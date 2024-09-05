@@ -7,14 +7,12 @@
     <input type="text" name="phone" class="form-control mb-2" value="{{ $customer->phone }}" placeholder="Enter customer phone">
     <input type="text" name="location" class="form-control mb-2" value="{{ $customer->location }}" placeholder="Enter customer location">
 
-    <div class="row">
-        <div class="col-md-8">
-            <input type="file" name="image" class="form-control mb-2">
-        </div>
-        <div class="col-md-4">
-            <img src="{{ dynamic_asset($customer->upload_id) }}" style="width: 100px" alt="">
-        </div>
-    </div>
+    <label  type="button" onclick="upload_select(this)">
+
+        <input type="text" name="image" id="image" class="form-control mb-2" hidden >
+        <img style="max-width: 100px" src="{{ dynamic_asset($customer->upload_id) }}" alt="">
+    </label>
+
 
     </div>
 

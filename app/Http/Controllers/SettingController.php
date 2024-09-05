@@ -101,6 +101,7 @@ class SettingController extends Controller
                 }else{
                     return $upload_id = uploads($value);
                 }
+
             }
         }
         return $value;
@@ -125,12 +126,12 @@ class SettingController extends Controller
                 $submit_value = '';
 
                 if( $setting){
-                    $submit_value =   $this->type_check($items_data[0],  $items,  $setting->value);
+                    $submit_value = $items;//$this->type_check($items_data[0],  $items,  $setting->value);
 
                     $setting->value =  $submit_value;
 
                 }else{
-                    $submit_value = $this->type_check(  $items_data[0],  $items);
+                    $submit_value =  $items;//$this->type_check(  $items_data[0],  $items);
 
                     $setting = new setting;
                     $setting->name =  $items_data[0];
@@ -142,7 +143,7 @@ class SettingController extends Controller
                 $setting->save();
 
             }
-            
+
             return 'success';
 
 
@@ -152,12 +153,12 @@ class SettingController extends Controller
             $submit_value = '';
 
             if( $setting){
-                $submit_value =   $this->type_check($setting->name,  $request->value,  $setting->value);
+                $submit_value =    $request->value; //$this->type_check($setting->name,  $request->value,  $setting->value);
                 $setting->value =  $submit_value;
 
             }else{
                 $setting = new setting;
-                $submit_value = $this->type_check(  $setting->name,  $request->value);
+                $submit_value = $request->value; // $this->type_check(  $setting->name,  $request->value);
                 $setting->name = $request->name;
                 $setting->key = $request->key;
                 $setting->value =   $submit_value;

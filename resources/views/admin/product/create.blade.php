@@ -1,4 +1,14 @@
-<form action="{{ route('admin.product.store') }}" method="post" enctype="multipart/form-data">
+{{--  Master Include  --}}
+@extends('layout.admin.master')
+
+{{--  Define Site Title  --}}
+@section('title', settings('product_create', 10))
+
+{{--  Content Extends  --}}
+@section('content')
+<div class="card">
+    <div class="card-body">
+        <form action="{{ route('admin.product.store') }}" class="form_ajax_submit" method="post" enctype="multipart/form-data">
     @csrf
 
     <div class="row">
@@ -13,10 +23,10 @@
         <div class="col-lg-6">
             <label for="">Unit</label>
             <div class="input-group mb-3">
-                <select type="text" name="unit" data-url="{{ route('admin.unit.select') }}" data-model="true" data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                    <option value="">Category</option>
+                <select type="text" name="unit" data-url="{{ route('admin.unit.select') }}" data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <option value="">unit</option>
                 </select>
-                <button class="btn btn-primary input-group-append" data-dialog="modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+ Add New unit</button>
+                <button type="button" class="btn btn-primary input-group-append" data-dialog="modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+</button>
 
 
             </div>
@@ -25,21 +35,21 @@
         <div class="col-lg-6">
             <label for="">Brand</label>
             <div class="input-group mb-3">
-                <select type="text" data-url="{{ route('admin.brand.select') }}" data-model="true" data-ajax="true" name="brand" class="form-control input-group-prepend select2" placeholder="Brand" aria-label="Username" aria-describedby="basic-addon1">
+                <select type="text" data-url="{{ route('admin.brand.select') }}" data-ajax="true" name="brand" class="form-control input-group-prepend select2" placeholder="Brand" aria-label="Username" aria-describedby="basic-addon1">
                      <option value="">Brands</option>
                 </select>
 
-                <button class="btn btn-primary input-group-append" data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  brand" data-href="{{ route('admin.brand.create') }}">+ Add New brand</button>
+                <button type="button" class="btn btn-primary input-group-append" data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  brand" data-href="{{ route('admin.brand.create') }}">+</button>
             </div>
 
         </div>
         <div class="col-lg-6">
             <label for="">Category</label>
             <div class="input-group mb-3">
-                <select type="text" name="category" data-url="{{ route('admin.category.select') }}" data-model="true" data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <select type="text" name="category" data-url="{{ route('admin.category.select') }}" data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     <option value="">category</option>
                 </select>
-                <button class="btn btn-primary input-group-append" data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>
+                <button type="button" class="btn btn-primary input-group-append" data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+</button>
             </div>
 
         </div>
@@ -70,8 +80,10 @@
 
 
         <div class="col-lg-6">
-            <label for="">Image</label>
-            <input type="file" name="image" class="form-control mb-2">
+            <label  type="button" onclick="upload_select(this)"> Image <br>
+                <input type="text" name="image" id="image" class="form-control mb-2" hidden >
+                <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt="">
+            </label>
         </div>
 
         <div class="col-lg-12">
@@ -86,5 +98,19 @@
         </div>
 
 </form>
+    </div>
+</div>
 
 
+
+
+
+
+@endsection
+
+@push('js')
+<script>
+
+
+</script>
+@endpush

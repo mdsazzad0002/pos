@@ -6,7 +6,13 @@
     <input type="text" name="phone" class="form-control mb-2" placeholder="Enter customer phone">
     <input type="text" name="location" class="form-control mb-2" placeholder="Enter customer location">
 
-    <input type="file" name="image" class="form-control mb-2" >
+    {{--  <input type="file" name="image" class="form-control mb-2" >  --}}
+
+    <label  type="button" onclick="upload_select(this)">
+
+        <input type="text" name="image" id="image" class="form-control mb-2" hidden >
+        <img style="max-width: 100px" src="{{ dynamic_asset(0) }}" alt="">
+    </label>
 
     <div class="d-flex justify-content-end">
         <button class="btn btn-warning" type="submit">Save</button>

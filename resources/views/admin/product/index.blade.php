@@ -12,7 +12,7 @@
         <div>
             @can('user create')
 
-            <button class="btn btn-primary"  onclick="button_ajax(this)" data-dialog="modal-lg  modal-dialog-scrollable modal-dialog-centered" data-title="Add New  product" data-href="{{ route('admin.product.create') }}">+ Add New product</button>
+            <a class="btn btn-primary"  href="{{ route('admin.product.create') }}">+ Add New product</a>
             @endcan
         </div>
     </div>

@@ -78,16 +78,15 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
+
         $customer = new customer;
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->location = $request->location;
+        $customer->upload_id =$request->image??0;
 
         $customer->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $customer->upload_id = uploads($request->file('image'));
-        }
 
         $customer->save();
 
@@ -125,9 +124,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->location = $request->location;
         $customer->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $customer->upload_id = uploads($request->file('image'), $customer->upload_id);
-        }
+        $customer->upload_id =$request->image;
         $customer->save();
 
         return json_encode([
@@ -146,7 +143,7 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
-        asset_unlink($customer->upload_id);
+        
         $customer->delete();
         return json_encode([
             'title'=>'Successfully  Delete Customer',

@@ -3,15 +3,12 @@
     @method('put')
 
     <input type="text" name="name" class="form-control mb-2" value="{{ $category->name }}" placeholder="Enter your name">
-    <div class="row">
-        <div class="col-md-8">
-            <input type="file" name="image" class="form-control mb-2">
-        </div>
-        <div class="col-md-4">
-            <img src="{{ dynamic_asset($category->upload_id) }}" style="width: 100px" alt="">
-        </div>
+    <div class="">
+        <label  type="button" onclick="upload_select(this)"> Image <br>
+            <input type="text" name="image" id="image" value="{{ $category->upload_id }}" class="form-control mb-2" hidden >
+            <img style="max-height: 60px" src="{{ dynamic_asset($category->upload_id) }}" alt="">
+        </label>
     </div>
-
     </div>
 
     <div class="d-flex justify-content-end">

@@ -5,7 +5,7 @@
         <form class="col-md-6 col-xl-4" action="{{ route('setting.store.update') }}" enctype="multipart/form-data">
             <div class="card">
 
-                
+
             <div class="card-header">
                 <h5>
                     {{ Str::title(str_replace('_', ' ', $setting->name)) }}
@@ -25,14 +25,14 @@
                         $url = settings($setting->name, $setting->key);
                     @endphp
                     @if (filter_var( $url, FILTER_VALIDATE_URL))
-                    <div class="row">
-                        <div class="col-8">
-                            <input type="file" class="form-control"  placeholder="Enter App Name" name="value"  id="{{ $setting->name }}">
-                        </div>
-                        <div class="col-4">
-                            <img style="height: 40px" src="{{  $url }}" alt="">
-                        </div>
+
+                    <div class="">
+                        <label  type="button" onclick="upload_select(this)">
+                            <input type="text" name="value" id="image" class="form-control mb-2" hidden >
+                            <img style="max-height: 60px" src="{{  $url }}" alt="">
+                        </label>
                     </div>
+
                     <div class="pt-2 d-flex justify-content-end">
                         <button onclick="submit_setting_post(this)" type="button" class="btn btn-primary" >Save</button>
                     </div>

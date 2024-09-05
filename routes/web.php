@@ -1,22 +1,24 @@
 <?php
 
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\userController;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\homecontroller;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\UnitController;
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\StockManagementController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,10 +52,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return redirect('admin/');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::post('/uploads', [UploadController::class, 'store']);
+Route::get('/uploads/get', [UploadController::class, 'index']);
 
 
 

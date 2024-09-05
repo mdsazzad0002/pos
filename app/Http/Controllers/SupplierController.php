@@ -85,9 +85,8 @@ class SupplierController extends Controller
         $supplier->location = $request->location;
 
         $supplier->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $supplier->upload_id = uploads($request->file('image'));
-        }
+
+            $supplier->upload_id = $request->image;
 
         $supplier->save();
 
@@ -125,9 +124,7 @@ class SupplierController extends Controller
         $supplier->phone = $request->phone;
         $supplier->location = $request->location;
         $supplier->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $supplier->upload_id = uploads($request->file('image'), $supplier->upload_id);
-        }
+        $supplier->upload_id = $request->image;
         $supplier->save();
 
         return json_encode([
@@ -146,7 +143,7 @@ class SupplierController extends Controller
      */
     public function destroy(supplier $supplier)
     {
-        asset_unlink($supplier->upload_id);
+        
         $supplier->delete();
         return json_encode([
             'title'=>'Successfully  Deleted Supplier',

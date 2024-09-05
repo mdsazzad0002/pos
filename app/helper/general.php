@@ -69,8 +69,11 @@ function uploads($file, $id = null)
         if ($id != null ) {
             $file_find = Upload::find($id);
             if ($file_find) {
-                if (file_exists($destinationPath . $file_find->name)) {
-                    unlink($destinationPath . $file_find->name);
+                $oldFilePath = $destinationPath . '/' . $file_find->name;
+
+                // Check if the old file exists and delete it
+                if (file_exists($oldFilePath) && is_file($oldFilePath)) {
+                    unlink($oldFilePath);
                 }
                 $file_find->name = $file_name;
                 $file_find->extension = $file_extension;
@@ -130,9 +133,10 @@ function dynamic_asset($id)
 function asset_unlink($id)
 {
 
+    // $destinationPath = public_path() . '/uploads/';
     $destinationPath = 'uploads/';
     if ($id != null && $id != '' && $id != 0) {
-        $file1 = $destinationPath . uploads::find($id)->name;
+        $file1 = $destinationPath . Upload::find($id)->name;
         // return static_asset($file1);
         if (File::exists(public_path($file1)) || is_dir(public_path($file1))) {
             if(unlink( public_path($file1))){

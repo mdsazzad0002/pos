@@ -70,7 +70,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.partials.create');
+        return view('admin.product.create');
     }
 
     /**
@@ -90,11 +90,10 @@ class ProductController extends Controller
         $product->for_selling = $request->for_selling;
         $product->weight = $request->weight;
 
+        $product->upload_id = $request->image;
 
         $product->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $product->upload_id = uploads($request->file('image'));
-        }
+
         $product->slug = create_slug($request->name, 'product', 'slug');
         $product->save();
 
@@ -102,7 +101,7 @@ class ProductController extends Controller
         return json_encode([
             'title'=>'Successfully  Created product',
             'type'=>'success',
-            'refresh'=>'true',
+            'refresh'=>'false',
         ]);
 
 
@@ -141,9 +140,7 @@ class ProductController extends Controller
         $product->weight = $request->weight;
 
         $product->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $product->upload_id = uploads($request->file('image'), $product->upload_id);
-        }
+        $product->upload_id = $request->image;
         $product->save();
 
 
@@ -163,7 +160,7 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
-        asset_unlink($product->upload_id);
+        
         $product->delete();
 
         return json_encode([
@@ -182,7 +179,7 @@ class ProductController extends Controller
                 $query->where('name', 'LIKE', "%$keyword%");
             }
         })->select('id', 'name as text', 'selling_price as price')->limit(10)->get();
-        
+
         // Debugging the query
         // dd($data_result);
 
@@ -195,7 +192,7 @@ class ProductController extends Controller
 
     public function single_filter (Request $request)
     {
-        
+
         $data_result = product::where(function($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('id',  $request->q);

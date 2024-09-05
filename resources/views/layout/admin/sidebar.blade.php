@@ -103,6 +103,14 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @can('product create')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.product.create') }}" class="nav-link">
+                                <i class="fas fa-plus nav-icon"></i>
+                                <p>Product</p>
+                            </a>
+                        </li>
+                        @endcan
 
                         @can('category read')
                         <li class="nav-item">

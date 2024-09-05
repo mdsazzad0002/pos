@@ -78,12 +78,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(['name' => 'required']);
         $category = new Category;
         $category->name = $request->name;;
         $category->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $category->upload_id = uploads($request->file('image'));
-        }
+
+        $category->upload_id = $request->image ?? 0;
         $category->slug = create_slug($request->name, 'category', 'slug');
         $category->save();
 
@@ -120,9 +120,8 @@ class CategoryController extends Controller
     {
         $category->name = $request->name;
         $category->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $category->upload_id = uploads($request->file('image'), $category->upload_id);
-        }
+
+        $category->upload_id = $request->image ?? 0;
         $category->save();
 
 
@@ -142,7 +141,7 @@ class CategoryController extends Controller
      */
     public function destroy(category $category)
     {
-        asset_unlink($category->upload_id);
+
         $category->delete();
 
         return json_encode([
@@ -152,7 +151,7 @@ class CategoryController extends Controller
         ]);
     }
 
-    
+
     public function getCategory(Request $request)
     {
         $data_result = category::where(function($query) use ($request) {

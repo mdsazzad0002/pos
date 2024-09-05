@@ -78,12 +78,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(['name' => 'required']);
         $brand = new brand;
         $brand->name = $request->name;;
         $brand->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $brand->upload_id = uploads($request->file('image'));
-        }
+
+        $brand->upload_id = $request->image ?? 0;
         $brand->slug = create_slug($request->name, 'brand', 'slug');
         $brand->save();
 
@@ -119,9 +119,8 @@ class BrandController extends Controller
     {
         $brand->name = $request->name;
         $brand->creator = auth()->user()->id ?? 0;
-        if($request->hasFile('image')){
-            $brand->upload_id = uploads($request->file('image'), $brand->upload_id);
-        }
+        $brand->upload_id = $request->image ?? 0;
+
         $brand->save();
 
         return json_encode([
@@ -140,7 +139,6 @@ class BrandController extends Controller
      */
     public function destroy(brand $brand)
     {
-        asset_unlink($brand->upload_id);
         $brand->delete();
 
         return json_encode([

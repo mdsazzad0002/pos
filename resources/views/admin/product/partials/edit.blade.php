@@ -72,16 +72,13 @@
 
 
             <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-8">
-                        <label for="">Image</label>
-                        <input type="file" name="image" class="form-control mb-2">
-                    </div>
-                    <div class="col-4">
-                        <img style="width: 100px;" src="{{ dynamic_asset($product->upload_id) }}" alt="">
-                    </div>
-                </div>
 
+                <div class="">
+                    <label  type="button" onclick="upload_select(this)"> Image <br>
+                        <input type="text" name="image" id="image" class="form-control mb-2" value="{{ $product->upload_id }}" hidden >
+                        <img style="max-height: 60px" src="{{ dynamic_asset($product->upload_id) }}" alt="">
+                    </label>
+                </div>
             </div>
 
             <div class="col-lg-12">
