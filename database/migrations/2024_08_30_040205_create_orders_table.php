@@ -18,9 +18,12 @@ return new class extends Migration
             $table->string('product_ids')->default(0);
             $table->longText('product_json')->nullable();
             $table->string('delivery_status')->default(0);
-            $table->integer('price')->default(0);
             $table->integer('quantity')->default(0);
             $table->string('quantitys')->default(0);
+            $table->string('discount_id')->default(0);
+            $table->integer('price')->default(0);
+            $table->string('vat')->default(0);
+            $table->string('status')->default(0);
             $table->integer('cash_collection')->default(0);
             $table->timestamps();
         });

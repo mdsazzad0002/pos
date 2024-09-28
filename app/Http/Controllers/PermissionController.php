@@ -19,6 +19,7 @@ class PermissionController extends Controller
                     return "<button class='btn btn-primary '
                     data-dialog='modal-lg modal-dialog-centered'
                     onclick='button_ajax(this)'
+                    data-title='View $row->name'
                     data-href='$view_route'>View</button>";
 
                 })
@@ -39,12 +40,15 @@ class PermissionController extends Controller
                     data-href='$edit_route'>Edit</button>";
 
                     $return_data = '';
-                    if(auth()->user()->can('role edit')==true){
-                        $return_data = $edit_button. '&nbsp;';
-                    }
 
-                    if(auth()->user()->can('role delete') == true){
-                        $return_data .= $delete_button ;
+                    if($row->id != 1){
+                        if(auth()->user()->can('role edit')==true){
+                            $return_data = $edit_button. '&nbsp;';
+                        }
+
+                        if(auth()->user()->can('role delete') == true){
+                            $return_data .= $delete_button ;
+                        }
                     }
 
                     return $return_data;
@@ -82,7 +86,7 @@ class PermissionController extends Controller
         $roles = Role::where('name', $request->role_name)->count();
         if($roles == 0){
             $role = Role::create(['name' => $request->role_name]);
-           
+
             $permissions = Permission::whereIn('id', $request->input('permission'))->get();
             $role->syncPermissions($permissions);
 
@@ -90,6 +94,7 @@ class PermissionController extends Controller
                 'title'=>'Successfully Role Created',
                 'type'=>'success',
                 'refresh'=>'true',
+                'page'=>'false',
             ]);
 
         }else{
@@ -97,6 +102,7 @@ class PermissionController extends Controller
                 'title'=>'Role Already Exists',
                 'type'=>'error',
                 'refresh'=>'false',
+                'page'=>'false',
             ]);
         }
 
@@ -142,6 +148,7 @@ class PermissionController extends Controller
             'title'=>'Successfully  updated role',
             'type'=>'success',
             'refresh'=>'true',
+            'page'=>'false',
         ]);
 
     }
@@ -152,12 +159,14 @@ class PermissionController extends Controller
         return view('layout.admin.modal_content_delete');
 
     }
-    public function destroy(Role $role) {
-        $role->delete();
+    public function destroy(Role $permission) {
+
+        $permission->delete();
         return json_encode([
             'title'=>'Successfully  Deleted role',
             'type'=>'success',
             'refresh'=>'true',
+            'page'=>'false',
         ]);
     }
 

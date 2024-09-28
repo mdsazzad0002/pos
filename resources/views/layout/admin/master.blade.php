@@ -17,7 +17,7 @@
 
     <div class="wrapper">
         <!-- Preloader -->
-   
+
 
 
 
@@ -55,6 +55,8 @@
     <!-- ./wrapper -->
 
     @include('layout.admin.script-page')
+    @stack('js')
     @include('layout.admin.modal_ajax')
+
 </body>
 </html>

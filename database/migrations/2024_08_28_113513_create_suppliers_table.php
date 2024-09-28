@@ -16,8 +16,14 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('creator')->nullable();
             $table->string('location')->nullable();
+            $table->string('type')->nullable();
+            $table->string('business_name')->nullable();
+            $table->string('account_holder')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('bank_name')->nullable();
+            $table->string('bank_branch')->nullable();
+            $table->string('creator')->nullable();
             $table->string('upload_id')->default(0);
             $table->timestamps();
         });

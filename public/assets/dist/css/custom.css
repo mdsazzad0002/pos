@@ -94,3 +94,23 @@
 {
     /* font-size: 23px; */
 }
+
+.border-dashed {
+    border-style: dashed;
+}
+
+label:has(select),
+label:has(textarea),
+label:has(input){
+    display: block;
+    cursor: pointer;
+}
+
+fieldset legend{
+    width: auto;
+    display: inline-block;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 0px;
+}
+

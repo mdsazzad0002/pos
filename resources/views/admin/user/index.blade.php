@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('users', 10))
+@section('title', settings('Commision Agent', 10))
 
 {{--  Content Extends  --}}
 @section('content')
@@ -12,7 +12,7 @@
         <div>
             @can('user create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Users" data-href="{{ route('admin.user.create') }}">+ Add New User</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered modal-lg" data-title="Add New  Commision Agent" data-href="{{ route('admin.user.create') }}">+ Add New Commision Agent</button>
             @endcan
         </div>
     </div>
@@ -27,6 +27,12 @@
                 </th>
                 <th>
                     Email
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Commision %
                 </th>
                 <th>
                     View
@@ -58,14 +64,19 @@
             }},
             {data:'name', name:'name'},
             {data:'email', name:'email'},
+            {data:'mobile_number', name:'mobile_number'},
+            {data:'sales_commission_present', name:'sales_commission_present'},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'role', name:'role', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}
         ],
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print' // Define available buttons
-         ],
-         "dom": 'lBTrftip',
+
+
+        buttons: true,
+        dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
+
+
+
     })
 </script>
 @endpush

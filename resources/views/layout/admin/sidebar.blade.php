@@ -241,7 +241,26 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.user.index') }}" class="nav-link">
                                 <i class="fas fa-user-tie nav-icon"></i>
-                                <p>User List</p>
+                                <p>User</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('user read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.CommisionAgent.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>Commision Agent</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('branch read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.branch.index') }}" class="nav-link">
+
+                                <i class="fas fa-circle-notch nav-icon"></i>
+                                <p>Branch</p>
                             </a>
                         </li>
                         @endcan

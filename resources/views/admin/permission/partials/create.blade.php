@@ -4,10 +4,23 @@
     <input class="form-control mb-2" type="text" name="role_name" placeholder="Enter your roles ">
     <div>
         <table class="table table-bordered table-striped table-hover">
+            <tr>
+                <td>
+                    <div>
+                        <label for="selectAll_permission">Select All
+                            <input type="checkbox"  onchange="selectPermission(this)" id="selectAll_permission">
+                        </label>
+                    </div>
+                </td>
+                <td></td>
+            </tr>
             @foreach ($permissions as $key => $items)
             <tr>
                 <td>
-                    {{ $key }}
+                    <label for="{{ $key }}" >
+                        {{ $key }}
+                        <input type="checkbox" onchange="target_base(this)" id="{{ $key }}">
+                    </label>
                 </td>
                 <td>
 
@@ -28,4 +41,5 @@
     </div>
 
 </form>
+
 

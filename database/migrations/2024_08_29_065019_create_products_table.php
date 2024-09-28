@@ -20,11 +20,22 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->string('weight')->nullable();
             $table->string('description')->nullable();
+
+            $table->integer('buying_price')->default(0);
             $table->integer('selling_price')->default(0);
+
             $table->string('unit')->nullable();
             $table->string('for_selling')->default(0);
+            $table->string('garage')->default(0);
+            $table->string('route')->default(0);
+
             $table->string('alert_quantity')->default(0);
             $table->string('quantity')->default(0);
+
+            $table->string('variant_on')->default(0);
+            $table->string('variant_option')->nullable();
+
+            $table->string('discount_id')->nullable();
 
             $table->string('creator')->default(0);
             $table->string('upload_id')->default(0);

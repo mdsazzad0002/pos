@@ -33,11 +33,11 @@
 
 
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendor/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script src="{{ asset('vendor/jszip/jszip.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.flash.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('vendor/jszip/jszip.js') }}"></script>
+<script src="{{ asset('vendor/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 
 
@@ -48,7 +48,6 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('assets/dist/js/pages/dashboard.js')}}"></script>
-@stack('js')
 
 
 <script>

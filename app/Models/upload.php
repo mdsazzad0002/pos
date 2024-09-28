@@ -10,4 +10,7 @@ class upload extends Model
     use HasFactory;
 
     protected    $fillable=['name','extension' , 'size','source','user_id' ];
+    public function user(){
+        return $this->hasOne(User::class,'id', 'user_id');
+    }
 }

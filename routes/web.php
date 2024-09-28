@@ -8,6 +8,8 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BranchController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
@@ -17,8 +19,8 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\CommisionAgentController;
 use App\Http\Controllers\StockManagementController;
-use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,9 +75,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
 
     // permission management
-    Route::resource('/permission', PermissionController::class)->middleware('')->names('permission');
     Route::resource('/permission', PermissionController::class)->middleware('can:role read')->names('permission');
     Route::get('/permission/delete/{id}', [PermissionController::class, 'delete'])->name('permission.delete');
+
+    // branch management
+    Route::resource('/branch', BranchController::class)->middleware('can:branch read')->names('branch');
+    Route::get('/branch/delete/{id}', [BranchController::class, 'delete'])->name('branch.delete');
+    Route::get('/branch/getbranch/get', [BranchController::class, 'getbranchs'])->name('branch.select');
 
 
     // Setting
@@ -90,10 +96,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/user/delete/{user}', [userController::class, 'delete'])->name('user.delete');
 
 
+    // Commision Agent Route
+    Route::get('/CommisionAgent', [CommisionAgentController::class, 'index'])->name('CommisionAgent.index');
+
     // Category management
     Route::resource('/category', CategoryController::class)->names('category');
     Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
+
 
 
     // brand management

@@ -7,7 +7,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade ajax_modal_dialog" id="ajax_modal" tabindex="-1" role="dialog" aria-labelledby="ajax_modalLabel" aria-hidden="true">
+<div class="modal fade ajax_modal_dialog" id="ajax_modal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ajax_modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +101,7 @@ var placeholder_body = `
 
                     //call all form submit in dialog
                     form_submit('.ajax_modal_dialog form');
-
+                    tooltip_active()
 
                 },
                 error: function (xhr, status, error) {
@@ -145,6 +145,7 @@ var placeholder_body = `
 
 
     // All Modal Submit
+
     function form_submit(class_element = null){
         var forem_reset = false;
         if(class_element == null){
@@ -159,7 +160,8 @@ var placeholder_body = `
             $.ajax({
                 type: $(this).attr('method'),    // Correct way to get form method
                 url: $(this).attr('action'),     // Correct way to get form action URL
-                data: new FormData(this),        // Correct constructor for FormData
+                data: new FormData(this),
+                accecpt:'json',       // Correct constructor for FormData
                 processData: false,              // Required for FormData
                 contentType: false,              // Required for FormData
                 success: function (data) {
@@ -177,11 +179,13 @@ var placeholder_body = `
                     if(forem_reset == true){
                         element.reset();
                     }else if(data.refresh == 'true'){
-                        if(datatableM){
+                        if (typeof datatableM === 'undefined') {
+                            console.log('Data table refresh not found');
+                        } else {
                             datatableM.ajax.reload();
                         }
                     }else{
-                        if(data.page){
+                        if(data.page == 'true'){
                             window.location.href = '';
                         }else{
                             console.log('not changed');
@@ -287,6 +291,14 @@ var placeholder_body = `
         });
     }
 
+
+
+    function tooltip_active(){
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    }
+    tooltip_active()
 
 </script>
 

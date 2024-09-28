@@ -152,7 +152,13 @@ function asset_unlink($id)
 }
 
 
-
+/**
+ * Summary of create_slug
+ * @param string $slug_gable_text Slug name
+ * @param string $model_name
+ * @param string $column_name
+ * @return string
+ */
 function create_slug($slug_gable_text, $model_name, $column_name)
 {
     // Use CamelCase for Model Name

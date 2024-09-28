@@ -39,8 +39,9 @@
 @push('js')
 
 <script>
-    var datatableM =  $(document).ready(function() {
-        $('#rolesTable').DataTable({
+    var datatableM ='';
+     $(document).ready(function() {
+         datatableM = $('#rolesTable').DataTable({
             processing: true,
             serverSide: true,
             ajax: '{{ route('admin.permission.index') }}',
@@ -51,14 +52,52 @@
                 { data: 'name', name: 'name' },
                 { data: 'view', name: 'view', orderable:false, searchable:false },
                 { data: 'edit', name: 'edit', orderable:false, searchable:false },
-               // { data: 'birth_date', name: 'birth_date' },
-                //{ data: 'hired_on', name: 'hired_on' }
             ],
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print' // Define available buttons
-             ],
-             "dom": 'lBTrftip',
+            buttons: true,
+            dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
+
         });
     });
 </script>
+
+<script>
+    function target_base(thi){
+        var check_element = true;
+        if(thi.checked == true){
+            check_element = true
+        }else{
+            check_element = false
+        }
+
+        $(thi).parents('tr').find('td:nth-child(2) input').each(function(key, element){
+            //console.log(element)
+
+            if(check_element == true){
+                element.checked = true;
+            }else{
+                element.checked = false;
+            }
+        })
+    }
+
+    function selectPermission(thi){
+        var check_element = true;
+        if(thi.checked == true){
+            check_element = true
+        }else{
+            check_element = false
+        }
+
+        $(thi).parents('table').find('tr td:nth-child(2) input').each(function(key, element){
+            //console.log(element)
+
+            if(check_element == true){
+                element.checked = true;
+            }else{
+                element.checked = false;
+            }
+        })
+    }
+</script>
+
 @endpush

@@ -9,8 +9,7 @@
 <!-- Tempusdominus Bootstrap 4 -->
 {{--  <link rel="stylesheet" href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">  --}}
 <!-- iCheck -->
-{{--  <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css')}}">  --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}" >
 <!-- JQVMap -->
 <link rel="stylesheet" href="{{ asset('vendor/jqvmap/jqvmap.min.css')}}">
 <!-- Theme style -->
@@ -23,26 +22,16 @@
 <link rel="stylesheet" href="{{ asset('vendor/summernote/summernote-bs4.min.css')}}">
 <!-- tostar -->
 <link rel="stylesheet" href="{{ asset('vendor/flasher/flasher.min.css') }}">
-{{--  <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.css') }}">  --}}
+
 <link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css')}}">
+
 <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendor/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/dist/css/custom.css') }}">
 
 @stack('css')
 <style>
-    .dt-container.dt-empty-footer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
 
-}
-.dt-container.dt-empty-footer table{
-    width: 100% !important;
-}
-.dt-container.dt-empty-footer{
-    overflow: auto;
-}
 
     .brand-link .brand-image {
     margin-top: 0px;
@@ -65,20 +54,31 @@
 }
 
 
-@media(max-width:800px){
-    .dt-container.dt-empty-footer {
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
 
-    }
+.dt-buttons {
+    display: flex;
+    /* align-items: center; */
+    /* text-align: center; */
+    justify-content: center;
+    margin-bottom:0px !important;
 
+}
+.dt-buttons button{
+    border:none;
+    border:1px solid #9e9e9e;
 
 
 }
-{{--  ul.nav.nav-treeview:has(.active){
-    display: block;
-}  --}}
+.dt-buttons button:first-child{
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px;
+}
+
+.dt-buttons button:last-child{
+    border-top-right-radius:4px;
+    border-bottom-right-radius:4px;
+}
+
 
 
 </style>

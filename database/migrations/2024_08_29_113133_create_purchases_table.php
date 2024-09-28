@@ -16,8 +16,10 @@ return new class extends Migration
             $table->bigInteger('productId');
             $table->bigInteger('supplierId');
             $table->bigInteger('quantity');
-            $table->bigInteger('status')->reference('1 means aproned 2 means cancel');
+            $table->bigInteger('status')->reference('1 means approved 2 means cancel');
             $table->bigInteger('price');
+            $table->bigInteger('buying_date');
+            $table->bigInteger('expiring_date');
             $table->bigInteger('creator');
             $table->timestamps();
         });

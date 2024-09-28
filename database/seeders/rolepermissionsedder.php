@@ -30,6 +30,11 @@ class rolepermissionsedder extends Seeder
             ['name' => 'role edit'],
             ['name' => 'role delete'],
 
+            ['name' => 'branch read'],
+            ['name' => 'branch create'],
+            ['name' => 'branch edit'],
+            ['name' => 'branch delete'],
+
             ['name' => 'product read'],
             ['name' => 'product create'],
             ['name' => 'product edit'],

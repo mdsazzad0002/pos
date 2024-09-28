@@ -17,8 +17,10 @@ class userSeeder extends Seeder
           User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
+            'username'=> 'superadmin',
             'upload_id' => '0',
             'password'=>  Hash::make('admin@gmail.com'),
+            'branch_id'=> 1
         ]);
     }
 }
