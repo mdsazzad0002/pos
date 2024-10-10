@@ -81,7 +81,7 @@ class PermissionController extends Controller
     public function store(Request $request) {
         // return $request;
         $request->validate([
-
+            'role_name'=>'required',
         ]);
         $roles = Role::where('name', $request->role_name)->count();
         if($roles == 0){

@@ -278,6 +278,153 @@ sidebar-dark-primary elevation-4">
                 </li>
 
 
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>
+                            CRM Management
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can('LeadAccount read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.LeadAccount.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>Account</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('LeadContact read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.LeadContact.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>Contacts</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('LeadDeal read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.LeadDeal.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>LeadDeal</p>
+                            </a>
+                        </li>
+                        @endcan
+
+
+                        @can('LeadSource read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.LeadSource.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>LeadSource</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('Lead read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.Lead.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>Lead</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('LeadDealStage read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.LeadDealStage.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>LeadDealStage</p>
+                            </a>
+                        </li>
+                        @endcan
+
+
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>
+                            Language
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can('language read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.language.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>{{ __('language.sidebar.name') }}</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('Translation read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.Translation.index') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>{{ __('translate.sidebar.name') }}</p>
+                            </a>
+                        </li>
+                        @endcan
+
+
+                    </ul>
+                </li>
+
+
+
+                {{--  Device Loged Listing Setting  --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>
+                            {{ __('device_access_check.sidebar.list') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        {{--  @can('language read')  --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>{{ __('device_access_check.sidebar.list.name') }}</p>
+                            </a>
+                        </li>
+                        {{--  @endcan  --}}
+                    </ul>
+                </li>
+                {{--  Device Loged Listing Setting  --}}
+
+                
+                {{--  Device Loged Listing Setting  --}}
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-user-cog nav-icon"></i>
+                        <p>
+                            {{ __('device_access_check.sidebar.list') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        {{--  @can('language read')  --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
+                                <i class="fas fa-user-tie nav-icon"></i>
+                                <p>{{ __('device_access_check.sidebar.list.name') }}</p>
+                            </a>
+                        </li>
+                        {{--  @endcan  --}}
+                    </ul>
+                </li>
+                {{--  Device Loged Listing Setting  --}}
+
+
                 <li class="nav-item ">
                     <a href="#" class="nav-link">
 
@@ -288,6 +435,13 @@ sidebar-dark-primary elevation-4">
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
+                            class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>{{ settings('main_setting', 10) }}</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
                             class="nav-link">

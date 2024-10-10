@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
             $table->bigInteger('creator')->default(0);
+            $table->bigInteger('updater_id')->default(0);
             $table->timestamps();
         });
     }

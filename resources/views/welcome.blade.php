@@ -50,4 +50,100 @@
 </div>
 <!-- /.row -->
 
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDqZqQet0viWFo5cjYNgTxF0T0ixFkf6ug",
+        authDomain: "test-1ee9d.firebaseapp.com",
+        projectId: "test-1ee9d",
+        storageBucket: "test-1ee9d.appspot.com",
+        messagingSenderId: "855449878632",
+        appId: "1:855449878632:web:e801798c7447abe9c0fbdd",
+        measurementId: "G-WTSTY1Q4EH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const messaging = getMessaging(app);
+
+    // Register the service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/firebase-messaging-sw.js').then((registration) => {
+            console.log('Service Worker registered with scope:', registration.scope);
+        }).catch((error) => {
+            console.error('Service Worker registration failed:', error);
+        });
+    }
+
+    // Request notification permission and get the token
+    Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+            console.log("Notification permission granted.");
+            return getToken(messaging);
+        } else {
+            console.error("Unable to get permission to notify.");
+        }
+    }).then((token) => {
+        if (token) {
+            console.log("FCM Token:", token);
+            // Send this token to your server for further processing
+        }
+    }).catch((err) => {
+        console.error("Error retrieving token.", err);
+    });
+</script>
+
+
+{{--
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+
+
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDqZqQet0viWFo5cjYNgTxF0T0ixFkf6ug",
+        authDomain: "test-1ee9d.firebaseapp.com",
+        projectId: "test-1ee9d",
+        storageBucket: "test-1ee9d.appspot.com",
+        messagingSenderId: "855449878632",
+        appId: "1:855449878632:web:e801798c7447abe9c0fbdd",
+        measurementId: "G-WTSTY1Q4EH"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+
+
+
+    import {
+        // ...
+        // Make sure to import getToken()
+        getToken,
+      } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging.js";
+    const messaging = getMessaging(app);
+
+    const checkIfTokenIsNotGeneratedBefore = () =>
+    !window.localStorage.getItem("fcm_token");
+
+    if (checkIfTokenIsNotGeneratedBefore()) {
+        await requestPermission(messaging);
+      }
+
+
+
+
+
+
+
+</script>  --}}
+
 @endsection

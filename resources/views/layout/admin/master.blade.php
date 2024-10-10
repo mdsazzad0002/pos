@@ -31,13 +31,10 @@
             @if(settings('preloader_enable', 8))
                 @include('layout.admin.preloder')
             @endif
-            <!-- Content Wrapper. Contains page content -->
-            @include('layout.admin.page-header')
-            <!-- /.content-header -->
 
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid">
+                <div class="container-fluid pt-4">
                     @yield('content')
 
                 </div><!-- /.container-fluid -->
@@ -57,6 +54,31 @@
     @include('layout.admin.script-page')
     @stack('js')
     @include('layout.admin.modal_ajax')
+
+
+
+        <script>
+
+
+            // Initialize EventSource with the device ID
+            var eventsource = new EventSource("{{ url('device_access_check') }}");
+
+            eventsource.onmessage = function(event) {
+                try {
+                    let data = JSON.parse(event.data);
+
+                    // Handle logout event
+                    if (data.logout === 1) {
+                        window.location.href = ''; // Specify a logout URL
+                    }
+
+                } catch (error) {
+                    console.error('Error parsing message data:', error);
+                }
+            };
+
+
+      </script>
 
 </body>
 </html>

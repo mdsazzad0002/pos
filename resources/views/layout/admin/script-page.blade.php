@@ -51,14 +51,32 @@
 
 
 <script>
+    function ActiveMenuCenter() {
 
-    var current_url = '{{ url()->current() }}';
-    var link_alldata = document.querySelectorAll('.nav-item .nav-link');
-    link_alldata.forEach(function(element){
-        if(element.href == current_url){
-            $(element).addClass('active');
-        }
-    })
+            var container = document.querySelectorAll('.sidebar .os-viewport')[0];
+            var activeItem = container.querySelectorAll('a.active');
+            if(activeItem.length > 0){
+                var activeItem = activeItem[activeItem.length - 1];
+
+            }
+            if (activeItem) {
+                var containerRect = container.getBoundingClientRect();
+                var activeItemRect = activeItem.getBoundingClientRect();
+                var scrollTop = activeItem.offsetTop - (containerRect.height / 2) + (activeItemRect.height / 2);
+                container.scrollTop = scrollTop;
+            }
+    }
+
+    // Scroll to the active item on load
+
+
+        var current_url = '{{ url()->current() }}';
+        var link_alldata = document.querySelectorAll('.nav-item .nav-link');
+        link_alldata.forEach(function(element){
+            if(element.href == current_url){
+                $(element).addClass('active');
+            }
+        })
         if($('.active').parents('.nav-item')){
             $('.active').parents('.nav-item').addClass('active');
         }
@@ -66,5 +84,10 @@
             $('.active').parents('.nav.nav-treeview').parents('.nav-item.active').addClass('menu-is-opening menu-open');
             $('.active').parents('.nav.nav-treeview').parents('.nav-item.active').find('a.nav-link:not(.nav-treeview a.nav-link)').addClass('active');
         }
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(function(){
+                ActiveMenuCenter();
+            },800)
+        });
 
 </script>

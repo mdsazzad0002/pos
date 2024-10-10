@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('creator')->default(0);
+            $table->bigInteger('updater_id')->default(0);
             $table->timestamps();
         });
     }

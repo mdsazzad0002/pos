@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LeadContact;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -14,13 +15,19 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
+
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\PermissionController;
+
 use App\Http\Controllers\CommisionAgentController;
+
+use App\Http\Controllers\Auth\LoginCheckController;
+
 use App\Http\Controllers\StockManagementController;
+use App\Http\Controllers\PushNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +39,7 @@ use App\Http\Controllers\StockManagementController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/migrate', function(){
     Artisan::call('migrate');
@@ -61,15 +69,26 @@ Route::get('/dashboard', function () {
 Route::post('/uploads', [UploadController::class, 'store']);
 Route::get('/uploads/get', [UploadController::class, 'index']);
 
-
+Route::get('notification', [dashboardController::class, 'noti']);
 
 require __DIR__.'/auth.php';
 
 
 
+Route::get('device_access_check', [LoginCheckController::class, 'index']);
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('device_access_check/list', [LoginCheckController::class, 'logedList'])->name('device_access_check.list');
+    Route::get('device_access_check/{device}', [LoginCheckController::class, 'view'])->name('device_access_check.view');
+    Route::get('device_access_check/status/update', [LoginCheckController::class, 'status'])->name('device_access_check.status');
+
+
+    Route::post('sendNotification', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
+    Route::put('sendNotification', [PushNotificationController::class, 'subscribe'])->name('sendNotificationsubscribe');
+    Route::get('sendNotification/test/', [PushNotificationController::class, 'index'])->name('notification_test');
+
+
     Route::get('/', [dashboardController::class, 'index'])->name('index');
     Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
@@ -155,6 +174,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/profile/edit_info', [ProfileController::class, 'info_edit'])->name('profile.edit.info');
     Route::get('/profile/password', [ProfileController::class, 'password_edit'])->name('profile.edit.password');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
 
 
 });

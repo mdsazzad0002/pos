@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('from_lead_id')->reference('Like 1 = facebook 2 = twitter 3 =email');
             $table->date('date');
-            $table->bigInteger('account_id');
             $table->bigInteger('contact_id');
             $table->bigInteger('creator');
+            $table->bigInteger('updater_id')->default(0);
             $table->timestamps();
         });
     }

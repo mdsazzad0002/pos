@@ -17,8 +17,9 @@ return new class extends Migration
             $table->integer('amount')->nullable();
             $table->date('date')->nullable();
             $table->integer('stage_id')->default(0);
-            $table->bigInteger('account_id')->default(0);
+            $table->bigInteger('lead_id')->default(0);
             $table->bigInteger('creator')->default(0);
+            $table->bigInteger('updater_id')->default(0);
             $table->timestamps();
         });
     }

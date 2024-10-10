@@ -145,6 +145,32 @@ var placeholder_body = `
 
 
     // All Modal Submit
+    function error_show(xhr, status, error){
+        var response_error = JSON.parse(xhr.responseText);
+
+        if(response_error.errors){
+            const errors = response_error.errors;
+            var i = 0;
+            Object.keys(errors).forEach(function(key) {
+                i++
+                if(i==1){
+                    $('input[name="'+key+'"]').focus();
+                }
+                errors[key].forEach(function(errorMessage) {
+                    flasher.error(errorMessage);
+                });
+            });
+        }else if(response_error.message){
+            flasher.error(response_error.message);
+        }else{
+            //Error show and refresh button generate
+          var items_refresh = "<div class='text-center btn_refresh_head'>"+thi.outerHTML+"<br/><br/>AJAX Error: "+ status + error+"</div>";
+          $('#ajax_modal .modal-body').html(items_refresh);
+          $('.btn_refresh_head .btn').html('Refresh')
+          //Error show and refresh button generate
+
+        }
+    }
 
     function form_submit(class_element = null){
         var forem_reset = false;
@@ -197,34 +223,7 @@ var placeholder_body = `
 
                 },
                 error: function (xhr, status, error) {
-                    var response_error = JSON.parse(xhr.responseText);
-
-                    if(response_error.errors){
-                        const errors = response_error.errors;
-                        var i = 0;
-                        Object.keys(errors).forEach(function(key) {
-                            i++
-                            if(i==1){
-                                $('input[name="'+key+'"]').focus();
-                            }
-                            errors[key].forEach(function(errorMessage) {
-                                flasher.error(errorMessage);
-                            });
-                        });
-                    }else if(response_error.message){
-                        flasher.error(response_error.message);
-                    }else{
-                        //Error show and refresh button generate
-                      var items_refresh = "<div class='text-center btn_refresh_head'>"+thi.outerHTML+"<br/><br/>AJAX Error: "+ status + error+"</div>";
-                      $('#ajax_modal .modal-body').html(items_refresh);
-                      $('.btn_refresh_head .btn').html('Refresh')
-                      //Error show and refresh button generate
-
-                    }
-
-
-
-
+                    error_show(xhr, status, error)
 
                 }
             });

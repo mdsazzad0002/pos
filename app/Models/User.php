@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+// use Illuminate\Support\Facades\Notification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use IvanoMatteo\LaravelDeviceTracking\Traits\UseDevices;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
+    // use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -47,4 +50,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // public function routeNotificationForVonage(Notification $notification): string
+    // {
+    //     return $this->mobile_number;
+    // }
 }

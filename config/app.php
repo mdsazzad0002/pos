@@ -83,7 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 1,//'en',
+    'language_support' => [1, 2],//['en', 'bn'],
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Jackiedo\Cart\CartServiceProvider::class,
+        
 
     ])->toArray(),
 
@@ -186,6 +188,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Cart' => Jackiedo\Cart\Facades\Cart::class,
+
 
     ])->toArray(),
 
