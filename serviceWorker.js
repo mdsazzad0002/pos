@@ -1,19 +1,29 @@
-self.addEventListener('push', function (event) {
-    if (!(self.Notification && self.Notification.permission === 'granted')) {
-        return;
-    }
+self.addEventListener("push", (event) => {
+    const notification = event.data.json();
 
-    const sendNotification = body => {
-        // you could refresh a notification badge here with postMessage API
-        const title = "Web Push example";
+    event.waitUntil(
+        self.registration.showNotification(notification.title, {
+            body: notification.body,
+            icon: notification.icon,
+            data: { url: notification.url } // Pass URL in data
+        })
+    );
+});
 
-        return self.registration.showNotification(title, {
-            body,
-        });
-    };
+self.addEventListener("notificationclick", (event) => {
+    event.notification.close(); // Close the notification
 
-    if (event.data) {
-        const payload = event.data.json();
-        event.waitUntil(sendNotification(payload.message));
-    }
+    const url = event.notification.data.url; // Access URL from data
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window' }).then((clientList) => {
+            for (let client of clientList) {
+                if (client.url === url && 'focus' in client) {
+                    return client.focus(); // Focus the existing window
+                }
+            }
+            // Open a new window if no client matches
+            return clients.openWindow(url);
+        })
+    );
 });

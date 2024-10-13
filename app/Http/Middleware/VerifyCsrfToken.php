@@ -14,6 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'uploads',
         'admin/Translation/*',
-        'admin/sendNotification/'
+        'admin/fcm_notification/*'
     ];
 }

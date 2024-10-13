@@ -13,12 +13,12 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
-        "minishlink/web-push": "^9.0",
+        "minishlink/web-push-php-example": "^4.0",
         "mpdf/mpdf": "^8.2",
         "paragonie/constant_time_encoding": "^3.0",
         "spatie/laravel-permission": "^6.7",
-        "yajra/laravel-datatables-oracle": "^10.3.1",
-        "web-token/jwt-library" :"*"
+        "whitecube/laravel-cookie-consent": "^1.2",
+        "yajra/laravel-datatables-oracle": "^10.3.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.13",

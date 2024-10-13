@@ -58,7 +58,7 @@ Route::get('/migrate/seed', function(){
 
 
 Route::get('/', function () {
-    return redirect('admin');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -84,9 +84,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('device_access_check/status/update', [LoginCheckController::class, 'status'])->name('device_access_check.status');
 
 
-    Route::post('sendNotification', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
-    Route::put('sendNotification', [PushNotificationController::class, 'subscribe'])->name('sendNotificationsubscribe');
-    Route::get('sendNotification/test/', [PushNotificationController::class, 'index'])->name('notification_test');
+
+    Route::post('fcm_notification/test', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
+    Route::post('fcm_notification/subscribe/', [PushNotificationController::class, 'subscribe'])->name('fcm_notification.subscribe');
+
+    Route::get('fcm_notification', [PushNotificationController::class, 'index'])->name('fcm_notification.index');
+    Route::post('fcm_notification', [PushNotificationController::class, 'store'])->name('fcm_notification.store');
+
+
 
 
     Route::get('/', [dashboardController::class, 'index'])->name('index');

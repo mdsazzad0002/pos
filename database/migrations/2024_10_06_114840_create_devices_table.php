@@ -23,7 +23,7 @@ class CreateDevicesTable extends Migration
             $table->bigInteger('creator')->nullable();
             $table->bigInteger('updater_id')->nullable();
             $table->softDeletes();
-            $table->string('notification_data')->nullable();
+            $table->text('notification_data')->nullable();
             $table->timestamps();
         });
     }

@@ -401,7 +401,7 @@ sidebar-dark-primary elevation-4">
                 </li>
                 {{--  Device Loged Listing Setting  --}}
 
-                
+
                 {{--  Device Loged Listing Setting  --}}
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -434,6 +434,14 @@ sidebar-dark-primary elevation-4">
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <a href="#" class="nav-link">
+
+                        <i class="fas fa-tools nav-icon"></i>
+                        <p>
+                            {{ settings('settings', 10) }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
@@ -443,7 +451,21 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('admin.fcm_notification.index') }}"
+                            class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>{{ settings('main_setting', 10) }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
+                            class="nav-link">
+                                <i class="fas fa-cogs nav-icon"></i>
+                                <p>{{ settings('main_setting', 10) }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.setting.index', ['site-verification-setting', '25']) }}"
                             class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
                                 <p>{{ settings('main_setting', 10) }}</p>

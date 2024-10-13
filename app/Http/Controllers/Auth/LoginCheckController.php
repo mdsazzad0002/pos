@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\Http\Controllers\Controller;
+use App\Models\Device;
+use Carbon\Carbon;
 use Carbon\Traits\Creator;
 use Date;
-use App\Models\Device;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Yajra\DataTables\Facades\DataTables;
 
 class LoginCheckController extends Controller
@@ -78,6 +80,8 @@ class LoginCheckController extends Controller
                 ]);
             }
             $device->logout = $device->logout == 1 ? 0 : 1;
+            
+            $device->suspend_date =  $device->logout == 1 ? Carbon::now()->addDays(500) : Carbon::now(); 
             $device->save();
 
             return json_encode([
@@ -98,67 +102,85 @@ class LoginCheckController extends Controller
     public function index(Request $request){
         $device_logout = 0;
         $device_id = 0;
-
+        $cookieName = 'user' . base64_encode(auth()->user()->id * 4);
+        $cookieName = str_replace('=', '4564785', $cookieName );
+    
 
         // dd($_SERVER);
         if($device_id = session()->get('user'.auth()->user()->id)){
             $current_device = Device::find($device_id);
             if($current_device){
 
-                if($current_device->logout == 1){
+                if($current_device->logout == 1 && $current_device->suspend_date <= Carbon::now()){
 
-                    $current_device->suspend_date = \Carbon\Carbon::now();
                     $current_device->updater_id = auth()->user()->id ?? 0;
                     $current_device->save();
 
                     auth()->logout();
                     $device_logout = 1;
-
-
+                    
                 }
+                setcookie(   $cookieName, base64_encode($current_device->id * 16), time() + 3600, url('/'));
+      
+              
 
+            } else {
+                    $deviceInfo = $this->getDeviceInfo();
+                    $new_device = new Device;
+                    $new_device->device_type = $deviceInfo['deviceName'].' '.$deviceInfo['browser_name'];
+                    $new_device->ip = $deviceInfo['ip'];
+    
+    
+                    $new_device->data = json_encode($_SERVER);
+                    $new_device->notification_data = '';
+                    $new_device->creator = auth()->user()->id ?? 0;
+                    $new_device->updater_id = auth()->user()->id ?? 0;
+    
+                    // Save the new device to the database
+                    $new_device->save();
+                    $device_id = $new_device->id;
+                    session()->put('user' . auth()->user()->id, $new_device->id);
+                    setcookie(   $cookieName, base64_encode($new_device->id * 16), time() + 3600, url('/'));
+
+      
+                
+
+            }
+        }else{
+           
+            if (isset($_COOKIE[$cookieName])) {
+                $current_device_cookie = $_COOKIE[$cookieName];
+                $current_device_cookie = base64_decode($current_device_cookie) / 16;
+                session()->put('user' . auth()->user()->id, $current_device_cookie);
+                $device_id = $current_device_cookie;
             } else {
                 $deviceInfo = $this->getDeviceInfo();
                 $new_device = new Device;
-                $new_device->device_type = $deviceInfo['deviceName'].' '.$deviceInfo['browser_name'];
+                $new_device->device_type = $deviceInfo['deviceName'] . ' ' . $deviceInfo['browser_name'];
                 $new_device->ip = $deviceInfo['ip'];
-
+                $new_device->creator = auth()->user()->id ?? 0;
+                $new_device->updater_id = auth()->user()->id ?? 0;
 
                 $new_device->data = json_encode($_SERVER);
                 $new_device->notification_data = '';
-                $new_device->creator = auth()->user()->id ?? 0;
-                $new_device->updater_id = auth()->user()->id ?? 0;
 
                 // Save the new device to the database
                 $new_device->save();
                 $device_id = $new_device->id;
                 session()->put('user' . auth()->user()->id, $new_device->id);
+                setcookie(   $cookieName, base64_encode($new_device->id * 16), time() + 3600, url('/'));
+      
             }
-        }else{
-            $deviceInfo = $this->getDeviceInfo();
-            $new_device = new Device;
-            $new_device->device_type = $deviceInfo['deviceName'].' '.$deviceInfo['browser_name'];
-            $new_device->ip = $deviceInfo['ip'];
-            $new_device->creator = auth()->user()->id ?? 0;
-            $new_device->updater_id = auth()->user()->id ?? 0;
-
-            $new_device->data = json_encode($_SERVER);
-            $new_device->notification_data = '';
-
-            // Save the new device to the database
-            $new_device->save();
-            $device_id = $new_device->id;
-            session()->put('user' . auth()->user()->id, $new_device->id);
         }
-
-
+       
         header('Content-Type: text/event-stream');
         header('Cache-Control: no-cache');
         header('Connection: keep-alive');
 
-
+       
         $eventData = [
             'logout' =>  $device_logout,
+           
         ];
 
         echo "data:" . json_encode($eventData) . "\n\n";
@@ -196,7 +218,7 @@ class LoginCheckController extends Controller
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
-        $browser_name = explode(';', $_SERVER['HTTP_SEC_CH_UA'])[0] ?? '';
+        $browser_name = explode(';', $_SERVER['HTTP_SEC_CH_UA'] ?? $_SERVER['HTTP_USER_AGENT'])[0] ?? '';
 
 
 

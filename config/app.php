@@ -170,7 +170,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Jackiedo\Cart\CartServiceProvider::class,
-        
+        App\Providers\CookiesServiceProvider::class,
 
     ])->toArray(),
 

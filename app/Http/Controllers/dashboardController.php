@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\fcm;
 use App\Models\unit;
 use App\Models\User;
 use App\Models\brand;
@@ -24,29 +25,7 @@ class dashboardController extends Controller
 {
     public function index(){
 
-        // $mailInfo = [
-        //     'title' => 'New Order title',
-        //     'subject' => 'New Order subject',
-        //     'body' => 'New Order body',
-        //     'user'=>User::first()
-        // ];
-        // Mail::to($mailInfo['user']->email, $mailInfo['user']->name)->send(new MailerDynamic($mailInfo));
-
-        // $notificationInfo = [
-        //     'line' => 'New Order title',
-        //     'action' => 'Click To Find',
-        //     'url' => '/',
-        //     'greetings' => 'Thank you for getting',
-        //     'user'=>User::first()
-        // ];
-
-        // Notification::send($notificationInfo['user'], new NotificationDynamic($notificationInfo));
-        // DeviceTracker::flagCurrentAsVerified();
-
-        // $device = DeviceTracker::detectFindAndUpdate();
-        // dd($device);
-        // Auth::logoutOtherDevices('admin@gmail.com');
-
+        $fcm = fcm::first();
 
 
         $order = order::count();
@@ -59,10 +38,8 @@ class dashboardController extends Controller
         $unit = unit::count();
         $role = Role::count();
         $category = category::count();
-        return view('welcome', compact('order', 'category', 'user', 'customer', 'brand', 'supplier','purchase','product', 'unit','role'));
+        return view('admin.dashboard.index', compact('order', 'category', 'user', 'customer', 'brand', 'supplier','purchase','product', 'unit','role', 'fcm'));
     }
 
-    public function noti(){
-        return view('noti');
-    }
+
 }
