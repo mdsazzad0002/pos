@@ -20,6 +20,7 @@
 
     <!-- Facebook Admin Verification -->
     <meta property="fb:admins" content="{{ settings('fb:admins', 25) }}" />
+    <link rel="icon" href="{{ asset('uploads/1081269358282203140.jpg') }}">
 
     <!-- Other meta tags -->
     <!-- Google Tag Manager -->

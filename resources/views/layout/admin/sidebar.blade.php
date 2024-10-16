@@ -434,55 +434,55 @@ sidebar-dark-primary elevation-4">
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
-                    <a href="#" class="nav-link">
 
-                        <i class="fas fa-tools nav-icon"></i>
-                        <p>
-                            {{ settings('settings', 10) }}
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
                             class="nav-link">
                                 <i class="fas fa-cogs nav-icon"></i>
-                                <p>{{ settings('main_setting', 10) }}</p>
+                                <p>{{ __('settings.main_setting_sidebar')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.fcm_notification.index') }}"
                             class="nav-link">
-                                <i class="fas fa-cogs nav-icon"></i>
-                                <p>{{ settings('main_setting', 10) }}</p>
+                            <i class="fas fa-bell nav-icon"></i>
+                                <p>{{ __('settings.notification_sidebar') }}</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
-                            class="nav-link">
-                                <i class="fas fa-cogs nav-icon"></i>
-                                <p>{{ settings('main_setting', 10) }}</p>
-                            </a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('admin.setting.index', ['site-verification-setting', '25']) }}"
                             class="nav-link">
-                                <i class="fas fa-cogs nav-icon"></i>
-                                <p>{{ settings('main_setting', 10) }}</p>
+                                <i class="fas fa-certificate nav-icon"></i>
+                                <p>{{ __('settings.site_verification_sidebar') }}</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['setting-status', '8']) }}" class="nav-link">
-                                <i class="fas fa-cog nav-icon"></i>
-                                <p>{{ settings('setting_status', 10) }}</p>
+                            <a href="{{ route('admin.setting.index', ['site-tag-management', '24']) }}"
+                            class="nav-link">
+                                <i class="fas fa-tags nav-icon"></i>
+                                <p>{{ __('settings.site-tag-management') }}</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['site-title','10']) }}" class="nav-link  ">
-                                <i class="fas fa-sliders-h nav-icon"></i>
-                                <p> {{ settings('site_title_setting', 10) }}</p>
+                            <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}"
+                            class="nav-link">
+                                <i class="fas fa-tags nav-icon"></i>
+                                <p>{{ __('settings.site-pwa-management') }}</p>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.mail.index') }}"
+                            class="nav-link">
+                                 <i class="fas fa-envelope-open-text nav-icon"></i>
+                                <p>{{ __('settings.email_setting_sidebar') }}</p>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{ route('admin.setting.index_group', ['payment-setting','20']) }}" class="nav-link ">
                                 <i class="fas fa-money-check nav-icon"></i>

@@ -8,18 +8,9 @@
 {{--  Content Extends  --}}
 
 
-@php
-    $blade_path = 'admin.settings.partials.'.$slug;
-@endphp
-@if(view()->exists($blade_path))
-    {{-- File exists --}}
-    @include($blade_path)
-    {{-- Your Blade code here --}}
-@else
-    {{-- File does not exist --}}
-    @include('admin.settings.partials.404')
-    {{-- Optionally, you can show a message or alternative content --}}
-@endif
+
+    @include( 'admin.settings.partials.main-setting', ['slug' => $slug])
+
 
 
 

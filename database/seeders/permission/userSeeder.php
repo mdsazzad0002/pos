@@ -14,13 +14,16 @@ class userSeeder extends Seeder
      */
     public function run(): void
     {
-          User::factory()->create([
-            'name' => 'Super Admin',
-            'email' => 'admin@gmail.com',
-            'username'=> 'superadmin',
-            'upload_id' => '0',
-            'password'=>  Hash::make('admin@gmail.com'),
-            'branch_id'=> 1
-        ]);
+        $items = User::count();
+        if($items == 0){
+            User::factory()->create([
+              'name' => 'Super Admin',
+              'email' => 'admin@gmail.com',
+              'username'=> 'superadmin',
+              'upload_id' => '0',
+              'password'=>  Hash::make('admin@gmail.com'),
+              'branch_id'=> 1
+          ]);
+        }
     }
 }

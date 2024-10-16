@@ -7,6 +7,7 @@ use App\Mail\MailerDynamic;
 use Illuminate\Http\Request;
 use App\Models\mail\MailSetting;
 use App\Http\Controllers\Controller;
+use App\Models\mail\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
 class MailSettingController extends Controller
@@ -17,7 +18,8 @@ class MailSettingController extends Controller
     public function index()
     {
         $mail_config = MailSetting::first();
-        return view('admin.MailConfiguration.index', compact('mail_config'));
+        $mail_template = MailTemplate::get()->pluck('id','name')->toArray();
+        return view('admin.MailConfiguration.index', compact('mail_config','mail_template'));
     }
 
     /**
@@ -43,8 +45,15 @@ class MailSettingController extends Controller
         $mail_setting->smtp_port = $request->smtp_port;
         $mail_setting->smtp_username = $request->smtp_username;
         $mail_setting->status = $request->status;
+        $mail_setting->from_address = $request->from_address;
         $mail_setting->save();
-        
+
+        return json_encode([
+            'title'=>'Successfully  updated',
+            'type'=>'success',
+            'refresh'=>'true',
+        ]);
+
     }
 
     /**
@@ -86,6 +95,9 @@ class MailSettingController extends Controller
     public function testMail(Request $request)
     {
 
+        $request->validate(
+            ['mail' => 'required']
+        );
 
         $mailInfo = [
             'title' => 'Test Mail',

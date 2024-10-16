@@ -22,7 +22,7 @@ class PushNotificationController extends Controller
     public function index()
     {
         $fcm = fcm::first();
-        return view('admin.notification.index', compact('fcm'));
+        return view('admin.settings.fcm', compact('fcm'));
     }
 
     public function store(Request $request)

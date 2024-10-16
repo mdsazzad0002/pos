@@ -116,15 +116,15 @@ function dynamic_asset($id)
             if (File::exists(public_path($file1)) || is_dir(public_path($file1))) {
                 return asset($file1);
             } else {
-                $file = $destinationPath . 'fixing.webp';
+                $file = $destinationPath . 'fixing.png';
                 return asset($file);
             }
         } else {
-            $file = $destinationPath . 'fixing.webp';
+            $file = $destinationPath . 'fixing.png';
             return asset($file);
         }
     } else {
-        $file = $destinationPath . 'fixing.webp';
+        $file = $destinationPath . 'fixing.png';
         return asset($file);
     }
 }

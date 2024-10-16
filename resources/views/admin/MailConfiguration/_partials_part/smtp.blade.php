@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">SMTP Setting</div>
     <div class="card-body">
-        <form action="" id="smtp_ajax_submit" method="POST">
+        <form action="" id="smtp_ajax_submit" class="form_ajax_submit" method="POST">
             @csrf
             <!-- Laravel CSRF token for protection -->
 
@@ -48,11 +48,11 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="smtp_encryption">Encryption:</label>
-                        <select class="form-control" value="{{ $mail_config->smtp_encryption }}" id="smtp_encryption" name="smtp_encryption" required>
-                            <option value="" disabled selected>Select encryption method</option>
-                            <option value="tls">TLS</option>
-                            <option value="ssl">SSL</option>
-                            <option value="none">None</option>
+                        <select class="form-control"  id="smtp_encryption" name="smtp_encryption">
+                            <option value="" @if($mail_config->smtp_encryption == "") selected @endif  >Select encryption method</option>
+                            <option value="tls" @if($mail_config->smtp_encryption == "tls") selected @endif >TLS</option>
+                            <option value="ssl"@if($mail_config->smtp_encryption == "ssl") selected @endif >SSL</option>
+                            <option value="none"@if($mail_config->smtp_encryption == "none") selected @endif >None</option>
                         </select>
                     </div>
                 </div>
@@ -85,9 +85,12 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('admin.mail.test') }}">
+    {{ __('smtp.send_a_test_mail') }}
+    <br>
+        <form action="{{ route('admin.mail.test') }}" class="input-group form_ajax_submit"  method="post">
+            @csrf
             <input type="email" name="mail" class="form-control" placeholder="{{ __('mailconfigration.test.email') }}">
-            <button class="btn btn-primary:submit">Submit</button>
+            <button class="btn btn-primary submit">Send</button>
         </form>
     </div>
 </div>

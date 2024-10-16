@@ -33,9 +33,22 @@ class SettingController extends Controller
         if ($request->ajax()) {
             return view('admin.settings.partials.helper.' . $slug.'-helper', compact('settings'));
         }
+        $flag_target = 0;
+        if($slug == 'main-setting' && $key == '9'){
+            $flag_target = 1;
+        }elseif($slug == 'site-verification-setting' && $key == '25'){
+            $flag_target = 1;
+        }elseif($slug == 'site-tag-management' && $key == '24'){
+            $flag_target = 1;
+        }elseif($slug == 'site-pwa-management' && $key == '20'){
+            $flag_target = 1;
+        }
 
-
-        return view('admin.settings.index', compact('slug', 'settings'));
+        if($flag_target == 1){
+            return view('admin.settings.index', compact('slug', 'settings'));
+        }else{
+            abort('404');
+        }
     }
 
 

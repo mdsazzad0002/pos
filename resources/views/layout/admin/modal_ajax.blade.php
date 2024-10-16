@@ -176,7 +176,7 @@ var placeholder_body = `
         var forem_reset = false;
         if(class_element == null){
             class_element = '.form_ajax_submit'
-             forem_reset = true;
+             {{--  forem_reset = true;  --}}
         }
         document.querySelectorAll(class_element).forEach(function(element){
 

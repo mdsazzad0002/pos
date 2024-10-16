@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('mail_templates', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('keywords');
+            $table->longText('template')->nullable();
+            $table->bigInteger('creator')->default(0);
+            $table->bigInteger('updater_id')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

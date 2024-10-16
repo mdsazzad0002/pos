@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\setting;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,8 +17,9 @@ class generalsetting extends Seeder
             ['name' => 'theme_sidebar-collapse', 'value' => '0', 'creator_id' => '1', 'key' => '1'],
             ['name' => 'theme_nav-legacy', 'value' => '0', 'creator_id' => '1', 'key' => '1'],
             ['name' => 'theme_nav-compact', 'value' => '0', 'creator_id' => '1', 'key' => '1'],
-       
+
         ];
+        
 
         DB::table('settings')->insert($data);
     }

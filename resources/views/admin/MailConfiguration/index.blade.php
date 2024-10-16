@@ -41,21 +41,4 @@
 
 @endsection
 
-@push('js')
-<script>
-    document.querySelector('#smtp_ajax_submit').addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
-        $.ajax({
-            type:'post',
-            url:'',
-            processData: false, // Important for FormData
-            contentType: false, // Important for FormData
-            data : new FormData(this),
-            success:function(data){
-                console.log(data)
-            }
-        })
-    });
-</script>
 
-@endpush

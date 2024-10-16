@@ -19,7 +19,7 @@ use App\Http\Controllers\mail\MailSettingController;
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/mail', [MailSettingController::class, 'index'])->name('mail.index');
     Route::post('/mail', [MailSettingController::class, 'store'])->name('mail.store');
-    Route::get('/mail/test', [MailSettingController::class, 'testMail'])->name('mail.test');
+    Route::post('/mail/test', [MailSettingController::class, 'testMail'])->name('mail.test');
 
 
 
