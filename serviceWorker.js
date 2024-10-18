@@ -29,3 +29,9 @@ self.addEventListener("notificationclick", (event) => {
 });
 
 
+
+//for app install pwa
+self.addEventListener('install', (event) => {
+    self.skipWaiting();
+});
+

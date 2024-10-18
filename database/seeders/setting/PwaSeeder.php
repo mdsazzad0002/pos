@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class pwa_seeder extends Seeder
+class PwaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,6 +24,7 @@ class pwa_seeder extends Seeder
             ['name' => 'pwa_type', 'value' => 'image/png', 'creator_id' => '1', 'key' => '20'],
             ['name' => 'pwa_sizes', 'value' => '150x150', 'creator_id' => '1', 'key' => '20'],
             ['name' => 'pwa_display', 'value' => 'standalone', 'creator_id' => '1', 'key' => '20'],
+            ['name' => 'pwa_status', 'value' => '0', 'creator_id' => '1', 'key' => '20'],
 
         ];
 

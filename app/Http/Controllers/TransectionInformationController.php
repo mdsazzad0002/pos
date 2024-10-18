@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\paymentMethod;
+use App\Models\payment\transection_information;
 use Illuminate\Http\Request;
 
-class PaymentMethodController extends Controller
+class TransectionInformationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class PaymentMethodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(paymentMethod $paymentMethod)
+    public function show(transection_information $transection_information)
     {
         //
     }
@@ -42,7 +42,7 @@ class PaymentMethodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(paymentMethod $paymentMethod)
+    public function edit(transection_information $transection_information)
     {
         //
     }
@@ -50,7 +50,7 @@ class PaymentMethodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, paymentMethod $paymentMethod)
+    public function update(Request $request, transection_information $transection_information)
     {
         //
     }
@@ -58,7 +58,7 @@ class PaymentMethodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(paymentMethod $paymentMethod)
+    public function destroy(transection_information $transection_information)
     {
         //
     }

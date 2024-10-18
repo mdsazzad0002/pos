@@ -14,7 +14,7 @@ class SettingController extends Controller
     public function index(Request $request, $slug, $key)
     {
 
-        $perpage = 10;
+        $perpage = 12;
         if($request->has('perpage')){
             if($request->perpage != ''){
                 $perpage = $request->perpage;
@@ -42,6 +42,10 @@ class SettingController extends Controller
             $flag_target = 1;
         }elseif($slug == 'site-pwa-management' && $key == '20'){
             $flag_target = 1;
+        }elseif($slug == 'takto-messageing-management' && $key == '31'){
+            $flag_target = 1;
+        }elseif($slug == 'cookie-management' && $key == '40'){
+            $flag_target = 1;
         }
 
         if($flag_target == 1){
@@ -52,44 +56,6 @@ class SettingController extends Controller
     }
 
 
-
-
-    public function index_group(Request $request, $slug, $key)
-    {
-
-        $perpage = 10;
-        if($request->has('perpage')){
-            if($request->perpage != ''){
-                $perpage = $request->perpage;
-            }
-        }
-
-
-    $settings = setting::where('key', $key)
-        ->where(function ($query) use ($request) {
-            if ($request->has('s')) {
-                $search_keyword = $request->s;
-                $query->where('name', 'LIKE', "%$search_keyword%");
-            }
-        })
-        ->paginate($perpage);
-
-     $settings_data_format = $settings
-        ->groupBy(function ($items) {
-            return explode('_', $items->name)[0];
-        });
-
-
-
-
-
-        if ($request->ajax()) {
-            return view('admin.settings.partials.helper.' . $slug.'-helper', compact('settings','settings_data_format'));
-        }
-
-
-        return view('admin.settings.index', compact('slug', 'settings','settings_data_format'));
-    }
 
 
 
@@ -157,7 +123,11 @@ class SettingController extends Controller
 
             }
 
-            return 'success';
+            return json_encode([
+                'title' => 'Successfully   updated',
+                'type' => 'success',
+                'refresh' => 'true',
+            ]);
 
 
         }else{
@@ -179,7 +149,12 @@ class SettingController extends Controller
 
             $setting->creator_id = $creator_id;
             $setting->save();
-            return 'success';
+
+            return json_encode([
+                'title' => 'Successfully   updated',
+                'type' => 'success',
+                'refresh' => 'true',
+            ]);
         }
 
 

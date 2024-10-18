@@ -1,8 +1,10 @@
 @section('title', settings('main_setting', 10))
 @section('content')
 <div class="row">
+
     @foreach ($settings as $setting)
-    <form class="col-md-6 col-xl-4" action="{{ route('setting.store.update') }}" enctype="multipart/form-data">
+    <form class="col-md-6 col-xl-4 form_ajax_submit" action="{{ route('setting.store.update') }}" enctype="multipart/form-data" method="POST">
+        @csrf
         <div class="card">
             <div class="card-header">
                 <h5>
@@ -18,32 +20,22 @@
 
 
                 @php
-                    $url = settings($setting->name, $setting->key);
+                $items_value = settings($setting->name, $setting->key);
                 @endphp
 
-                @if (filter_var( $url, FILTER_VALIDATE_URL) && str_contains($setting->name, 'image'))
-                    <div class="">
-                        <label type="button" onclick="upload_select(this)">
-                            <input type="text" name="value" id="image" class="form-control mb-2" hidden>
-                            <img style="max-height: 60px" src="{{  $url }}" alt="">
-                        </label>
-                    </div>
+                @include('admin.settings.partials.main-setting-helper', ['key' => $setting->name, 'items_key'=> 'value', 'items_value' => $items_value])
 
-                    <div class="pt-2 d-flex justify-content-end">
-                        <button onclick="submit_setting_post(this)" type="button" class="btn btn-primary">Save</button>
-                    </div>
-                @else
-                    <input type="text" class="form-control" placeholder="Enter App Name" name="value" id="{{ $setting->name }}" value="{{  $url}}">
-                    <div class="pt-2 d-flex justify-content-end">
-                        <button onclick="submit_setting(this)" type="button" class="btn btn-primary">Save</button>
-                    </div>
-                @endif
+
+
+                <div class="pt-2 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
 
             </div>
         </div>
 
     </form>
     @endforeach
-
 </div>
+{{ $settings->links() }}
 @endsection

@@ -474,6 +474,20 @@ sidebar-dark-primary elevation-4">
                                 <p>{{ __('settings.site-pwa-management') }}</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.setting.index', ['takto-messageing-management', '31']) }}"
+                            class="nav-link">
+                                <i class="fas fa-tags nav-icon"></i>
+                                <p>{{ __('settings.takto_sidebar-management') }}</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.setting.index', ['cookie-management', '40']) }}"
+                            class="nav-link">
+                                <i class="fas fa-tags nav-icon"></i>
+                                <p>{{ __('settings.cookie-sidebar-management') }}</p>
+                            </a>
+                        </li>
 
                         <li class="nav-item">
                             <a href="{{ route('admin.mail.index') }}"
@@ -484,9 +498,9 @@ sidebar-dark-primary elevation-4">
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route('admin.setting.index_group', ['payment-setting','20']) }}" class="nav-link ">
+                            <a href="{{ route('admin.settings.payment-configration.index') }}" class="nav-link ">
                                 <i class="fas fa-money-check nav-icon"></i>
-                                <p> {{ settings('payment_setting', 10) }}</p>
+                                <p> {{ __('settings.payment-configration-sidebar') }}</p>
                             </a>
                         </li>
                     </ul>

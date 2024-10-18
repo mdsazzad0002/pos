@@ -55,7 +55,7 @@ class PushNotificationController extends Controller
      */
     public function sendNotification(Request $request)
     {
-        $request['user_id'] = 1;
+        // $request['user_id'] = 1;
         if ($request->has('user_id')) {
             $fcm_title = $request->fcm_title ?? 'fcm_title';
             $fcm_message = $request->fcm_message ?? 'fcm_message';

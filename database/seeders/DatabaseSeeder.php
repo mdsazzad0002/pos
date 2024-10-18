@@ -24,6 +24,7 @@ use Database\Seeders\SupplierTypeSeeder;
 
 use Database\Seeders\PaymentMethodSeeder;
 use Database\Seeders\language\LanguageCaller;
+use Database\Seeders\payment\paymentCaller;
 use Database\Seeders\permission\PermissionCaller;
 use Database\Seeders\setting\settingCaller;
 
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(settingCaller::class);
+        
         $this->call(branchSeeder::class);
         $this->call(customerSeeder::class);
         $this->call(supplierSeeder::class);
@@ -47,11 +49,12 @@ class DatabaseSeeder extends Seeder
         $this->call(productSeeder::class);
         $this->call(OrderStatusSeeder::class);
         $this->call(VatSeeder::class);
-        $this->call(PaymentMethodSeeder::class);
+
 
         //Crm lead Seeder call
 
 
+        $this->call(paymentCaller::class);
         $this->call(PermissionCaller::class);
         $this->call(CrmCaller::class);
         $this->call(LanguageCaller::class);

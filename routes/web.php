@@ -29,6 +29,10 @@ use App\Http\Controllers\Auth\LoginCheckController;
 use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\PushNotificationController;
 
+use App\Http\Controllers\payment\amarpay\amarpayController;
+use App\Http\Controllers\payment\PaymentCredentialController;
+use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,7 +87,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('device_access_check/{device}', [LoginCheckController::class, 'view'])->name('device_access_check.view');
     Route::get('device_access_check/status/update', [LoginCheckController::class, 'status'])->name('device_access_check.status');
 
-
+    Route::resource('settings/payment-configuration', PaymentCredentialController::class)->names('settings.payment-configration');
 
     Route::post('fcm_notification/test', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
     Route::post('fcm_notification/subscribe/', [PushNotificationController::class, 'subscribe'])->name('fcm_notification.subscribe');
@@ -192,3 +196,29 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 Route::any('setting-store-update', [SettingController::class, 'store'])->name('setting.store.update');
 
+
+
+
+
+Route::group(['as' => 'amarpay.', 'prefix' => 'amarpay'], function () {
+    Route::post('success', [amarpayController::class, 'success'])->name('success');
+    Route::post('fail', [amarpayController::class, 'fail'])->name('fail');
+    Route::get('cancel', [amarpayController::class, 'cancel'])->name('cancel');
+});
+
+
+Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
+    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+    //SSLCOMMERZ END
+
+});
