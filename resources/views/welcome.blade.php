@@ -35,8 +35,10 @@
 
 
 
-
-
+<form action="{{ route('paypal.payment.purchase') }}" method="POST">
+    @csrf
+    <button type="submit">Pay Now</button>
+</form>
 
 
 

@@ -29,6 +29,8 @@ use App\Http\Controllers\Auth\LoginCheckController;
 use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\PushNotificationController;
 
+use App\Http\Controllers\payment\paypal\paypalController;
+use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\amarpay\amarpayController;
 use App\Http\Controllers\payment\PaymentCredentialController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
@@ -220,5 +222,13 @@ Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
 
     Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
     //SSLCOMMERZ END
+
+});
+
+Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
+    Route::post('/purchase', [PaymentController::class, 'purchase'])->name('payment.purchase');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
 
 });

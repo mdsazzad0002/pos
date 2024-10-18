@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         'admin/Translation/*',
         'admin/fcm_notification/*',
         'amarpay/*',
-        'sslcommerz/*'
+        'sslcommerz/*',
+        'paypal/*'
     ];
 }
