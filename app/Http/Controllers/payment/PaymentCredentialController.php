@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\payment\PaymentCredential;
 use App\Http\Controllers\payment\amarpay\amarpayController;
+use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 
 
@@ -38,7 +39,7 @@ class PaymentCredentialController extends Controller
 
     public function show(PaymentCredential $payment_configuration){
         $data = [
-            
+
         ];
         if ($payment_configuration->provider == 'AmarPay') {
             $amarpay = new amarpayController($data);
@@ -47,6 +48,9 @@ class PaymentCredentialController extends Controller
         }elseif($payment_configuration->provider == 'SSLCommerz'){
             $sslcommerz = new SslCommerzPaymentController();
             return $sslcommerz->index($data);
+        }elseif($payment_configuration->provider == 'paypal'){
+            $paypal = new PaymentController($data);
+            return $paypal->createPayment();
 
         }
 

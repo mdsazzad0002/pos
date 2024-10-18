@@ -226,7 +226,7 @@ Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
 });
 
 Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
-    Route::post('/purchase', [PaymentController::class, 'purchase'])->name('payment.purchase');
+    Route::post('/purchase', [PaymentController::class, 'createPayment'])->name('payment.purchase');
     Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
     Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 

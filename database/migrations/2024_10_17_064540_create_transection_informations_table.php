@@ -40,6 +40,8 @@ return new class extends Migration
             $table->text('all_response')->nullable();
 
             $table->string('secret')->nullable();
+            $table->string('PayerID')->nullable();
+            $table->string('token')->nullable();
             $table->string('client_id')->nullable();
 
 
