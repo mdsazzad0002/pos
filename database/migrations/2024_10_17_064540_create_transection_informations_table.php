@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('ip_address')->nullable();
             $table->string('by_method')->nullable();
             $table->string('description')->nullable();
+            $table->string('tnx_id_by_user')->nullable();
 
             $table->string('amount')->nullable();
 

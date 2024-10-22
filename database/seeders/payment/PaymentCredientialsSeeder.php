@@ -48,6 +48,33 @@ class PaymentCredientialsSeeder extends Seeder
                 'charge' => 0,
                 'banach'=> 'us',
                 'country'=> 'us',
+            ],
+            [
+                'provider' => 'stripe',
+                'publishable' => 'pk_test_51QBS8gGmdDJ09IiPzuSRshs99WwkulloA8wW0rPt4vTORhFZUYXXa2LaxrySoZMgwcndwdnFbVTWsDkemFIJl43W00fxHQeYXV',
+                'secret' =>  'sk_test_51QBS8gGmdDJ09IiPeBXzbzsKu4yZC3GLYepHUyK8uzqNeXl1hJan55DmOZpJMY5D3uHhNREjAU2qId5Y4SeaaMBS000ZwhS3JO',
+                'sandbox_status' => '1',
+                'status'=> 1,
+
+
+
+                'charge' => 0,
+                'banach'=> 'us',
+                'country'=> 'us',
+            ],
+            [
+                'provider' => 'braintree',
+                'merchant_id' => 'bxqn974w5gzggj44',
+                'public_key' =>  'wktqb878b2x7jj7r',
+                'private_key' =>  '4d024a30390cb9475e556d475aaa399f',
+                'sandbox_status' => '1',
+                'status'=> 1,
+
+
+
+                'charge' => 0,
+                'banach'=> 'us',
+                'country'=> 'us',
             ]
         ];
 

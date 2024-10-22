@@ -33,6 +33,8 @@ use App\Http\Controllers\payment\paypal\paypalController;
 use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\amarpay\amarpayController;
 use App\Http\Controllers\payment\PaymentCredentialController;
+use App\Http\Controllers\payment\braintree\BraintreeController;
+use App\Http\Controllers\payment\stripe\stripePaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 
 /*
@@ -232,3 +234,23 @@ Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
 
 
 });
+
+
+
+Route::group(['as' => 'stripe.', 'prefix' => 'stripe'], function () {
+    Route::get('/checkout', [stripePaymentController::class, 'create'])->name('checkout.create');
+    Route::get('/checkout/success', [stripePaymentController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/cancel', [stripePaymentController::class, 'cancel'])->name('checkout.cancel');
+
+
+});
+
+
+
+Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
+    Route::get('/generate-client-token', [BraintreeController::class, 'generateClientToken']);
+    Route::get('/process-transaction', [BraintreeController::class, 'processTransaction']);
+
+});
+
+

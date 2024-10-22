@@ -8,7 +8,7 @@ use App\Models\payment\PaymentCredential;
 use App\Http\Controllers\payment\amarpay\amarpayController;
 use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
-
+use App\Http\Controllers\payment\stripe\stripePaymentController;
 
 class PaymentCredentialController extends Controller
 {
@@ -51,6 +51,9 @@ class PaymentCredentialController extends Controller
         }elseif($payment_configuration->provider == 'paypal'){
             $paypal = new PaymentController($data);
             return $paypal->createPayment();
+        }elseif($payment_configuration->provider == 'stripe'){
+            $paypal = new stripePaymentController($data);
+            return $paypal->create();
 
         }
 

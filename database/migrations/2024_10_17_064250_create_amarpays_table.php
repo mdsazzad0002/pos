@@ -28,11 +28,13 @@ return new class extends Migration
             $table->string('private_key')->nullable();
             $table->string('client_id')->nullable();
             $table->string('secret')->nullable();
+            $table->string('publishable')->nullable();
+
 
 
             $table->string('sandbox_status')->default(1);
             $table->string('status')->default(1);
-            
+
             $table->float('charge')->default(1);
             $table->string('banach')->nullable();
             $table->string('country')->nullable();
