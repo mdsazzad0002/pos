@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@yield('title') | {{ settings('app_name_short', 9) }}</title>
-<link rel="icon" href="{{ settings('app_image', 9) }}">
+<link rel="icon" href="{{ settings('app_fav_image', 9) }}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
 <!-- Ionicons -->

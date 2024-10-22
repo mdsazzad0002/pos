@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call(settingCaller::class);
-        
+
         $this->call(branchSeeder::class);
         $this->call(customerSeeder::class);
         $this->call(supplierSeeder::class);
@@ -49,6 +49,8 @@ class DatabaseSeeder extends Seeder
         $this->call(productSeeder::class);
         $this->call(OrderStatusSeeder::class);
         $this->call(VatSeeder::class);
+        $this->call(ServiceSeeder::class);
+        $this->call(SliderSeeder::class);
 
 
         //Crm lead Seeder call

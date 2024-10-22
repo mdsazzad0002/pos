@@ -65,9 +65,9 @@ Route::get('/migrate/seed', function(){
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return redirect('admin/');

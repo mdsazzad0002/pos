@@ -44,6 +44,13 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/mail.php'));
+
+
+
+            // Portfolio Theme
+
+            Route::middleware('web')
+                ->group(base_path('routes/protfilio_theme/web.php'));
         });
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('creator');
             $table->string('name');
             $table->string('slug');
+            $table->boolean('status')->default(1);
             $table->string('upload_id')->nullable();
             $table->timestamps();
         });
