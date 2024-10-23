@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VatSeeder::class);
         $this->call(ServiceSeeder::class);
         $this->call(SliderSeeder::class);
+        $this->call(FeaturesSeeder::class);
 
 
         //Crm lead Seeder call

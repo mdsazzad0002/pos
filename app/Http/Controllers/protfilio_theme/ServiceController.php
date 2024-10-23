@@ -5,6 +5,7 @@ namespace App\Http\Controllers\protfilio_theme;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\features;
 
 class ServiceController extends Controller
 {
@@ -13,7 +14,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return 'sda';
+        $services = Service::where('status', 1)->get();
+        $features = features::where('status', 1)->get();
+        return view('frontend.protfilio_theme.service.index', compact('services', 'features'));
     }
 
     /**
@@ -37,7 +40,7 @@ class ServiceController extends Controller
      */
     public function show($slug)
     {
-        
+
         if($slug != null && $slug){
             $service =  Service::where('status', 1)->where('slug', $slug)->first();
             return view('frontend.protfilio_theme.service_view.index', compact('service'));

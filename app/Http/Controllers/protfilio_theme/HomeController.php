@@ -18,4 +18,17 @@ class HomeController extends Controller
 
         return view('frontend.protfilio_theme.home.index', compact('brands', 'services', 'sliders'));
     }
+
+
+    public function contact(){
+        return view('frontend.protfilio_theme.contact.index');
+    }
+
+
+    public function blog(){
+        return view('frontend.protfilio_theme.blog.index');
+    }
+    public function faq(){
+        return view('frontend.protfilio_theme.faq.index');
+    }
 }
