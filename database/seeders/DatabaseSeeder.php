@@ -52,6 +52,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSeeder::class);
         $this->call(SliderSeeder::class);
         $this->call(FeaturesSeeder::class);
+        $this->call(FooterLinkHeadingSeeder::class);
+        $this->call(FooterLinkSubHeadingSeeder::class);
+        $this->call(TestimonialSeeder::class);
 
 
         //Crm lead Seeder call

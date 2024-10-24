@@ -4,6 +4,7 @@ use App\Models\upload;
 use App\Models\setting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Models\language\language;
 use Illuminate\Support\Facades\File;
 
 
@@ -34,7 +35,9 @@ function settings($name, $key)
     return '';
 }
 
-
+function language(){
+    return language::get();
+}
 
 function file_type($file_mime_type, $file_extension)
 {

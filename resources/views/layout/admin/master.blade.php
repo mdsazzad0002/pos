@@ -28,7 +28,7 @@
         <!-- Main Sidebar Container -->
         @include('layout.admin.sidebar')
         <div class="content-wrapper position-relative">
-            @if(settings('preloader_enable', 8))
+            @if(settings('preloader_enable', 9))
                 @include('layout.admin.preloder')
             @endif
 
