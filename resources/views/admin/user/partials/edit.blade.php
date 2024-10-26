@@ -41,6 +41,13 @@
                     </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div>
+                    <label for="designation">designation
+                        <input type="text" name="designation" value="{{ $User->designation ?? '' }}" class="form-control mb-2" id="designation" placeholder="Enter your designation">
+                    </label>
+                </div>
+            </div>
 
         </div>
     </fieldset>
@@ -262,6 +269,34 @@
                 <div>
                     <label for="youtube">Youtube
                         <input type="text" name="youtube" value="{{ $User->youtube ?? '' }}" class="form-control mb-2" placeholder="Youtube Url" id="youtube">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="linkedin">linkedin
+                        <input type="text" name="linkedin" value="{{ $User->linkedin ?? '' }}" class="form-control mb-2" placeholder="linkedin Url" id="linkedin">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="whatsapp">whatsapp
+                        <input type="text" name="whatsapp" value="{{ $User->whatsapp ?? '' }}" class="form-control mb-2" placeholder="whatsapp Url" id="whatsapp">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="whatsapp">telegram
+                        <input type="text" name="telegram" value="{{ $User->telegram ?? '' }}" class="form-control mb-2" placeholder="telegram Url" id="telegram">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="pintarest">Pintarest
+                        <input type="text" name="pintarest"  value="{{ $User->pintarest ?? '' }}" class="form-control mb-2" placeholder="pintarest Url" id="pintarest">
                     </label>
                 </div>
             </div>

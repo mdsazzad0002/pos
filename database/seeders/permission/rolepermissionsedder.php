@@ -166,6 +166,27 @@ class rolepermissionsedder extends Seeder
                 'Translation delete',
 
 
+
+
+                // CMS Seeder
+                   // Translation
+                   'slider read',
+                   'slider create',
+                   'slider edit',
+                   'slider delete',
+
+
+                   // Translation
+                   'service read',
+                   'service create',
+                   'service edit',
+                   'service delete',
+
+                   // testimonial
+                   'testimonial read',
+                   'testimonial create',
+                   'testimonial edit',
+                   'testimonial delete',
             ];
 
 

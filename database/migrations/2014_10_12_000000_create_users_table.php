@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('prefix')->nullable();
             $table->string('name');
             $table->string('username')->nullable();
+            $table->string('designation')->nullable();
+
             $table->string('nid')->nullable();
             $table->float('experience')->default(0);
             $table->string('salary')->nullable();
@@ -32,9 +34,17 @@ return new class extends Migration
             $table->string('family_mobile_number')->nullable();
             $table->string('present_address')->nullable();
             $table->string('p_present_address')->nullable();
+
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('github')->nullable();
+            $table->string('pintarest')->nullable();
+            $table->string('telegram')->nullable();
+            $table->string('whatsapp')->nullable();
+
             $table->string('account_holder_name')->nullable();
             $table->string('account_no')->nullable();
             $table->string('account_provider')->nullable();

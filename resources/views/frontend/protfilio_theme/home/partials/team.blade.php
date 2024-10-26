@@ -10,25 +10,28 @@
     <div class="container">
 
         <div class="row gy-4">
+            @foreach ($teams as $item)
 
-            @for($i = 0; $i < 10; $i++) <div class="col-lg-3 col-md-6 " data-aos="fade-up" data-aos-delay="100">
+
+            <div class="col-lg-3 col-md-6 " data-aos="fade-up" data-aos-delay="100">
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="{{ dynamic_asset(0) }}" class="img-fluid w-100" alt="">
+                        <img src="{{ dynamic_asset($item->upload_id) }}" class="img-fluid w-100" alt="{{ $item->name }}">
                         <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
+                            <a href="{{ $item->twitter }}"><i class="bi bi-twitter-x"></i></a>
+                            <a href="{{ $item->facebook }}"><i class="bi bi-facebook"></i></a>
+                            <a href="{{ $item->instagram }}"><i class="bi bi-instagram"></i></a>
+                            <a href="{{ $item->linkedin }}"><i class="bi bi-linkedin"></i></a>
                         </div>
                     </div>
                     <div class="member-info">
-                        <h4>Walter White</h4>
-                        <span>Chief Executive Officer</span>
+                        <h4>{{ $item->name }}</h4>
+                        <span>{{ $item->designation }}</span>
                     </div>
                 </div>
             </div><!-- End Team Member -->
-                @endfor
+            @endforeach
+
     </div>
 
     </div>

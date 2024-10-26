@@ -55,6 +55,35 @@ sidebar-dark-primary elevation-4">
                 </li>
 
 
+                <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-luggage-cart"></i>
+                        <p>
+                            Frontend Theme
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.slider.index') }}" class="nav-link ">
+                                <i class="fas fa-shopping-cart nav-icon"></i>
+                                <p>Slider</p>
+                            </a>
+                            <a href="{{ route('admin.service.index') }}" class="nav-link ">
+                                <i class="fas fa-shopping-cart nav-icon"></i>
+                                <p>Service</p>
+                            </a>
+                            <a href="{{ route('admin.testimonial.index') }}" class="nav-link ">
+                                <i class="fas fa-shopping-cart nav-icon"></i>
+                                <p>Testimonial</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
                 @can('order read')
                 <li class="nav-item">
                     <a href="#" class="nav-link ">

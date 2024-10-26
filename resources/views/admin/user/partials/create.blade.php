@@ -40,6 +40,13 @@
                     </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div>
+                    <label for="designation">designation
+                        <input type="text" name="designation" value="" class="form-control mb-2" id="joining_date" placeholder="Enter your designation">
+                    </label>
+                </div>
+            </div>
 
         </div>
     </fieldset>
@@ -257,6 +264,42 @@
                 <div>
                     <label for="youtube">Youtube
                         <input type="text" name="youtube" class="form-control mb-2" placeholder="Youtube Url" id="youtube">
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div>
+                    <label for="instagram">instagram
+                        <input type="text" name="instagram" class="form-control mb-2" placeholder="instagram Url" id="instagram">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="linkedin">linkedin
+                        <input type="text" name="linkedin" class="form-control mb-2" placeholder="linkedin Url" id="linkedin">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="whatsapp">whatsapp
+                        <input type="text" name="whatsapp" class="form-control mb-2" placeholder="whatsapp Url" id="whatsapp">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="whatsapp">telegram
+                        <input type="text" name="telegram" class="form-control mb-2" placeholder="telegram Url" id="telegram">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <label for="pintarest">Pintarest
+                        <input type="text" name="pintarest" class="form-control mb-2" placeholder="pintarest Url" id="pintarest">
                     </label>
                 </div>
             </div>

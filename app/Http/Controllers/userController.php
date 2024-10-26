@@ -111,6 +111,7 @@ class userController extends Controller
         $user_create = new User;
         $user_create->name = $request->name;
         $user_create->email = $request->email;
+        $user_create->designation = $request->designation;
         $user_create->password = Hash::make($request->password);
 
         $user_create->prefix = $request->input('prefix');
@@ -127,9 +128,15 @@ class userController extends Controller
         $user_create->family_mobile_number = $request->input('family_mobile_number');
         $user_create->present_address = $request->input('paresent_address');
         $user_create->p_present_address = $request->input('p_paresent_address');
+
         $user_create->facebook = $request->input('facebook');
         $user_create->twitter = $request->input('twitter');
         $user_create->youtube = $request->input('youtube');
+        $user_create->linkedin = $request->input('linkedin');
+        $user_create->whatsapp = $request->input('whatsapp');
+        $user_create->telegram = $request->input('telegram');
+        $user_create->pintarest = $request->input('pintarest');
+
         $user_create->account_holder_name = $request->input('account_holder_name');
         $user_create->account_no = $request->input('account_no');
         $user_create->account_provider = $request->input('account_provider');
@@ -198,6 +205,7 @@ class userController extends Controller
 
         $User->prefix = $request->input('prefix');
         $User->salary = $request->input('salary');
+        $User->designation = $request->input('designation');
         $User->branch_id = implode(',',$request->input('branch_id'));
         $User->joining_date = $request->input('joining_date');
 
@@ -210,9 +218,15 @@ class userController extends Controller
         $User->family_mobile_number = $request->input('family_mobile_number');
         $User->present_address = $request->input('paresent_address');
         $User->p_present_address = $request->input('p_paresent_address');
+
         $User->facebook = $request->input('facebook');
         $User->twitter = $request->input('twitter');
         $User->youtube = $request->input('youtube');
+        $User->linkedin = $request->input('linkedin');
+        $User->whatsapp = $request->input('whatsapp');
+        $User->telegram = $request->input('telegram');
+        $User->pintarest = $request->input('pintarest');
+
         $User->account_holder_name = $request->input('account_holder_name');
         $User->account_no = $request->input('account_no');
         $User->account_provider = $request->input('account_provider');

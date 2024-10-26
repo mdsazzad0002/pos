@@ -51,6 +51,11 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/protfilio_theme/web.php'));
+
+            Route::middleware('web')
+                ->name('admin.')
+                ->prefix('admin')
+                ->group(base_path('routes/protfilio_theme/admin.php'));
         });
     }
 }
