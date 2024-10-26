@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FooterLinkSubHeadingSeeder::class);
         $this->call(TestimonialSeeder::class);
 
+        $this->call(FaqSeeder::class);
 
         //Crm lead Seeder call
 

@@ -13,7 +13,7 @@ class LeadSourceSeeder extends Seeder
      */
     public function run(): void
     {
-        $leadsources = ['Facebook', 'Email', 'Twitter', 'Voice Call', 'Whatsapp', 'Linkedin'];
+        $leadsources = ['website', 'Facebook', 'Email', 'Twitter', 'Voice Call', 'Whatsapp', 'Linkedin'];
         foreach($leadsources as $leadsource){
             $newleadsource = new LeadSource();
             $newleadsource->name = $leadsource;

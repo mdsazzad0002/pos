@@ -187,6 +187,25 @@ class rolepermissionsedder extends Seeder
                    'testimonial create',
                    'testimonial edit',
                    'testimonial delete',
+
+
+                   // footerlinkheading
+                   'footerlinkheading read',
+                   'footerlinkheading create',
+                   'footerlinkheading edit',
+                   'footerlinkheading delete',
+
+                   // footerlinksubheading
+                   'footerlinksubheading read',
+                   'footerlinksubheading create',
+                   'footerlinksubheading edit',
+                   'footerlinksubheading delete',
+
+                   // faq
+                   'faq read',
+                   'faq create',
+                   'faq edit',
+                   'faq delete',
             ];
 
 

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('lead_deals', function (Blueprint $table) {
             $table->id();
             $table->string('note')->nullable();
+            $table->string('note_replay')->nullable();
             $table->integer('amount')->nullable();
             $table->date('date')->nullable();
             $table->integer('stage_id')->default(0);

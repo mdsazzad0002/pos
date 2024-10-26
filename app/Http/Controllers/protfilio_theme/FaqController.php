@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\protfilio_theme;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -12,9 +13,9 @@ class FaqController extends Controller
      */
     public function index()
     {
-        //
+        $faqs =  Faq::where("status",1)->orderBy("id","desc")->get();
+        return view('frontend.protfilio_theme.faq.index', compact('faqs'));
     }
-
     /**
      * Show the form for creating a new resource.
      */

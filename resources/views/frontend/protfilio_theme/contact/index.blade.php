@@ -49,8 +49,8 @@
 
   <!-- Section Title -->
   <div class="container section-title" data-aos="fade-up">
-    <h2>Contact</h2>
-    <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+    <h2>{{ __('contact.front_title') }}</h2>
+    <p>{{ __('contact.front_sub_title') }}</p>
   </div><!-- End Section Title -->
 
   <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -63,58 +63,67 @@
           <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
             <i class="bi bi-geo-alt flex-shrink-0"></i>
             <div>
-              <h3>Address</h3>
-              <p>{{ settings('app') }}</p>
+              <h3>{{ __('contact.front_address') }}</h3>
+              <p>{{ settings('app_address', 9) }}</p>
             </div>
           </div><!-- End Info Item -->
 
           <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
             <i class="bi bi-telephone flex-shrink-0"></i>
             <div>
-              <h3>Call Us</h3>
-              <p>+1 5589 55488 55</p>
+              <h3>{{ __('contact.fornt_call_us') }}</h3>
+              <p>{{ settings('app_email', 9) }}</p>
             </div>
           </div><!-- End Info Item -->
 
           <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
             <i class="bi bi-envelope flex-shrink-0"></i>
             <div>
-              <h3>Email Us</h3>
-              <p>info@example.com</p>
+              <h3>{{ __('contact.front_email_us') }}</h3>
+              <p>{{ settings('app_email', 9) }}</p>
             </div>
           </div><!-- End Info Item -->
 
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="{{ settings('app_maps', 9) }}" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
 
       <div class="col-lg-7">
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <form action="{{ route('contact.store') }}" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            @csrf
           <div class="row gy-4">
 
             <div class="col-md-6">
-              <label for="name-field" class="pb-2">Your Name</label>
-              <input type="text" name="name" id="name-field" class="form-control" required="">
+              <label for="name-field" class="pb-2">{{ __('contact.front_your_name') }}</label>
+              <input type="text" required name="name" id="name-field" class="form-control" required="">
+            </div>
+
+
+            <div class="col-md-6">
+              <label for="email-field" class="pb-2">{{ __('contact.front_your_email') }}</label>
+              <input type="email" required class="form-control" name="email" id="email-field" required="">
             </div>
 
             <div class="col-md-6">
-              <label for="email-field" class="pb-2">Your Email</label>
-              <input type="email" class="form-control" name="email" id="email-field" required="">
+              <label for="phone-field" class="pb-2">{{ __('contact.front_phone') }}</label>
+              <input type="text" required class="form-control" name="phone" id="phone-field" required="">
             </div>
 
-            <div class="col-md-12">
-              <label for="subject-field" class="pb-2">Subject</label>
-              <input type="text" class="form-control" name="subject" id="subject-field" required="">
+            <div class="col-md-6">
+              <label for="address-field" class="pb-2">{{ __('contact.front_address') }}</label>
+              <input type="text" class="form-control" name="address" id="address-field" required="">
             </div>
 
+
+
             <div class="col-md-12">
-              <label for="message-field" class="pb-2">Message</label>
-              <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+              <label for="message-field" class="pb-2">{{ __('contact.front_message') }}</label>
+              <textarea required class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
             </div>
 
             <div class="col-md-12 text-center">
               <div class="loading">Loading</div>
-              <div class="error-message"></div>
+              <div class="error-message">Something weng wrong. Please try again later. Or contact our support number</div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
 
               <button type="submit">Send Message</button>
@@ -131,4 +140,59 @@
 </section><!-- /Contact Section -->
 @endsection
 
+@push('js')
+<script>
+    document.querySelector('.php-email-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        this.querySelector('.loading').style.display = 'block';
+var form_element =  this;
+        // Create a new FormData object from the form
+        const formData = new FormData(this);
+
+        $.ajax({
+            type: 'post',
+            url: this.action,
+            data: formData,
+            processData: false, // Note: should be processData, not processType
+            contentType: false, // Set to false to allow jQuery to automatically set the correct content type
+            success: function(data) {
+                // console.log(data);
+                // data = JSON.parse(data)
+                // console.log(data.type)
+                data = JSON.parse(data);
+
+                if(data.type == 'success'){
+
+                    form_element.reset();
+                    
+                    form_element.querySelector('.loading').style.display = 'none';
+                    form_element.querySelector('.sent-message').style.display = 'block';
+                    setTimeout(() => {
+                        form_element.querySelector('.sent-message').style.display = 'none';
+                    }, 4500);
+
+                }else{
+
+                    form_element.querySelector('.loading').style.display = 'none';
+                    form_element.querySelector('.error-message').style.display = 'block';
+                    setTimeout(() => {
+                        form_element.querySelector('.error-message').style.display = 'none';
+                    }, 4500);
+                }
+                // You can add additional success handling here
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error:', textStatus, errorThrown);
+                // Handle errors here
+                form_element.querySelector('.loading').style.display = 'none';
+                form_element.querySelector('.error-message').style.display = 'block';
+                form_element.querySelector('.error-message').innerHTML = errorThrown;
+                setTimeout(() => {
+                    form_element.querySelector('.error-message').style.display = 'none';
+                }, 4500);
+        }
+        });
+    });
+</script>
+@endpush
 

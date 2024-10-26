@@ -2,13 +2,19 @@
 @if(count($services) > 0)
 <section id="services" class="services section">
 
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>{{ __('service.front_heading') }}</h2>
+        <p>{{ __('service.front_sub_heading') }}</p>
+    </div><!-- End Section Title -->
+
   <div class="container">
 
     <div class="row gy-4">
 
         @foreach ($services as $item)
-            
-        
+
+
       <div class="col-lg-4 col-md-6 mb-3" data-aos="fade-up" data-aos-delay="100">
         <div class="service-item  position-relative">
           <div class="icon">
@@ -24,7 +30,7 @@
       </div><!-- End Service Item -->
       @endforeach
 
-   
+
     </div>
 
   </div>

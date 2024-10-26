@@ -299,6 +299,18 @@ var placeholder_body = `
     }
     tooltip_active()
 
+    function copyElement(button) {
+
+        const text = button.getAttribute('data-href');
+
+        // Copy the text to the clipboard
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Text copied to clipboard!');
+        }).catch(err => {
+            console.error('Error copying text: ', err);
+        });
+    }
+
 </script>
 
 

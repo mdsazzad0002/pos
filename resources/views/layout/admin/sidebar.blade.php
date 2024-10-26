@@ -77,7 +77,34 @@ sidebar-dark-primary elevation-4">
                                 <i class="fas fa-shopping-cart nav-icon"></i>
                                 <p>Testimonial</p>
                             </a>
+                            <a href="{{ route('admin.faq.index') }}" class="nav-link ">
+                                <i class="fas fa-shopping-cart nav-icon"></i>
+                                <p>Faq</p>
+                            </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link ">
+                                <i class="nav-icon fas fa-luggage-cart"></i>
+                                <p>
+                                   Footer
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.footerlinkheading.index') }}" class="nav-link ">
+                                        <i class="fas fa-shopping-cart nav-icon"></i>
+                                        <p>Footer Link Heading</p>
+                                    </a>
+                                    <a href="{{ route('admin.footerlinksubheading.index') }}" class="nav-link ">
+                                        <i class="fas fa-shopping-cart nav-icon"></i>
+                                        <p>Footer Link</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
                 </li>
 

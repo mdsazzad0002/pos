@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\File;
 
 
 
-function settings($name, $key)
+function settings($name = null, $key = null)
 {
+    if($name == null || $key == null){
+        return '';
+    }
     $data = $setting =  setting::firstOrCreate(
         ['name' => "$name", 'key' => "$key"],
         ['creator_id' => 0, 'value'=> Str::title(str_replace("_", ' ', $name))],

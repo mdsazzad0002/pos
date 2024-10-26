@@ -6,6 +6,7 @@
 // });
 
 use App\Http\Controllers\protfilio_theme\ContactController;
+use App\Http\Controllers\protfilio_theme\FaqController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\protfilio_theme\HomeController;
@@ -19,8 +20,11 @@ Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('servic
 
 
 
-Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+
 
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 

@@ -1,10 +1,11 @@
+@if(count($teams) > 0)
 <!-- Team Section -->
 <section id="team" class="team section">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>{{ __('team.front_heading') }}</h2>
+        <p>{{ __('team.front_sub_heading') }}</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -37,3 +38,5 @@
     </div>
 
 </section><!-- /Team Section -->
+
+@endif

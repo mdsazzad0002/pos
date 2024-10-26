@@ -2,6 +2,11 @@
 <!-- Testimonials Section -->
 <section id="testimonials" class="testimonials section light-background">
 
+     <!-- Section Title -->
+     <div class="container section-title" data-aos="fade-up">
+        <h2>{{ __('testimonial.front_heading') }}</h2>
+        <p>{{ __('testimonial.front_sub_heading') }}</p>
+    </div><!-- End Section Title -->
   <div class="container">
 
     <div class="row align-items-center">
