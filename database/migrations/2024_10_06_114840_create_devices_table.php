@@ -22,6 +22,11 @@ class CreateDevicesTable extends Migration
             $table->json('data',60)->nullable();
             $table->bigInteger('creator')->nullable();
             $table->bigInteger('updater_id')->nullable();
+            
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+
             $table->softDeletes();
             $table->text('notification_data')->nullable();
             $table->timestamps();
