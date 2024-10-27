@@ -28,5 +28,9 @@ class HomeController extends Controller
     public function blog(){
         return view('frontend.protfilio_theme.blog.index');
     }
-  
+
+    public function show(){
+        return view('frontend.protfilio_theme.blog.index');
+    }
+
 }

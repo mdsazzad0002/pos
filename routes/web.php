@@ -51,17 +51,31 @@ use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 
 Route::get('/migrate', function(){
     Artisan::call('migrate');
-    toastr()->success('Successfully migrated', 'Congrats');
+    // toastr()->success('Successfully migrated', 'Congrats');
     return back();
 });
 Route::get('/migrate/seed', function(){
     $db_seeder = new DatabaseSeeder;
     $db_seeder->run();
-    toastr()->success('Successfully seed', 'Congrats');
+    // toastr()->success('Successfully seed', 'Congrats');
     return back();
 });
 
 
+
+Route::get('clear', function () {
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    // toastr()->success('Successfully cleared', 'Congrats');
+    return back();
+});
+
+Route::get('fresh', function () {
+    Artisan::call('migrate:fresh --seed');
+    return back();
+});
 
 
 
