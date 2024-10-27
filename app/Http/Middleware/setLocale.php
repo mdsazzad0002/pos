@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Schema;
 use Symfony\Component\HttpFoundation\Response;
 
-class setLocale
+class SetLocale
 {
     /**
      * Handle an incoming request.

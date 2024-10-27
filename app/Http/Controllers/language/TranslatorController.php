@@ -60,7 +60,7 @@ class TranslatorController extends Controller
                 ->rawColumns(['action', 'view'])
                 ->make(true);
         }
-        return view('admin.Translation.index');
+        return view('admin.translation.index');
     }
 
     /**
@@ -69,7 +69,7 @@ class TranslatorController extends Controller
     public function create()
     {
         $language_all = language::all();
-        return view('admin.Translation.partials.create', compact('language_all'));
+        return view('admin.translation.partials.create', compact('language_all'));
     }
 
     /**
@@ -119,7 +119,7 @@ class TranslatorController extends Controller
      */
     public function show(Translation $Translation)
     {
-        return view('admin.Translation.partials.view', compact('Translation'));
+        return view('admin.translation.partials.view', compact('Translation'));
     }
 
     /**
