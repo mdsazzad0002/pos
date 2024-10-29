@@ -23,10 +23,12 @@ use Database\Seeders\SupplierTypeSeeder;
 
 
 use Database\Seeders\PaymentMethodSeeder;
-use Database\Seeders\language\LanguageCaller;
+use Database\Seeders\HomePageManageSeeder;
 use Database\Seeders\payment\paymentCaller;
-use Database\Seeders\permission\PermissionCaller;
 use Database\Seeders\setting\settingCaller;
+use Database\Seeders\language\LanguageCaller;
+use Database\Seeders\VarinatSuggessionSeeder;
+use Database\Seeders\permission\PermissionCaller;
 
 class DatabaseSeeder extends Seeder
 {
@@ -57,6 +59,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TestimonialSeeder::class);
 
         $this->call(FaqSeeder::class);
+        $this->call(VarinatSuggessionSeeder::class);
+        $this->call(HomePageManageSeeder::class);
 
         //Crm lead Seeder call
 

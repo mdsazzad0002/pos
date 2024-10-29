@@ -1,0 +1,66 @@
+
+/*--------------------------------------------------------------
+# Tabs Section
+--------------------------------------------------------------*/
+.side_side_tabs1 .nav-tabs {
+    border: 0;
+  }
+  
+  .side_side_tabs1 .nav-item {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .side_side_tabs1 .nav-item:last-child {
+    margin-bottom: 0;
+  }
+  
+  .side_side_tabs1 .nav-link {
+    color: var(--heading-color);
+    border: 0;
+    padding: 30px;
+    transition: 0.3s;
+    border-radius: 10px;
+    display: flex;
+    cursor: pointer;
+  }
+  
+  .side_side_tabs1 .nav-link i {
+    background-color: var(--surface-color);
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .side_side_tabs1 .nav-link h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    transition: 0.3s;
+  }
+  
+  .side_side_tabs1 .nav-link p {
+    font-size: 15px;
+    margin: 0;
+  }
+  
+  .side_side_tabs1 .nav-link:hover {
+    background: color-mix(in srgb, var(--accent-color), transparent 96%);
+  }
+  
+  .side_side_tabs1 .nav-link.active {
+    background: color-mix(in srgb, var(--accent-color), transparent 96%);
+    color: var(--default-color);
+  }
+  
+  .side_side_tabs1 .tab-pane img {
+    border-radius: 15px;
+  }

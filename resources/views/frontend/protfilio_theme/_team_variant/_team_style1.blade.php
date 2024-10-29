@@ -1,23 +1,26 @@
-@if(count($teams) > 0)
-<!-- Team Section -->
-<section id="team" class="team section">
+@php
+    $team_items = \App\Models\User::where('status', 1)->get();
+@endphp
 
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>{{ __('team.front_heading') }}</h2>
-        <p>{{ __('team.front_sub_heading') }}</p>
-    </div><!-- End Section Title -->
+@if(count($team_items) > 0)
+<!-- Team Section -->
+<link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_team_style/_team_style1.css') }}">
+<section id="team_team_style1 " class="team_team_style1  section">
+
+ @include('frontend.protfilio_theme._variant_manage._title')
 
     <div class="container">
 
         <div class="row gy-4">
-            @foreach ($teams as $item)
+            @foreach ($team_items as $item)
 
 
             <div class="col-lg-3 col-md-6 " data-aos="fade-up" data-aos-delay="100">
                 <div class="team-member">
                     <div class="member-img">
-                        <img src="{{ dynamic_asset($item->upload_id) }}" class="img-fluid w-100" alt="{{ $item->name }}">
+                        <a href="{{ route('team.view', $item->slug) }}">
+                            <img src="{{ dynamic_asset($item->upload_id) }}" class="img-fluid w-100" alt="{{ $item->name }}">
+                        </a>
                         <div class="social">
                             <a href="{{ $item->twitter }}"><i class="bi bi-twitter-x"></i></a>
                             <a href="{{ $item->facebook }}"><i class="bi bi-facebook"></i></a>
@@ -25,15 +28,21 @@
                             <a href="{{ $item->linkedin }}"><i class="bi bi-linkedin"></i></a>
                         </div>
                     </div>
-                    <div class="member-info">
+                    <a href="{{ route('team.view', $item->slug) }}" class="member-info">
                         <h4>{{ $item->name }}</h4>
                         <span>{{ $item->designation }}</span>
-                    </div>
+                    </a>
                 </div>
             </div><!-- End Team Member -->
             @endforeach
 
     </div>
+
+    @if($variant_info->view_all_status)
+    <div class="text-center">
+        <a href="{{ route('team.index') }}" class="btn_primary">{{ $variant_info->short_read_more }} <i class="bi bi-arrow-right"></i></a>
+    </div>
+@endif
 
     </div>
 

@@ -7,11 +7,13 @@ use App\Models\product;
 use App\Models\category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\HomePageManage;
 use App\Models\SubCategory;
 
 class HomeController extends Controller
 {
     public function index(){
+
 
         // Categorys
         $categories = Category::withCount(['products' => function ($query) {

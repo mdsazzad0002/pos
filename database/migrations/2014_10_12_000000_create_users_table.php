@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->nullable();
             $table->string('designation')->nullable();
+            $table->string('slug')->nullable();
 
             $table->string('nid')->nullable();
             $table->float('experience')->default(0);

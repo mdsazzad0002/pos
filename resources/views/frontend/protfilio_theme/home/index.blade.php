@@ -2,11 +2,15 @@
 
 
 @section('content')
-@include('frontend.protfilio_theme.home.partials.hero')
-@include('frontend.protfilio_theme.home.partials.service')
-@include('frontend.protfilio_theme.home.partials.team')
-@include('frontend.protfilio_theme.home.partials.client')
-@include('frontend.protfilio_theme.home.partials.testimonial')
+
+
+@foreach ($homepagemanage as $items)
+
+    @include('frontend.protfilio_theme.'.$items->key, ['variant_info'=> $items])
+
+@endforeach
+
+
 
 {{--  @include('frontend.protfilio_theme.home.partials.call_to_action')  --}}
 @endsection

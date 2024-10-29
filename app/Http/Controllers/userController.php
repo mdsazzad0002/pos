@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\branch;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Spatie\Permission\Models\Role;
@@ -111,6 +112,7 @@ class userController extends Controller
         $user_create = new User;
         $user_create->name = $request->name;
         $user_create->email = $request->email;
+        $user_create->slug = Str::slug($request->name . strtotime("now"));
         $user_create->designation = $request->designation;
         $user_create->password = Hash::make($request->password);
 

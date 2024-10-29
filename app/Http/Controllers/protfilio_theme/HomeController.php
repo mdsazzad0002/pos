@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers\protfilio_theme;
 
-use App\Models\brand;
-use App\Models\Service;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\slider;
-use App\Models\Testimonial;
 use App\Models\User;
+use App\Models\brand;
+use App\Models\slider;
+
+use App\Models\Testimonial;
+use Illuminate\Http\Request;
+use App\Models\HomePageManage;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
     public function index(){
 
-        $brands = brand::where('status', 1)->get();
-        $services = Service::where('status', 1)->get();
-        $sliders = slider::where('status', 1)->get();
-        $testimonials = Testimonial::where('status', 1)->get();
-        $teams = User::where('status',1)->get();
+        $homepagemanage = HomePageManage::where('status', 1)->orderBy('order', 'desc')->get();
 
-        return view('frontend.protfilio_theme.home.index', compact('brands', 'services', 'sliders', 'testimonials', 'teams'));
+
+        
+
+        $sliders = slider::where('status', 1)->get();
+        
+        
+
+        return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage'));
     }
 
 
