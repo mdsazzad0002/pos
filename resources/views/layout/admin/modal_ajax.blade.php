@@ -41,48 +41,52 @@ var placeholder_body = `
         <div class="w-100 p-2 glow_text"></div>
 `;
 
-    $('#ajax_modal .modal-body').html(placeholder_body);
+var modalDialog = '';
+var setElement = '';
+if($(thi).data('setelement')){
+    setElement =  $(thi).data('setelement');
 
-        var modalDialog = document.querySelector('#ajax_modal .modal-dialog');
+}else{
+    modalDialog = document.querySelector('#ajax_modal .modal-dialog');
+    setElement = modalDialog.querySelector('.modal-body');
 
-        {{--  Modal dialog class add remove  --}}
-        if($(thi).data('dialog')){
-            if($('#ajax_modal .modal-dialog').data('dialog')){
-                var data_array = modalDialog.getAttribute('data-dialog').split(" ");
-                data_array.forEach(function(element) {
-                    $('#ajax_modal .modal-dialog').removeClass(element); // Remove each class from modal-dialog
-                });
-            }
-
-
-            var dialogValue = thi.getAttribute('data-dialog');
-            $('#ajax_modal .modal-dialog').addClass($(thi).data('dialog'));
-            // Add the data-dialog attribute value from thi to the .modal-dialog element
-            modalDialog.setAttribute('data-dialog', dialogValue);
-
-
-        }else{
-            if($('#ajax_modal .modal-dialog').data('dialog')){
-                var data_array = modalDialog.getAttribute('data-dialog').split(" ");
-                data_array.forEach(function(element) {
-                    $('#ajax_modal .modal-dialog').removeClass(element); // Remove each class from modal-dialog
-                });
-            }
-            modalDialog.setAttribute('data-dialog', '');
+    if($(thi).data('dialog')){
+        if($('#ajax_modal .modal-dialog').data('dialog')){
+            var data_array = modalDialog.getAttribute('data-dialog').split(" ");
+            data_array.forEach(function(element) {
+                $('#ajax_modal .modal-dialog').removeClass(element); // Remove each class from modal-dialog
+            });
         }
-    {{-- end Modal dialog class add remove  --}}
+
+
+        var dialogValue = thi.getAttribute('data-dialog');
+        $('#ajax_modal .modal-dialog').addClass($(thi).data('dialog'));
+        // Add the data-dialog attribute value from thi to the .modal-dialog element
+        modalDialog.setAttribute('data-dialog', dialogValue);
+    }
 
     {{--  Modal Title  --}}
-    if($(thi).data('title')){
-        $('#ajax_modal #eajax_modalLabel').html($(thi).data('title'));
-    }else{
-        if($(thi).title){
-            $('#ajax_modal #eajax_modalLabel').html($(thi).title);
+        if($(thi).data('title')){
+            $('#ajax_modal #eajax_modalLabel').html($(thi).data('title'));
         }else{
-            $('#ajax_modal #eajax_modalLabel').html('data-title or title');
+            if($(thi).title){
+                $('#ajax_modal #eajax_modalLabel').html($(thi).title);
+            }else{
+                $('#ajax_modal #eajax_modalLabel').html('data-title or title');
+            }
         }
+        {{--  end modal Title  --}}
+
+
     }
-    {{--  end modal Title  --}}
+    $(setElement).html(placeholder_body);
+
+
+
+
+
+
+
 
     {{--  data set  --}}
         if($(thi).data('href')){
@@ -90,7 +94,7 @@ var placeholder_body = `
                 'type':'get',
                 'url': $(thi).data('href'),
                 success: function (data){
-                    $('#ajax_modal .modal-body').html(data);
+                    $(setElement).html(data);
 
 
                     //Select2 fillelement
@@ -100,6 +104,7 @@ var placeholder_body = `
                     summernote_render();
 
                     //call all form submit in dialog
+                    //if($(thi).)
                     form_submit('.ajax_modal_dialog form');
                     tooltip_active()
 
@@ -118,10 +123,11 @@ var placeholder_body = `
         }
     {{--  end data set  --}}
 
-
-
+    if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
         $('#ajax_modal').modal('show');
-    };
+    }
+
+    }
 
 
     //Summernote render

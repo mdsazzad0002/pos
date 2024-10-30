@@ -116,6 +116,28 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-luggage-cart"></i>
                         <p>
+                          Page Management
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.page.index') }}" class="nav-link ">
+                                <i class="fas fa-shopping-cart nav-icon"></i>
+                                <p>Order</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endcan
+
+
+                @can('order read')
+                <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-luggage-cart"></i>
+                        <p>
                             Order management
                             <i class="fas fa-angle-left right"></i>
 

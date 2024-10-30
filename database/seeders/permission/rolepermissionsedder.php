@@ -206,6 +206,12 @@ class rolepermissionsedder extends Seeder
                    'faq create',
                    'faq edit',
                    'faq delete',
+
+                   // page
+                   'page read',
+                   'page create',
+                   'page edit',
+                   'page delete',
             ];
 
 

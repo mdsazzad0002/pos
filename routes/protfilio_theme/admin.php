@@ -4,10 +4,31 @@
 use App\Http\Controllers\protfilio_theme_admin\FaqController;
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkHeadingController;
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkSubHeadingController;
+use App\Http\Controllers\protfilio_theme_admin\HomePageManageController;
+use App\Http\Controllers\protfilio_theme_admin\PageController;
 use App\Http\Controllers\protfilio_theme_admin\ServiceController;
 use App\Http\Controllers\protfilio_theme_admin\SliderController;
 use App\Http\Controllers\protfilio_theme_admin\TestimonialController;
+use App\Http\Controllers\protfilio_theme_admin\VarinatSuggessionController;
 use Illuminate\Support\Facades\Route;
+
+// page
+Route::resource('page', PageController::class)->names('page');
+Route::get('/page/delete/{page}', [PageController::class, 'delete'])->name('page.delete');
+Route::get('/page/getPage/get', [PageController::class, 'getPage'])->name('page.select');
+Route::post('/page/edit_builder/update_data', [PageController::class, 'edit_builder_update'])->name('page.edit_builder_update');
+
+
+
+
+// homepagemanage it's allover pagecontrol
+Route::resource('homePageManage', HomePageManageController::class)->names('homePageManage');
+Route::get('/homePageManage/delete/{homePageManage}', [HomePageManageController::class, 'delete'])->name('homePageManage.delete');
+Route::get('/homePageManage/homePageManage/get', [HomePageManageController::class, 'homePageManage'])->name('homePageManage.select');
+
+
+Route::get('/VarinatSuggession/VarinatSuggession/get', [VarinatSuggessionController::class, 'VarinatSuggession'])->name('VarinatSuggession.select');
+
 
 // Slider
 Route::resource('slider', SliderController::class)->names('slider');

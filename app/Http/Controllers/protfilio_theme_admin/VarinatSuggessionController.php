@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\protfilio_theme_admin;
 
-use App\Models\VarinatSuggession;
 use Illuminate\Http\Request;
+use App\Models\VarinatSuggession;
+use App\Http\Controllers\Controller;
 
 class VarinatSuggessionController extends Controller
 {
@@ -61,5 +62,20 @@ class VarinatSuggessionController extends Controller
     public function destroy(VarinatSuggession $varinatSuggession)
     {
         //
+    }
+
+    public function VarinatSuggession(Request $request)
+    {
+        $data_result = VarinatSuggession::where(function($query) use ($request) {
+            if ($request->has('q')) {
+                $query->where('title', 'LIKE', '%' . $request->q . '%');
+            }
+        })->select('id', 'title as text')->get();
+
+        $result_make = [];
+        $result_make['items']=$data_result;
+
+        return json_encode($result_make);
+
     }
 }
