@@ -1,0 +1,30 @@
+.clients_brand_style2 .client-logo:hover img {
+  transform: scale(1.1);
+}
+.clients_brand_style2 .brand-sec .brand-slider {
+    margin: 0 -8px;
+    padding: 2.083vw 0;
+    width: 100%;
+  }
+  @media (max-width: 490px) {
+    .clients_brand_style2 .brand-sec .brand-slider {
+      padding: clamp(32px, 8.163vw, 80px) 0;
+    }
+  }
+  .clients_brand_style2 .brand-sec .brand-slider .brand-block {
+    width: 13.958vw;
+    height: clamp(70px, 4.792vw, 160px);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #EAEAEC;
+    border-radius: 5px;
+    margin: 0 8px;
+  }
+  @media (max-width: 490px) {
+    .clients_brand_style2 .brand-sec .brand-slider .brand-block {
+      width: clamp(200px, 48.98vw, 550px);
+      height: clamp(48px, 13.061vw, 120px);
+      padding: 0 8px;
+    }
+  }
