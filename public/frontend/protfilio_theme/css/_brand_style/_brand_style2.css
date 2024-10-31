@@ -1,8 +1,11 @@
+section#clients_brand_style2{
+    padding: 10px 0;
+}
 .clients_brand_style2 .client-logo:hover img {
   transform: scale(1.1);
 }
 .clients_brand_style2 .brand-sec .brand-slider {
-    margin: 0 -8px;
+    margin: 0 ;
     padding: 2.083vw 0;
     width: 100%;
   }
@@ -28,3 +31,4 @@
       padding: 0 8px;
     }
   }
+

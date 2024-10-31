@@ -14,16 +14,21 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index($view = null){
 
-        $homepage = Page::where('status', 1)->where('homepage', 1)->first();
+        if( $view == null){
+            $homepage = Page::where('status', 1)->where('homepage', 1)->first();
+        }else{
+            $homepage = Page::where('status', 1)->where('slug', $view)->first();
+        }
+        $pages_items = Page::where('status', 1)->orderBy('order', 'asc')->get();
         if($homepage){
             $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
             if($homepagemanage){
-                        
+
                 $sliders = slider::where('status', 1)->get();
-                
-                return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage'));
+
+                return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage', 'pages_items'));
             }else{
                 abort('401', 'Add Items in this page');
             }
@@ -33,7 +38,7 @@ class HomeController extends Controller
 
 
 
-        
+
 
     }
 

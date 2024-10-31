@@ -20,13 +20,24 @@ return new class extends Migration
             $table->string('sub_title')->nullable();
             $table->string('sub_title_status')->default(1);
 
+
             $table->string('short_read_more')->default('Read More');
             $table->boolean('short_read_more_status')->default(1);
+            $table->string('short_read_more_page_url')->nullable();
 
             $table->string('view_all')->default('See All');
             $table->boolean('view_all_status')->default(1);
+            $table->string('view_all_page_url')->nullable();
 
+            
             $table->integer('items_per_row')->default(3);
+            $table->integer('items_show_short')->default(4);
+
+
+            $table->integer('is_details_page')->default(0);
+            $table->integer('items_show_details')->default(16);
+
+
 
             $table->string('background')->default(0);
             $table->string('background_color')->default('#eeeeee');

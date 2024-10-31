@@ -14,8 +14,7 @@ use App\Http\Controllers\protfilio_theme\HomeController;
 use App\Http\Controllers\protfilio_theme\ServiceController;
 use App\Http\Controllers\protfilio_theme\TeamController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^(?!admin).*');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');

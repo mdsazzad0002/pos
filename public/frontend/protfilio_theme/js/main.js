@@ -182,7 +182,7 @@
         });
       });
 
-    
+
 
   /**
    * Init swiper sliders
@@ -200,7 +200,22 @@
       }
     });
   }
+  /**
+   * Init swiper sliders
+   */
+  function initSlick() {
+    document.querySelectorAll(".init-slick").forEach(function(slickElement) {
+      let config = JSON.parse(
+        slickElement.querySelector(".slick-config").innerHTML.trim()
+      );
+
+        $(slickElement).slick(config)
+        console.log(slickElement);
+
+    });
+  }
 
   window.addEventListener("load", initSwiper);
+  window.addEventListener("load", initSlick);
 
 })();

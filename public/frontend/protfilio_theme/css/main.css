@@ -828,11 +828,15 @@ h6 {
 --------------------------------------------------------------*/
 section,
 .section {
-  color: var(--default-color);
-  background-color: var(--background-color);
+
   padding: 60px 0;
   scroll-margin-top: 100px;
   overflow: clip;
+
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @media (max-width: 1199px) {
@@ -2149,4 +2153,7 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+
+
+
 

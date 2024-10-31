@@ -6,12 +6,12 @@
 
 <nav id="navmenu" class="navmenu">
     <ul>
-        <li><a href="{{ route('home') }}" class="active">Home<br></a></li>
+        @foreach ($pages_items as $item)
+            
+        <li><a href="{{ url($item->slug) }}" class="@if ($item->slug == $homepage->slug) active @endif">{{ $item->name }}</a></li>
+        @endforeach
         {{-- <li><a href="about.html">About</a></li>  --}}
-        <li><a href="{{ route('service.index') }}">Services</a></li>
-        <li><a href="{{ route('faq.index') }}">Faq</a></li>
-
-        <li><a href="{{ route('blog.index') }}">Blog</a></li>
+      
         {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
         <ul>
           <li><a href="#">Dropdown 1</a></li>
