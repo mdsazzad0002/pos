@@ -38,14 +38,14 @@ class HomePageManageController extends Controller
          $homePageManage = VarinatSuggession::find($request->VarinatSuggession);
          $homePageManageArray = $homePageManage->toArray();
         $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater']);
-        
+
         $homePageManage['controlby'] = $request->page_id;
         $homePageManage['title'] = $request->title;
         $homePageManage['sub_title'] = $request->subtitle;
-        
+
         // Ensure the variable is properly named
         HomePageManage::create($homePageManage);
-        
+
         return json_encode([
             'title'=>'Successfully  Added Items',
             'type'=>'success',
@@ -90,7 +90,13 @@ class HomePageManageController extends Controller
     $homePageManage->sub_title = $request->sub_title;
     $homePageManage->short_read_more = $request->short_read_more;
     $homePageManage->view_all = $request->view_all;
+
     $homePageManage->items_per_row = $request->items_per_row;
+    $homePageManage->items_show = $request->items_show;
+    $homePageManage->view_all_page_url = $request->view_all_page_url;
+    $homePageManage->short_read_more_page_url = $request->short_read_more_page_url;
+    $homePageManage->is_details_page = $request->is_details_page;
+
     $homePageManage->title_status = $request->title_status; // Only keep one status for title
     $homePageManage->sub_title_status = $request->sub_title_status; // Only keep one status for subtitle
     $homePageManage->short_read_more_status = $request->short_read_more_status; // Short read more status

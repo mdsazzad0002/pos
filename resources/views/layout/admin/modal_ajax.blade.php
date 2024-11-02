@@ -317,6 +317,30 @@ if($(thi).data('setelement')){
         });
     }
 
+
+    function load_items_card(element){
+        if($(element).data('items') != ''){
+           $.ajax({
+               type:'get',
+               url:'{{ route('admin.items_load_card') }}',
+               data:{
+                   'items': $(element).data('items'),
+                   'where': $(element).data('where'),
+               },
+               success:function(data){
+                   {{--  return data;  --}}
+                   $(element).find('.inner .overlay').css('display', 'none');
+                   $(element).find('h3 span').html(data);
+               
+               }
+           })
+       }
+   }
+
+   var card_count_loaded = document.querySelectorAll('.card_count_loaded').forEach(function(element){
+     load_items_card(element);
+
+  })
 </script>
 
 

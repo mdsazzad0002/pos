@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mail\MailSettingController;
+use App\Http\Controllers\mail\MailTemplateController;
 
 
 /*
@@ -21,6 +22,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::post('/mail', [MailSettingController::class, 'store'])->name('mail.store');
     Route::post('/mail/test', [MailSettingController::class, 'testMail'])->name('mail.test');
 
+    Route::put('/mail/template/{mailTemplate}', [MailTemplateController::class, 'update'])->name('mail.update');
 
 
 

@@ -24,7 +24,9 @@
 <!-- Tempusdominus Bootstrap 4 -->
 {{--  <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>  --}}
 <!-- Summernote -->
-<script src="{{ asset('vendor/summernote/summernote-bs4.min.js')}}"></script>
+<script src="{{ asset('vendor/summernote/summernote.js')}}"></script>
+
+
 <!-- flasher -->
 <script src="{{ asset('vendor/flasher/flasher.min.js')}}"></script>
 <!-- overlayScrollbars -->

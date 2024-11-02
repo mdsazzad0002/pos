@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('short_description')->nullable();
+            $table->text('sub_description')->nullable();
             $table->bigInteger('upload_id')->nullable();
+            $table->bigInteger('upload_bg')->nullable();
             $table->string('button_title')->nullable();
             $table->string('button_link')->nullable();
             $table->boolean('status')->default(1);

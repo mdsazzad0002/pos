@@ -24,7 +24,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="smtp_port">SMTP Port:</label>
-                        <input type="number" class="form-control" id="smtp_port" value="{{ $mail_config->smtp_port }}"name="smtp_port" required placeholder="e.g., 587">
+                        <input type="number" class="form-control" id="smtp_port" value="{{ $mail_config->smtp_port }}" name="smtp_port" required placeholder="e.g., 587">
                     </div>
                 </div>
             </div>
@@ -48,11 +48,11 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="smtp_encryption">Encryption:</label>
-                        <select class="form-control"  id="smtp_encryption" name="smtp_encryption">
-                            <option value="" @if($mail_config->smtp_encryption == "") selected @endif  >Select encryption method</option>
+                        <select class="form-control" id="smtp_encryption" name="smtp_encryption">
+                            <option value="" @if($mail_config->smtp_encryption == "") selected @endif >Select encryption method</option>
                             <option value="tls" @if($mail_config->smtp_encryption == "tls") selected @endif >TLS</option>
-                            <option value="ssl"@if($mail_config->smtp_encryption == "ssl") selected @endif >SSL</option>
-                            <option value="none"@if($mail_config->smtp_encryption == "none") selected @endif >None</option>
+                            <option value="ssl" @if($mail_config->smtp_encryption == "ssl") selected @endif >SSL</option>
+                            <option value="none" @if($mail_config->smtp_encryption == "none") selected @endif >None</option>
                         </select>
                     </div>
                 </div>
@@ -85,9 +85,9 @@
 
 <div class="card">
     <div class="card-body">
-    {{ __('smtp.send_a_test_mail') }}
-    <br>
-        <form action="{{ route('admin.mail.test') }}" class="input-group form_ajax_submit"  method="post">
+        {{ __('smtp.send_a_test_mail') }}
+        <br>
+        <form action="{{ route('admin.mail.test') }}" class="input-group form_ajax_submit" method="post">
             @csrf
             <input type="email" name="mail" class="form-control" placeholder="{{ __('mailconfigration.test.email') }}">
             <button class="btn btn-primary submit">Send</button>

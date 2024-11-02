@@ -14,7 +14,6 @@ use App\Http\Controllers\protfilio_theme\HomeController;
 use App\Http\Controllers\protfilio_theme\ServiceController;
 use App\Http\Controllers\protfilio_theme\TeamController;
 
-Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^(?!admin).*');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');
@@ -36,3 +35,25 @@ Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
+
+
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
+Route::get('/product/quickview', [HomeController::class, 'quickview'])->name('product.quickview');
+
+// feature product view for homepage
+Route::get('/product/feature_view', [HomeController::class, 'feature_view'])->name('product.feature_view');
+Route::get('/product/popular_view', [HomeController::class, 'popular_view'])->name('product.feature_view');
+
+
+Route::get('/about', [HomeController::class, 'about']);
+
+
+
+
+
+
+
+
+// User Defined Route Web So Check Route not exists
+Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^.*');

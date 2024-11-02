@@ -16,9 +16,9 @@ class ContactSeedSeeder extends Seeder
 
             [
                 'key' =>'_contact_variant._contact_style1',
-                'title' => 'Brand',
+                'title' => 'Contact Style 1',
                 'title_status' => 1,
-                'sub_title' => 'Brand Sub Title',
+                'sub_title' => 'Contact Sub Title',
                 'sub_title_status' => 1,
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 1,

@@ -119,6 +119,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/', [dashboardController::class, 'index'])->name('index');
     Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
+    
+    
+    Route::get('/items_load_card', [dashboardController::class, 'items_load_card'])->name('items_load_card');
 
     // permission management
     Route::resource('/permission', PermissionController::class)->middleware('can:role read')->names('permission');

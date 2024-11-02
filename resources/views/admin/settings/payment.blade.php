@@ -1,8 +1,15 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title  --}}
-@section('title', settings('order', 10))
+@section('title', __('setting.payment-settings'))
 @section('content')
+
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.payment')
+    </div>
+</x-summary>
 
 
 <div class="row">

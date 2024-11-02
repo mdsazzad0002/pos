@@ -13,6 +13,9 @@ use App\Models\customer;
 use App\Models\purchase;
 use App\Models\supplier;
 use App\Mail\MailerDynamic;
+use App\Models\mail\MailSetting;
+use App\Models\mail\MailTemplate;
+use App\Models\payment\PaymentCredential;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -24,21 +27,78 @@ use Illuminate\Support\Facades\Notification;
 class dashboardController extends Controller
 {
     public function index(){
+        return view('admin.dashboard.index');
+    }
 
-        $fcm = fcm::first();
+    public function items_load_card(Request $request)
+    {
+        $query = 0;
+        if ($request->has('items') ) {
+            $items_req =  trim($request->items);
 
+            if ($items_req === 'users') {
+                $query = User::query(); // Start the query for the User model
+            }elseif($items_req === 'orders'){
+                $query = order::query(); // Start the query for the User model
 
-        $order = order::count();
-        $user = User::count();
-        $customer = customer::count();
-        $brand = brand::count();
-        $supplier = supplier::count();
-        $purchase = purchase::count();
-        $product = product::count();
-        $unit = unit::count();
-        $role = Role::count();
-        $category = category::count();
-        return view('admin.dashboard.index', compact('order', 'category', 'user', 'customer', 'brand', 'supplier','purchase','product', 'unit','role', 'fcm'));
+            }elseif($items_req === 'brands'){
+                $query = brand::query(); // Start the query for the User model
+
+            }elseif($items_req === 'products'){
+                $query = product::query(); // Start the query for the User model
+
+            }elseif($items_req === 'suppliers'){
+                $query = supplier::query(); // Start the query for the User model
+
+            }elseif($items_req === 'purchases'){
+                $query = purchase::query(); // Start the query for the User model
+
+            }elseif($items_req === 'categories'){
+                $query = category::query(); // Start the query for the User model
+
+            }elseif($items_req === 'roles'){
+                $query = Role::query(); // Start the query for the User model
+
+            }elseif($items_req === 'units'){
+                $query = unit::query(); // Start the query for the User model
+
+            }elseif($items_req === 'customers'){
+                $query = customer::query(); // Start the query for the User model
+
+            }elseif($items_req === 'fcms'){
+                $query = fcm::query(); // Start the query for the User model
+
+            }elseif($items_req === 'payment'){
+                $query = PaymentCredential::query(); // Start the query for the User model
+
+            }elseif($items_req === 'mail_template'){
+                $query = MailTemplate::query(); // Start the query for the User model
+
+            }elseif($items_req === 'mail_config'){
+                $query = MailSetting::query(); // Start the query for the User model
+                
+            }
+
+            // Check for additional conditions in the 'where' parameter
+            if ($request->has('where')) {
+                $items = explode(',', trim($request->where));
+                foreach ($items as $item) {
+                    if ($item === 'active') {
+                        $query->where('status', 1);
+                    }elseif($item === 'inactive'){
+                        $query->where('status', 0);
+                    }elseif($item === 'sandbox'){
+                        $query->where('sandbox_status', 1);
+
+                    }
+                }
+            }
+
+            // Return the count based on the constructed query
+            return response()->json( $query->count());
+        }
+
+        return response()->json(0); // Handle invalid requests
     }
 
 

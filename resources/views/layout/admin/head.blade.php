@@ -81,6 +81,27 @@
     border-bottom-right-radius:4px;
 }
 
+.card .inner .overlay{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
+.items_list_list_mail {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+}
+.items_list_list_mail span{
+  background:#6c757d;
+    border-radius:5px;
+    padding:3px 5px;
+    color:white;
+    cursor:pointer;
+}
 
 </style>

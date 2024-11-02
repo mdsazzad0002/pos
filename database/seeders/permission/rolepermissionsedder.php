@@ -24,75 +24,66 @@ class rolepermissionsedder extends Seeder
             $permission_data = [
 
                 // User Management
-                'user read',
-                'user create',
-                'user edit',
-                'user rolechange',
-                'user delete',
+                'user read', 'user create',  'user edit', 'user rolechange', 'user delete',
 
                 // Role and Permission
-                'role read',
-                'role create',
-                'role edit',
-                'role delete',
+                'role read',  'role create',  'role edit',  'role delete',
 
                 // Branch
-                'branch read',
-                'branch create',
-                'branch edit',
-                'branch delete',
+                'branch read', 'branch create', 'branch edit', 'branch delete',
 
                 // Product
-                'product read',
-                'product create',
-                'product edit',
-                'product delete',
+                'product read', 'product create', 'product edit', 'product delete',
 
                 // Unit
-                'unit read',
-                'unit create',
-                'unit edit',
-                'unit delete',
+                'unit read', 'unit create', 'unit edit', 'unit delete',
 
                 // Purchase
-                'purchase read',
-                'purchase create',
-                'purchase edit',
-                'purchase delete',
+                'purchase read',  'purchase create', 'purchase edit', 'purchase delete',
 
                 // Customer
-                'customer read',
-                'customer create',
-                'customer edit',
-                'customer delete',
+                'customer read', 'customer create', 'customer edit', 'customer delete',
 
                 // Stock
                 'stock read',
 
 
                 // Supplier
-                'supplier read',
-                'supplier create',
-                'supplier edit',
-                'supplier delete',
+                'supplier read', 'supplier create',  'supplier edit', 'supplier delete',
 
                 // Category
-                'category read',
-                'category create',
-                'category edit',
-                'category delete',
+                'category read',  'category create', 'category edit', 'category delete',
 
                 // Brand
-                'brand read',
-                'brand create',
-                'brand edit',
-                'brand delete',
+                'brand read',  'brand create', 'brand edit',  'brand delete',
 
-                // Setting
-                'setting read',
-                'setting create',
-                'setting edit',
-                'setting delete',
+                //[[[ Setting
+                        'setting read', 'setting create', 'setting edit',  'setting delete',
+
+                        // Site Verification Setting
+                        'siteverification read', 'siteverification edit',
+
+                        // Tag Management Setting
+                        'tagmanagement read',  'tagmanagement edit',
+
+                        // Progressive Web Application Setting
+                        'pwa read',  'pwa edit',
+
+                        // Notification Setting
+                        'notification read',  'notification edit',
+
+                        // Tak.to Setting
+                        'takto read',  'takto edit',
+
+                        // Tak.to Setting
+                        'cookie read',  'cookie edit',
+
+                        // SMTP Setting
+                        'smtp read',  'smtp edit',
+
+                        // Tak.to Setting
+                        'payment_credentials read',  'payment_credentials edit',
+                //]]]
 
                 // Order
                 'order read',

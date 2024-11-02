@@ -14,23 +14,33 @@ class HomePageManageSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            // [
+            //     'key' =>'_service_variant._service_style1',
+            //     'title' => 'Service',
+            //     'sub_title' => 'service.sub_title'
+            // ],
+            // [
+            //     'key' =>'_service_variant._service_style2',
+            //     'title' => 'Service',
+            //     'sub_title' => 'service.sub_title'
+            // ],
+            // [
+            //     'key' =>'_brand_variant._brand_style1',
+            //     'title' => 'Service',
+            //     'sub_title' => 'service.sub_title'
+            // ],
+            // [
+            //     'key' =>'_contact_variant._contact_style1',
+            //     'title' => 'Service',
+            //     'sub_title' => 'service.sub_title'
+            // ]
             [
-                'key' =>'_service_variant._service_style1',
+                'key' =>'_hero_variant._hero_style3',
                 'title' => 'Service',
                 'sub_title' => 'service.sub_title'
             ],
             [
-                'key' =>'_service_variant._service_style2',
-                'title' => 'Service',
-                'sub_title' => 'service.sub_title'
-            ],
-            [
-                'key' =>'_brand_variant._brand_style1',
-                'title' => 'Service',
-                'sub_title' => 'service.sub_title'
-            ],
-            [
-                'key' =>'_contact_variant._contact_style1',
+                'key' =>'_category_variant._category_style1',
                 'title' => 'Service',
                 'sub_title' => 'service.sub_title'
             ]

@@ -1,3 +1,12 @@
+@php
+
+$pages_items = \App\Models\Page::where('status', 1)->orderBy('order', 'asc')->get();
+if(!isset($homepage)){
+    $homepage = null;
+}
+@endphp
+
+
 <a href="{{ url('/') }}" class="logo d-flex align-items-center">
     <!-- Uncomment the line below if you also wish to use an image logo -->
     <img src="{{ settings('app_image', 9) }}" alt="">
@@ -7,11 +16,11 @@
 <nav id="navmenu" class="navmenu">
     <ul>
         @foreach ($pages_items as $item)
-            
-        <li><a href="{{ url($item->slug) }}" class="@if ($item->slug == $homepage->slug) active @endif">{{ $item->name }}</a></li>
+
+        <li><a href="{{ url($item->slug) }}" class="@if ($item->slug == $homepage?->slug) active @endif">{{ $item->name }}</a></li>
         @endforeach
         {{-- <li><a href="about.html">About</a></li>  --}}
-      
+
         {{-- <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
         <ul>
           <li><a href="#">Dropdown 1</a></li>

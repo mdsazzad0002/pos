@@ -53,7 +53,14 @@ class MailTemplateController extends Controller
      */
     public function update(Request $request, MailTemplate $mailTemplate)
     {
-        //
+        $mailTemplate->template = $request->description;
+        $mailTemplate->save(); 
+        
+        return json_encode([
+            'title'=>'Successfully  updated',
+            'type'=>'success',
+            'refresh'=>'true',
+        ]);
     }
 
     /**

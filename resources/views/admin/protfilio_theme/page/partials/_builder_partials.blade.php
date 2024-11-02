@@ -57,10 +57,16 @@
 
 
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="short_read_more">Short Read More</label>
                             <input type="text" class="form-control" id="short_read_more" name="short_read_more" value="{{ $item->short_read_more }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="short_read_more_page_url">short_read_more_page_url</label>
+                            <input type="text" class="form-control" id="short_read_more_page_url" name="short_read_more_page_url" value="{{ $item->short_read_more_page_url }}" required>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -73,10 +79,16 @@
 
 
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="view_all">View All</label>
                             <input type="text" class="form-control" id="view_all" name="view_all" value="{{ $item->view_all }}" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="view_all_page_url">view_all_page_url</label>
+                            <input type="text" class="form-control" id="view_all_page_url" name="view_all_page_url" value="{{ $item->view_all_page_url }}" required>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -97,9 +109,15 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="items_per_row">Items Show Details</label>
-                            <input type="number" class="form-control" id="items_show_details" name="items_show_details" value="{{ $item->items_per_row }}" required>
+                            <label for="items_show">Items Show</label>
+                            <input type="number" class="form-control" id="items_show" name="items_show" value="{{ $item->items_show }}" required>
                         </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <label for="is_details_page"> is_details_page <br />
+                            <input type="checkbox" checked  class="" hidden name="is_details_page" value="0">
+                            <input type="checkbox" class="toggle" {{ $item->is_details_page == 1 ? 'checked' : '' }} checked placeholder="page is_details_page" name="is_details_page" id="is_details_page" value="1">
+                        </label>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <label for="status"> Page Status <br />
@@ -128,7 +146,7 @@
 
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <label for="background_type"> Background Color <span class="text-danger"> On = Background Image, Off = Background Color </span> <br />
-                            <input type="checkbox" checked class="" hidden name="background_type" value="0">
+                            <input type="checkbox"  class="" checked hidden name="background_type" value="0">
                             <input type="checkbox" class="toggle" {{ $item->background_type == 1 ? 'checked' : '' }} checked placeholder="page Status" name="background_type" id="background_type" value="1">
                         </label>
                     </div>

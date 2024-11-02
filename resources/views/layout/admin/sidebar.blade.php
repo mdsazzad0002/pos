@@ -42,10 +42,10 @@ sidebar-dark-primary elevation-4">
 
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link
-                {{ Request::routeIs('admin.dashboard') ||
-                Request::routeIs('admin.home') ||
-                Request::routeIs('admin') ? $active_menu : ''
-                }}
+                    {{ Request::routeIs('admin.dashboard') ||
+                    Request::routeIs('admin.home') ||
+                    Request::routeIs('admin') ? $active_menu : ''
+                    }}
             ">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
@@ -54,83 +54,11 @@ sidebar-dark-primary elevation-4">
                     </a>
                 </li>
 
-
-                <li class="nav-item">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-luggage-cart"></i>
-                        <p>
-                            Frontend Theme
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.slider.index') }}" class="nav-link ">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Slider</p>
-                            </a>
-                            <a href="{{ route('admin.service.index') }}" class="nav-link ">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Service</p>
-                            </a>
-                            <a href="{{ route('admin.testimonial.index') }}" class="nav-link ">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Testimonial</p>
-                            </a>
-                            <a href="{{ route('admin.faq.index') }}" class="nav-link ">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Faq</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-luggage-cart"></i>
-                                <p>
-                                   Footer
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('admin.footerlinkheading.index') }}" class="nav-link ">
-                                        <i class="fas fa-shopping-cart nav-icon"></i>
-                                        <p>Footer Link Heading</p>
-                                    </a>
-                                    <a href="{{ route('admin.footerlinksubheading.index') }}" class="nav-link ">
-                                        <i class="fas fa-shopping-cart nav-icon"></i>
-                                        <p>Footer Link</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </li>
+               
+            
 
 
-
-
-                @can('order read')
-                <li class="nav-item">
-                    <a href="#" class="nav-link ">
-                        <i class="nav-icon fas fa-luggage-cart"></i>
-                        <p>
-                          Page Management
-                            <i class="fas fa-angle-left right"></i>
-
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.page.index') }}" class="nav-link ">
-                                <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Order</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                @endcan
+             
 
 
                 @can('order read')
@@ -502,87 +430,11 @@ sidebar-dark-primary elevation-4">
                 </li>
                 {{--  Device Loged Listing Setting  --}}
 
+                @include('layout.admin._sidebar.frontend')
 
-                <li class="nav-item ">
-                    <a href="#" class="nav-link">
+                @include('layout.admin._sidebar.settings')
 
-                        <i class="fas fa-tools nav-icon"></i>
-                        <p>
-                            {{ settings('settings', 10) }}
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}"
-                            class="nav-link">
-                                <i class="fas fa-cogs nav-icon"></i>
-                                <p>{{ __('settings.main_setting_sidebar')}}</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.fcm_notification.index') }}"
-                            class="nav-link">
-                            <i class="fas fa-bell nav-icon"></i>
-                                <p>{{ __('settings.notification_sidebar') }}</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['site-verification-setting', '25']) }}"
-                            class="nav-link">
-                                <i class="fas fa-certificate nav-icon"></i>
-                                <p>{{ __('settings.site_verification_sidebar') }}</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['site-tag-management', '24']) }}"
-                            class="nav-link">
-                                <i class="fas fa-tags nav-icon"></i>
-                                <p>{{ __('settings.site-tag-management') }}</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}"
-                            class="nav-link">
-                                <i class="fas fa-tags nav-icon"></i>
-                                <p>{{ __('settings.site-pwa-management') }}</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['takto-messageing-management', '31']) }}"
-                            class="nav-link">
-                                <i class="fas fa-tags nav-icon"></i>
-                                <p>{{ __('settings.takto_sidebar-management') }}</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.setting.index', ['cookie-management', '40']) }}"
-                            class="nav-link">
-                                <i class="fas fa-tags nav-icon"></i>
-                                <p>{{ __('settings.cookie-sidebar-management') }}</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.mail.index') }}"
-                            class="nav-link">
-                                 <i class="fas fa-envelope-open-text nav-icon"></i>
-                                <p>{{ __('settings.email_setting_sidebar') }}</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('admin.settings.payment-configration.index') }}" class="nav-link ">
-                                <i class="fas fa-money-check nav-icon"></i>
-                                <p> {{ __('settings.payment-configration-sidebar') }}</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+               
 
 
         </nav>

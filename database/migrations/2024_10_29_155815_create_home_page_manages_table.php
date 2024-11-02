@@ -29,13 +29,11 @@ return new class extends Migration
             $table->boolean('view_all_status')->default(1);
             $table->string('view_all_page_url')->nullable();
 
-            
-            $table->integer('items_per_row')->default(3);
-            $table->integer('items_show_short')->default(4);
 
+            $table->integer('items_per_row')->default(3);
+            $table->integer('items_show')->default(4);
 
             $table->integer('is_details_page')->default(0);
-            $table->integer('items_show_details')->default(16);
 
 
 

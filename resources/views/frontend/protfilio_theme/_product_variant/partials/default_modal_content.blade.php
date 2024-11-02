@@ -1,0 +1,40 @@
+<div class="close-content text-end">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<p class="card-text placeholder-glow">
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+    <span class="placeholder col-7"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-4"></span>
+    <span class="placeholder col-6"></span>
+    <span class="placeholder col-8"></span>
+  </p>

@@ -18,7 +18,7 @@ class MailSettingController extends Controller
     public function index()
     {
         $mail_config = MailSetting::first();
-        $mail_template = MailTemplate::get()->pluck('id','name')->toArray();
+        $mail_template = MailTemplate::get();
         return view('admin.MailConfiguration.index', compact('mail_config','mail_template'));
     }
 
@@ -77,7 +77,7 @@ class MailSettingController extends Controller
      */
     public function update(Request $request, MailSetting $mailSetting)
     {
-        //
+        return $request;
     }
 
     /**
