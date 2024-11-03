@@ -50,6 +50,9 @@ return new class extends Migration
             $table->integer('selling_price')->default(0);
 
 
+            $table->string('vat')->default(0);
+            $table->boolean('service')->default(0);
+
             $table->string('variant_on')->default(0);
             $table->string('variant_option')->nullable();
             $table->string('status')->nullable();

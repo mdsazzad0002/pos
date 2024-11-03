@@ -54,11 +54,17 @@ class rolepermissionsedder extends Seeder
                 // Category
                 'category read',  'category create', 'category edit', 'category delete',
 
+                // subcategory
+                'subcategory read',  'subcategory create', 'subcategory edit', 'subcategory delete',
+
                 // Area
                 'area read',  'area create', 'area edit', 'area delete',
 
                 // Brand
                 'brand read',  'brand create', 'brand edit',  'brand delete',
+
+                // Discoount
+                'discount read',  'discount create', 'discount edit',  'discount delete',
 
                 //[[[ Setting
                         'setting read', 'setting create', 'setting edit',  'setting delete',

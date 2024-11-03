@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('vats', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('type')->nullable();
+            $table->string('type')->default(1)->comment('0 means include  1 means exclude');
+            $table->string('status')->default(1);
             $table->string( 'amount')->nullable();
             $table->string( 'creator')->nullable();
             $table->timestamps();

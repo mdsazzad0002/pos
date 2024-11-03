@@ -28,6 +28,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CommisionAgentController;
 
 use App\Http\Controllers\Auth\LoginCheckController;
+use App\Http\Controllers\discountController;
 use App\Http\Controllers\StockManagementController;
 
 use App\Http\Controllers\PushNotificationController;
@@ -38,6 +39,8 @@ use App\Http\Controllers\payment\PaymentCredentialController;
 use App\Http\Controllers\payment\braintree\BraintreeController;
 use App\Http\Controllers\payment\stripe\stripePaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\vatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -155,11 +158,27 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
 
+    // subcategory management
+    Route::resource('/subcategory', SubCategoryController::class)->names('subcategory');
+    Route::get('/subcategory/delete/{subcategory}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
+    Route::get('/subcategory/subcategory/get', [SubCategoryController::class, 'getsubcategory'])->name('subcategory.select');
+
 
     // Area management
     Route::resource('/area', AreaController::class)->names('area');
     Route::get('/area/delete/{area}', [AreaController::class, 'delete'])->name('area.delete');
     Route::get('/area/getArea/get', [AreaController::class, 'getAreas'])->name('area.select');
+
+    // Vat management
+    Route::resource('/vat', vatController::class)->names('vat');
+    Route::get('/vat/delete/{vat}', [vatController::class, 'delete'])->name('vat.delete');
+    Route::get('/vat/getvat/get', [vatController::class, 'getVats'])->name('vat.select');
+
+
+    // Discount management
+    Route::resource('/discount', discountController::class)->names('discount');
+    Route::get('/discount/delete/{vat}', [discountController::class, 'delete'])->name('discount.delete');
+    Route::get('/discount/getdiscount/get', [discountController::class, 'getDiscounts'])->name('discount.select');
 
 
 

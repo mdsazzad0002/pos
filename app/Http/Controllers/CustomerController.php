@@ -78,13 +78,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'area' => 'required |integer'
+        ]);
         $customer = new customer;
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->location = $request->location;
         $customer->area = $request->area;
+        $customer->prev_due = $request->prev_due;
 
         $customer->shop_phone = $request->shop_phone;
         $customer->shop_address = $request->shop_address;
@@ -126,11 +129,15 @@ class CustomerController extends Controller
      */
     public function update(Request $request, customer $customer)
     {
+        $request->validate([
+            'area' => 'required|integer'
+        ]);
         $customer->name = $request->name;
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->location = $request->location;
         $customer->area = $request->area;
+        $customer->prev_due = $request->prev_due;
 
         $customer->shop_phone = $request->shop_phone;
         $customer->shop_address = $request->shop_address;

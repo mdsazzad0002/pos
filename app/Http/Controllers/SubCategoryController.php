@@ -145,7 +145,7 @@ class SubCategoryController extends Controller
     public function destroy(SubCategory $subcategory)
     {
 
-        $category->delete();
+        $subcategory->delete();
 
         return json_encode([
             'title'=>'Successfully  Deleted SubCategory',
@@ -157,7 +157,7 @@ class SubCategoryController extends Controller
 
     public function getCategory(Request $request)
     {
-        $data_result = SubCategory::where(function($query) use ($request) {
+        $data_result = subcategory::where(function($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%');
             }

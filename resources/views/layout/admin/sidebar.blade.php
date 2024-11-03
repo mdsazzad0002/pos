@@ -126,6 +126,14 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @can('subcategory read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.subcategory.index') }}" class="nav-link ">
+                                <i class="fab fa-linode nav-icon"></i>
+                                <p>{{ __('sidebar.subcategory') }}</p>
+                            </a>
+                        </li>
+                        @endcan
 
                         @can('area read')
                         <li class="nav-item">

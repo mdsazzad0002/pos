@@ -5,6 +5,8 @@
     <input type="text" name="email" class="form-control mb-2" placeholder="Enter customer email">
     <input type="text" name="phone" class="form-control mb-2" placeholder="Enter customer phone">
     <input type="text" name="location" class="form-control mb-2" placeholder="Enter customer address">
+    <input type="number" step="0.1" name="prev_due" class="form-control mb-2" value="0" placeholder="Enter Previous Due">
+
     <div class="input-group">
         <select  name="area" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
             <option> Select Area </option>

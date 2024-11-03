@@ -6,6 +6,7 @@
     <input type="text" name="email" class="form-control mb-2" value="{{ $customer->email }}" placeholder="Enter customer email">
     <input type="text" name="phone" class="form-control mb-2" value="{{ $customer->phone }}" placeholder="Enter customer phone">
     <input type="text" name="location" class="form-control mb-2" value="{{ $customer->location }}" placeholder="Enter customer location">
+    <input type="number" step="0.1" name="prev_due" class="form-control mb-2" value="{{ $customer->prev_due }}" placeholder="Enter Previous Due">
 
 
 
