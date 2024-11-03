@@ -103,5 +103,8 @@
     color:white;
     cursor:pointer;
 }
-
+.cursor-pointer{
+    cursor: pointer;
+    user-select: none;
+}
 </style>

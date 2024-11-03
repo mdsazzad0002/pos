@@ -11,47 +11,87 @@
             <form action="{{ route('admin.product.store') }}" class="form_ajax_submit" method="post"
                 enctype="multipart/form-data">
                 @csrf
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-lg-12">
+                <label for="">Name</label>
+                <input type="text" name="name" class="form-control mb-2" placeholder="Enter product name">
+            </div>
+            <div class="col-lg-6">
+                <label for="">Sku</label>
+                <input type="text" name="sku" class="form-control mb-2" placeholder="Enter product sku">
+            </div>
 
+            <div class="col-lg-6">
+                <label for="">Unit</label>
+                <div class="input-group mb-3">
+                    <select type="text" name="unit" data-url="{{ route('admin.unit.select') }}"
+                        data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                        <option value="">unit</option>
+                    </select>
+                    <button type="button" class="btn btn-primary input-group-append"
+                        data-dialog="modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
+                        data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+</button>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <label for="">Brand</label>
+                <div class="input-group mb-3">
+                    <select type="text" data-url="{{ route('admin.brand.select') }}" data-ajax="true"
+                        name="brand" class="form-control input-group-prepend select2" placeholder="Brand"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                        <option value="">Brands</option>
+                    </select>
+
+                    <button type="button" class="btn btn-primary input-group-append"
+                        data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
+                        data-title="Add New  brand" data-href="{{ route('admin.brand.create') }}">+</button>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <label for="">Category</label>
+                <div class="input-group mb-3">
+                    <select type="text" name="category" data-url="{{ route('admin.category.select') }}"
+                        data-ajax="true" class="form-control input-group-prepend select2 category_select" placeholder="Username"
+                        aria-label="Username" aria-describedby="basic-addon1" >
+                        <option value="">category</option>
+                    </select>
+                    <button type="button" class="btn btn-primary input-group-append"
+                        data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
+                        data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+</button>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <label for="">Sub Category</label>
+                <div class="input-group mb-3">
+                    <select type="text" name="subcategory" data-url="{{ route('admin.subcategory.select') }}"
+                        data-ajax="true" class="form-control input-group-prepend select2 select_subcategory" placeholder="Username"
+                        aria-label="Username" aria-describedby="basic-addon1">
+                        <option value="">subcategory</option>
+                    </select>
+                    <button type="button" class="btn btn-primary input-group-append"
+                        data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
+                        data-title="Add New  subcategory"
+                        data-href="{{ route('admin.subcategory.create') }}">+</button>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
                 <div class="row">
-                    <div class="col-lg-6">
-                        <label for="">Name</label>
-                        <input type="text" name="name" class="form-control mb-2" placeholder="Enter product name">
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Sku</label>
-                        <input type="text" name="sku" class="form-control mb-2" placeholder="Enter product sku">
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Unit</label>
-                        <div class="input-group mb-3">
-                            <select type="text" name="unit" data-url="{{ route('admin.unit.select') }}"
-                                data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                                <option value="">unit</option>
-                            </select>
-                            <button type="button" class="btn btn-primary input-group-append"
-                                data-dialog="modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
-                                data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+</button>
 
 
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6">
-                        <label for="">Brand</label>
-                        <div class="input-group mb-3">
-                            <select type="text" data-url="{{ route('admin.brand.select') }}" data-ajax="true"
-                                name="brand" class="form-control input-group-prepend select2" placeholder="Brand"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                                <option value="">Brands</option>
-                            </select>
-
-                            <button type="button" class="btn btn-primary input-group-append"
-                                data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
-                                data-title="Add New  brand" data-href="{{ route('admin.brand.create') }}">+</button>
-                        </div>
-
-                    </div>
                     <div class="col-lg-6">
                         <label for="">Vat</label>
                         <div class="input-group mb-3">
@@ -66,34 +106,8 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-6">
-                        <label for="">Category</label>
-                        <div class="input-group mb-3">
-                            <select type="text" name="category" data-url="{{ route('admin.category.select') }}"
-                                data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                                <option value="">category</option>
-                            </select>
-                            <button type="button" class="btn btn-primary input-group-append"
-                                data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
-                                data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+</button>
-                        </div>
 
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="">Sub Category</label>
-                        <div class="input-group mb-3">
-                            <select type="text" name="subcategory" data-url="{{ route('admin.subcategory.select') }}"
-                                data-ajax="true" class="form-control input-group-prepend select2" placeholder="Username"
-                                aria-label="Username" aria-describedby="basic-addon1">
-                                <option value="">subcategory</option>
-                            </select>
-                            <button type="button" class="btn btn-primary input-group-append"
-                                data-dialog=" modal-dialog-scrollable modal-dialog-centered" onclick="button_ajax(this)"
-                                data-title="Add New  subcategory"
-                                data-href="{{ route('admin.subcategory.create') }}">+</button>
-                        </div>
-                    </div>
+
 
 
 
@@ -209,20 +223,44 @@
                 </div>
 
 
+
+
+
+            {{--  Its for Variant Part  --}}
                 <div class="variant_option my-4">
                     <div class="card">
                         <div class="card-header">
-                            Variant Option
+                            {{ __('product.variant_option') }}
+                            <div class="float-right">
+
+                                    <input type="checkbox" checked class="" hidden name="variant_on" value="0">
+                                    <input type="checkbox" class="toggle" placeholder="variant_on" name="variant_on" id="variant_on"
+                                        value="1">
+
+                            </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body variant_body" style="display: none">
                             <div class="variant_input">
-                                <input type="text" class="form-control" id="variant_name"
-                                    placeholder="Variant Name separate by comma">
-                                <input type="text" class="form-control" id="variant_option"
-                                    placeholder="Variant Option separate by comma">
-                                <button type="button" onclick="generate_variant_filed()">
-                                    Generate Filed
-                                </button>
+                                <div class="row mb-2">
+                                    <div class="col-12">
+                                        <span onclick="demo_varinat_data()" class="text-primary">NB: Every items separate by `,` Comma example <span  class="cursor-pointer text-danger">`red,yellow,blue`</span> </span>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="variant_name">Variant Name</label>
+                                        <input type="text" class="form-control" id="variant_name"
+                                        placeholder="Variant Name">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="variant_option">Variant Option</label>
+                                        <input type="text" class="form-control" id="variant_option"
+                                            placeholder="Variant Option">
+                                    </div>
+                                    <div class="col-4">
+                                        <button type="button" class="btn btn-primary mt-4" onclick="generate_variant_filed()">
+                                            Generate Filed
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="variant_output">
 
@@ -231,8 +269,7 @@
                     </div>
 
                 </div>
-
-
+            {{--  End Variant Part  --}}
 
 
 
@@ -254,21 +291,65 @@
 
 @push('js')
     <script>
+        document.querySelector('#variant_on').addEventListener('change', function() {
+            const items = this; // 'this' refers to the element that triggered the event
+            if (items.checked) {
+                document.querySelector('.variant_body').style.display = 'block';
+            } else {
+                document.querySelector('.variant_body').style.display = 'none';
+            }
+        });
+
+
+        $('.category_select').select2().on('change', function() {
+            const selectedValue = $(this).val(); // Get the selected value
+            console.log(selectedValue); // Log the selected value
+
+            // Get the current data-url
+            var data_url = $('.select_subcategory').data('url');
+
+            // Create a URL object to manage parameters easily
+            const url = new URL(data_url, window.location.origin); // Ensure base URL is included
+
+            // Check if cat_id already exists
+            if (url.searchParams.has('cat_id')) {
+                // If it exists, update the existing cat_id
+                url.searchParams.set('cat_id', selectedValue);
+            } else {
+                // If it doesn't exist, add it
+                url.searchParams.append('cat_id', selectedValue);
+            }
+
+            // Update the data-url attribute
+            $('.select_subcategory').data('url', url.toString());
+
+            select2_caller();
+        });
+
+
+        function demo_varinat_data(){
+            document.querySelector('#variant_name').value='red,yellow,blue'
+            document.querySelector('#variant_option').value='S,L,T'
+        }
         function render_html(items){
             rendered = '';
             items.forEach(function(item){
-                rendered +=  `<div class="col-md-4">
-                    <input type="text" name="variant_key[]" value="${item}" class="form-control"
-                        placeholder="veriant key" id="">
-                </div>
-                <div class="col-md-4">
-                    <input type="text" name="old_price_v[]" class="form-control"
-                        placeholder="veriant key" id="">
-                </div>
-                <div class="col-md-4">
-                    <input type="text" name="selling_price_v[]" class="form-control"
-                        placeholder="veriant key" id="">
-                </div>`;
+                rendered +=  `
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+
+                            <input type="text" name="variant_key[]" value="${item}" class="form-control"
+                                placeholder="veriant key" id="">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="old_price_v[]" class="form-control"
+                                placeholder="Old Price" id="">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="selling_price_v[]" class="form-control"
+                                placeholder="Current Price" id="">
+                        </div>
+                    </div>`;
             });
 
             return rendered;
@@ -304,7 +385,7 @@
             }
 
             if(items_combanitaion.length > 0 ){
-                document.querySelector.innerHTML = render_html(items_combanitaion);
+                document.querySelector('.variant_output').innerHTML = render_html(items_combanitaion);
 
             }
 

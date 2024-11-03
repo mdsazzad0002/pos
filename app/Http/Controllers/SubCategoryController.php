@@ -78,11 +78,12 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
+        $request->validate(['name' => 'required', 'category'=>'required|integer']);
 
         $category = new SubCategory;
         $category->name = $request->name;;
-        $category->category_id = $request->category;;
+        $category->category_id = $request->category;
+        $category->description = $request->description;
 
         $category->creator = auth()->user()->id ?? 0;
 
@@ -121,8 +122,11 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, SubCategory $subcategory)
     {
+        $request->validate(['name' => 'required', 'category'=>'required|integer']);
         $subcategory->name = $request->name;
-        $subcategory->creator = auth()->user()->id ?? 0;
+        $subcategory->category_id = $request->category;
+        $subcategory->description = $request->description;
+
 
         $subcategory->upload_id = $request->image ?? 0;
         $subcategory->save();
@@ -155,11 +159,16 @@ class SubCategoryController extends Controller
     }
 
 
-    public function getCategory(Request $request)
+    public function getsubcategory (Request $request)
     {
         $data_result = subcategory::where(function($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%');
+
+            }
+            if ($request->has('cat_id')) {
+                $query->where('id', 'LIKE', '%' . $request->cat_id . '%');
+
             }
         })->select('id', 'name as text')->get();
 

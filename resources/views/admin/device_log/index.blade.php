@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('Authenticated History', 10))
+@section('title', __('settings.authenticted_history'))
 
 {{--  Content Extends  --}}
 @section('content')
@@ -17,14 +17,9 @@
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5>
-            Authenticated History List
+            {{ __('settings.authenticated_list') }}
         </h5>
-        <div>
-            @can('user create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>
-            @endcan
-        </div>
     </div>
     <div class="card-body">
         <table id="users" class="table table-bordered table-striped table-hover">
@@ -91,7 +86,9 @@
             {data:'updated_at_data', name:'updated_at'},
             {data:'created_at_data', name:'created_at'},
 
-        ]
+        ],
+        buttons: true,
+        dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
     })
 
     function change_device_status(id){

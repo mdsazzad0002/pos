@@ -109,7 +109,8 @@ class dashboardController extends Controller
                         $lastActivity = $query->orderBy('last_activity', 'asc')->first();
                         if ($lastActivity && $lastActivity->last_activity) {
                             // Format the last_activity date
-                            $lastActivity = date('d-M-Y h:i:s A', strtotime($lastActivity->last_activity));
+                            return $lastActivity = Carbon::createFromTimestamp($lastActivity->last_activity)->diffForHumans();
+
                         } else {
                             $lastActivity = 0; // Default value if no activity found
                         }
@@ -117,6 +118,14 @@ class dashboardController extends Controller
 
                     }elseif($item === 'sandbox'){
                         $query->where('sandbox_status', 1);
+
+                    }elseif($item === 'decimal'){
+                        $query->where('decimal', 1);
+                    }elseif($item === 'decimal'){
+                        $query->where('decimal', 0);
+                    }elseif($item === 'sub_items '){
+                        $query->where('sub_items', '!=',  0);
+                        $query->where('sub_items', '!=',  null);
 
                     }
                 }

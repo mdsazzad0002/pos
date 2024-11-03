@@ -23,13 +23,13 @@ class PageSeeder extends Seeder
             ],
             [
                 'name' => 'About',
-                'slug' => '/about',
+                'slug' => 'about',
                 'status' => 1,
                 'homepage' => 0,
             ],
             [
                 'name' => 'Contact Us',
-                'slug' => '/contact_us',
+                'slug' => 'contact_us',
                 'status' => 1,
                 'homepage' => 0,
             ],

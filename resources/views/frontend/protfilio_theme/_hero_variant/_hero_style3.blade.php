@@ -36,11 +36,11 @@ if($variant_info->is_details_page){
                             <div class="banner-content-right v-2"
                                 style="background: url('{{ dynamic_asset( $slider_list[1]->upload_bg)}}') no-repeat; background-size: cover;">
                                 <div class="text-box">
-                                    <h6 class="color-ter mb-32 d-sm-block d-none">{{ $slider_list[1]->title }}</h6>
-                                    <h2 class="white fw-600 mb-8">{{ $slider_list[1]->short_description }}</h2>
-                                    <h6 class="white mb-32">{{ $slider_list[1]->sub_description }}</h6>
-                                    <a href="{{ $slider_list[1]->button_link }}" class="cus-btn-3 sec">{{ $slider_list[1]->button_title }}</a>
+                                    <h5 class="fw-500 mb-16"><a href="{{ $slider_list[1]->button_link }}" class="white">{{ $slider_list[1]->title }}</a>
+                                    </h5>
+                                    <p class="white fw-500">{{ $slider_list[1]->sub_description }}</p>
                                 </div>
+
                                 <div class="image-area">
                                     <img src="{{ dynamic_asset($slider_list[1]->upload_id) }}" alt="">
                                 </div>
@@ -50,10 +50,9 @@ if($variant_info->is_details_page){
                             <div class="banner-content-right v-3"
                                 style="background: url('{{ dynamic_asset( $slider_list[2]->upload_bg)}}') no-repeat; background-size: cover;">
                                 <div class="text-box">
-                                    <h6 class="color-ter mb-32 d-sm-block d-none">{{ $slider_list[2]->title }}</h6>
-                                    <h2 class="white fw-600 mb-8">{{ $slider_list[2]->short_description }}</h2>
-                                    <h6 class="white mb-32">{{ $slider_list[2]->sub_description }}</h6>
-                                    <a href="{{ $slider_list[2]->button_link }}" class="cus-btn-3 sec">{{ $slider_list[2]->button_title }}</a>
+                                    <h5 class="fw-500 mb-16"><a href="{{ $slider_list[2]->button_link }}" class="white">{{ $slider_list[1]->title }}</a>
+                                    </h5>
+                                    <p class="white fw-500">{{ $slider_list[2]->sub_description }}</p>
                                 </div>
                                 <div class="image-area">
                                     <img src="{{ dynamic_asset($slider_list[2]->upload_id) }}" alt="">

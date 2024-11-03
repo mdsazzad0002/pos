@@ -15,7 +15,8 @@ class UnitController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            return DataTables::make(unit::query())
+            $query = unit::with('subitems')->get();
+            return DataTables::of( $query)
 
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.unit.show', $row->id);

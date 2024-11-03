@@ -16,4 +16,8 @@ class unit extends Model
     public function child_items(){
         return $this->hasOne(unit::class, 'id', 'sub_items_id');
     }
+
+    public function subitems(){
+        return $this->hasOne(unit::class, 'id', 'sub_items_id');
+    }
 }

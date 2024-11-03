@@ -2,24 +2,17 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('settings.units'))
+@section('title', settings('subcategory', 10))
 
 {{--  Content Extends  --}}
 @section('content')
-<x-summary>
-    <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.unit')
-    </div>
-</x-summary>
-
-
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        {{ __('settings.unit_list') }}
+        Users
         <div>
             @can('user create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+ Add New unit</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  subcategory" data-href="{{ route('admin.subcategory.create') }}">+ Add New subcategory</button>
             @endcan
         </div>
     </div>
@@ -33,14 +26,7 @@
                     Name
                 </th>
                 <th>
-                    Short Name
-                </th>
-                <th>
-                    Allow Decimal
-                </th>
-
-                <th>
-                    Items
+                    Image
                 </th>
                 <th>
                     View
@@ -59,27 +45,20 @@
 
 @push('js')
 <script>
-    var datatableM = $('#users').DataTable({
+    var datatableM =  $('#users').DataTable({
         serverSide:true,
         processing:true,
+        responsive: true,
         ajax:'',
         columns:[
             { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'name', name:'name'},
-            {data:'sort_name', name:'sort_name'},
-            {data:'decimal', name:'decimal', render:function(decimal){
-                return decimal == 1 ? 'YES' : 'NO';
-            }},
-            {data:'subitems.name', name:'subitems.name', searchable:false, orderable:false},
-            {data:'sub_items', name:'sub_items'},
+            {data:'image', name:'image', searchable:false, orderable:false},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}
-        ],
-
-        buttons: true,
-        dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
+        ]
     })
 </script>
 @endpush
