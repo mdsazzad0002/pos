@@ -95,25 +95,27 @@ class MailSettingController extends Controller
     public function testMail(Request $request)
     {
 
-        $request->validate(
-            ['mail' => 'required']
-        );
+        $request->validate(['mail' => 'required|email']);
 
         $mailInfo = [
             'title' => 'Test Mail',
             'subject' => 'Test Subject',
             'body' => 'Test Body',
-            'user'=> $request->mail,
+            'user' => $request->mail,
             'name' => 'Test Name'
         ];
 
-        Mail::to($mailInfo['user'], $mailInfo['name'])->send(new TestMail($mailInfo));
 
-        return json_encode([
-            'title'=>'Successfully send mail',
-            'type'=>'success',
-            'refresh'=>'false',
-        ]);
+            Mail::to($mailInfo['user'], $mailInfo['name'])->send(new TestMail($mailInfo));
+
+            return response()->json([
+                'title' => 'Successfully sent mail',
+                'type' => 'success',
+                'refresh' => false,
+            ]);
+
+        
+
     }
 
 

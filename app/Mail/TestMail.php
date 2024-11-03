@@ -18,6 +18,7 @@ class TestMail extends Mailable
      */
 
      public $mailInfo;
+
      public function __construct($mailInfo)
      {
          $this->mailInfo = $mailInfo;
@@ -31,7 +32,7 @@ class TestMail extends Mailable
      public function envelope(): Envelope
      {
          return new Envelope(
-             subject: $this->mailInfo['subject'],
+             subject : $this->mailInfo['subject'],
          );
      }
 
@@ -42,7 +43,7 @@ class TestMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.test',
+            view: 'mail.invoice',
             with:[
                 'mailInfo_data' => $this->mailInfo,
             ],

@@ -7,12 +7,13 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="quick-image-box">
-                                   @include('frontend.protfilio_theme.product.partials.default_modal_image')
+                                   @include('frontend.protfilio_theme._product_variant.partials.default_modal_image')
+
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="product-text-container bg-white br-20">
-                                    @include('frontend.protfilio_theme.product.partials.default_modal_content')
+                                    @include('frontend.protfilio_theme._product_variant.partials.default_modal_content')
                                 </div>
                             </div>
                         </div>
