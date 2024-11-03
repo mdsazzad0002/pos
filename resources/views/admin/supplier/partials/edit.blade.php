@@ -6,7 +6,12 @@
     <input type="text" name="email" class="form-control mb-2" value="{{ $supplier->email }}" placeholder="Enter supplier email">
     <input type="text" name="phone" class="form-control mb-2" value="{{ $supplier->phone }}" placeholder="Enter supplier phone">
     <input type="text" name="location" class="form-control mb-2" value="{{ $supplier->location }}" placeholder="Enter supplier location">
-
+    <div class="input-group">
+        <select  name="area" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
+            <option value="{{ $supplier->area }}"> {{$supplier->areaItem->name ?? ''}} </option>
+        </select>
+        <a target="_blank" href="{{ route('admin.area.index') }}" class="btn btn-priamry">+</a>
+    </div>
 
     <div class="">
         <label  type="button" onclick="upload_select(this)"> Image <br>

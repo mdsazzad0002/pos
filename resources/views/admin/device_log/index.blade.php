@@ -6,7 +6,13 @@
 
 {{--  Content Extends  --}}
 @section('content')
-@include('admin.device_log.partials.summary')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.device_log')
+    </div>
+</x-summary>
+
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">

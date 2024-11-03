@@ -8,6 +8,10 @@
         <td>{{ $category->slug }}</td>
     </tr>
     <tr>
+        <td>Slug</td>
+        <td>{{ $category->description }}</td>
+    </tr>
+    <tr>
         <td>Image</td>
         <td><img src="{{ dynamic_asset($category->upload_id) }}" style="width: 100px" alt=""></td>
     </tr>

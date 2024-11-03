@@ -5,7 +5,13 @@
     <input type="text" name="email" class="form-control mb-2" placeholder="Enter supplier email">
     <input type="text" name="phone" class="form-control mb-2" placeholder="Enter supplier phone">
     <input type="text" name="location" class="form-control mb-2" placeholder="Enter supplier location">
+   <div class="input-group">
+       <select  name="area" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
+           <option value="">-- area -- </option>
+       </select>
+       <a target="_blank" href="{{ route('admin.area.index') }}" class="btn btn-priamry">+</a>
 
+   </div>
     <div class="">
         <label  type="button" onclick="upload_select(this)"> Image <br>
             <input type="text" name="image" id="image" class="form-control mb-2" hidden >

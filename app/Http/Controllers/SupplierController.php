@@ -82,11 +82,12 @@ class SupplierController extends Controller
         $supplier->name = $request->name;
         $supplier->email = $request->email;
         $supplier->phone = $request->phone;
+        $supplier->area = $request->area;
         $supplier->location = $request->location;
 
         $supplier->creator = auth()->user()->id ?? 0;
 
-            $supplier->upload_id = $request->image;
+            $supplier->upload_id = $request->image ?? 0;
 
         $supplier->save();
 
@@ -122,6 +123,7 @@ class SupplierController extends Controller
         $supplier->name = $request->name;
         $supplier->email = $request->email;
         $supplier->phone = $request->phone;
+        $supplier->area = $request->area;
         $supplier->location = $request->location;
         $supplier->creator = auth()->user()->id ?? 0;
         $supplier->upload_id = $request->image;
@@ -143,7 +145,7 @@ class SupplierController extends Controller
      */
     public function destroy(supplier $supplier)
     {
-        
+
         $supplier->delete();
         return json_encode([
             'title'=>'Successfully  Deleted Supplier',

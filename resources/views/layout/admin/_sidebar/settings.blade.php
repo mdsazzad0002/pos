@@ -76,5 +76,13 @@
                 <p> {{ __('settings.payment-configration-sidebar') }}</p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>{{ __('device_access_check.sidebar.list.name') }}</p>
+            </a>
+        </li>
+        
     </ul>
 </li>

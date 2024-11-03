@@ -5,8 +5,26 @@
     <input type="text" name="email" class="form-control mb-2" placeholder="Enter customer email">
     <input type="text" name="phone" class="form-control mb-2" placeholder="Enter customer phone">
     <input type="text" name="location" class="form-control mb-2" placeholder="Enter customer address">
+    <div class="input-group">
+        <select  name="area" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
+            <option> Select Area </option>
+        </select>
+        <a target="_blank" href="{{ route('admin.area.index') }}" class="btn btn-priamry">+</a>
+    </div>
 
-    {{--  <input type="file" name="image" class="form-control mb-2" >  --}}
+    <div class="text-danger">
+        If You WholeSeller
+    </div>
+
+    <input type="text" name="shop_name" class="form-control mb-2" placeholder="Enter Shop Name">
+    <input type="text" name="shop_phone" class="form-control mb-2" placeholder="Enter Shop Phone">
+    <input type="text" name="shop_address" class="form-control mb-2" placeholder="Enter Shop Adddress">
+    <select name="type" id="" class="form-control select2">
+        <option value="0">Retail</option>
+        <option value="1">Wholesale</option>
+    </select>
+
+
 
     <label  type="button" onclick="upload_select(this)">
 

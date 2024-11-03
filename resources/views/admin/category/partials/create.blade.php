@@ -2,6 +2,9 @@
 @csrf
 
     <input type="text" name="name" class="form-control mb-2" placeholder="Enter category name">
+
+    <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About Category"></textarea>
+
     <div class="">
         <label  type="button" onclick="upload_select(this)"> Image <br>
             <input type="text" name="image" id="image" class="form-control mb-2" hidden >

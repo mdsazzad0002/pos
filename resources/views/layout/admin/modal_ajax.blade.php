@@ -318,24 +318,35 @@ if($(thi).data('setelement')){
     }
 
 
-    function load_items_card(element){
-        if($(element).data('items') != ''){
-           $.ajax({
-               type:'get',
-               url:'{{ route('admin.items_load_card') }}',
-               data:{
-                   'items': $(element).data('items'),
-                   'where': $(element).data('where'),
-               },
-               success:function(data){
-                   {{--  return data;  --}}
-                   $(element).find('.inner .overlay').css('display', 'none');
-                   $(element).find('h3 span').html(data);
-               
-               }
-           })
-       }
-   }
+    function load_items_card(element, retryCount = 3) {
+    if ($(element).data('items') != '') {
+        $.ajax({
+            type: 'get',
+            url: '{{ route('admin.items_load_card') }}',
+            data: {
+                'items': $(element).data('items'),
+                'where': $(element).data('where'),
+            },
+            success: function(data) {
+                $(element).find('.inner .overlay').css('display', 'none');
+                $(element).find('h3 span').html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Display an error message if needed
+                console.error('Error loading items:', textStatus, errorThrown);
+                $(element).find('.inner .overlay').css('display', 'none');
+
+                if (retryCount > 0) {
+                    console.log('Retrying... Remaining attempts:', retryCount);
+                    load_items_card(element, retryCount - 1); // Retry the request
+                } else {
+                    $(element).find('h3 span').html('Failed to load items. Please try again later.');
+                }
+            }
+        });
+    }
+}
+
 
    var card_count_loaded = document.querySelectorAll('.card_count_loaded').forEach(function(element){
      load_items_card(element);

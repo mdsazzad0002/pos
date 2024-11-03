@@ -115,11 +115,15 @@ class LoginCheckController extends Controller
                     if($current_device->logout == 1 && $current_device->suspend_date <= Carbon::now()){
 
                         $current_device->updater_id = auth()->user()->id ?? 0;
+                        $current_device->last_activity = time();
                         $current_device->save();
 
                         auth()->logout();
                         $device_logout = 1;
 
+                    }else{
+                        $current_device->last_activity = time();
+                        $current_device->save();
                     }
                     setcookie(   $cookieName, base64_encode($current_device->id * 16), time() + 3600, url('/'));
 
@@ -136,6 +140,9 @@ class LoginCheckController extends Controller
                         $new_device->notification_data = '';
                         $new_device->creator = auth()->user()->id ?? 0;
                         $new_device->updater_id = auth()->user()->id ?? 0;
+
+                        $new_device->last_activity = time();
+
 
                         // Save the new device to the database
                         $new_device->save();
@@ -161,7 +168,7 @@ class LoginCheckController extends Controller
                     $new_device->ip = $deviceInfo['ip'];
                     $new_device->creator = auth()->user()->id ?? 0;
                     $new_device->updater_id = auth()->user()->id ?? 0;
-
+                    $new_device->last_activity = time();
                     $new_device->data = json_encode($_SERVER);
                     $new_device->notification_data = '';
 
@@ -189,7 +196,7 @@ class LoginCheckController extends Controller
 
             ob_flush();
             flush();
-        
+
 
         // dd($device);
     }

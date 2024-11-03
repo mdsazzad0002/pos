@@ -23,6 +23,9 @@
                     SI
                 </th>
                 <th>
+                    Supplier ID
+                </th>
+                <th>
                     Name
                 </th>
                 <th>
@@ -56,6 +59,7 @@
             { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
+            {data:'id', name:'id'},
             {data:'name', name:'name'},
             {data:'phone', name:'phone'},
             {data:'image', name:'image', searchable:false, orderable:false},

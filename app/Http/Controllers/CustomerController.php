@@ -84,7 +84,14 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->location = $request->location;
-        $customer->upload_id =$request->image??0;
+        $customer->area = $request->area;
+
+        $customer->shop_phone = $request->shop_phone;
+        $customer->shop_address = $request->shop_address;
+        $customer->shop_name = $request->shop_name;
+
+        $customer->upload_id =$request->image ?? 0;
+
 
         $customer->creator = auth()->user()->id ?? 0;
 
@@ -123,8 +130,14 @@ class CustomerController extends Controller
         $customer->email = $request->email;
         $customer->phone = $request->phone;
         $customer->location = $request->location;
+        $customer->area = $request->area;
+
+        $customer->shop_phone = $request->shop_phone;
+        $customer->shop_address = $request->shop_address;
+        $customer->shop_name = $request->shop_name;
+
         $customer->creator = auth()->user()->id ?? 0;
-        $customer->upload_id =$request->image;
+        $customer->upload_id =$request->image ?? 0;
         $customer->save();
 
         return json_encode([
@@ -143,7 +156,7 @@ class CustomerController extends Controller
      */
     public function destroy(customer $customer)
     {
-        
+
         $customer->delete();
         return json_encode([
             'title'=>'Successfully  Delete Customer',

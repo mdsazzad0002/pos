@@ -2,24 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\fcm;
 use App\Models\unit;
 use App\Models\User;
 use App\Models\brand;
 use App\Models\order;
+use App\Models\Device;
 use App\Models\product;
 use App\Models\category;
 use App\Models\customer;
 use App\Models\purchase;
 use App\Models\supplier;
 use App\Mail\MailerDynamic;
+use Illuminate\Http\Request;
 use App\Models\mail\MailSetting;
 use App\Models\mail\MailTemplate;
-use App\Models\payment\PaymentCredential;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Models\payment\PaymentCredential;
 use App\Notifications\NotificationDynamic;
 use Illuminate\Support\Facades\Notification;
 
@@ -76,7 +78,11 @@ class dashboardController extends Controller
 
             }elseif($items_req === 'mail_config'){
                 $query = MailSetting::query(); // Start the query for the User model
-                
+
+
+            }elseif($items_req === 'device_log'){
+                $query = Device::query(); // Start the query for the User model
+
             }
 
             // Check for additional conditions in the 'where' parameter
@@ -85,8 +91,30 @@ class dashboardController extends Controller
                 foreach ($items as $item) {
                     if ($item === 'active') {
                         $query->where('status', 1);
+
                     }elseif($item === 'inactive'){
                         $query->where('status', 0);
+
+                    }elseif($item === 'sandbox'){
+                        $query->where('sandbox_status', 1);
+
+                    }elseif($item === 'suspanded_device'){
+                        $query->where('suspend_date','!=', null);
+
+                    }elseif($item === 'active_device'){
+                        $query->where('suspend_date', null);
+
+                    }elseif($item === 'lastactive'){
+                        // active time
+                        $lastActivity = $query->orderBy('last_activity', 'asc')->first();
+                        if ($lastActivity && $lastActivity->last_activity) {
+                            // Format the last_activity date
+                            $lastActivity = date('d-M-Y h:i:s A', strtotime($lastActivity->last_activity));
+                        } else {
+                            $lastActivity = 0; // Default value if no activity found
+                        }
+                        // end active time
+
                     }elseif($item === 'sandbox'){
                         $query->where('sandbox_status', 1);
 

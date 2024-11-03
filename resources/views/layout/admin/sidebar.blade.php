@@ -54,11 +54,11 @@ sidebar-dark-primary elevation-4">
                     </a>
                 </li>
 
-               
-            
 
 
-             
+
+
+
 
 
                 @can('order read')
@@ -96,7 +96,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Product Management
+                            {{ __('sidebar.product_management') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -105,7 +105,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.product.index') }}" class="nav-link">
                                 <i class="fas fa-th-large nav-icon"></i>
-                                <p>Product</p>
+                                <p>{{ __('settings.product_list') }}</p>
                             </a>
                         </li>
                         @endcan
@@ -113,7 +113,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.product.create') }}" class="nav-link">
                                 <i class="fas fa-plus nav-icon"></i>
-                                <p>Product</p>
+                                <p>{{ __('sidebar.product_create') }}</p>
                             </a>
                         </li>
                         @endcan
@@ -122,7 +122,16 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.category.index') }}" class="nav-link ">
                                 <i class="fab fa-linode nav-icon"></i>
-                                <p>Category</p>
+                                <p>{{ __('sidebar.category') }}</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('area read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.area.index') }}" class="nav-link ">
+                                <i class="fas fa-map-marker-alt nav-icon"></i>
+                                <p>{{ __('sidebar.area') }}</p>
                             </a>
                         </li>
                         @endcan
@@ -385,56 +394,12 @@ sidebar-dark-primary elevation-4">
 
 
 
-                {{--  Device Loged Listing Setting  --}}
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-user-cog nav-icon"></i>
-                        <p>
-                            {{ __('device_access_check.sidebar.list') }}
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        {{--  @can('language read')  --}}
-                        <li class="nav-item">
-                            <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
-                                <i class="fas fa-user-tie nav-icon"></i>
-                                <p>{{ __('device_access_check.sidebar.list.name') }}</p>
-                            </a>
-                        </li>
-                        {{--  @endcan  --}}
-                    </ul>
-                </li>
-                {{--  Device Loged Listing Setting  --}}
-
-
-                {{--  Device Loged Listing Setting  --}}
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fas fa-user-cog nav-icon"></i>
-                        <p>
-                            {{ __('device_access_check.sidebar.list') }}
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        {{--  @can('language read')  --}}
-                        <li class="nav-item">
-                            <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
-                                <i class="fas fa-user-tie nav-icon"></i>
-                                <p>{{ __('device_access_check.sidebar.list.name') }}</p>
-                            </a>
-                        </li>
-                        {{--  @endcan  --}}
-                    </ul>
-                </li>
-                {{--  Device Loged Listing Setting  --}}
 
                 @include('layout.admin._sidebar.frontend')
 
                 @include('layout.admin._sidebar.settings')
 
-               
+
 
 
         </nav>

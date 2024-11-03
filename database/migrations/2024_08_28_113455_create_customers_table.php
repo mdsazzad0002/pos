@@ -16,11 +16,22 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+
+            $table->string('shop_name')->nullable();
+            $table->string('shop_phone')->nullable();
+            $table->string('shop_address')->nullable();
+            $table->string('type')->nullable();
+
             $table->string('creator')->nullable();
             $table->string('location')->nullable();
             $table->string('account_holder')->nullable();
             $table->string('account_number')->nullable();
+            $table->text('note')->nullable();
             $table->string('bank_name')->nullable();
+            $table->integer('credit_limit')->nullable();
+            $table->integer('prev_due')->nullable();
+            $table->integer('area')->nullable();
+
             $table->string('bank_branch')->nullable();
             $table->string('upload_id')->default(0);
             $table->timestamps();

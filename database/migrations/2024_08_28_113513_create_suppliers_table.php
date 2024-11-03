@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->bigInteger('area')->default(0);
             $table->string('location')->nullable();
             $table->string('type')->nullable();
             $table->string('business_name')->nullable();

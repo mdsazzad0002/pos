@@ -4,31 +4,33 @@ use App\Models\LeadContact;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\homecontroller;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\CategoryController;
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\dashboardController;
+
 use App\Http\Controllers\PermissionController;
 
 use App\Http\Controllers\CommisionAgentController;
 
 use App\Http\Controllers\Auth\LoginCheckController;
-
 use App\Http\Controllers\StockManagementController;
-use App\Http\Controllers\PushNotificationController;
 
+use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\payment\paypal\paypalController;
 use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\amarpay\amarpayController;
@@ -119,8 +121,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/', [dashboardController::class, 'index'])->name('index');
     Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
     Route::get('/home', [dashboardController::class, 'index'])->name('home');
-    
-    
+
+
     Route::get('/items_load_card', [dashboardController::class, 'items_load_card'])->name('items_load_card');
 
     // permission management
@@ -152,6 +154,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('/category', CategoryController::class)->names('category');
     Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
     Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
+
+
+    // Area management
+    Route::resource('/area', AreaController::class)->names('area');
+    Route::get('/area/delete/{area}', [AreaController::class, 'delete'])->name('area.delete');
+    Route::get('/area/getArea/get', [AreaController::class, 'getAreas'])->name('area.select');
 
 
 
@@ -207,6 +215,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
+    Route::any('/backup', [BackupController::class, 'createBackup']);
 
 
 });

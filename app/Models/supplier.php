@@ -12,4 +12,8 @@ class supplier extends Model
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }
+
+    public function areaItem(){
+        return $this->hasOne(area::class, 'id', 'area');
+    }
 }

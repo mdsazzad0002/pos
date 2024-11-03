@@ -81,6 +81,7 @@ class CategoryController extends Controller
         $request->validate(['name' => 'required']);
         $category = new Category;
         $category->name = $request->name;;
+        $category->description = $request->description;;
         $category->creator = auth()->user()->id ?? 0;
 
         $category->upload_id = $request->image ?? 0;
@@ -120,7 +121,7 @@ class CategoryController extends Controller
     {
         $category->name = $request->name;
         $category->creator = auth()->user()->id ?? 0;
-
+        $category->description = $request->description;;
         $category->upload_id = $request->image ?? 0;
         $category->save();
 

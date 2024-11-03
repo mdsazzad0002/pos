@@ -3,6 +3,9 @@
     @method('put')
 
     <input type="text" name="name" class="form-control mb-2" value="{{ $category->name }}" placeholder="Enter your name">
+
+    <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About Category">{{ $category->description }}</textarea>
+
     <div class="">
         <label  type="button" onclick="upload_select(this)"> Image <br>
             <input type="text" name="image" id="image" value="{{ $category->upload_id }}" class="form-control mb-2" hidden >
