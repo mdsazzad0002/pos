@@ -7,6 +7,10 @@
         <td>Slug</td>
         <td>{{ $area->slug }}</td>
     </tr>
+    <tr>
+        <td>Status</td>
+        <td>{{ $area->status ? 'Active' : 'Inactive' }}</td>
+    </tr>
 
     <tr>
         <td>Creator</td>

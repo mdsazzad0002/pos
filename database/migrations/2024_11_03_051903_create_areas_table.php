@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->bigInteger('upload_id')->default(0);
+            $table->boolean('status')->default(1);
             $table->string('creator')->default(0);
             $table->string('updater')->default(0);
             $table->softDeletes();

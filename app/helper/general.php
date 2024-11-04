@@ -135,6 +135,14 @@ function dynamic_asset($id)
     }
 }
 
+function dynamic_assets($ids){
+    $data = [];
+    foreach (explode(',',$ids) as $id) {
+        $data[$id] = dynamic_asset($id);
+    }
+    return $data;
+}
+
 
 function asset_unlink($id)
 {

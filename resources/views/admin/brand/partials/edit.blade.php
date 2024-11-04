@@ -2,7 +2,11 @@
     @csrf
     @method('put')
 
-    <input type="text" name="name" class="form-control mb-2" value="{{ $brand->name }}" placeholder="Enter your name">
+    <div class="mb-2">
+        <label for="brand_name">Brand Name</label>
+        <input type="text" name="name" class="form-control mb-2" value="{{ $brand->name }}" placeholder="Enter your name">
+    </div>
+
 
     <div class="col-lg-6">
         <label  type="button" onclick="upload_select(this)"> Image <br>
@@ -11,6 +15,11 @@
         </label>
     </div>
     
+    <label for="status"> Brand Status <br/>
+        <input type="checkbox" checked class="" hidden  name="status"   value="0">
+        <input type="checkbox" class="toggle"  placeholder=" Status" name="status" {{ $brand->status == 1 ? 'checked' : '' }} id="status" value="1">
+    </label>
+
 
     </div>
 

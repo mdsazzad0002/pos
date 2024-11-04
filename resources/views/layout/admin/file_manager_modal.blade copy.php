@@ -110,6 +110,7 @@
       })
 
 
+
       function file_upload(files){
         // Create a new FormData object
         var formData = new FormData();
@@ -213,38 +214,31 @@ dropArea.addEventListener('dragover', () => {
         currnet_element_selected = thi;
     }
 
+    var items_array = [];
     function select_image(thi){
 
-       //getting image data from upload window
-        var img_tag_form_upload_window =  $(thi).find('img');
-        var src_img = $(img_tag_form_upload_window).attr('src');
-        var img_id = $(img_tag_form_upload_window).data('id');
+        if($(currnet_element_selected).hasClass('multiple')){
+            items_array.push()
+        }else{
+               //getting image data from upload window
+                var img_tag_form_upload_window =  $(thi).find('img');
+                var src_img = $(img_tag_form_upload_window).attr('src');
+                var img_id = $(img_tag_form_upload_window).data('id');
 
 
-        //setting img info selecting window
-       var selected_eleemtn =  $(currnet_element_selected).find('input');
-       var selected_eleemtn_img =  $(currnet_element_selected).find('img');
-       $(selected_eleemtn).val(img_id)
-       selected_eleemtn_img.attr('src',src_img);
+                //setting img info selecting window
+                var selected_eleemtn =  $(currnet_element_selected).find('input');
+                var selected_eleemtn_img =  $(currnet_element_selected).find('img');
 
-       $('#upload_ajax_modal').modal('hide');
+                $(selected_eleemtn).val(img_id)
+                selected_eleemtn_img.attr('src',src_img);
+                $('#upload_ajax_modal').modal('hide');
+        }
+
+
     }
 </script>
-<script>
-    function remove_element_image(thi){
-        $(thi).parents('.image_items_removeable').remove();
-    }
-    function add_more_filed_image(){
-        var items_image = `<div class="image_items_removeable">
-                                 <label type="button" class="multiple" onclick="upload_select(this)">
-                                    <input type="text" hidden name="images_multiple[]" id="image" class="form-control mb-2"/>
-                                    <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt=""/>
-                                </label>
-                                <span  onclick="remove_element_image(this)">x</span>
-                            </div>`;
-        $('.items_filed_iamge').append(items_image)
-    }
-</script>
+
 
 
 <style>
@@ -280,57 +274,5 @@ dropArea.addEventListener('dragover', () => {
   #drop-area.drag-over {
     background-color: #eee;
 }
-
-
-
-
-.items_container_image .items_filed_iamge {
-    display: flex;
-    gap: 7px;
-}
-.items_container_image .items_filed_iamge input{
-    visibility:hidden;
-}
-
-.items_container_image .image_items_removeable{
-    max-width:70px;
-    position:relative;
-}
-
-
-.items_container_image .image_items_removeable span{
-    position:absolute;
-    top: -5px;
-    right: -6px;
-    z-index:9;
-    background:red;
-    width:25px;
-    height:25px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:5px
-
-}
-.items_container_image .image_items_removeable span:hover{
-    opacity: 0.8;
-}
-.items_container_image .items_container_image {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-
-.items_container_image .items_filed_iamge {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.items_container_image button.add_image_filed.btn.btn-primary {
-    cursor: pointer;
-}
-
-
 
 </style>

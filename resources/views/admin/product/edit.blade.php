@@ -8,13 +8,10 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ $product ?  route('admin.product.update', $product->id) : route('admin.product.store')  }}" class="form_ajax_submit" method="post"
+        <form action="{{ route('admin.product.store') }}" class="form_ajax_submit" method="post"
             enctype="multipart/form-data">
             @csrf
 
-            @if($product)
-                @method('put')
-            @endif
 
             <div class="row">
                 <div class="col-md-6">
@@ -29,12 +26,12 @@
                                 <div class="col-lg-12">
                                     <label for="">Name</label>
                                     <input type="text" name="name" class="form-control mb-2"
-                                        placeholder="Enter product name" value="{{ $product->name ?? '' }}">
+                                        placeholder="Enter product name">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="">Sku</label>
                                     <input type="text" name="sku" class="form-control mb-2"
-                                        placeholder="Enter product sku" value="{{ $product->sku ?? '' }}">
+                                        placeholder="Enter product sku">
                                 </div>
 
                                 <div class="col-lg-6">
@@ -44,11 +41,7 @@
                                             data-ajax="true" class="form-control input-group-prepend select2"
                                             placeholder="Username" aria-label="Username"
                                             aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->unit ?? 0 }}">{{ $product->unit_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">unit</option>
-                                            @endif
+                                            <option value="">unit</option>
                                         </select>
                                         <button type="button" class="btn btn-primary input-group-append"
                                             data-dialog="modal-dialog-scrollable modal-dialog-centered"
@@ -65,11 +58,7 @@
                                             data-ajax="true" name="brand"
                                             class="form-control input-group-prepend select2" placeholder="Brand"
                                             aria-label="Username" aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->brand ?? 0 }}">{{ $product->brand_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">Brands</option>
-                                            @endif
+                                            <option value="">Brands</option>
                                         </select>
 
                                         <button type="button" class="btn btn-primary input-group-append"
@@ -87,11 +76,7 @@
                                             class="form-control input-group-prepend select2 category_select"
                                             placeholder="Username" aria-label="Username"
                                             aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->category ?? 0 }}">{{ $product->category_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">category</option>
-                                            @endif
+                                            <option value="">category</option>
                                         </select>
                                         <button type="button" class="btn btn-primary input-group-append"
                                             data-dialog=" modal-dialog-scrollable modal-dialog-centered"
@@ -109,11 +94,7 @@
                                             class="form-control input-group-prepend select2 select_subcategory"
                                             placeholder="Username" aria-label="Username"
                                             aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->sub_category ?? 0 }}">{{ $product->sub_category_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">subcategory</option>
-                                            @endif
+                                            <option value="">subcategory</option>
                                         </select>
                                         <button type="button" class="btn btn-primary input-group-append"
                                             data-dialog=" modal-dialog-scrollable modal-dialog-centered"
@@ -129,11 +110,7 @@
                                             data-ajax="true" class="form-control input-group-prepend select2"
                                             placeholder="Username" aria-label="Username"
                                             aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->vat ?? 0 }}">{{ $product->vat_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">Vat</option>
-                                            @endif
+                                            <option value="">Vat</option>
                                         </select>
                                         <button type="button" class="btn btn-primary input-group-append"
                                             data-dialog=" modal-dialog-scrollable modal-dialog-centered"
@@ -146,30 +123,23 @@
                                 <div class="col-lg-6">
                                     <label for="">Old Price</label>
                                     <input type="number" step="0.1" name="old_price" class="form-control mb-2"
-                                        placeholder="Old Price" value="{{ $product ? $product->old_price : 0 }}">
+                                        placeholder="Old Price">
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label for="">Selling Price</label>
-                                    <input type="number" step="0.1" name="selling_price" value="{{ $product ? $product->selling_price : 0 }}" class="form-control mb-2"
+                                    <input type="number" step="0.1" name="selling_price" class="form-control mb-2"
                                         placeholder="Selling Price">
                                 </div>
 
                                 <div class="col-lg-12">
                                     <label for="">Discount</label>
                                     <div class="input-group mb-3">
-                                        <select type="text" name="discount_id[]" multiple
+                                        <select type="text" name="discount_id" multiple
                                             data-url="{{ route('admin.discount.select') }}" data-ajax="true"
                                             class="form-control input-group-prepend select2" placeholder="Username"
                                             aria-label="Username" aria-describedby="basic-addon1">
-                                            @if($product)
-                                                @foreach ($product->discount_info() as $items)
-                                                    <option selected value="{{ $items->id ?? '' }}">{{ $items->name ?? '' }}</option>
-                                                @endforeach
-                                            @else
-                                                <option value="0">discount</option>
-                                            @endif
-
+                                            <option value="">discount</option>
                                         </select>
                                         <button type="button" class="btn btn-primary input-group-append"
                                             data-dialog=" modal-dialog-scrollable modal-dialog-centered"
@@ -181,40 +151,40 @@
 
                                 <div class="col-lg-6">
                                     <label for="">Alert Quantaty</label>
-                                    <input type="number" name="alert_quantity" value="{{ $product ? $product->alert_quantity : 0 }}" class="form-control mb-2">
+                                    <input type="number" name="alert_quantity" value="0" class="form-control mb-2">
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label for="">Weight</label>
-                                    <input type="text" name="weight" value="{{ $product ? $product->weight : 0 }}" class="form-control mb-2">
+                                    <input type="text" name="weight" class="form-control mb-2">
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label for="">Garage</label>
-                                    <input type="text" name="garage" value="{{ $product ? $product->garage : 0 }}" class="form-control mb-2">
+                                    <input type="text" name="garage" class="form-control mb-2">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="">Route</label>
-                                    <input type="text" name="route" value="{{ $product ? $product->route : 0 }}" class="form-control mb-2">
+                                    <input type="text" name="route" class="form-control mb-2">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="feature"> Feature <br />
                                         <input type="checkbox" checked class="" hidden name="feature" value="0">
-                                        <input type="checkbox" {{ $product ? ($product->feature ? 'checked' : '') : '' }} class="toggle" placeholder="Feature" name="feature"
+                                        <input type="checkbox" class="toggle" placeholder="Feature" name="feature"
                                             id="feature" value="1">
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="service"> Service <br />
                                         <input type="checkbox" checked class="" hidden name="service" value="0">
-                                        <input type="checkbox" class="service toggle" {{ $product ? ($product->service ? 'checked' : '') : '' }}  placeholder="service" name="service"
+                                        <input type="checkbox" class="service toggle" placeholder="service" name="service"
                                             id="service" value="1">
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="service"> Status <br />
                                         <input type="checkbox" checked class="" hidden name="status" value="0">
-                                        <input type="checkbox" class="status toggle" {{ $product ? ($product->status ? 'checked' : '') : '' }}  placeholder="status" name="status"
+                                        <input type="checkbox" class="status toggle" placeholder="status" name="status"
                                             id="service" value="1">
                                     </label>
                                 </div>
@@ -222,35 +192,22 @@
                                 <div class="col-lg-6">
                                     <label for="">For Selling</label>
                                     <select name="for_selling" id="" class="form-control mb-2">
+                                        <option value="1">YES</option>
                                         <option value="0">NO</option>
-                                        <option {{ $product ? ($product->for_selling ? 'selected' : '') : '' }}  value="1">YES</option>
                                     </select>
                                 </div>
 
 
                                 <div class="col-lg-6">
                                     <label type="button" onclick="upload_select(this)"> Image <br>
-                                        <input type="text" name="image" id="image" class="form-control mb-2" value="{{ $product ? $product->upload_id : 0 }}" hidden>
-                                        <img style="max-height: 60px" src="{{ dynamic_asset( $product ? $product->upload_id : 0 ) }}" alt="">
+                                        <input type="text" name="image" id="image" class="form-control mb-2"value="0" hidden>
+                                        <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
                                     Image Slides
                                     <div class="items_container_image">
                                         <div class="items_filed_iamge">
-                                            {{-- items --}}
-                                            @if($product)
-                                                @foreach (dynamic_assets($product->uploads_id) as $key =>  $item)
-                                                    <div class="image_items_removeable">
-                                                        <label type="button" class="multiple" onclick="upload_select(this)">
-                                                        <input type="text" hidden name="images_multiple[]" value="{{ $key }}" id="image" class="form-control mb-2"/>
-                                                        <img style="max-height: 60px" src="{{ $item }}" alt=""/>
-                                                    </label>
-                                                    <span  onclick="remove_element_image(this)">x</span>
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                            {{-- items --}}
 
                                         </div>
                                         <button type="button" class="add_image_filed btn btn-primary" onclick="add_more_filed_image()">
@@ -264,17 +221,17 @@
                                 <div class="col-lg-12">
                                     <label for="">Short Description</label>
                                     <textarea type="text" name="short_description" class="form-control mb-2 "
-                                        placeholder="short_description">{{ $product ? $product->short_description : 0 }}</textarea>
+                                        placeholder="short_description"></textarea>
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="">Description</label>
                                     <textarea type="text" name="description" class="form-control mb-2 summernote"
-                                        placeholder="Description">{{ $product ? $product->description : 0 }}</textarea>
+                                        placeholder="Description"></textarea>
                                 </div>
                                 <div class="col-lg-12 mt-3">
                                     <label for="Youtube_Video">Youtube Video</label>
                                     <textarea name="youtube_video" id="Youtube_Video" class="form-control"
-                                        placeholder="Iframe Full TAG">{{ $product ? $product->youtube_video : 0 }}</textarea>
+                                        placeholder="Iframe Full TAG"></textarea>
                                 </div>
 
                             </div>
@@ -290,19 +247,19 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <label for="landing_page_bg">Landing Page BG</label>
-                                    <input type="color" name="landing_page_bg" value="{{ $product ? $product->landing_page_bg : 0 }}" class="form-control mb-2"
+                                    <input type="color" name="landing_page_bg" class="form-control mb-2"
                                         placeholder="Landing Page BG">
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label for="landing_page_color">Landing Page Color</label>
-                                    <input type="color" name="landing_page_color" value="{{ $product ? $product->landing_page_color : 0 }}" class="form-control mb-2"
+                                    <input type="color" name="landing_page_color" class="form-control mb-2"
                                         placeholder="Landing Page Color">
                                 </div>
 
                                 <div class="col-lg-6">
                                     <label for="landing_page_color">Landing Page Variant</label>
-                                    <div class="text-light p-3 bg-danger border"> Working on it</div>
+                                    ------ Under Constraction ----
                                 </div>
                             </div>
 

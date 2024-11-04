@@ -8,8 +8,16 @@
         <td>{{ $subcategory->slug }}</td>
     </tr>
     <tr>
-        <td>Slug</td>
+        <td>Status</td>
+        <td>{{ $subcategory->status ? 'Active' : 'Inactive' }}</td>
+    </tr>
+    <tr>
+        <td>Description</td>
         <td>{{ $subcategory->description }}</td>
+    </tr>
+    <tr class="bg-success">
+        <td>Category</td>
+        <td>{{ $subcategory->category->name }}</td>
     </tr>
     <tr>
         <td>Image</td>

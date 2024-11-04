@@ -21,6 +21,10 @@
         <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About subcategory"></textarea>
     </div>
 
+    <label for="status"> Subcategory Status <br/>
+        <input type="checkbox" checked class="" hidden  name="status"   value="0">
+        <input type="checkbox" class="toggle"  placeholder=" Status" name="status"  id="status" value="1">
+    </label>
 
 
     <div class="">

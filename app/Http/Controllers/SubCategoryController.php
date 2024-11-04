@@ -84,6 +84,7 @@ class SubCategoryController extends Controller
         $category->name = $request->name;;
         $category->category_id = $request->category;
         $category->description = $request->description;
+        $category->status = $request->status;
 
         $category->creator = auth()->user()->id ?? 0;
 
@@ -126,6 +127,7 @@ class SubCategoryController extends Controller
         $subcategory->name = $request->name;
         $subcategory->category_id = $request->category;
         $subcategory->description = $request->description;
+        $subcategory->status = $request->status;
 
 
         $subcategory->upload_id = $request->image ?? 0;

@@ -17,7 +17,7 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         {{ __('settings.unit_list') }}
         <div>
-            @can('user create')
+            @can('unit create')
 
             <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  unit" data-href="{{ route('admin.unit.create') }}">+ Add New unit</button>
             @endcan

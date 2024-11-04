@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('discount_id')->nullable();
             $table->string('creator')->default(0);
             $table->string('upload_id')->default(0);
+            $table->string('uploads_id')->default(0);
             $table->string('sub_category')->nullable();
 
 

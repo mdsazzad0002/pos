@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\VariantOption;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+
+use function PHPSTORM_META\type;
 
 class ProductController extends Controller
 {
@@ -40,11 +43,7 @@ class ProductController extends Controller
                     data-href='$delete_route'>Delete</button>";
 
                     $edit_route = route('admin.product.edit', $row->id);
-                    $edit_button =  "<button class='btn btn-warning '
-                    data-dialog='modal-lg  modal-dialog-scrollable modal-dialog-centered'
-                    data-title='$row->name'
-                    onclick='button_ajax(this)'
-                    data-href='$edit_route'>Edit</button>";
+                    $edit_button =  "<a class='btn btn-warning' href='$edit_route'>Edit</a>";
 
                     $return_data = '';
                     if(auth()->user()->can('product edit')==true){
@@ -70,7 +69,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+
+        $product = null;
+        return view('admin.product.create', compact('product'));
     }
 
     /**
@@ -78,24 +79,58 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'vat'=>'required|integer',
+                'unit'=>'required|integer',
+                'category'=>'required|integer',
+                'subcategory'=>'required|integer',
+                'brand'=>'required|integer',
+                'name'=>'required',
+                'old_price'=>'required',
+                'selling_price'=>'required',
+                // 'selling_price'=>'required',
+            ]
+        );
         $product = new product;
         $product->name = $request->name;
+        $product->slug = create_slug($request->name, 'product', 'slug');
+
         $product->sku = $request->sku;
-        $product->selling_price = $request->selling_price;
-        $product->category = $request->category;
-        $product->brand = $request->brand;
         $product->unit = $request->unit;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->sub_category = $request->subcategory;
+        $product->vat = $request->vat;
+        $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
+        $product->old_price = $request->old_price;
+        $product->selling_price = $request->selling_price;
         $product->alert_quantity = $request->alert_quantity;
-        $product->description = $request->description;
-        $product->for_selling = $request->for_selling;
         $product->weight = $request->weight;
+        $product->garage = $request->garage;
+        $product->route = $request->route;
+        $product->feature = $request->feature;
+        $product->service = $request->service;
+        $product->status = $request->status;
+        $product->for_selling = $request->for_selling;
+
 
         $product->upload_id = $request->image;
+        if($request->has('images_multiple')){
+            $product->uploads_id = implode(',',$request->images_multiple);
+        }
+
+
+        $product->short_description = $request->short_description;
+        $product->description = $request->description;
+        $product->youtube_video = $request->youtube_video;
+        $product->landing_page_bg = $request->landing_page_bg;
+        $product->landing_page_color = $request->landing_page_color;
+        $product->variant_on = $request->variant_on;
+
 
         $product->creator = auth()->user()->id ?? 0;
-
-        $product->slug = create_slug($request->name, 'product', 'slug');
-        $product->save();
+         $product->save();
 
 
         return json_encode([
@@ -120,7 +155,7 @@ class ProductController extends Controller
      */
     public function edit(product $product)
     {
-        return view('admin.product.partials.edit', compact('product'));
+        return view('admin.product.create', compact('product'));
     }
 
     /**
@@ -128,20 +163,91 @@ class ProductController extends Controller
      */
     public function update(Request $request, product $product)
     {
+        $request->validate(
+            [
+                'vat'=>'required|integer',
+                'unit'=>'required|integer',
+                'category'=>'required|integer',
+                'subcategory'=>'required|integer',
+                'brand'=>'required|integer',
+                'name'=>'required',
+                'old_price'=>'required',
+                'selling_price'=>'required',
+                // 'selling_price'=>'required',
+            ]
+        );
         $product->name = $request->name;
+        $product->slug = create_slug($request->name, 'product', 'slug');
+
         $product->sku = $request->sku;
-        $product->selling_price = $request->selling_price;
-        $product->category = $request->category;
-        $product->brand = $request->brand;
         $product->unit = $request->unit;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->sub_category = $request->subcategory;
+        $product->vat = $request->vat;
+        $product->discount_id =  is_array($request->discount_id) ? implode(',', $request->discount_id) : '0';
+
+        $product->old_price = $request->old_price;
+        $product->selling_price = $request->selling_price;
         $product->alert_quantity = $request->alert_quantity;
-        $product->description = $request->description;
-        $product->for_selling = $request->for_selling;
         $product->weight = $request->weight;
+        $product->garage = $request->garage;
+        $product->route = $request->route;
+        $product->feature = $request->feature;
+        $product->service = $request->service;
+        $product->status = $request->status;
+        $product->for_selling = $request->for_selling;
+
+
+        $product->upload_id = $request->image;
+        if($request->has('images_multiple')){
+            $product->uploads_id = implode(',',$request->images_multiple);
+        }
+
+
+        $product->short_description = $request->short_description;
+        $product->description = $request->description;
+        $product->youtube_video = $request->youtube_video;
+        $product->landing_page_bg = $request->landing_page_bg;
+        $product->landing_page_color = $request->landing_page_color;
+        $product->variant_on = $request->variant_on;
+
 
         $product->creator = auth()->user()->id ?? 0;
-        $product->upload_id = $request->image;
         $product->save();
+
+
+
+        // working on variant product
+        if( $request->has('variant_on') == 1){
+            $existingVariants = VariantOption::where('product_id', $product->id)->get();
+
+            $existingOptionNames = $existingVariants->pluck('name')->toArray();
+
+            // Array to hold the option names from the request
+            $requestOptionNames = $request->variant_key;
+
+
+            foreach($request->variant_key as $key => $items){
+
+                VariantOption::updateOrCreate(
+                    [
+                        'product_id' => $product->id,
+                        'name' =>  $items, // Use this for finding existing options
+                    ],
+                    [
+
+                       'old_price' => $request->old_price_v[$key],
+                       'selling_price' => $request->old_price_v[$key],
+                    ]
+
+                );
+            }
+
+             // Determine which options are to be deleted
+            $optionsToDelete = array_diff($existingOptionNames, $requestOptionNames);
+
+        }
 
 
         return json_encode([
@@ -160,7 +266,7 @@ class ProductController extends Controller
      */
     public function destroy(product $product)
     {
-        
+
         $product->delete();
 
         return json_encode([

@@ -81,6 +81,7 @@ class BrandController extends Controller
         $request->validate(['name' => 'required']);
         $brand = new brand;
         $brand->name = $request->name;;
+        $brand->status = $request->status;
         $brand->creator = auth()->user()->id ?? 0;
 
         $brand->upload_id = $request->image ?? 0;
@@ -120,7 +121,8 @@ class BrandController extends Controller
         $brand->name = $request->name;
         $brand->creator = auth()->user()->id ?? 0;
         $brand->upload_id = $request->image ?? 0;
-
+        $brand->status = $request->status;
+        $brand->slug = create_slug($request->name, 'brand', 'slug');
         $brand->save();
 
         return json_encode([

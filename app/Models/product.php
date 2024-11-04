@@ -15,16 +15,25 @@ class product extends Model
     use HasFactory;
 
     protected $appends = ['image_url'];
-    
+
     // Recombanend 1st items
+    public function category_info(){
+        return $this->hasOne(category::class, 'id', 'category');
+    }
+
     public function categoryInfo(){
         return $this->hasOne(category::class, 'id', 'category');
     }
 
-    
+
     public function categorys(){
         return $this->hasOne(category::class, 'id', 'category');
     }
+    public function sub_category_info(){
+        return $this->hasOne(SubCategory::class, 'id', 'sub_category');
+    }
+
+
 
     // Recombanend 1st items
     public function brand_info(){
@@ -42,6 +51,10 @@ class product extends Model
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }
+    public function vat_info(){
+        return $this->hasOne(Vat::class,'id', 'vat');
+
+    }
     public function getImageUrlAttribute(){
         return dynamic_asset($this->upload_id);
     }
@@ -50,8 +63,11 @@ class product extends Model
         return $this->hasMany(reviewProduct::class, 'product_id', 'id');
     }
 
+    public function discount_info(){
+        return discount::whereIn('id', explode(',',$this->discount_id))->get();
+    }
+ 
 
 
-  
 
 }

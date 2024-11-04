@@ -80,7 +80,10 @@ class AreaController extends Controller
     {
         $request->validate(['name' => 'required']);
         $area = new area;
-        $area->name = $request->name;;
+        $area->name = $request->name;
+        $area->status = $request->status;
+
+        $area->upload_id = $request->image;
         $area->slug = create_slug($request->name, 'area', 'slug');
 
         $area->creator = auth()->user()->id ?? 0;
@@ -118,6 +121,8 @@ class AreaController extends Controller
     public function update(Request $request, area $area)
     {
         $area->name = $request->name;
+        $area->status = $request->status;
+        $area->upload_id = $request->image;
         $area->slug = create_slug($request->name, 'area', 'slug');
         $area->creator = auth()->user()->id ?? 0;
         $area->save();

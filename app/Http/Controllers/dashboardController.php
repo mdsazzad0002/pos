@@ -15,6 +15,7 @@ use App\Models\customer;
 use App\Models\purchase;
 use App\Models\supplier;
 use App\Mail\MailerDynamic;
+use App\Models\area;
 use Illuminate\Http\Request;
 use App\Models\mail\MailSetting;
 use App\Models\mail\MailTemplate;
@@ -22,6 +23,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\payment\PaymentCredential;
+use App\Models\SubCategory;
 use App\Notifications\NotificationDynamic;
 use Illuminate\Support\Facades\Notification;
 
@@ -58,6 +60,9 @@ class dashboardController extends Controller
             }elseif($items_req === 'categories'){
                 $query = category::query(); // Start the query for the User model
 
+            }elseif($items_req === 'subcategories'){
+                $query = SubCategory::query(); // Start the query for the User model
+
             }elseif($items_req === 'roles'){
                 $query = Role::query(); // Start the query for the User model
 
@@ -82,6 +87,10 @@ class dashboardController extends Controller
 
             }elseif($items_req === 'device_log'){
                 $query = Device::query(); // Start the query for the User model
+
+
+            }elseif($items_req === 'areas'){
+                $query = area::query(); // Start the query for the User model
 
             }
 

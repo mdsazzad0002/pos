@@ -121,7 +121,7 @@ class discountController extends Controller
     {
         $request->validate(['name' => 'required', 'amount'=>'required']);
 
-        
+
         $discount->name = $request->name;
         $discount->type = $request->type;
         $discount->amount = $request->amount;
@@ -158,7 +158,7 @@ class discountController extends Controller
     }
 
 
-    public function getdiscount(Request $request)
+    public function getDiscounts(Request $request)
     {
         $data_result = discount::where(function($query) use ($request) {
             if ($request->has('q')) {

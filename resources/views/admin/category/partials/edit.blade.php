@@ -2,9 +2,20 @@
     @csrf
     @method('put')
 
-    <input type="text" name="name" class="form-control mb-2" value="{{ $category->name }}" placeholder="Enter your name">
+    <div class="mb-2">
+        <label for="category_name"> {{ __('category.name') }} </label>
+        <input type="text" name="name" class="form-control mb-2" value="{{ $category->name }}" placeholder="Enter your name">
+    </div>
 
-    <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About Category">{{ $category->description }}</textarea>
+    <div class="mb-2">
+        <label for="category_description"> {{ __('category.description') }} </label>
+        <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About Category">{{ $category->description }}</textarea>
+    </div>
+
+    <label for="status"> category Status <br/>
+        <input type="checkbox" checked class="" hidden  name="status"   value="0">
+        <input type="checkbox" class="toggle"  placeholder=" Status" name="status" {{ $category->status == 1 ? 'checked' : '' }} id="status" value="1">
+    </label>
 
     <div class="">
         <label  type="button" onclick="upload_select(this)"> Image <br>
@@ -12,7 +23,7 @@
             <img style="max-height: 60px" src="{{ dynamic_asset($category->upload_id) }}" alt="">
         </label>
     </div>
-    </div>
+
 
     <div class="d-flex justify-content-end">
         <button class="btn btn-warning" type="submit">Save</button>

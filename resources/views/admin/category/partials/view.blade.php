@@ -8,7 +8,11 @@
         <td>{{ $category->slug }}</td>
     </tr>
     <tr>
-        <td>Slug</td>
+        <td>Status</td>
+        <td>{{ $category->status ? 'Active' : 'Inactive' }}</td>
+    </tr>
+    <tr>
+        <td>Description</td>
         <td>{{ $category->description }}</td>
     </tr>
     <tr>

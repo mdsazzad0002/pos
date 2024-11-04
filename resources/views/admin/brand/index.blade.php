@@ -2,15 +2,24 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('brand', 10))
+@section('title', __('brand.title'))
 
 {{--  Content Extends  --}}
+
 @section('content')
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.brand')
+    </div>
+</x-summary>
+
+
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        {{ __('brand.list') }}
         <div>
-            @can('user create')
+            @can('brand create')
 
             <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  brand" data-href="{{ route('admin.brand.create') }}">+ Add New brand</button>
             @endcan
@@ -26,8 +35,12 @@
                     Name
                 </th>
                 <th>
+                    Status
+                </th>
+                <th>
                     Image
                 </th>
+
                 <th>
                     View
                 </th>
@@ -54,10 +67,15 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'name', name:'name'},
+            {data:'status', name:'status', render: function (data, type, row, meta) {
+                return data ? 'Active' : 'Inactive';
+            }},
             {data:'image', name:'image', searchable:false, orderable:false},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}
-        ]
+        ],
+        buttons: true,
+        dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
     })
 </script>
 @endpush

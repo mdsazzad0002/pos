@@ -6,6 +6,7 @@
 
 {{--  Content Extends  --}}
 @section('content')
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         Purchuse Create

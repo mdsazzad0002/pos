@@ -13,14 +13,17 @@ return new class extends Migration
     {
         Schema::create('variant_options', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('buying_price');
-            $table->string('selling_price');
-            $table->string('quantity');
-            $table->string('alert_quantity');
-            $table->string('buying_date');
-            $table->string('expiring_date');
-            $table->bigInteger('creator');
+            $table->bigInteger('product_id');
+            $table->string('name')->nullable();
+            $table->string('buying_price')->default(0);
+            $table->string('old_price')->default(0);
+            $table->string('selling_price')->default(0);
+            $table->string('quantity')->default(0);
+
+            $table->string('alert_quantity')->default(0);
+            $table->string('buying_date')->nullable();
+            $table->string('expiring_date')->nullable();
+            $table->bigInteger('creator')->default(0);
             $table->timestamps();
         });
     }
