@@ -111,7 +111,7 @@ sidebar-dark-primary elevation-4">
                         @endcan
                         @can('product create')
                         <li class="nav-item">
-                            <a href="{{ route('admin.product.create') }}" class="nav-link">
+                            <a href="{{ route('admin.product.create') }}" class="nav-link {{ Request::routeIs('admin.product.edit') ? 'active': ''}}">
                                 <i class="fas fa-plus nav-icon"></i>
                                 <p>{{ __('sidebar.product_create') }}</p>
                             </a>

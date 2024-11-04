@@ -2,13 +2,20 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('product', 10))
+@section('title', __('product.product_title'))
 
 {{--  Content Extends  --}}
 @section('content')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.product')
+    </div>
+</x-summary>
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        {{ __('product.product_list') }}
         <div>
             @can('user create')
 

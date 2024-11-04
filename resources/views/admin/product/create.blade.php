@@ -2,10 +2,21 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title --}}
-@section('title', settings('product_create', 10))
-
+@if($product)
+    @section('title', __('product.update'))
+@else
+    @section('title', __('product.create'))
+@endif
 {{-- Content Extends --}}
 @section('content')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.product')
+    </div>
+</x-summary>
+
+
 <div class="card">
     <div class="card-body">
         <form action="{{ $product ?  route('admin.product.update', $product->id) : route('admin.product.store')  }}" class="form_ajax_submit" method="post"
@@ -325,11 +336,11 @@
 
                             <input type="checkbox" checked class="" hidden name="variant_on" value="0">
                             <input type="checkbox" class="toggle" placeholder="variant_on" name="variant_on"
-                                id="variant_on" value="1">
+                                id="variant_on" {{ $product ?( $product->variant_on ? 'checked' : '') : '' }} value="1">
 
                         </div>
                     </div>
-                    <div class="card-body variant_body" style="display: none">
+                    <div class="card-body variant_body" style="display: {{ $product ?( $product->variant_on ? 'block' : 'none') : 'none' }}">
                         <div class="variant_input">
                             <div class="row mb-2">
                                 <div class="col-12">
@@ -355,8 +366,35 @@
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <div class="row text-center font-weight-bold text-primary mt-3">
+                                <div class="col-md-4">Variant Name</div>
+                                <div class="col-md-4">Old Price</div>
+                                <div class="col-md-4">New Price</div>
+                            </div>
+                        </div>
                         <div class="variant_output">
+                            {{--  variant outpur  --}}
+                            @if($product)
+                                    @foreach ($product->variant_option_info as $items)
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
 
+                                            <input type="text" name="variant_key[]" value="{{ $items->name ?? '' }}" class="form-control"
+                                                placeholder="veriant key" id="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="old_price_v[]" value="{{ $items->old_price ?? 0 }}" class="form-control"
+                                                placeholder="Old Price" id="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="selling_price_v[]" value="{{ $items->selling_price ?? 0 }}" class="form-control"
+                                                placeholder="Current Price" id="">
+                                        </div>
+                                    </div>
+                                    @endforeach
+                            @endif
+                            {{--  variant outpur  --}}
                         </div>
                     </div>
                 </div>

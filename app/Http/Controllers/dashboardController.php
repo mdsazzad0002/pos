@@ -130,11 +130,16 @@ class dashboardController extends Controller
 
                     }elseif($item === 'decimal'){
                         $query->where('decimal', 1);
-                    }elseif($item === 'decimal'){
-                        $query->where('decimal', 0);
+
                     }elseif($item === 'sub_items '){
                         $query->where('sub_items', '!=',  0);
                         $query->where('sub_items', '!=',  null);
+
+                    }elseif($item === 'feature'){
+                        $query->where('feature', 1);
+
+                    }elseif($item === 'service'){
+                        $query->where('service', 1);
 
                     }
                 }

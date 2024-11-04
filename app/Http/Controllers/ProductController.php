@@ -94,6 +94,7 @@ class ProductController extends Controller
         );
         $product = new product;
         $product->name = $request->name;
+        $product->product_id = create_slug('P', 'product', 'product_id');
         $product->slug = create_slug($request->name, 'product', 'slug');
 
         $product->sku = $request->sku;
@@ -131,6 +132,48 @@ class ProductController extends Controller
 
         $product->creator = auth()->user()->id ?? 0;
          $product->save();
+
+
+
+        // working on variant product
+        if ($request->has('variant_on') && $request->variant_on == 1) {
+            $existingVariants = VariantOption::where('product_id', $product->id)->get();
+
+            $existingOptionNames = $existingVariants->pluck('name')->toArray();
+
+            // Array to hold the option names from the request
+            $requestOptionNames = $request->variant_key;
+
+
+            foreach ($requestOptionNames as $key => $items) {
+
+                VariantOption::updateOrCreate(
+                    [
+                        'product_id' => $product->id,
+                        'name' => $items, // Use this for finding existing options
+                    ],
+                    [
+
+                        'old_price' => $request->old_price_v[$key],
+                        'selling_price' => $request->old_price_v[$key],
+                        'creator' => auth()->user()->id  ?? 0,
+                    ]
+
+                );
+            }
+
+            $array_diff = array_diff($existingOptionNames, $requestOptionNames);
+
+            foreach($array_diff as $items){
+                $dataItem = VariantOption::where('name', $items)
+                ->where('product_id', $product->id)
+                ->first();
+                if($dataItem){
+                    $dataItem->delete();
+                }
+            }
+        }
+
 
 
         return json_encode([
@@ -185,8 +228,7 @@ class ProductController extends Controller
         $product->category = $request->category;
         $product->sub_category = $request->subcategory;
         $product->vat = $request->vat;
-        $product->discount_id =  is_array($request->discount_id) ? implode(',', $request->discount_id) : '0';
-
+        $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
         $product->old_price = $request->old_price;
         $product->selling_price = $request->selling_price;
         $product->alert_quantity = $request->alert_quantity;
@@ -214,12 +256,13 @@ class ProductController extends Controller
 
 
         $product->creator = auth()->user()->id ?? 0;
-        $product->save();
+         $product->save();
 
 
 
         // working on variant product
-        if( $request->has('variant_on') == 1){
+        if ($request->has('variant_on') && $request->variant_on == 1) {
+
             $existingVariants = VariantOption::where('product_id', $product->id)->get();
 
             $existingOptionNames = $existingVariants->pluck('name')->toArray();
@@ -228,25 +271,33 @@ class ProductController extends Controller
             $requestOptionNames = $request->variant_key;
 
 
-            foreach($request->variant_key as $key => $items){
+            foreach ($requestOptionNames as $key => $items) {
 
                 VariantOption::updateOrCreate(
                     [
                         'product_id' => $product->id,
-                        'name' =>  $items, // Use this for finding existing options
+                        'name' => $items, // Use this for finding existing options
                     ],
                     [
 
-                       'old_price' => $request->old_price_v[$key],
-                       'selling_price' => $request->old_price_v[$key],
+                        'old_price' => $request->old_price_v[$key],
+                        'selling_price' => $request->old_price_v[$key],
+                        'creator' => auth()->user()->id  ?? 0,
                     ]
 
                 );
             }
 
-             // Determine which options are to be deleted
-            $optionsToDelete = array_diff($existingOptionNames, $requestOptionNames);
+             $array_diff = array_diff($existingOptionNames, $requestOptionNames);
 
+            foreach($array_diff as $items){
+                $dataItem = VariantOption::where('name', $items)
+                ->where('product_id', $product->id)
+                ->first();
+                if($dataItem){
+                    $dataItem->delete();
+                }
+            }
         }
 
 

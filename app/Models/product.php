@@ -66,7 +66,10 @@ class product extends Model
     public function discount_info(){
         return discount::whereIn('id', explode(',',$this->discount_id))->get();
     }
- 
+
+    public function variant_option_info(){
+        return $this->hasMany(VariantOption::class, 'product_id', 'id');
+    }
 
 
 
