@@ -34,7 +34,10 @@ var MyScroll = "";
       Init.dropdown();
       Init.header();
       Init.slick();
-      Init.countdownInit(".countdown", "2024/12/01");
+
+      Init.countdownInit(".countdown", document.querySelector('.countdown').getAttribute('data-date'));
+    //   console.log(document.querySelector('.countdown').getAttribute('data-date'));
+
       Init.countryCode();
       Init.filterSearch();
       Init.filterToggle();
@@ -247,7 +250,7 @@ var MyScroll = "";
           ],
         });
         };
-        
+
       if ($(".blog-slider").length) {
         $(".blog-slider").slick({
           slidesToShow: 4,

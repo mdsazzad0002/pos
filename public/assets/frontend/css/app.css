@@ -2715,7 +2715,7 @@ header .header-section .mixin-container .input-field button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  
+
 }
 @media (max-width: 576px) {
   .categories-sec .categories-wrapper {
@@ -3104,7 +3104,7 @@ header .header-section .mixin-container .input-field button {
 }
 
 .inner-banner {
-  background: url("../media/bg/inner-banner.png") no-repeat;
+  
   background-position: center;
   background-size: cover;
   height: clamp(170px, 10.417vw, 300px);

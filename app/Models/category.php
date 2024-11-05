@@ -25,4 +25,8 @@ class category extends Model
     public function subcategory() {
         return $this->hasMany(SubCategory::class, 'category_id', 'id');
     }
+
+    public function productCount() {
+        return $this->products()->count();
+    }
 }

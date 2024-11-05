@@ -44,15 +44,13 @@ class HomeController extends Controller
 
     public function feature_view(Request $request){
 
-        $features_product = product::join('categories', 'products.sub_category', '=', 'categories.id')
-        ->where('products.status', 1)
-        ->where('products.feature', 1)
-        ->where('categories.feature', 1) // Check if category is featured
-        ->select('products.*') // Select product fields
+        $features_product = product::where('status',1)
         ->where(function($query) use ($request){
+            $query->where('feature', '1');
+
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
-                   $query->where('categories.id', $request->id);
+                   $query->where('category', $request->id);
 
                }
            }
@@ -64,9 +62,26 @@ class HomeController extends Controller
    }
 
 
-   public function popular_view(Request $request){
+   public function recent_view(Request $request){
 
-        $features_product = product::where(function($query) use ($request){
+        $features_product = product::withCount('review')->withAvg('review', 'rating')
+        ->where(function($query) use ($request){
+           if($request->has('id')){
+               if($request->id != null && $request->id != '' && $request->id != 0){
+                   $query->where('category', $request->id);
+
+               }
+           }
+
+       })->limit(20)->orderBy('id' ,'desc')->get();
+
+       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+
+   }
+   public function recommend_view(Request $request){
+
+        $features_product = product::withCount('review')->withAvg('review', 'rating')
+        ->where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
                    $query->where('category', $request->id);
@@ -75,6 +90,24 @@ class HomeController extends Controller
            }
 
        })->limit(20)->orderBy('views' ,'asc')->get();
+
+       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+
+   }
+
+
+   public function popular_view(Request $request){
+
+        $features_product = product::withCount('review')->withAvg('review', 'rating')
+        ->where(function($query) use ($request){
+           if($request->has('id')){
+               if($request->id != null && $request->id != '' && $request->id != 0){
+                   $query->where('category', $request->id);
+
+               }
+           }
+
+       })->limit(20)->orderByRaw('COALESCE(review_avg_rating, 0) desc')->get();
 
        return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
 

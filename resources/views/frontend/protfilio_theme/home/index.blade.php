@@ -6,6 +6,7 @@
 
 
 
+@include('frontend.protfilio_theme._banner_card._bannar_card1')
 @foreach ($homepagemanage as $items)
 
     @include('frontend.protfilio_theme.'.$items->key, ['variant_info'=> $items])

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\offerbanner;
 use Database\Seeders\VatSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\crm\CrmCaller;
@@ -60,6 +61,7 @@ class DatabaseSeeder extends Seeder
 
 
         //Crm lead Seeder call
+        $this->call(OfferbannerSeeder::class);
 
 
         $this->call(paymentCaller::class);

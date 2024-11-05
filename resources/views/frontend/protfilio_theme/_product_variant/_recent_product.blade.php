@@ -6,21 +6,20 @@ if($variant_info->is_details_page){
 }
 
 
+
 @endphp
 
 @if(count($feature_category) > 0)
 <x-frontend_section :items="$feature_category" :info="$variant_info" class="feature_product" css="_product_style/_product_feature.css" >
 
 
-    <section class="featured-product-sec py-40 bg-lightest-gray">
+    <section class="recent-product-sec py-40 bg-lightest-gray">
         <div class="container-fluid">
             <div class="row row-gap-3">
-                <div class="col-xl-3">
-                    @include('frontend.protfilio_theme._product_variant._offer_product_feature_side')
-                </div>
 
-                <div class="col-xl-9">
-                    @include('frontend.protfilio_theme._product_variant._common_product_deasign',  ['title_data'=> 'Feature Product', 'category'=> $feature_category])
+
+                <div class="col-xl-12">
+                    @include('frontend.protfilio_theme._product_variant._common_product_deasign', ['title_data'=> 'Recent Product', 'category'=> $feature_category])
                 </div>
             </div>
         </div>
@@ -36,7 +35,7 @@ if($variant_info->is_details_page){
 <script>
     function feature_product(){
         var i = 0;
-        var features_sec =  document.querySelector('.featured-product-sec');
+        var features_sec =  document.querySelector('.recent-product-sec');
         features_items = features_sec.querySelectorAll('button.nav-link')
         features_items.forEach(element => {
             var id_current_target = element.getAttribute('data-bs-target');
@@ -49,9 +48,9 @@ if($variant_info->is_details_page){
                     data:{
                         'id' :id
                     },
-                    url:'{{ route('product.feature_view') }}',
+                    url:'{{ route('product.recent_view') }}',
                     success: function(data) {
-                        document.querySelector(id_current_target).innerHTML = data;
+                        features_sec.querySelector(id_current_target).innerHTML = data;
                         quick_view();
                     }
                 })

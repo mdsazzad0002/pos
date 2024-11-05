@@ -93,7 +93,23 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 3,
+                'items_per_row' => 12,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            'category2' => [
+                'key' =>'_category_variant._category_style2',
+                'title' => 'Category Style 2',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 12,
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
@@ -164,15 +180,63 @@ class VarinatSuggessionSeeder extends Seeder
             // Product Variant =====================================================================
              'product1' => [
                 'key' =>'_product_variant._feature_product',
-                'title' => 'Category Style 1',
-                'title_status' => 1,
+                'title' => 'Product  Style 1',
+                'title_status' => 0,
                 'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 1,
+                'sub_title_status' => 0,
                 'short_read_more' => 'Read More',
-                'short_read_more_status' => 1,
+                'short_read_more_status' => 0,
                 'view_all' => 'View All',
-                'view_all_status' => 1,
-                'items_per_row' => 3,
+                'view_all_status' => 0,
+                'items_per_row' => 4,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+             'product2' => [
+                'key' =>'_product_variant._popular_product',
+                'title' => 'Product Style 2',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+             'product3' => [
+                'key' =>'_product_variant._recommended_product',
+                'title' => 'Product Style 3',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+             'product4' => [
+                'key' =>'_product_variant._recent_product',
+                'title' => 'Product Style 3',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
@@ -258,7 +322,7 @@ class VarinatSuggessionSeeder extends Seeder
             seed_items($items);
         }
 
-        $ecom_home = [ 'brand2','hero3', 'product1',];
+        $ecom_home = [ 'category2','hero3', 'product4','product1','product2','product3'];
         foreach($ecom_home as $items){
             seed_items($data[$items],1);
         }

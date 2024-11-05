@@ -62,6 +62,11 @@ class product extends Model
     public function review(){
         return $this->hasMany(reviewProduct::class, 'product_id', 'id');
     }
+    public function averageRating(){
+        return $this->review()->avg('rating');  // 'rating' is the column name in the reviewProduct table
+    }
+
+
 
     public function discount_info(){
         return discount::whereIn('id', explode(',',$this->discount_id))->get();

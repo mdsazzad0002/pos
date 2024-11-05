@@ -43,7 +43,9 @@ Route::get('/product/quickview', [HomeController::class, 'quickview'])->name('pr
 
 // feature product view for homepage
 Route::get('/product/feature_view', [HomeController::class, 'feature_view'])->name('product.feature_view');
-Route::get('/product/popular_view', [HomeController::class, 'popular_view'])->name('product.feature_view');
+Route::get('/product/popular_view', [HomeController::class, 'popular_view'])->name('product.popular_view');
+Route::get('/product/recommend_view', [HomeController::class, 'recommend_view'])->name('product.recommend_view');
+Route::get('/product/recent_view', [HomeController::class, 'recent_view'])->name('product.recent_view');
 
 
 Route::get('/about', [HomeController::class, 'about']);
