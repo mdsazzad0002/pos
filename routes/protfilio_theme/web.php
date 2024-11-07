@@ -38,7 +38,7 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 
 // Route::get('/', [HomeController::class, 'index']);
-Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
+// Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
 Route::get('/product/quickview', [HomeController::class, 'quickview'])->name('product.quickview');
 
 // feature product view for homepage
@@ -49,6 +49,7 @@ Route::get('/product/recent_view', [HomeController::class, 'recent_view'])->name
 
 
 Route::get('/about', [HomeController::class, 'about']);
+Route::get('filter/data-get', [HomeController::class, 'filter_get']);
 
 
 

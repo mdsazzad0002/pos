@@ -9,4 +9,8 @@ class HomePageManage extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function page(){
+        return $this->belongsTo(Page::class, "controlby");
+    }
 }

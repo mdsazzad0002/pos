@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index($view = null){
+    public function index(Request $request, $view = null){
 
         if( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
@@ -24,11 +24,20 @@ class HomeController extends Controller
             $homepage = Page::where('status', 1)->where('slug', $view)->first();
         }
         if($homepage){
+
+
+            if($request->has('preview_page')){
+                $items_id = $request->preview_page;
+
+                $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->where('id', $items_id)->orderBy('order', 'asc')->get();
+
+                return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage'));
+            }
+
             $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
+            $sliders = slider::where('status', 1)->get();
 
-                $sliders = slider::where('status', 1)->get();
-
-                return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage'));
+            return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage'));
 
         }else{
             abort('401', 'Not Set Home Page');
@@ -40,6 +49,11 @@ class HomeController extends Controller
 
     }
 
+
+    public function filter_get(Request $request){
+        $product_list = product::where('status', 1)->paginate(2);
+        return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
+    }
 
 
     public function feature_view(Request $request){
@@ -132,7 +146,6 @@ class HomeController extends Controller
                    $query->orWhere('category', $category->id);
                }
            }
-
 
        })->get();
 

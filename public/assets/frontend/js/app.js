@@ -34,9 +34,9 @@ var MyScroll = "";
       Init.dropdown();
       Init.header();
       Init.slick();
-
-      Init.countdownInit(".countdown", document.querySelector('.countdown').getAttribute('data-date'));
-    //   console.log(document.querySelector('.countdown').getAttribute('data-date'));
+        if(document.querySelectorAll('.countdown').length > 0){
+            Init.countdownInit(".countdown", document.querySelector('.countdown').getAttribute('data-date'));
+        }
 
       Init.countryCode();
       Init.filterSearch();

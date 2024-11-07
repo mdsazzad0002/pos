@@ -44,6 +44,7 @@ return new class extends Migration
 
             $table->string('controlby')->default(1)->comment('1 => Homepage');
 
+            $table->integer('is_banner')->default(0);
             $table->integer('order')->default(1);
             $table->string('status')->default(1);
 

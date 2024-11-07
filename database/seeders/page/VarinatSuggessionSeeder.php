@@ -287,6 +287,46 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
 
+             // Banner =====================================================================
+            'banner1' => [
+                'key' =>'_banner_card._bannar_card1',
+                'title' => 'Banner Card 1',
+                'title_status' => 0,
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // Banner 2
+            'banner2' => [
+                'key' =>'_banner_card._bannar_card2',
+                'title' => 'Banner Card 2',
+                'title_status' => 0,
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
 
 
         ];
@@ -301,6 +341,7 @@ class VarinatSuggessionSeeder extends Seeder
                     $homepage->controlby = $sug;
 
                 }
+                $homepage->key = $item['is_banner'] ?? 0;
                 $homepage->key = $item['key'];
                 $homepage->title = $item['title'];
                 $homepage->title_status = $item['title_status'];

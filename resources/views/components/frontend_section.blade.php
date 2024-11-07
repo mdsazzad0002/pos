@@ -20,12 +20,15 @@
     {{ $slot }}
 
 
-    @if($info->is_details_page)
-    <div class="links_nav mt-3">
-        {{ $items->links()  }}
+
+    <div class="container-fluid  text-center pb-5 d-flex align-items-center justify-content-center">
+        @if($info->is_details_page)
+        <div class="links_nav mt-3">
+            {{ $items->links()  }}
+        </div>
+        @endif
 
     </div>
-    @endif
 
 
     @if ($info->view_all_status)

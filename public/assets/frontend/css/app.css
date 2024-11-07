@@ -3104,7 +3104,7 @@ header .header-section .mixin-container .input-field button {
 }
 
 .inner-banner {
-  
+
   background-position: center;
   background-size: cover;
   height: clamp(170px, 10.417vw, 300px);
@@ -3923,13 +3923,7 @@ footer .footer-bottom-bar {
   color: #ccc;
   cursor: pointer;
 }
-.sidebar .category-block .star-rating :checked ~ label {
-  color: #DD3842;
-}
-.sidebar .category-block .star-rating label:hover,
-.sidebar .category-block .star-rating label:hover ~ label {
-  color: #DD3842;
-}
+
 .sidebar .far.fa-plus {
   font-size: 24px;
   font-weight: 300;

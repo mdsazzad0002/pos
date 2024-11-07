@@ -14,6 +14,7 @@
   <div class="container">
 
     <div class="row g-5">
+
         @foreach ($service_items as $item)
             <div class="col-lg-{{ 12 / $variant_info->items_per_row }} " data-aos="fade-up" data-aos-delay="100">
                 <div class="service-item item-cyan position-relative">
@@ -30,7 +31,6 @@
                 </div>
             </div><!-- End Service Item -->
         @endforeach
-
 
     </div>
 

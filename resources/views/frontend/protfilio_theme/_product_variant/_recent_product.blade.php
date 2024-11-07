@@ -10,7 +10,7 @@ if($variant_info->is_details_page){
 @endphp
 
 @if(count($feature_category) > 0)
-<x-frontend_section :items="$feature_category" :info="$variant_info" class="feature_product" css="_product_style/_product_feature.css" >
+<x-frontend_section :items="$feature_category" :info="$variant_info" class="recent_product" css="_product_style/_product_feature.css" >
 
 
     <section class="recent-product-sec py-40 bg-lightest-gray">
@@ -33,7 +33,7 @@ if($variant_info->is_details_page){
 
 @push('script')
 <script>
-    function feature_product(){
+    function recent_product(){
         var i = 0;
         var features_sec =  document.querySelector('.recent-product-sec');
         features_items = features_sec.querySelectorAll('button.nav-link')
@@ -61,7 +61,7 @@ if($variant_info->is_details_page){
             features_items[0].click();
         }
     }
-    feature_product();
+    recent_product();
 
 </script>
 @endpush

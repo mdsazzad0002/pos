@@ -35,13 +35,13 @@
 <script>
 
     function submit_ajax_builder(){
-        
+
         $('.form_ajax_submit').on('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
-    
+
             var form = $(this);
             var actionUrl = form.attr('action'); // Get the action URL
-    
+
             $.ajax({
                 url: actionUrl,
                 type: 'POST',
@@ -59,10 +59,10 @@
                 }
             });
         });
-    
-            
+
+
     }
-   
+
     function sorting(){
 
                $("#sortable").sortable({
@@ -86,10 +86,10 @@
           }
         });
         $("#sortable").disableSelection();
-      
+
     }
-     
-      
+
+
       function  html_render(){
         $.ajax({
             type: 'get',
@@ -102,6 +102,8 @@
         })
       }
       html_render()
+
+
 
 </script>
 @endpush

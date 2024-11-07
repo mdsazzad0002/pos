@@ -42,8 +42,9 @@ return new class extends Migration
             $table->boolean('background_type')->default(1);
 
 
-            
 
+
+            $table->integer('is_banner')->default(0);
             $table->integer('order')->default(1);
             $table->string('status')->default(1);
 
