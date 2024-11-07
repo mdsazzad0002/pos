@@ -430,39 +430,31 @@
         var current_page = 1;
 
         function ajaxDataChangeLoad(){
-            var newUrl = "{{ url('posts') }}?page=" + page;
-            history.pushState({page: page}, "Page " + page, newUrl);
+            var newUrl = "{{ url('filter/data-get') }}?page=" + current_page;
+
+            // history.pushState({page: page}, "Page " + page, newUrl);
 
 
             $.get(newUrl, function(response) {
                 // Success callback
                 $('.filter_product_outpur').html(response);
-                // console.log('Data received:', response);
-                // Process the data here
+
             }).fail(function(jqXHR, textStatus, errorThrown) {
-                // Error callback
+
                 console.error('Request failed: ' + textStatus + ', ' + errorThrown);
                 alert('An error occurred while fetching data: ' + errorThrown);
             });
         }
+
+
         ajaxDataChangeLoad();
 
         $(document).on('click', '.pagination a', function (e) {
             e.preventDefault();
-             page = $(this).attr('href').split('page=')[1];
-            ajaxDataChangeLoad(page);
+            current_page = $(this).attr('href').split('page=')[1];
+            ajaxDataChangeLoad();
         });
 
-        function fetchData(page) {
-            $.ajax({
-                url: "{{ route('posts.index') }}?page=" + page,
-                type: 'GET',
-                dataType: 'html',
-                success: function(data) {
-                    $('#post-data').html(data);
-                }
-            });
-        }
     </script>
 
 @endpush
