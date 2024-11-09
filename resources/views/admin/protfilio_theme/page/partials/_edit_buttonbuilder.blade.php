@@ -24,7 +24,7 @@
 
             @endforeach
         </ul>
-        
+
         <script>
             // Function to adjust the height of the iframe
             document.querySelectorAll('iframe').forEach(element => {
@@ -41,3 +41,11 @@
             });
 
         </script>
+@push('css')
+ <style>
+    iframe{
+        min-height: 250px;
+    }
+ </style>
+@endpush
+

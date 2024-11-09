@@ -288,6 +288,27 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
 
+            // Service View 1
+            'service_view1' => [
+                'key' =>'_service_view_variant._service_view1',
+                'title' => 'Service View 1',
+                'title_status' => 1,
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 1,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'view_all' => 'View All',
+                'view_all_status' => 1,
+                'items_per_row' => 3,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
              // Banner =====================================================================
             'banner1' => [
                 'key' =>'_banner_card._bannar_card1',
@@ -469,32 +490,10 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 
-            // Product tracing 1
-            'product_tracking1' => [
-                'key' =>'_tracking_variant.tracking_style1',
-                'title' => 'Product tracking  1',
-                'title_status' => 0,
-                'sub_title' => 'Product tracking Title',
-                'sub_title_status' => 0,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'items_per_row' => 0,
-                'background' => 0,
-                'is_banner' => 1,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-
-            ],
-            // ===================================================================
-            // ===================================================================
-            // ===================================================================
-
 
 
             // Product tracing 1
-            'product_tracking1' => [
+            'tracking1' => [
                 'key' =>'_tracking_variant.tracking_style1',
                 'title' => 'Product checkout  1',
                 'title_status' => 0,
@@ -661,7 +660,7 @@ class VarinatSuggessionSeeder extends Seeder
             // Faq 1
             'faq_1' => [
                 'key' =>'_faq_variant._faq_style1',
-                'title' => 'Blog Details  1',
+                'title' => 'Faq style  1',
                 'title_status' => 0,
                 'sub_title' => 'Blog details Title',
                 'sub_title_status' => 0,
@@ -717,7 +716,7 @@ class VarinatSuggessionSeeder extends Seeder
         }
 
         // Home page seeder default
-        $ecom_home = [ 'category2','hero3', 'product4','product1','product2','product3'];
+        $ecom_home = [ 'hero3','category2', 'product4','product1','product2','product3'];
         foreach($ecom_home as $items){
             seed_items($data[$items],1);
         }
@@ -725,7 +724,74 @@ class VarinatSuggessionSeeder extends Seeder
 
          // about-us page seeder default
          $about_us_id = Page::where('slug', 'about-us')->first();
-         $ecom_home = [ 'about1'];
+         $ecom_home = [ 'about1', 'faq_1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // filter page seeder default
+         $about_us_id = Page::where('slug', 'filter')->first();
+         $ecom_home = [ 'product_filter1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+
+         // details page seeder default
+         $about_us_id = Page::where('slug', 'product/details')->first();
+         $ecom_home = [ 'product_details1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // cart page seeder default
+         $about_us_id = Page::where('slug', 'cart')->first();
+         $ecom_home = [ 'product_cart1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+
+
+         // checkout page seeder default
+         $about_us_id = Page::where('slug', 'checkout')->first();
+         $ecom_home = [ 'product_checkout1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // tracking page seeder default
+         $about_us_id = Page::where('slug', 'tracking')->first();
+         $ecom_home = [ 'tracking1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // service page seeder default
+         $about_us_id = Page::where('slug', 'service')->first();
+         $ecom_home = [ 'service1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // service-details page seeder default
+         $about_us_id = Page::where('slug', 'service-details')->first();
+         $ecom_home = [ 'service_view1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // service-details page seeder default
+         $about_us_id = Page::where('slug', 'register')->first();
+         $ecom_home = [ 'register1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
