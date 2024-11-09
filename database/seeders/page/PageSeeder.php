@@ -23,16 +23,90 @@ class PageSeeder extends Seeder
             ],
             [
                 'name' => 'About',
-                'slug' => 'about',
+                'slug' => 'about-us',
                 'status' => 1,
                 'homepage' => 0,
             ],
             [
-                'name' => 'Contact Us',
-                'slug' => 'contact_us',
+                'name' => 'Filter',
+                'slug' => 'filter',
                 'status' => 1,
                 'homepage' => 0,
             ],
+            [
+                'name' => 'Product details',
+                'slug' => 'product/details',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'cart',
+                'slug' => 'cart',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'checkout',
+                'slug' => 'checkout',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'tracking',
+                'slug' => 'tracking',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'service',
+                'slug' => 'service',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'service-details',
+                'slug' => 'service-details',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'register',
+                'slug' => 'register',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'wishlist',
+                'slug' => 'wishlist',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+
+            [
+                'name' => 'coming-soon',
+                'slug' => 'coming-soon',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'blog',
+                'slug' => 'blog',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'blog details',
+                'slug' => 'blog/details',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+            [
+                'name' => 'FAQ',
+                'slug' => 'faq',
+                'status' => 1,
+                'homepage' => 0,
+            ],
+
 
         ];
         foreach($data as $item){

@@ -40,7 +40,11 @@ class HomeController extends Controller
             return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage'));
 
         }else{
-            abort('401', 'Not Set Home Page');
+            if(env('APP_DEBUG') == true){
+                abort('401', 'Not Set Home Page');
+            }else{
+                return redirect('/');
+            }
         }
 
 

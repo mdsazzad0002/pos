@@ -3,6 +3,7 @@
 namespace Database\Seeders\page;
 
 use App\Models\HomePageManage;
+use App\Models\Page;
 use Illuminate\Database\Seeder;
 use App\Models\VarinatSuggession;
 use Database\Seeders\page\variant_part\HeroSeedSeeder;
@@ -328,6 +329,358 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
 
 
+            // About Page 1
+            'about1' => [
+                'key' =>'_about_us_variant.about_us_style1',
+                'title' => 'About page 1',
+                'title_status' => 0,
+                'sub_title' => 'About Us Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+            // Product Details
+            'product_details1' => [
+                'key' =>'_product_details.product_details1',
+                'title' => 'Product Details page 1',
+                'title_status' => 0,
+                'sub_title' => 'Product Details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+            // Product Filter 1
+            'product_filter1' => [
+                'key' =>'_filter_variant.filter_vaiant1',
+                'title' => 'Product Filter  1',
+                'title_status' => 0,
+                'sub_title' => 'Product Filter Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+            // Product Filter 1
+            'product_cart1' => [
+                'key' =>'_cart_variant.cart_style1',
+                'title' => 'Product Filter  1',
+                'title_status' => 0,
+                'sub_title' => 'Product Filter Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+            // Product wishlist 1
+            'product_wishlist1' => [
+                'key' =>'_wishlist_variant.wish_list_style1',
+                'title' => 'Product wishlist  1',
+                'title_status' => 0,
+                'sub_title' => 'Product wishlist Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+            // Product checkout 1
+            'product_checkout1' => [
+                'key' =>'_checkout_variant.checkout_style1',
+                'title' => 'Product checkout  1',
+                'title_status' => 0,
+                'sub_title' => 'Product checkout Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+            // Product tracing 1
+            'product_tracking1' => [
+                'key' =>'_tracking_variant.tracking_style1',
+                'title' => 'Product tracking  1',
+                'title_status' => 0,
+                'sub_title' => 'Product tracking Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+            // Product tracing 1
+            'product_tracking1' => [
+                'key' =>'_tracking_variant.tracking_style1',
+                'title' => 'Product checkout  1',
+                'title_status' => 0,
+                'sub_title' => 'Product tracking Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+
+            // Product contact 1
+            'contact_us1' => [
+                'key' =>'_contact_us_variant.contact_us_style1',
+                'title' => 'Contact us  1',
+                'title_status' => 0,
+                'sub_title' => 'contact us Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+
+            // Product contact 1
+            'register1' => [
+                'key' =>'_register_variant.register_style1',
+                'title' => 'Register us  1',
+                'title_status' => 0,
+                'sub_title' => 'contact us Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+            // Product contact 1
+            '_404v_1' => [
+                'key' =>'_404_variant.404_style1',
+                'title' => '404 page  1',
+                'title_status' => 0,
+                'sub_title' => 'contact us Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+            // Product contact 1
+            'comming_soon1' => [
+                'key' =>'_comming_soon.comming_soon1',
+                'title' => 'Comming soon  1',
+                'title_status' => 0,
+                'sub_title' => 'contact us Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
+            // Product contact 1
+            'blog_1' => [
+                'key' =>'_blog_variant.blog_variant1',
+                'title' => 'blog  1',
+                'title_status' => 0,
+                'sub_title' => 'blog Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+            // Product contact 1
+            'blog_details_1' => [
+                'key' =>'_blog_details_variant.blog_details_variant1',
+                'title' => 'Blog Details  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+            // Faq 1
+            'faq_1' => [
+                'key' =>'_faq_variant._faq_style1',
+                'title' => 'Blog Details  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 0,
+                'is_banner' => 1,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
 
         ];
 
@@ -363,10 +716,20 @@ class VarinatSuggessionSeeder extends Seeder
             seed_items($items);
         }
 
+        // Home page seeder default
         $ecom_home = [ 'category2','hero3', 'product4','product1','product2','product3'];
         foreach($ecom_home as $items){
             seed_items($data[$items],1);
         }
+
+
+         // about-us page seeder default
+         $about_us_id = Page::where('slug', 'about-us')->first();
+         $ecom_home = [ 'about1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
 
 
     }
