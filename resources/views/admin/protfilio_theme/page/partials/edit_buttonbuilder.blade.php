@@ -65,7 +65,7 @@
 
     function sorting(){
 
-               $("#sortable").sortable({
+    $("#sortable").sortable({
           update: function(event, ui) {
             var sortedIDs = $(this).sortable("toArray");
             $.ajax({

@@ -68,7 +68,12 @@ Route::get('/brand/getfaq/get', [FaqController::class, 'getFaq'])->name('faq.sel
 
 
 Route::get('/header', [HeaderController::class, 'index'])->name('header.index');
+Route::get('/header/view', [HeaderController::class, 'view'])->name('header.view');
 Route::post('/header/store', [HeaderController::class, 'store'])->name('header.store');
-Route::put('/header/store', [HeaderController::class, 'update'])->name('header.update');
 
+Route::put('/header/{header_item}/update', [HeaderController::class, 'update'])->name('header.update');
+
+Route::post('/header/delete', [HeaderController::class, 'destroy'])->name('header.delete');
+
+Route::get('/header/{header_item}/edit', [HeaderController::class, 'edit'])->name('header.edit');
 
