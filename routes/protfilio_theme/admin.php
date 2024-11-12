@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\protfilio_theme_admin\FaqController;
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkHeadingController;
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkSubHeadingController;
@@ -65,5 +65,10 @@ Route::get('/brand/getfooterlinksubheading/get', [FooterLinkSubHeadingController
 Route::resource('faq', FaqController::class)->names('faq');
 Route::get('/faq/delete/{faq}', [FaqController::class, 'delete'])->name('faq.delete');
 Route::get('/brand/getfaq/get', [FaqController::class, 'getFaq'])->name('faq.select');
+
+
+Route::get('/header', [HeaderController::class, 'index'])->name('header.index');
+Route::post('/header/store', [HeaderController::class, 'store'])->name('header.store');
+Route::put('/header/store', [HeaderController::class, 'update'])->name('header.update');
 
 

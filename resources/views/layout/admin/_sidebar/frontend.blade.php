@@ -49,6 +49,12 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('admin.header.index') }}" class="nav-link ">
+                <i class="fas fa-book nav-icon"></i>
+                <p>Header Manage</p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="{{ route('admin.page.index') }}" class="nav-link {{ Request::routeIs('admin.homePageManage.*') ? 'active' :''  }}">
                 <i class="fas fa-book nav-icon"></i>
                 <p>Page Management</p>
