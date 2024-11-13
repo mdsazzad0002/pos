@@ -1,4 +1,15 @@
+@php
+if($request->has('slug')){
+    $products = \App\Models\product::where('slug', $request->slug)->first();
+
+}else{
+    echo 'product slug not found';
+}
+@endphp
+
 <main class="main-wrapper bg-lightest-gray">
+    @if($products)
+
     <!-- Shop Detail Start -->
     <section class="shop-detail py-40">
         <div class="container-fluid">
@@ -7,56 +18,57 @@
                     <div class="col-xl-6">
                         <div class="product-image-container bg-white">
                             <div class="product-slider-asnav">
+
                                 <div class="nav-image">
-                                    <img src="assets/media/products/nav-image-1.png" alt="">
+                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
                                 </div>
-                                <div class="nav-image">
-                                    <img src="assets/media/products/nav-image-2.png" alt="">
-                                </div>
-                                <div class="nav-image">
-                                    <img src="assets/media/products/nav-image-3.png" alt="">
-                                </div>
-                                <div class="nav-image">
-                                    <img src="assets/media/products/nav-image-4.png" alt="">
-                                </div>
+                                @foreach(dynamic_assets($products->uploads_id) as $key => $item)
+                                    <div class="nav-image">
+                                        <img src="{{ $item }}" alt="">
+                                    </div>
+                                @endforeach
+
                             </div>
                             <div class="product-slider">
                                 <div class="detail-image">
-                                    <img src="assets/media/products/large-image-1.png" alt="">
+                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
                                 </div>
+                                @foreach(dynamic_assets($products->uploads_id) as $key => $item)
                                 <div class="detail-image">
-                                    <img src="assets/media/products/large-image-2.png" alt="">
+                                    <img src="{{ $item }}" alt="">
                                 </div>
-                                <div class="detail-image">
-                                    <img src="assets/media/products/large-image-3.png" alt="">
-                                </div>
-                                <div class="detail-image">
-                                    <img src="assets/media/products/large-image-4.png" alt="">
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
+
+
                     <div class="col-xl-6">
+
+
                         <div class="product-text-container bg-white br-20">
-                            <h3 class="fw-700 mb-16">Nexus Mobile Pro 256GB</h3>
+
+                            <h3 class="fw-600 mb-16">{{ $products->name ?? '' }}</h3>
                             <div class="d-flex align-items-center flex-wrap gap-16 mb-24">
-                                <h5 class="color-sec">★★★★<span class="light-gray">★</span>&nbsp;&nbsp;<span
-                                        class="text-16 fw-400 dark-black">(02 Reviews)</span></h5>
+                                @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $products->review_count, 'rating_star' => $products->review_avg_rating])
+
                                 <div class="vr-line vr-line-2"></div>
-                                <p class="light-gray">Brand: <span class="color-primary">Beast</span></p>
-                                <div class="vr-line vr-line-2"></div>
-                                <p class="light-gray">SKU: <span class="light-black">3, 24, 672</span></p>
+                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brands->name }}</span></p>
+                                <p class="light-gray">SKU: <span class="light-black">{{ $products->sku }}</span></p>
                             </div>
+
                             <div class="d-flex align-items-center gap-16 mb-24">
-                                <p class="light-gray text-decoration-line-through">$450.00</p>
-                                <h5>$400.00</h5>
-                                <span class="label white">-12%</span>
+                                {{-- <p class="light-gray text-decoration-line-through">$450.00</p>
+                                <h5>$400.00</h5> --}}
+                                @include('frontend.protfilio_theme._filter_variant.partials.product_price', ['product'=> $products, 'discount'=> true])
+
                             </div>
-                            <p class="light-gray mb-24">
-                                Lorem ipsum dolor sit amet consectetur. Purus nulla nec in ac malesuada et nisi ipsum.
-                                Massa scelerisque commodo nam
-                                elementum fermentum sed sit.
+
+                           <p class="light-gray mb-24">
+                                {{ $products->short_description }}
                             </p>
+
                             <div class="d-flex align-items-center gap-24 mb-24">
                                 <h6>Size:</h6>
                                 <div class="drop-container bg-lightest-gray p-8-12 br-5">
@@ -92,6 +104,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="content-block mb-24">
                                 <h6 class="mb-24">Color:</h6>
                                 <div class="product-color">
@@ -148,6 +161,7 @@
                                     </ul>
                                 </div>
                             </div>
+
                             <div class="hr-line mb-24"></div>
                             <div class="function-bar mb-16">
                                 <div class="quantity quantity-wrap">
@@ -200,22 +214,36 @@
                                     </ul>
                                 </div>
                             </div>
+
+
                             <a href="checkout.html" class="cus-btn-3 w-100 mb-24">Buy Now</a>
                             <div class="hr-line mb-24"></div>
-                            <div class="d-flex align-items-center gap-16 mb-16">
+
+                            <div class="d-flex  gap-16 mb-16">
                                 <h6>Category:</h6>
-                                <p class="light-gray"> <span class="color-primary">Mobile Phone</span> , Android , Flagship</p>
+
+                                <p class="light-gray">
+                                    <a class="items_active" href="{{ url('filter') }}?category={{  $products->categorys->slug  }}">{{ $products->categorys->name }}</a>
+
+                                    @foreach ($products->categorys->subcategory as $items) ,
+                                        <a @if($products->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
+                                    @endforeach
+                                </p>
                             </div>
+
+
                             <div class="d-flex align-items-center gap-16 mb-16">
                                 <h6>Tags:</h6>
-                                <p class="light-gray">5G Compatible , <span class="color-primary">256GB Storage , </span> Student Phone</p>
+                                <p class="light-gray">{{ $products->tags }}</p>
                             </div>
+
                             <div class="hr-line mb-24"></div>
                             <div class="d-flex align-items-center gap-16 mb-24">
                                 <h6>Share:</h6>
                                 <ul class="list-unstyled social-link m-0">
                                     <li>
-                                        <a href="">
+
+                                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}"  target="_blank">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 viewBox="0 0 16 16" fill="none">
                                                 <g clip-path="url(#clip0_7951_48369)">
@@ -232,7 +260,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="">
+                                        <a href="https://twitter.com/intent/tweet?text={{ $products->name }}&url={{ url()->full() }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 viewBox="0 0 16 16" fill="none">
                                                 <g clip-path="url(#clip0_7951_48371)">
@@ -248,25 +276,9 @@
                                             </svg>
                                         </a>
                                     </li>
+
                                     <li>
-                                        <a href="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                viewBox="0 0 16 16" fill="none">
-                                                <g clip-path="url(#clip0_7951_48373)">
-                                                    <path
-                                                        d="M8.15747 16.0002C8.10449 16.0002 8.05151 16.0002 7.99817 16C6.74402 16.003 5.5852 15.9711 4.45825 15.9025C3.42505 15.8397 2.48193 15.4826 1.73071 14.8701C1.00586 14.279 0.510864 13.4798 0.259521 12.4949C0.0407715 11.6375 0.0291748 10.7959 0.0180664 9.98177C0.0100097 9.39766 0.00170898 8.70552 0 8.00166C0.00170898 7.29488 0.0100097 6.60274 0.0180664 6.01863C0.0291748 5.20467 0.0407715 4.36299 0.259521 3.50545C0.510864 2.52058 1.00586 1.72139 1.73071 1.13033C2.48193 0.517777 3.42505 0.160722 4.45837 0.0978555C5.58533 0.0293741 6.74438 -0.00260836 8.00122 0.000443394C9.25574 -0.00224215 10.4142 0.0293741 11.5411 0.0978555C12.5743 0.160722 13.5175 0.517777 14.2687 1.13033C14.9936 1.72139 15.4885 2.52058 15.7399 3.50545C15.9586 4.36287 15.9702 5.20467 15.9813 6.01863C15.9894 6.60274 15.9978 7.29488 15.9994 7.99873V8.00166C15.9978 8.70552 15.9894 9.39766 15.9813 9.98177C15.9702 10.7957 15.9587 11.6374 15.7399 12.4949C15.4885 13.4798 14.9936 14.279 14.2687 14.8701C13.5175 15.4826 12.5743 15.8397 11.5411 15.9025C10.4619 15.9682 9.35327 16.0002 8.15747 16.0002ZM7.99817 15.009C9.23193 15.0119 10.3647 14.9807 11.4652 14.9138C12.2465 14.8663 13.168 14.3538 13.7229 13.9013C14.2359 13.483 14.5891 12.9058 14.7729 12.1859C14.955 11.4721 14.9655 10.7058 14.9756 9.96468C14.9835 9.38448 14.9918 8.69722 14.9936 8.0002C14.9918 7.30305 14.9835 6.61592 14.9756 6.03572C14.9655 5.29463 14.955 4.52828 14.7729 3.81441C14.5891 3.09444 14.2359 2.51729 13.7229 2.09895C13.168 1.64656 12.2465 1.14912 11.4652 1.10164C10.3647 1.03462 9.23193 1.00373 8.0011 1.00642C6.76758 1.00349 5.63464 1.03829 4.53418 1.1053C3.75293 1.15279 2.91684 1.48784 2.36191 1.94023C1.84897 2.35857 1.4007 3.09444 1.21699 3.81441C1.03486 4.52828 1.02436 5.29451 1.01423 6.03572C1.00629 6.61641 0.997993 7.30403 0.996284 8.00166C0.997993 8.69624 1.00629 9.38399 1.01423 9.96468C1.02436 10.7058 1.03486 11.4721 1.21699 12.1859C1.4007 12.9058 1.75397 13.483 2.26691 13.9013C2.82185 14.3537 3.75293 14.8663 4.53418 14.9138C5.63464 14.9808 6.76782 15.012 7.99817 15.009ZM7.96838 11.9064C5.81457 11.9064 4.06213 10.1541 4.06213 8.0002C4.06213 5.84627 5.81457 4.09395 7.96838 4.09395C10.1223 4.09395 11.8746 5.84627 11.8746 8.0002C11.8746 10.1541 10.1223 11.9064 7.96838 11.9064ZM8.0011 5.0035C6.24478 5.0035 5.00876 6.23953 5.00876 7.99873C5.00876 9.46333 6.11624 11.0089 7.98382 11.0089C9.44854 11.0089 10.9713 9.6213 10.9713 7.99873C10.9713 6.53413 9.85398 5.0035 8.0011 5.0035ZM12.3121 2.84395C11.7944 2.84395 11.3746 3.26363 11.3746 3.78145C11.3746 4.29927 11.7944 4.71895 12.3121 4.71895C12.83 4.71895 13.2496 4.29927 13.2496 3.78145C13.2496 3.26363 12.83 2.84395 12.3121 2.84395Z"
-                                                        fill="#006937" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_7951_48373">
-                                                        <rect width="16" height="16" fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="">
+                                        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ url()->full() }}&title={{ $products->name }}&summary={{ $products->description }}&source={{ url()->full() }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 viewBox="0 0 16 16" fill="none">
                                                 <g clip-path="url(#clip0_7951_48375)">
@@ -1148,4 +1160,13 @@
         </div>
     </footer>
     <!-- Benefits End -->
+
+    @endif
 </main>
+
+
+<style>
+    .product-slider-asnav img{
+        max-width: 80px;
+    }
+</style>

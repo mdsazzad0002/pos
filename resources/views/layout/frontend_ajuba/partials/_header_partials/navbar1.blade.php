@@ -98,8 +98,8 @@
                                                     </span>
                                                 </span>
                                             </span>
-                                            <span class="img-product-menu" style="background: url('{{ asset('uploads/images/dropdown-image.png') }}') no-repeat;">
-                                                @if($product = $items->most_view_by_cat())
+                                            @if($product = $items->most_view_by_cat())
+                                                 <span class="img-product-menu" style="background: url('{{ asset('uploads/images/dropdown-image.png') }}') no-repeat;">
                                                     <span class="image-content">
                                                         <span class="h6 d-block fw-400 white mb-4p">{{ $items->name }}</span>
                                                         <span class="h6 d-block fw-500 white mb-24">{{ $product->name ?? '' }}</span>
@@ -107,8 +107,8 @@
                                                         <span class="d-block h4 color-ter mb-32">{{ settings('currency_symbol', 9) }}{{ $product->selling_price ?? 0 }}</span>
                                                         <a href="{{ url($view_page->slug) }}?slug={{ $product->slug }}" class="cus-btn-3 sec">Shop Now</a>
                                                     </span>
-                                                @endif
-                                            </span>
+                                                </span>
+                                            @endif
                                         </span>
                                         @endif
                                     </span>

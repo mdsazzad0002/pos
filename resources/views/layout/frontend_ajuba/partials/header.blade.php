@@ -12,7 +12,7 @@
     <div class="header-section">
         <div class="header-top bg-color-primary">
             <div class="header-start d-lg-block d-none">
-                <p class="fw-500 white">Welcome to Worldwide Electronic Store</p>
+                <p class="fw-500 white">{{ settings('welcome_note', 9) }}</p>
             </div>
             <div class="header-end">
                 @if($contact_page)
@@ -90,7 +90,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="drop-container">
+                {{-- <div class="drop-container">
                     <div class="wrapper-dropdown white" id="dropdown2">
                         <span class="selected-display" id="destination2">USD</span>
                         <svg id="drp-arrow2" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -105,7 +105,7 @@
                             <li class="item dark-black">GBP</li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>

@@ -23,6 +23,7 @@ class HomeController extends Controller
         }else{
             $homepage = Page::where('status', 1)->where('slug', $view)->first();
         }
+
         if($homepage){
 
 
@@ -31,17 +32,17 @@ class HomeController extends Controller
 
                 $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->where('id', $items_id)->orderBy('order', 'asc')->get();
 
-                return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage'));
+                return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage', 'request'));
             }
 
             $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
             $sliders = slider::where('status', 1)->get();
 
-            return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage'));
+            return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage', 'request'));
 
         }else{
             if(env('APP_DEBUG') == true){
-                abort('401', 'Not Set Home Page');
+                abort('404', 'Not Set Home Page');
             }else{
                 return redirect('/');
             }

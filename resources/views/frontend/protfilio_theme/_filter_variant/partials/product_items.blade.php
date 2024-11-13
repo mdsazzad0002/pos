@@ -1,4 +1,8 @@
 @if(isset($product))
+@php
+     $view_page = \App\Models\page::where('page_type', 'view')->first();
+
+@endphp
 <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
     <div class="featured-product-card bg-white br-10">
         <div class="image-box mb-16">
@@ -7,25 +11,30 @@
             <div class="side-icons">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="wishlist.html">
-                            <img src="assets/media/icons/heart.png" alt="">
+                        <a href="#">
+                            <img src="{{ asset('uploads/icons/heart.png') }}" alt="">
                         </a>
                     </li>
                     <li>
                         <a href="#" class="btn productQuickViewbtn" data-id="{{ $product->id }}" data-bs-toggle="modal" data-bs-target="#productQuickView">
-                            <img src="assets/media/icons/eye.png" alt="">
+                            <img src="{{ asset('uploads/icons/eye.png') }}" alt="">
                         </a>
                     </li>
                     <li>
-                        <a href="" class="zui-wrapper-button" data-bs-toggle="modal" data-bs-target="#comparepopup">
-                            <img src="assets/media/icons/compare.png" alt="">
+                        <a href="#" class="zui-wrapper-button" data-bs-toggle="modal" data-bs-target="#comparepopup">
+                            <img src="{{ asset('uploads/icons/compare.png')}}" alt="">
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="product-desc">
-            <h6 class="product-title mb-8"><a href="shop-detail.html">{{ $product->name }}</a></h6>
+            <h6 class="product-title mb-8">
+                @if($view_page)
+                <a href="{{ $view_page->slug }}?slug={{ $product->slug }}">{{ $product->name }}</a>
+
+                @endif
+            </h6>
             <div class="text mb-16">
                 <p class="light-gray line-clamp-2">{{ $product->short_description }}</p>
             </div>
