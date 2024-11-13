@@ -16,6 +16,20 @@
         <input type="checkbox" checked class="" hidden  name="status"   value="0">
         <input type="checkbox" class="toggle" checked  placeholder="page Status" name="status" id="status" value="1">
     </label>
+    <label for="page_type"> Page Type <br/>
+       <select name="page_type" id="page_type" class="form-control">
+            <option value="">Default</option>
+            <option value="filter">Filter</option>
+            <option  value="view">View</option>
+            <option value="tracking">tracking</option>
+            <option  value="contact">contact</option>
+            <option  value="about">about</option>
+            <option  value="about">register</option>
+            <option value="checkout">checkout</option>
+            <option value="cart">cart</option>
+            <option value="wishlist">wishlist</option>
+       </select>
+    </label>
 
     <label for="homepage"> Make As Home Page Status <br/>
         <input type="checkbox" checked class="" hidden  name="homepage"   value="0">

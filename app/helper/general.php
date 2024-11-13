@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\category;
 use App\Models\upload;
 use App\Models\setting;
 use Illuminate\Support\Arr;
@@ -213,4 +214,13 @@ function create_slug($slug_gable_text, $model_name, $column_name)
     return $slug;
 }
 
+
+
+/**
+ * Summary of category
+ * @return category[]|Illuminate\Database\Eloquent\Collection
+ */
+function category(){
+    return category::where('status', 1)->orderBy('name','asc')->get();
+}
 

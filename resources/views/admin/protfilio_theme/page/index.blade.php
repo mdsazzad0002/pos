@@ -33,6 +33,9 @@
                     Status
                 </th>
                 <th>
+                    Page Type
+                </th>
+                <th>
                     Homepage
                 </th>
                 <th>
@@ -64,9 +67,11 @@
 
             {data:'name', name:'name'},
             {data:'slug', name:'slug'},
+
             {data:'status', name:'status', render: function (data, type, row, meta) {
                 return  data == 1 ? 'Active' : 'Inactive';
             }},
+            {data:'page_type', name:'page_type'},
 
             {data:'null', name:'null', searchable:false, orderable:false,  render: function (data, type, row, meta) {
                 return row.homepage == 1 ? 'Active' : 'Inactive';

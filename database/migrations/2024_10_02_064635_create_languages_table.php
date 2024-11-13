@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('status')->default(1);
             $table->bigInteger('updater_id')->nullable();
             $table->bigInteger('creator')->default(0);
             $table->timestamps();

@@ -1,3 +1,9 @@
+@php
+
+    $cart_page = \App\Models\page::where('page_type', 'cart')->first();
+    $checkout_page = \App\Models\page::where('page_type', 'checkout')->first();
+@endphp
+
 <aside id="sidebar-cart">
     <div class="title-cart-block mb-32 bg-lightest-gray">
         <h6>Shopping Cart (02)</h6>
@@ -66,9 +72,13 @@
         <span class="h5">$281.98</span>
     </div>
     <div class="hr-line mb-24"></div>
-    <div class="action-buttons p-24">
-        <a href="cart.html" class="cus-btn-2">VIEW CART</a>
-        <a href="checkout.html" class="cus-btn active-btn">CHECKOUT</a>
-    </div>
+    @if ($cart_page && $checkout_page)
+
+        <div class="action-buttons p-24">
+            <a href="{{ url($cart_page->slug) }}" class="cus-btn-2">{{ $cart_page->name ?? '' }}</a>
+            <a href="{{ url($checkout_page->slug) }}" class="cus-btn active-btn">{{ $checkout_page->name ?? '' }}</a>
+        </div>
+
+    @endif
 </aside>
 <div id="sidebar-cart-curtain" class="close-popup"></div>

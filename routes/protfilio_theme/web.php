@@ -32,8 +32,8 @@ Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
 
 
 
-Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');
-Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+// Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');
+// Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 
 

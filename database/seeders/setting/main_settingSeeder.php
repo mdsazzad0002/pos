@@ -14,6 +14,7 @@ class main_settingSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            ['name' => 'currency_symbol', 'value' => '$', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_image', 'value' => '0', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_name_short', 'value' => 'D Pos', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_title', 'value' => 'D Engr Pos', 'creator_id' => '1', 'key' => '9'],

@@ -21,7 +21,7 @@ return new class extends Migration
 
             $table->string('homepage')->default(0);
             $table->string('order')->default(1);
-
+            $table->string('page_type')->nullable()->comment('Like filter, homepage');
             $table->string('creator')->default(0);
             $table->string('updater')->default(0);
             $table->softDeletes();

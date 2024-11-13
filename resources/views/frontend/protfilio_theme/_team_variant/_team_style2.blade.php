@@ -15,7 +15,7 @@ $team_items = \App\Models\User::where('status', 1)->get();
             @foreach ($team_items as $item)
 
 
-            <div class="col-xl{{ 12 / $variant_info->items_per_row }} col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-xl{{ 12 / $variant_info->items_per_row != 0 ? $variant_info->items_per_row : 1 }} col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="member">
                   <img  src="{{ dynamic_asset($item->upload_id) }}" class="img-fluid" alt="">
                   <div class="member-info">

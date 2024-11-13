@@ -1,11 +1,19 @@
 <ul id="sortable_items_data">
     @foreach ($headers as $items)
 
-    <li  data-dialog="modal-dialog-centered" onclick="button_ajax(this)" data-title="{{ $itms->name ?? '' }}"  data-href="{{ route('admin.header.edit', $items->id) }}" id="{{ $items->id }}">
+    <li id="{{ $items->id }}">
 
         <span>
+            &nbsp;
+            &nbsp;
+
+            <span  class="btn btn-warning btn-sm"  data-dialog="modal-dialog-centered" onclick="button_ajax(this)" data-title="{{ $itms->name ?? '' }}"  data-href="{{ route('admin.header.edit', $items->id) }}">
+                <i class="fas fa-edit"></i>
+
+            </span>
             <i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i>
-            {{  $items->name ?? '' }}
+
+            {!!  $items->name ?? '' !!}
         </span>
 
         <span>

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class header extends Model
 {
     use HasFactory;
+
+    public function page(){
+        return $this->hasOne(Page::class,"id","page_id");
+    }
 }

@@ -16,7 +16,7 @@
     <div class="row g-5">
 
         @foreach ($service_items as $item)
-            <div class="col-lg-{{ 12 / $variant_info->items_per_row }} " data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-{{ 12 / ($variant_info->items_per_row != 0 ? $variant_info->items_per_row : 1) }} " data-aos="fade-up" data-aos-delay="100">
                 <div class="service-item item-cyan position-relative">
                 <i class="{{ $item->icon_class }} icon"></i>
                 <div>

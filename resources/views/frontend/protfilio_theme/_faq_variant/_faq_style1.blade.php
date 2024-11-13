@@ -15,8 +15,8 @@
             <div class="col-lg-12" data-aos="fade-up" data-aos-delay="100">
                 <div class="faq-container row">
                     @forelse($faq_list as $key => $faq)
-                    <div class="col-lg-{{ 12 / $variant_info->items_per_row }} mb-2">
-                        
+                    <div class="col-lg-{{ 12 /( $variant_info->items_per_row != 0 ? $variant_info->items_per_row : 1) }} mb-2">
+
                     <div class="faq-item @if($key == 0) faq-active @endif">
                         <h3>{{ Str::title($faq->title) }}</h3>
                         <div class="faq-content">
@@ -24,7 +24,7 @@
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
                     </div><!-- End Faq item-->
-                    
+
                 </div>
                     @empty
                     <div class="p-4 bg-cyan">

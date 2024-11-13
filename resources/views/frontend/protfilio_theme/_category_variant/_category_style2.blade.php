@@ -4,6 +4,7 @@
     }else{
         $category_list = \App\Models\category::where('status', 1)->limit($variant_info->items_show)->get();
     }
+    $filter_page = \App\Models\page::where('page_type', 'filter')->first();
 @endphp
 
 
@@ -20,7 +21,7 @@
                     <div class="row">
                         <div class="categories-wrapper">
                             @foreach ($category_list as $category)
-                            <a  href="{{ route('client.view', $category->slug) }}" class="category-block">
+                            <a  href="{{ url($filter_page->slug)}}?category={{ $category->slug }}" class="category-block">
                                 <div class="image-box mb-12">
                                     <img src="{{ dynamic_asset($category->upload_id) }}" alt="">
                                 </div>

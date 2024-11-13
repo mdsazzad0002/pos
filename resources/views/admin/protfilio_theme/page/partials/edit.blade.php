@@ -17,6 +17,22 @@
         <input type="checkbox" class="toggle"  {{ $page->status == 1 ? 'checked' : '' }} checked  placeholder="page Status" name="status" id="status" value="1">
     </label>
 
+    <label for="page_type"> Page Type <br/>
+        <select name="page_type" id="page_type" class="form-control">
+             <option value="">Default</option>
+             <option @if($page->page_type =='filter') selected @endif value="filter">Filter</option>
+             <option @if($page->page_type =='view') selected @endif value="view">View</option>
+             <option @if($page->page_type =='tracking') selected @endif value="tracking">tracking</option>
+             <option @if($page->page_type =='contact') selected @endif value="contact">contact</option>
+             <option @if($page->page_type =='about') selected @endif value="about">about</option>
+             <option @if($page->page_type =='register') selected @endif value="register">register</option>
+             <option @if($page->page_type =='checkout') selected @endif value="checkout">checkout</option>
+             <option @if($page->page_type =='cart') selected @endif value="cart">cart</option>
+             <option @if($page->page_type =='wishlist') selected @endif value="wishlist">wishlist</option>
+
+        </select>
+     </label>
+
     <label for="homepage"> Make As Home Page Status <br/>
         <input type="checkbox" checked class="" hidden  name="homepage"   value="0">
         <input type="checkbox" class="toggle"   {{ $page->homepage == 1 ? 'checked' : '' }} placeholder="page homepage" name="homepage" id="homepage" value="1">

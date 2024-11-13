@@ -2277,7 +2277,7 @@ header .header-section .header-bottom-area .nav-container .category-second-list 
   object-fit: cover;
   border: 1px solid #6d6d6d;
   border-radius: 5px;
-  background: url("../media/images/dropdown-image.png") no-repeat;
+  
   background-position: center;
   background-size: cover;
   padding: clamp(20px, 1.667vw, 54px);

@@ -91,7 +91,7 @@ class PageController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        
+
         if($request->homepage == 1){
             Page::query()->update(['homepage' => 0]);
         }
@@ -100,6 +100,7 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->status = $request->status;
+        $page->page_type = $request->page_type;
         $page->homepage = $request->homepage;
         $page->save();
 
@@ -161,8 +162,9 @@ class PageController extends Controller
         $page->name = $request->name;
         $page->slug = $request->slug;
         $page->status = $request->status;
+        $page->page_type = $request->page_type;
         $page->homepage = $request->homepage;
-        
+
         $page->save();
 
 
