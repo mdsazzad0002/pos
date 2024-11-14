@@ -9,7 +9,7 @@
     @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->review_count, 'rating_star' => $product->review_avg_rating])
 
     <div class="vr-line vr-line-2"></div>
-    <p class="light-gray">Brand: <span class="color-primary">{{ $product->brands->name }}</span></p>
+    <p class="light-gray">Brand: <span class="color-primary">{{ $product->brands->name ?? '' }}</span></p>
 </div>
 <div class="d-flex align-items-center gap-16 mb-24">
     {{-- <p class="light-gray text-decoration-line-through">$450.00</p>

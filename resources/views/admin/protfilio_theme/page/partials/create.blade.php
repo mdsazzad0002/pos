@@ -28,6 +28,8 @@
             <option value="checkout">checkout</option>
             <option value="cart">cart</option>
             <option value="wishlist">wishlist</option>
+            <option value="service">service</option>
+            <option value="service_details">service_details</option>
        </select>
     </label>
 

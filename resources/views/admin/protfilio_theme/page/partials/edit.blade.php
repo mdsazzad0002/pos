@@ -29,6 +29,8 @@
              <option @if($page->page_type =='checkout') selected @endif value="checkout">checkout</option>
              <option @if($page->page_type =='cart') selected @endif value="cart">cart</option>
              <option @if($page->page_type =='wishlist') selected @endif value="wishlist">wishlist</option>
+             <option @if($page->page_type =='service') selected @endif value="service">service</option>
+             <option @if($page->page_type =='service_details') selected @endif value="service_details">service_details</option>
 
         </select>
      </label>

@@ -14,7 +14,7 @@
             <div class="header-start d-lg-block d-none">
                 <p class="fw-500 white">{{ settings('welcome_note', 9) }}</p>
             </div>
-            <div class="header-end">
+            <div class="header-end ">
                 @if($contact_page)
                 <a href="{{ url($contact_page->slug) }}" class="top-bar-links d-sm-flex d-none align-items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -70,42 +70,15 @@
 
                 <div class="vr-line d-sm-block d-none">
                 </div>
-                <div class="drop-container">
-                    <div class="wrapper-dropdown white" id="dropdown">
-                        <span class="selected-display" id="destination">English</span>
-                        <svg id="drp-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
-                            <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
+                <select name="" id="language_container">
+                    @foreach ($languages as $items)
+                    <option class="item dark-black"  {{ session('locale') == $items->id ? 'selected' : '' }} data-href="{{ url('locale/'.$items->id) }}">
+                            {{ Str::title($items->name) }}
 
-                        <ul class="topbar-dropdown bg-lightest-gray">
-                            @foreach ($languages as $items)
-                            <li class="item dark-black">
-                                <a class=" text-gray-600 dark:text-gray-400" href="{{ url('locale/'.$items->id) }}">
-                                    {{ Str::title($items->name) }}
-                                </a>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-                {{-- <div class="drop-container">
-                    <div class="wrapper-dropdown white" id="dropdown2">
-                        <span class="selected-display" id="destination2">USD</span>
-                        <svg id="drp-arrow2" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
-                            <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-                        <ul class="topbar-dropdown bg-lightest-gray">
-                            <li class="item dark-black">USD</li>
-                            <li class="item dark-black">AED </li>
-                            <li class="item dark-black">EUR</li>
-                            <li class="item dark-black">GBP</li>
-                        </ul>
-                    </div>
-                </div> --}}
+                    </option>
+                    @endforeach
+                </select>
+
 
             </div>
         </div>
@@ -230,6 +203,11 @@
         // console.log(searchInput);
 
         window.location.href= this.action+'?category_name='+category_name+'&q='+searchInput;
+    })
+    $('#language_container').on('change', function(){
+        var selectedOption = $(this).find('option:selected');
+                    var href = selectedOption.data('href'); // Use data('href') to get the custom data attribute
+                    window.location.href = href;
     })
 </script>
 

@@ -15,23 +15,27 @@
                 <td></td>
             </tr>
             @foreach ($permissions as $key => $items)
-            <tr>
-                <td>
-                    <label for="{{ $key }}" >
-                        {{ $key }}
-                        <input type="checkbox" onchange="target_base(this)" id="{{ $key }}">
-                    </label>
-                </td>
-                <td>
+                @can( $key.' read')
+                    <tr>
+                        <td>
+                            <label for="{{ $key }}" >
+                                {{ $key }}
+                                <input type="checkbox" onchange="target_base(this)" id="{{ $key }}">
+                            </label>
+                        </td>
+                        <td>
 
-                    @foreach ($items as $item)
-                    <label for="target_id_{{ $item->id }}" class="badge badge-primary">
-                        <input id="target_id_{{ $item->id }}" name="permission[]" type="checkbox" value="{{ $item->id }}">&nbsp;
-                        {{ $item->name }}
-                    </label>
-                    @endforeach
-                </td>
-            </tr>
+                            @foreach ($items as $item)
+                                @can(  $item->name)
+                                    <label for="target_id_{{ $item->id }}" class="badge badge-primary">
+                                        <input id="target_id_{{ $item->id }}" name="permission[]" type="checkbox" value="{{ $item->id }}">&nbsp;
+                                        {{ $item->name }}
+                                    </label>
+                                @endif
+                            @endforeach
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </table>
     </div>

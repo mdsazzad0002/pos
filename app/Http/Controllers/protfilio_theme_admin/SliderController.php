@@ -87,6 +87,7 @@ class SliderController extends Controller
         $slider =  new slider;
         $slider->title =  $request->title;
         $slider->upload_id =  $request->image;
+        $slider->upload_bg =  $request->upload_bg;
         $slider->short_description = $request->description;
         $slider->button_link = $request->button_link;
         $slider->button_title = $request->button_title;
@@ -125,6 +126,7 @@ class SliderController extends Controller
 
         $slider->title =  $request->title;
         $slider->upload_id =  $request->image;
+        $slider->upload_bg =  $request->upload_bg;
         $slider->short_description = $request->description;
         $slider->button_link = $request->button_link;
         $slider->button_title = $request->button_title;

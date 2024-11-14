@@ -21,10 +21,17 @@
     </div>
 
     <label  type="button" onclick="upload_select(this)">
-
+        Image <br/>
         <input type="text" name="image" value="{{ $slider->upload_id }}" id="image" class="form-control mb-2" hidden >
         <img style="max-width: 100px" src="{{ dynamic_asset($slider->upload_id) }}" alt="">
     </label>
+  
+    <label  type="button" onclick="upload_select(this)">
+        Background Image <br/>
+        <input type="text" name="upload_bg" id="upload_bg" value="{{ $slider->upload_bg }}" class="form-control mb-2" hidden >
+        <img style="max-width: 100px" src="{{ dynamic_asset($slider->upload_bg) }}" alt="">
+    </label>
+
 
     <div class="d-flex justify-content-end">
         <button class="btn btn-warning" type="submit">Save</button>

@@ -21,8 +21,14 @@
 </div>
 
 <label  type="button" onclick="upload_select(this)">
-
+    Image <br/>
     <input type="text" name="image" id="image" class="form-control mb-2" hidden >
+    <img style="max-width: 100px" src="{{ dynamic_asset(0) }}" alt="">
+</label>
+
+<label  type="button" onclick="upload_select(this)">
+    Background Image <br/>
+    <input type="text" name="upload_bg" id="upload_bg" class="form-control mb-2" hidden >
     <img style="max-width: 100px" src="{{ dynamic_asset(0) }}" alt="">
 </label>
 
