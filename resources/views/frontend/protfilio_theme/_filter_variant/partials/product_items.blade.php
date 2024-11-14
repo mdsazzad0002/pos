@@ -46,7 +46,7 @@
                 @include('frontend.protfilio_theme._filter_variant.partials.product_price')
 
             </div>
-            <a href="cart.html" class="cus-btn-2 w-100">Add to Cart</a>
+            <a href="javascript:void(0)" onclick="add_to_cart(this)" data-id="{{ $product->id }}" class="cus-btn-2 w-100">Add to Cart</a>
         </div>
     </div>
 </div>

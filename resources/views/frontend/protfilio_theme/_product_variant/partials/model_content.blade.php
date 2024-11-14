@@ -27,13 +27,13 @@
         <div class="input-area quantity-wrap">
             <input class="decrement" type="button" value="-">
             <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                class="number">
+                class="number qunataty_number">
             <input class="increment" type="button" value="+">
         </div>
     </div>
 
     <div class="cart-btn w-100">
-        <a href="cart.html" class="cus-btn-2 w-100">ADD TO CART</a>
+        <a href="javascript:void(0)" onclick="add_to_cart(this)" data-quantaty="true" data-id="{{ $product->id }}" class="cus-btn-2 w-100">Add to Cart</a>
     </div>
 
 </div>

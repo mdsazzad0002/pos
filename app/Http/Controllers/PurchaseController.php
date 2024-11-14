@@ -95,7 +95,7 @@ class PurchaseController extends Controller
             $purchase = new purchase;
             $purchase->productId = $value;
             $purchase->supplierId = $request->supplierID;
-            $purchase->quantity = $request->quantaty[$key];
+            $purchase->quantity = $request->quantity[$key];
             $purchase->price = $request->price[$key];
             $purchase->status = 2;
             $purchase->creator = auth()->user()->id ?? 0;
@@ -135,9 +135,9 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, purchase $purchase)
     {
-       
+
         if($purchase->status == 2 && $request->status == 1) {
-            
+
             $product = product::find($purchase->productId);
             $product->quantity += $purchase->quantity;
             $product->save();

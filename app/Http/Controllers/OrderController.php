@@ -103,12 +103,12 @@ class OrderController extends Controller
 
         $price = 0;
         $productIds = $request->productId;
-        $quantities = $request->quantaty;
+        $quantities = $request->quantity;
         $product_json = [];
         $product = product::whereIn('id', $request->productId)->get();
 
         foreach($product as $key => $items){
-            $items['order_quantity'] = $this->getProductIdsByQuantity($items->id, $request->productId, $request->quantaty);
+            $items['order_quantity'] = $this->getProductIdsByQuantity($items->id, $request->productId, $request->quantity);
             $items['order_price'] = (int) $items->order_quantity * (int) $items->selling_price;
 
             $price += $items->order_price;
@@ -192,12 +192,12 @@ class OrderController extends Controller
 
         $price = 0;
         $productIds = $request->productId;
-        $quantities = $request->quantaty;
+        $quantities = $request->quantity;
         $product_json = [];
         $product = product::whereIn('id', $request->productId)->get();
 
         foreach($product as $key => $items){
-            $items['order_quantity'] = $this->getProductIdsByQuantity($items->id, $request->productId, $request->quantaty);
+            $items['order_quantity'] = $this->getProductIdsByQuantity($items->id, $request->productId, $request->quantity);
             $items['order_price'] = (int) $items->order_quantity * (int) $items->selling_price;
 
             $price += $items->order_price;

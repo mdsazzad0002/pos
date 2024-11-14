@@ -36,4 +36,39 @@
         }
         quick_view();
 
+
+
+        function add_to_cart(thi){
+
+            if ($(thi).data('quantaty')) {
+                var quantaty = $(thi).closest('.modal').find('input.qunataty_number').val();
+                // console.log(quantaty);
+                $.ajax({
+                    type: 'get',
+                    url:'{{ route('add_to_cart') }}',
+                    data:{
+                        'product_id': $(thi).data('id'),
+                        'quantity' : quantaty
+
+                    },
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
+            }else{
+                $.ajax({
+                    type: 'get',
+                    url:'{{ route('add_to_cart') }}',
+                    data:{
+                        'product_id': $(thi).data('id'),
+                    },
+                    success:function(data){
+                        console.log(data)
+                    }
+                })
+            }
+
+
+
+        }
     </script>

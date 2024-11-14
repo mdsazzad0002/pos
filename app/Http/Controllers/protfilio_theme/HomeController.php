@@ -184,4 +184,72 @@ class HomeController extends Controller
         return view('frontend.protfilio_theme.blog.index');
     }
 
+    public function add_to_cart(Request $request){
+
+        if ($request->has('product_id')) {
+
+            $product_id = $request->product_id;
+            $product_cart = session()->get('fornt_product', []);
+
+            // Flag to check if the product was found
+            $found = false;
+
+            // Loop through the cart to check if the product exists
+            foreach ($product_cart as &$item) {
+                if (isset($item['pd_' . $product_id])) {
+                    // If the product exists, increase the quantity
+                    if($request->has('quantity')) {
+                        $item['pd_' . $product_id]['quantaty'] = $request->quantity;
+                    }else{
+                        $item['pd_' . $product_id]['quantaty'] += 1;
+
+                    }
+                    $found = true;
+                    break;
+                }
+            }
+
+            // If the product was not found, add a new product entry
+            if (!$found) {
+                if($request->has('quantity')) {
+                    $product_cart[] = [
+                        'pd_' . $product_id => [
+                            'product_id' => $product_id,
+                            'quantaty' => $request->quantity,
+                        ]
+                    ];
+                }else{
+                    $product_cart[] = [
+                        'pd_' . $product_id => [
+                            'product_id' => $product_id,
+                            'quantaty' => 1,
+                        ]
+                    ];
+
+                }
+
+            }
+
+            // Save the updated cart back to the session
+
+            // Save the updated cart back to the session
+            session()->put('fornt_product', $product_cart);
+            return $product_cart;
+
+            return json_encode([
+                'title'=>'Successfully  added Cart',
+                'type'=>'success',
+            ]);
+        }else{
+            return json_encode([
+                'title'=>'Failed  added Cart',
+                'type'=>'error',
+            ]);
+        }
+
+
+
+
+    }
+
 }
