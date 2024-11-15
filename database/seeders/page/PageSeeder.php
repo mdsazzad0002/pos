@@ -21,6 +21,7 @@ class PageSeeder extends Seeder
                 'slug' => '/',
                 'status' => 1,
                 'homepage' => 1,
+                'page_type' => ''
             ],
             [
                 'name' => 'About',
