@@ -24,7 +24,7 @@
             <option value="tracking">tracking</option>
             <option  value="contact">contact</option>
             <option  value="about">about</option>
-            <option  value="about">register</option>
+            <option  value="register">register</option>
             <option value="checkout">checkout</option>
             <option value="cart">cart</option>
             <option value="wishlist">wishlist</option>

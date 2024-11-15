@@ -14,6 +14,7 @@ class PageSeeder extends Seeder
     public function run(): void
     {
 
+
         $data = [
             [
                 'name' => 'Home',
@@ -26,60 +27,70 @@ class PageSeeder extends Seeder
                 'slug' => 'about-us',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'about'
             ],
             [
                 'name' => 'Filter',
                 'slug' => 'filter',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'filter'
             ],
             [
                 'name' => 'Product details',
                 'slug' => 'product/details',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'view'
             ],
             [
                 'name' => 'cart',
                 'slug' => 'cart',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'cart'
             ],
             [
-                'name' => 'checkout',
+                'name' => 'Checkout',
                 'slug' => 'checkout',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'checkout'
             ],
             [
-                'name' => 'tracking',
+                'name' => 'Tracking',
                 'slug' => 'tracking',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'tracking'
             ],
             [
-                'name' => 'service',
+                'name' => 'Service',
                 'slug' => 'service',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'service'
             ],
             [
-                'name' => 'service-details',
+                'name' => 'Service Details',
                 'slug' => 'service-details',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'service_details'
             ],
             [
-                'name' => 'register',
+                'name' => 'Register',
                 'slug' => 'register',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'register'
             ],
             [
-                'name' => 'wishlist',
+                'name' => 'Wishlist',
                 'slug' => 'wishlist',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => 'wishlist'
             ],
 
             [
@@ -87,24 +98,35 @@ class PageSeeder extends Seeder
                 'slug' => 'coming-soon',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => ''
             ],
             [
-                'name' => 'blog',
+                'name' => 'Blog',
                 'slug' => 'blog',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => ''
             ],
             [
-                'name' => 'blog details',
+                'name' => 'Blog Details',
                 'slug' => 'blog/details',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => ''
             ],
             [
                 'name' => 'FAQ',
                 'slug' => 'faq',
                 'status' => 1,
                 'homepage' => 0,
+                'page_type' => '',
+            ],
+            [
+                'name' => 'Contact',
+                'slug' => 'contact',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'contact',
             ],
 
 
@@ -113,6 +135,7 @@ class PageSeeder extends Seeder
             $page = new Page();
             $page->name = $item['name'];
             $page->slug = $item['slug'];
+            $page->page_type = $item['page_type'];
             $page->status = $item['status'];
             $page->homepage = $item['homepage'];
             $page->save();

@@ -8,6 +8,9 @@
     $wishlist_page = \App\Models\page::where('page_type', 'wishlist')->first();
     $languages = \App\Models\language\language::where('status', 1)->get();
 @endphp
+
+@if($filter_page)
+
 <header>
     <div class="header-section">
         <div class="header-top bg-color-primary">
@@ -153,6 +156,7 @@
     </div>
 </header>
 
+@endif
 
 <style>
 .navbar_filter_section .mixin-container form,

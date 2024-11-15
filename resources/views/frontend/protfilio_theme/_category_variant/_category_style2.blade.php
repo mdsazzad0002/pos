@@ -9,7 +9,7 @@
 
 
 <!-- Clients Section -->
-@if (count($category_list) > 0)
+@if (count($category_list) > 0 && $filter_page)
     <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_category_style/_category_style2.css') }}">
     <section id="clients_category_style2" class="clients_category_style2 section p-0" style="{{ $variant_info->background_type ? 'background-image:url('.dynamic_asset($variant_info->background).')' : 'background:'.$variant_info->background_color  }}">
 
