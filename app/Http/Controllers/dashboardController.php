@@ -16,6 +16,8 @@ use App\Models\purchase;
 use App\Models\supplier;
 use App\Mail\MailerDynamic;
 use App\Models\area;
+use App\Models\language\language;
+use App\Models\language\Translation;
 use Illuminate\Http\Request;
 use App\Models\mail\MailSetting;
 use App\Models\mail\MailTemplate;
@@ -23,6 +25,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\payment\PaymentCredential;
+use App\Models\setting;
 use App\Models\SubCategory;
 use App\Notifications\NotificationDynamic;
 use Illuminate\Support\Facades\Notification;
@@ -84,13 +87,30 @@ class dashboardController extends Controller
             }elseif($items_req === 'mail_config'){
                 $query = MailSetting::query(); // Start the query for the User model
 
+            }elseif($items_req === 'translation'){
+                $query = Translation::query(); // Start the query for the User model
 
             }elseif($items_req === 'device_log'){
                 $query = Device::query(); // Start the query for the User model
 
+            }elseif($items_req === 'lanuage'){
+                $query = language::query(); // Start the query for the User model
+
 
             }elseif($items_req === 'areas'){
                 $query = area::query(); // Start the query for the User model
+            }elseif($items_req === 'fcm'){
+                $query = fcm::query(); // Start the query for the User model
+
+            }elseif(
+                $items_req === 'cookie' ||
+                $items_req === 'takto'||
+                $items_req === 'pwa' ||
+                $items_req === 'site_verification' ||
+                $items_req === 'main_settings' ||
+                $items_req === 'tag'
+            ){
+                $query = setting::query(); // Start the query for the User model
 
             }
 
@@ -98,7 +118,55 @@ class dashboardController extends Controller
             if ($request->has('where')) {
                 $items = explode(',', trim($request->where));
                 foreach ($items as $item) {
-                    if ($item === 'active') {
+
+                    // pwa Progressive web application
+                    if($items_req === 'pwa' && $item === 'status'){
+                        $query->where('name', 'pwa_status');
+                        return $query->first()->value ? 'Active' : 'Inactive';
+                    } elseif ($items_req === 'pwa') {
+                        $query->where('key', 20);
+
+                    // takto maessage application
+                    }elseif($items_req === 'takto' && $item === 'status'){
+                        $query->where('name', 'tawk_to_status');
+                        return $query->first()->value ? 'Active' : 'Inactive';
+                    } elseif ($items_req === 'takto') {
+                        $query->where('key', 31);
+
+                    // Cookie managment
+                    }elseif($items_req === 'cookie' && $item === 'status'){
+                        $query->where('name', 'cookie_status');
+                        return $query->first()->value ? 'Active' : 'Inactive';
+
+                    }elseif($items_req === 'cookie'){
+                        $query->where('key', 40);
+
+                    // Main Settings managment
+                    }elseif($items_req === 'main_settings' && $item === 'app_preloader_status'){
+                        $query->where('name', 'app_preloader_status');
+                        return $query->first()->value ? 'Active' : 'Inactive';
+
+                    }elseif($items_req === 'main_settings'){
+                        $query->where('key', 9);
+
+                    // Tag managment
+
+                    }elseif($items_req === 'tag'){
+                        $query->where('key', 24);
+
+                    }elseif($items_req === 'translation'){
+                        $query->where('language', $item);
+
+                        // Site verification
+                    }elseif($items_req === 'site_verification'){
+                        $query->where('key', 25);
+
+                        // fcm information
+                    }elseif ($items_req === 'fcm' && $item === 'status') {
+                        return $query->first()->fcm_status_key ? 'Active' : 'Inactive';
+
+
+                    }elseif ($item === 'active') {
                         $query->where('status', 1);
 
                     }elseif($item === 'inactive'){
@@ -115,7 +183,7 @@ class dashboardController extends Controller
 
                     }elseif($item === 'lastactive'){
                         // active time
-                        $lastActivity = $query->orderBy('last_activity', 'asc')->first();
+                        $lastActivity = $query->orderBy('last_activity', 'desc')->first();
                         if ($lastActivity && $lastActivity->last_activity) {
                             // Format the last_activity date
                             return $lastActivity = Carbon::createFromTimestamp($lastActivity->last_activity)->diffForHumans();
@@ -140,6 +208,11 @@ class dashboardController extends Controller
 
                     }elseif($item === 'service'){
                         $query->where('service', 1);
+
+                    }elseif($item === 'items'){
+                        $query->where('service', 1);
+
+
 
                     }
                 }

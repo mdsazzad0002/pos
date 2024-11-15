@@ -78,11 +78,42 @@
         </li>
 
         <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-user-cog nav-icon"></i>
+                <p>
+                    {{ __('settings.language') }}
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                @can('language read')
+                <li class="nav-item">
+                    <a href="{{ route('admin.language.index') }}" class="nav-link">
+                        <i class="fas fa-user-tie nav-icon"></i>
+                        <p>{{ __('language.sidebar.name') }}</p>
+                    </a>
+                </li>
+                @endcan
+
+                @can('Translation read')
+                <li class="nav-item">
+                    <a href="{{ route('admin.Translation.index') }}" class="nav-link">
+                        <i class="fas fa-user-tie nav-icon"></i>
+                        <p>{{ __('translate.sidebar.name') }}</p>
+                    </a>
+                </li>
+                @endcan
+
+
+            </ul>
+        </li>
+
+        <li class="nav-item">
             <a href="{{ route('admin.device_access_check.list') }}" class="nav-link">
                 <i class="fas fa-user-tie nav-icon"></i>
                 <p>{{ __('device_access_check.sidebar.list.name') }}</p>
             </a>
         </li>
-        
+
     </ul>
 </li>

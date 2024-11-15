@@ -14,7 +14,7 @@ class SettingController extends Controller
     public function index(Request $request, $slug, $key)
     {
 
-        $perpage = 12;
+        $perpage = 30;
         if($request->has('perpage')){
             if($request->perpage != ''){
                 $perpage = $request->perpage;
@@ -49,7 +49,7 @@ class SettingController extends Controller
         }
 
         if($flag_target == 1){
-            return view('admin.settings.index', compact('slug', 'settings'));
+            return view('admin.settings.index', compact('slug', 'settings', 'key'));
         }else{
             abort('404');
         }

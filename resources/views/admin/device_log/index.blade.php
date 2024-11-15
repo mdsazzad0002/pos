@@ -31,6 +31,9 @@
                     Action
                 </th>
                 <th>
+                    Notification
+                </th>
+                <th>
                     View
                 </th>
                 <th>
@@ -48,12 +51,11 @@
                 <th>
                     Suspend Date
                 </th>
+
                 <th>
-                    Updated at
+                    Last Active
                 </th>
-                <th>
-                    Created at
-                </th>
+
 
             </thead>
         </table>
@@ -75,6 +77,10 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'action', name:'action', searchable:false, orderable:false},
+            {data:null, name:null, searchable:false, orderable:false, render: function (data, type, row, meta) {
+                return (data.notification_data == '' || data.notification_data == null )? 'Un Register' : '<button onclick="revock_notification(this)" data-id="'+data.id+'" class="btn btn-warning" title="Revoke Notification data">Registered</button>';
+
+            }},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'name', name:'users.name'},
             {data:'device_type', name:'device_type'},
@@ -82,9 +88,10 @@
             {data:'logout', name:'logout', render: function (data, type, row, meta) {
                 return data == 0 ? 'Default' : 'Suspended';
             }},
-            {data:'suspend_date', name:'suspend_date'},
-            {data:'updated_at_data', name:'updated_at'},
-            {data:'created_at_data', name:'created_at'},
+
+            {data:'suspend_date', name:'suspend_date',  searchable:false, orderable:false},
+            {data:'last_active', name:'last_activity'},
+           
 
         ],
         buttons: true,
@@ -95,6 +102,27 @@
         $.ajax({
             type:'get',
             url:'{{ route('admin.device_access_check.status') }}?device='+id,
+            success:function(data){
+                data = JSON.parse(data);
+                //console.log(data);          // Handle success
+                if(data.type == 'success'){
+                    flasher.success(data.title);
+                    datatableM.ajax.reload();
+                }else{
+                    flasher.error(data.title);
+                }
+            },
+            error: function (xhr, status, error) {
+                error_show(xhr, status, error)
+
+            }
+        })
+    }
+    function revock_notification(thi){
+        var id = $(thi).data('id');
+        $.ajax({
+            type:'get',
+            url:'{{ route('admin.revoke_notification_data') }}?device='+id,
             success:function(data){
                 data = JSON.parse(data);
                 //console.log(data);          // Handle success

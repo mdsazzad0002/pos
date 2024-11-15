@@ -1,5 +1,12 @@
-@section('title', settings('main_setting', 10))
+@section('title', __('settings.'.$slug))
 @section('content')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.'.$slug)
+    </div>
+</x-summary>
+
 <div class="row">
 
     @foreach ($settings as $setting)

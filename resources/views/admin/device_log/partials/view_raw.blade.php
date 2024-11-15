@@ -19,4 +19,20 @@
             {{ $device->ip ?? '' }}
         </td>
     </tr>
+    <tr>
+        <td>
+            Updated At
+        </td>
+        <td>
+            {{ $device->updated_at->format('d-M-Y h:i:s A') ?? '' }}
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Created At
+        </td>
+        <td>
+            {{ $device->created_at->format('d-M-Y h:i:s A') ?? '' }}
+        </td>
+    </tr>
 </table>

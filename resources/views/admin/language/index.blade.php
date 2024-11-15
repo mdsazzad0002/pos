@@ -6,9 +6,16 @@
 
 {{--  Content Extends  --}}
 @section('content')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.language')
+    </div>
+</x-summary>
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        language
+        {{ __('settings.language') }}
         <div>
             @can('user create')
 

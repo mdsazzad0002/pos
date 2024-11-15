@@ -106,9 +106,13 @@ Route::get('device_access_check', [LoginCheckController::class, 'index']);
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
+
+
     Route::get('device_access_check/list', [LoginCheckController::class, 'logedList'])->name('device_access_check.list');
     Route::get('device_access_check/{device}', [LoginCheckController::class, 'view'])->name('device_access_check.view');
     Route::get('device_access_check/status/update', [LoginCheckController::class, 'status'])->name('device_access_check.status');
+    Route::get('revoke_notification_data', [LoginCheckController::class, 'revokeNotifi'])->name('revoke_notification_data');
+
 
     Route::resource('settings/payment-configuration', PaymentCredentialController::class)->names('settings.payment-configration');
 

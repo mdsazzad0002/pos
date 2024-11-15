@@ -60,7 +60,8 @@ class TranslatorController extends Controller
                 ->rawColumns(['action', 'view'])
                 ->make(true);
         }
-        return view('admin.translation.index');
+        $languages = language::get();
+        return view('admin.translation.index', compact('languages'));
     }
 
     /**

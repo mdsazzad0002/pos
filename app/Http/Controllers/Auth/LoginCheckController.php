@@ -45,6 +45,9 @@ class LoginCheckController extends Controller
                     return $row->updated_at->format('d-M-Y h:i:s A');
 
                 })
+                ->addColumn('last_active', function ($row) {
+                    return Carbon::createFromTimestamp($row->last_activity)->diffForHumans();
+                })
                 ->addColumn('created_at_data', function ($row) {
                     return $row->created_at->format('d-M-Y h:i:s A');
 
@@ -53,11 +56,12 @@ class LoginCheckController extends Controller
                     $status_device = $row->logout == 1 ? 'Unsuspend' : 'Suspend';
                     $return_data = '<button class="btn btn-warning" onclick="change_device_status('.$row->id.')">'.$status_device.'</button>';
 
+
                     return $return_data;
 
 
                 })
-                ->rawColumns(['action', 'view','updated_at_data','created_at_data'])
+                ->rawColumns(['action', 'view','updated_at_data','created_at_data', 'last_active'])
                 ->make(true);
         }
         return view('admin.device_log.index');
@@ -236,6 +240,26 @@ class LoginCheckController extends Controller
             'ip' => $ip,
             'browser_name' => $browser_name,
         ];
+    }
+
+
+    public function revokeNotifi(Request $request){
+        $device = Device::find($request->device);
+        if($device){
+            $device->notification_data = '';
+            $device->save();
+            return json_encode([
+                'title' => 'Successfully Unregistered',
+                'type' => 'success',
+                'refresh' => 'true',
+            ]);
+
+        }
+        return json_encode([
+            'title' => 'Something is wrong',
+            'type' => 'error',
+            'refresh' => 'false',
+        ]);
     }
 
 }

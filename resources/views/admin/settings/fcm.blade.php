@@ -1,9 +1,21 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('order', 10))
+@section('title', __('settings.fcm'))
 @section('content')
+
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @include('admin.dashboard._cards.fcm')
+    </div>
+</x-summary>
+
     <div class="card">
+        <div class="card-header">
+            <h3>
+                {{ __('settings.fcm') }}
+            </h3>
+        </div>
         <div class="card-body">
             <form action="" method="POST" class="form_ajax_submit">
                 @csrf
