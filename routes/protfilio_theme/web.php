@@ -58,5 +58,8 @@ Route::get('filter/data-get', [HomeController::class, 'filter_get']);
 
 Route::get('add_to_cart', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
 
+Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->name('cart_and_wishlist');
+Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
+
 // User Defined Route Web So Check Route not exists
 Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^.*');

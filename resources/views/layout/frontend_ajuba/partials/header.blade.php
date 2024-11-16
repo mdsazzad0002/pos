@@ -136,12 +136,11 @@
                     </a>
                     @endif
 
-                    <a href="#" class="button-block d-sm-flex d-none cart-button">
-                        <img src="{{asset('uploads/')}}/icons/cart.png" alt="">
-                        <div>
-                            <p>Your Cart</p>
-                            <h6>$120.00</h6>
-                        </div>
+                    <a href="#" class="button-block d-sm-flex d-none cart-button position-relative cart items_icon_parents">
+                        {{-- <img src="{{asset('uploads/')}}/icons/cart.png" alt=""> --}}
+                        <i class="bi bi-cart" style=""></i>
+                        <span class="items_added">0</span>
+
                     </a>
                 </div>
             </div>
@@ -194,6 +193,35 @@
     }
 }
 
+span.items_added {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #dd3842;
+    color: white;
+    width: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 20px;
+    font-size: 11px;
+}
+.items_icon_parents i{
+    font-size: clamp(25px, 0.833vw, 22px)
+}
+
+@media (min-width: 1500px) and (max-width: 1800px) {
+    .items_icon_parents i{
+        font-size:  clamp(35px, 0.833vw, 22px)
+    }
+}
+@media (min-width: 1800px) {
+    .items_icon_parents i{
+        font-size: clamp(45px, 0.833vw, 22px)
+    }
+}
 </style>
 
 @push('js')

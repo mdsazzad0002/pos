@@ -189,7 +189,7 @@ class HomeController extends Controller
         if ($request->has('product_id')) {
 
             $product_id = $request->product_id;
-            $product_cart = session()->get('fornt_product', []);
+            $product_cart = session()->get('front_product', []);
 
             // Flag to check if the product was found
             $found = false;
@@ -233,8 +233,7 @@ class HomeController extends Controller
             // Save the updated cart back to the session
 
             // Save the updated cart back to the session
-            session()->put('fornt_product', $product_cart);
-            return $product_cart;
+            session()->put('front_product', $product_cart);
 
             return json_encode([
                 'title'=>'Successfully  added Cart',
@@ -250,6 +249,60 @@ class HomeController extends Controller
 
 
 
+    }
+
+
+
+
+    public function cart_and_wishlist(){
+        $returned_data = [
+            'front_product' => count(session('front_product', [])),
+            'front_wishlist' => count(session('front_wishlist', []))
+        ];
+
+            header('Content-Type: text/event-stream');
+            header('Cache-Control: no-cache');
+            header('Connection: keep-alive');
+
+
+
+
+            echo "data:" . json_encode($returned_data) . "\n\n";
+            echo "\n\n";
+
+            ob_flush();
+            flush();
+    }
+
+    public function side_cart_info(){
+        $cart = session("front_product", []);
+        $products = [];
+
+        foreach ($cart as $key => $items) {
+            // Since $items is an associative array with only one key like 'pd_5', 'pd_6', etc.
+            // We extract the first (and only) item in the array.
+             $item = reset($items);  // reset() gives the first value of the array
+
+            // Extract product_id and quantaty
+            $product_id = $item['product_id'] ?? null;  // Default to null if product_id doesn't exist
+            $quantaty = $item['quantaty'] ?? 0;  // Default to 0 if quantaty doesn't exist
+
+            // Check if product_id exists
+            if ($product_id !== null) {
+                // Find the product in the database
+                $product = Product::find($product_id);
+
+                if ($product) {
+                    // Add the quantity from the cart to the product
+                    $product['items_cart'] = $quantaty;  // Set items_cart to the quantity in the cart
+
+                    // Add the updated product to the products array
+                    $products[] = $product;
+                }
+            }
+        }
+
+        return view('layout.frontend_ajuba.partials._shoping_partials.product_items', compact('cart', 'products'));
     }
 
 }
