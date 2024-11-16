@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Models\LeadContact;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Route;
@@ -123,6 +124,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::post('fcm_notification', [PushNotificationController::class, 'store'])->name('fcm_notification.store');
 
 
+    Route::resource('message', MessageController::class)->names('message');
+    Route::get('message/get_message/data', [MessageController::class, 'get_message'])->name('message.get_message');
 
 
     Route::get('/', [dashboardController::class, 'index'])->name('index');

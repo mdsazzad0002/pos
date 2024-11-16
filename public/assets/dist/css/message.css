@@ -1,0 +1,151 @@
+.message_chart {
+    display: flex;
+    height: 100vh;
+}
+/* message_sidebar styles */
+.message_chart .message_sidebar {
+    width: 250px;
+    background-color: #075e54;
+    color: white;
+    padding-top: 10px;
+    border-right: 1px solid #ddd;
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
+}
+
+#contactList{
+    overflow-y: auto;
+}
+.message_chart .message_sidebar-search {
+    margin: 3px;
+}
+.message_chart .message_sidebar-search input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.message_chart .message_sidebar-item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+.message_chart .message_sidebar-item:hover {
+    background-color: #128c7e;
+}
+.message_chart .message_sidebar-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.message_chart .message_sidebar-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+.message_chart .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #25D366; /* green (online) */
+    margin-left: 5px;
+}
+.message_chart .status-offline {
+    background-color: #C6C6C6; /* gray (offline) */
+}
+
+/* Chat Window Styles */
+.message_chart .chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.message_chart .1);
+    height: 100%;
+}
+.message_chart .header {
+    background-color: #075e54;
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.message_chart .header-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.message_chart .header-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+.message_chart .chat-box {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #e5ddd5;
+    display: flex;
+    flex-direction: column;
+}
+.message_chart .message-bubble {
+    max-width: 75%;
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+.message_chart .message-sent {
+    background-color: #000000;
+    align-self: flex-end;
+}
+.message_chart .message-received {
+    background-color: #075e54;
+    align-self: flex-start;
+    border: 1px solid #ddd;
+}
+.message_chart .message-time {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+.message_chart .message-input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+}
+.message_chart .send-btn {
+    background-color: #075e54;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px 15px;
+    font-size: 18px;
+}
+.message_chart .send-btn:hover {
+    background-color: #128c7e;
+}
+.message_chart .filter-buttons {
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 5px;
+}
+.message_chart .filter-buttons button {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    padding: 3px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.message_chart .filter-buttons button:hover {
+    background-color: #128c7e;
+}
