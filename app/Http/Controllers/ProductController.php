@@ -104,8 +104,10 @@ class ProductController extends Controller
         $product->sub_category = $request->subcategory;
         $product->vat = $request->vat;
         $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
+        
         $product->old_price = $request->old_price;
         $product->selling_price = $request->selling_price;
+
         $product->alert_quantity = $request->alert_quantity;
         $product->weight = $request->weight;
         $product->garage = $request->garage;

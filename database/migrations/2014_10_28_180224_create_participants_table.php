@@ -18,7 +18,9 @@ class CreateParticipantsTable extends Migration
             $table->increments('id');
             $table->integer('thread_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('user_type')->default(1)->comment('1 user, 2 customer');
             $table->timestamp('last_read')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

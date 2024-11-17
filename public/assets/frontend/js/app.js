@@ -233,7 +233,7 @@ var MyScroll = "";
           cssEase: 'linear',
           pauseOnFocus: false,
           pauseOnHover: false,
-
+          
           responsive: [
             {
               breakpoint: 1025,

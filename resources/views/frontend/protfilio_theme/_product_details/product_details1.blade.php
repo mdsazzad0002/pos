@@ -10,32 +10,33 @@ if($request->has('slug')){
 <main class="main-wrapper bg-lightest-gray">
     @if($products)
 
+
     <!-- Shop Detail Start -->
     <section class="shop-detail py-40">
         <div class="container-fluid">
             <div class="detail-wrapper">
                 <div class="row row-gap-3">
                     <div class="col-xl-6">
-                        <div class="product-image-container bg-white">
-                            <div class="product-slider-asnav">
+                        <div class="product-image-container container-2 bg-white">
+                            <div class="product-slider-asnav asnav-2">
 
                                 <div class="nav-image">
                                     <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
                                 </div>
                                 @foreach(dynamic_assets($products->uploads_id) as $key => $item)
                                     <div class="nav-image">
-                                        <img src="{{ $item }}" alt="">
+                                        <img  src="{{ $item }}" alt="">
                                     </div>
                                 @endforeach
 
                             </div>
-                            <div class="product-slider">
+                            <div class="product-slider slider-2">
                                 <div class="detail-image">
                                     <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
                                 </div>
                                 @foreach(dynamic_assets($products->uploads_id) as $key => $item)
                                 <div class="detail-image">
-                                    <img src="{{ $item }}" alt="">
+                                    <img class="w-100 " src="{{ $item }}" alt="">
                                 </div>
                                 @endforeach
 
@@ -54,7 +55,7 @@ if($request->has('slug')){
                                 @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $products->review_count, 'rating_star' => $products->review_avg_rating])
 
                                 <div class="vr-line vr-line-2"></div>
-                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brands->name }}</span></p>
+                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brands->name ?? '' }}</span></p>
                                 <p class="light-gray">SKU: <span class="light-black">{{ $products->sku }}</span></p>
                             </div>
 
@@ -1170,3 +1171,13 @@ if($request->has('slug')){
         max-width: 80px;
     }
 </style>
+
+
+@push('js')
+
+<script>
+
+
+</script>
+
+@endpush
