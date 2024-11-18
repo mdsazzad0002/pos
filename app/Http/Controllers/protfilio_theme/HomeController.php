@@ -56,9 +56,52 @@ class HomeController extends Controller
 
 
     public function filter_get(Request $request){
-        $product_list = product::where('status', 1)->paginate(2);
+        $product_list = product::where('status', 1)->where(function($query) use ($request){
+
+            // filter by category
+            if($request->has('category_name') && $request->category_name != '' && $request->category_name != 'All Categories'){
+                $category = category::where('name', $request->category_name)->first();
+                //return $request;
+                if($category){
+                    $query->where('category', $category->id);
+                }
+
+            }
+
+            // filter by category slug
+            if($request->has('category') && $request->category != ''){
+                $category = category::where('slug', $request->category)->first();
+                if($category){
+                    $query->where('category', $category->id);
+                }
+            }
+
+            // filter by category id
+            if($request->has('category') && $request->subcategory_ids != ''){
+                 $query->whereIn('category', $request->subcategory_ids);
+            }
+
+            // filter by custom input
+            if($request->has('q') && $request->q != ''){
+                $q = explode(' ', $request->q);
+                foreach (['name', 'short_description', 'sku', 'brand', 'tags'] as $column) {
+                    foreach ($q as $value) {
+                        // Use LIKE to find partial matches
+                        $query->orWhere($column, 'LIKE', '%' . trim($value) . '%');
+                    }
+                }
+            }
+        })
+
+        ->paginate(2);
         return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
     }
+
+
+
+
+
+
 
 
     public function feature_view(Request $request){

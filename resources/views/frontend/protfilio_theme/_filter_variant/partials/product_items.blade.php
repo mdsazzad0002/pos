@@ -6,14 +6,14 @@
 <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
     <div class="featured-product-card bg-white br-10">
         <div class="image-box mb-16">
-    
+
             @if($product->variant == 0 && $product->selling_price < $product->old_price)
                 <span class="sale-label">
                     {{ number_format((($product->old_price - $product->selling_price ) *  100 )/ $product->old_price,2)}} %
-                </span>            
+                </span>
             @endif
 
-            <a href="{{ $view_page->slug }}?slug={{ $product->slug }}"><img src="{{ dynamic_asset($product->upload_id) }}"  class="product-image" alt=""></a>
+            <a href="{{ url($view_page->slug) }}?slug={{ $product->slug }}"><img src="{{ dynamic_asset($product->upload_id) }}"  class="product-image" alt=""></a>
             <div class="side-icons">
                 <ul class="list-unstyled">
                     <li>

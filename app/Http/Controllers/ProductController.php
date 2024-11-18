@@ -104,7 +104,7 @@ class ProductController extends Controller
         $product->sub_category = $request->subcategory;
         $product->vat = $request->vat;
         $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
-        
+
         $product->old_price = $request->old_price;
         $product->selling_price = $request->selling_price;
 
@@ -126,6 +126,7 @@ class ProductController extends Controller
 
         $product->short_description = $request->short_description;
         $product->description = $request->description;
+        $product->additional_description = $request->additional_description;
         $product->youtube_video = $request->youtube_video;
         $product->landing_page_bg = $request->landing_page_bg;
         $product->landing_page_color = $request->landing_page_color;
@@ -251,6 +252,7 @@ class ProductController extends Controller
 
         $product->short_description = $request->short_description;
         $product->description = $request->description;
+        $product->additional_description = $request->additional_description;
         $product->youtube_video = $request->youtube_video;
         $product->landing_page_bg = $request->landing_page_bg;
         $product->landing_page_color = $request->landing_page_color;

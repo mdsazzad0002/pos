@@ -97,7 +97,7 @@
                     <form action="{{ url( $filter_page->slug) }}" method="post" id="filter_form_all">
                         <div class="drop-container d-flex align-items-center flex-nowrap">
                             <div class="wrapper-dropdown" id="dropdown3">
-                                <span class="selected-display black fw-500" id="destination3">All Categories</span>
+                                <span class="selected-display black fw-500" id="destination3">{{ $_GET['category_name'] ?? 'All Categories' }}</span>
                                 <svg id="drp-arrow3" width="24" height="24" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
                                     <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -114,7 +114,7 @@
                         <div class="vr-line vr-line-2"></div>
 
                         <div class="input-field">
-                            <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search for products...">
+                            <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search for products..." value="{{ $_GET['q'] ?? '' }}">
                             <button type="submit" class="cus-btn">Search</button>
                         </div>
                     </form>

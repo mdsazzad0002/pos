@@ -1,6 +1,6 @@
 
 @php
-        $price =  0;
+    $price =  0;
 @endphp
 <ul class="product-list p-24">
     @if(isset($products) && count($products) > 0)

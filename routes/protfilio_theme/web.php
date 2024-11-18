@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\protfilio_theme\HomeController;
 use App\Http\Controllers\protfilio_theme\ServiceController;
 use App\Http\Controllers\protfilio_theme\TeamController;
-
+use App\Http\Controllers\ReviewProductController;
 
 Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
 Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');
@@ -60,6 +60,14 @@ Route::get('add_to_cart', [HomeController::class, 'add_to_cart'])->name('add_to_
 
 Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->name('cart_and_wishlist');
 Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
+
+
+
+
+
+Route::resource('review', ReviewProductController::class)->names('review');
+
+
 
 // User Defined Route Web So Check Route not exists
 Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^.*');

@@ -233,7 +233,7 @@ var MyScroll = "";
           cssEase: 'linear',
           pauseOnFocus: false,
           pauseOnHover: false,
-          
+
           responsive: [
             {
               breakpoint: 1025,
@@ -555,6 +555,10 @@ var MyScroll = "";
     contactForm: function () {
       $(".contact-form").on("submit", function (e) {
         e.preventDefault();
+
+        var current_action = this.action;
+        var current_method = this.method;
+
         if ($(".contact-form").valid()) {
           var _self = $(this);
           _self
@@ -562,20 +566,22 @@ var MyScroll = "";
             .find('button[type="submit"]')
             .attr("disabled", "disabled");
           var data = $(this).serialize();
+          console.log(_self.action)
           $.ajax({
-            url: "./assets/mail/contact.php",
-            type: "post",
+            url: current_action,
+            type: current_method,
             dataType: "json",
             data: data,
             success: function (data) {
+                console.log(data.success)
               $(".contact-form").trigger("reset");
               _self.find('button[type="submit"]').removeAttr("disabled");
               if (data.success) {
                 document.getElementById("message").innerHTML =
-                  "<h6 class='color-primary mt-3'>Email Sent Successfully</h6>";
+                  "<h6 class='color-primary mt-3 p-3 bg-warning rounded'>"+data.success+"</h6>";
               } else {
                 document.getElementById("message").innerHTML =
-                  "<h6 class='color-primary mt-3'>There is an error</h6>";
+                  "<h6 class='color-primary mt-3  p-3 bg-danger rounded'>There is an error</h6>";
               }
               $("#messages").show("slow");
               $("#messages").slideDown("slow");

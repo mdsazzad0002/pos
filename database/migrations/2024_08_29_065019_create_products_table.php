@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('brand')->nullable();
             $table->string('weight')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
+            $table->longText('additional_description')->nullable();
 
             $table->string('unit')->nullable();
             $table->string('for_selling')->default(0);
@@ -39,7 +40,7 @@ return new class extends Migration
             $table->string('sub_category')->nullable();
 
 
-            $table->string('short_description')->nullable();
+            $table->text('short_description')->nullable();
             $table->string('youtube_video')->nullable();
             $table->string('tags')->nullable();
 

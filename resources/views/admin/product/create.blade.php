@@ -282,11 +282,12 @@
                                     <textarea type="text" name="description" class="form-control mb-2 summernote"
                                         placeholder="Description">{{ $product ? $product->description : 0 }}</textarea>
                                 </div>
-                                <div class="col-lg-12 mt-3">
-                                    <label for="Youtube_Video">Youtube Video</label>
-                                    <textarea name="youtube_video" id="Youtube_Video" class="form-control"
-                                        placeholder="Iframe Full TAG">{{ $product ? $product->youtube_video : 0 }}</textarea>
+                                <div class="col-lg-12 pt-3">
+                                    <label for="">Additional Description</label>
+                                    <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
+                                        placeholder="Additional Description">{{ $product ? $product->additional_description : 0 }}</textarea>
                                 </div>
+
 
                             </div>
                         </div>
@@ -309,6 +310,11 @@
                                     <label for="landing_page_color">Landing Page Color</label>
                                     <input type="color" name="landing_page_color" value="{{ $product ? $product->landing_page_color : 0 }}" class="form-control mb-2"
                                         placeholder="Landing Page Color">
+                                </div>
+                                <div class="col-lg-12 mt-3">
+                                    <label for="Youtube_Video">Youtube Video</label>
+                                    <textarea name="youtube_video" id="Youtube_Video" class="form-control"
+                                        placeholder="Iframe Full TAG">{{ $product ? $product->youtube_video : 0 }}</textarea>
                                 </div>
 
                                 <div class="col-lg-6">

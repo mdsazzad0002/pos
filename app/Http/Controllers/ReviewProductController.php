@@ -12,7 +12,7 @@ class ReviewProductController extends Controller
      */
     public function index()
     {
-        //
+        return  reviewProduct::paginate(10);
     }
 
     /**
@@ -28,7 +28,27 @@ class ReviewProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required',
+            'product_id' => 'required',
+        ]);
+
+        $product_review = new reviewProduct();
+        $product_review->name = $request->name;
+        $product_review->email = $request->email;
+        $product_review->comment = $request->message;
+        $product_review->rating = $request->rating;
+        $product_review->product_id = $request->product_id;
+        $product_review->creator = auth('customer')->user()->id ?? 0;
+        $product_review->save();
+
+
+        $data = new \stdClass();
+        $data->success = 'successfully send review';
+        return json_encode($data);
     }
 
     /**
