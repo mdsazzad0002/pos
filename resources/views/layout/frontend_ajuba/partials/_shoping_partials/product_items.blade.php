@@ -15,7 +15,7 @@
                     <div class="product-text">
                         <div class="prod-title mb-16">
                             <h6>{{ $product->name ?? '' }}</h6>
-                            <a href="javascript:;" class="cancel">
+                            <a href="javascript:void(0);" class="cancel" onclick="remove_cart({{ $product->id }})">
                                 <img src="{{asset('uploads/')}}/images/cancel.png" alt="" style="margin-bottom: 5px;">
                             </a>
                         </div>

@@ -7,6 +7,9 @@
     <script src="{{ asset('assets/frontend/js/vendor/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('assets/frontend/js/vendor/countryCode.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ asset('vendor/flasher/flasher.min.css') }}">
+    <script src="{{ asset('vendor/flasher/flasher.min.js') }}"></script>
+
     <script src="{{ asset('assets/frontend/js/app.js') }}"></script>
 
     @stack('js')
@@ -41,8 +44,9 @@
 
         function add_to_cart(thi){
 
+            // console.log(thi)
             if ($(thi).data('quantaty')) {
-                var quantaty = $(thi).closest('.modal').find('input.qunataty_number').val();
+                var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
                 // console.log(quantaty);
                 $.ajax({
                     type: 'get',
@@ -53,7 +57,7 @@
 
                     },
                     success:function(data){
-                        console.log(data)
+                        flasher.success('Successfully added cart');
                     }
                 })
             }else{
@@ -64,7 +68,8 @@
                         'product_id': $(thi).data('id'),
                     },
                     success:function(data){
-                        console.log(data)
+                        flasher.warning('Successfully removed cart');
+
                     }
                 })
             }
@@ -72,10 +77,9 @@
 
 
         }
-    </script>
 
 
-    <script>
+
 
 
         // Initialize EventSource with the device ID load data current session
@@ -144,27 +148,73 @@
         function cart_init_sidebar(){
             document.querySelectorAll('#sidebar-cart li').forEach(element => {
             var id = element.getAttribute('data-id');
-
-            element.querySelector('.qunataty_input').addEventListener("change", function() {
-                    cart_update(id, this.value)
-                })
+                if(id){
+                    element.querySelector('.qunataty_input').addEventListener("change", function() {
+                        cart_update(id, this.value)
+                    })
+                }
             });
         }
 
 
         function cart_update(id, quantaty){
             $.ajax({
-                        type: 'get',
-                        url:'{{ route('add_to_cart') }}',
-                        data:{
-                            'product_id': id,
-                            'quantity' : quantaty
+                type: 'get',
+                url:'{{ route('add_to_cart') }}',
+                data:{
+                    'product_id': id,
+                    'quantity' : quantaty
 
-                        },
-                        success:function(data){
-                            update_side_cart();
-                        }
-                    })
+                },
+                success:function(data){
+                    update_side_cart();
+                }
+            })
+        }
+
+        function remove_cart(id){
+            $.ajax({
+                type: 'get',
+                url:'{{ route('add_to_cart') }}',
+                data:{
+                    'product_id': id,
+                    'type' : 'remove_cart'
+
+                },
+                success:function(data){
+                    update_side_cart();
+                }
+            })
+        }
+
+        function add_to_compareList(id, type = null){
+
+            if(type == null){
+                $.ajax({
+                    type: 'get',
+                    url:'{{ route('add_to_compareList') }}',
+                    data:{
+                        'product_id': id,
+                    },
+                    success:function(data){
+                        flasher.success("Successfully added compare list");
+                    }
+                })
+
+            }else{
+                $.ajax({
+                    type: 'get',
+                    url:'{{ route('add_to_compareList') }}',
+                    data:{
+                        'product_id': id,
+                        'remove_list': true,
+                    },
+                    success:function(data){
+                        flasher.warning('Successfully removed compare list');
+                    }
+                })
+
+            }
         }
 
     </script>

@@ -37,8 +37,7 @@
         <div class="product-desc">
             <h6 class="product-title mb-8">
                 @if($view_page)
-                <a href="{{ $view_page->slug }}?slug={{ $product->slug }}">{{ $product->name }}</a>
-
+                <a href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">{{ $product->name }}</a>
                 @endif
             </h6>
             <div class="text mb-16">
@@ -46,7 +45,7 @@
             </div>
             <div class="rating-star mb-16 bg-white">
                 <div class="mb-24">
-                    @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->review_count, 'rating_star' => $product->review_avg_rating])
+                    @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->rat_count, 'rating_star' => $product->avg_rat])
                 </div>
 
                 @include('frontend.protfilio_theme._filter_variant.partials.product_price')

@@ -61,6 +61,7 @@ Route::get('add_to_cart', [HomeController::class, 'add_to_cart'])->name('add_to_
 Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->name('cart_and_wishlist');
 Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
 
+Route::get('add_to_compareList', [HomeController::class, 'add_to_compareList'])->name('add_to_compareList');
 
 
 

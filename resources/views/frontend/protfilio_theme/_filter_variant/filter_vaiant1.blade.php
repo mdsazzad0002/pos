@@ -130,11 +130,11 @@
                                                 <div class="price-input mb-24">
                                                     <div class="field">
                                                         <div class="fw-500 mb-4p">Low</div>
-                                                        <input type="number" class="input-min" value="2500">
+                                                        <input type="number" class="input-min" value="0">
                                                     </div>
                                                     <div class="field">
                                                         <div class="fw-500 mb-4p">High</div>
-                                                        <input type="number" class="input-max" value="7500">
+                                                        <input type="number" class="input-max" value="1000000">
                                                     </div>
                                                 </div>
                                                 <div class="slider">
@@ -142,9 +142,9 @@
                                                 </div>
                                                 <div class="range-input">
                                                     <input type="range" class="range-min" min="0" max="10000"
-                                                        value="2500" step="100">
-                                                    <input type="range" class="range-max" min="0" max="10000"
-                                                        value="7500" step="100">
+                                                        value="0" step="100">
+                                                    <input type="range" class="range-max" min="0" max="100000"
+                                                        value="1000000" step="100">
                                                 </div>
                                             </div>
                                         </div>
@@ -159,7 +159,7 @@
                                 @endphp
                                 @if(count($brand_items) > 0)
                                 <div class="hr-line mb-24"></div>
-                                <div class="category-block box-3 mb-24">
+                                <div class="category-block box-3 mb-24 brands_block">
                                     <div class="title mb-32" data-count="3">
                                         <h6>{{ __('product.filter_by_brand') }}</h6>
                                         <span>
@@ -172,7 +172,7 @@
 
                                             <li class="d-flex align-items-center justify-content-between mb-12">
                                                 <div class="check-block">
-                                                    <input type="checkbox" id="brand{{ $brand->id }}">
+                                                    <input type="checkbox" class="brands_input" value="{{ $brand->id }}" id="brand{{ $brand->id }}">
                                                     <label for="brand{{ $brand->id }}">{{ $brand->name }}</label>
                                                 </div>
                                                 <p class="light-gray fw-400"></p>
@@ -191,7 +191,7 @@
 
 
                             <div class="hr-line mb-24"></div>
-                            <div class="category-block box-6 mb-24">
+                            <div class="category-block box-6 mb-24 rating_block">
                                 <div class="title mb-24" data-count="6">
                                     <h6>{{ __('product.filter_by_rating') }}</h6>
                                     <span>
@@ -203,13 +203,13 @@
                                         <div class="star-rating flex-column w-100">
 
                                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5">
+                                                <input type="radio" id="5-stars" name="rating"  value="5">
                                                 <label for="5-stars" class="star">
                                                     <span class="text-danger">
                                                         &#9733; &#9733; &#9733; &#9733; &#9733;
                                                     </span>
                                                 </label>
-                                                <p class="light-gray fw-400"></p>
+
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -220,7 +220,7 @@
                                                     </span>
                                                     &#9733;
                                                 </label>
-                                                <p class="light-gray fw-400"></p>
+
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -231,7 +231,7 @@
                                                     </span>
                                                     &#9733; &#9733;
                                                 </label>
-                                                <p class="light-gray fw-400"></p>
+
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -242,7 +242,7 @@
                                                     </span>
                                                     &#9733; &#9733; &#9733;
                                                 </label>
-                                                <p class="light-gray fw-400"></p>
+
                                             </div>
 
                                             <div class="d-flex align-items-center justify-content-between mb-2">
@@ -253,7 +253,6 @@
                                                     </span>
                                                     &#9733; &#9733;&#9733; &#9733;
                                                 </label>
-                                                <p class="light-gray fw-400"></p>
                                             </div>
 
                                         </div>
@@ -267,6 +266,7 @@
 
                             @php
                                 $feature_product = \App\Models\product::where('status', 1)->where('feature', 1)->orderBy('id','desc')->limit(5)->get();
+                                $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'view')->first();
                             @endphp
                             @if(count($feature_product) > 0)
 
@@ -281,7 +281,7 @@
                                 <div class="content-block">
 
                                     @foreach($feature_product as $key => $product)
-                                    <a href="{{ $product->slug }}" class="d-flex gap-24 align-items-center mb-24">
+                                    <a href="{{ url($filter_page->slug.'?slug='.$product->slug) }}" class="d-flex gap-24 align-items-center mb-24">
                                         <div class="image-box d-flex flex-shrink-0">
                                             <img style="max-width: 80px" src="{{ dynamic_asset($product->upload_id) }}" alt="">
                                         </div>
@@ -360,20 +360,33 @@
         var category_name = '{{ $_GET['category_name'] ?? '' }}';
         var q = '{{ $_GET['q'] ?? '' }}';
         var category = '{{ $_GET['category'] ?? '' }}';
-        var selectedCategories = [];
-        var selectedSubCategories = [];
+        var selectedCategories = {!! json_encode($_GET['category_ids'] ?? []) !!};
+        var selectedSubCategories = {!! json_encode($_GET['subcategory_ids'] ?? []) !!};
+        var min_price = '{{ $_GET['min_price'] ?? '' }}';
+        var max_price = '{{ $_GET['max_price'] ?? '' }}';
+        var brands_items = {!! json_encode($_GET['brands_key'] ?? []) !!};
+        var rating_star = {{ $_GET['rating_star'] ?? 0 }};
+
+
+
 
         function ajaxDataChangeLoad(){
             var url_data = "?page=" + current_page +
             '&category_name='+category_name+
             '&category='+category+
+            '&min_price='+min_price+
+            '&max_price='+max_price+
+            '&rating_star='+rating_star+
             '&q='+q;
 
             selectedCategories.forEach(element => {
-                url_data+='&category_ids='+element;
+                url_data+='&category_ids[]='+element;
             });
             selectedSubCategories.forEach(element => {
-                url_data+='&subcategory_ids='+element;
+                url_data+='&subcategory_ids[]='+element;
+            });
+            brands_items.forEach(element => {
+                url_data+='&brand[]='+element;
             });
 
             // window.history.pushState(window.history.state, '', url_data);
@@ -424,7 +437,6 @@
 
 
         $('.category_filter').on('change', function(){
-
             selectedCategories = [];
             selectedSubCategories = [];
             $('.main_check_category:checked').each(function() {
@@ -437,6 +449,35 @@
 
             ajaxDataChangeLoad()
         })
+
+
+        $('.filter_by_price').on('change', function(){
+            min_price = $(this).find('.range-min').val();
+            max_price = $(this).find('.range-max').val();
+            ajaxDataChangeLoad();
+
+        })
+
+
+        $('.brands_block').on('change', function(){
+            brands_items = [];
+
+            $('.brands_input:checked').each(function() {
+                brands_items.push($(this).val());
+            });
+
+            ajaxDataChangeLoad()
+        })
+
+        $('.rating_block').on('change', function(){
+
+            rating_star = $('input:checked').val();
+
+            ajaxDataChangeLoad()
+        })
+
+
+
     </script>
 
 @endpush

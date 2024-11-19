@@ -14,35 +14,35 @@ class product extends Model
 {
     use HasFactory;
 
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'avg_rat', 'rat_count'];
 
-    // Recombanend 1st items
+
     public function category_info(){
         return $this->hasOne(category::class, 'id', 'category');
     }
 
-    public function categoryInfo(){
-        return $this->hasOne(category::class, 'id', 'category');
-    }
+    // public function categoryInfo(){
+    //     return $this->hasOne(category::class, 'id', 'category');
+    // }
 
 
-    public function categorys(){
-        return $this->hasOne(category::class, 'id', 'category');
-    }
+    // public function categorys(){
+    //     return $this->hasOne(category::class, 'id', 'category');
+    // }
     public function sub_category_info(){
         return $this->hasOne(SubCategory::class, 'id', 'sub_category');
     }
 
 
 
-    // Recombanend 1st items
+
     public function brand_info(){
         return $this->hasOne(brand::class, 'id', 'brand');
 
     }
-    public function brands(){
-        return $this->hasOne(brand::class, 'id', 'brand');
-    }
+    // public function brands(){
+    //     return $this->hasOne(brand::class, 'id', 'brand');
+    // }
 
     public function unit_info(){
         return $this->hasOne(unit::class, 'id', 'unit');
@@ -55,28 +55,37 @@ class product extends Model
         return $this->hasOne(Vat::class,'id', 'vat');
 
     }
-    public function getImageUrlAttribute(){
-        return dynamic_asset($this->upload_id);
-    }
-
-    public function review(){
+    public function reviews_info(){
         return $this->hasMany(reviewProduct::class, 'product_id', 'id');
     }
     public function reviewCount(){
         return $this->hasMany(reviewProduct::class, 'product_id', 'id')->count();
     }
     public function averageRating(){
-        return $this->review()->avg('rating');  // 'rating' is the column name in the reviewProduct table
+        return $this->reviews_info()->avg('rating');  // 'rating' is the column name in the reviewProduct table
     }
 
 
 
-    public function discount_info(){
+    public function discounts_info(){
         return discount::whereIn('id', explode(',',$this->discount_id))->get();
     }
 
     public function variant_option_info(){
         return $this->hasMany(VariantOption::class, 'product_id', 'id');
+    }
+
+
+    // attribute set
+
+    public function getImageUrlAttribute(){
+        return dynamic_asset($this->upload_id);
+    }
+    public function getAvgRatAttribute(){
+        return $this->averageRating() ?? 0;
+    }
+    public function getRatCountAttribute(){
+        return $this->reviewCount() ?? 0;
     }
 
 

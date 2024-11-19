@@ -31,6 +31,7 @@ class HomeController extends Controller
 
 
     public function feature_view(Request $request){
+        
 
          $features_product = product::join('sub_categories', 'products.sub_category', '=', 'sub_categories.id')
         ->where('products.status', 1)

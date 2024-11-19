@@ -1,3 +1,6 @@
+@php
+    $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter')->first();
+@endphp
 
 <div class="close-content text-end">
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -21,7 +24,7 @@
    {{ $product->short_description }}
 </p>
 <div class="hr-line mb-24"></div>
-<div class="function-bar mb-16">
+<div class="function-bar mb-16 quantity_parents">
 
     <div class="quantity quantity-wrap">
         <div class="input-area quantity-wrap">
@@ -42,9 +45,9 @@
     <h6>Category:</h6>
 
     <p class="light-gray">
-        <a class="items_active" href="{{ url('filter') }}?category={{  $product->categorys->slug  }}">{{ $product->categorys->name }}</a>
+        <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $product->category_info->slug  }}">{{ $product->category_info->name }}</a>
 
-        @foreach ($product->categorys->subcategory as $items) ,
+        @foreach ($product->category_info->subcategories_info as $items) ,
             <a @if($product->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
         @endforeach
     </p>

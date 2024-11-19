@@ -5,6 +5,8 @@ if($request->has('slug')){
 }else{
     echo 'product slug not found';
 }
+
+$filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter')->first();
 @endphp
 
 <main class="main-wrapper bg-lightest-gray">
@@ -165,22 +167,22 @@ if($request->has('slug')){
                             </div>
 
                             <div class="hr-line mb-24"></div>
-                            <div class="function-bar mb-16">
+                            <div class="function-bar mb-16 quantity_parents">
                                 <div class="quantity quantity-wrap">
                                     <div class="input-area quantity-wrap">
                                         <input class="decrement" type="button" value="-">
                                         <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                            class="number">
+                                            class="number qunataty_number">
                                         <input class="increment" type="button" value="+">
                                     </div>
                                 </div>
                                 <div class="cart-btn w-100">
-                                    <a href="cart.html" class="cus-btn-2 w-100">ADD TO CART</a>
+                                    <a href="javascript:void(0)" onclick="add_to_cart(this)" data-quantaty="true" data-id="{{ $products->id }}" class="cus-btn-2 w-100">ADD TO CART</a>
                                 </div>
                                 <div class="side-icons">
                                     <ul class="list-unstyled m-0">
                                         <li>
-                                            <a href="wishlist.html">
+                                            <a href="javascript:void(0)" onclick="add_to_compareList({{ $products->id }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22"
                                                     viewBox="0 0 24 22" fill="none">
                                                     <path
@@ -189,30 +191,7 @@ if($request->has('slug')){
                                                 </svg>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="" class="zui-wrapper-button" data-bs-toggle="modal" data-bs-target="#comparepopup">
-                                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g clip-path="url(#clip0_7951_48348)">
-                                                        <g clip-path="url(#clip1_7951_48348)">
-                                                            <path
-                                                                d="M19.5508 24.4844C19.3083 24.4844 19.0659 24.3908 18.8823 24.2042C18.5193 23.835 18.5243 23.2414 18.8935 22.8784L22.0446 19.7799C22.2199 19.6043 22.3164 19.3715 22.3164 19.1241C22.3164 18.8774 22.2205 18.6454 22.0462 18.4699L18.897 15.4064C18.0386 14.5069 19.2826 13.2294 20.2045 14.0624L23.3587 17.1309C23.3614 17.1336 23.3642 17.1362 23.3668 17.1389C23.8986 17.6691 24.1914 18.3741 24.1914 19.1242C24.1914 19.8742 23.8985 20.5792 23.3668 21.1093C23.3653 21.1108 23.3637 21.1123 23.3622 21.1139L20.208 24.2154C20.0255 24.3949 19.7881 24.4844 19.5508 24.4844ZM19.5508 19.9844H5.81641C2.71478 19.9844 0.191406 17.461 0.191406 14.3594V11.9688C0.237484 10.7262 2.02075 10.7271 2.06641 11.9688V14.3594C2.06641 16.4271 3.74866 18.1094 5.81641 18.1094H19.5508C20.7933 18.1555 20.7924 19.9387 19.5508 19.9844ZM23.2539 13.9375C22.7361 13.9375 22.3164 13.5178 22.3164 13V10.6094C22.3164 8.54164 20.6342 6.85939 18.5664 6.85939H4.83203C3.58947 6.81331 3.59041 5.03004 4.83203 4.98439H18.5664C21.668 4.98439 24.1914 7.50776 24.1914 10.6094V13C24.1914 13.5178 23.7717 13.9375 23.2539 13.9375ZM4.83194 11.1719C4.59634 11.1719 4.36052 11.0837 4.17831 10.9063L1.02409 7.83785C1.02133 7.83518 1.01861 7.83251 1.01594 7.82979C0.484234 7.29968 0.191406 6.59468 0.191406 5.84464C0.191406 5.09459 0.484234 4.38954 1.01594 3.85948C1.01748 3.85793 1.01898 3.85643 1.02053 3.85493L4.17475 0.7534C4.54394 0.3904 5.13752 0.395369 5.50052 0.764557C5.86352 1.13374 5.85855 1.72732 5.48936 2.09032L2.33823 5.18885C1.97884 5.53432 1.97809 6.15242 2.33655 6.49878L5.48575 9.56239C5.85686 9.92342 5.86502 10.5169 5.50398 10.8881C5.32028 11.077 5.07616 11.1719 4.83194 11.1719Z"
-                                                                fill="#141516" />
-                                                        </g>
-                                                    </g>
-                                                    <defs>
-                                                        <clipPath id="clip0_7951_48348">
-                                                            <rect width="24" height="24" fill="white"
-                                                                transform="translate(0.0820312 0.484375)" />
-                                                        </clipPath>
-                                                        <clipPath id="clip1_7951_48348">
-                                                            <rect width="24" height="24" fill="white"
-                                                                transform="translate(0.191406 0.484375)" />
-                                                        </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -225,9 +204,9 @@ if($request->has('slug')){
                                 <h6>Category:</h6>
 
                                 <p class="light-gray">
-                                    <a class="items_active" href="{{ url('filter') }}?category={{  $products->categorys->slug  }}">{{ $products->categorys->name }}</a>
+                                    <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $products->category_info->slug  }}">{{ $products->category_info->name }}</a>
 
-                                    @foreach ($products->categorys->subcategory as $items) ,
+                                    @foreach ($products->category_info->subcategories_info as $items) ,
                                         <a @if($products->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
                                     @endforeach
                                 </p>
@@ -349,9 +328,9 @@ if($request->has('slug')){
                                 <h5 class="mb-48">({{$products->reviewCount() ??  0 }}) Reviews For {{ $products->name ?? '' }}</h5>
 
 
-                                @foreach ($products->review as $review)
+                                @foreach ($products->reviews_info as $review)
                                     <div class="comment-box mb-24">
-                                        <img src="assets/media/users/user-4.png" alt="" class="br-5">
+                                        <img src="{{ $review->review_image }}" alt="" class="br-5">
                                         <div class="block">
                                             <div class="top-row mb-16">
                                                 <div class="info">
@@ -509,6 +488,10 @@ if($request->has('slug')){
         /* Style the selected stars */
         .rating input:checked ~ label {
             color: gold;
+        }
+
+        .comment-box img {
+             width: 60px;
         }
 
     </style>

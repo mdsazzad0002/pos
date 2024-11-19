@@ -2763,11 +2763,7 @@ header .header-section .mixin-container .input-field button {
   padding: clamp(20px, 1.667vw, 42px) clamp(16px, 1.25vw, 36px);
   border-radius: clamp(6px, 0.521vw, 20px);
 }
-@media (max-width: 1499px) {
-  .featured-product-sec .main-card {
-    height: 100%;
-  }
-}
+
 @media (max-width: 1199px) {
   .featured-product-sec .main-card {
     width: 100%;
@@ -3808,8 +3804,8 @@ footer .footer-bottom-bar {
 }
 .sidebar .category-block .wrapper .slider .progress {
   height: 100%;
-  left: 25%;
-  right: 25%;
+  left: 0%;
+  right: 0%;
   position: absolute;
   border-radius: 5px;
   background: #006937;
@@ -3916,8 +3912,10 @@ footer .footer-bottom-bar {
   justify-content: start;
   font-size: 26px;
 }
-.sidebar .category-block .star-rating input {
-  display: none;
+.sidebar .category-block .star-rating div {
+  display: flex;
+  justify-content:space-between;
+  flex-direction:row-reverse;
 }
 .sidebar .category-block .star-rating label {
   color: #ccc;

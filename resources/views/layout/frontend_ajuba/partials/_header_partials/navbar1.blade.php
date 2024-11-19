@@ -55,7 +55,7 @@
                                                 <span class="wrapper-1">
                                                     <span class="category-second-list-ul list-unstyled mb-40">
                                                         <span class="dark-black fw-500 mb-16">Sub Cateogory</span>
-                                                        @foreach ($items->subcategory as $subcategory_items)
+                                                        @foreach ($items->subcategories_info as $subcategory_items)
                                                              <span class="category-second-item">
                                                                 <a href="{{ url($filter_page->slug) }}?category={{ $items->slug }}&subcategory={{ $subcategory_items->slug }}">
                                                                     {{ $subcategory_items->name ?? '' }}

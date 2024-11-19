@@ -13,6 +13,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -56,7 +57,8 @@ class HomeController extends Controller
 
 
     public function filter_get(Request $request){
-        $product_list = product::where('status', 1)->where(function($query) use ($request){
+        // return $request;
+         $product_list = product::where('status', 1)->where(function($query) use ($request){
 
             // filter by category
             if($request->has('category_name') && $request->category_name != '' && $request->category_name != 'All Categories'){
@@ -76,9 +78,24 @@ class HomeController extends Controller
                 }
             }
 
+            // filter by price slug
+            if($request->has('min_price') && $request->min_price != '' && $request->has('max_price') && $request->max_price != ''){
+                    $query->whereBetween('selling_price', [$request->min_price, $request->max_price]);
+            }
+
+
+
             // filter by category id
-            if($request->has('category') && $request->subcategory_ids != ''){
-                 $query->whereIn('category', $request->subcategory_ids);
+            if($request->has('category_ids') && $request->category_ids != ''){
+                 $query->whereIn('category', $request->category_ids);
+            }
+
+            // filter by subcategory id
+            if($request->has('subcategory_ids') && $request->subcategory_ids != ''){
+                 $query->whereIn('sub_category', $request->subcategory_ids);
+            }
+            if($request->has('brand') && $request->brand != ''){
+                 $query->whereIn('brand', $request->brand);
             }
 
             // filter by custom input
@@ -91,9 +108,18 @@ class HomeController extends Controller
                     }
                 }
             }
+
+
+           // Filter by rating
+           if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
+                $query->withAvg('review', 'rating') // eager load the average rating
+                ->havingRaw('COALESCE(review_avg_rating, 0) >= ?', [$request->rating_star]);
+
+            }
         })
 
-        ->paginate(2);
+        ->paginate(3);
+
         return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
     }
 
@@ -126,8 +152,7 @@ class HomeController extends Controller
 
    public function recent_view(Request $request){
 
-        $features_product = product::withCount('review')->withAvg('review', 'rating')
-        ->where(function($query) use ($request){
+        $features_product = product::where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
                    $query->where('category', $request->id);
@@ -142,8 +167,7 @@ class HomeController extends Controller
    }
    public function recommend_view(Request $request){
 
-        $features_product = product::withCount('review')->withAvg('review', 'rating')
-        ->where(function($query) use ($request){
+        $features_product = product::where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
                    $query->where('category', $request->id);
@@ -160,7 +184,7 @@ class HomeController extends Controller
 
    public function popular_view(Request $request){
 
-        $features_product = product::withCount('review')->withAvg('review', 'rating')
+        $features_product = product::withAvg('reviews_info', 'rating')
         ->where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
@@ -169,7 +193,7 @@ class HomeController extends Controller
                }
            }
 
-       })->limit(20)->orderByRaw('COALESCE(review_avg_rating, 0) desc')->get();
+       })->limit(20)->orderByRaw('COALESCE(reviews_info_avg_rating, 0) desc')->get();
 
        return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
 
@@ -183,28 +207,28 @@ class HomeController extends Controller
 
 
 
-   public function filter(Request $request){
-       // return $request;
-       $products = product::withCount('review')->withAvg('review', 'rating')->where(function($query) use ($request){
+//    public function filter(Request $request){
+//        // return $request;
+//        $products = product::withCount('review')->withAvg('review', 'rating')->where(function($query) use ($request){
 
-           // filter by category
-           if($request->has('category')){
-               $category = category::where('slug', $request->category)->first();
-               if($category){
-                   $query->orWhere('category', $category->id);
-               }
-           }
+//            // filter by category
+//            if($request->has('category')){
+//                $category = category::where('slug', $request->category)->first();
+//                if($category){
+//                    $query->orWhere('category', $category->id);
+//                }
+//            }
 
-       })->get();
+//        })->get();
 
-       //   $products;
+//        //   $products;
 
-       return view('frontend.filter.index', compact('request', 'products'));
-   }
+//        return view('frontend.filter.index', compact('request', 'products'));
+//    }
 
 
    public function quickview(Request $request){
-       $product = product::withCount('review')->withAvg('review', 'rating')->find($request->id);
+       $product = product::find($request->id);
        if($product){
            $upload_id = $product->upload_id;
            $image_view = view('frontend.protfilio_theme._product_variant.partials.model_image', compact('upload_id'))->render();
@@ -223,9 +247,13 @@ class HomeController extends Controller
         return view('frontend.protfilio_theme.blog.index');
     }
 
+
+
     public function show(){
         return view('frontend.protfilio_theme.blog.index');
     }
+
+
 
     public function add_to_cart(Request $request){
 
@@ -237,9 +265,35 @@ class HomeController extends Controller
             // Flag to check if the product was found
             $found = false;
 
+
+
             // Loop through the cart to check if the product exists
-            foreach ($product_cart as &$item) {
+            foreach ($product_cart as $key =>  &$item) {
                 if (isset($item['pd_' . $product_id])) {
+
+                    // return $item;
+
+                    if($request->has('type') && $request->type == 'remove_cart') {
+
+                        unset($product_cart[$key]);
+                        session()->put('front_product', $product_cart);
+                        // Check if the product was successfully removed
+                        if (!isset($product_cart[$key])) {
+                            // Return success response if product was removed
+                            return response()->json([
+                                'title' => 'Successfully removed from Cart',
+                                'type'  => 'success',
+                                'cart'  => $product_cart, // Return the updated cart
+                            ]);
+                        } else {
+                            // This case should never happen because we already called unset.
+                            return response()->json([
+                                'title' => 'Failed to remove product from Cart',
+                                'type'  => 'error',
+                            ]);
+                        }
+
+                    }
                     // If the product exists, increase the quantity
                     if($request->has('quantity')) {
                         $item['pd_' . $product_id]['quantaty'] = $request->quantity;
@@ -293,6 +347,36 @@ class HomeController extends Controller
 
 
     }
+
+
+
+    public function add_to_compareList(Request $request){
+        $compare_list = session('compare_list', []);
+
+        if($request->has('remove_list')) {
+            unset($compare_list[$request->product_id]);
+            session()->put('compare_list', $compare_list);
+
+            return json_encode([
+                'title'=>'Successfully  removed Compare List',
+                'type'=>'success',
+            ]);
+
+
+        }else{
+
+
+            $compare_list[] = $request->product_id;
+            session()->put('compare_list', $compare_list);
+
+            return json_encode([
+                'title'=>'Successfully  added Compare List',
+                'type'=>'success',
+            ]);
+        }
+
+    }
+
 
 
 
