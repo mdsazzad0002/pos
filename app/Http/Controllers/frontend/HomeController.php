@@ -31,7 +31,7 @@ class HomeController extends Controller
 
 
     public function feature_view(Request $request){
-        
+
 
          $features_product = product::join('sub_categories', 'products.sub_category', '=', 'sub_categories.id')
         ->where('products.status', 1)
@@ -109,5 +109,16 @@ class HomeController extends Controller
             return $data;
         }
 
+    }
+
+    public function sales_partner_store ( Request $request ) {
+        $validate = $request->validate([
+            'username' => ['required', 'max:100'],
+            'email'    => ['required', 'max:255', 'email'],
+            'nid'      => ['required', 'max:255'],
+            'password' => ['required', 'min:3', 'confirmed']
+        ]);
+
+        
     }
 }

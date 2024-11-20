@@ -42,6 +42,7 @@ use App\Http\Controllers\payment\stripe\stripePaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\vatController;
+use App\Http\Controllers\frontend\HomeController as home;
 
 /*
 |--------------------------------------------------------------------------
@@ -304,5 +305,7 @@ Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
     Route::get('/process-transaction', [BraintreeController::class, 'processTransaction']);
 
 });
+
+Route::post('/pos/salse/partner', [home::class, 'sales_partner_store'])->name('sales_partner_store');
 
 

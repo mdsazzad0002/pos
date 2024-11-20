@@ -17,7 +17,7 @@
             <div class="side-icons">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#">
+                        <a href="javascript:void(0)" onclick="add_to_compareList({{ $product->id }})">
                             <img src="{{ asset('uploads/icons/heart.png') }}" alt="">
                         </a>
                     </li>

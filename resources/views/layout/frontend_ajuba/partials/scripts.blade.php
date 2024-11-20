@@ -68,7 +68,7 @@
                         'product_id': $(thi).data('id'),
                     },
                     success:function(data){
-                        flasher.warning('Successfully removed cart');
+                        flasher.success('Successfully added cart');
 
                     }
                 })

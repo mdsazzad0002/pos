@@ -369,7 +369,7 @@ sidebar-dark-primary elevation-4">
 
                     </ul>
                 </li>
-               
+
 
 
 
@@ -378,7 +378,15 @@ sidebar-dark-primary elevation-4">
 
                 @include('layout.admin._sidebar.settings')
 
+                <li class="nav-item">
+                    <a href="{{ url('/') }}" class="nav-link" target="_blank">
 
+                        <i class="fas fa-external-link-alt nav-icon"></i>
+                        <p>
+                           {{ __('visit.webiste') }}
+                        </p>
+                    </a>
+                </li>
 
 
         </nav>

@@ -3,7 +3,7 @@
 
 
 @section('content')
-
+@include('frontend.protfilio_theme._sales_partner_commission.variant1')
 
 
         @foreach ($homepagemanage as $items)

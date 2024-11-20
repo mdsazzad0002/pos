@@ -15,7 +15,7 @@ class enSeeder extends Seeder
     public function run(): void
     {
         $array = [
-            "log.in" => 'log in en',
+            "log.in" => 'log in',
             'settings.main_setting_sidebar' => 'Main Settings',
             'device_access_check.sidebar.list' => 'Device Access',
             'settings.notification_sidebar' => 'Notification Setting',
@@ -128,6 +128,11 @@ class enSeeder extends Seeder
             'sidebar.settings' => 'Settings',
             'language.title' => 'Language',
             'language.add_new' => '+',
+            'log.choose_your_language' =>'Language',
+            'log.Email' =>'Email',
+            'log.Password' =>'Password',
+            'log.Remember_me' =>'Remember Me',
+            'log.Forgot_your_password?' =>'Forgot your password ?',
 
 
 
