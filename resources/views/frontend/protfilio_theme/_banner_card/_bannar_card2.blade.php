@@ -3,7 +3,7 @@
 @php
     $offer_event = \App\Models\offerbanner::where('type', 3)->first();
 @endphp
-<section class="inner-banner"  style="background: url('{{ asset("uploads/bg/inner-banner.png")}}')  no-repeat">
+<section class="inner-banner"  style="background: url('{{ dynamic_asset($offer_event->image3) }}')  no-repeat;  background-size: cover;">
     <div class="container-fluid">
         <div class="inner-content v-2">
             <div class="inner-text">

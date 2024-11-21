@@ -43,6 +43,7 @@ use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\vatController;
 use App\Http\Controllers\frontend\HomeController as home;
+use App\Http\Controllers\OfferbannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -223,6 +224,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/purchase/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('purchase.select');
 
 
+    //  purchase
+    Route::resource('/offerbanner', OfferbannerController::class)->names('offerbanner');
+    Route::get('/purchase/delete/{offerbanner}', [OfferbannerController::class, 'delete'])->name('offerbanner.delete');
+    Route::get('/purchase/getPurchase/get', [OfferbannerController::class, 'getofferbanner'])->name('offerbanner.select');
+
+
+
     //  Order
     Route::resource('/order', OrderController::class)->names('order');
     Route::get('/order/delete/{order}', [OrderController::class, 'delete'])->name('order.delete');
@@ -305,7 +313,5 @@ Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
     Route::get('/process-transaction', [BraintreeController::class, 'processTransaction']);
 
 });
-
-Route::post('/pos/salse/partner', [home::class, 'sales_partner_store'])->name('sales_partner_store');
 
 

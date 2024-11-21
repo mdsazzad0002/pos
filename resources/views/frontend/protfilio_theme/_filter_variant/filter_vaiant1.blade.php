@@ -79,13 +79,13 @@
                                                         <label for="cat{{ $category->id }}">{{ $category->name
                                                             }}</label>
                                                     </div>
-                                                    @if(count($category->subcategory) > 0)
+                                                    @if(count($category->subcategories_info) > 0)
                                                     <i class="fa-thin fa-chevron-down fw-500 light-gray"></i>
                                                     @endif
                                                 </div>
-                                                @if(count($category->subcategory) > 0)
+                                                @if(count($category->subcategories_info) > 0)
                                                 <ul class="sub-checkboxes pl-16 mb-16">
-                                                    @foreach ($category->subcategory as $subcategory)
+                                                    @foreach ($category->subcategories_info as $subcategory)
                                                     <li class="d-flex align-items-center gap-2 mb-12">
                                                         <div class="check-block">
                                                             <input type="checkbox"  value="{{ $subcategory->id  }}" class="sub_check_category" data-type="subcategory" id="sub{{ $subcategory->id }}"

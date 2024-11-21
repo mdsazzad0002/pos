@@ -65,6 +65,9 @@ Route::get('add_to_compareList', [HomeController::class, 'add_to_compareList'])-
 
 
 
+Route::post('/pos/salse/partner', [HomeController::class, 'sales_partner_store'])->name('sales_partner_store');
+
+
 
 Route::resource('review', ReviewProductController::class)->names('review');
 

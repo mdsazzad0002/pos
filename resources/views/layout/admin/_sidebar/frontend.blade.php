@@ -16,6 +16,10 @@
                 <i class="fab fa-servicestack nav-icon"></i>
                 <p>Service</p>
             </a>
+            <a href="{{ route('admin.offerbanner.index') }}" class="nav-link ">
+                <i class="fab fa-servicestack nav-icon"></i>
+                <p>Service</p>
+            </a>
             <a href="{{ route('admin.testimonial.index') }}" class="nav-link ">
                 <i class="fas fa-star-half-alt nav-icon"></i>
                 <p>Testimonial</p>

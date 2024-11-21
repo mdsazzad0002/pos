@@ -174,7 +174,7 @@
                                             class="form-control input-group-prepend select2" placeholder="Username"
                                             aria-label="Username" aria-describedby="basic-addon1">
                                             @if($product)
-                                                @foreach ($product->discount_info() as $items)
+                                                @foreach ($product->discounts_info() as $items)
                                                     <option selected value="{{ $items->id ?? '' }}">{{ $items->name ?? '' }}</option>
                                                 @endforeach
                                             @else
