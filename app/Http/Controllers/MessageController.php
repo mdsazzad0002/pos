@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\message;
+use App\Models\Participant;
+use App\Models\Thread;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,8 +16,8 @@ class MessageController extends Controller
     public function index()
     {
 
-        $users = User::get();
-        return view('admin.message.index', compact('users'));
+
+        return view('admin.message.index');
     }
 
     /**
@@ -36,12 +38,11 @@ class MessageController extends Controller
         ]);
 
         $message = new message;
-        $message->sender_id =$request->sender_id;
-        $message->user_type =$request->user_type;
-        $message->receiver_id =$request->message_id;
-        $message->message =$request->message;
+        $message->user_id =$request->sender_id;
+        $message->thread_id =$request->message_id;
+        $message->body =$request->message;
         $message->message_type = 1;
-        $message->is_group = 0;
+
         $message->save();
 
         return 'success';
@@ -82,10 +83,58 @@ class MessageController extends Controller
 
 
     public function get_message(Request $request){
-       return  message::
-    //    where(['sender_id' => $request->sender_id, 'receiver_id' => $request->message_id])
-       where('id', '>', $request->current_message_id)
-       ->get();
+        if($request->has('last_id')){
 
+             $thread_id = Participant::where('user_id', auth()->user()->id)->pluck('thread_id')->toArray();
+            $message = message::whereIn('thread_id', $thread_id)->where('id','>', $request->last_id)->get();
+
+            return json_encode($message);
+        }else{
+            $threads_message =   message::where('thread_id', $request->thread_id)->get();
+            return json_encode($threads_message);
+
+        }
+    }
+
+
+
+
+    public function thread_users(Request $request){
+        $threads = Thread::orderBy('id','desc')->limit(30)->get();
+
+        return json_encode($threads);
+    }
+
+
+    public function thread_user_filter(Request $request){
+        $users = User::where('name', 'LIKE', '%' . $request->inpute . '%')->get();
+        $return_data = [
+            'users' => $users
+        ];
+        return json_encode($return_data);
+    }
+
+
+    public function thread_create(Request $request){
+        $thread_create = new Thread();
+        $thread_create->subject = $request->subject ?? '';
+        $thread_create->type = $request->type ?? 1;
+        $thread_create->status = $request->status ?? 1;
+        $thread_create->save();
+
+        $participant =  new Participant;
+        $participant->thread_id = $thread_create->id;
+        $participant->user_type = $request->key == 'users' ? 1 : 2;
+        $participant->user_id = $request->items;
+        $participant->save();
+
+        $participant =  new Participant;
+        $participant->thread_id = $thread_create->id;
+        $participant->user_type =  1;
+        $participant->user_id = auth()->user()->id;
+        $participant->save();
+
+
+        return json_encode($thread_create);
     }
 }

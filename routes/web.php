@@ -127,6 +127,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
     Route::resource('message', MessageController::class)->names('message');
+    Route::get('message/thread/message', [MessageController::class, 'get_message'])->name('thread.get_message');
+    Route::get('message/thread/users', [MessageController::class, 'thread_users'])->name('thread.index');
+    Route::get('message/thread/user_filter', [MessageController::class, 'thread_user_filter'])->name('message.user.filter');
+    Route::get('message/thread/create', [MessageController::class, 'thread_create'])->name('message.thread.create');
+
+
+
     Route::get('message/get_message/data', [MessageController::class, 'get_message'])->name('message.get_message');
 
 

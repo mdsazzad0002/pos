@@ -78,6 +78,62 @@
             };
 
 
+            var last_id = 0;
+            var message_selected_id = 0;
+            var message_sender_id = {{ auth()->user()->id }};
+
+            function inew_message_load(){
+                $.ajax({
+                    type:'get',
+                    url:'{{ route('admin.message.get_message') }}',
+                    data: {
+                        'last_id': last_id
+                    },
+                    success:function(data){
+                        data = JSON.parse(data)
+                        var items_data_ret = '';
+                            if($('.message_chart').length > 0){
+
+
+                                Object.entries(data).forEach(([key, items]) => {
+                                      last_id = items.id
+
+                                        if(items.user_id == {{ auth()->user()->id }}){
+                                            items_data_ret +=  `
+                                            <div class="message-bubble message-sent">
+                                                <p>${items.body}</p>
+                                                <span class="message-time">${items.created_at}</span>
+                                            </div>`;
+
+                                        }else{
+                                            items_data_ret +=  `<div class="message-bubble message-received">
+                                                <p>${items.body}</p>
+                                                <span class="message-time">${items.created_at}</span>
+                                            </div>`;
+                                        }
+
+                                        if(items.thread_id == message_selected_id){
+                                            $('.chat-bod-body').append(`<div class="items_body_per thread_items${items.thread_id}" > ${items_data_ret}</div>`);
+
+                                        }else{
+                                            $('.chat-bod-body').append(`<div class="items_body_per thread_items${items.thread_id}" style="display:none"> ${items_data_ret}</div>`);
+
+                                        }
+
+
+                                })
+
+
+
+
+                            }
+                    }
+                })
+            }
+            setInterval(function(){
+                inew_message_load()
+            },5000)
+
       </script>
 
 </body>

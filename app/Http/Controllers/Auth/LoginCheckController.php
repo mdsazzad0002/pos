@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\message;
+use App\Models\Participant;
 use Carbon\Carbon;
 use Carbon\Traits\Creator;
 use Date;
@@ -185,6 +187,7 @@ class LoginCheckController extends Controller
                 }
             }
 
+
             header('Content-Type: text/event-stream');
             header('Cache-Control: no-cache');
             header('Connection: keep-alive');
@@ -192,6 +195,8 @@ class LoginCheckController extends Controller
 
             $eventData = [
                 'logout' =>  $device_logout,
+               
+
 
             ];
 

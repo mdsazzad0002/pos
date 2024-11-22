@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 // use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use IvanoMatteo\LaravelDeviceTracking\Traits\UseDevices;
@@ -30,6 +31,7 @@ class User extends Authenticatable
         'password',
     ];
 
+    protected $appends = ['image', 'last_active'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -54,4 +56,23 @@ class User extends Authenticatable
     // {
     //     return $this->mobile_number;
     // }
+
+    public function getImageAttribute(){
+        return dynamic_asset($this->upload_id);
+    }
+    public function getLastActiveAttribute(){
+        $lastActiveDevice = device::where('creator', $this->id)->orderBy('last_activity', 'desc')->first();
+        if ($lastActiveDevice) {
+            // Get the last activity time
+            $lastActivityTime = Carbon::parse($lastActiveDevice->last_activity);
+
+            // Check if the last activity was within the last 5 minutes
+            if ($lastActivityTime->gte(Carbon::now()->subMinutes(5))) {
+                return 'active'; // User is active
+            }
+        }
+
+        return 'status-offline'; // User is inactive
+
+    }
 }

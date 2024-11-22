@@ -31,15 +31,6 @@ class Participant extends Model
      */
     protected $casts = ['last_read' => 'datetime'];
 
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->table = Models::table('participants');
-
-        parent::__construct($attributes);
-    }
 
     /**
      * Thread relationship.
@@ -50,7 +41,7 @@ class Participant extends Model
      */
     public function thread()
     {
-        return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
+        return $this->belongsTo(Thread::class, 'thread_id', 'id');
     }
 
     /**
@@ -62,6 +53,6 @@ class Participant extends Model
      */
     public function user()
     {
-        return $this->belongsTo(Models::user(), 'user_id');
+        
     }
 }

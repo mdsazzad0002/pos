@@ -27,7 +27,7 @@ class Thread extends Eloquent
      *
      * @var string
      */
-    protected $table = 'threads';
+    // protected $table = 'threads';
 
     /**
      * The attributes that can be set with Mass Assignment.
@@ -36,22 +36,7 @@ class Thread extends Eloquent
      */
     protected $fillable = ['subject'];
 
-    /**
-     * Internal cache for creator.
-     *
-     * @var null|Models::user()|\Illuminate\Database\Eloquent\Model
-     */
-    protected $creatorCache;
 
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->table = Models::table('threads');
-
-        parent::__construct($attributes);
-    }
 
     /**
      * Messages relationship.
@@ -62,7 +47,7 @@ class Thread extends Eloquent
      */
     public function messages()
     {
-        return $this->hasMany(Models::classname(Message::class), 'thread_id', 'id');
+        return $this->hasMany(Message::class, 'thread_id', 'id');
     }
 
     /**
@@ -84,7 +69,7 @@ class Thread extends Eloquent
      */
     public function participants()
     {
-        return $this->hasMany(Models::classname(Participant::class), 'thread_id', 'id');
+        return $this->hasMany(Participant::class, 'thread_id', 'id');
     }
 
     /**
@@ -94,17 +79,17 @@ class Thread extends Eloquent
      *
      * @codeCoverageIgnore
      */
-    public function users()
-    {
-        return $this
-            ->belongsToMany(
-                Models::classname('User'),
-                Models::table('participants'),
-                'thread_id',
-                'user_id'
-            )
-            ->whereNull(Models::table('participants') . '.deleted_at')
-            ->withTimestamps();
+    // public function users()
+    // {
+    //     return $this
+    //         ->belongsToMany(
+    //             Models::classname('User'),
+    //             Models::table('participants'),
+    //             'thread_id',
+    //             'user_id'
+    //         )
+    //         ->whereNull(Models::table('participants') . '.deleted_at')
+    //         ->withTimestamps();
     }
 
     /**
@@ -112,25 +97,25 @@ class Thread extends Eloquent
      *
      * @return null|Models::user()|\Illuminate\Database\Eloquent\Model
      */
-    public function creator()
-    {
-        if ($this->creatorCache === null) {
-            $firstMessage = $this->messages()->withTrashed()->oldest()->first();
-            $this->creatorCache = $firstMessage ? $firstMessage->user : Models::user();
-        }
+    // public function creator()
+    // {
+    //     if ($this->creatorCache === null) {
+    //         $firstMessage = $this->messages()->withTrashed()->oldest()->first();
+    //         $this->creatorCache = $firstMessage ? $firstMessage->user : Models::user();
+    //     }
 
-        return $this->creatorCache;
-    }
+    //     return $this->creatorCache;
+    // }
 
     /**
      * Returns all the latest threads by updated_at date.
      *
      * @return Builder|static
      */
-    public static function getAllLatest()
-    {
-        return static::latest('updated_at');
-    }
+    // public static function getAllLatest()
+    // {
+    //     return static::latest('updated_at');
+    // }
 
     /**
      * Returns all threads by subject.
@@ -139,10 +124,10 @@ class Thread extends Eloquent
      *
      * @return Collection|static[]
      */
-    public static function getBySubject($subject)
-    {
-        return static::where('subject', 'like', $subject)->get();
-    }
+    // public static function getBySubject($subject)
+    // {
+    //     return static::where('subject', 'like', $subject)->get();
+    // }
 
     /**
      * Returns an array of user ids that are associated with the thread.
@@ -151,18 +136,18 @@ class Thread extends Eloquent
      *
      * @return array
      */
-    public function participantsUserIds($userId = null)
-    {
-        $users = $this->participants()->withTrashed()->select('user_id')->get()->map(function ($participant) {
-            return $participant->user_id;
-        });
+    // public function participantsUserIds($userId = null)
+    // {
+    //     $users = $this->participants()->withTrashed()->select('user_id')->get()->map(function ($participant) {
+    //         return $participant->user_id;
+    //     });
 
-        if ($userId !== null) {
-            $users->push($userId);
-        }
+    //     if ($userId !== null) {
+    //         $users->push($userId);
+    //     }
 
-        return $users->toArray();
-    }
+    //     return $users->toArray();
+    // }
 
     /**
      * Returns threads that the user is associated with.
@@ -172,16 +157,16 @@ class Thread extends Eloquent
      *
      * @return Builder
      */
-    public function scopeForUser(Builder $query, $userId)
-    {
-        $participantsTable = Models::table('participants');
-        $threadsTable = Models::table('threads');
+    // public function scopeForUser(Builder $query, $userId)
+    // {
+    //     $participantsTable = Models::table('participants');
+    //     $threadsTable = Models::table('threads');
 
-        return $query->join($participantsTable, $this->getQualifiedKeyName(), '=', $participantsTable . '.thread_id')
-            ->where($participantsTable . '.user_id', $userId)
-            ->whereNull($participantsTable . '.deleted_at')
-            ->select($threadsTable . '.*');
-    }
+    //     return $query->join($participantsTable, $this->getQualifiedKeyName(), '=', $participantsTable . '.thread_id')
+    //         ->where($participantsTable . '.user_id', $userId)
+    //         ->whereNull($participantsTable . '.deleted_at')
+    //         ->select($threadsTable . '.*');
+    // }
 
     /**
      * Returns threads with new messages that the user is associated with.
@@ -191,40 +176,20 @@ class Thread extends Eloquent
      *
      * @return Builder
      */
-    public function scopeForUserWithNewMessages(Builder $query, $userId)
-    {
-        $participantTable = Models::table('participants');
-        $threadsTable = Models::table('threads');
+    // public function scopeForUserWithNewMessages(Builder $query, $userId)
+    // {
+    //     $participantTable = Models::table('participants');
+    //     $threadsTable = Models::table('threads');
 
-        return $query->join($participantTable, $this->getQualifiedKeyName(), '=', $participantTable . '.thread_id')
-            ->where($participantTable . '.user_id', $userId)
-            ->whereNull($participantTable . '.deleted_at')
-            ->where(function (Builder $query) use ($participantTable, $threadsTable) {
-                $query->where($threadsTable . '.updated_at', '>', $this->getConnection()->raw($this->getConnection()->getTablePrefix() . $participantTable . '.last_read'))
-                    ->orWhereNull($participantTable . '.last_read');
-            })
-            ->select($threadsTable . '.*');
-    }
-
-    /**
-     * Returns threads between given user ids.
-     *
-     * @param Builder $query
-     * @param array $participants
-     *
-     * @return Builder
-     */
-    public function scopeBetweenOnly(Builder $query, array $participants)
-    {
-        $participantTable = Models::table('participants');
-
-        return $query->whereHas('participants', function (Builder $builder) use ($participants, $participantTable) {
-            return $builder->whereIn('user_id', $participants)
-                           ->groupBy($participantTable . '.thread_id')
-                           ->select($participantTable . '.thread_id')
-                           ->havingRaw('COUNT(' . $participantTable . '.thread_id)=?', [count($participants)]);
-        });
-    }
+    //     return $query->join($participantTable, $this->getQualifiedKeyName(), '=', $participantTable . '.thread_id')
+    //         ->where($participantTable . '.user_id', $userId)
+    //         ->whereNull($participantTable . '.deleted_at')
+    //         ->where(function (Builder $query) use ($participantTable, $threadsTable) {
+    //             $query->where($threadsTable . '.updated_at', '>', $this->getConnection()->raw($this->getConnection()->getTablePrefix() . $participantTable . '.last_read'))
+    //                 ->orWhereNull($participantTable . '.last_read');
+    //         })
+    //         ->select($threadsTable . '.*');
+    // }
 
     /**
      * Returns threads between given user ids.
@@ -234,15 +199,35 @@ class Thread extends Eloquent
      *
      * @return Builder
      */
-    public function scopeBetween(Builder $query, array $participants)
-    {
-        return $query->whereHas('participants', function (Builder $q) use ($participants) {
-            $q->whereIn('user_id', $participants)
-                ->select($this->getConnection()->raw('DISTINCT(thread_id)'))
-                ->groupBy('thread_id')
-                ->havingRaw('COUNT(thread_id)=' . count($participants));
-        });
-    }
+    // public function scopeBetweenOnly(Builder $query, array $participants)
+    // {
+    //     $participantTable = Models::table('participants');
+
+    //     return $query->whereHas('participants', function (Builder $builder) use ($participants, $participantTable) {
+    //         return $builder->whereIn('user_id', $participants)
+    //                        ->groupBy($participantTable . '.thread_id')
+    //                        ->select($participantTable . '.thread_id')
+    //                        ->havingRaw('COUNT(' . $participantTable . '.thread_id)=?', [count($participants)]);
+    //     });
+    // }
+
+    /**
+     * Returns threads between given user ids.
+     *
+     * @param Builder $query
+     * @param array $participants
+     *
+     * @return Builder
+     */
+    // public function scopeBetween(Builder $query, array $participants)
+    // {
+    //     return $query->whereHas('participants', function (Builder $q) use ($participants) {
+    //         $q->whereIn('user_id', $participants)
+    //             ->select($this->getConnection()->raw('DISTINCT(thread_id)'))
+    //             ->groupBy('thread_id')
+    //             ->havingRaw('COUNT(thread_id)=' . count($participants));
+    //     });
+    // }
 
     /**
      * Add users to thread as participants.
@@ -251,17 +236,17 @@ class Thread extends Eloquent
      *
      * @return void
      */
-    public function addParticipant($userId)
-    {
-        $userIds = is_array($userId) ? $userId : func_get_args();
+    // public function addParticipant($userId)
+    // {
+    //     $userIds = is_array($userId) ? $userId : func_get_args();
 
-        collect($userIds)->each(function ($userId) {
-            Models::participant()->firstOrCreate([
-                'user_id' => $userId,
-                'thread_id' => $this->id,
-            ]);
-        });
-    }
+    //     collect($userIds)->each(function ($userId) {
+    //         Models::participant()->firstOrCreate([
+    //             'user_id' => $userId,
+    //             'thread_id' => $this->id,
+    //         ]);
+    //     });
+    // }
 
     /**
      * Remove participants from thread.
@@ -270,12 +255,12 @@ class Thread extends Eloquent
      *
      * @return void
      */
-    public function removeParticipant($userId)
-    {
-        $userIds = is_array($userId) ? $userId : func_get_args();
+    // public function removeParticipant($userId)
+    // {
+    //     $userIds = is_array($userId) ? $userId : func_get_args();
 
-        Models::participant()->where('thread_id', $this->id)->whereIn('user_id', $userIds)->delete();
-    }
+    //     Models::participant()->where('thread_id', $this->id)->whereIn('user_id', $userIds)->delete();
+    // }
 
     /**
      * Mark a thread as read for a user.
@@ -284,16 +269,16 @@ class Thread extends Eloquent
      *
      * @return void
      */
-    public function markAsRead($userId)
-    {
-        try {
-            $participant = $this->getParticipantFromUser($userId);
-            $participant->last_read = new Carbon();
-            $participant->save();
-        } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
-            // do nothing
-        }
-    }
+    // public function markAsRead($userId)
+    // {
+    //     try {
+    //         $participant = $this->getParticipantFromUser($userId);
+    //         $participant->last_read = new Carbon();
+    //         $participant->save();
+    //     } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
+    //         // do nothing
+    //     }
+    // }
 
     /**
      * See if the current thread is unread by the user.
@@ -302,20 +287,20 @@ class Thread extends Eloquent
      *
      * @return bool
      */
-    public function isUnread($userId)
-    {
-        try {
-            $participant = $this->getParticipantFromUser($userId);
+    // public function isUnread($userId)
+    // {
+    //     try {
+    //         $participant = $this->getParticipantFromUser($userId);
 
-            if ($participant->last_read === null || $this->updated_at->gt($participant->last_read)) {
-                return true;
-            }
-        } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
-            // do nothing
-        }
+    //         if ($participant->last_read === null || $this->updated_at->gt($participant->last_read)) {
+    //             return true;
+    //         }
+    //     } catch (ModelNotFoundException $e) { // @codeCoverageIgnore
+    //         // do nothing
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
     /**
      * Finds the participant record from a user id.
@@ -326,10 +311,10 @@ class Thread extends Eloquent
      *
      * @throws ModelNotFoundException
      */
-    public function getParticipantFromUser($userId)
-    {
-        return $this->participants()->where('user_id', $userId)->firstOrFail();
-    }
+    // public function getParticipantFromUser($userId)
+    // {
+    //     return $this->participants()->where('user_id', $userId)->firstOrFail();
+    // }
 
     /**
      * Restores only trashed participants within a thread that has a new message.
@@ -337,13 +322,13 @@ class Thread extends Eloquent
      *
      * @return void
      */
-    public function activateAllParticipants()
-    {
-        $participants = $this->participants()->onlyTrashed()->get();
-        foreach ($participants as $participant) {
-            $participant->restore();
-        }
-    }
+    // public function activateAllParticipants()
+    // {
+    //     $participants = $this->participants()->onlyTrashed()->get();
+    //     foreach ($participants as $participant) {
+    //         $participant->restore();
+    //     }
+    // }
 
     /**
      * Generates a string of participant information.
@@ -353,25 +338,25 @@ class Thread extends Eloquent
      *
      * @return string
      */
-    public function participantsString($userId = null, $columns = ['name'])
-    {
-        $participantsTable = Models::table('participants');
-        $usersTable = Models::table('users');
-        $userPrimaryKey = Models::user()->getKeyName();
+    // public function participantsString($userId = null, $columns = ['name'])
+    // {
+    //     $participantsTable = Models::table('participants');
+    //     $usersTable = Models::table('users');
+    //     $userPrimaryKey = Models::user()->getKeyName();
 
-        $selectString = $this->createSelectString($columns);
+    //     $selectString = $this->createSelectString($columns);
 
-        $participantNames = $this->getConnection()->table($usersTable)
-            ->join($participantsTable, $usersTable . '.' . $userPrimaryKey, '=', $participantsTable . '.user_id')
-            ->where($participantsTable . '.thread_id', $this->id)
-            ->select($this->getConnection()->raw($selectString));
+    //     $participantNames = $this->getConnection()->table($usersTable)
+    //         ->join($participantsTable, $usersTable . '.' . $userPrimaryKey, '=', $participantsTable . '.user_id')
+    //         ->where($participantsTable . '.thread_id', $this->id)
+    //         ->select($this->getConnection()->raw($selectString));
 
-        if ($userId !== null) {
-            $participantNames->where($usersTable . '.' . $userPrimaryKey, '!=', $userId);
-        }
+    //     if ($userId !== null) {
+    //         $participantNames->where($usersTable . '.' . $userPrimaryKey, '!=', $userId);
+    //     }
 
-        return $participantNames->implode('name', ', ');
-    }
+    //     return $participantNames->implode('name', ', ');
+    // }
 
     /**
      * Checks to see if a user is a current participant of the thread.
@@ -380,12 +365,12 @@ class Thread extends Eloquent
      *
      * @return bool
      */
-    public function hasParticipant($userId)
-    {
-        $participants = $this->participants()->where('user_id', '=', $userId);
+    // public function hasParticipant($userId)
+    // {
+    //     $participants = $this->participants()->where('user_id', '=', $userId);
 
-        return $participants->count() > 0;
-    }
+    //     return $participants->count() > 0;
+    // }
 
     /**
      * Generates a select string used in participantsString().
@@ -394,31 +379,31 @@ class Thread extends Eloquent
      *
      * @return string
      */
-    protected function createSelectString($columns)
-    {
-        $dbDriver = $this->getConnection()->getDriverName();
-        $tablePrefix = $this->getConnection()->getTablePrefix();
-        $usersTable = Models::table('users');
+    // protected function createSelectString($columns)
+    // {
+    //     $dbDriver = $this->getConnection()->getDriverName();
+    //     $tablePrefix = $this->getConnection()->getTablePrefix();
+    //     $usersTable = Models::table('users');
 
-        switch ($dbDriver) {
-            case 'pgsql':
-            case 'sqlite':
-                $columnString = implode(" || ' ' || " . $tablePrefix . $usersTable . '.', $columns);
-                $selectString = '(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
+    //     switch ($dbDriver) {
+    //         case 'pgsql':
+    //         case 'sqlite':
+    //             $columnString = implode(" || ' ' || " . $tablePrefix . $usersTable . '.', $columns);
+    //             $selectString = '(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
 
-                break;
-            case 'sqlsrv':
-                $columnString = implode(" + ' ' + " . $tablePrefix . $usersTable . '.', $columns);
-                $selectString = '(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
+    //             break;
+    //         case 'sqlsrv':
+    //             $columnString = implode(" + ' ' + " . $tablePrefix . $usersTable . '.', $columns);
+    //             $selectString = '(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
 
-                break;
-            default:
-                $columnString = implode(", ' ', " . $tablePrefix . $usersTable . '.', $columns);
-                $selectString = 'concat(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
-        }
+    //             break;
+    //         default:
+    //             $columnString = implode(", ' ', " . $tablePrefix . $usersTable . '.', $columns);
+    //             $selectString = 'concat(' . $tablePrefix . $usersTable . '.' . $columnString . ') as name';
+    //     }
 
-        return $selectString;
-    }
+    //     return $selectString;
+    // }
 
     /**
      * Returns array of unread messages in thread for given user.
@@ -427,24 +412,24 @@ class Thread extends Eloquent
      *
      * @return Collection
      */
-    public function userUnreadMessages($userId)
-    {
-        $messages = $this->messages()->where('user_id', '!=', $userId)->get();
+    // public function userUnreadMessages($userId)
+    // {
+    //     $messages = $this->messages()->where('user_id', '!=', $userId)->get();
 
-        try {
-            $participant = $this->getParticipantFromUser($userId);
-        } catch (ModelNotFoundException $e) {
-            return collect();
-        }
+    //     try {
+    //         $participant = $this->getParticipantFromUser($userId);
+    //     } catch (ModelNotFoundException $e) {
+    //         return collect();
+    //     }
 
-        if (! $participant->last_read) {
-            return $messages;
-        }
+    //     if (! $participant->last_read) {
+    //         return $messages;
+    //     }
 
-        return $messages->filter(function ($message) use ($participant) {
-            return $message->updated_at->gt($participant->last_read);
-        });
-    }
+    //     return $messages->filter(function ($message) use ($participant) {
+    //         return $message->updated_at->gt($participant->last_read);
+    //     });
+    // }
 
     /**
      * Returns count of unread messages in thread for given user.
@@ -453,8 +438,8 @@ class Thread extends Eloquent
      *
      * @return int
      */
-    public function userUnreadMessagesCount($userId)
-    {
-        return $this->userUnreadMessages($userId)->count();
-    }
-}
+    // public function userUnreadMessagesCount($userId)
+    // {
+    //     return $this->userUnreadMessages($userId)->count();
+    // }
+
