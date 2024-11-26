@@ -25,6 +25,7 @@ class LoginCheckController extends Controller
 
 
             $query = Device::leftJoin('users', 'devices.creator', 'users.id')
+                ->orderBy('last_activity', 'desc')
                 ->select('devices.*', 'users.name');
 
             if(!in_array('superadmin', $roles_name)){
@@ -36,11 +37,15 @@ class LoginCheckController extends Controller
             return $data_table_make
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.device_access_check.view', $row->id);
-                    return "<button class='btn btn-primary '
+
+                    $return_data =  "<button class='btn btn-primary ";
+                    $return_data .= $row->id == session()->get('user' . auth()->user()->id) ? 'current_device' : '';
+                    $return_data .= "'
                     data-dialog=' modal-dialog-centered'
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
+                    return   $return_data;
 
                 })
                 ->addColumn('updated_at_data', function ($row) {
@@ -131,7 +136,7 @@ class LoginCheckController extends Controller
                         $current_device->last_activity = time();
                         $current_device->save();
                     }
-                    setcookie(   $cookieName, base64_encode($current_device->id * 16), time() + 3600, url('/'));
+                    setcookie( $cookieName, base64_encode($current_device->id * 16), time() + 3600, url('/'));
 
 
 
@@ -195,9 +200,6 @@ class LoginCheckController extends Controller
 
             $eventData = [
                 'logout' =>  $device_logout,
-               
-
-
             ];
 
             echo "data:" . json_encode($eventData) . "\n\n";

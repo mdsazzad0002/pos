@@ -2,31 +2,31 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('Branch', 10))
+@section('title', settings('cashcounter', 10))
 
 {{--  Content Extends  --}}
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        branch
+        cashcounter
         <div>
-            @can('branch create')
+            @can('cashcounter create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  branch" data-href="{{ route('admin.branch.create') }}">+ Add New Branch</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  cashcounter" data-href="{{ route('admin.cashcounter.create') }}">+ Add New cashcounter</button>
             @endcan
         </div>
     </div>
     <div class="card-body">
-        <table id="branch" class="table table-bordered table-striped table-hover">
+        <table id="cashcounter" class="table table-bordered table-striped table-hover">
             <thead>
                 <th>
                     SI
                 </th>
                 <th>
-                    Name
+                   Counter Name
                 </th>
                 <th>
-                    Location
+                    Branch Name
                 </th>
 
                 <th>
@@ -41,11 +41,12 @@
 </div>
 
 
+
 @endsection
 
 @push('js')
 <script>
-    var datatableM =  $('#branch').DataTable({
+    var datatableM =  $('#cashcounter').DataTable({
         serverSide:true,
         processing:true,
         ajax:'',
@@ -54,7 +55,7 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'name', name:'name'},
-            {data:'location', name:'location'},
+            {data:'branch_name', name:'branches.name'},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}
         ],
@@ -63,4 +64,3 @@
     })
 </script>
 @endpush
-

@@ -32,6 +32,10 @@ class rolepermissionsedder extends Seeder
                 // Branch
                 'branch read', 'branch create', 'branch edit', 'branch delete',
 
+                    // CAshcounter
+                    'cashcounter read', 'cashcounter create', 'cashcounter edit', 'cashcounter delete',
+
+
                 // Product
                 'product read', 'product create', 'product edit', 'product delete',
 

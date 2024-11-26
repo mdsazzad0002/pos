@@ -91,7 +91,7 @@
 
             {data:'suspend_date', name:'suspend_date',  searchable:false, orderable:false},
             {data:'last_active', name:'last_activity'},
-           
+
 
         ],
         buttons: true,
@@ -141,3 +141,13 @@
     }
 </script>
 @endpush
+
+
+@push('css')
+<style>
+    tr:has(.current_device){
+        background:#0c8065 !important
+    }
+</style>
+@endpush
+

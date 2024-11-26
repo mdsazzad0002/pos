@@ -287,6 +287,15 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @can('cashcounter read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.cashcounter.index') }}" class="nav-link">
+
+                                <i class="fas fa-circle-notch nav-icon"></i>
+                                <p>Cash Counter</p>
+                            </a>
+                        </li>
+                        @endcan
 
                         @can('role read')
                         <li class="nav-item">

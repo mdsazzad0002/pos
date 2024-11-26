@@ -29,6 +29,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CommisionAgentController;
 
 use App\Http\Controllers\Auth\LoginCheckController;
+use App\Http\Controllers\CashCounterController;
 use App\Http\Controllers\discountController;
 use App\Http\Controllers\StockManagementController;
 
@@ -152,6 +153,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('/branch', BranchController::class)->middleware('can:branch read')->names('branch');
     Route::get('/branch/delete/{id}', [BranchController::class, 'delete'])->name('branch.delete');
     Route::get('/branch/getbranch/get', [BranchController::class, 'getbranchs'])->name('branch.select');
+
+
+    // cashcounter management
+    Route::resource('/cashcounter', CashCounterController::class)->middleware('can:cashcounter read')->names('cashcounter');
+    Route::get('/cashcounter/delete/{id}', [CashCounterController::class, 'delete'])->name('cashcounter.delete');
+    Route::get('/cashcounter/getcashcounter/get', [CashCounterController::class, 'getcashcounters'])->name('cashcounter.select');
 
 
     // Setting

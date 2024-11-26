@@ -133,6 +133,13 @@ class enSeeder extends Seeder
             'log.Password' =>'Password',
             'log.Remember_me' =>'Remember Me',
             'log.Forgot_your_password?' =>'Forgot your password ?',
+            'sidebar.product_management' =>'Product Management',
+            'settings.product_list' =>'Product List',
+            'sidebar.product_create' =>'Product Create',
+            'sidebar.category' =>'Category',
+            'sidebar.subcategory' =>'SubCategory',
+            'sidebar.area' =>'Area',
+            'visit.webiste' =>'Visit Website',
 
 
 
