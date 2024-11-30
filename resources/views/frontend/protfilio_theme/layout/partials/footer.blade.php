@@ -22,11 +22,11 @@
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>{{ $items->title }}</h4>
             <ul>
-
-
+                
                 @foreach ($items->sub_heading as $links)
                     <li> <i class="{{ $links->icon }}"></i><a href="{{ $links->url }}">{{ $links->title }}</a></li>
                 @endforeach
+
             </ul>
           </div>
           @endforeach

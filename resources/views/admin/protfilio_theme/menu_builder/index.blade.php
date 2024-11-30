@@ -7,64 +7,66 @@
 {{-- Content Extends --}}
 @section('content')
 
-        <div class="row">
-            <div class="col-lg-4">
+<div class="row">
+    <div class="col-lg-4">
 
-                <div class="card mb-3">
-                    <div class="card-header">Preset</div>
-                    <div class="card-body">
-                        <ul class="page_items">
-                           <li class="d-flex justify-content-between " onclick="category_menu('category_menu1')" >Categories Menu <i class="fas fa-plus"></i></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="card-header">Text</div>
-                    <div class="card-body">
-                        <form action="" class="Add_TExt_element">
-                            <input type="text" name="type" id="" value="new" class="d-none">
-                            <input type="text" name="text_item" id="" value="1" class="d-none">
-                            @csrf
-
-                            <input type="text" name="name" class="form-control mb-2" placeholder="Menu Name">
-                            <input type="text" name="url" class="form-control mb-2" placeholder="Link">
-                            <input type="submit" class="btn btn-success float-right">
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card mb-3">
-                    <div class="card-header">Pages</div>
-                    <div class="card-body">
-                        <ul class="page_items">
-                            @foreach ($pages as $items)
-                                <li class="d-flex justify-content-between" onclick="add_new_page_heading({{ $items->id }})" data-id="{{ $items->id }}" onclick="">{{  $items->name ?? '' }}<i class="fas fa-plus"></i></li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-
+        <div class="card mb-3">
+            <div class="card-header">Preset</div>
+            <div class="card-body">
+                <ul class="page_items">
+                    <li class="d-flex justify-content-between " onclick="category_menu('category_menu1')">Categories
+                        Menu <i class="fas fa-plus"></i></li>
+                </ul>
             </div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-header">
-                        Heading
-                    </div>
-                    <div class="card-body list_view_data">
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">Text</div>
+            <div class="card-body">
+                <form action="" class="Add_TExt_element">
+                    <input type="text" name="type" id="" value="new" class="d-none">
+                    <input type="text" name="text_item" id="" value="1" class="d-none">
+                    @csrf
 
-                            {{-- load by ajax --}}
+                    <input type="text" name="name" class="form-control mb-2" placeholder="Menu Name">
+                    <input type="text" name="url" class="form-control mb-2" placeholder="Link">
+                    <input type="submit" class="btn btn-success float-right">
+                </form>
+            </div>
+        </div>
 
-                    </div>
-                </div>
+        <div class="card mb-3">
+            <div class="card-header">Pages</div>
+            <div class="card-body">
+                <ul class="page_items">
+                    @foreach ($pages as $items)
+                    <li class="d-flex justify-content-between" onclick="add_new_page_heading({{ $items->id }})"
+                        data-id="{{ $items->id }}" onclick="">{{ $items->name ?? '' }}<i class="fas fa-plus"></i></li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                Heading
+            </div>
+            <div class="card-body list_view_data">
+
+                {{-- load by ajax --}}
 
             </div>
         </div>
+
+    </div>
+</div>
 
 
 
 
 <script>
-     function sorting(){
+    function sorting(){
         $("#sortable_items_data").sortable({
             update: function(event, ui) {
                 var sortedIDasdfs = $(this).sortable("toArray");
@@ -257,24 +259,23 @@
         align-items: center;
         justify-content: space-between;
     }
+
     span.item_trash_btn {
-    position: absolute;
-    left: -20px;
-    top: 0px;
-    background: red;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        position: absolute;
+        left: -20px;
+        top: 0px;
+        background: red;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
 
-.ui-sortable-handle {
-    position: relative;
-}
+    .ui-sortable-handle {
+        position: relative;
+    }
 </style>
 @endpush
-
-
