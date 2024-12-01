@@ -129,6 +129,13 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'contact',
             ],
+            [
+                'name' => 'Sales Partner',
+                'slug' => 'sales/partner',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'sales_partner',
+            ],
 
 
         ];
