@@ -13,6 +13,7 @@ use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -430,6 +431,20 @@ class HomeController extends Controller
         }
 
         return view('layout.frontend_ajuba.partials._shoping_partials.product_items', compact('cart', 'products'));
+    }
+
+
+    public function sales_partner_store (Request $request){
+
+        $data = new userController();
+        $request['role'] = 'sales_partner';
+        $request['type_of_user'] = 'Successfully Created Sales Partner';
+        $data->store($request);
+
+        return  $data;
+
+
+
     }
 
 }

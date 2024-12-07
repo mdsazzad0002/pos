@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\address;
 use App\Models\User;
 use App\Models\branch;
 use Illuminate\Support\Str;
@@ -103,69 +104,37 @@ class userController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email'=>'required',
+            'email'=>'required|unique:users,email',
             'password'=>'required',
+            'c_password'=>'required',
             'name'=>'required',
         ]);
 
-        $request->validate(['email' => 'unique:users,email']);
+
         $user_create = new User;
         $user_create->name = $request->name;
-        $user_create->email = $request->email;
-        $user_create->slug = Str::slug($request->name . strtotime("now"));
-        $user_create->designation = $request->designation;
-        $user_create->password = Hash::make($request->password);
-
-        $user_create->prefix = $request->input('prefix');
-        $user_create->salary = $request->input('salary');
-        $user_create->branch_id = implode(',',$request->input('branch_id'));
-        $user_create->joining_date = $request->input('joining_date');
-
-        $user_create->status = $request->input('status', 0); // Default value if not provided
-        $user_create->sales_status = $request->input('sales_status', 0); // Default value if not provided
-        $user_create->birth = $request->input('birth');
-        $user_create->blood_group = $request->input('blood_group');
-        $user_create->mobile_number = $request->input('mobile_number');
-        $user_create->alt_mobile_number = $request->input('alt_mobile_number');
-        $user_create->family_mobile_number = $request->input('family_mobile_number');
-        $user_create->present_address = $request->input('paresent_address');
-        $user_create->p_present_address = $request->input('p_paresent_address');
-
-        $user_create->facebook = $request->input('facebook');
-        $user_create->twitter = $request->input('twitter');
-        $user_create->youtube = $request->input('youtube');
-        $user_create->linkedin = $request->input('linkedin');
-        $user_create->whatsapp = $request->input('whatsapp');
-        $user_create->telegram = $request->input('telegram');
-        $user_create->pintarest = $request->input('pintarest');
-
-        $user_create->account_holder_name = $request->input('account_holder_name');
-        $user_create->account_no = $request->input('account_no');
-        $user_create->account_provider = $request->input('account_provider');
-        $user_create->account_identifier_code = $request->input('account_identifier_code');
-        $user_create->account_branch = $request->input('account_branch');
-        $user_create->account_tax_payer_id = $request->input('account_tax_payer_id');
-        $user_create->gender = $request->input('gender', 0); // Default value if not provided
-        $user_create->marital_status = $request->input('marital_status', 0); // Default value if not provided
-        $user_create->sales_commission_present = $request->input('sales_commision_persent', 0); // Default value if not provided
+        $user_create->email  = $request->email;
 
         if($request->password != $request->c_password){
+
             return json_encode([
-                'title'=>'Confirm password does not match',
+                'title'=>'Confirm Password  Not Match',
                 'type'=>'error',
                 'refresh'=>'false',
             ]);
         }
+        $user_create->password  = Hash::make($request->password);
 
         $user_create->save();
 
-        $this->assingRole($request, $user_create);
+        if(!$request->has('type_of_user')){
+            $request['type_of_user'] = 'user_create';
+        }
 
-        return json_encode([
-            'title'=>'Successfully  Created User',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+       $user_update = $this->update($request, $user_create);
+       return $user_update;
+
+
     }
 
     /**
@@ -197,57 +166,121 @@ class userController extends Controller
             'email'=>'required',
         ]);
 
-        $check_email = User::where('email', $request->email)->whereNot('email', $User->email)->count();
-        $User->name = $request->name;
-        $User->email = $request->email;
+
+        if($request->has('name')){
+            $User->name = $request->name;
+        }
 
         if ($request->password == $request->c_password && $request->password != '') {
             $User->password = Hash::make($request->password);
         }
 
-        $User->prefix = $request->input('prefix');
-        $User->salary = $request->input('salary');
-        $User->designation = $request->input('designation');
-        $User->branch_id = implode(',',$request->input('branch_id'));
-        $User->joining_date = $request->input('joining_date');
 
-        $User->status = $request->input('status', 0); // Default value if not provided
-        $User->sales_status = $request->input('sales_status', 0); // Default value if not provided
-        $User->birth = $request->input('birth');
-        $User->blood_group = $request->input('blood_group');
-        $User->mobile_number = $request->input('mobile_number');
-        $User->alt_mobile_number = $request->input('alt_mobile_number');
-        $User->family_mobile_number = $request->input('family_mobile_number');
-        $User->present_address = $request->input('paresent_address');
-        $User->p_present_address = $request->input('p_paresent_address');
-
-        $User->facebook = $request->input('facebook');
-        $User->twitter = $request->input('twitter');
-        $User->youtube = $request->input('youtube');
-        $User->linkedin = $request->input('linkedin');
-        $User->whatsapp = $request->input('whatsapp');
-        $User->telegram = $request->input('telegram');
-        $User->pintarest = $request->input('pintarest');
-
-        $User->account_holder_name = $request->input('account_holder_name');
-        $User->account_no = $request->input('account_no');
-        $User->account_provider = $request->input('account_provider');
-        $User->account_identifier_code = $request->input('account_identifier_code');
-        $User->account_branch = $request->input('account_branch');
-        $User->account_tax_payer_id = $request->input('account_tax_payer_id');
-        $User->gender = $request->input('gender', 0); // Default value if not provided
-        $User->marital_status = $request->input('marital_status', 0); // Default value if not provided
-        $User->sales_commission_present = $request->input('sales_commision_persent', 0); // Default value if not provided
-
-        if($check_email == 0){
-            $User->email = $request->email;
+        if($request->has('prefix')){
+            $User->prefix = $request->input('prefix');
         }
+        if($request->has('father')){
+            $User->father = $request->input('father');
+        }
+        if($request->has('nid')){
+            $User->nid = $request->input('nid');
+        }
+
+        if($request->has('religion')){
+            $User->religion = $request->input('religion');
+        }
+
+
+        if($request->has('salary') && $request->salary != null && $request->salary != 0){
+            $User->salary = $request->input('salary');
+        }elseif($request->has('sales_status') && $request->has('sales_status') == 1){
+            $User->sales_commission_present = $request->input('sales_commision_persent', 0); // Default value if not provided
+        }
+        if($request->has('sales_status')){
+             $User->sales_status = $request->input('sales_status', 0); // Default value if not provided
+        }
+        if($request->has('designation')){
+            $User->designation = $request->input('designation');
+        }
+        if($request->has('branch_id')){
+            $User->branch_id = implode(',',$request->input('branch_id'));
+        }
+        if($request->has('joining_date')){
+            $User->designation = $request->input('joining_date');
+        }
+
+        if($request->has('status')){
+            $User->designation = $request->input('status');
+        }
+        if($request->has('nationality')){
+            $User->nationality = $request->input('nationality');
+        }
+        if($request->has('birth')){
+            $User->designation = $request->input('birth');
+        }
+        if($request->has('blood_group')){
+            $User->designation = $request->input('blood_group');
+        }
+        if($request->has('mobile_number')){
+            $User->designation = $request->input('designation');
+        }
+        if($request->has('alt_mobile_number')){
+            $User->designation = $request->input('alt_mobile_number');
+        }
+        if($request->has('family_mobile_number')){
+            $User->designation = $request->input('family_mobile_number');
+        }
+        if($request->has('account_tax_payer_id')){
+            $User->account_tax_payer_id = $request->input('account_tax_payer_id');
+        }
+        if($request->has('gender')){
+            $User->gender = $request->input('gender');
+        }
+        if($request->has('marital_status')){
+            $User->gender = $request->input('marital_status');
+        }
+
+        // if(){
+
+        // }
+
+        if($request->has('email')){
+            $check_email = User::where('email', $request->email)->whereNot('email', $User->email)->count();
+
+            if($check_email == 0){
+                $User->email = $request->email;
+            }
+        }
+
         $User->save();
 
-        $this->assingRole($request, $User);
+        if($request->has('role_id')){
+            $this->assingRole($request->role_id, $User);
+        }
+
+
+        $address_data = new AddressController();
+        $address_data =  $address_data->store($request, $User);
+
+
+        $contact_data = new ContactController();
+        $contact_data =  $contact_data->store($request, $User);
+
+
+        $payment_data = new PaymentMethodController();
+        $payment_data =  $payment_data->store($request, $User);
+
+
+
+
+
+        if($address_data){
+            dd($request);
+        }
+
 
         return json_encode([
-            'title'=>'Successfully  Updated User',
+            'title'=>$request->type_of_user == 'user_create' ? 'Updated User' : ($request->role == 'sales_partner' ? 'Successfully created commission agent' : 'Successfully  Updated User'),
             'type'=>'success',
             'refresh'=>'true',
         ]);

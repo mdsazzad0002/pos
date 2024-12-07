@@ -16,41 +16,37 @@ return new class extends Migration
             $table->id();
             $table->string('prefix')->nullable();
             $table->string('name');
+            $table->string('father')->nullable();
+            $table->string('mother')->nullable();
             $table->string('username')->nullable();
             $table->string('designation')->nullable();
+            $table->string('religion')->nullable();
             $table->string('slug')->nullable();
 
+
+
+            $table->string('nationality')->nullable();
             $table->string('nid')->nullable();
-            $table->float('experience')->default(0);
-            $table->string('salary')->nullable();
-            $table->string('branch_id')->nullable();
+            $table->string('salary')->default(0);
+            $table->string('branch_id')->default(0);
+
             $table->date('joining_date')->nullable();
+            $table->date('exit_date')->nullable();
+
             $table->string('upload_id')->default(0);
             $table->string('status')->default(0);
+
             $table->string('sales_status')->default(0);
+
+
             $table->string('birth')->nullable();
             $table->string('blood_group')->nullable();
             $table->string('mobile_number')->nullable();
             $table->string('alt_mobile_number')->nullable();
             $table->string('family_mobile_number')->nullable();
-            $table->string('present_address')->nullable();
-            $table->string('p_present_address')->nullable();
 
-            $table->string('facebook')->nullable();
-            $table->string('twitter')->nullable();
-            $table->string('youtube')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('linkedin')->nullable();
-            $table->string('github')->nullable();
-            $table->string('pintarest')->nullable();
-            $table->string('telegram')->nullable();
-            $table->string('whatsapp')->nullable();
 
-            $table->string('account_holder_name')->nullable();
-            $table->string('account_no')->nullable();
-            $table->string('account_provider')->nullable();
-            $table->string('account_identifier_code')->nullable();
-            $table->string('account_branch')->nullable();
+
             $table->string('account_tax_payer_id')->nullable();
             $table->string('gender')->default(0);
             $table->string('marital_status')->default(0);
