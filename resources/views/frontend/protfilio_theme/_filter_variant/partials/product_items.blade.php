@@ -1,6 +1,8 @@
 @if(isset($product))
 @php
-     $view_page = \App\Models\page::where('page_type', 'view')->first();
+    if(!$view_page){
+        $view_page = \App\Models\page::where('page_type', 'view')->first();
+    }
 
 @endphp
 <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">

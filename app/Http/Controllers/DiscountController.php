@@ -70,7 +70,7 @@ class discountController extends Controller
      */
     public function create()
     {
-        return view('admin.discount.partials.create');
+        return view('admin.discount.partials.create_and_edit');
     }
 
     /**
@@ -111,7 +111,7 @@ class discountController extends Controller
      */
     public function edit(discount $discount)
     {
-        return view('admin.discount.partials.edit', compact('discount'));
+        return view('admin.discount.partials.create_and_edit', compact('discount'));
     }
 
     /**

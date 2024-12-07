@@ -681,6 +681,30 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 
+            // Sales Partner 1
+            'sales_partner_1' => [
+                'key' =>'_sales_partner_commission.sales_partner1',
+                'title' => 'Sales Partner style  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
+
         ];
 
 
@@ -792,6 +816,14 @@ class VarinatSuggessionSeeder extends Seeder
          // service-details page seeder default
          $about_us_id = Page::where('slug', 'register')->first();
          $ecom_home = [ 'register1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         // Sales-details page seeder default
+         $about_us_id = Page::where('page_type', 'sales_partner')->first();
+         $ecom_home = [ 'sales_partner_1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);

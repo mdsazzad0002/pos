@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="benefits">
             <div class="row justify-content-center  benefits-wrapper">
-                <div class="col-xxl-10 col-xl-12">
+                <div class="col-xxl-12 col-xl-12">
                     <div class="row row-gap-3">
 
 

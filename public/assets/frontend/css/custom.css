@@ -51,3 +51,15 @@ div#productQuickView .quick-image-box{
     padding: 0 5px;
     border-radius: 2px;
 }
+
+
+fieldset {
+    border-radius: 8px;
+    border-color: #ffffff8c;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+legend {
+    padding: 0 15px;
+}

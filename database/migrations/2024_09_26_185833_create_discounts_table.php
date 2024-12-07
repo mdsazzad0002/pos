@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('type')->default(0)->reference('1 Flat 0 by perchance');
             $table->string('amount')->default(0);
-            $table->bigInteger('creator')->default(0);
+            $table->string('creator')->default(0);
+            $table->bigInteger('updater_id')->default(0);
             $table->timestamps();
         });
     }

@@ -30,6 +30,12 @@
                     SI
                 </th>
                 <th>
+                    Action
+                </th>
+                <th>
+                    View
+                </th>
+                <th>
                     Name
                 </th>
                 <th>
@@ -40,14 +46,12 @@
                 </th>
 
                 <th>
-                    Items
+                   Sub Items
                 </th>
                 <th>
-                    View
+                    Items Count
                 </th>
-                <th>
-                    Action
-                </th>
+
             </thead>
         </table>
     </div>
@@ -67,6 +71,8 @@
             { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
+            {data:'action', name:'action', searchable:false, orderable:false},
+            {data:'view', name:'view', searchable:false, orderable:false},
             {data:'name', name:'name'},
             {data:'sort_name', name:'sort_name'},
             {data:'decimal', name:'decimal', render:function(decimal){
@@ -74,8 +80,7 @@
             }},
             {data:'subitems.name', name:'subitems.name', searchable:false, orderable:false},
             {data:'sub_items', name:'sub_items'},
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
+
         ],
 
         buttons: true,

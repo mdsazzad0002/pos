@@ -12,6 +12,10 @@
         <td>{{ $service->title }}</td>
     </tr>
     <tr>
+        <td>Image</td>
+        <td><img src="{{ dynamic_asset($service->upload_id )}}" style="max-width: 300px" alt=""></td>
+    </tr>
+    <tr>
         <td>Short Description</td>
         <td>{{ $service->short_description }}</td>
     </tr>

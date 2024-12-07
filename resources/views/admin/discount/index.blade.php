@@ -58,12 +58,14 @@
             }},
             {data:'name', name:'name'},
             {data:'type', name:'type', render: function (data, type, row, meta) {
-                return data ? 'Fixed' : 'Perchant %';
+                return data.type ? 'Fixed' : 'Perchant %';
             }},
             {data:'amount', name:'amount'},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}
-        ]
+        ],
+        buttons: true,
+        dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
     })
 </script>
 @endpush

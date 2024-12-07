@@ -161,6 +161,14 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @can('discount read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.discount.index') }}" class="nav-link">
+                                <i class="fab  nav-icon">%</i>
+                                <p>Discount</p>
+                            </a>
+                        </li>
+                        @endcan
 
 
                     </ul>

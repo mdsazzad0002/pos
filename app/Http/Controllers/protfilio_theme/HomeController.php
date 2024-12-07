@@ -37,9 +37,9 @@ class HomeController extends Controller
             }
 
             $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
-            $sliders = slider::where('status', 1)->get();
+            // $sliders = slider::where('status', 1)->get();
 
-            return view('frontend.protfilio_theme.home.index', compact(  'sliders',  'homepagemanage', 'homepage', 'request'));
+            return view('frontend.protfilio_theme.home.index', compact(   'homepagemanage', 'homepage', 'request'));
 
         }else{
             if(env('APP_DEBUG') == true){

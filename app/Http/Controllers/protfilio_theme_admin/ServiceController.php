@@ -27,7 +27,7 @@ class ServiceController extends Controller
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.service.show', $row->id);
                     return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered'
+                    data-dialog='modal-dialog-centered modal-lg'
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
@@ -45,7 +45,7 @@ class ServiceController extends Controller
 
                         $edit_route = route('admin.service.edit', $row->id);
                         $edit_button =  "<button class='btn btn-warning '
-                        data-dialog='modal-dialog-centered'
+                        data-dialog='modal-dialog-centered modal-lg'
                         data-title='$row->name'
                         onclick='button_ajax(this)'
                         data-href='$edit_route'>Edit</button>";
@@ -77,7 +77,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('admin.protfilio_theme.service.partials.create');
+        return view('admin.protfilio_theme.service.partials.create_and_edit');
     }
 
     /**
@@ -88,6 +88,7 @@ class ServiceController extends Controller
         $service =  new service;
         $service->title =  $request->title;
         $service->icon_class =  $request->icon_class;
+        $service->upload_id =  $request->image;
         $service->short_description = $request->short_description;
         $service->description = $request->description;
         $service->status = $request->status;
@@ -116,7 +117,7 @@ class ServiceController extends Controller
      */
     public function edit(service $service)
     {
-        return view('admin.protfilio_theme.service.partials.edit', compact('service'));
+        return view('admin.protfilio_theme.service.partials.create_and_edit', compact('service'));
     }
 
     /**
@@ -128,6 +129,7 @@ class ServiceController extends Controller
         $service->title =  $request->title;
         $service->icon_class =  $request->icon_class;
         $service->short_description = $request->short_description;
+        $service->upload_id =  $request->image;
         $service->description = $request->description;
         $service->status = $request->status;
         $service->slug = Str::slug($request->title);
