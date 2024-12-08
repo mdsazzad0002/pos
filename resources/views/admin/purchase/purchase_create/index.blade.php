@@ -107,13 +107,47 @@
         data_items = data_items.items;
         var product_filter ='';
         Object.keys(data_items).forEach(function(data){
+
+            var items_variant_data = (JSON.parse(data_items[data].variant_option));
+            var html_data_key = '';
+            var html_data_value = '';
+            if(data_items[data].variant_on == 1){
+               
+                var item_data_key = items_variant_data.vairant_value.split(",");
+                if(item_data_key.length > 0){
+                    html_data_key+=`<select class="form-control">`
+                    item_data_key.forEach(element => {
+                        console.log(element);
+                        html_data_key+=`<option value="${element}">${element}</option>`
+                    });
+                    html_data_key+=`</select>`
+                }
+                
+                
+                var item_data_key = items_variant_data.variant_key.split(",");
+                if(item_data_key.length > 0){
+                    html_data_value+=`<select class="form-control">`
+                    item_data_key.forEach(element => {
+                        console.log(element);
+                        html_data_value+=`<option value="${element}">${element}</option>`
+                    });
+                    html_data_value+=`</select>`
+                }
+            }
+
             product_filter +=`<tr class="single_item_result ">
                 <td class="img p-1">
                     <img src="${data_items[data].image_url}" style="max-width:150px; height:40px" alt="">
                 </td>
+                <td>
+                    <div class="d-flex ">
+                        ${data_items[data].variant_on == 1 ? html_data_key + html_data_value : '' }
+                    </div>
+                </td>
                 <td class="name p-1">
                     ${data_items[data].text}
                 </td>
+
                 <td class="action p-1">
                     <button type="button" type="button" class="btn btn-primary" onclick="items_add_from_quey(${data_items[data].id}, '${data_items[data].text}')">+</button>
                 </td>

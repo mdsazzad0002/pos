@@ -45,6 +45,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
+use App\Http\Controllers\PosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -250,6 +251,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/order/delete/{order}', [OrderController::class, 'delete'])->name('order.delete');
     // Route::get('/order/getOrder/get', [OrderController::class, 'getOrder'])->name('order.select');
 
+    //pos
+    Route::resource('/pos', PosController::class)->names('pos');
 
     // unit purchase
     Route::get('/stock', [StockManagementController::class, 'index'])->name('stock.index');

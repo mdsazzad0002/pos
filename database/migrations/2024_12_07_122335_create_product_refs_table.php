@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('product_refs', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('model_no')->nullable();
+            $table->string('taka')->nullable();
+            $table->string('creator');
+            $table->string('updater');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

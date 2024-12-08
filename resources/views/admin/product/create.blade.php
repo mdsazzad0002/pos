@@ -275,17 +275,17 @@
                                 <div class="col-lg-12">
                                     <label for="">Short Description</label>
                                     <textarea type="text" name="short_description" class="form-control mb-2 "
-                                        placeholder="short_description">{{ $product ? $product->short_description : 0 }}</textarea>
+                                        placeholder="short_description">{{ $product ? $product->short_description : '' }}</textarea>
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="">Description</label>
                                     <textarea type="text" name="description" class="form-control mb-2 summernote"
-                                        placeholder="Description">{{ $product ? $product->description : 0 }}</textarea>
+                                        placeholder="Description">{{ $product ? $product->description : '' }}</textarea>
                                 </div>
                                 <div class="col-lg-12 pt-3">
                                     <label for="">Additional Description</label>
                                     <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
-                                        placeholder="Additional Description">{{ $product ? $product->additional_description : 0 }}</textarea>
+                                        placeholder="Additional Description">{{ $product ? $product->additional_description : '' }}</textarea>
                                 </div>
 
 
@@ -356,12 +356,12 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="variant_name">Variant Name</label>
-                                    <input type="text" class="form-control" id="variant_name"
+                                    <input type="text" class="form-control" id="variant_name" name="variant_name_key"
                                         placeholder="Variant Name">
                                 </div>
                                 <div class="col-4">
                                     <label for="variant_option">Variant Option</label>
-                                    <input type="text" class="form-control" id="variant_option"
+                                    <input type="text" class="form-control" id="variant_option" name="variant_name_value"
                                         placeholder="Variant Option">
                                 </div>
                                 <div class="col-4">
@@ -385,7 +385,7 @@
                                     @foreach ($product->variant_option_info as $items)
                                     <div class="row mb-2">
                                         <div class="col-md-4">
-
+                                            <input type="hidden" name="product_id" value="{{ $items->id }}">
                                             <input type="text" name="variant_key[]" value="{{ $items->name ?? '' }}" class="form-control"
                                                 placeholder="veriant key" id="">
                                         </div>
@@ -428,6 +428,14 @@
 
 @push('js')
 <script>
+    @if ($product ? $product->variant_on : 0)
+        var variant_data = JSON.parse(@json($product->variant_option));
+            $('#variant_name').val(variant_data.variant_key)
+            $('#variant_option').val(variant_data.vairant_value)
+  @endif
+
+
+
     document.querySelector('#variant_on').addEventListener('change', function() {
             const items = this; // 'this' refers to the element that triggered the event
             if (items.checked) {

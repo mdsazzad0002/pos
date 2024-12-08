@@ -27,7 +27,7 @@ class ProductController extends Controller
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.product.show', $row->id);
                     return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered'
+                    data-dialog=' modal-dialog-centered modal-lg'
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
@@ -93,97 +93,10 @@ class ProductController extends Controller
             ]
         );
         $product = new product;
-        $product->name = $request->name;
-        $product->product_id = create_slug('P', 'product', 'product_id');
-        $product->slug = create_slug($request->name, 'product', 'slug');
+        $product->save();
 
-        $product->sku = $request->sku;
-        $product->unit = $request->unit;
-        $product->brand = $request->brand;
-        $product->category = $request->category;
-        $product->sub_category = $request->subcategory;
-        $product->vat = $request->vat;
-        $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
-
-        $product->old_price = $request->old_price;
-        $product->selling_price = $request->selling_price;
-
-        $product->alert_quantity = $request->alert_quantity;
-        $product->weight = $request->weight;
-        $product->garage = $request->garage;
-        $product->route = $request->route;
-        $product->feature = $request->feature;
-        $product->service = $request->service;
-        $product->status = $request->status;
-        $product->for_selling = $request->for_selling;
-
-
-        $product->upload_id = $request->image;
-        if($request->has('images_multiple')){
-            $product->uploads_id = implode(',',$request->images_multiple);
-        }
-
-
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
-        $product->additional_description = $request->additional_description;
-        $product->youtube_video = $request->youtube_video;
-        $product->landing_page_bg = $request->landing_page_bg;
-        $product->landing_page_color = $request->landing_page_color;
-        $product->variant_on = $request->variant_on;
-
-
-        $product->creator = auth()->user()->id ?? 0;
-         $product->save();
-
-
-
-        // working on variant product
-        if ($request->has('variant_on') && $request->variant_on == 1) {
-            $existingVariants = VariantOption::where('product_id', $product->id)->get();
-
-            $existingOptionNames = $existingVariants->pluck('name')->toArray();
-
-            // Array to hold the option names from the request
-            $requestOptionNames = $request->variant_key;
-
-
-            foreach ($requestOptionNames as $key => $items) {
-
-                VariantOption::updateOrCreate(
-                    [
-                        'product_id' => $product->id,
-                        'name' => $items, // Use this for finding existing options
-                    ],
-                    [
-
-                        'old_price' => $request->old_price_v[$key],
-                        'selling_price' => $request->old_price_v[$key],
-                        'creator' => auth()->user()->id  ?? 0,
-                    ]
-
-                );
-            }
-
-            $array_diff = array_diff($existingOptionNames, $requestOptionNames);
-
-            foreach($array_diff as $items){
-                $dataItem = VariantOption::where('name', $items)
-                ->where('product_id', $product->id)
-                ->first();
-                if($dataItem){
-                    $dataItem->delete();
-                }
-            }
-        }
-
-
-
-        return json_encode([
-            'title'=>'Successfully  Created product',
-            'type'=>'success',
-            'refresh'=>'false',
-        ]);
+        $product_update = new ProductController();
+        return $product_update = $product_update->update($request, $product);
 
 
     }
@@ -207,7 +120,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, product $product)
+    public function update(Request $request, product $product = null)
     {
         $request->validate(
             [
@@ -222,94 +135,108 @@ class ProductController extends Controller
                 // 'selling_price'=>'required',
             ]
         );
-        $product->name = $request->name;
-        $product->slug = create_slug($request->name, 'product', 'slug');
 
-        $product->sku = $request->sku;
-        $product->unit = $request->unit;
-        $product->brand = $request->brand;
-        $product->category = $request->category;
-        $product->sub_category = $request->subcategory;
-        $product->vat = $request->vat;
-        $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
-        $product->old_price = $request->old_price;
-        $product->selling_price = $request->selling_price;
-        $product->alert_quantity = $request->alert_quantity;
-        $product->weight = $request->weight;
-        $product->garage = $request->garage;
-        $product->route = $request->route;
-        $product->feature = $request->feature;
-        $product->service = $request->service;
-        $product->status = $request->status;
-        $product->for_selling = $request->for_selling;
+        if($product){
 
-
-        $product->upload_id = $request->image;
-        if($request->has('images_multiple')){
-            $product->uploads_id = implode(',',$request->images_multiple);
-        }
-
-
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
-        $product->additional_description = $request->additional_description;
-        $product->youtube_video = $request->youtube_video;
-        $product->landing_page_bg = $request->landing_page_bg;
-        $product->landing_page_color = $request->landing_page_color;
-        $product->variant_on = $request->variant_on;
-
-
-        $product->creator = auth()->user()->id ?? 0;
-         $product->save();
-
-
-
-        // working on variant product
-        if ($request->has('variant_on') && $request->variant_on == 1) {
-
-            $existingVariants = VariantOption::where('product_id', $product->id)->get();
-
-            $existingOptionNames = $existingVariants->pluck('name')->toArray();
-
-            // Array to hold the option names from the request
-            $requestOptionNames = $request->variant_key;
-
-
-            foreach ($requestOptionNames as $key => $items) {
-
-                VariantOption::updateOrCreate(
-                    [
-                        'product_id' => $product->id,
-                        'name' => $items, // Use this for finding existing options
-                    ],
-                    [
-
-                        'old_price' => $request->old_price_v[$key],
-                        'selling_price' => $request->old_price_v[$key],
-                        'creator' => auth()->user()->id  ?? 0,
-                    ]
-
-                );
-            }
-
-             $array_diff = array_diff($existingOptionNames, $requestOptionNames);
-
-            foreach($array_diff as $items){
-                $dataItem = VariantOption::where('name', $items)
-                ->where('product_id', $product->id)
-                ->first();
-                if($dataItem){
-                    $dataItem->delete();
+                $product->name = $request->name;
+                $product->slug = create_slug($request->name, 'product', 'slug');
+                if(!$product->product_id){
+                    $product->product_id = create_slug('P-', 'product', 'product_id');
                 }
+                $product->sku = $request->sku;
+                $product->unit = $request->unit;
+                $product->brand = $request->brand;
+                $product->category = $request->category;
+                $product->sub_category = $request->subcategory;
+                $product->vat = $request->vat;
+                $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
+                $product->old_price = $request->old_price;
+                $product->selling_price = $request->selling_price;
+                $product->alert_quantity = $request->alert_quantity;
+                $product->weight = $request->weight;
+                $product->garage = $request->garage;
+                $product->route = $request->route;
+                $product->feature = $request->feature;
+                $product->service = $request->service;
+                $product->status = $request->status;
+                $product->for_selling = $request->for_selling;
+
+
+                $product->upload_id = $request->image;
+                if($request->has('images_multiple')){
+                    $product->uploads_id = implode(',',$request->images_multiple);
+                }
+
+
+                $product->short_description = $request->short_description;
+                $product->description = $request->description;
+                $product->additional_description = $request->additional_description;
+                $product->youtube_video = $request->youtube_video;
+                $product->landing_page_bg = $request->landing_page_bg;
+                $product->landing_page_color = $request->landing_page_color;
+                $product->variant_on = $request->variant_on;
+                $product->variant_option = json_encode(['variant_key'=>$request->variant_name_key, 'vairant_value'=>$request->variant_name_value]);
+
+
+                $product->creator = auth()->user()->id ?? 0;
+                $product->save();
+
+
+
+                // working on variant product
+                if ($request->has('variant_on') && $request->variant_on == 1) {
+
+
+                    $existingVariants = VariantOption::where('product_id', $product->id)->get();
+
+                    $existingOptionNames = $existingVariants->pluck('name')->toArray();
+
+                    // Array to hold the option names from the request
+                    $requestOptionNames = $request->variant_key;
+
+
+                    foreach ($requestOptionNames as $key => $items) {
+
+                        VariantOption::updateOrCreate(
+                            [
+                                'product_id' => $product->id,
+                                'name' => $items, // Use this for finding existing options
+                            ],
+                            [
+
+                                'old_price' => $request->old_price_v[$key],
+                                'selling_price' => $request->selling_price_v[$key],
+                                'creator' => auth()->user()->id  ?? 0,
+                            ]
+
+                        );
+                    }
+
+                    $array_diff = array_diff($existingOptionNames, $requestOptionNames);
+
+                    foreach($array_diff as $items){
+                        $dataItem = VariantOption::where('name', $items)
+                        ->where('product_id', $product->id)
+                        ->first();
+                        if($dataItem){
+                            $dataItem->delete();
+                        }
+                    }
+                }
+
+
+                return json_encode([
+                    'title'=>'Successfully  Updated product',
+                    'type'=>'success',
+                    'refresh'=>'true',
+                ]);
+            }else{
+                return json_encode([
+                    'title'=>'Product Not Find',
+                    'type'=>'error',
+                    'refresh'=>'false',
+                ]);
             }
-        }
-
-
-        return json_encode([
-            'title'=>'Successfully  Updated product',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
     }
 
     public function delete(product $product){
@@ -339,13 +266,13 @@ class ProductController extends Controller
                 $keyword =  $request->q;
                 $query->where('name', 'LIKE', "%$keyword%");
             }
-        })->select('id', 'name as text', 'selling_price as price')->limit(10)->get();
+        })->select('id', 'name as text', 'selling_price as price','variant_on', 'variant_option')->limit(10)->get();
 
         // Debugging the query
         // dd($data_result);
 
         $result_make = [];
-        $result_make['items']=$data_result;
+        $result_make['items']= $data_result;
 
         return json_encode($result_make);
 

@@ -18,6 +18,9 @@
             <a href="{{ route('admin.order.index') }}" class="nav-link">Order</a>
         </li>
         @endcan
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="{{ route('admin.pos.index') }}" class="nav-link">POS</a>
+        </li>
     </ul>
 
     <!-- Right navbar links -->

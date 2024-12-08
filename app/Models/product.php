@@ -65,8 +65,6 @@ class product extends Model
         return $this->reviews_info()->avg('rating');  // 'rating' is the column name in the reviewProduct table
     }
 
-
-
     public function discounts_info(){
         return discount::whereIn('id', explode(',',$this->discount_id))->get();
     }
