@@ -231,6 +231,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/product/delete/{product}', [ProductController::class, 'delete'])->name('product.delete');
     Route::get('/product/getProduct/get', [ProductController::class, 'getProduct'])->name('product.select');
     Route::get('/product/single_filter/get', [ProductController::class, 'single_filter'])->name('product.single_filter');
+    Route::get('/product/productByID/{product}', [ProductController::class, 'productByID'])->name('product.productByID');
 
 
     //  purchase

@@ -291,4 +291,11 @@ class ProductController extends Controller
         return json_encode($data_result);
 
     }
+
+    public function productByID($product)
+    {
+
+            $product = product::with('variant_option_info')->findOrFail($product);
+            return response()->json($product);
+    }
 }
