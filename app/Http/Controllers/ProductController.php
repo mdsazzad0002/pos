@@ -226,7 +226,7 @@ class ProductController extends Controller
 
 
                 return json_encode([
-                    'title'=>'Successfully  Updated product',
+                    'title'=>'Successfully  Save product',
                     'type'=>'success',
                     'refresh'=>'true',
                 ]);

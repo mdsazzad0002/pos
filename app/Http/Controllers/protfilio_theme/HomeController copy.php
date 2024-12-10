@@ -14,8 +14,6 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
-use App\Models\VariantOption;
-use App\Models\Vat;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -261,31 +259,25 @@ class HomeController extends Controller
     public function add_to_cart(Request $request){
 
         if ($request->has('product_id')) {
-            $source_type = 'front_product';
-            if($request->has('source_type')){
-                $source_type = $request->source_type;
-            }
 
             $product_id = $request->product_id;
-            $product_key = 'pd_' . $product_id;
-            if($request->has('size') && $request->size != 0  && $request->size != ''){
-                $product_key =  $product_key .'vr_'. $request->size;
-            }else{
-                $request['size'] = 0;
-            }
-            $product_cart = session()->get( $source_type, []);
+            $product_cart = session()->get('front_product', []);
 
             // Flag to check if the product was found
             $found = false;
 
+
+
             // Loop through the cart to check if the product exists
             foreach ($product_cart as $key =>  &$item) {
-                if (isset($item[$product_key])) {
+                if (isset($item['pd_' . $product_id])) {
 
                     // return $item;
+
                     if($request->has('type') && $request->type == 'remove_cart') {
+
                         unset($product_cart[$key]);
-                        session()->put( $source_type, $product_cart);
+                        session()->put('front_product', $product_cart);
                         // Check if the product was successfully removed
                         if (!isset($product_cart[$key])) {
                             // Return success response if product was removed
@@ -302,44 +294,33 @@ class HomeController extends Controller
                             ]);
                         }
 
-
-                    }else{
-                        // If the product exists, increase the quantity
-                        if($request->has('quantity')) {
-                            $item[ $product_key]['quantaty'] = $request->quantity;
-                        }else{
-                            $item[ $product_key]['quantaty'] += 1;
-
-                        }
-                        $found = true;
-                        break;
                     }
+                    // If the product exists, increase the quantity
+                    if($request->has('quantity')) {
+                        $item['pd_' . $product_id]['quantaty'] = $request->quantity;
+                    }else{
+                        $item['pd_' . $product_id]['quantaty'] += 1;
+
+                    }
+                    $found = true;
+                    break;
                 }
-            }
-            if($request->has('type') && $request->type == 'remove_cart') {
-             
-                return response()->json([
-                    'title' => 'Failed to find items',
-                    'type'  => 'error',
-                ]);
             }
 
             // If the product was not found, add a new product entry
             if (!$found) {
                 if($request->has('quantity')) {
                     $product_cart[] = [
-                         $product_key => [
+                        'pd_' . $product_id => [
                             'product_id' => $product_id,
                             'quantaty' => $request->quantity,
-                            'size' => $request->size ?? 0,
                         ]
                     ];
                 }else{
                     $product_cart[] = [
-                         $product_key => [
+                        'pd_' . $product_id => [
                             'product_id' => $product_id,
                             'quantaty' => 1,
-                            'size' => $request->size ?? 0,
                         ]
                     ];
 
@@ -350,12 +331,11 @@ class HomeController extends Controller
             // Save the updated cart back to the session
 
             // Save the updated cart back to the session
-            session()->put( $source_type, $product_cart);
+            session()->put('front_product', $product_cart);
 
             return json_encode([
                 'title'=>'Successfully  added Cart',
                 'type'=>'success',
-                'product' =>  $product_cart
             ]);
         }else{
             return json_encode([
@@ -422,7 +402,6 @@ class HomeController extends Controller
             flush();
     }
 
-
     public function side_cart_info(){
         $cart = session("front_product", []);
         $products = [];
@@ -455,8 +434,6 @@ class HomeController extends Controller
     }
 
 
-
-
     public function sales_partner_store (Request $request){
 
         $data = new userController();
@@ -465,63 +442,7 @@ class HomeController extends Controller
         $data->store($request);
 
         return  $data;
-    }
 
-
-
-    public function cart_details(Request $request){
-
-
-            $source_type = 'front_product';
-            if($request->has('source_type')){
-                $source_type = $request->source_type;
-            }
-
-            $product_cart = session()->get( $source_type, []);
-            $data_array = [
-                'subtotal'=> [
-                    'price' => 0,
-                    'vat' => 0,
-                    'quantity' => 0
-                ]
-            ];
-
-            foreach ($product_cart as $key =>  &$item) {
-
-                foreach($item as $key => $itemdata){
-                    $product = product::find($itemdata['product_id']);
-                    $product_variant = VariantOption::find($itemdata['size']);
-                    $vat_info = Vat::find($product->vat);
-
-                    if(!$product){
-                        break;
-                    }
-
-
-                    // return $itemdata['quantaty'];
-                    $data_array['product'][]=[
-                        'session_id'=>  $key,
-                        'product' => $product,
-                        'product_variant' => $product_variant,
-                        'vat' => $vat_info,
-                        'size'=> $itemdata['size'],
-                        'quantity' =>  $itemdata['quantaty'],
-                        'total_price' =>  $itemdata['quantaty'] * $product_variant->selling_price ?? $product->selling_price,
-
-
-                    ];
-
-                    $data_array['subtotal']['price'] += $product_variant->selling_price ?? $product->selling_price;
-                    $data_array['subtotal']['vat'] = (($data_array['subtotal']['price'] * $vat_info->amount) / 100);
-                    $data_array['subtotal']['quantity'] += $itemdata['quantaty'];
-
-                }
-
-            }
-
-
-            return $data_array;
-            // return response()->json($data_array);
 
 
     }

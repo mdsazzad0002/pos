@@ -8,11 +8,11 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        area
+        Vat
         <div>
             @can('area create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  area" data-href="{{ route('admin.area.create') }}">+ Add New area</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Vat" data-href="{{ route('admin.vat.create') }}">+ Add New area</button>
             @endcan
         </div>
     </div>

@@ -41,7 +41,7 @@ class LoginCheckController extends Controller
                     $return_data =  "<button class='btn btn-primary ";
                     $return_data .= $row->id == session()->get('user' . auth()->user()->id) ? 'current_device' : '';
                     $return_data .= "'
-                    data-dialog=' modal-dialog-centered'
+                    data-dialog=' modal-dialog-centered modal-xl modal-dialog-scrollable'
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
@@ -123,7 +123,7 @@ class LoginCheckController extends Controller
                 $current_device = Device::find($device_id);
                 if($current_device){
 
-                    if($current_device->logout == 1 && $current_device->suspend_date <= Carbon::now()){
+                    if($current_device->logout == 1 && $current_device->suspend_date > Carbon::now()){
 
                         $current_device->updater_id = auth()->user()->id ?? 0;
                         $current_device->last_activity = time();

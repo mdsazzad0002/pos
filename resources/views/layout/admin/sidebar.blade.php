@@ -169,6 +169,14 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @can('vat read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.vat.index') }}" class="nav-link">
+                                <i class="fab  nav-icon">%</i>
+                                <p>Vat</p>
+                            </a>
+                        </li>
+                        @endcan
 
 
                     </ul>

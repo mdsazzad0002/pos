@@ -48,6 +48,13 @@ class product extends Model
         return $this->hasOne(unit::class, 'id', 'unit');
 
     }
+
+    public function units_info(){
+       return $this->hasMany(unit::class, 'sub_items_id', 'unit');
+    //    unit::where('sub_items_id', $this->unit)->get();
+    }
+
+
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }

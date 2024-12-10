@@ -32,19 +32,26 @@
                             <input type="checkbox" class="input-group-prepend" id="scan_match_andInput">
                         </div>
                     </div>
-                    <input type="text"  data-url="{{ route('admin.product.select') }}" class="form-control input-group-append" id="product_filter" placeholder="Enter product name">
+                    <input type="text"  data-url="{{ route('admin.product.filter_purchase') }}" class="form-control input-group-append" id="product_filter" placeholder="Enter product name">
 
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             {{--  product entry section  --}}
             <div class="col-md-6 overflow-auto">
                 <table id="users" class="table table-bordered table-striped table-hover">
                     <thead>
 
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Size
+                        </th>
+                        <th>
+                            Unit
+                        </th>
                         <th>
                             Name
                         </th>
@@ -104,15 +111,14 @@
 @push('js')
     <script>
       function format_query_result(data_items){
-        data_items = data_items.items;
+
         var product_filter ='';
         Object.keys(data_items).forEach(function(data){
-
             var items_variant_data = (JSON.parse(data_items[data].variant_option));
             var html_data_key = '';
             var html_data_value = '';
             if(data_items[data].variant_on == 1){
-               
+
                 var item_data_key = items_variant_data.vairant_value.split(",");
                 if(item_data_key.length > 0){
                     html_data_key+=`<select class="form-control">`
@@ -122,8 +128,8 @@
                     });
                     html_data_key+=`</select>`
                 }
-                
-                
+
+
                 var item_data_key = items_variant_data.variant_key.split(",");
                 if(item_data_key.length > 0){
                     html_data_value+=`<select class="form-control">`
@@ -135,21 +141,39 @@
                 }
             }
 
+
+            var unitsItem = ''
+            data_items[data].units_info.forEach(function(item){
+                console.log(item);
+                 unitsItem += `
+                  <option value="${item.id}">
+                        ${item.name}
+                  </option>
+                 `
+            })
+
             product_filter +=`<tr class="single_item_result ">
-                <td class="img p-1">
+                <td class="img p-1 img_c">
                     <img src="${data_items[data].image_url}" style="max-width:150px; height:40px" alt="">
                 </td>
                 <td>
-                    <div class="d-flex ">
+                    <div class="d-flex variant_c">
                         ${data_items[data].variant_on == 1 ? html_data_key + html_data_value : '' }
                     </div>
                 </td>
                 <td class="name p-1">
-                    ${data_items[data].text}
+                    ${data_items[data].name}
                 </td>
-
+                <td class="name p-1 unit_c" style="${data_items[data].unit_info ? 'display:block': 'display:none' }">
+                    <select>
+                        <option value="${data_items[data].unit_info ? data_items[data].unit_info.id : 0}">
+                            ${data_items[data].unit_info ? data_items[data].unit_info.name : ''}
+                        </option>
+                        ${unitsItem}
+                    </select>
+                </td>
                 <td class="action p-1">
-                    <button type="button" type="button" class="btn btn-primary" onclick="items_add_from_quey(${data_items[data].id}, '${data_items[data].text}')">+</button>
+                    <button type="button" type="button" class="btn btn-primary" onclick="items_add_from_quey(this, ${data_items[data].id}, '${data_items[data].name}')">+</button>
                 </td>
             </tr>`;
         })
@@ -161,13 +185,17 @@
         var search_var = document.querySelector('#product_filter');
         search_var.addEventListener('input', function(e){
             e.preventDefault();
+            filter_product_for_purchase(this)
 
+        })
+
+        function filter_product_for_purchase(thi){
             if ($('#scan_match_andInput').is(':checked')) {
                 $.ajax({
                     type:'get',
                     url:'{{route('admin.product.single_filter')}}',
                     data:{
-                        q:this.value,
+                        q:thi.value,
                     },
                     success:function(data){
                         data = JSON.parse(data);
@@ -184,35 +212,47 @@
             } else {
                  $.ajax({
                     type:'get',
-                    url:this.getAttribute('data-url'),
+                    url:thi.getAttribute('data-url'),
                     data:{
-                        q:this.value,
+                        q:thi.value,
                     },
                     success:function(data){
                         data = JSON.parse(data);
+
                     var data_format = format_query_result(data);
                         $('.container_searching_result').html(data_format);
                     }
 
                 })
             }
+        }
+
+        filter_product_for_purchase(search_var)
 
 
 
-
-        })
-
-        function items_add_from_quey(id, name){
+        function items_add_from_quey(thi, id, name){
+            var img_c = $(thi).parents('tr').find('.img_c').html();
+            var variant_c = $(thi).parents('tr').find('.variant_c').html();
+            var unit_c = $(thi).parents('tr').find('.unit_c').html();
             var data_format = ` <tr class="curent_parents_data items${id}">
                             <td>
-                                ${name}
-                                <input type="text" hidden name="productId[]" value="${id}">
+                               ${img_c}
+                            </td>
+                           <td>
+                                ${variant_c}
+                            </td>
+                           <td>
+                                ${unit_c}
+                            </td>
+                            <td>
+                                ${name} <input type="text" hidden name="productId[]" value="${id}">
                             </td>
                             <td>
                                 <input oninput="calclute_inline('.items${id}')" type="number" class="quantaty" name="quantaty[]" value="1">
                             </td>
                             <td>
-                                <input oninput="calclute_inline('.items${id}')" type="numberr" class="price" name="price[]" value="0">
+                                <input oninput="calclute_inline('.items${id}')" type="number" class="price" name="price[]" value="0">
                             </td>
                             <td>
 

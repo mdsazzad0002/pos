@@ -21,6 +21,16 @@
     </tr>
     <tr>
         <td>
+            Details
+        </td>
+        <td style="overflow: auto">
+<pre  style="color: white">
+{{ print_r(json_decode(($device->data?? ''))) }}
+</pre>
+        </td>
+    </tr>
+    <tr>
+        <td>
             Updated At
         </td>
         <td>

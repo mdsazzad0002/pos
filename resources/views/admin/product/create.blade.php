@@ -412,6 +412,7 @@
 
 
             <div class="d-flex justify-content-end">
+                <button class="btn btn-warning mr-1" type="button" onclick="document.querySelector('.form_ajax_submit').reset()">Reset</button>
                 <button class="btn btn-warning" type="submit">Save</button>
             </div>
 

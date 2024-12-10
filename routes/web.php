@@ -238,6 +238,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('/purchase', PurchaseController::class)->names('purchase');
     Route::get('/purchase/delete/{purchase}', [PurchaseController::class, 'delete'])->name('purchase.delete');
     Route::get('/purchase/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('purchase.select');
+    Route::get('/purchase/filter_purchase/get', [PurchaseController::class, 'filterPurchase'])->name('product.filter_purchase');
 
 
     //  purchase

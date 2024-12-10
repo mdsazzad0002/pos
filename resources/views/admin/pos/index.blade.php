@@ -139,180 +139,7 @@
                                 <div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
                                     <!-- BEGIN #newOrderTab -->
                                     <div class="tab-pane fade h-100 show active" id="newOrderTab">
-                                        <!-- BEGIN pos-order -->
-                                        <div class="pos-order">
-                                            <div class="pos-order-product">
-                                                <div class="img"
-                                                    style="background-image: url({{ asset('pos/pos_image') }}/product-2.jpg)">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="h6 mb-1">Grill Pork Chop</div>
-                                                    <div class="small">$12.99</div>
-                                                    <div class="small mb-2">- size: large</div>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-minus"></i></a>
-                                                        <input type="text"
-                                                            class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
-                                                            value="01">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pos-order-price d-flex flex-column">
-                                                <div class="flex-1">$12.99</div>
-                                                <div class="text-end">
-                                                    <a href="#" class="btn btn-default btn-sm"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END pos-order -->
-                                        <!-- BEGIN pos-order -->
-                                        <div class="pos-order">
-                                            <div class="pos-order-product">
-                                                <div class="img"
-                                                    style="background-image: url({{ asset('pos/pos_image') }}/product-8.jpg)">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="h6 mb-1">Orange Juice</div>
-                                                    <div class="small">$5.00</div>
-                                                    <div class="small mb-2">
-                                                        - size: large<br>
-                                                        - less ice
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-minus"></i></a>
-                                                        <input type="text"
-                                                            class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
-                                                            value="02">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pos-order-price d-flex flex-column">
-                                                <div class="flex-1">$10.00</div>
-                                                <div class="text-end">
-                                                    <a href="#" class="btn btn-default btn-sm"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END pos-order -->
-                                        <!-- BEGIN pos-order -->
-                                        <div class="pos-order">
-                                            <div class="pos-order-product">
-                                                <div class="img"
-                                                    style="background-image: url({{ asset('pos/pos_image') }}/product-1.jpg)">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="h6 mb-1">Grill chicken chop</div>
-                                                    <div class="small">$10.99</div>
-                                                    <div class="small mb-2">
-                                                        - size: large<br>
-                                                        - spicy: medium
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-minus"></i></a>
-                                                        <input type="text"
-                                                            class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
-                                                            value="01">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pos-order-price d-flex flex-column">
-                                                <div class="flex-1">$10.99</div>
-                                                <div class="text-end">
-                                                    <a href="#" class="btn btn-default btn-sm"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END pos-order -->
-                                        <!-- BEGIN pos-order -->
-                                        <div class="pos-order">
-                                            <div class="pos-order-product">
-                                                <div class="img"
-                                                    style="background-image: url({{ asset('pos/pos_image') }}/product-5.jpg)">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="h6 mb-1">Hawaiian Pizza</div>
-                                                    <div class="small">$15.00</div>
-                                                    <div class="small mb-2">
-                                                        - size: large<br>
-                                                        - more onion
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-minus"></i></a>
-                                                        <input type="text"
-                                                            class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
-                                                            value="01">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pos-order-price d-flex flex-column">
-                                                <div class="flex-1">$15.00</div>
-                                                <div class="text-end">
-                                                    <a href="#" class="btn btn-default btn-sm"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="pos-order-confirmation text-center d-flex flex-column justify-content-center">
-                                                <div class="mb-1">
-                                                    <i class="fa fa-trash fs-36px lh-1 text-body text-opacity-25"></i>
-                                                </div>
-                                                <div class="mb-2">Remove this item?</div>
-                                                <div>
-                                                    <a href="#"
-                                                        class="btn btn-default btn-sm ms-auto me-2 width-100px">No</a>
-                                                    <a href="#" class="btn btn-danger btn-sm width-100px">Yes</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END pos-order -->
-                                        <!-- BEGIN pos-order -->
-                                        <div class="pos-order">
-                                            <div class="pos-order-product">
-                                                <div class="img"
-                                                    style="background-image: url({{ asset('pos/pos_image') }}/product-10.jpg)">
-                                                </div>
-                                                <div class="flex-1">
-                                                    <div class="h6 mb-1">Mushroom Soup</div>
-                                                    <div class="small">$3.99</div>
-                                                    <div class="small mb-2">
-                                                        - size: large<br>
-                                                        - more cheese
-                                                    </div>
-                                                    <div class="d-flex">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-minus"></i></a>
-                                                        <input type="text"
-                                                            class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
-                                                            value="01">
-                                                        <a href="#" class="btn btn-secondary btn-sm"><i
-                                                                class="fa fa-plus"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="pos-order-price d-flex flex-column">
-                                                <div class="flex-1">$3.99</div>
-                                                <div class="text-end">
-                                                    <a href="#" class="btn btn-default btn-sm"><i
-                                                            class="fa fa-trash"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END pos-order -->
+
                                     </div>
                                     <!-- END #orderHistoryTab -->
 
@@ -414,7 +241,7 @@
                             <div class="img product_bg_image"
                                 style="background-image: url({{ asset('pos/pos_image') }}/product-1.jpg)"></div>
                         </div>
-                        <div class="modal-pos-product-info">
+                        <form class="modal-pos-product-info">
                             <div class="fs-4 fw-semibold name_info">Grill Chicken Chop</div>
                             <div class="text-body text-opacity-50 mb-2 product_info_extra_inof">
                                 ----
@@ -422,7 +249,7 @@
                             <div class="fs-3 fw-bold mb-3 name_price">{{ settings('currency_symbol', 9) }}<span>0.0</span> </div>
                             <div class="d-flex mb-3 quantity_parents">
                                 <a href="javascript:void(0)" onclick="product_counterUP(this, '-')" class="btn btn-secondary"><i class="fa fa-minus"></i></a>
-                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="qty"
+                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="quantaty"
                                     value="0">
                                 <a   href="javascript:void(0)" onclick="product_counterUP(this, '+')" class="btn btn-secondary"><i class="fa fa-plus"></i></a>
                             </div>
@@ -431,7 +258,7 @@
                                 <div class="fw-bold">Size:</div>
                                 <div class="option-list vaiaant_key"></div>
                             </div>
-                           
+
                             <hr class="opacity-1">
                             <div class="row">
                                 <div class="col-4">
@@ -439,12 +266,12 @@
                                         data-dismiss="modal">Cancel</a>
                                 </div>
                                 <div class="col-8">
-                                    <a href="#"
+                                    <button type="submit" href="#"
                                         class="btn btn-primary fw-semibold d-flex justify-content-center align-items-center py-3 m-0"><i class="fa fa-plus ms-2 my-n3"></i> &nbsp;&nbsp;Add
-                                        to cart </a>
+                                        to cart </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -452,14 +279,37 @@
     </div>
 
     <script>
+
+        document.querySelector('.modal-pos-product-info').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            // AJAX request
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('add_to_cart') }}',
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    if(data.type == 'success'){
+                        cart_product_view();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("There was an error with the request: " + error);
+                }
+            });
+        });
+
+
+
         function product_view_cart(thi){
-            console.log(thi)
+            // console.log(thi)
             $.ajax({
                 type:'get',
                 url:'{{ url("admin/product/productByID/") }}/'+$(thi).data('id'),
-                
+
                 success:function(data){
-                  
+
                     $('#modalPosItem .product_bg_image').css('background-image', 'url('+data.image_url+')');
                     $('#modalPosItem .name_info').html(data.name);
                     $('#modalPosItem .name_price span').html(data.selling_price);
@@ -471,8 +321,10 @@
                     <div>Buying Price Last : ${data.buying_price}</div>
                     <div>Garage : ${data.garage}</div>
                     <div>Route : ${data.route}</div>
+                    <input name="product_id" value="${data.id}" hidden/>
+                    <input name="source_type" value="pos" hidden/>
                     `;
-            
+
                     $('#modalPosItem .product_info_extra_inof').html(product_info_data);
 
                     if(data.variant_on == 1){
@@ -510,7 +362,7 @@
 
             productVariant.forEach((items, index) => {
                 html_data_value += `<div class="option" data-price="${items.selling_price}" onclick="price_change(this)">
-                                        <input type="radio" id="size${items.id}"  name="size" class="option-input"
+                                        <input type="radio" id="size${items.id}" value="${items.id}"  name="size" class="option-input"
                                             >
                                         <label class="option-label" for="size${items.id}">
                                             <span class="option-text text-capitalize">${items.name}</span>
@@ -519,7 +371,7 @@
                                     </div>`;
             });
 
-          
+
 
 
              $('#modalPosItem .vaiaant_key.option-list').html(html_data_value);
@@ -527,13 +379,101 @@
              $('#modalPosItem .name_price span').html(productVariant[0].selling_price);
 
 
-         
+
         }
 
 
         function price_change(thi){
             $('#modalPosItem .name_price span').html($(thi).data('price'));
         }
+
+
+        function format_cart_items(data){
+            var html_data = '';
+            // console.log(data['product'])
+            Object(data['product']).forEach((element, index)=>{
+                html_data+=`
+                  <!-- BEGIN pos-order -->
+                    <div class="pos-order">
+                        <div class="pos-order-product">
+                            <div class="img"
+                                style="background-image: url('${element.product.image_url}')">
+                            </div>
+                            <div class="flex-1">
+                                <div class="h6 mb-1">${element.product.name}</div>
+                                <div class="small">${element.product_variant.selling_price ?? element.product.selling_price}</div>
+
+                                <div class="small mb-2" style="${element.product_variant ? 'display:block': 'display:none'}">
+                                    - size: ${element.product_variant.name}<br>
+
+                                </div>
+                                <div class="d-flex">
+                                    <a href="#" class="btn btn-secondary btn-sm"><i
+                                            class="fa fa-minus"></i></a>
+                                    <input type="text"
+                                        class="form-control w-50px form-control-sm mx-2 bg-white bg-opacity-25 bg-white bg-opacity-25 text-center"
+                                        value="${element.quantity}">
+                                    <a href="#" class="btn btn-secondary btn-sm"><i
+                                            class="fa fa-plus"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pos-order-price d-flex flex-column">
+                            <div class="flex-1">${element.total_price}</div>
+                            <div class="text-end">
+                                <a href="#" class="btn btn-default btn-sm" onclick="pos_remove_cart(${element.product.id},${element.size})" ><i
+                                        class="fa fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END pos-order -->
+                `
+                console.log(element)
+            })
+            $('#newOrderTab').html(html_data)
+        }
+
+        function cart_product_view(){
+            $.ajax({
+                type:'get',
+                url:'{{ route('cart_details') }}?source_type=pos',
+                success:function(data){
+                    // data  = JSON.parse(data)
+
+                    if(data.subtotal.quantity == 0){
+                        $('#newOrderTab').html('')
+                    }else{
+                        format_cart_items(data)
+                    }
+                }
+            })
+        }
+        setTimeout(() => {
+            cart_product_view()
+        }, 1000);
+
+
+        function pos_remove_cart(id, size){
+            console.log(size)
+            if(size == 0){
+                size = ''
+            }
+            $.ajax({
+                type: 'get',
+                url:'{{ route('add_to_cart') }}',
+                data:{
+                    'product_id': id,
+                    'size':size,
+                    'type' : 'remove_cart',
+                    'source_type' : 'pos'
+
+                },
+                success:function(data){
+                    cart_product_view()
+                }
+            })
+        }
+
 
     </script>
 

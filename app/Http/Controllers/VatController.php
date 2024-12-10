@@ -66,7 +66,7 @@ class vatController extends Controller
      */
     public function create()
     {
-        return view('admin.vat.partials.create');
+        return view('admin.vat.partials.create_edit');
     }
 
     /**
@@ -74,8 +74,10 @@ class vatController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate(['name' => 'required']);
         $vat = new vat;
+
         $vat->name = $request->name;
         $vat->amount = $request->amount;
         $vat->status = $request->status ?? 1;
@@ -107,7 +109,8 @@ class vatController extends Controller
      */
     public function edit(vat $vat)
     {
-        return view('admin.vat.partials.edit', compact('vat'));
+        
+        return view('admin.vat.partials.create_edit', compact('vat'));
     }
 
     /**

@@ -67,6 +67,9 @@ class rolepermissionsedder extends Seeder
                 // Brand
                 'brand read',  'brand create', 'brand edit',  'brand delete',
 
+                // Brand
+                'vat read',  'vat create', 'vat edit',  'vat delete',
+
                 // Discoount
                 'discount read',  'discount create', 'discount edit',  'discount delete',
 

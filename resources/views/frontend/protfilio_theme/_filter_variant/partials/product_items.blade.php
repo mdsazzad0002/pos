@@ -1,6 +1,6 @@
 @if(isset($product))
 @php
-    if(!$view_page){
+    if(!isset($view_page)){
         $view_page = \App\Models\page::where('page_type', 'view')->first();
     }
 
