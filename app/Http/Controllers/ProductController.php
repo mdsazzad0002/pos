@@ -294,8 +294,7 @@ class ProductController extends Controller
 
     public function productByID($product)
     {
-
-            $product = product::with('variant_option_info')->findOrFail($product);
+            $product = product::with('variant_option_info', 'vat_info')->findOrFail($product);
             return response()->json($product);
     }
 }

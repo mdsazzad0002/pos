@@ -334,3 +334,5 @@ Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
 });
 
 
+
+include(__DIR__ . '/courier.php');

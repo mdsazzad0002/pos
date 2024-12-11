@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FooterLinkHeadingSeeder::class);
         $this->call(FooterLinkSubHeadingSeeder::class);
         $this->call(TestimonialSeeder::class);
+        $this->call(PaymentMethodSeeder::class);
 
         $this->call(FaqSeeder::class);
 

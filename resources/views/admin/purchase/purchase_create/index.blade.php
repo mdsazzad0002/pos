@@ -14,16 +14,33 @@
         @csrf
         <div class="row mb-3">
             <div class="col-md-6 mb-2">
-                <div class="input-group">
-                    <select  name="supplierID" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.supplier.select') }}" id="">
-                        <option value="">-- supplier -- </option>
-                    </select>
-                    @can('user create')
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group">
+                            <select  name="supplierID" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.supplier.select') }}" id="">
+                                <option value="">-- supplier -- </option>
+                            </select>
+                            @can('user create')
 
-                    <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">+ Add New supplier</button>
-                    @endcan
+                            <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">+ Add New supplier</button>
+                            @endcan
 
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group">
+
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    Buying Date
+                                </div>
+                            </div>
+                            <input type="date" class="form-control" name="buying_date" value="{{ date('Y-m-d') }}" id="">
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
             <div class="col-md-6 mb-2">
                 <div class="input-group">
@@ -75,7 +92,7 @@
                     </tbody>
                     <tfoot class="foma_output_footer">
                         <tr>
-                            <td></td>
+                            <td colspan="4">Total</td>
                             <td class="total_quantaty">0</td>
                             <td class="total_price">0</td>
                             <td class="total_subtotal">0</td>
@@ -117,28 +134,44 @@
             var items_variant_data = (JSON.parse(data_items[data].variant_option));
             var html_data_key = '';
             var html_data_value = '';
+
             if(data_items[data].variant_on == 1){
 
-                var item_data_key = items_variant_data.vairant_value.split(",");
+
+
+                var item_data_key = items_variant_data.variant_key.split(",");
+
                 if(item_data_key.length > 0){
-                    html_data_key+=`<select class="form-control">`
+                     html_data_key+=`<select class="form-control" name="variant_key[]">`
                     item_data_key.forEach(element => {
                         console.log(element);
                         html_data_key+=`<option value="${element}">${element}</option>`
                     });
-                    html_data_key+=`</select>`
+                      html_data_key+=`</select>`
                 }
 
 
-                var item_data_key = items_variant_data.variant_key.split(",");
+
+
+
+
+                var item_data_key = items_variant_data.vairant_value.split(",");
+                html_data_value+=`<select class="form-control" name="variant_value[]">`
                 if(item_data_key.length > 0){
-                    html_data_value+=`<select class="form-control">`
                     item_data_key.forEach(element => {
                         console.log(element);
                         html_data_value+=`<option value="${element}">${element}</option>`
                     });
-                    html_data_value+=`</select>`
+                }else{
+                    html_data_value+=`<option value="">Variant Not Found</option>`
                 }
+                html_data_value+=`</select>`
+
+
+
+            }else{
+                  html_data_key+=`<select class="form-control" name="variant_key[]"><option value="">Variant Not Found</option></select>`
+                  html_data_value+=`<select class="form-control" name="variant_value[]"><option value="">Variant Not Found</option></select>`
             }
 
 
@@ -155,17 +188,18 @@
             product_filter +=`<tr class="single_item_result ">
                 <td class="img p-1 img_c">
                     <img src="${data_items[data].image_url}" style="max-width:150px; height:40px" alt="">
+
                 </td>
                 <td>
                     <div class="d-flex variant_c">
-                        ${data_items[data].variant_on == 1 ? html_data_key + html_data_value : '' }
+                        ${ html_data_key + html_data_value  }
                     </div>
                 </td>
                 <td class="name p-1">
                     ${data_items[data].name}
                 </td>
-                <td class="name p-1 unit_c" style="${data_items[data].unit_info ? 'display:block': 'display:none' }">
-                    <select>
+                <td class="name p-1 unit_c">
+                    <select class="form-control" name="unit_name">
                         <option value="${data_items[data].unit_info ? data_items[data].unit_info.id : 0}">
                             ${data_items[data].unit_info ? data_items[data].unit_info.name : ''}
                         </option>
@@ -246,10 +280,11 @@
                                 ${unit_c}
                             </td>
                             <td>
-                                ${name} <input type="text" hidden name="productId[]" value="${id}">
+                                ${name}
+                                <input type="hidden" value="${id}" name="productId[]"/>
                             </td>
                             <td>
-                                <input oninput="calclute_inline('.items${id}')" type="number" class="quantaty" name="quantaty[]" value="1">
+                                <input oninput="calclute_inline('.items${id}')" type="number" class="quantaty" name="quantity[]" value="1">
                             </td>
                             <td>
                                 <input oninput="calclute_inline('.items${id}')" type="number" class="price" name="price[]" value="0">
@@ -280,6 +315,9 @@
 
 
         function calclute_inline(class_name){
+            var items = document.querySelector(class_name+' .quantaty').value;
+            var items = document.querySelector(class_name+' .quantaty').value;
+            var items = document.querySelector(class_name+' .quantaty').value;
             var items = document.querySelector(class_name+' .quantaty').value;
             var price = document.querySelector(class_name+' .price').value;
             var total = document.querySelector(class_name+' .total');

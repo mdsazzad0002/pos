@@ -132,7 +132,7 @@
             }
             setInterval(function(){
                 inew_message_load()
-            },5000)
+            },10000)
 
       </script>
 

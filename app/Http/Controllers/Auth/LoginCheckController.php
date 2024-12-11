@@ -207,7 +207,7 @@ class LoginCheckController extends Controller
 
             ob_flush();
             flush();
-
+            sleep(5);
 
         // dd($device);
     }

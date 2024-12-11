@@ -13,15 +13,15 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run(): void
     {
-        $paymentMethods = ['bKash', 'Nagad', 'Rocket', 'Dutch Bangla Bank', 'Sonali Bank'];
-        foreach($paymentMethods as $method){
-            $newMethod = new paymentMethod();
-            $newMethod->name = $method;
-            $newMethod->provider = 'Bangladesh';
-            $newMethod->branch = 'Dhaka';
-            $newMethod->charge = 0;
-            $newMethod->save();
-        }
+        // $paymentMethods = ['bKash', 'Nagad', 'Rocket', 'Dutch Bangla Bank', 'Sonali Bank'];
+        // foreach($paymentMethods as $method){
+        //     $newMethod = new paymentMethod();
+        //     $newMethod->name = $method;
+        //     $newMethod->provider = 'Bangladesh';
+        //     $newMethod->branch = 'Dhaka';
+        //     $newMethod->charge = 0;
+        //     $newMethod->save();
+        // }
 
     }
 }

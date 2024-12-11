@@ -125,7 +125,7 @@
                                     <ul class="nav nav-tabs nav-fill">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#" data-bs-toggle="tab"
-                                                data-bs-target="#newOrderTab">New Order (5)</a>
+                                                data-bs-target="#newOrderTab">New Order (<span class="subtotal_quantity">0</span>)</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="#" data-bs-toggle="tab"
@@ -169,17 +169,31 @@
                                 <!-- BEGIN pos-sidebar-footer -->
                                 <div class="pos-sidebar-footer">
                                     <div class="d-flex align-items-center mb-2">
-                                        <div>Subtotal</div>
-                                        <div class="flex-1 text-end h6 mb-0">$30.98</div>
+                                        <div>Subtotal : </div>
+                                        <div class="flex-1 text-end h6 mb-0 "> $<span class="subtotal_price">00.00</span> </div>
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <div>Taxes (6%)</div>
-                                        <div class="flex-1 text-end h6 mb-0">$2.12</div>
+                                        <div>Taxes : </div>
+                                        <div class="flex-1 text-end h6 mb-0"> $<span class="subtotal_tax">00.00</span></div>
+                                    </div>
+                                    <div>
+                                        <div class="inputgorup">
+                                            <div class="input-group-prepend mt-2">
+                                                <div class="input-group-text">
+                                                    <select name="type" id="typevalue" onchange="discountCalculation()">
+                                                        <option value="1">Fixed</option>
+                                                        <option value="2">Present</option>
+                                                    </select>
+                                                </div>
+                                                <input type="number" step="0.1" oninput="discountCalculation()" id="discount" class="form-control" placeholder="Enter your Discount">
+                                            </div>
+                                        </div>
                                     </div>
                                     <hr class="opacity-1 my-10px">
                                     <div class="d-flex align-items-center mb-2">
-                                        <div>Total</div>
-                                        <div class="flex-1 text-end h4 mb-0">$33.10</div>
+                                        <div>Total : </div>
+                                        <div class="flex-1 text-end h4 mb-0"> $<span class="subtotal_tprice">00.00</span></div>
+                                        <input type="hidden" id="grand_total">
                                     </div>
                                     <div class="mt-3">
                                         <div class="d-flex">
@@ -198,7 +212,8 @@
                                                 </span>
                                             </a>
                                             <a href="#"
-                                                class="btn btn-theme flex-fill d-flex align-items-center justify-content-center">
+                                                class="btn btn-theme flex-fill d-flex align-items-center justify-content-center" data-toggle="modal"
+                                                data-target="#modalOrder">
                                                 <span>
                                                     <i class="fa fa-cash-register fa-lg my-10px d-block"></i>
                                                     <span class="small fw-semibold">Submit Order</span>
@@ -231,6 +246,23 @@
         </div>
         <!-- END #app -->
 
+        {{-- Order modal --}}
+        <div class="modal modal-pos fade" id="modalOrder">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content border-0">
+                    <a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
+                    <div class="modal-pos-product">
+
+
+                        @include('admin.pos.checkout')
+
+                      
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- BEGIN #modalPosItem -->
         <div class="modal modal-pos fade" id="modalPosItem">
             <div class="modal-dialog modal-lg">
@@ -249,7 +281,7 @@
                             <div class="fs-3 fw-bold mb-3 name_price">{{ settings('currency_symbol', 9) }}<span>0.0</span> </div>
                             <div class="d-flex mb-3 quantity_parents">
                                 <a href="javascript:void(0)" onclick="product_counterUP(this, '-')" class="btn btn-secondary"><i class="fa fa-minus"></i></a>
-                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="quantaty"
+                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="quantity"
                                     value="0">
                                 <a   href="javascript:void(0)" onclick="product_counterUP(this, '+')" class="btn btn-secondary"><i class="fa fa-plus"></i></a>
                             </div>
@@ -319,8 +351,10 @@
                     <div>SKU : ${data.sku}</div>
                     <div>Weight : ${data.weight}</div>
                     <div>Buying Price Last : ${data.buying_price}</div>
+                    <div>Vat : ${data.vat_info ? data.vat_info.amount : 0}%</div>
                     <div>Garage : ${data.garage}</div>
                     <div>Route : ${data.route}</div>
+                    <input name="product_id" value="${data.id}" hidden/>
                     <input name="product_id" value="${data.id}" hidden/>
                     <input name="source_type" value="pos" hidden/>
                     `;
@@ -401,7 +435,7 @@
                             </div>
                             <div class="flex-1">
                                 <div class="h6 mb-1">${element.product.name}</div>
-                                <div class="small">${element.product_variant.selling_price ?? element.product.selling_price}</div>
+                                <div class="small">${element.product_variant.selling_price ?? element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</div>
 
                                 <div class="small mb-2" style="${element.product_variant ? 'display:block': 'display:none'}">
                                     - size: ${element.product_variant.name}<br>
@@ -440,6 +474,12 @@
                 success:function(data){
                     // data  = JSON.parse(data)
 
+                    $('.subtotal_quantity').html(data.subtotal.quantity);
+                    $('.subtotal_tax').html(data.subtotal.total_vat);
+                    $('.subtotal_price').html(data.subtotal.price);
+                    $('.subtotal_tprice').html(data.subtotal.total_price);
+                    $('#grand_total').val(data.subtotal.total_price);
+
                     if(data.subtotal.quantity == 0){
                         $('#newOrderTab').html('')
                     }else{
@@ -452,6 +492,29 @@
             cart_product_view()
         }, 1000);
 
+        function discountCalculation(){
+            var subtotal_tprice = document.querySelector('.subtotal_tprice');
+            var grandInput = document.getElementById('grand_total');
+
+            var typevalue = document.getElementById('typevalue');
+            var inputvalue = document.getElementById('discount');
+            if(typevalue.value==1){
+                var calcluted =  grandInput.value - inputvalue.value;
+                if(calcluted < 0){
+                    alert('Negative value detected');
+                }
+                subtotal_tprice.innerHTML = calcluted
+
+            }else{
+                var calcluted = grandInput.value - ((grandInput.value * inputvalue.value) / 100);
+                if(calcluted < 0){
+                    alert('Negative value detected');
+                }
+                subtotal_tprice.innerHTML = calcluted
+
+            }
+
+        }
 
         function pos_remove_cart(id, size){
             console.log(size)

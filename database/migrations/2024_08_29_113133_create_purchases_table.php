@@ -16,11 +16,16 @@ return new class extends Migration
             $table->bigInteger('productId');
             $table->bigInteger('supplierId');
             $table->bigInteger('quantity');
+            $table->bigInteger('unit_id')->nullable();
+            $table->bigInteger('varinat_id')->nullable();
             $table->bigInteger('status')->reference('1 means approved 2 means cancel');
+            $table->foreign('unit_id')->references('id')->on('units')->nullable();
+            $table->foreign('varinat_id')->references('id')->on('variant_options')->nullable();
             $table->bigInteger('price');
-            $table->bigInteger('buying_date');
-            $table->bigInteger('expiring_date');
-            $table->bigInteger('creator');
+            $table->timestamp('buying_date')->nullable();
+            $table->timestamp('expiring_date')->nullable();
+            $table->string('creator')->default(0);
+            $table->string('updater')->default(0);
             $table->timestamps();
         });
     }

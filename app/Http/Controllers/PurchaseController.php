@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\unit;
+use App\Models\product;
 use App\Models\purchase;
 use Illuminate\Http\Request;
+use App\Models\VariantOption;
 use Yajra\DataTables\DataTables;
-use App\Models\product;
 
 class PurchaseController extends Controller
 {
@@ -92,12 +94,18 @@ class PurchaseController extends Controller
 
 
         foreach($request->productId as $key => $value){
+            $units = unit::find($request->unit_name[$key])->first();
+            $variant = VariantOption::where('name', $request->variant_key[$key].':'.$request->variant_value[$key])->first();
+
             $purchase = new purchase;
             $purchase->productId = $value;
             $purchase->supplierId = $request->supplierID;
             $purchase->quantity = $request->quantity[$key];
             $purchase->price = $request->price[$key];
+            $purchase->buying_date = $request->buying_date;
             $purchase->status = 2;
+            $purchase->unit_id =  $units ?  $units->id : 0;
+            $purchase->varinat_id =  $variant ?  $variant->id : 0;
             $purchase->creator = auth()->user()->id ?? 0;
             $purchase->save();
         }

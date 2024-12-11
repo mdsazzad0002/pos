@@ -14,6 +14,16 @@ class PaymentCredientialsSeeder extends Seeder
     public function run(): void
     {
         $data = [
+
+            [
+                'provider' => 'Cash',
+                'sandbox_status' => '1',
+                'status'=> 1,
+
+                'charge' => 0,
+                'banach'=> 'dhaka',
+                'country'=> 'bangladesh',
+            ],
             [
                 'provider' => 'AmarPay',
                 'store_id' => 'aamarpaytest',
@@ -75,7 +85,16 @@ class PaymentCredientialsSeeder extends Seeder
                 'charge' => 0,
                 'banach'=> 'us',
                 'country'=> 'us',
-            ]
+            ],
+            [
+                'provider' => 'Others',
+                'sandbox_status' => '1',
+                'status'=> 1,
+
+                'charge' => 0,
+                'banach'=> 'dhaka',
+                'country'=> 'bangladesh',
+            ],
         ];
 
         $count = PaymentCredential::count();

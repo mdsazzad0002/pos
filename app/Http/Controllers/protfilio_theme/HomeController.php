@@ -317,7 +317,7 @@ class HomeController extends Controller
                 }
             }
             if($request->has('type') && $request->type == 'remove_cart') {
-             
+
                 return response()->json([
                     'title' => 'Failed to find items',
                     'type'  => 'error',
@@ -469,6 +469,11 @@ class HomeController extends Controller
 
 
 
+
+
+
+
+
     public function cart_details(Request $request){
 
 
@@ -482,11 +487,14 @@ class HomeController extends Controller
                 'subtotal'=> [
                     'price' => 0,
                     'vat' => 0,
-                    'quantity' => 0
+                    'quantity' => 0,
+                    'total_price' => 0,
+                    'total_vat' => 0
                 ]
             ];
 
             foreach ($product_cart as $key =>  &$item) {
+
 
                 foreach($item as $key => $itemdata){
                     $product = product::find($itemdata['product_id']);
@@ -497,6 +505,18 @@ class HomeController extends Controller
                         break;
                     }
 
+                    $cal_quantity =  $itemdata['quantaty'];
+                    $cal_price = $product_variant->selling_price ?? $product->selling_price;
+                    $cal_sub_price = $cal_price * $cal_quantity;
+
+
+                    $cat_vat_price = $vat_info ? (($cal_price * $vat_info->amount) / 100) : 0;
+                    $cal_total_vat = ($cat_vat_price * $cal_quantity);
+
+                    $cal_vat_with_price = $cal_price +  $cat_vat_price;
+
+                    $cal_total_vat_with_price =  $cal_total_vat + $cal_sub_price;
+
 
                     // return $itemdata['quantaty'];
                     $data_array['product'][]=[
@@ -504,16 +524,21 @@ class HomeController extends Controller
                         'product' => $product,
                         'product_variant' => $product_variant,
                         'vat' => $vat_info,
+                        'vat_price' =>  $cat_vat_price,
                         'size'=> $itemdata['size'],
-                        'quantity' =>  $itemdata['quantaty'],
-                        'total_price' =>  $itemdata['quantaty'] * $product_variant->selling_price ?? $product->selling_price,
-
-
+                        'quantity' =>  $cal_quantity,
+                        'price' =>  $cal_price,
+                        'vat_with_price' =>  $cal_vat_with_price,
+                        'price_with_vat_price' =>  $cal_vat_with_price,
+                        'total_price' => $cal_total_vat_with_price,
+                        'total_vat_price' => $cal_total_vat,
                     ];
 
-                    $data_array['subtotal']['price'] += $product_variant->selling_price ?? $product->selling_price;
-                    $data_array['subtotal']['vat'] = (($data_array['subtotal']['price'] * $vat_info->amount) / 100);
-                    $data_array['subtotal']['quantity'] += $itemdata['quantaty'];
+                    $data_array['subtotal']['quantity'] +=  $cal_quantity;
+                    $data_array['subtotal']['vat'] +=  $cat_vat_price;
+                    $data_array['subtotal']['total_vat'] +=   $cal_total_vat;
+                    $data_array['subtotal']['price'] +=  $cal_sub_price;
+                    $data_array['subtotal']['total_price'] += $cal_total_vat_with_price;
 
                 }
 

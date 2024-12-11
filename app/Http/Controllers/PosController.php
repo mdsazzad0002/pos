@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\brand;
 use App\Models\category;
+use App\Models\payment\PaymentCredential;
 use App\Models\product;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,11 @@ class PosController extends Controller
      */
     public function index()
     {
+        $paymentCredentials = PaymentCredential::where('status', 1)->select('id','provider')->get();
         $categories = category::where('status', 1)->get();
         $brands = brand::where('status', 1)->get();
         $products = product::where('status', 1)->where('for_selling', 1)->orderBy('views')->limit(40)->get();
-        return view('admin.pos.index', compact('categories','brands', 'products'));
+        return view('admin.pos.index', compact('categories','brands', 'products','paymentCredentials'));
     }
 
     /**
