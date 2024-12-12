@@ -76,6 +76,12 @@
                 <p> {{ __('settings.payment-configration-sidebar') }}</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.settings.courier-configration.index') }}" class="nav-link ">
+                <i class="fas fa-money-check nav-icon"></i>
+                <p> {{ __('settings.courier-configration-sidebar') }}</p>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a href="#" class="nav-link">

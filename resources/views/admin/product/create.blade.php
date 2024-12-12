@@ -68,6 +68,54 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="">Category</label>
+                                    <div class="input-group mb-3">
+                                        <select type="text" name="category"
+                                            data-url="{{ route('admin.category.select') }}" data-ajax="true"
+                                            class="form-control input-group-prepend select2 category_select"
+                                            placeholder="Username" aria-label="Username"
+                                            aria-describedby="basic-addon1">
+                                            @if($product)
+                                                <option value="{{ $product->category ?? 0 }}">{{ $product->category_info->name ?? '' }}</option>
+                                            @else
+                                                <option value="0">category</option>
+                                            @endif
+                                        </select>
+                                        <button type="button" class="btn btn-primary input-group-append"
+                                            data-dialog=" modal-dialog-scrollable modal-dialog-centered"
+                                            onclick="button_ajax(this)" data-title="Add New  Category"
+                                            data-href="{{ route('admin.category.create') }}">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Sub Category</label>
+                                    <div class="input-group mb-3">
+                                        <select type="text" name="subcategory"
+                                            data-url="{{ route('admin.subcategory.select') }}" data-ajax="true"
+                                            class="form-control input-group-prepend select2 select_subcategory"
+                                            placeholder="Username" aria-label="Username"
+                                            aria-describedby="basic-addon1">
+                                            @if($product)
+                                                <option value="{{ $product->sub_category ?? 0 }}">{{ $product->sub_category_info->name ?? '' }}</option>
+                                            @else
+                                                <option value="0">subcategory</option>
+                                            @endif
+                                        </select>
+                                        <button type="button" class="btn btn-primary input-group-append"
+                                            data-dialog=" modal-dialog-scrollable modal-dialog-centered"
+                                            onclick="button_ajax(this)" data-title="Add New  subcategory"
+                                            data-href="{{ route('admin.subcategory.create') }}">+</button>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="row">
+
 
                                 <div class="col-lg-6">
                                     <label for="">Brand</label>
@@ -89,50 +137,6 @@
                                             data-href="{{ route('admin.brand.create') }}">+</button>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-6">
-                                    <label for="">Category</label>
-                                    <div class="input-group mb-3">
-                                        <select type="text" name="category"
-                                            data-url="{{ route('admin.category.select') }}" data-ajax="true"
-                                            class="form-control input-group-prepend select2 category_select"
-                                            placeholder="Username" aria-label="Username"
-                                            aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->category ?? 0 }}">{{ $product->category_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">category</option>
-                                            @endif
-                                        </select>
-                                        <button type="button" class="btn btn-primary input-group-append"
-                                            data-dialog=" modal-dialog-scrollable modal-dialog-centered"
-                                            onclick="button_ajax(this)" data-title="Add New  Category"
-                                            data-href="{{ route('admin.category.create') }}">+</button>
-                                    </div>
-                                </div>
-
-
-                                <div class="col-lg-6">
-                                    <label for="">Sub Category</label>
-                                    <div class="input-group mb-3">
-                                        <select type="text" name="subcategory"
-                                            data-url="{{ route('admin.subcategory.select') }}" data-ajax="true"
-                                            class="form-control input-group-prepend select2 select_subcategory"
-                                            placeholder="Username" aria-label="Username"
-                                            aria-describedby="basic-addon1">
-                                            @if($product)
-                                                <option value="{{ $product->sub_category ?? 0 }}">{{ $product->sub_category_info->name ?? '' }}</option>
-                                            @else
-                                                <option value="0">subcategory</option>
-                                            @endif
-                                        </select>
-                                        <button type="button" class="btn btn-primary input-group-append"
-                                            data-dialog=" modal-dialog-scrollable modal-dialog-centered"
-                                            onclick="button_ajax(this)" data-title="Add New  subcategory"
-                                            data-href="{{ route('admin.subcategory.create') }}">+</button>
-                                    </div>
-                                </div>
-
                                 <div class="col-lg-6">
                                     <label for="">Vat</label>
                                     <div class="input-group mb-3">
@@ -166,7 +170,7 @@
                                         placeholder="Selling Price">
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <label for="">Discount</label>
                                     <div class="input-group mb-3">
                                         <select type="text" name="discount_id[]" multiple

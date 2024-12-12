@@ -6,7 +6,6 @@
     $about_page = \App\Models\page::where('page_type', 'about')->first();
     $register_page = \App\Models\page::where('page_type', 'register')->first();
     $wishlist_page = \App\Models\page::where('page_type', 'wishlist')->first();
-    $languages = \App\Models\language\language::where('status', 1)->get();
 @endphp
 
 @if($filter_page)
@@ -73,16 +72,7 @@
 
                 <div class="vr-line d-sm-block d-none">
                 </div>
-                <select name="" id="language_container">
-                    @foreach ($languages as $items)
-                    <option class="item dark-black"  {{ session('locale') == $items->id ? 'selected' : '' }} data-href="{{ url('locale/'.$items->id) }}">
-                            {{ Str::title($items->name) }}
-
-                    </option>
-                    @endforeach
-                </select>
-
-
+                @include('layout.frontend_ajuba.partials.language')
             </div>
         </div>
 
@@ -236,11 +226,7 @@ span.items_added {
 
         window.location.href= this.action+'?category_name='+category_name+'&q='+searchInput;
     })
-    $('#language_container').on('change', function(){
-        var selectedOption = $(this).find('option:selected');
-                    var href = selectedOption.data('href'); // Use data('href') to get the custom data attribute
-                    window.location.href = href;
-    })
+
 </script>
 
 

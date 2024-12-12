@@ -15,7 +15,10 @@ class SubCategoryController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            return DataTables::make(SubCategory::query())
+
+            $query =  SubCategory::leftJoin('categories', 'sub_categories.category_id',  '=', 'categories.id')->select('sub_categories.*', 'categories.name as category_name');
+
+            return DataTables::make(  $query)
                 ->addColumn('image', function ($row) {
 
                     return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
@@ -169,7 +172,7 @@ class SubCategoryController extends Controller
 
             }
             if ($request->has('cat_id')) {
-                $query->where('id', 'LIKE', '%' . $request->cat_id . '%');
+                $query->where('category_id', 'LIKE', '%' . $request->cat_id . '%');
 
             }
         })->select('id', 'name as text')->get();

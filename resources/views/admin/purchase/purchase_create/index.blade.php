@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Purchuse Create
+        Purchase Create
     </div>
     <form class="card-body purchause_create" method="POST" action="{{ route('admin.purchase.store') }}">
         @csrf
@@ -22,7 +22,7 @@
                             </select>
                             @can('user create')
 
-                            <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">+ Add New supplier</button>
+                            <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">+</button>
                             @endcan
 
                         </div>
@@ -64,17 +64,17 @@
                             Image
                         </th>
                         <th>
+                            Name
+                        </th>
+                        <th>
                             Size
                         </th>
                         <th>
                             Unit
                         </th>
-                        <th>
-                            Name
-                        </th>
 
                         <th>
-                            Quantaty
+                            Quantity
                         </th>
                         <th>
                             Price
@@ -142,7 +142,7 @@
                 var item_data_key = items_variant_data.variant_key.split(",");
 
                 if(item_data_key.length > 0){
-                     html_data_key+=`<select class="form-control" name="variant_key[]">`
+                     html_data_key+=`<select class="form-control variant_key" name="variant_key[]">`
                     item_data_key.forEach(element => {
                         console.log(element);
                         html_data_key+=`<option value="${element}">${element}</option>`
@@ -156,7 +156,7 @@
 
 
                 var item_data_key = items_variant_data.vairant_value.split(",");
-                html_data_value+=`<select class="form-control" name="variant_value[]">`
+                html_data_value+=`<select class="form-control variant_value" name="variant_value[]">`
                 if(item_data_key.length > 0){
                     item_data_key.forEach(element => {
                         console.log(element);
@@ -170,8 +170,8 @@
 
 
             }else{
-                  html_data_key+=`<select class="form-control" name="variant_key[]"><option value="">Variant Not Found</option></select>`
-                  html_data_value+=`<select class="form-control" name="variant_value[]"><option value="">Variant Not Found</option></select>`
+                  html_data_key+=`<select class="form-control variant_key" name="variant_key"><option value="">Variant Key</option></select>`
+                  html_data_value+=`<select class="form-control variant_value" name="variant_value"><option value="">Variant Value</option></select>`
             }
 
 
@@ -188,18 +188,19 @@
             product_filter +=`<tr class="single_item_result ">
                 <td class="img p-1 img_c">
                     <img src="${data_items[data].image_url}" style="max-width:150px; height:40px" alt="">
-
+                    <input class="data_id" name="product_id[]" hidden />
                 </td>
-                <td>
-                    <div class="d-flex variant_c">
+                <td class="name p-1 product_c">
+                    ${data_items[data].name}
+                </td>
+                <td class="p-1">
+                    <div class="d-flex variant_c" style="gap:5px;">
                         ${ html_data_key + html_data_value  }
                     </div>
                 </td>
+
                 <td class="name p-1">
-                    ${data_items[data].name}
-                </td>
-                <td class="name p-1 unit_c">
-                    <select class="form-control" name="unit_name">
+                    <select class="form-control unit_c" name="unit_name">
                         <option value="${data_items[data].unit_info ? data_items[data].unit_info.id : 0}">
                             ${data_items[data].unit_info ? data_items[data].unit_info.name : ''}
                         </option>
@@ -207,7 +208,7 @@
                     </select>
                 </td>
                 <td class="action p-1">
-                    <button type="button" type="button" class="btn btn-primary" onclick="items_add_from_quey(this, ${data_items[data].id}, '${data_items[data].name}')">+</button>
+                    <button type="button" type="button" class="btn btn-primary" onclick="items_add_from_quey(this)">+</button>
                 </td>
             </tr>`;
         })
@@ -265,29 +266,47 @@
 
 
 
-        function items_add_from_quey(thi, id, name){
+        function items_add_from_quey(thi){
+
+            var id = $(thi).parents('tr').find('.img_c .data_id').val();
+
             var img_c = $(thi).parents('tr').find('.img_c').html();
-            var variant_c = $(thi).parents('tr').find('.variant_c').html();
-            var unit_c = $(thi).parents('tr').find('.unit_c').html();
-            var data_format = ` <tr class="curent_parents_data items${id}">
+            var name = $(thi).parents('tr').find('.product_c').html();
+
+
+            var variant_key = $(thi).parents('tr').find('.variant_c .variant_key').val();
+            var variant_key_html = $(thi).parents('tr').find('.variant_c .variant_key option:selected').html();
+
+            var variant_value = $(thi).parents('tr').find('.variant_c .variant_value').val();
+            var variant_value_html = $(thi).parents('tr').find('.variant_c .variant_value option:selected').html();
+
+            var unit_c = $(thi).parents('tr').find('.unit_c').val();
+            var unit_c_html = $(thi).parents('tr').find('.unit_c option:selected').html();
+
+            var key_unique = id+'_'+variant_key+'_'+variant_value+'_'+unit_c;
+
+            var data_format = ` <tr class="curent_parents_data items${key_unique}">
                             <td>
                                ${img_c}
                             </td>
-                           <td>
-                                ${variant_c}
-                            </td>
-                           <td>
-                                ${unit_c}
-                            </td>
-                            <td>
+                             <td>
                                 ${name}
                                 <input type="hidden" value="${id}" name="productId[]"/>
                             </td>
+                           <td>
+                                ${variant_key_html+' & '+variant_value_html}
+                                <input hidden value="${variant_key+':'+variant_value}" name="variant_name[]"/>
+                            </td>
+                           <td>
+                                ${unit_c_html}
+                                <input value="${unit_c}" name="unit[]" hidden/>
+                            </td>
+
                             <td>
-                                <input oninput="calclute_inline('.items${id}')" type="number" class="quantaty" name="quantity[]" value="1">
+                                <input oninput="calclute_inline('.items${key_unique}')" type="number" class="quantaty" name="quantity[]" value="1">
                             </td>
                             <td>
-                                <input oninput="calclute_inline('.items${id}')" type="number" class="price" name="price[]" value="0">
+                                <input oninput="calclute_inline('.items${key_unique}')" type="number" class="price" name="price[]" value="0">
                             </td>
                             <td>
 
@@ -300,7 +319,7 @@
                             </td>
                         </tr>`;
 
-                        var finding = document.querySelectorAll('#data_insert_list .items'+id);
+                        var finding = document.querySelectorAll('#data_insert_list .items'+key_unique);
                         if(finding.length > 0){
                             var prev_val = finding[0].querySelector('.quantaty');
                             var current_value = parseInt(prev_val.value)+1;
@@ -309,15 +328,12 @@
                             $('#data_insert_list').append(data_format);
                         }
 
-                        calclute_inline('.items'+id)
+                        calclute_inline('.items'+key_unique)
 
         }
 
 
         function calclute_inline(class_name){
-            var items = document.querySelector(class_name+' .quantaty').value;
-            var items = document.querySelector(class_name+' .quantaty').value;
-            var items = document.querySelector(class_name+' .quantaty').value;
             var items = document.querySelector(class_name+' .quantaty').value;
             var price = document.querySelector(class_name+' .price').value;
             var total = document.querySelector(class_name+' .total');

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\offerbanner;
+use Database\Seeders\courier\courierCredentialSeeder;
 use Database\Seeders\VatSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\crm\CrmCaller;
@@ -71,6 +72,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageCaller::class);
         $this->call(MailCaller::class);
         $this->call(PageCallerSeeder::class);
+        $this->call(courierCredentialSeeder::class);
 
 
     }

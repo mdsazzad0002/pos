@@ -33,6 +33,9 @@
                     Name
                 </th>
                 <th>
+                    Category
+                </th>
+                <th>
                     Status
                 </th>
                 <th>
@@ -65,6 +68,7 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'name', name:'name'},
+            {data:'category_name', name:'categories.name'},
             {data:'status', name:'status',  render: function (data, type, row, meta) {
                 return data == 1 ? 'Active' : 'Inactive';
             }},

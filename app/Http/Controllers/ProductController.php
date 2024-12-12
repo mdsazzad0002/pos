@@ -45,16 +45,23 @@ class ProductController extends Controller
                     $edit_route = route('admin.product.edit', $row->id);
                     $edit_button =  "<a class='btn btn-warning' href='$edit_route'>Edit</a>";
 
+                    $barcode_route = route('admin.product.barcode',$row->id);
+                    $bar_button =  "<a class='btn btn-warning ml-1' href='$barcode_route'>Barcode</a>";
+
                     $return_data = '';
                     if(auth()->user()->can('product edit')==true){
                         $return_data = $edit_button. '&nbsp;';
                     }
 
+                    // if(auth()->user()->can('product barcode')==true){
+                    //     $return_data = $bar_button. '&nbsp;';
+                    // }
+
                     if(auth()->user()->can('product delete') == true){
                         $return_data .= $delete_button ;
                     }
 
-                    return $return_data;
+                    return $return_data. $bar_button ;
 
 
                 })
@@ -296,5 +303,10 @@ class ProductController extends Controller
     {
             $product = product::with('variant_option_info', 'vat_info')->findOrFail($product);
             return response()->json($product);
+    }
+
+    public function barcode($id = null){
+        $products = product::findOrFail($id);
+        return view('admin.product.barcode',compact('products'));
     }
 }

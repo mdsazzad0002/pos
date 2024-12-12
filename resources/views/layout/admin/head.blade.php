@@ -107,4 +107,8 @@
     cursor: pointer;
     user-select: none;
 }
+.language_container{
+    height: 27px;
+    margin: auto 0;
+}
 </style>
