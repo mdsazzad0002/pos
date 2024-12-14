@@ -95,11 +95,15 @@
                             <td colspan="4">Total</td>
                             <td class="total_quantaty">0</td>
                             <td class="total_price">0</td>
+                            {{-- <td class="total_payment">0</td> --}}
                             <td class="total_subtotal">0</td>
                             <td></td>
                         </tr>
                     </tfoot>
                 </table>
+                <div>
+                    <label for="invoice_print_status"><input id="invoice_print_status" type="checkbox">&nbsp; Do you want print invoice ?</label>
+                </div>
             </div>
             {{--  end product entry section  --}}
             <div class="col-md-6 overflow-auto">
@@ -142,7 +146,7 @@
                 var item_data_key = items_variant_data.variant_key.split(",");
 
                 if(item_data_key.length > 0){
-                     html_data_key+=`<select class="form-control variant_key" name="variant_key[]">`
+                     html_data_key+=`<select class="form-control variant_key" >`
                     item_data_key.forEach(element => {
                         console.log(element);
                         html_data_key+=`<option value="${element}">${element}</option>`
@@ -156,7 +160,7 @@
 
 
                 var item_data_key = items_variant_data.vairant_value.split(",");
-                html_data_value+=`<select class="form-control variant_value" name="variant_value[]">`
+                html_data_value+=`<select class="form-control variant_value" >`
                 if(item_data_key.length > 0){
                     item_data_key.forEach(element => {
                         console.log(element);
@@ -170,8 +174,8 @@
 
 
             }else{
-                  html_data_key+=`<select class="form-control variant_key" name="variant_key"><option value="">Variant Key</option></select>`
-                  html_data_value+=`<select class="form-control variant_value" name="variant_value"><option value="">Variant Value</option></select>`
+                  html_data_key+=`<select class="form-control variant_key" ><option value="">Variant Key</option></select>`
+                  html_data_value+=`<select class="form-control variant_value" ><option value="">Variant Value</option></select>`
             }
 
 
@@ -188,7 +192,7 @@
             product_filter +=`<tr class="single_item_result ">
                 <td class="img p-1 img_c">
                     <img src="${data_items[data].image_url}" style="max-width:150px; height:40px" alt="">
-                    <input class="data_id" name="product_id[]" hidden />
+                    <input class="data_id" value="${data_items[data].id}"  hidden />
                 </td>
                 <td class="name p-1 product_c">
                     ${data_items[data].name}
@@ -200,7 +204,7 @@
                 </td>
 
                 <td class="name p-1">
-                    <select class="form-control unit_c" name="unit_name">
+                    <select class="form-control unit_c" >
                         <option value="${data_items[data].unit_info ? data_items[data].unit_info.id : 0}">
                             ${data_items[data].unit_info ? data_items[data].unit_info.name : ''}
                         </option>
@@ -336,8 +340,12 @@
         function calclute_inline(class_name){
             var items = document.querySelector(class_name+' .quantaty').value;
             var price = document.querySelector(class_name+' .price').value;
+            // var payment = document.querySelector(class_name+' .payment').value;
+
             var total = document.querySelector(class_name+' .total');
             total.value = items * price
+
+            // total.value = (items * price) - payment
 
             calculateSubtotal()
         }
@@ -346,22 +354,26 @@
             var items = document.querySelectorAll('#data_insert_list tr');
             var totalItems = 0;
             var totalPrice = 0;
+            // var totalPayment = 0;
             var totalSubtotal = 0;
 
             items.forEach(function(element) {
                 // Safely parse integer values and default to 0 if not valid
                 var quantity = parseInt(element.querySelector('.quantaty').value) || 0;
                 var price = parseInt(element.querySelector('.price').value) || 0;
+                // var payment = parseInt(element.querySelector('.payment').value) || 0;
                 var subtotal = parseInt(element.querySelector('.total').value) || 0;
 
                 totalItems += quantity;
                 totalPrice += price;
+                // totalPayment += payment;
                 totalSubtotal += subtotal;
             });
 
             // Update the DOM elements with the calculated totals
             document.querySelector('.total_subtotal').innerHTML = totalSubtotal;
             document.querySelector('.total_price').innerHTML = totalPrice;
+            // document.querySelector('.total_payment').innerHTML = totalPayment;
             document.querySelector('.total_quantaty').innerHTML = totalItems;
         }
 
@@ -371,13 +383,17 @@
             $.ajax({
                 type: this.method,
                 url: this.action,
-                processData: false,              // Required for FormData
+                processData: false,
                 contentType: false,
                 data: new FormData(this),
                 success:function(data){
                     data = JSON.parse(data);
                     if(data.type =='success'){
                         flasher.success(data.title)
+
+                        if($('#invoice_print_status').prop('checked') == true) {
+                            window.open("{{ route('admin.purchase.report_single') }}?purchase_id=" + data.purchase_id, "_blank", "popup=yes");
+                        }
 
                         $('#data_insert_list').html('');
                         {{--  $(this).reset()  --}}

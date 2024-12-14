@@ -18,7 +18,8 @@ class PurchaseController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            return DataTables::make(purchase::query())
+            $query = purchase::join('units', 'purchases.unit_id', '=', 'units.id')->select('purchases.*', 'units.name as unit_name');
+            return DataTables::make($query)
 
                 ->addColumn('name', function ($row) {
                     $view_route = route('admin.purchase.show', $row->id);
@@ -30,7 +31,7 @@ class PurchaseController extends Controller
                     return "<button class='btn btn-primary '
                     data-dialog=' modal-dialog-centered'
                     onclick='button_ajax(this)'
-                    data-title='$row->name  info'
+                    data-title='".$row->product->name."  info'
                     data-href='$view_route'>View</button>";
 
                 })
@@ -43,14 +44,14 @@ class PurchaseController extends Controller
 
                     $delete_button =  "<button class='btn btn-danger '
 
-                    data-title='$row->name'
+                    data-title='".$row->product->name."'
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 
                     $edit_route = route('admin.purchase.edit', $row->id);
                     $edit_button =  "<button class='btn btn-warning '
                     data-dialog='modal-dialog-centered'
-                    data-title='$row->name'
+                    data-title='".$row->product->name."'
                     onclick='button_ajax(this)'
                     data-href='$edit_route'>Change Status</button>";
 
@@ -88,16 +89,24 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request;
         $request->validate([
             'supplierID' => 'required'
         ]);
 
 
+        $purchase_last = purchase::orderBy('id','desc')->first();
+        $purchase_last =$purchase_last ? $purchase_last->purchase_id+1 : 1;
+
         foreach($request->productId as $key => $value){
-            $units = unit::find($request->unit_name[$key])->first();
-            $variant = VariantOption::where('name', $request->variant_key[$key].':'.$request->variant_value[$key])->first();
+            $units = unit::find($request->unit[$key])->first();
+
+
+            $variant = VariantOption::where('name', $request->variant_name[$key])->first();
 
             $purchase = new purchase;
+            $purchase->purchase_id = $purchase_last;
             $purchase->productId = $value;
             $purchase->supplierId = $request->supplierID;
             $purchase->quantity = $request->quantity[$key];
@@ -106,6 +115,8 @@ class PurchaseController extends Controller
             $purchase->status = 2;
             $purchase->unit_id =  $units ?  $units->id : 0;
             $purchase->varinat_id =  $variant ?  $variant->id : 0;
+            $purchase->total =  $request->quantity[$key] * $request->price[$key];
+            $purchase->expiring_date =  $request->expiring_date[$key] ?? null;
             $purchase->creator = auth()->user()->id ?? 0;
             $purchase->save();
         }
@@ -114,6 +125,7 @@ class PurchaseController extends Controller
         // return back();
 
         return json_encode([
+            'purchase_id'=> $purchase_last,
             'title'=>'Successfully  Created purchase',
             'type'=>'success',
             'refresh'=>'true',
@@ -145,24 +157,15 @@ class PurchaseController extends Controller
     {
 
         if($purchase->status == 2 && $request->status == 1) {
-
-            $product = product::find($purchase->productId);
-            $product->quantity += $purchase->quantity;
-            $product->save();
-
             $purchase->status = 1;
             $purchase->save();
 
         }elseif($purchase->status == 1 && $request->status == 2){
-            $product = product::find($purchase->productId);
-            $product->quantity -= $purchase->quantity;
-            $product->save();
-
             $purchase->status = 2;
             $purchase->save();
         }
 
-        $purchase->creator = auth()->user()->id ?? 0;
+        $purchase->updater = auth()->user()->id ?? 0;
         $purchase->save();
 
 
@@ -210,7 +213,10 @@ class PurchaseController extends Controller
 
     public function filterPurchase (Request $request)
     {
-        $data_result = product::with('unit_info','units_info','variant_option_info')->where(function($query) use ($request) {
+        $data_result = product::with('unit_info','units_info','variant_option_info')
+        ->whereNot('unit', null)
+        ->where('service', 0)
+        ->where(function($query) use ($request) {
             if ($request->has('q')) {
                 $keyword =  $request->q;
                 $query->where('name', 'LIKE', "%$keyword%");
@@ -221,4 +227,14 @@ class PurchaseController extends Controller
 
     }
 
+
+
+
+    public function report_single(Request  $request){
+
+        $purchase = purchase::with('product', 'unit', 'supplier', 'user', 'variant')->where('purchase_id', $request->purchase_id)->get();
+        return view('admin.purchase.partials.print', compact('purchase'));
+        // return $purchase;
+
+    }
 }

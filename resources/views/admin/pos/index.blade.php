@@ -57,14 +57,14 @@
                                     <div class="unit_items_container">
                                         <ul class="nav nav-tabs">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#" data-filter="all">
+                                                <a class="nav-link active" href="#" data-filter="all"  data-id="0">
                                                     <i class="fas fa-ring nav-icon"></i> All Brands
                                                 </a>
                                             </li>
                                             @foreach ($brands as $brand)
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#" data-filter="meat" style="background: url('{{  dynamic_asset($brand->upload_id) }}') no-repeat; background-position: center center;
+                                                <a class="nav-link" href="#" data-filter="meat"  data-id="{{  $brand->id }}" style="background: url('{{  dynamic_asset($brand->upload_id) }}') no-repeat; background-position: center center;
                                                 background-size: cover;">
                                                     <span>
                                                         {{ $brand->name ?? '' }}
@@ -81,7 +81,7 @@
                                     <div class="product_scroll">
                                         <div class="row gx-4">
                                             @foreach ($products as $product)
-                                                <div class=" col-xl-4 col-lg-4  col-md-4 col-sm-6 pb-4" data-type="meat">
+                                                <div class=" col-xxl-3 col-xl-2  col-lg-4  col-md-6 col-sm-6 pb-4" data-type="meat">
                                                 <a href="#" class="pos-product modal" onclick="product_view_cart(this)" data-id="{{ $product->id }}" data-toggle="modal"
                                                     data-target="#modalPosItem">
                                                     <div class="img"
@@ -179,8 +179,8 @@
                                     <div>
                                         <div class="inputgorup">
                                             <div class="input-group-prepend mt-2">
-                                                <div class="input-group-text">
-                                                    <select name="type" id="typevalue" onchange="discountCalculation()">
+                                                <div class="input-group-text p-0 w-50">
+                                                    <select name="type" id="typevalue" class="form-control" onchange="discountCalculation()">
                                                         <option value="1">Fixed</option>
                                                         <option value="2">Present</option>
                                                     </select>
@@ -253,10 +253,7 @@
                     <a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
                     <div class="modal-pos-product">
 
-
                         @include('admin.pos.checkout')
-
-                      
 
                     </div>
                 </div>
@@ -278,17 +275,23 @@
                             <div class="text-body text-opacity-50 mb-2 product_info_extra_inof">
                                 ----
                             </div>
-                            <div class="fs-3 fw-bold mb-3 name_price">{{ settings('currency_symbol', 9) }}<span>0.0</span> </div>
+                            <div class="fs-3 fw-bold mb-3 name_price">{{ settings('currency_symbol', 9) }} <input type="text" hidden><span>0.0</span> </div>
+                            <div class="fs-3 fw-bold mb-3 unit_change"> <input type="text" hidden> </div>
+
                             <div class="d-flex mb-3 quantity_parents">
                                 <a href="javascript:void(0)" onclick="product_counterUP(this, '-')" class="btn btn-secondary"><i class="fa fa-minus"></i></a>
-                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="quantity"
-                                    value="0">
+                                <input type="text" class="form-control w-50px fw-bold mx-2 text-center input_quantity" name="quantity" value="0">
                                 <a   href="javascript:void(0)" onclick="product_counterUP(this, '+')" class="btn btn-secondary"><i class="fa fa-plus"></i></a>
                             </div>
                             <hr class="opacity-1">
                             <div class="mb-2">
                                 <div class="fw-bold">Size:</div>
                                 <div class="option-list vaiaant_key"></div>
+                            </div>
+
+                            <div class="mb-2">
+                                <div class="fw-bold">Unit:</div>
+                                <div class="option-list unit_key"></div>
                             </div>
 
                             <hr class="opacity-1">
@@ -299,7 +302,7 @@
                                 </div>
                                 <div class="col-8">
                                     <button type="submit" href="#"
-                                        class="btn btn-primary fw-semibold d-flex justify-content-center align-items-center py-3 m-0"><i class="fa fa-plus ms-2 my-n3"></i> &nbsp;&nbsp;Add
+                                        class="btn btn-primary fw-semibold d-flex justify-content-center align-items-center py-3 m-0 w-100"><i class="fa fa-plus ms-2 my-n3"></i> &nbsp;&nbsp;Add
                                         to cart </button>
                                 </div>
                             </div>
@@ -334,6 +337,8 @@
 
 
 
+
+
         function product_view_cart(thi){
             // console.log(thi)
             $.ajax({
@@ -347,16 +352,19 @@
                     $('#modalPosItem .name_price span').html(data.selling_price);
                     // console.log(data)
 
+
                     var product_info_data = `
-                    <div>SKU : ${data.sku}</div>
-                    <div>Weight : ${data.weight}</div>
-                    <div>Buying Price Last : ${data.buying_price}</div>
-                    <div>Vat : ${data.vat_info ? data.vat_info.amount : 0}%</div>
-                    <div>Garage : ${data.garage}</div>
-                    <div>Route : ${data.route}</div>
-                    <input name="product_id" value="${data.id}" hidden/>
-                    <input name="product_id" value="${data.id}" hidden/>
-                    <input name="source_type" value="pos" hidden/>
+                        <div>SKU : ${data.sku}</div>
+                        <div>Weight : ${data.weight}</div>
+                        <div>Buying Price Last : ${data.buying_price}</div>
+                        <div>Vat : ${data.vat_info ? data.vat_info.amount : 0}%</div>
+                        <div>Garage : ${data.garage}</div>
+                        <div>Route : ${data.route}</div>
+                        <input name="product_id" value="${data.id}" hidden/>
+                        <input name="product_id" value="${data.id}" hidden/>
+                        <input name="source_type" value="pos" hidden/>
+
+
                     `;
 
                     $('#modalPosItem .product_info_extra_inof').html(product_info_data);
@@ -367,11 +375,17 @@
                         $('#modalPosItem .vaiaant_key.option-list').html('');
                     }
 
+                    productOfunit(data)
+
 
                 }
             })
 
         }
+
+
+
+
 
         function product_counterUP(thi, key){
             var input_value = $(thi).parents('.quantity_parents').find('.input_quantity').val();
@@ -389,9 +403,10 @@
 
         }
 
+
+
+
         function productOfVariant(productVariant){
-
-
             var html_data_value = '';
 
             productVariant.forEach((items, index) => {
@@ -409,23 +424,73 @@
 
 
              $('#modalPosItem .vaiaant_key.option-list').html(html_data_value);
-             $('#modalPosItem .vaiaant_key.option-list .option:first-child input').prop('checked', true);
-             $('#modalPosItem .name_price span').html(productVariant[0].selling_price);
-
+             var items_var = $('#modalPosItem .vaiaant_key.option-list .option:first-child input');
+             items_var.prop('checked', true);
+             price_change($(items_var).parents('.option'));
 
 
         }
+
+
+        function productOfunit(unitVariant){
+            var html_data_value = '';
+
+                html_data_value += `<div class="option" data-count="1" onclick="unit_change(this)">
+                                        <input type="radio" id="size${unitVariant.unit_info.id}" value="${unitVariant.unit_info.id}"  name="unit" class="option-input"
+                                            >
+                                        <label class="option-label" for="size${unitVariant.unit_info.id}">
+                                            <span class="option-text text-capitalize">1</span>
+                                            <span class="option-price"> ${unitVariant.unit_info.name}</span>
+                                        </label>
+                                    </div>`;
+
+                unitVariant.units_info.forEach((items, index) => {
+                html_data_value += `<div class="option" data-count="${items.sub_items}" onclick="unit_change(this)">
+                                        <input type="radio" id="size${items.id}" value="${items.id}"  name="unit" class="option-input"
+                                            >
+                                        <label class="option-label" for="size${items.id}">
+                                            <span class="option-text text-capitalize">${items.sub_items}</span>
+                                            <span class="option-price">${items.name}</span>
+                                        </label>
+                                    </div>`;
+            });
+
+
+
+
+             $('#modalPosItem .unit_key.option-list').html(html_data_value);
+             var items_var = $('#modalPosItem .unit_key.option-list .option:first-child input');
+             items_var.prop('checked', true);
+             unit_change($(items_var).parents('.option'));
+
+
+        }
+
+
+
 
 
         function price_change(thi){
-            $('#modalPosItem .name_price span').html($(thi).data('price'));
+            console.log(thi)
+            $('#modalPosItem .name_price input').val($(thi).data('price'));
+            price_calculation_change_option()
         }
+
+        function unit_change(thi){
+            $('#modalPosItem .unit_change input').val($(thi).data('count'));
+            price_calculation_change_option()
+        }
+
+
+
 
 
         function format_cart_items(data){
             var html_data = '';
+
             // console.log(data['product'])
             Object(data['product']).forEach((element, index)=>{
+
                 html_data+=`
                   <!-- BEGIN pos-order -->
                     <div class="pos-order">
@@ -435,12 +500,16 @@
                             </div>
                             <div class="flex-1">
                                 <div class="h6 mb-1">${element.product.name}</div>
-                                <div class="small">${element.product_variant.selling_price ?? element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</div>
+                                <div class="small">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</div>
+
+
 
                                 <div class="small mb-2" style="${element.product_variant ? 'display:block': 'display:none'}">
-                                    - size: ${element.product_variant.name}<br>
+                                    - size: ${element.product_variant ? element.product_variant.name : ''}<br>
 
                                 </div>
+
+
                                 <div class="d-flex">
                                     <a href="#" class="btn btn-secondary btn-sm"><i
                                             class="fa fa-minus"></i></a>
@@ -467,6 +536,9 @@
             $('#newOrderTab').html(html_data)
         }
 
+
+
+
         function cart_product_view(){
             $.ajax({
                 type:'get',
@@ -488,9 +560,22 @@
                 }
             })
         }
+
+
+
         setTimeout(() => {
             cart_product_view()
         }, 1000);
+
+
+
+        function price_calculation_change_option(){
+            var quantity = $('#modalPosItem .unit_change input').val();
+            var inp_price = $('#modalPosItem .name_price input').val();
+            $('#modalPosItem .name_price span').html(quantity * inp_price);
+
+        }
+
 
         function discountCalculation(){
             var subtotal_tprice = document.querySelector('.subtotal_tprice');
@@ -516,6 +601,10 @@
 
         }
 
+
+
+
+
         function pos_remove_cart(id, size){
             console.log(size)
             if(size == 0){
@@ -538,6 +627,36 @@
         }
 
 
+
+
+        var brand_id = 0;
+        let category_id = 0;
+        function brand_items_container(){
+            document.querySelectorAll('.unit_items_container .nav-link').forEach(element=>{
+                element.addEventListener('click',function(event){
+                    brand_id = this.getAttribute('data-id');
+                    filter_and_refresh();
+                })
+            })
+        }
+        function category_items_container(){
+            document.querySelectorAll('.sidebar_nav_category .nav-link').forEach(element=>{
+                element.addEventListener('click',function(event){
+                    category_id = this.getAttribute('data-id');
+                    filter_and_refresh();
+                })
+            })
+        }
+
+        function filter_and_refresh(){
+            $.ajax({
+                type:'get',
+                url:'',
+                success:function(data){
+                    
+                }
+            })
+        }
     </script>
 
 @endsection

@@ -24,14 +24,13 @@ return new class extends Migration
             $table->longText('additional_description')->nullable();
 
             $table->string('unit')->nullable();
+
             $table->string('for_selling')->default(0);
             $table->string('garage')->default(0);
             $table->string('route')->default(0);
             $table->string('feature')->default(0);
 
             $table->string('alert_quantity')->default(0);
-            $table->string('quantity')->default(0);
-
 
             $table->string('discount_id')->nullable();
             $table->string('creator')->default(0);
@@ -44,10 +43,8 @@ return new class extends Migration
             $table->string('youtube_video')->nullable();
             $table->string('tags')->nullable();
 
-
             $table->bigInteger('views')->default(0);
 
-            $table->integer('buying_price')->default(0);
             $table->integer('old_price')->default(0);
             $table->integer('selling_price')->default(0);
 

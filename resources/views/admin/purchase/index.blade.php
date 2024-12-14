@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        Purchase
         <div>
             @can('user create')
 
@@ -17,34 +17,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table id="users" class="table table-bordered table-striped table-hover">
-            <thead>
-                <th>
-                    SI
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Quantaty
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Total Price
-                </th>
-                <th>
-                    View
-                </th>
-                <th>
-                    Action
-                </th>
-            </thead>
-        </table>
+        <table id="users" class="table table-bordered table-striped table-hover"></table>
     </div>
 </div>
 
@@ -57,19 +30,35 @@
     var datatableM =  $('#users').DataTable({
         serverSide:true,
         processing:true,
+        stateSave: true,
         ajax:'',
         columns:[
-            { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
+            { data: null, name: null,  title:'SL', orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:'image', name:'image', searchable:false, orderable:false},
-            {data:'name', name:'name'},
-            {data:'quantity', name:'quantity', searchable:false, orderable:false},
-            {data:'price', name:'price', searchable:false, orderable:false},
-            {data:'total_price', name:'total_price', searchable:false, orderable:false},
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
-        ]
+            {data:'image',  name:'image',title:'Image', searchable:false, orderable:false},
+            {data:'name',  name:'name',title:'Name',},
+            {data:'quantity', name:'quantity', title:'Quantity', render(data, type, row, meta) {
+                return row.quantity+' '+row.unit_name;
+            }},
+            {data:'total', title:'Total', name:'total'},
+            {data:'total_price',  name:'total_price', title:'Total Price', searchable:false, orderable:false},
+            {data:'buying_date',  name:'buying_date', title:'Buying Date', render(data, type, row, meta) {
+                const date = new Date(row.buying_date);  // Convert the data into a Date object
+                return date.toLocaleDateString('en-GB', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                });
+            }},
+
+            {data:'view', name:'view', title:'View', searchable:false, orderable:false},
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false}
+        ],
+
+        dom:database_dom_format
     })
 </script>
 @endpush
+

@@ -6,21 +6,48 @@
             <!-- CARD FORM -->
             <div class="col-lg-8 col-md-12">
                 <form>
-                    <div class="header flex-between flex-vertical-center">
-                        <div class="flex-vertical-center">
-                            <i class="ai-bitcoin-fill size-xl pr-sm f-main-color"></i>
-                            <span class="title">
-                                <strong>Payment Method</strong>
-                            </span>
-                        </div>
-                    </div>
+
                     <div class="card-data flex-fill flex-vertical">
                         <div class="row">
+                            <div class="col-12">
+                                <div class="header flex-between flex-vertical-center">
+                                    <div class="flex-vertical-center">
+                                        <i class="fas fa-money-bill-wave"></i>  &nbsp;
+                                        <span class="title">
+                                            <strong>Payment Method</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                             @foreach ($paymentCredentials as $item)
                             <div class="col-md-6 col-lg-4 mb-2">
                                 <div class="">
                                     <label class="p-2 border rounded d-flex flex-nowrap align-items-center gap-2 card_border" for="provider{{ $item->id }}">
                                         <input type="radio" id="provider{{ $item->id }}" name="payment_provider"
+                                            value="{{ $item->id }}">
+                                        <div class="mb-0" >{{ $item->provider }}</div>
+                                    </label>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="header flex-between flex-vertical-center">
+                                    <div class="flex-vertical-center">
+                                        <i class="fas fa-box-open"></i> &nbsp;
+                                        <span class="title">
+                                            <strong>Courier</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach ($courierCredentials as $item)
+                            <div class="col-md-6 col-lg-4 mb-2">
+                                <div class="">
+                                    <label class="p-2 border rounded d-flex flex-nowrap align-items-center gap-2 card_border" for="cprovider{{ $item->id }}">
+                                        <input type="radio" id="cprovider{{ $item->id }}" name="courier_provider"
                                             value="{{ $item->id }}">
                                         <div class="mb-0" >{{ $item->provider }}</div>
                                     </label>

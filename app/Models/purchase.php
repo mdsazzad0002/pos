@@ -14,6 +14,9 @@ class purchase extends Model
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }
+    public function updater(){
+        return $this->hasOne(User::class,'id', 'updater');
+    }
 
     public function product(){
         return $this->hasOne(product::class, 'id', 'productId');
@@ -22,9 +25,17 @@ class purchase extends Model
     public function supplier(){
         return $this->hasOne(supplier::class, 'id', 'supplierId');
     }
-    
+
     public function getTotalPriceAttribute(){
         return (int) $this->quantity * (int) $this->price;
     }
-    
+    public function unit(){
+        return $this->belongsTo(unit::class, 'unit_id');
+    }
+
+    public function variant(){
+        return $this->belongsTo(VariantOption::class, 'variant_id');
+
+    }
+
 }

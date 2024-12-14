@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('purchase_id');
             $table->bigInteger('productId');
             $table->bigInteger('supplierId');
             $table->bigInteger('quantity');
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->foreign('unit_id')->references('id')->on('units')->nullable();
             $table->foreign('varinat_id')->references('id')->on('variant_options')->nullable();
             $table->bigInteger('price');
+            $table->bigInteger('total');
             $table->timestamp('buying_date')->nullable();
             $table->timestamp('expiring_date')->nullable();
             $table->string('creator')->default(0);

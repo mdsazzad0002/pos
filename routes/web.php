@@ -240,6 +240,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/purchase/delete/{purchase}', [PurchaseController::class, 'delete'])->name('purchase.delete');
     Route::get('/purchase/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('purchase.select');
     Route::get('/purchase/filter_purchase/get', [PurchaseController::class, 'filterPurchase'])->name('product.filter_purchase');
+        // purchase report
+        Route::get('/purchase/single/purchase_report', [PurchaseController::class, 'report_single'])->name('purchase.report_single');
 
 
     //  purchase

@@ -15,14 +15,11 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('product_id');
             $table->string('name')->nullable();
-            $table->string('buying_price')->default(0);
+            
             $table->string('old_price')->default(0);
             $table->string('selling_price')->default(0);
-            $table->string('quantity')->default(0);
 
             $table->string('alert_quantity')->default(0);
-            $table->string('buying_date')->nullable();
-            $table->string('expiring_date')->nullable();
             $table->bigInteger('creator')->default(0);
             $table->timestamps();
         });
