@@ -1,3 +1,8 @@
+@php
+    $checkout_page = \App\Models\page::where('status', 1)->where('page_type', 'checkout')->first();
+    $home_page = \App\Models\page::where('status', 1)->where('page_type', '')->first();
+
+@endphp
 <main class="main-wrapper bg-lightest-gray">
 
     <!-- Title Banner Start -->
@@ -22,41 +27,12 @@
                         </table>
                         <table class="cart-table">
                             <tbody>
-                                <tr class="table-row">
-                                    <td class="pd">
-                                        <div class="product-detail-box">
-                                            <div class="cus-checkBox">
-                                                <input type="checkbox" id="box1">
-                                                <label for="box1" class="light-gray"></label>
-                                            </div>
-                                            <a href="" class="h5 dark-black"><i class="fal fa-times"></i></a>
-                                            <div class="img-block">
-                                                <a href="shop-grid-2.html"><img src="assets/media/images/cart-image-1.png" alt=""></a>
-                                            </div>
-                                            <div class="d-block text-start">
-                                                <h6><a href="shop-grid-2.html">Gaming Headphone</a></h6>
-                                            </div>
 
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="fw-500"> <span class="light-gray text-decoration-line-through">$10.00</span> $85.00</p>
-                                    </td>
-                                    <td>
-                                        <div class="quantity-controller quantity-wrap">
-                                            <input class="decrement" type="button" value="-">
-                                            <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                                class="number">
-                                            <input class="increment" type="button" value="+">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="fw-500">$85.00</p>
-                                    </td>
-                                </tr>
+
+
                             </tbody>
                         </table>
-                        <table class="cart-table">
+                        {{-- <table class="cart-table">
                             <tbody>
                                 <tr class="table-row">
                                     <td class="pd">
@@ -90,10 +66,10 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> --}}
 
                     </div>
-                    <div class="d-lg-none d-block">
+                    {{-- <div class="d-lg-none d-block">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="cart-item-block mb-32">
@@ -160,9 +136,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="table-bottom-row bg-white">
-                        <a href="shop-list-1.html" class="cus-btn">Continue Shopping</a>
+                        <a href="{{ url($home_page->slug) }}" class="cus-btn">Continue Shopping</a>
                         <form action="checkout.html" method="post" class="contact-form d-flex align-items-center gap-16">
                             <input type="number" class="form-control" placeholder="Coupon Code" name="code" id="cpCode">
                             <button type="submit" class="cus-btn">Apply Now</button>
@@ -197,7 +173,7 @@
                             </div>
                             <div class="hr-line mb-16"></div>
                             <div class="text-end">
-                                <a href="checkout.html" class="cus-btn active-btn">PROCEED TO CHECKOUT</a>
+                                <a href="{{ url($checkout_page->slug) }}" class="cus-btn active-btn">PROCEED TO CHECKOUT</a>
                             </div>
                         </div>
                     </div>
@@ -207,5 +183,125 @@
     </section>
     <!-- Cart Area End -->
 
-   
+
 </main>
+
+
+@push('js')
+<script>
+  function format_cart_items(data){
+            var html_data = '';
+
+            // console.log(data['product'])
+            Object(data['product']).forEach((element, index)=>{
+
+                html_data+=`
+                            <tr class="table-row">
+                                    <td class="pd">
+                                        <div class="product-detail-box">
+                                            <div class="cus-checkBox">
+                                                <input type="checkbox" id="box1">
+                                                <label for="box1" class="light-gray"></label>
+                                            </div>
+                                            <a href="#" onclick="pos_remove_cart(${element.product.id},${element.size})" class="h5 dark-black"><i class="fal fa-times"></i></a>
+                                            <div class="img-block">
+                                                <a href="shop-grid-2.html"><img src="${element.product.image_url}" alt=""></a>
+                                            </div>
+                                            <div class="d-block text-start">
+                                                <h6><a href="shop-grid-2.html">${element.product.name}</a></h6>
+                                                    <div class="small mb-2" style="${element.product_variant ? 'display:block': 'display:none'}">
+                                                        - size: ${element.product_variant ? element.product_variant.name : ''}<br>
+
+                                                    </div>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="fw-500"> <span class="light-gray">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</span></p>
+                                    </td>
+                                    <td>
+                                        <div class="quantity-controller quantity-wrap">
+                                            <input onclick="product_counterUP(this, '-')" class="decrement" type="button" value="-">
+                                            <input type="text" name="quantity" value="${element.quantity}" maxlength="2" size="1"
+                                                class="number">
+                                            <input onclick="product_counterUP(this, '+')" class="increment" type="button" value="+">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="fw-500">${element.total_price}</p>
+                                    </td>
+                                </tr> `
+                console.log(element)
+            })
+            $('.cart-table tbody').html(html_data)
+        }
+
+
+
+     function cart_product_view(){
+            $.ajax({
+                type:'get',
+                url:'{{ route('cart_details') }}?source_type=front_product',
+                success:function(data){
+                    // data  = JSON.parse(data)
+                    console.log(data);
+
+
+                    // $('.subtotal_quantity').html(data.subtotal.quantity);
+                    // $('.subtotal_tax').html(data.subtotal.total_vat);
+                    // $('.subtotal_price').html(data.subtotal.price);
+                    // $('.subtotal_tprice').html(data.subtotal.total_price);
+                    // $('#grand_total').val(data.subtotal.total_price);
+
+                    // if(data.subtotal.quantity == 0){
+                    //     $('#newOrderTab').html('')
+                    // }else{
+                        format_cart_items(data)
+                    // }
+                }
+            })
+        }
+
+        cart_product_view();
+
+
+        function pos_remove_cart(id, size){
+            console.log(size)
+            if(size == 0){
+                size = ''
+            }
+            $.ajax({
+                type: 'get',
+                url:'{{ route('add_to_cart') }}',
+                data:{
+                    'product_id': id,
+                    'size':size,
+                    'type' : 'remove_cart',
+                    'source_type' : 'front_product'
+
+                },
+                success:function(data){
+                    cart_product_view()
+                }
+            })
+        }
+
+        function product_counterUP(thi, key){
+            var input_value = $(thi).parents('.quantity_parents').find('.input_quantity').val();
+            var input_assing = $(thi).parents('.quantity_parents').find('.input_quantity');
+
+            if(key == '+'){
+                input_assing.val( parseInt(input_value) + 1);
+            }else if(key == '-'){
+                if(input_value < 1){
+                    input_assing.val(0)
+                }else{
+                    input_assing.val(input_value - 1);
+                }
+            }
+
+        }
+</script>
+
+@endpush

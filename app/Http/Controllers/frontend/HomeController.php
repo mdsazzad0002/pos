@@ -119,6 +119,6 @@ class HomeController extends Controller
             'password' => ['required', 'min:3', 'confirmed']
         ]);
 
-        
+
     }
 }

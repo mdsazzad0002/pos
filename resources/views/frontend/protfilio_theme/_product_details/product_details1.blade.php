@@ -7,11 +7,11 @@ if($request->has('slug')){
 }
 
 $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter')->first();
+$cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->first();
 @endphp
 
 <main class="main-wrapper bg-lightest-gray">
-    @if($products)
-
+    @if(isset($products))
 
     <!-- Shop Detail Start -->
     <section class="shop-detail py-40">
@@ -58,56 +58,60 @@ $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter'
                                 @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=>  $products->reviewCount(), 'rating_star' => $products->averageRating()])
 
                                 <div class="vr-line vr-line-2"></div>
-                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brands->name ?? '' }}</span></p>
-                                <p class="light-gray">SKU: <span class="light-black">{{ $products->sku }}</span></p>
-                            </div>
-
-                            <div class="d-flex align-items-center gap-16 mb-24">
-                                {{-- <p class="light-gray text-decoration-line-through">$450.00</p>
-                                <h5>$400.00</h5> --}}
+                                <p>Price:<span>
                                 @include('frontend.protfilio_theme._filter_variant.partials.product_price', ['product'=> $products, 'discount'=> true])
-
+                                </span></p>
+                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brand_info->name ?? '' }}</span></p>
+                                <p class="light-gray">SKU: <span class="light-black">{{ $products->sku }}</span></p><br>
+                                {{-- <p class="light-gray">Unit: <span class="light-black">{{ $products->unit_info->name }}</span></p> --}}
+                            </div>
+                            <div class="mb-2">
+                                <div class="fw-bold">Size:</div>
+                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start;">
+                                    @foreach ($products->variant_option_info as $size)
+                                        <div class="quantity quantity-wrap">
+                                            <div class="input-area quantity-wrap flex-column">
+                                                <p> {{ $size->name  }}</p>
+                                                <p> ${{ $size->selling_price  }}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
 
-                           <p class="light-gray mb-24">
-                                {{ $products->short_description }}
-                            </p>
-
-                            <div class="d-flex align-items-center gap-24 mb-24">
-                                <h6>Size:</h6>
-                                <div class="drop-container bg-lightest-gray p-8-12 br-5">
-                                    <div class="wrapper-dropdown black" id="dropdown02">
-                                        <span class="selected-display" id="destination_02">256GB</span>
-                                        <svg id="drp-arrow-2" width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_7951_48322)">
-                                                <g clip-path="url(#clip1_7951_48322)">
-                                                    <path
-                                                        d="M0.0742188 4.01306L8.07424 11.987L16.0742 4.01306H0.0742188Z"
-                                                        fill="#141516" />
-                                                </g>
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_7951_48322">
-                                                    <rect width="16" height="16" fill="white" />
-                                                </clipPath>
-                                                <clipPath id="clip1_7951_48322">
-                                                    <rect width="16" height="16" fill="white"
-                                                        transform="translate(0.0742188)" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-
-                                        <ul class="topbar-dropdown bg-lightest-gray">
-                                            <li class="item dark-black">512GB</li>
-                                            <li class="item dark-black">256GB</li>
-                                            <li class="item dark-black">128GB</li>
-                                            <li class="item dark-black">64GB</li>
-                                            <li class="item dark-black">32GB</li>
-                                        </ul>
+                            <div class="mb-2">
+                                <div class="fw-bold">Unit:</div>
+                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start;">
+                                    <div class="quantity quantity-wrap">
+                                        <div class="input-area quantity-wrap">
+                                            <p>{{ $products->unit_info->name }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="d-flex  gap-16 mb-16">
+                                <h6>Description:</h6>
+                           <p class="light-gray mb-16">{{ $products->short_description }}</p>
+
+                            </div>
+
+                           <div class="d-flex  gap-16 mb-16">
+                            <h6>Category:</h6>
+
+                            <p class="light-gray">
+                                <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $products->category_info->slug  }}">{{ $products->category_info->name }}</a>
+
+                                @foreach ($products->category_info->subcategories_info as $items) ,
+                                    <a @if($products->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
+                                @endforeach
+                            </p>
+                        </div>
+
+
+                        <div class="d-flex align-items-center gap-16 mb-16">
+                            <h6>Tags:</h6>
+                            <p class="light-gray">{{ $products->tags }}</p>
+                        </div>
 
                             <div class="content-block mb-24">
                                 <h6 class="mb-24">Color:</h6>
@@ -197,26 +201,10 @@ $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter'
                             </div>
 
 
-                            <a href="checkout.html" class="cus-btn-3 w-100 mb-24">Buy Now</a>
+                            <a href="{{ url($cart_page->slug) }}" class="cus-btn-3 w-100 mb-24">Buy Now</a>
                             <div class="hr-line mb-24"></div>
 
-                            <div class="d-flex  gap-16 mb-16">
-                                <h6>Category:</h6>
 
-                                <p class="light-gray">
-                                    <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $products->category_info->slug  }}">{{ $products->category_info->name }}</a>
-
-                                    @foreach ($products->category_info->subcategories_info as $items) ,
-                                        <a @if($products->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
-                                    @endforeach
-                                </p>
-                            </div>
-
-
-                            <div class="d-flex align-items-center gap-16 mb-16">
-                                <h6>Tags:</h6>
-                                <p class="light-gray">{{ $products->tags }}</p>
-                            </div>
 
                             <div class="hr-line mb-24"></div>
                             <div class="d-flex align-items-center gap-16 mb-24">

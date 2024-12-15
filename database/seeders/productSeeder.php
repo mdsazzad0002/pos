@@ -21,7 +21,6 @@ class productSeeder extends Seeder
         $product->brand = 1;
         $product->for_selling = 0;
         $product->alert_quantity = 0;
-        $product->quantity = 0;
         $product->upload_id = 0;
         $product->creator = 0;
         $product->save();
