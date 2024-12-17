@@ -45,6 +45,8 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/mail.php'));
 
+                Route::middleware('web')
+                    ->group(base_path('routes/admin.php'));
 
 
             // Portfolio Theme
@@ -54,7 +56,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('admin.')
                 ->prefix('admin')
                 ->group(base_path('routes/protfilio_theme/admin.php'));
-                
+
 
             Route::middleware('web')
                 ->group(base_path('routes/protfilio_theme/web.php'));

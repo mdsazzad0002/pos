@@ -542,7 +542,7 @@
         function cart_product_view(){
             $.ajax({
                 type:'get',
-                url:'{{ route('cart_details') }}?source_type=front_product',
+                url:'{{ route('cart_details') }}?source_type=pos',
                 success:function(data){
                     // data  = JSON.parse(data)
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\customer;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class CustomerController extends Controller
@@ -74,67 +74,39 @@ class CustomerController extends Controller
         return view('admin.customer.partials.create');
     }
 
-
-
-
     /**
      * Store a newly created resource in storage.
      */
-
-     public function customerStore(Request $request)
-     {
-         // Validate the incoming request
-         $validated = $request->validate([
-             'name' => 'required|string|max:255',
-             'email' => 'required|email|unique:customers,email',
-             'phone' => 'nullable|string|max:20',
-             'password' => 'required|min:6',
-         ]);
-
-         // Create the customer
-         $customer = Customer::create([
-             'name' => $validated['name'],
-             'email' => $validated['email'],
-             'phone' => $validated['phone'],
-             'password' => bcrypt($validated['password']),
-         ]);
-
-         // Login the customer
-         auth()->guard('customer')->login( $customer);
-         
-         // Return a successful response or redirect to a desired route
-         return response()->json([
-             'title' => 'Successfully Customer Created',
-             'type' => 'success',
-             'page' => 'false',
-         ]);
-     }
-
-
-
-
-
-    public function customerLogin(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
+            'area' => 'required |integer'
         ]);
+        $customer = new customer;
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->phone = $request->phone;
+        $customer->location = $request->location;
+        $customer->area = $request->area;
+        $customer->prev_due = $request->prev_due;
 
-        $credentials = $request->only('email', 'password');
+        $customer->shop_phone = $request->shop_phone;
+        $customer->shop_address = $request->shop_address;
+        $customer->shop_name = $request->shop_name;
 
-        if (Auth::guard('customer')->attempt($credentials)) {
-            return json_encode([
-                'title'=>'Successfully Customer Created',
-                'type'=>'success',
-                'page'=>'false',
-            ]);
-        }
+        $customer->upload_id =$request->image ?? 0;
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Invalid login credentials.',
-        ], 422);
+
+        $customer->creator = auth()->user()->id ?? 0;
+
+        $customer->save();
+
+
+        return json_encode([
+            'title'=>'Successfully  Created Customer',
+            'type'=>'success',
+            'refresh'=>'true',
+        ]);
     }
 
     /**

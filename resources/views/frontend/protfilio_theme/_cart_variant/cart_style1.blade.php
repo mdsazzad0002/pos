@@ -218,13 +218,12 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-500"> <span class="light-gray">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</span></p>
+                                        <p class="fw-500"> <span class="light-gray qtyPrice">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</span></p>
                                     </td>
                                     <td>
                                         <div class="quantity-controller quantity-wrap">
                                             <input onclick="product_counterUP(this, '-')" class="decrement" type="button" value="-">
-                                            <input type="text" name="quantity" value="${element.quantity}" maxlength="2" size="1"
-                                                class="number">
+                                            <input type="text" name="quantity" value="${element.quantity}" maxlength="2" size="1" class="input_quantity">
                                             <input onclick="product_counterUP(this, '+')" class="increment" type="button" value="+">
                                         </div>
                                     </td>
@@ -267,7 +266,7 @@
 
 
         function pos_remove_cart(id, size){
-            console.log(size)
+            // console.log(size)
             if(size == 0){
                 size = ''
             }
@@ -287,21 +286,20 @@
             })
         }
 
-        function product_counterUP(thi, key){
-            var input_value = $(thi).parents('.quantity_parents').find('.input_quantity').val();
-            var input_assing = $(thi).parents('.quantity_parents').find('.input_quantity');
 
-            if(key == '+'){
-                input_assing.val( parseInt(input_value) + 1);
-            }else if(key == '-'){
-                if(input_value < 1){
-                    input_assing.val(0)
-                }else{
-                    input_assing.val(input_value - 1);
+        function product_counterUP(thi, key) {
+            var inputField = $(thi).siblings('.input_quantity');
+            var inputValue = parseInt(inputField.val()) || 0;
+
+            if (key === '+') {
+                inputField.val(inputValue + 1);
+            } else if (key === '-') {
+                if (inputValue > 0) {
+                    inputField.val(inputValue - 1);
                 }
             }
-
         }
+
 </script>
 
 @endpush
