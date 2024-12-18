@@ -136,6 +136,27 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'sales_partner',
             ],
+            [
+                'name' => 'Dashboard',
+                'slug' => 'user/dashboard',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'profile_dashboard',
+            ],
+            [
+                'name' => 'Cart',
+                'slug' => 'user/cart',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'profile_cart',
+            ],
+            [
+                'name' => 'Location',
+                'slug' => 'user/location',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'profile_location',
+            ],
 
 
         ];

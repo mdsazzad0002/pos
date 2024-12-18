@@ -178,6 +178,9 @@ if($(thi).data('setelement')){
         }
     }
 
+
+
+    // Capture the state before reloading
     function form_submit(class_element = null){
         var forem_reset = false;
         if(class_element == null){
@@ -214,7 +217,9 @@ if($(thi).data('setelement')){
                         if (typeof datatableM === 'undefined') {
                             console.log('Data table refresh not found');
                         } else {
+
                             datatableM.ajax.reload();
+
                         }
                     }else{
                         if(data.page == 'true'){
@@ -356,3 +361,5 @@ if($(thi).data('setelement')){
 
 
 @include('layout.admin.file_manager_modal')
+
+

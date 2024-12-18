@@ -67,14 +67,15 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
                             </div>
                             <div class="mb-2">
                                 <div class="fw-bold">Size:</div>
-                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start;">
+                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start; flex-wrap">
                                     @foreach ($products->variant_option_info as $size)
-                                        <div class="quantity quantity-wrap">
+                                        <label class="quantity quantity-wrap quantity_price" for="quantity_{{ $size->id }}">
+                                            <input type="radio" name="price" id="quantity_{{ $size->id }}">
                                             <div class="input-area quantity-wrap flex-column">
                                                 <p> {{ $size->name  }}</p>
                                                 <p> ${{ $size->selling_price  }}</p>
                                             </div>
-                                        </div>
+                                        </label>
                                     @endforeach
                                 </div>
                             </div>
@@ -84,7 +85,7 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
                                 <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start;">
                                     <div class="quantity quantity-wrap">
                                         <div class="input-area quantity-wrap">
-                                            <p>{{ $products->unit_info->name }}</p>
+                                            <p>{{ $products->unit_info->name ?? '' }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -439,6 +440,11 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
 
 <script>
 
+    document.querySelectorAll('.quantity_price').forEach(element => {
+        element.addEventListener(function (item) {
+            this.
+        })
+    });
 
 </script>
 

@@ -1,51 +1,32 @@
 <?php
 
-use App\Http\Controllers\MessageController;
-use App\Models\LeadContact;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\AreaController;
-use App\Http\Controllers\homecontroller;
-use App\Http\Controllers\UnitController;
-use App\Http\Controllers\userController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\BackupController;
-use App\Http\Controllers\BranchController;
 use App\Http\Controllers\UploadController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
-use App\Http\Controllers\PurchaseController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\dashboardController;
 
-use App\Http\Controllers\PermissionController;
 
-use App\Http\Controllers\CommisionAgentController;
 
 use App\Http\Controllers\Auth\LoginCheckController;
-use App\Http\Controllers\CashCounterController;
-use App\Http\Controllers\discountController;
-use App\Http\Controllers\StockManagementController;
 
-use App\Http\Controllers\PushNotificationController;
-use App\Http\Controllers\payment\paypal\paypalController;
 use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\amarpay\amarpayController;
-use App\Http\Controllers\payment\PaymentCredentialController;
 use App\Http\Controllers\payment\braintree\BraintreeController;
 use App\Http\Controllers\payment\stripe\stripePaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
+use App\Models\customer;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +83,15 @@ Route::post('/uploads', [UploadController::class, 'store']);
 Route::get('/uploads/get', [UploadController::class, 'index']);
 
 Route::get('notification', [dashboardController::class, 'noti']);
-Route::post('/customer-register',[App\Http\Controllers\CustomerController::class, 'customerStore'])->name('customer_register');
-Route::post('/customer-login', [App\Http\Controllers\CustomerController::class, 'customerLogin'])->name('customer_login');
+
+
+Route::post('user/customer-profile_pic/{customer}',[App\Http\Controllers\CustomerController::class, 'customer_profile_pic'])->name('customer_profile_pic.update');
+Route::post('user/customer-register',[App\Http\Controllers\CustomerController::class, 'customerStore'])->name('customer_register');
+Route::post('user/customer-login', [App\Http\Controllers\CustomerController::class, 'customerLogin'])->name('customer_login');
+Route::get('user/customer-logout', [App\Http\Controllers\CustomerController::class, 'customer_logout'])->name('customer_logout');
+
+Route::get('user/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('user/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
 require __DIR__.'/auth.php';
 

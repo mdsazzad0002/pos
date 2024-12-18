@@ -3,9 +3,7 @@
 
 
 @section('content')
-@include('frontend.protfilio_theme._profile._location.variant_1')
 
-@include('frontend.protfilio_theme._profile._profile.profile_variant_1')
 
 
         @foreach ($homepagemanage as $items)

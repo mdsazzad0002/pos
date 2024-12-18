@@ -83,6 +83,7 @@ class CustomerController extends Controller
 
      public function customerStore(Request $request)
      {
+        // return $request->all();
          // Validate the incoming request
          $validated = $request->validate([
              'name' => 'required|string|max:255',
@@ -101,7 +102,7 @@ class CustomerController extends Controller
 
          // Login the customer
          auth()->guard('customer')->login( $customer);
-         
+
          // Return a successful response or redirect to a desired route
          return response()->json([
              'title' => 'Successfully Customer Created',
@@ -215,5 +216,18 @@ class CustomerController extends Controller
 
         return json_encode($result_make);
 
+    }
+
+
+    public function customer_profile_pic(Request $request, customer $customer){
+        $customer->upload_id = uploads($request->profile_pic, $customer->upload_id);
+        $customer->save();
+        return back();
+    }
+
+
+    public function customer_logout(){
+        auth()->guard('customer')->logout();
+        return back();
     }
 }

@@ -1,3 +1,12 @@
+@php
+if(!isset($profile_dashboard )){
+    $profile_dashboard  = \App\Models\Page::where('status', 1)->where('page_type', 'profile_dashboard')->first();
+}
+if(auth()->guard('customer')->user()){
+    echo '<script>window.location.href="'.$profile_dashboard->slug.'"</script>';
+}
+
+@endphp
 <main class="main-wrapper bg-lightest-gray">
 
     <!-- Title Banner Start -->
@@ -23,7 +32,7 @@
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="#" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
+                                    <a href="{{ route('google.redirect') }}" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
                                 </div>
                                 <div class="col-sm-6">
                                     <a href="#" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
@@ -39,25 +48,25 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="input-block mb-16">
-                                        <input type="password" id="password" name="password" autocomplete="off" class="form-control" placeholder="Password" required>
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_7949_46264)">
-                                                <path d="M19.8898 10.3421C20.0368 10.1378 20.0368 9.86227 19.8898 9.65785C19.8451 9.5957 18.7753 8.11922 17.0388 6.62602L19.8898 10.3421ZM19.8898 10.3421C19.8451 10.4043 18.7753 11.8808 17.0388 13.374C16.0117 14.2571 14.9628 14.9625 13.9213 15.4705M19.8898 10.3421L6.33476 14.9827M2.96124 13.374L3.31779 12.9593L0.110303 10.3421C0.15499 10.4043 1.22472 11.8808 2.96124 13.374ZM2.96124 13.374L3.31781 12.9593M2.96124 13.374L3.31781 12.9593M3.31781 12.9593C3.32463 12.9652 3.33146 12.971 3.3383 12.9769C3.78259 13.3578 4.30002 13.7615 4.87535 14.1434C4.94379 14.1888 5.01304 14.2339 5.08309 14.2787L5.09608 14.287L5.10946 14.2946L5.99122 14.7983L6.16418 14.8971L6.17856 14.9054L6.19335 14.9128C6.23538 14.9339 6.27765 14.9549 6.32015 14.9756L6.07878 15.4705M3.31781 12.9593L5.73444 15.2904C5.83141 15.341 5.9444 15.3999 6.07878 15.4705M6.07878 15.4705L6.33476 14.9827M6.07878 15.4705C7.40507 16.1173 8.72437 16.4453 10 16.4453C11.2757 16.4453 12.595 16.1173 13.9213 15.4705M6.33476 14.9827C7.43018 15.5147 8.67705 15.8984 10 15.8984C11.3151 15.8984 12.56 15.5261 13.6814 14.9787L13.9213 15.4705M6.33476 14.9827L13.6814 14.9787L13.9213 15.4705M13.5053 9.93776C13.5053 11.8737 11.936 13.443 10 13.443C8.06414 13.443 6.49478 11.8737 6.49478 9.93776C6.49478 8.00186 8.06414 6.4325 10 6.4325C11.936 6.4325 13.5053 8.00186 13.5053 9.93776ZM13.9212 4.52961L13.9212 4.52972L13.9212 4.52961Z" stroke="#141516" stroke-width="1.25" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_7949_46264">
-                                                    <rect width="20" height="20" fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            name="password"
+                                            autocomplete="off"
+                                            class="form-control signPassword"
+                                            placeholder="Password"
+                                            required
+                                        />
+
+                                        <i class="toggleSign-password bi   bi-eye-slash hello_eye_pass" style="cursor: pointer;"></i>
+
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="cus-checkBox mb-32">
                                             <input type="checkbox" id="remember">
-                                            <label for="remember" class="light-gray">Remember for 30 Days</label>
+                                            <label for="remember" class="light-gray">Remember me</label>
                                         </div>
                                         <a href="#" class="color-primary fw-500">Forget Password</a>
                                     </div>
@@ -78,16 +87,16 @@
                         <form class="contact-form" id="registerForm">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <a href="" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
+                                {{-- <div class="col-sm-6">
+                                    <a href="#" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
+                                    <a href="#" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
                                 </div>
 
                                 <div class="col-sm-12">
                                     <p class="or mb-12">Or</p>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12">
                                     <div class="input-block mb-16">
                                         <input type="text" name="name" id="name" class="form-control" required placeholder="Name">
@@ -125,18 +134,9 @@
                                     <div class="input-block mb-16">
                                         <div class="input-block mb-16">
                                             <input type="password" name="password" autocomplete="off" class="form-control password-input" placeholder="Password">
-                                            <svg class="toggle-password" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
-                                                <g clip-path="url(#clip0_7949_46264)">
-                                                    <path
-                                                        d="M19.8898 10.3421C20.0368 10.1378 20.0368 9.86227 19.8898 9.65785C19.8451 9.5957 18.7753 8.11922 17.0388 6.62602L19.8898 10.3421ZM19.8898 10.3421C19.8451 10.4043 18.7753 11.8808 17.0388 13.374C16.0117 14.2571 14.9628 14.9625 13.9213 15.4705M19.8898 10.3421L6.33476 14.9827M2.96124 13.374L3.31779 12.9593L0.110303 10.3421C0.15499 10.4043 1.22472 11.8808 2.96124 13.374ZM2.96124 13.374L3.31781 12.9593M2.96124 13.374L3.31781 12.9593M3.31781 12.9593C3.32463 12.9652 3.33146 12.971 3.3383 12.9769C3.78259 13.3578 4.30002 13.7615 4.87535 14.1434C4.94379 14.1888 5.01304 14.2339 5.08309 14.2787L5.09608 14.287L5.10946 14.2946L5.99122 14.7983L6.16418 14.8971L6.17856 14.9054L6.19335 14.9128C6.23538 14.9339 6.27765 14.9549 6.32015 14.9756L6.07878 15.4705M3.31781 12.9593L5.73444 15.2904C5.83141 15.341 5.9444 15.3999 6.07878 15.4705M6.07878 15.4705L6.33476 14.9827M6.07878 15.4705C7.40507 16.1173 8.72437 16.4453 10 16.4453C11.2757 16.4453 12.595 16.1173 13.9213 15.4705M6.33476 14.9827C7.43018 15.5147 8.67705 15.8984 10 15.8984C11.3151 15.8984 12.56 15.5261 13.6814 14.9787L13.9213 15.4705M6.33476 14.9827L13.6814 14.9787L13.9213 15.4705M13.5053 9.93776C13.5053 11.8737 11.936 13.443 10 13.443C8.06414 13.443 6.49478 11.8737 6.49478 9.93776C6.49478 8.00186 8.06414 6.4325 10 6.4325C11.936 6.4325 13.5053 8.00186 13.5053 9.93776ZM13.9212 4.52961L13.9212 4.52972L13.9212 4.52961Z"
-                                                        stroke="#141516" stroke-width="1.25" />
-                                                </g>
-                                                <defs>
-                                                    <clipPath id="clip0_7949_46264">
-                                                        <rect width="20" height="20" fill="white" />
-                                                    </clipPath>
-                                                </defs>
-                                            </svg>
+
+                                            <i class="toggle-password bi bi-eye-slash hello_eye_pass" style="cursor: pointer;"></i>
+
                                         </div>
                                     </div>
                                 </div>
@@ -150,8 +150,6 @@
             </div>
         </div>
     </section>
-
-
 </main>
 <!-- Main Sections -->
 @push('js')
@@ -167,12 +165,20 @@
                 url: '{{ route('customer_register') }}',
                 type: 'POST',
                 data: formData,
-                processData: false,
-                contentType: false,
+                // processData: false,
+                // contentType: false,
                 success: function (response) {
-                    alert('Form submitted successfully!');
-                    console.log(response);
-                    $('#registerForm')[0].reset();
+                    // alert('Form submitted successfully!');
+                    // console.log(response);
+                    if(response.type == 'success'){
+                        @php
+                            if(!isset($profile_dashboard )){
+                                $profile_dashboard  = \App\Models\Page::where('status', 1)->where('page_type', 'profile_dashboard')->first();
+                            }
+                        @endphp
+                        window.location.href = ''
+                    }
+                    // $('#registerForm')[0].reset();
                 },
                 error: function (xhr, status, error) {
                     if (xhr.status === 422) {
@@ -195,6 +201,7 @@
         const passwordInput = document.querySelector(".password-input");
 
         togglePassword.addEventListener("click", () => {
+            togglePassword.classList.toggle('bi-eye')
             const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
             passwordInput.setAttribute("type", type);
         });
@@ -232,6 +239,35 @@
         });
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleSignPassword = document.querySelector(".toggleSign-password");
+    const passwordSignInput = document.querySelector(".signPassword");
+
+    toggleSignPassword.addEventListener("click", () => {
+
+        toggleSignPassword.classList.toggle('bi-eye')
+        const isPassword = passwordSignInput.getAttribute("type") === "password";
+        passwordSignInput.setAttribute("type", isPassword ? "text" : "password");
+
+        if (isPassword) {
+            toggleSignPassword.style.fill = "#677c757d";
+        } else {
+            toggleSignPassword.style.fill = "#141516";
+        }
+    });
+});
 
 </script>
+@endpush
+
+@push('css')
+    <style>
+        i.hello_eye_pass.bi.bi-eye-slash {
+            position:absolute;
+            right:20px;
+            top:50%;
+            transform:translateY(-50%);
+            font-size:22px;
+        }
+    </style>
 @endpush

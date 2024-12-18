@@ -11,6 +11,7 @@
         "jackiedo/cart": "^3.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
+        "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.8",
         "maatwebsite/excel": "^3.1",
         "minishlink/web-push-php-example": "^4.0",

@@ -704,6 +704,94 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
 
 
+            // Location variant 1
+            'profile_location_1' => [
+                'key' =>'_profile._location.variant_1',
+                'title' => 'profile location style  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            // Profile cart variant 1
+            'profile_cart_1' => [
+                'key' =>'_profile._cart.variant_1',
+                'title' => 'Profile cart style  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            // Profile cart variant 1
+            'profile_profile_1' => [
+                'key' =>'_profile._profile.profile_variant_1',
+                'title' => 'Profile Profile style  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+            'page_title1' => [
+                'key' =>'_variant_manage.page_title',
+                'title' => 'Page Title style  1',
+                'title_status' => 0,
+                'sub_title' => 'Blog details Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+
 
         ];
 
@@ -748,7 +836,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // about-us page seeder default
          $about_us_id = Page::where('slug', 'about-us')->first();
-         $ecom_home = [ 'about1', 'faq_1'];
+         $ecom_home = ['page_title1', 'about1', 'faq_1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -756,7 +844,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // filter page seeder default
          $about_us_id = Page::where('slug', 'filter')->first();
-         $ecom_home = [ 'product_filter1'];
+         $ecom_home = [ 'page_title1', 'product_filter1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -783,7 +871,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // checkout page seeder default
          $about_us_id = Page::where('slug', 'checkout')->first();
-         $ecom_home = [ 'product_checkout1'];
+         $ecom_home = [ 'page_title1','product_checkout1', ];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -791,7 +879,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // tracking page seeder default
          $about_us_id = Page::where('slug', 'tracking')->first();
-         $ecom_home = [ 'tracking1'];
+         $ecom_home = [ 'page_title1', 'tracking1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -799,7 +887,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service page seeder default
          $about_us_id = Page::where('slug', 'service')->first();
-         $ecom_home = [ 'service1'];
+         $ecom_home = [ 'page_title1','service1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -807,7 +895,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service-details page seeder default
          $about_us_id = Page::where('slug', 'service-details')->first();
-         $ecom_home = [ 'service_view1'];
+         $ecom_home = ['page_title1', 'service_view1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -815,7 +903,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service-details page seeder default
          $about_us_id = Page::where('slug', 'register')->first();
-         $ecom_home = [ 'register1'];
+         $ecom_home = [ 'page_title1','register1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -823,7 +911,29 @@ class VarinatSuggessionSeeder extends Seeder
 
          // Sales-details page seeder default
          $about_us_id = Page::where('page_type', 'sales_partner')->first();
-         $ecom_home = [ 'sales_partner_1'];
+         $ecom_home = [ 'page_title1','sales_partner_1', ];
+         foreach($ecom_home as $items){
+            seed_items($data[$items],$about_us_id->id);
+        }
+
+
+
+         // Sales-details page seeder default
+         $about_us_id = Page::where('page_type', 'profile_dashboard')->first();
+         $ecom_home = ['page_title1','profile_profile_1'];
+         foreach($ecom_home as $items){
+            seed_items($data[$items],$about_us_id->id);
+        }
+
+
+         $about_us_id = Page::where('page_type', 'profile_location')->first();
+         $ecom_home = [ 'page_title1','profile_location_1'];
+         foreach($ecom_home as $items){
+            seed_items($data[$items],$about_us_id->id);
+        }
+
+         $about_us_id = Page::where('page_type', 'profile_cart')->first();
+         $ecom_home = [ 'page_title1','profile_cart_1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);

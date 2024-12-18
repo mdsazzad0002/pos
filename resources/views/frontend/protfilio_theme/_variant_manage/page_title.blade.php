@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="banner-wrapper">
             <img src="{{ asset('uploads/banner/left-image.png') }}" alt="" class="banner-image1">
-            <h1 class="dark-black fw-600">Shopping Cart</h1>
+            <h1 class="dark-black fw-600">{{ $title ?? '' }}</h1>
             <img src="{{ asset('uploads/banner/right-image.png') }}" alt="" class="banner-image2">
         </div>
     </div>

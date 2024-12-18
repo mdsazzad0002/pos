@@ -25,9 +25,11 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\CommisionAgentController;
 use App\Http\Controllers\Auth\LoginCheckController;
+use App\Http\Controllers\discountController;
 use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\payment\PaymentCredentialController;
+use App\Http\Controllers\vatController;
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function () {
 

@@ -5,7 +5,7 @@
 
 @endphp
 <form
-@if( $vat)
+@if($vat)
     action="{{ route('admin.vat.update', $vat->id) }}"
 @else
     action="{{ route('admin.vat.store') }}"

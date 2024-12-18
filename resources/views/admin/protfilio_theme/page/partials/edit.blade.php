@@ -31,6 +31,8 @@
              <option @if($page->page_type =='wishlist') selected @endif value="wishlist">wishlist</option>
              <option @if($page->page_type =='service') selected @endif value="service">service</option>
              <option @if($page->page_type =='service_details') selected @endif value="service_details">service_details</option>
+             <option @if($page->page_type =='profile_dashboard') selected @endif value="profile_dashboard">profile_dashboard</option>
+             <option @if($page->page_type =='profile_location') selected @endif value="profile_location">profile_location</option>
 
         </select>
      </label>
