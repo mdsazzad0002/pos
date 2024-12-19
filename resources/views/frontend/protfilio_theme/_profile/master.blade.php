@@ -13,7 +13,6 @@
     $customer = auth()->guard('customer')->user();
 
 @endphp
-{{-- @dd($profile_location); --}}
 
 @include('frontend.protfilio_theme._variant_manage.page_title',['title'=> 'Profile'])
 <br>
@@ -36,32 +35,39 @@
                 </li>
                 @if($profile_dashboard)
                     <li>
-                        <a class="{{ Request::is($profile_dashboard->slug) ? 'active' : '' }}" href="{{ $profile_dashboard->slug }}">{{ $profile_dashboard->name }}</a>
+                        <a class="{{ Request::is($profile_dashboard->slug) ? 'active' : '' }}" href="{{ url($profile_dashboard->slug) }}"><i class="bi bi-speedometer2"></i> {{ $profile_dashboard->name }}</a>
                     </li>
                 @endif
                 <li>
-                    <a href="#">Cart Item</a>
+                    <a href="#"><i class="bi bi-basket-fill"></i> Cart Item</a>
                 </li>
                 <li>
-                    <a href="#">Wishlist</a>
+                    <a href="#"><i class="bi bi-heart-fill"></i> Wishlist</a>
                 </li>
                 <li>
-                    <a href="#">Checkout item</a>
+                    <a href="#"><i class="bi bi-border-all"></i> Checkout item</a>
                 </li>
                 <li>
-                    <a href="#">Payment Information</a>
+                    <a href="#"><i class="bi bi-wallet"></i> Payment Information</a>
                 </li>
                 @if($profile_location)
                     <li>
-                        <a class="{{ Request::is($profile_location->slug) ? 'active' : '' }}" href="{{ $profile_location->slug }}">{{ $profile_location->name }}</a>
+                        <a class="{{ Request::is($profile_location->slug) ? 'active' : '' }}" href="{{ url($profile_location->slug) }}"><i class="bi bi-geo-alt-fill"></i> {{ $profile_location->name }}</a>
                     </li>
                 @endif
                 <li>
-                    <a href="{{ route('customer_logout') }}">Logout</a>
+                    <a href="{{ route('customer_logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a>
                 </li>
             </ul>
         </div>
         <div class="col-lg-8">
+            <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center" style="    border-left: 4px solid green;">
+                <div class="font-weight-bold">
+                    <i class="bi bi-exclamation-triangle-fill text-white"></i> Please Verify your mail address.
+                </div>
+                <a class="btn btn-success"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
+
+             </div>
             @yield('profile')
         </div>
     </div>
@@ -70,10 +76,10 @@
 
 
 <style>
-    .profile_sidebar{
-        background: #eee;
-    }
-    .profile_sidebar{
+.profile_sidebar{
+    background: #eee;
+}
+.profile_sidebar{
     padding:0;
 
 }
@@ -85,17 +91,29 @@
 }
 
 .profile_sidebar ul li a{
-    padding:15px 15px;
     border-bottom:1px dotted #868686;
     display:block;
     border-left:4px solid #006937;
 
 }
 
+.profile_sidebar ul li a i,
+.profile_sidebar ul li a{
+        transition: .8s;
+}
+
+.profile_sidebar ul li a i{
+    padding: 15px;
+    display: inline-block;
+    background: #eee;
+    opacity: 0.8;
+}
+
+.profile_sidebar ul li a.active i,
+.profile_sidebar ul li a:hover i,
 .profile_sidebar ul li a.active,
 .profile_sidebar ul li a:hover{
     background:#006937;
-
     color:white;
 }
 .profile_sidebar  .form__li{

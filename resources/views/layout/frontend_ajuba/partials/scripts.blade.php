@@ -32,7 +32,7 @@
                                 var target_item = $('#productQuickView'); // Use jQuery to select the element
                                 target_item.find('.quick-image-box').html(JSON.parse(data.image)); // Use .find() for nested selection
                                 target_item.find('.product-text-container').html(JSON.parse(data.content));
-                                qunataty_inc_dec()
+                                data_unit_and_variant_check()
                             }
                         })
                     })
@@ -47,13 +47,17 @@
             // console.log(thi)
             if ($(thi).data('quantaty')) {
                 var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
-                // console.log(quantaty);
+                var variant = $(thi).closest('.product_variant').find('input.variant_size').val();
+                var unit = $(thi).closest('.product_unit').find('input.unit').val();
+                console.log(quantaty);
                 $.ajax({
                     type: 'get',
                     url:'{{ route('add_to_cart') }}',
                     data:{
                         'product_id': $(thi).data('id'),
-                        'quantity' : quantaty
+                        'quantity' : quantaty,
+                        'unit' : unit,
+                        'size' : variant
 
                     },
                     success:function(data){
@@ -114,7 +118,7 @@
                 success:function(data){
                     // console.log(data)
                     $('.shoping_content').html(data);
-                    qunataty_inc_dec()
+
                     setTimeout(() => {
                         cart_init_sidebar()
                     }, 700);
@@ -124,25 +128,7 @@
         }
 
 
-        function qunataty_inc_dec(){
 
-            $(".decrement").on("click", function () {
-                var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-                var qtyVal = parseInt(qtyInput.val());
-                if (qtyVal > 0) {
-                qtyInput.val(qtyVal - 1);
-                }
-                cart_update($(this).closest('li').data('id'), qtyInput.val());
-            });
-            $(".increment").on("click", function () {
-                var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-                var qtyVal = parseInt(qtyInput.val());
-                qtyInput.val(parseInt(qtyVal + 1));
-
-                cart_update($(this).closest('li').data('id'), qtyInput.val());
-            });
-
-        }
 
 
         function cart_init_sidebar(){
@@ -216,5 +202,76 @@
 
             }
         }
+
+
+
+
+        function price_change(thi){
+            console.log(thi)
+            console.log(456)
+            $('.name_price input').val($(thi).data('price'));
+            $('.name_price_old input').val($(thi).data('old_price'));
+            price_calculation_change_option(thi)
+        }
+
+        function unit_change(thi){
+            $('.unit_change input').val($(thi).data('count'));
+            price_calculation_change_option(thi)
+            console.log(thi)
+        }
+
+
+        function data_unit_and_variant_check(){
+
+            if($('.product-text-container_fornt .option').length > 0){
+                var items_var = $('.product-text-container_fornt .option:first-child input');
+                items_var.prop('checked', true);
+
+            }
+            if($('.option-list .option').length > 0){
+                var items_var = $('.option-list .option:first-child input');
+                items_var.prop('checked', true);
+
+            }
+        }
+
+
+        function price_calculation_change_option(thi){
+            var quantity = $(thi).parents('.product_description_parents').find('.unit_change input').val();
+            var inp_price = $(thi).parents('.product_description_parents').find('.name_price input').val();
+
+            var inp_price_old =  $(thi).parents('.product_description_parents').find('.name_price_old input').val();
+
+            $(thi).parents('.product_description_parents').find('.name_price span').html(quantity * inp_price);
+            $(thi).parents('.product_description_parents').find('.name_price_old span').html(quantity * inp_price_old);
+
+            $(thi).parents('.product_description_parents').find('.price_discount span').html(calculateDiscount(inp_price_old,inp_price))
+         
+
+        }
+
+
+        function calculateDiscount(oldPrice, sellingPrice) {
+            var discount =  ((oldPrice - sellingPrice) * 100) / oldPrice;
+            return discount.toFixed(2);
+        }
+
+        function product_counterUP(thi, key){
+            var input_value = $(thi).parents('.quantity_parents').find('.input_quantity').val();
+            var input_assing = $(thi).parents('.quantity_parents').find('.input_quantity');
+
+            if(key == '+'){
+                input_assing.val( parseInt(input_value) + 1);
+            }else if(key == '-'){
+                if(input_value < 1){
+                    input_assing.val(0)
+                }else{
+                    input_assing.val(input_value - 1);
+                }
+            }
+
+        }
+
+
 
     </script>

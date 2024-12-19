@@ -40,8 +40,6 @@
                 <li class="hr-line mb-24"></li>
         @endforeach
     @endif
-
-
 </ul>
 <div class="price-total p-24">
     <span class="h5">SUBTOTAL</span>

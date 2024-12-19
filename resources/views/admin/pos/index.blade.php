@@ -94,8 +94,6 @@
                                                 </a>
                                             </div>
                                             @endforeach
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -302,7 +300,8 @@
                                 </div>
                                 <div class="col-8">
                                     <button type="submit" href="#"
-                                        class="btn btn-primary fw-semibold d-flex justify-content-center align-items-center py-3 m-0 w-100"><i class="fa fa-plus ms-2 my-n3"></i> &nbsp;&nbsp;Add
+                                        class="btn btn-primary fw-semibold d-flex justify-content-center align-items-center py-3 m-0 w-100">
+                                        <i class="fa fa-plus ms-2 my-n3"></i> &nbsp;&nbsp;Add
                                         to cart </button>
                                 </div>
                             </div>
@@ -314,7 +313,6 @@
     </div>
 
     <script>
-
         document.querySelector('.modal-pos-product-info').addEventListener('submit', function(e) {
             e.preventDefault();
             var formData = $(this).serialize();
@@ -335,10 +333,6 @@
             });
         });
 
-
-
-
-
         function product_view_cart(thi){
             // console.log(thi)
             $.ajax({
@@ -351,7 +345,6 @@
                     $('#modalPosItem .name_info').html(data.name);
                     $('#modalPosItem .name_price span').html(data.selling_price);
                     // console.log(data)
-
 
                     var product_info_data = `
                         <div>SKU : ${data.sku}</div>
@@ -382,10 +375,6 @@
             })
 
         }
-
-
-
-
 
         function product_counterUP(thi, key){
             var input_value = $(thi).parents('.quantity_parents').find('.input_quantity').val();

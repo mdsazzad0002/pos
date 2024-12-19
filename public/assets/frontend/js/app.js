@@ -44,7 +44,6 @@ var MyScroll = "";
       Init.checkBoxes();
       Init.priceRangeSlider();
       Init.billingAddress();
-      Init.quantityHandle();
       Init.cartSidebar();
       Init.formValidation();
       Init.contactForm();
@@ -514,20 +513,7 @@ var MyScroll = "";
     },
 
     // Quantity Controller
-    quantityHandle: function () {
-      $(".decrement").on("click", function () {
-        var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-        var qtyVal = parseInt(qtyInput.val());
-        if (qtyVal > 0) {
-          qtyInput.val(qtyVal - 1);
-        }
-      });
-      $(".increment").on("click", function () {
-        var qtyInput = $(this).closest(".quantity-wrap").children(".number");
-        var qtyVal = parseInt(qtyInput.val());
-        qtyInput.val(parseInt(qtyVal + 1));
-      });
-    },
+
 
     // Cart Sidebar
     cartSidebar: function () {

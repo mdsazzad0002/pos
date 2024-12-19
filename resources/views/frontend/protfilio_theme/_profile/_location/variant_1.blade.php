@@ -17,16 +17,13 @@
             <div class="bg-white text-dark">
                 Location
             </div>
-            <div class="bg-warning">
-                    Please Verify your mail address. <a class="btn btn-success">Send Mail</a>
-
-            </div>
+   
             <div class="col-12">
                 <div class="row">
                     <card-header>
                         <h4>Loaction</h4>
                     </card-header>
-                    @foreach ( $customer->addressable as $address)
+                    @forelse ( $customer->addressable as $address)
 
                     <div class="col-6 mt-2">
                         <div class="card">
@@ -68,7 +65,17 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-12">
+                        <div class="bg-warning rounded shadow p-5 text-center">
+                            <h3>
+                                Not found
+                            </h3>
+                            <br>
+                            Location Data
+                        </div>
+                    </div>
+                    @endforelse
 
                 </div>
             </div>

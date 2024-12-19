@@ -325,6 +325,7 @@ h6 {
   overflow: hidden;
 }
 
+
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -345,6 +346,7 @@ h6 {
   .navmenu li {
     position: relative;
   }
+
 
   .navmenu a,
   .navmenu a:focus {
@@ -2161,3 +2163,8 @@ section,
     justify-content: center;
 }
 
+
+
+.font-weight-bold{
+    font-weight: bold;
+}

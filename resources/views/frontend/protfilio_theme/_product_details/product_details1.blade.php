@@ -51,159 +51,9 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
 
 
                         <div class="product-text-container bg-white br-20">
-
-                            <h3 class="fw-600 mb-16">{{ $products->name ?? '' }}</h3>
-                            <div class="d-flex align-items-center flex-wrap gap-16 mb-24">
-
-                                @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=>  $products->reviewCount(), 'rating_star' => $products->averageRating()])
-
-                                <div class="vr-line vr-line-2"></div>
-                                <p>Price:<span>
-                                @include('frontend.protfilio_theme._filter_variant.partials.product_price', ['product'=> $products, 'discount'=> true])
-                                </span></p>
-                                <p class="light-gray">Brand: <span class="color-primary">{{ $products->brand_info->name ?? '' }}</span></p>
-                                <p class="light-gray">SKU: <span class="light-black">{{ $products->sku }}</span></p><br>
-                                {{-- <p class="light-gray">Unit: <span class="light-black">{{ $products->unit_info->name }}</span></p> --}}
-                            </div>
-                            <div class="mb-2">
-                                <div class="fw-bold">Size:</div>
-                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start; flex-wrap">
-                                    @foreach ($products->variant_option_info as $size)
-                                        <label class="quantity quantity-wrap quantity_price" for="quantity_{{ $size->id }}">
-                                            <input type="radio" name="price" id="quantity_{{ $size->id }}">
-                                            <div class="input-area quantity-wrap flex-column">
-                                                <p> {{ $size->name  }}</p>
-                                                <p> ${{ $size->selling_price  }}</p>
-                                            </div>
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            <div class="mb-2">
-                                <div class="fw-bold">Unit:</div>
-                                <div class="function-bar mb-16 quantity_parents d-flex justify-content-flex-start;">
-                                    <div class="quantity quantity-wrap">
-                                        <div class="input-area quantity-wrap">
-                                            <p>{{ $products->unit_info->name ?? '' }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex  gap-16 mb-16">
-                                <h6>Description:</h6>
-                           <p class="light-gray mb-16">{{ $products->short_description }}</p>
-
-                            </div>
-
-                           <div class="d-flex  gap-16 mb-16">
-                            <h6>Category:</h6>
-
-                            <p class="light-gray">
-                                <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $products->category_info->slug  }}">{{ $products->category_info->name }}</a>
-
-                                @foreach ($products->category_info->subcategories_info as $items) ,
-                                    <a @if($products->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
-                                @endforeach
-                            </p>
-                        </div>
+                            @include('frontend.protfilio_theme._product_variant.partials.model_content', ['product'=>$products])
 
 
-                        <div class="d-flex align-items-center gap-16 mb-16">
-                            <h6>Tags:</h6>
-                            <p class="light-gray">{{ $products->tags }}</p>
-                        </div>
-
-                            <div class="content-block mb-24">
-                                <h6 class="mb-24">Color:</h6>
-                                <div class="product-color">
-                                    <ul class="unstyled list">
-                                        <li>
-                                            <label for="muhRadio1"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio1" name="muhRadio" class="radio-1"
-                                                    value="muhRadio1">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio2"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio2" name="muhRadio" class="radio-2"
-                                                    value="muhRadio2">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio3"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio3" name="muhRadio" class="radio-3"
-                                                    value="muhRadio3">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio4"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio4" name="muhRadio" class="radio-4"
-                                                    value="muhRadio4">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio5"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio5" name="muhRadio" class="radio-5"
-                                                    value="muhRadio5">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio6"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio6" name="muhRadio" class="radio-6"
-                                                    value="muhRadio6">
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label for="muhRadio7"
-                                                class="d-flex align-items-center h-21 light-black font-sec fw-500">
-                                                <input type="radio" id="muhRadio7" name="muhRadio" class="radio-7"
-                                                    value="muhRadio7">
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="hr-line mb-24"></div>
-                            <div class="function-bar mb-16 quantity_parents">
-                                <div class="quantity quantity-wrap">
-                                    <div class="input-area quantity-wrap">
-                                        <input class="decrement" type="button" value="-">
-                                        <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                            class="number qunataty_number">
-                                        <input class="increment" type="button" value="+">
-                                    </div>
-                                </div>
-                                <div class="cart-btn w-100">
-                                    <a href="javascript:void(0)" onclick="add_to_cart(this)" data-quantaty="true" data-id="{{ $products->id }}" class="cus-btn-2 w-100">ADD TO CART</a>
-                                </div>
-                                <div class="side-icons">
-                                    <ul class="list-unstyled m-0">
-                                        <li>
-                                            <a href="javascript:void(0)" onclick="add_to_compareList({{ $products->id }})">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="22"
-                                                    viewBox="0 0 24 22" fill="none">
-                                                    <path
-                                                        d="M12 21.6648C11.6583 21.6648 11.3289 21.541 11.0722 21.3162C10.1026 20.4684 9.16789 19.6717 8.34318 18.9689L8.33897 18.9653C5.92107 16.9048 3.83312 15.1254 2.38037 13.3725C0.756407 11.4129 0 9.55493 0 7.52521C0 5.55316 0.676207 3.73383 1.90393 2.4021C3.1463 1.05463 4.851 0.3125 6.70458 0.3125C8.08995 0.3125 9.35869 0.750488 10.4754 1.6142C11.039 2.05017 11.5499 2.58374 12 3.20612C12.4502 2.58374 12.9609 2.05017 13.5247 1.6142C14.6415 0.750488 15.9102 0.3125 17.2956 0.3125C19.149 0.3125 20.8538 1.05463 22.0962 2.4021C23.3239 3.73383 24 5.55316 24 7.52521C24 9.55493 23.2437 11.4129 21.6198 13.3723C20.167 15.1254 18.0793 16.9046 15.6617 18.9649C14.8355 19.6688 13.8993 20.4667 12.9276 21.3165C12.6711 21.541 12.3415 21.6648 12 21.6648ZM6.70458 1.71838C5.24834 1.71838 3.91058 2.29956 2.93737 3.35498C1.9497 4.42633 1.4057 5.90729 1.4057 7.52521C1.4057 9.2323 2.04016 10.759 3.4627 12.4755C4.83764 14.1346 6.88274 15.8774 9.25065 17.8954L9.25505 17.899C10.0829 18.6046 11.0213 19.4044 11.998 20.2584C12.9805 19.4027 13.9204 18.6016 14.7498 17.895C17.1176 15.877 19.1625 14.1346 20.5374 12.4755C21.9598 10.759 22.5943 9.2323 22.5943 7.52521C22.5943 5.90729 22.0503 4.42633 21.0626 3.35498C20.0896 2.29956 18.7516 1.71838 17.2956 1.71838C16.2288 1.71838 15.2494 2.0575 14.3846 2.7262C13.6139 3.32239 13.077 4.07605 12.7622 4.60339C12.6004 4.87457 12.3155 5.03644 12 5.03644C11.6845 5.03644 11.3996 4.87457 11.2377 4.60339C10.9231 4.07605 10.3863 3.32239 9.6154 2.7262C8.75059 2.0575 7.77116 1.71838 6.70458 1.71838Z"
-                                                        fill="#141516" />
-                                                </svg>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-
-
-                            <a href="{{ url($cart_page->slug) }}" class="cus-btn-3 w-100 mb-24">Buy Now</a>
-                            <div class="hr-line mb-24"></div>
 
 
 
@@ -440,11 +290,11 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
 
 <script>
 
-    document.querySelectorAll('.quantity_price').forEach(element => {
-        element.addEventListener(function (item) {
-            this.
-        })
-    });
+    // document.querySelectorAll('.quantity_price').forEach(element => {
+    //     element.addEventListener(function (item) {
+    //         this.
+    //     })
+    // });
 
 </script>
 
@@ -452,8 +302,12 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
 
 @push('css')
     <style>
+        .shop-detail .detail-wrapper .product-image-container {
+            height: 100%;
+        }
         .shop-detail .detail-wrapper .product-image-container .product-slider .detail-image img{
             width: 100%;
+
         }
 
         /* Hide the radio buttons */
@@ -487,6 +341,8 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
         .comment-box img {
              width: 60px;
         }
+
+        
 
     </style>
 @endpush
