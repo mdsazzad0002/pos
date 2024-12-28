@@ -28,6 +28,7 @@ class settingCaller extends Seeder
             PwaSeeder::class,
             takto_messageSeeder::class,
             CookieSeeder::class,
+            CourierReportSeeder::class
         ]);
     }
 }

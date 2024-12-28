@@ -46,8 +46,12 @@ class SettingController extends Controller
             $flag_target = 1;
         }elseif($slug == 'cookie-management' && $key == '40'){
             $flag_target = 1;
+        }elseif($slug == 'tracking_report' && $key == '27'){
+            $flag_target = 1;
         }
 
+
+        // return $settings;
         if($flag_target == 1){
             return view('admin.settings.index', compact('slug', 'settings', 'key'));
         }else{

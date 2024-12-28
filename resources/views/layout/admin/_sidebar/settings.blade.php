@@ -39,6 +39,13 @@
                 <p>{{ __('settings.site-tag-management') }}</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.setting.index', ['tracking_report', '27']) }}"
+            class="nav-link">
+                <i class="fas fa-tags nav-icon"></i>
+                <p>{{ __('settings.tracking_report') }}</p>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}"

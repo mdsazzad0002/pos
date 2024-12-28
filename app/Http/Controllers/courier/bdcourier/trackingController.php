@@ -9,6 +9,10 @@ class trackingController extends Controller
 {
     public function tracking(Request $request){
 
+
+        if(settings('bd_courier_tracking_status', 27) == 1){
+
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -21,7 +25,7 @@ class trackingController extends Controller
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_HTTPHEADER => array(
-            'Authorization: 44KuwISREmzWwTxOhapxFaiVyAIAuXVS2618lNMTa4OAJ3NWffuQKjrDeTfk'
+            'Authorization: '.settings('bd_courier_tracking_id', 27)
           ),
           CURLOPT_SSL_VERIFYPEER => false,  // Disable SSL peer verification
           CURLOPT_SSL_VERIFYHOST => false,  // Disable host verification
@@ -40,5 +44,8 @@ class trackingController extends Controller
 
 
         return $request;
+    }else{
+        return 'Please Enabled courier settings';
+    }
     }
 }

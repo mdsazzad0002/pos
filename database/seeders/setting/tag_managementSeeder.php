@@ -16,6 +16,7 @@ class tag_managementSeeder extends Seeder
         $data = [
             ['name' => 'google_tag_manager_key', 'value' => '', 'creator_id' => '1', 'key' => '24'],
             ['name' => 'google_tag_analysis_key', 'value' => '', 'creator_id' => '1', 'key' => '24'],
+            ['name' => 'facebook_app_id', 'value' => '', 'creator_id' => '1', 'key' => '24'],
 
         ];
 

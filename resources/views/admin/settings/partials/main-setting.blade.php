@@ -43,6 +43,28 @@
 
     </form>
     @endforeach
+
+
+</div>
+<div class="">
+
+    @if($key==27)
+        <div style="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Courier Report
+                </div>
+                <div class="card-body">
+                    <form class="input-group" action="{{ route('tracking') }}">
+                        <input value="01590084779" name="phone" type="text" class="form-control" placeholder="Enter your phone number">
+                        <button class="btn btn-primary border-top-left-0">See Report</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    @endif
 </div>
 {{ $settings->links() }}
 @endsection
