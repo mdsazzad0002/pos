@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
+use App\Models\Discount;
 use App\Models\VariantOption;
 use App\Models\Vat;
 use Illuminate\Support\Facades\DB;
@@ -155,7 +156,9 @@ class HomeController extends Controller
 
    public function recent_view(Request $request){
 
-        $features_product = product::where(function($query) use ($request){
+        $features_product = product::whereNotNull('unit')
+        ->where('for_selling', 1)
+        ->where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
                    $query->where('category', $request->id);
@@ -170,7 +173,10 @@ class HomeController extends Controller
    }
    public function recommend_view(Request $request){
 
-        $features_product = product::where(function($query) use ($request){
+        $features_product = product::
+        whereNotNull('unit')
+        ->where('for_selling', 1)
+        ->where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
                    $query->where('category', $request->id);
@@ -188,6 +194,8 @@ class HomeController extends Controller
    public function popular_view(Request $request){
 
         $features_product = product::withAvg('reviews_info', 'rating')
+        ->whereNotNull('unit')
+        ->where('for_selling', 1)
         ->where(function($query) use ($request){
            if($request->has('id')){
                if($request->id != null && $request->id != '' && $request->id != 0){
@@ -423,35 +431,10 @@ class HomeController extends Controller
     }
 
 
-    public function side_cart_info(){
-        $cart = session("front_product", []);
-        $products = [];
+    public function side_cart_info(Request $request){
 
-        foreach ($cart as $key => $items) {
-            // Since $items is an associative array with only one key like 'pd_5', 'pd_6', etc.
-            // We extract the first (and only) item in the array.
-             $item = reset($items);  // reset() gives the first value of the array
-
-            // Extract product_id and quantaty
-            $product_id = $item['product_id'] ?? null;  // Default to null if product_id doesn't exist
-            $quantaty = $item['quantaty'] ?? 0;  // Default to 0 if quantaty doesn't exist
-
-            // Check if product_id exists
-            if ($product_id !== null) {
-                // Find the product in the database
-                $product = Product::find($product_id);
-
-                if ($product) {
-                    // Add the quantity from the cart to the product
-                    $product['items_cart'] = $quantaty;  // Set items_cart to the quantity in the cart
-
-                    // Add the updated product to the products array
-                    $products[] = $product;
-                }
-            }
-        }
-
-        return view('layout.frontend_ajuba.partials._shoping_partials.product_items', compact('cart', 'products'));
+        $product_cart = (object) $this->cart_details($request);
+        return view('layout.frontend_ajuba.partials._shoping_partials.product_items', compact( 'product_cart'));
     }
 
 
@@ -516,7 +499,8 @@ class HomeController extends Controller
                     $cal_vat_with_price = $cal_price +  $cat_vat_price;
 
                     $cal_total_vat_with_price =  $cal_total_vat + $cal_sub_price;
-
+                    $discount = Discount::find($product->discount_id);
+                    $discount_price = $discount ? ($discount->type == 1 ? $discount->amount : (($cal_price * $discount->amount)/100)) : 0;//$cal_price
 
                     // return $itemdata['quantaty'];
                     $data_array['product'][]=[
@@ -530,7 +514,10 @@ class HomeController extends Controller
                         'price' =>  $cal_price,
                         'vat_with_price' =>  $cal_vat_with_price,
                         'price_with_vat_price' =>  $cal_vat_with_price,
-                        'total_price' => $cal_total_vat_with_price,
+                        'discount'=> $discount,
+                        'discount_price' => $discount_price,
+                        'total_price' => $cal_total_vat_with_price - $discount_price,
+
                         'total_vat_price' => $cal_total_vat,
                     ];
 

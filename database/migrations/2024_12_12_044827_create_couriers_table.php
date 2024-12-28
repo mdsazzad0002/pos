@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('courier_credentials', function (Blueprint $table) {
             $table->id();
+            $table->string('upload_id')->nullable();
             $table->string('provider')->nullable();
             $table->string('Secret_Key')->nullable();
             $table->string('Api_Key')->nullable();
