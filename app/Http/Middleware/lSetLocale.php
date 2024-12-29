@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SetLocale
 {
+    
     /**
      * Handle an incoming request.
      *
