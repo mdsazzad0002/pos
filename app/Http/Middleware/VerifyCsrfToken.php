@@ -18,7 +18,6 @@ class VerifyCsrfToken extends Middleware
         'amarpay/*',
         'sslcommerz/*',
         'paypal/*',
-        'customer-register',
-        'login'
+        
     ];
 }
