@@ -116,7 +116,7 @@ class HomeController extends Controller
 
            // Filter by rating
            if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
-                $query->withAvg('review', 'rating') // eager load the average rating
+                $query->withAvg('reviews_info', 'rating') // eager load the average rating
                 ->havingRaw('COALESCE(review_avg_rating, 0) >= ?', [$request->rating_star]);
 
             }
@@ -416,18 +416,8 @@ class HomeController extends Controller
             'front_wishlist' => count(session('front_wishlist', []))
         ];
 
-            header('Content-Type: text/event-stream');
-            header('Cache-Control: no-cache');
-            header('Connection: keep-alive');
+        return json_encode($returned_data);
 
-
-
-
-            echo "data:" . json_encode($returned_data) . "\n\n";
-            echo "\n\n";
-
-            ob_flush();
-            flush();
     }
 
 

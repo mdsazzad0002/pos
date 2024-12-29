@@ -79,8 +79,8 @@ class  LeadSourceController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+
+
         $LeadSource = new LeadSource;
         $LeadSource->name = $request->name;
         $LeadSource->creator = auth()->user()->id ?? 0;

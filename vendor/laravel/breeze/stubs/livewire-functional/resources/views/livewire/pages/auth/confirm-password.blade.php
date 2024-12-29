@@ -18,7 +18,7 @@ $confirmPassword = function () {
     $this->validate();
 
     if (! Auth::guard('web')->validate([
-        'email' => Auth::user()->email,
+        'email' =>auth()->user()->email,
         'password' => $this->password,
     ])) {
         throw ValidationException::withMessages([

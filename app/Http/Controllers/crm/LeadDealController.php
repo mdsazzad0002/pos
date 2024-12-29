@@ -24,7 +24,7 @@ class   LeadDealController extends Controller
                             ->select('lead_deals.*', 'lead_accounts.name as account_name', 'lead_accounts.phone as account_phone', 'lead_accounts.email as account_email', 'lead_accounts.website as account_website','lead_accounts.address as account_address',  'lead_contacts.name as contacts_name', 'lead_contacts.email as contacts_email', 'lead_contacts.phone as contacts_phone', 'lead_deal_stages.name as stage_name' );
 
             return DataTables::of($query)
-               
+
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.LeadDeal.show', $row->id);
                     return "<button class='btn btn-primary '
@@ -160,7 +160,7 @@ class   LeadDealController extends Controller
                 'lead'=>'required',
                 'amount'=>'required | int',
             ]);
-            
+
             $LeadDeal->note = $request->note;
             $LeadDeal->amount = $request->amount;
             $LeadDeal->date = $request->date;

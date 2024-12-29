@@ -109,7 +109,7 @@ class vatController extends Controller
      */
     public function edit(vat $vat)
     {
-        
+
         return view('admin.vat.partials.create_edit', compact('vat'));
     }
 

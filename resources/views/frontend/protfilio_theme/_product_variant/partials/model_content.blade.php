@@ -1,10 +1,10 @@
 @php
     if(!isset($filter_page)){
-        $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter')->first();
+        $filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
     }
 
     if(!isset($cart_page)){
-        $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->first();
+        $cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
     }
 @endphp
 <div class="product_description_parents">
@@ -31,7 +31,7 @@
     <h6>Category:</h6>
     <p class="light-gray">
         @if (isset($filter_page))
-            <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $product->category_info->slug  }}">{{ $product->category_info->name }}</a>
+            <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $product->category_info->slug ?? '' }}">{{ $product->category_info->name ?? '' }}</a>
         @endif
 
         @foreach ($product->category_info->subcategories_info as $items) ,

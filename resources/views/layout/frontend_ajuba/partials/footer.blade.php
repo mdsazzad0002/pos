@@ -7,8 +7,8 @@
 
 
                         @php
-                            $services = \App\Models\service::where('status', 1)->get();
-                            $service__details_page = \App\Models\page::where('status', 1)->where('page_type', 'service_details')->first();
+                            $services = \App\Models\Service::where('status', 1)->get();
+                            $service__details_page = \App\Models\Page::where('status', 1)->where('page_type', 'service_details')->first();
                         @endphp
                         @if($service__details_page && count($services) > 0)
                             @foreach ($services as $key => $items)

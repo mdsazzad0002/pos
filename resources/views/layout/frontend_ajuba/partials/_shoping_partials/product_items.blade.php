@@ -1,7 +1,8 @@
 
 
 <ul class="product-list p-24">
-    @if(isset($product_cart) && $product_cart)
+
+    @if(isset($product_cart) && $product_cart && isset($product_cart->product))
         @foreach ($product_cart->product as $product)
 
                 <li class="product-item mb-24" data-id="{{ $product['product']->id ?? '' }}">

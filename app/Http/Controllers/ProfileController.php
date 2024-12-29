@@ -69,12 +69,12 @@ class ProfileController extends Controller
 
                 $request->user()->password = Hash::make($request->new);
                 $request->user()->save();
-                
+
                 return json_encode([
                     'title'=>'Successfully changed password',
                     'type'=>'success',
                     'refresh'=>'false',
-                    
+
                 ]);
             }else{
                 return json_encode([
@@ -82,7 +82,7 @@ class ProfileController extends Controller
                     'type'=>'error',
                     'refresh'=>'false',
                 ]);
-                
+
             }
 
         }else{

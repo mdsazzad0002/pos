@@ -1,7 +1,7 @@
 @if(isset($product))
 @php
     if(!isset($view_page)){
-        $view_page = \App\Models\page::where('page_type', 'view')->first();
+        $view_page = \App\Models\Page::where('page_type', 'view')->first();
     }
 
 @endphp

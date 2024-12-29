@@ -15,7 +15,7 @@ state([
 ]);
 
 $updateProfileInformation = function () {
-    $user = Auth::user();
+    $user =auth()->user();
 
     $validated = $this->validate([
         'name' => ['required', 'string', 'max:255'],
@@ -34,7 +34,7 @@ $updateProfileInformation = function () {
 };
 
 $sendVerification = function () {
-    $user = Auth::user();
+    $user =auth()->user();
 
     if ($user->hasVerifiedEmail()) {
         $this->redirectIntended(default: RouteServiceProvider::HOME);

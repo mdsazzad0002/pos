@@ -13,6 +13,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use IvanoMatteo\LaravelDeviceTracking\Traits\UseDevices;
+use App\Models\Device;
+
 
 class User extends Authenticatable
 {
@@ -61,7 +63,7 @@ class User extends Authenticatable
         return dynamic_asset($this->upload_id);
     }
     public function getLastActiveAttribute(){
-        $lastActiveDevice = device::where('creator', $this->id)->orderBy('last_activity', 'desc')->first();
+        $lastActiveDevice = Device::where('creator', $this->id)->orderBy('last_activity', 'desc')->first();
         if ($lastActiveDevice) {
             // Get the last activity time
             $lastActivityTime = Carbon::parse($lastActiveDevice->last_activity);

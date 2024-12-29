@@ -1,6 +1,6 @@
 @php
-    $checkout_page = \App\Models\page::where('status', 1)->where('page_type', 'checkout')->first();
-    $home_page = \App\Models\page::where('status', 1)->where('page_type', '')->first();
+    $checkout_page = \App\Models\Page::where('status', 1)->where('page_type', 'checkout')->first();
+    $home_page = \App\Models\Page::where('status', 1)->where('page_type', '')->first();
 
 @endphp
 <main class="main-wrapper bg-lightest-gray">

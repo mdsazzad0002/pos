@@ -85,21 +85,21 @@
 
 
 
+        setInterval(() => {
+ 
+            $.ajax({
+                type:'get',
+                url: "{{ url('cart_and_wishlist') }}",
+                success:function(data){
+                     data = JSON.parse(data);
 
-        // Initialize EventSource with the device ID load data current session
-        var eventsource = new EventSource("{{ url('cart_and_wishlist') }}");
+                    document.querySelector('.cart .items_added').innerHTML = data.front_product;
+                    document.querySelector('#sidebar-cart .cart_items').innerHTML = data.front_product;
+                }
+            })
+        }, 2500);
 
-        eventsource.onmessage = function(event) {
-            try {
-                let data = JSON.parse(event.data);
 
-                document.querySelector('.cart .items_added').innerHTML = data.front_product;
-                document.querySelector('#sidebar-cart .cart_items').innerHTML = data.front_product;
-
-            } catch (error) {
-                console.error('Error parsing message data:', error);
-            }
-        };
 
 
 
@@ -246,7 +246,7 @@
             $(thi).parents('.product_description_parents').find('.name_price_old span').html(quantity * inp_price_old);
 
             $(thi).parents('.product_description_parents').find('.price_discount span').html(calculateDiscount(inp_price_old,inp_price))
-         
+
 
         }
 

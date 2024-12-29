@@ -138,7 +138,7 @@ class amarpayController extends Controller
 
     public function fail(Request $request)
     {
-        
+
         $transection = TransectionInformation::where('mer_txnid', $request->mer_txnid)->first();
         if($transection){
             $transection->ip_address = $request->ip_address;

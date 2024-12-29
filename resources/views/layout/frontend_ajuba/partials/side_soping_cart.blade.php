@@ -1,7 +1,7 @@
 @php
 
-    $cart_page = \App\Models\page::where('page_type', 'cart')->first();
-    $checkout_page = \App\Models\page::where('page_type', 'checkout')->first();
+    $cart_page = \App\Models\Page::where('page_type', 'cart')->first();
+    $checkout_page = \App\Models\Page::where('page_type', 'checkout')->first();
 @endphp
 
 <aside id="sidebar-cart">

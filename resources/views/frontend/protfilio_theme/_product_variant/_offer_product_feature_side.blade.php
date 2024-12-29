@@ -1,5 +1,5 @@
 @php
-    $offer_event = \App\Models\offerbanner::where('type', 1)->first();
+    $offer_event = \App\Models\OfferBanner::where('type', 1)->first();
 @endphp
 
 <a href="{{ url($offer_event->link ?? '#') }}" class="main-card text-center"

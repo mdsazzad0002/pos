@@ -28,7 +28,7 @@ $updatePassword = function () {
         throw $e;
     }
 
-    Auth::user()->update([
+   auth()->user()->update([
         'password' => Hash::make($validated['password']),
     ]);
 

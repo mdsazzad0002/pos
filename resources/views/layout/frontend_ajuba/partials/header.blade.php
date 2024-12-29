@@ -1,11 +1,11 @@
 @php
-    $filter_page = \App\Models\page::where('page_type', 'filter')->first();
-    $view_page = \App\Models\page::where('page_type', 'view')->first();
-    $tracking_page = \App\Models\page::where('page_type', 'tracking')->first();
-    $contact_page = \App\Models\page::where('page_type', 'contact')->first();
-    $about_page = \App\Models\page::where('page_type', 'about')->first();
-    $register_page = \App\Models\page::where('page_type', 'register')->first();
-    $wishlist_page = \App\Models\page::where('page_type', 'wishlist')->first();
+    $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
+    $view_page = \App\Models\Page::where('page_type', 'view')->first();
+    $tracking_page = \App\Models\Page::where('page_type', 'tracking')->first();
+    $contact_page = \App\Models\Page::where('page_type', 'contact')->first();
+    $about_page = \App\Models\Page::where('page_type', 'about')->first();
+    $register_page = \App\Models\Page::where('page_type', 'register')->first();
+    $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
 @endphp
 
 @if($filter_page)

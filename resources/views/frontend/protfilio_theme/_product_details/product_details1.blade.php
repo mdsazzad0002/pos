@@ -6,8 +6,8 @@ if($request->has('slug')){
     echo 'product slug not found';
 }
 
-$filter_page = \App\Models\page::where('status', 1)->where('page_type', 'filter')->first();
-$cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->first();
+$filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
+$cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
 @endphp
 
 <main class="main-wrapper bg-lightest-gray">
@@ -342,7 +342,7 @@ $cart_page = \App\Models\page::where('status', 1)->where('page_type', 'cart')->f
              width: 60px;
         }
 
-        
+
 
     </style>
 @endpush

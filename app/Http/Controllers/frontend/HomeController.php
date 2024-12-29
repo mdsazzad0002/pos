@@ -97,7 +97,7 @@ class HomeController extends Controller
 
 
     public function quickview(Request $request){
-        $product = product::withCount('review')->withAvg('review', 'rating')->find($request->id);
+        $product = product::withCount('reviews_info')->withAvg('reviews_info', 'rating')->find($request->id);
         if($product){
             $upload_id = $product->upload_id;
             $image_view = view('frontend.product.partials.model_image', compact('upload_id'))->render();

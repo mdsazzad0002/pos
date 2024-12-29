@@ -1,10 +1,10 @@
 @php
     if(!isset($sales_privacy_page)){
-        $sales_privacy_page = \App\Models\page::where('page_type', 'sales_privacy')->first();
+        $sales_privacy_page = \App\Models\Page::where('page_type', 'sales_privacy')->first();
     }
 
     if(!isset($sales_condition_page)){
-        $sales_condition_page = \App\Models\page::where('page_type', 'sales_condition')->first();
+        $sales_condition_page = \App\Models\Page::where('page_type', 'sales_condition')->first();
     }
     if(!isset($lead_sources)){
         $lead_sources = \App\Models\crm\LeadSource::get();

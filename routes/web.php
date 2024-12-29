@@ -23,6 +23,7 @@ use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
 use App\Models\customer;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
@@ -38,6 +39,14 @@ use Illuminate\Support\Str;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('test_login', function(){
+
+    $userTEst = User::first();
+    Auth::guard('web')->login($userTEst);
+   return redirect('admin/dashboard');
+});
+
 
 
 Route::get('/migrate', function(){

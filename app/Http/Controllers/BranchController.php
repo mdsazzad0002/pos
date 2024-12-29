@@ -111,7 +111,7 @@ class BranchController extends Controller
     {
         $request->validate(['name'=> 'required', 'location'=> 'required']);
 
-        
+
         $branch->name = $request->name;
         $branch->status = $request->status;
         $branch->creator = auth()->user()->id ?? 0;

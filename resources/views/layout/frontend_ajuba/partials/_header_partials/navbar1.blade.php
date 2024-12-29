@@ -2,8 +2,8 @@
     <nav class="navigation d-flex align-items-center justify-content-between">
         @php
             $menu_items = \App\Models\header::where('status', 1)->orderBy('order', 'asc')->get()->groupBy('position');
-            $filter_page = \App\Models\page::where('page_type', 'filter')->first();
-            $view_page = \App\Models\page::where('page_type', 'view')->first();
+            $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
+            $view_page = \App\Models\Page::where('page_type', 'view')->first();
         @endphp
 
         <!-- Categories Dropdown -->

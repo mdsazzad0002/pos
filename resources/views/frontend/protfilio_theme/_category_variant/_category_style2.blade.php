@@ -4,7 +4,7 @@
     }else{
         $category_list = \App\Models\category::where('status', 1)->limit($variant_info->items_show)->get();
     }
-    $filter_page = \App\Models\page::where('page_type', 'filter')->first();
+    $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
 @endphp
 
 
