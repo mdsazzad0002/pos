@@ -36,30 +36,6 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::middleware('web')
-                ->group(base_path('routes/crm.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/language.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/mail.php'));
-
-                Route::middleware('web')
-                    ->group(base_path('routes/admin.php'));
-
-
-            // Portfolio Theme
-
-
-            Route::middleware('web','auth')
-                ->name('admin.')
-                ->prefix('admin')
-                ->group(base_path('routes/protfilio_theme/admin.php'));
-
-
-            Route::middleware('web')
-                ->group(base_path('routes/protfilio_theme/web.php'));
 
         });
     }
