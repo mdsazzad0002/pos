@@ -17,12 +17,16 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="input-group">
-                            <select  name="supplierID" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.supplier.select') }}" id="">
-                                <option value="">-- supplier -- </option>
-                            </select>
-                            @can('user create')
-
-                            <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">+</button>
+                                 <select  name="supplierID" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.supplier.select') }}" id="">
+                                    <option value="">-- supplier -- </option>
+                                </select>
+                         
+                            @can('supplier create')
+                            <div class="input-group-append">
+                                 <button class="btn btn-primary input-group-append" onclick="button_ajax(this)" data-title="Add New  supplier" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-href="{{ route('admin.supplier.create') }}">
+                                    <span>+</span>
+                                </button>
+                            </div>
                             @endcan
 
                         </div>

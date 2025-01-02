@@ -57,9 +57,13 @@
             margin-bottom: 20px;
         }
 
-        .supplier-info .left,
+        .supplier-info .left, {
+            width: 45%;
+        }
+
         .supplier-info .right {
-            width: 48%;
+            width:55%;
+            justify-content:space-between;
         }
 
         .supplier-info p {
@@ -131,14 +135,14 @@
     <div class="invoice-container">
         <!-- Header -->
         <header class="invoice-header">
-            <div style="display: flex; justify-content:space-evenly">
+            <div style="display: flex; justify-content:space-evenly; align-items:center;">
                 <div class="breadcrumb" style="line-height:0.5">
-                    <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="" style="height: 44px; width:84px">
+                    <img src="{{ settings('app_image', 9) }}" alt="" style="height: 80px;">
                 </div>
                 <div class="breadcrumb" style="line-height:0.5">
-                    <h2>BD SOFT</h2>
-                    <p>Mirput 10 Dhaka 1216</p>
-                    <p>01715-4263541</p>
+                    <h2>{{settings('app_title', 9)}}</h2>
+                    <p>{{settings('address', 9)}}</p>
+                    <p>{{settings('app_tel', 9)}}</p>
                 </div>
             </div>
             <hr>
@@ -154,10 +158,40 @@
                 <p><strong>Supplier Address:</strong>{{ $purchase[0]->supplier->areaItem->name }}</p>
                 <p><strong>Supplier Mobile:</strong>{{ $purchase[0]->supplier->phone }}</p>
             </div>
-            <div class="right">
-                <p><strong>Purchase by:</strong>{{ $purchase[0]->user->name }}</p>
-                <p><strong>Invoice No.:</strong>{{ $purchase[0]->productId }}</p>
-                <p><strong>Purchase Date:</strong>{{ $purchase[0]->buying_date }}</p>
+            <div class="right" style="display:flex;">
+                <div>
+                    <p><strong>Purchase by:</strong>{{ $purchase[0]->user->name }}</p>
+                    <p><strong>Invoice No.:</strong>{{ $purchase[0]->productId }}</p>
+                    <p><strong>Purchase Date:</strong>{{ $purchase[0]->buying_date }}</p>
+                </div>
+                <div>
+                    <div  style="
+                    text-align:center; 
+                    display:flex;
+                    align-items:center;
+                    flex-direction:column;
+                    
+                    ">
+                        <div style=" border: 1px solid #cfcfcf; border-radius:5px;">
+        
+                            {!! $data!!}
+                            <span style="
+                                border: 1px solid #cfcfcf;
+                                display: block;
+                                border-bottom: none;
+                                border-left: none;
+                                border-right: none;
+                                background: #e5e5e5;
+                                padding: 2px 0px;
+                                color: #07336d;
+                                font-weight: 700;
+                            ">Scan & View</span>
+                        </div>
+                    
+                     
+                    </div>
+                </div>
+            
             </div>
         </section>
 
@@ -188,8 +222,8 @@
                         <td>{{ $item->product->name }}</td>
                         <td>{{ $item->quantity }}</td>
                         <td>{{ $item->unit->name }}</td>
-                        <td>{{ $item->price }}</td>
-                        <td>{{ $item->total }}</td>
+                        <td> &nbsp;{{settings('currency_symbol',9)}} &nbsp; {{ $item->price }}</td>
+                        <td> &nbsp;{{settings('currency_symbol',9)}} &nbsp; {{ $item->total }}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -198,34 +232,30 @@
 
         <!-- Invoice Summary -->
         <section class="summary">
-            @php
-                
-            @endphp
-            <div class="left">
-                <p><strong>Previous Due:</strong> 4253100</p>
-                <p><strong>Current Due:</strong>{{  $totalPrice }}</p>
-                <p><strong>Total Due:</strong> 4277130.00</p>
+
+            <div class="left" >
+               
             </div>
             <div class="right">
-                <p><strong>Sub Total:</strong> {{  $totalPrice }}</p>
-                {{-- <p><strong>VAT:</strong> 0.00</p>
-                <p><strong>Discount:</strong> 0.00</p>
-                <p><strong>Transport Cost:</strong> 0.00</p> --}}
-                {{-- <p><strong>Total:</strong> 24030.00</p>
-                <p><strong>Paid:</strong> 0.00</p>
-                <p><strong>Due:</strong> 24030.00</p> --}}
+                <p><strong>Sub Total:</strong>  &nbsp;{{settings('currency_symbol',9)}} &nbsp;{{  $totalPrice }}</p>
+                <p><strong>In Word : </strong>{{ Str::title(numToWordsRec($totalPrice)) }} ({{settings('currency_symbol',9)}})</p>
+
+                <p><strong>Current Due:</strong> &nbsp;{{settings('currency_symbol',9)}} {{
+                    (($previous_due != null) ? $previous_due->total_sum : 0) - (($supplier_payment != null) ?  $supplier_payment->payment : 0) + (($supplier_refund != null) ?  $supplier_refund->payment : 0)
+                    }}</p>
+                <p>
+                    
             </div>
         </section>
+      
 
 
         <!-- Footer -->
         <section class="footer">
-                <p><strong>In Word : </strong>{{ Str::title(numToWordsRec($totalPrice)) }}</p>
+            <div style="text-align: center">
                 <p><strong>Note:</strong> Thank you for your business.</p>
-<div style="text-align: center">
-    <button onclick="window.print()" class="print-button">Print</button>
-
-</div>
+                <button onclick="window.print()" class="print-button">Print</button>
+            </div>
         </section>
 
     </div>

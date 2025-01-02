@@ -6,10 +6,12 @@
     <input type="text" name="phone" class="form-control mb-2" placeholder="Enter supplier phone">
     <input type="text" name="location" class="form-control mb-2" placeholder="Enter supplier location">
    <div class="input-group">
-       <select  name="area" required class="form-control select2 input-group-prepend" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
+       <select  name="area" required class="form-control select2 input-group" data-ajax="true" data-url="{{ route('admin.area.select') }}" id="">
            <option value="">-- area -- </option>
        </select>
-       <a target="_blank" href="{{ route('admin.area.index') }}" class="btn btn-priamry">+</a>
+    <div class="input-group-append">
+        <a target="_blank" href="{{ route('admin.area.index') }}" class="btn btn-primary">+</a>
+    </div>
 
    </div>
     <div class="">

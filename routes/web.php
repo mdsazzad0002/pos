@@ -17,7 +17,7 @@ use App\Http\Controllers\vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
-use App\Models\customer;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\protfilio_theme\ClientController;
@@ -43,7 +43,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CashCounterController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CommisionAgentController;
-use App\Http\Controllers\discountController;
+use App\Http\Controllers\DiscountController as discountController;
 use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\payment\PaymentCredentialController;
@@ -100,8 +100,6 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 
 
 
-
-
 Route::get('bdcouriertracking', [trackingController::class, 'tracking'])->name('tracking');
 Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
 Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCredentialController::class, 'update'])->name('admin.settings.courier-configration.update');
@@ -118,7 +116,6 @@ Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCred
 
 // Web Route
 Route::get('test_login', function(){
-
     $userTEst = User::first();
     Auth::guard('web')->login($userTEst);
    return redirect('admin/dashboard');
@@ -247,6 +244,28 @@ Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
 
 
 // end Web route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -394,10 +413,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/subcategory/subcategory/get', [SubCategoryController::class, 'getsubcategory'])->name('subcategory.select');
 
 
-        // Area management
-        Route::resource('/area', AreaController::class)->names('area');
-        Route::get('/area/delete/{area}', [AreaController::class, 'delete'])->name('area.delete');
-        Route::get('/area/getArea/get', [AreaController::class, 'getAreas'])->name('area.select');
+
 
         // Vat management
         Route::resource('/vat', vatController::class)->names('vat');
@@ -417,37 +433,15 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/brand/delete/{brand}', [BrandController::class, 'delete'])->name('brand.delete');
         Route::get('/brand/getBrands/get', [BrandController::class, 'getBrands'])->name('brand.select');
 
-        // supplier management
-        Route::resource('/supplier', SupplierController::class)->names('supplier');
-        Route::get('/supplier/delete/{supplier}', [SupplierController::class, 'delete'])->name('supplier.delete');
-        Route::get('/supplier/getSupplier/get', [SupplierController::class, 'getSupplier'])->name('supplier.select');
-
-        // supplier management
-        Route::resource('/customer', CustomerController::class)->names('customer');
-        Route::get('/customer/delete/{customer}', [CustomerController::class, 'delete'])->name('customer.delete');
-        Route::get('/customer/getCustomer/get', [CustomerController::class, 'getCustomer'])->name('customer.select');
 
         //  management
         Route::resource('/unit', UnitController::class)->names('unit');
         Route::get('/unit/delete/{unit}', [UnitController::class, 'delete'])->name('unit.delete');
         Route::get('/unit/getUnit/get', [UnitController::class, 'getUnit'])->name('unit.select');
 
-        //  product
-        Route::resource('/product', ProductController::class)->names('product');
-        Route::get('/product/delete/{product}', [ProductController::class, 'delete'])->name('product.delete');
-        Route::get('/product/getProduct/get', [ProductController::class, 'getProduct'])->name('product.select');
-        Route::get('/product/single_filter/get', [ProductController::class, 'single_filter'])->name('product.single_filter');
-        Route::get('/product/productByID/{product}', [ProductController::class, 'productByID'])->name('product.productByID');
-        Route::get('/product/barcode/{id}', [ProductController::class, 'barcode'])->name('product.barcode');
 
 
-        //  purchase
-        Route::resource('/purchase', PurchaseController::class)->names('purchase');
-        Route::get('/purchase/delete/{purchase}', [PurchaseController::class, 'delete'])->name('purchase.delete');
-        Route::get('/purchase/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('purchase.select');
-        Route::get('/purchase/filter_purchase/get', [PurchaseController::class, 'filterPurchase'])->name('product.filter_purchase');
-            // purchase report
-            Route::get('/purchase/single/purchase_report', [PurchaseController::class, 'report_single'])->name('purchase.report_single');
+
 
 
         //  purchase
@@ -630,13 +624,7 @@ Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
 
 // Route::get('/', [HomeController::class, 'index']);
 // Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
-Route::get('/product/quickview', [HomeController::class, 'quickview'])->name('product.quickview');
 
-// feature product view for homepage
-Route::get('/product/feature_view', [HomeController::class, 'feature_view'])->name('product.feature_view');
-Route::get('/product/popular_view', [HomeController::class, 'popular_view'])->name('product.popular_view');
-Route::get('/product/recommend_view', [HomeController::class, 'recommend_view'])->name('product.recommend_view');
-Route::get('/product/recent_view', [HomeController::class, 'recent_view'])->name('product.recent_view');
 
 
 Route::get('/about', [HomeController::class, 'about']);
@@ -665,10 +653,107 @@ Route::resource('review', ReviewProductController::class)->names('review');
 
 
 
-// User Defined Route Web So Check Route not exists
-Route::get('{view}', [HomeController::class, 'index'])->name('home')->where('view', '^.*');
 
+
+// Product management
+Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
+    // frontend
+    Route::get('/feature_view', [HomeController::class, 'feature_view'])->name('feature_view');
+    Route::get('/popular_view', [HomeController::class, 'popular_view'])->name('popular_view');
+    Route::get('/recommend_view', [HomeController::class, 'recommend_view'])->name('recommend_view');
+    Route::get('/recent_view', [HomeController::class, 'recent_view'])->name('recent_view');
+    Route::get('/quickview', [HomeController::class, 'quickview'])->name('quickview');
+});
+
+
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Admin
+    Route::resource('/product', ProductController::class)->names('product'); // Use an empty string here
+
+    Route::group(['as' => 'product.', 'prefix' => 'product'], function() {
+        Route::get('/delete/{product}', [ProductController::class, 'delete'])->name('delete');
+        Route::get('/getProduct/get', [ProductController::class, 'getProduct'])->name('select');
+        Route::get('/single_filter/get', [ProductController::class, 'single_filter'])->name('single_filter');
+        Route::get('/productByID/{product}', [ProductController::class, 'productByID'])->name('productByID');
+        Route::get('/barcode/{id}', [ProductController::class, 'barcode'])->name('barcode');
+        Route::get('/filter_purchase/get', [ProductController::class, 'filterPurchase'])->name('filter_purchase');
+     
+    });
+});
+// End product Management
+
+
+
+// Area Management
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Admin
+    Route::resource('/area', AreaController::class)->names('area');
+
+    Route::group(['as' => 'area.', 'prefix' => 'supplier'], function() {
+        Route::get('/delete/{area}', [AreaController::class, 'delete'])->name('delete');
+        Route::get('/getArea/get', [AreaController::class, 'getAreas'])->name('select');
+    });
+});
+// End Area Management
+
+
+
+// Purchase Management
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Admin
+    Route::resource('/purchase', PurchaseController::class)->names('purchase');
+
+    Route::group(['as' => 'purchase.', 'prefix' => 'purchase'], function() {
+        Route::get('/delete/{purchase}', [PurchaseController::class, 'delete'])->name('delete');
+        Route::get('/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('select');
+        Route::get('/single/purchase_report', [PurchaseController::class, 'report_single'])->name('report_single');
+    });    
+});
+// End Purchase Management
+
+
+
+
+
+
+// Supplier Management
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Admin
+    Route::resource('/supplier', SupplierController::class)->names('supplier');
+
+    Route::group(['as' => 'supplier.', 'prefix' => 'supplier'], function() {
+        Route::get('/delete/{supplier}', [SupplierController::class, 'delete'])->name('delete');
+        Route::get('/getSupplier/get', [SupplierController::class, 'getSupplier'])->name('select');
+    });
+});
+// End Supplier Management
+
+
+
+
+// Customer Management
+// Admin
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    Route::resource('/customer', CustomerController::class)->names('customer');
+
+    Route::group(['as' => 'customer.', 'prefix' => 'customer'], function() {
+        Route::get('/delete/{customer}', [CustomerController::class, 'delete'])->name('delete');
+        Route::get('/getCustomer/get', [CustomerController::class, 'getCustomer'])->name('select');
+    });
+
+});
+// End Customer Management
+
+
+
+
+// User Defined Route Web So Check Route not exists
+Route::get('{view}', [HomeController::class, 'index'])->name('home')-> where('view', '^(?!admin).*');
 // end protflio_web_theme
+
+
+
+
 
 
 

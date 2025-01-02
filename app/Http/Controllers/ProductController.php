@@ -309,4 +309,22 @@ class ProductController extends Controller
         $products = product::findOrFail($id);
         return view('admin.product.barcode',compact('products'));
     }
+
+
+    public function filterPurchase (Request $request)
+    {
+        $data_result = product::with('unit_info','units_info','variant_option_info')
+        ->whereNot('unit', null)
+        ->where('service', 0)
+        ->where(function($query) use ($request) {
+            if ($request->has('q')) {
+                $keyword =  $request->q;
+                $query->where('name', 'LIKE', "%$keyword%");
+            }
+        })->limit(10)->get();
+
+        return json_encode($data_result);
+
+    }
+
 }

@@ -8,11 +8,11 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        Supplier
         <div>
-            @can('user create')
+            @can('supplier create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)"  data-dialog=" modal-dialog-scrollable modal-dialog-centered"data-title="Add New  supplier" data-href="{{ route('admin.supplier.create') }}">+ Add New supplier</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)"  data-dialog=" modal-dialog-scrollable modal-dialog-centered"data-title="Add New  supplier" data-href="{{ route('admin.supplier.create') }}"><span class="btn_grouped">+</span> Add New</button>
             @endcan
         </div>
     </div>

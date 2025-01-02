@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\unit;
 use App\Models\product;
+use App\Models\supplierPayment;
 use App\Models\purchase;
 use Illuminate\Http\Request;
 use App\Models\VariantOption;
 use Yajra\DataTables\DataTables;
+
+
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
+use Barryvdh\DomPDF\Facade as PDF;
+
+
 
 class PurchaseController extends Controller
 {
@@ -211,30 +219,48 @@ class PurchaseController extends Controller
     }
 
 
-    public function filterPurchase (Request $request)
-    {
-        $data_result = product::with('unit_info','units_info','variant_option_info')
-        ->whereNot('unit', null)
-        ->where('service', 0)
-        ->where(function($query) use ($request) {
-            if ($request->has('q')) {
-                $keyword =  $request->q;
-                $query->where('name', 'LIKE', "%$keyword%");
-            }
-        })->limit(10)->get();
-
-        return json_encode($data_result);
-
-    }
-
+ 
 
 
 
     public function report_single(Request  $request){
+        
 
         $purchase = purchase::with('product', 'unit', 'supplier', 'user', 'variant')->where('purchase_id', $request->purchase_id)->get();
-        return view('admin.purchase.partials.print', compact('purchase'));
-        // return $purchase;
+        if(count($purchase) > 0){
+             $purchase_first_column =  $purchase->first();
+             $supplier = $purchase_first_column->supplier;
+             $previous_due = Purchase::where('supplierId',  $supplier->id)
+                         ->selectRaw('SUM(total) as total_sum')
+                         ->first();
 
+             $supplier_payment = supplierPayment::where('supplier_id', $supplier->id)
+                                ->where('status', 1)
+                                ->selectRaw('SUM(amount) as payment')
+                                ->first();
+
+             $supplier_refund = supplierPayment::where('supplier_id', $supplier->id)
+                                ->where('status', 2)
+                                ->selectRaw('SUM(amount) as payment')
+                                ->first();
+
+             $current_url = url()->current();
+            $qrCode = new QrCode($current_url);
+            
+            // // Echo an HTML table
+            $output = new Output\Html();
+            $data = $output->output($qrCode);
+            
+            if($request->has('pdf')){
+                $pdf = PDF::loadView('admin.purchase.partials.print', compact('purchase', 'previous_due', 'supplier_payment', 'supplier_refund', 'data'));
+                return $pdf->download('invoice-'.Str::slug($supplier).'.pdf');
+            }else{
+                return view('admin.purchase.partials.print', compact('purchase', 'previous_due', 'supplier_payment', 'supplier_refund', 'data'));
+            }
+
+
+        }else{
+            return 'Something is wrong';
+        }
     }
 }

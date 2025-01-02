@@ -140,6 +140,7 @@ class enSeeder extends Seeder
             'sidebar.subcategory' =>'SubCategory',
             'sidebar.area' =>'Area',
             'visit.webiste' =>'Visit Website',
+            'area.name' =>'Area',
 
 
 

@@ -147,6 +147,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
         'M' => 
         array (
+            'Mpdf\\QrCode\\' => 12,
             'Mpdf\\PsrLogAwareTrait\\' => 22,
             'Mpdf\\PsrHttpMessageShim\\' => 24,
             'Mpdf\\' => 5,
@@ -225,6 +226,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             'Brick\\Math\\' => 11,
             'Base64Url\\' => 10,
+            'Barryvdh\\DomPDF\\' => 16,
             'Barryvdh\\Debugbar\\' => 18,
         ),
         'A' => 
@@ -493,6 +495,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
+        'Mpdf\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/qrcode/src',
+        ),
         'Mpdf\\PsrLogAwareTrait\\' => 
         array (
             0 => __DIR__ . '/..' . '/mpdf/psr-log-aware-trait/src',
@@ -701,6 +707,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             0 => __DIR__ . '/..' . '/spomky-labs/base64url/src',
         ),
+        'Barryvdh\\DomPDF\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
+        ),
         'Barryvdh\\Debugbar\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
@@ -752,6 +762,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CouponController' => __DIR__ . '/../..' . '/app/Http/Controllers/CouponController.php',
         'App\\Http\\Controllers\\CustomerController' => __DIR__ . '/../..' . '/app/Http/Controllers/CustomerController.php',
+        'App\\Http\\Controllers\\DiscountController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiscountController.php',
         'App\\Http\\Controllers\\ExpenseController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExpenseController.php',
         'App\\Http\\Controllers\\ExprienceController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExprienceController.php',
         'App\\Http\\Controllers\\FeaturesController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeaturesController.php',
@@ -763,6 +774,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\OrderStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderStatusController.php',
         'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\PaymentMethodController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentMethodController.php',
+        'App\\Http\\Controllers\\PdfController' => __DIR__ . '/../..' . '/app/Http/Controllers/PdfController.php',
         'App\\Http\\Controllers\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermissionController.php',
         'App\\Http\\Controllers\\PosController' => __DIR__ . '/../..' . '/app/Http/Controllers/PosController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
@@ -780,6 +792,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Controllers\\StockManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/StockManagementController.php',
         'App\\Http\\Controllers\\SubCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubCategoryController.php',
         'App\\Http\\Controllers\\SupplierController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupplierController.php',
+        'App\\Http\\Controllers\\SupplierPaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupplierPaymentController.php',
         'App\\Http\\Controllers\\SupplierTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupplierTypeController.php',
         'App\\Http\\Controllers\\TransectionInformationController' => __DIR__ . '/../..' . '/app/Http/Controllers/TransectionInformationController.php',
         'App\\Http\\Controllers\\UnitController' => __DIR__ . '/../..' . '/app/Http/Controllers/UnitController.php',
@@ -915,6 +928,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Models\\social_contact' => __DIR__ . '/../..' . '/app/Models/social_contact.php',
         'App\\Models\\specialEvent' => __DIR__ . '/../..' . '/app/Models/specialEvent.php',
         'App\\Models\\supplier' => __DIR__ . '/../..' . '/app/Models/supplier.php',
+        'App\\Models\\supplierPayment' => __DIR__ . '/../..' . '/app/Models/supplierPayment.php',
         'App\\Models\\supplierType' => __DIR__ . '/../..' . '/app/Models/supplierType.php',
         'App\\Models\\unit' => __DIR__ . '/../..' . '/app/Models/unit.php',
         'App\\Models\\upload' => __DIR__ . '/../..' . '/app/Models/upload.php',
@@ -973,6 +987,9 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Barryvdh\\Debugbar\\Twig\\Extension\\Debug' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Twig/Extension/Debug.php',
         'Barryvdh\\Debugbar\\Twig\\Extension\\Dump' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Twig/Extension/Dump.php',
         'Barryvdh\\Debugbar\\Twig\\Extension\\Stopwatch' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Twig/Extension/Stopwatch.php',
+        'Barryvdh\\DomPDF\\Facade\\Pdf' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade/Pdf.php',
+        'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
+        'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
         'Base64Url\\Base64Url' => __DIR__ . '/..' . '/spomky-labs/base64url/src/Base64Url.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
@@ -1126,6 +1143,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Database\\Seeders\\SocialContactSeeder' => __DIR__ . '/../..' . '/database/seeders/SocialContactSeeder.php',
         'Database\\Seeders\\SpecialEventSeeder' => __DIR__ . '/../..' . '/database/seeders/SpecialEventSeeder.php',
         'Database\\Seeders\\SubCategorySeeder' => __DIR__ . '/../..' . '/database/seeders/SubCategorySeeder.php',
+        'Database\\Seeders\\SupplierPaymentSeeder' => __DIR__ . '/../..' . '/database/seeders/SupplierPaymentSeeder.php',
         'Database\\Seeders\\SupplierTypeSeeder' => __DIR__ . '/../..' . '/database/seeders/SupplierTypeSeeder.php',
         'Database\\Seeders\\TestimonialSeeder' => __DIR__ . '/../..' . '/database/seeders/TestimonialSeeder.php',
         'Database\\Seeders\\VatSeeder' => __DIR__ . '/../..' . '/database/seeders/VatSeeder.php',
@@ -4934,6 +4952,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Mpdf\\PsrHttpMessageShim\\Uri' => __DIR__ . '/..' . '/mpdf/psr-http-message-shim/src/Uri.php',
         'Mpdf\\PsrLogAwareTrait\\MpdfPsrLogAwareTrait' => __DIR__ . '/..' . '/mpdf/psr-log-aware-trait/src/MpdfPsrLogAwareTrait.php',
         'Mpdf\\PsrLogAwareTrait\\PsrLogAwareTrait' => __DIR__ . '/..' . '/mpdf/psr-log-aware-trait/src/PsrLogAwareTrait.php',
+        'Mpdf\\QrCode\\Output\\Html' => __DIR__ . '/..' . '/mpdf/qrcode/src/Output/Html.php',
+        'Mpdf\\QrCode\\Output\\Mpdf' => __DIR__ . '/..' . '/mpdf/qrcode/src/Output/Mpdf.php',
+        'Mpdf\\QrCode\\Output\\Png' => __DIR__ . '/..' . '/mpdf/qrcode/src/Output/Png.php',
+        'Mpdf\\QrCode\\Output\\Svg' => __DIR__ . '/..' . '/mpdf/qrcode/src/Output/Svg.php',
+        'Mpdf\\QrCode\\QrCode' => __DIR__ . '/..' . '/mpdf/qrcode/src/QrCode.php',
+        'Mpdf\\QrCode\\QrCodeException' => __DIR__ . '/..' . '/mpdf/qrcode/src/QrCodeException.php',
         'Mpdf\\ServiceFactory' => __DIR__ . '/..' . '/mpdf/mpdf/src/ServiceFactory.php',
         'Mpdf\\Shaper\\Indic' => __DIR__ . '/..' . '/mpdf/mpdf/src/Shaper/Indic.php',
         'Mpdf\\Shaper\\Myanmar' => __DIR__ . '/..' . '/mpdf/mpdf/src/Shaper/Myanmar.php',

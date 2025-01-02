@@ -111,4 +111,21 @@
     height: 27px;
     margin: auto 0;
 }
+.btn:has(span.btn_grouped){
+    padding:0px 7px 0 0;
+    overflow:hidden;
+    border:none
+
+}
+
+.btn span.btn_grouped{
+    padding:7px 10px;
+    margin-right:4px;
+    display:inline-block;
+    background:#000000ad;
+}
+
+.btn:has(span.btn_grouped):hover span.btn_grouped{
+        background:#000000c7;
+}
 </style>
