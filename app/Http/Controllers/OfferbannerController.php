@@ -66,7 +66,8 @@ class OfferbannerController extends Controller
      */
     public function create()
     {
-        return view('admin.offerbanner.partials.create');
+        $offerbanner = null;
+        return view('admin.offerbanner.partials.create', compact('offerbanner'));
     }
 
     /**
@@ -75,33 +76,12 @@ class OfferbannerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'area' => 'required |integer'
+            // 'area' => 'required |integer'
         ]);
-        $offerbanner = new offerbanner;
-        $offerbanner->name = $request->name;
-        $offerbanner->email = $request->email;
-        $offerbanner->phone = $request->phone;
-        $offerbanner->location = $request->location;
-        $offerbanner->area = $request->area;
-        $offerbanner->prev_due = $request->prev_due;
 
-        $offerbanner->shop_phone = $request->shop_phone;
-        $offerbanner->shop_address = $request->shop_address;
-        $offerbanner->shop_name = $request->shop_name;
-
-        $offerbanner->upload_id =$request->image ?? 0;
-
-
-        $offerbanner->creator = auth()->user()->id ?? 0;
-
-        $offerbanner->save();
-
-
-        return json_encode([
-            'title'=>'Successfully  Created offerbanner',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+        $request['store_date'] = true;
+         return  $this->update($request);
+       
     }
 
     /**
@@ -109,6 +89,7 @@ class OfferbannerController extends Controller
      */
     public function show(offerbanner $offerbanner)
     {
+
         return view('admin.offerbanner.partials.view', compact('offerbanner'));
     }
 
@@ -117,37 +98,51 @@ class OfferbannerController extends Controller
      */
     public function edit(offerbanner $offerbanner)
     {
-        return view('admin.offerbanner.partials.edit', compact('offerbanner'));
+        return view('admin.offerbanner.partials.create', compact('offerbanner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, offerbanner $offerbanner)
+    public function update(Request $request,  $offerbanner = null)
     {
         $request->validate([
-            'area' => 'required|integer'
+            'title' => 'required',
+            'subtitle' => 'nullable',
+            'type' => 'required',
         ]);
-        $offerbanner->name = $request->name;
-        $offerbanner->email = $request->email;
-        $offerbanner->phone = $request->phone;
-        $offerbanner->location = $request->location;
-        $offerbanner->area = $request->area;
-        $offerbanner->prev_due = $request->prev_due;
 
-        $offerbanner->shop_phone = $request->shop_phone;
-        $offerbanner->shop_address = $request->shop_address;
-        $offerbanner->shop_name = $request->shop_name;
+        if($offerbanner != null){
+            $offerbanner = offerbanner::find($offerbanner);
+        }else{
+            $offerbanner = new offerbanner();
 
-        $offerbanner->creator = auth()->user()->id ?? 0;
-        $offerbanner->upload_id =$request->image ?? 0;
+        }
+
+
+        $offerbanner->title = $request->title;
+        $offerbanner->subtitle = $request->subtitle;
+        $offerbanner->image1 = $request->image1;
+        $offerbanner->image2 = $request->image2;
+        $offerbanner->image3 = $request->image3;
+        $offerbanner->status = $request->status ?? 0;
+
+        $offerbanner->type = $request->type; //  1 => feature card 2 => full banner 3 => countdown
         $offerbanner->save();
 
-        return json_encode([
-            'title'=>'Successfully  Updated offerbanner',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+        if($request->has('store_date')){
+            return json_encode([
+                'title'=>'Successfully  Created offerbanner',
+                'type'=>'success',
+                'refresh'=>'true',
+            ]);
+        }else{
+            return json_encode([
+                'title'=>'Successfully  Updated offerbanner',
+                'type'=>'success',
+                'refresh'=>'true',
+            ]);
+        }
     }
 
     public function delete(offerbanner $offerbanner){

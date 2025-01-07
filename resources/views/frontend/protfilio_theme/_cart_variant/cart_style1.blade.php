@@ -2,6 +2,11 @@
     $checkout_page = \App\Models\Page::where('status', 1)->where('page_type', 'checkout')->first();
     $home_page = \App\Models\Page::where('status', 1)->where('page_type', '')->first();
 
+    if(!isset($view_page)){
+        $view_page = \App\Models\Page::where('page_type', 'view')->first();
+    }
+
+
 @endphp
 <main class="main-wrapper bg-lightest-gray">
 
@@ -32,111 +37,9 @@
 
                             </tbody>
                         </table>
-                        {{-- <table class="cart-table">
-                            <tbody>
-                                <tr class="table-row">
-                                    <td class="pd">
-                                        <div class="product-detail-box">
-                                            <div class="cus-checkBox">
-                                                <input type="checkbox" id="box2">
-                                                <label for="box2" class="light-gray"></label>
-                                            </div>
-                                            <a href="" class="h5 dark-black"><i class="fal fa-times"></i></a>
-                                            <div class="img-block">
-                                                <a href="shop-grid-2.html"><img src="assets/media/images/cart-image-2.png" alt=""></a>
-                                            </div>
-                                            <div class="d-block text-start">
-                                                <h6><a href="shop-grid-2.html">Samsung S21 Ultra</a></h6>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="fw-500"> $15.00</p>
-                                    </td>
-                                    <td>
-                                        <div class="quantity-controller quantity-wrap">
-                                            <input class="decrement" type="button" value="-">
-                                            <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                                class="number">
-                                            <input class="increment" type="button" value="+">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <p class="fw-500">$15.00</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> --}}
-
+               
                     </div>
-                    {{-- <div class="d-lg-none d-block">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="cart-item-block mb-32">
-                                    <div class="img-block mb-16">
-                                        <a href="product-detail-1.html"><img src="assets/media/images/cart-image-1.png" alt=""></a>
-                                        <a href="" class="cross"><i class="fal fa-times"></i></a>
-                                    </div>
-                                    <h6 class="mb-24">Gaming Headphone</h6>
-                                    <ul class="unstyled detail">
-                                        <li>
-                                            <h6 class="">Price</h6>
-                                            <h6 class="">$85.00</h6>
-                                        </li>
-
-                                        <li>
-                                            <h6 class="">Quantity</h6>
-                                            <div class="quantity-controller quantity-wrap">
-                                                <input class="decrement" type="button" value="-">
-                                                <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                                    class="number">
-                                                <input class="increment" type="button" value="+">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h6 class="">Subtotal</h6>
-                                            <h6 class="">$85.00</h6>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html" class="cus-btn active-btn">Add to Cart</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="cart-item-block mb-32">
-                                    <div class="img-block mb-16">
-                                        <a href="product-detail-1.html"><img src="assets/media/images/cart-image-2.png" alt=""></a>
-                                        <a href="" class="cross"><i class="fal fa-times"></i></a>
-                                    </div>
-                                    <h6 class="mb-24">Samsung S21 Ultra</h6>
-                                    <ul class="unstyled detail">
-                                        <li>
-                                            <h6 class="">Price</h6>
-                                            <h6 class="">$10.00</h6>
-                                        </li>
-
-                                        <li>
-                                            <h6 class="">Quantity</h6>
-                                            <div class="quantity-controller quantity-wrap">
-                                                <input class="decrement" type="button" value="-">
-                                                <input type="text" name="quantity" value="1" maxlength="2" size="1"
-                                                    class="number">
-                                                <input class="increment" type="button" value="+">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h6 class="">Subtotal</h6>
-                                            <h6 class="">$10.00</h6>
-                                        </li>
-                                        <li>
-                                            <a href="cart.html" class="cus-btn active-btn">Add to Cart</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                  
                     <div class="table-bottom-row bg-white">
                         <a href="{{ url($home_page->slug) }}" class="cus-btn">Continue Shopping</a>
                         <form action="checkout.html" method="post" class="contact-form d-flex align-items-center gap-16">
@@ -190,9 +93,13 @@
 @push('js')
 <script>
   function format_cart_items(data){
+    console.log('removed');
             var html_data = '';
 
             // console.log(data['product'])
+            if(typeof(data['product']) == 'object'){
+
+            
             Object(data['product']).forEach((element, index)=>{
 
                 html_data+=`
@@ -200,12 +107,12 @@
                                     <td class="pd">
                                         <div class="product-detail-box">
                                             <div class="cus-checkBox">
-                                                <input type="checkbox" id="box1">
-                                                <label for="box1" class="light-gray"></label>
+                                                <input type="checkbox" id="box1${index}">
+                                                <label for="box1${index}" class="light-gray"></label>
                                             </div>
-                                            <a href="#" onclick="pos_remove_cart(${element.product.id},${element.size})" class="h5 dark-black"><i class="fal fa-times"></i></a>
+                                            <a href="javascript:void(0)" onclick="pos_remove_cart(${element.product.id},${element.size})" class="h5 dark-black"><i class="fal fa-times"></i></a>
                                             <div class="img-block">
-                                                <a href="shop-grid-2.html"><img src="${element.product.image_url}" alt=""></a>
+                                                <a href="{{ $view_page->slug }}?slug=${element.product.slug}"><img src="${element.product.image_url}" alt=""></a>
                                             </div>
                                             <div class="d-block text-start">
                                                 <h6><a href="shop-grid-2.html">${element.product.name}</a></h6>
@@ -218,7 +125,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-500"> <span class="light-gray qtyPrice">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price}) = ${element.vat_with_price}</span></p>
+                                        <p class="fw-500"> <span class="light-gray qtyPrice">${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price} Vat) = ${element.vat_with_price} {{ settings('currency_symbol', 9) }}</span></p>
                                     </td>
                                     <td>
                                         <div class="quantity-controller quantity-wrap">
@@ -228,11 +135,15 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-500">${element.total_price}</p>
+                                        <p class="fw-500">{{ settings('currency_symbol', 9) }} ${element.total_price.toFixed(2)}</p>
                                     </td>
-                                </tr> `
-                console.log(element)
+                                </tr> `;
+                // console.log(element)
             })
+                
+        }else{
+            html_data = `<a class="border text-center p-5 d-block bg-success text-light" href="{{ url('/') }}">Not found any cart product. Continue Shopping</a>`
+        }
             $('.cart-table tbody').html(html_data)
         }
 
@@ -243,21 +154,9 @@
                 type:'get',
                 url:'{{ route('cart_details') }}?source_type=front_product',
                 success:function(data){
-                    // data  = JSON.parse(data)
-                    console.log(data);
-
-
-                    // $('.subtotal_quantity').html(data.subtotal.quantity);
-                    // $('.subtotal_tax').html(data.subtotal.total_vat);
-                    // $('.subtotal_price').html(data.subtotal.price);
-                    // $('.subtotal_tprice').html(data.subtotal.total_price);
-                    // $('#grand_total').val(data.subtotal.total_price);
-
-                    // if(data.subtotal.quantity == 0){
-                    //     $('#newOrderTab').html('')
-                    // }else{
-                        format_cart_items(data)
-                    // }
+                    // console.log(data);
+                    format_cart_items(data)
+                  
                 }
             })
         }

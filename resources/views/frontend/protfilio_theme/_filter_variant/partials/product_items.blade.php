@@ -5,7 +5,7 @@
     }
 
 @endphp
-<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+<div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-6">
     <div class="featured-product-card bg-white br-10">
         <div class="image-box mb-16">
 
@@ -53,7 +53,11 @@
                 @include('frontend.protfilio_theme._filter_variant.partials.product_price')
 
             </div>
-            <a href="javascript:void(0)" onclick="add_to_cart(this)" data-id="{{ $product->id }}" class="cus-btn-2 w-100">Add to Cart</a>
+            @if ($product->variant_on == 1)
+                 <a href="{{ url($view_page->slug) }}?slug={{ $product->slug }}"  data-id="{{ $product->id }}" class="cus-btn-2 w-100">View Details</a>
+            @else
+                <a href="javascript:void(0)" onclick="add_to_cart(this)" data-id="{{ $product->id }}" class="cus-btn-2 w-100">Add to Cart</a>
+            @endif
         </div>
     </div>
 </div>

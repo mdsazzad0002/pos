@@ -66,7 +66,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="short_read_more_page_url">short_read_more_page_url</label>
-                            <input type="text" class="form-control" id="short_read_more_page_url" name="short_read_more_page_url" value="{{ $item->short_read_more_page_url }}" required>
+                            <input type="text" class="form-control" id="short_read_more_page_url" name="short_read_more_page_url" value="{{ $item->short_read_more_page_url }}" >
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -88,7 +88,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="view_all_page_url">view_all_page_url</label>
-                            <input type="text" class="form-control" id="view_all_page_url" name="view_all_page_url" value="{{ $item->view_all_page_url }}" required>
+                            <input type="text" class="form-control" id="view_all_page_url" name="view_all_page_url" value="{{ $item->view_all_page_url }}" >
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -104,13 +104,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="items_per_row">Items Per Row</label>
-                            <input type="number" class="form-control" id="items_per_row" name="items_per_row" value="{{ $item->items_per_row }}" required>
+                            <input type="number" class="form-control" id="items_per_row" name="items_per_row" value="{{ $item->items_per_row }}" >
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="items_show">Items Show</label>
-                            <input type="number" class="form-control" id="items_show" name="items_show" value="{{ $item->items_show }}" required>
+                            <input type="number" class="form-control" id="items_show" name="items_show" value="{{ $item->items_show }}" >
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 col-xl-3">
@@ -132,7 +132,7 @@
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group" onclick="upload_select(this)">
                             <label for="background d-block">Background</label> <br>
-                            <input hidden type="text" class="form-control" id="background" name="background" value="{{ $item->background }}" required>
+                            <input hidden type="text" class="form-control" id="background" name="background" value="{{ $item->background }}">
                             <img style="max-height: 60px" src="{{  dynamic_asset($item->background) }}" alt="">
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group">
                             <label for="background_color">Background Color</label>
-                            <input type="color" class="form-control" id="background_color" name="background_color" value="{{ $item->background_color }}" required>
+                            <input type="color" class="form-control" id="background_color" name="background_color" value="{{ $item->background_color }}">
                         </div>
                     </div>
 

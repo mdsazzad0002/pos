@@ -106,6 +106,12 @@ class rolepermissionsedder extends Seeder
                 'order create',
                 'order edit',
                 'order delete',
+                
+                // offerbanner
+                'offerbanner read',
+                'offerbanner create',
+                'offerbanner edit',
+                'offerbanner delete',
 
                 //Profile
                 'profile read',

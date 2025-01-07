@@ -46,10 +46,22 @@
 
             // console.log(thi)
             if ($(thi).data('quantaty')) {
+
                 var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
-                var variant = $(thi).closest('.product_variant').find('input.variant_size').val();
-                var unit = $(thi).closest('.product_unit').find('input.unit').val();
-                console.log(quantaty);
+                if($(thi).closest('.product_variant').length > 0){
+                    var variant = $(thi).closest('.product_variant').find('input.variant_size:checked').val();
+                }else{
+                    var variant = $(thi).closest('.modal').find('input.variant_size:checked').val();
+
+                }
+                if($(thi).closest('.product_unit').length > 0){
+                    var unit = $(thi).closest('.product_unit').find('input.option-input:checked').val();
+                }else{
+                    var unit = $(thi).closest('.modal').find('input.option-input:checked').val();
+                }
+
+
+                // console.log(quantaty);
                 $.ajax({
                     type: 'get',
                     url:'{{ route('add_to_cart') }}',
@@ -57,7 +69,8 @@
                         'product_id': $(thi).data('id'),
                         'quantity' : quantaty,
                         'unit' : unit,
-                        'size' : variant
+                        'size' : variant,
+                        'update':'sdfasd'
 
                     },
                     success:function(data){
@@ -86,7 +99,6 @@
 
 
         setInterval(() => {
- 
             $.ajax({
                 type:'get',
                 url: "{{ url('cart_and_wishlist') }}",

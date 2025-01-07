@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('details')->nullable();
             $table->string('type')->default(0)->comment('1 = fixed 0 present');
             $table->integer('amount')->default(0);
-            $table->string('expire_date')->nullable();
+            $table->timestamp('expire_date')->nullable();
             $table->timestamps();
         });
     }

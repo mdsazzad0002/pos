@@ -147,7 +147,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('admin.protfilio_theme.Page.partials.edit', compact('page'));
+        return view('admin.protfilio_theme.page.partials.edit', compact('page'));
     }
 
     /**

@@ -22,9 +22,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\protfilio_theme\ClientController;
 use App\Http\Controllers\protfilio_theme\ContactController;
-use App\Http\Controllers\protfilio_theme\FaqController;
+
+use App\Http\Controllers\protfilio_theme\FaqController as frontend_faq;
+use App\Http\Controllers\protfilio_theme_admin\FaqController;
+
 use App\Http\Controllers\protfilio_theme\HomeController;
 use App\Http\Controllers\protfilio_theme\ServiceController;
+use App\Http\Controllers\protfilio_theme_admin\ServiceController as  AdminServiceController;
 use App\Http\Controllers\protfilio_theme\TeamController;
 use App\Http\Controllers\ReviewProductController;
 use App\Http\Controllers\AreaController;
@@ -297,9 +301,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
         // Service
-        Route::resource('service', ServiceController::class)->names('service');
-        Route::get('/service/delete/{service}', [serviceController::class, 'delete'])->name('service.delete');
-        Route::get('/brand/getservices/get', [serviceController::class, 'getservice'])->name('service.select');
+        Route::resource('service', AdminServiceController::class)->names('service');
+        Route::get('/service/delete/{service}', [AdminServiceController::class, 'delete'])->name('service.delete');
+        Route::get('/brand/getservices/get', [AdminServiceController::class, 'getservice'])->name('service.select');
 
 
         // Testimonial

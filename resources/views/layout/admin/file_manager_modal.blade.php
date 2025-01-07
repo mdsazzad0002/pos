@@ -97,16 +97,17 @@
           fileInput.files = files;
 
           // Processing the files for previews (next step)
-          console.log(files)
-          handleFiles(files);
+        //   console.log(files)
+        //   handleFiles(files);
           file_upload(files);
+          dropArea.classList.remove('drag-over');
         }
       }
 
       fileInput.addEventListener('change', function(e){
         e.preventDefault();
         file_upload(this.files)
-        {{--  handleFiles(this.files);  --}}
+        // handleFiles(this.files);
       })
 
 
@@ -138,6 +139,8 @@
                 console.error('Error uploading files:', textStatus, errorThrown); // Handle errors
             }
         })
+
+        
       }
 
 

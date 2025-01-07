@@ -14,9 +14,11 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
+use App\Models\coupon;
 use App\Models\Discount;
 use App\Models\VariantOption;
 use App\Models\Vat;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -332,14 +334,32 @@ class HomeController extends Controller
                 ]);
             }
 
+
+
+
             // If the product was not found, add a new product entry
+            if($request->has('size')){
+                $size = $request->size;
+            }else{
+                $size = 0;
+            }
+
+            
+            if($request->has('unit')){
+                $unit = $request->unit;
+            }else{
+                $unit = 0;
+            }
+
+
             if (!$found) {
                 if($request->has('quantity')) {
                     $product_cart[] = [
                          $product_key => [
                             'product_id' => $product_id,
                             'quantaty' => $request->quantity,
-                            'size' => $request->size ?? 0,
+                            'size' => $size,
+                            'unit' => $unit
                         ]
                     ];
                 }else{
@@ -347,15 +367,15 @@ class HomeController extends Controller
                          $product_key => [
                             'product_id' => $product_id,
                             'quantaty' => 1,
-                            'size' => $request->size ?? 0,
+                            'size' => $size,
+                            'unit' => $unit 
                         ]
                     ];
 
                 }
-
             }
 
-            // Save the updated cart back to the session
+
 
             // Save the updated cart back to the session
             session()->put( $source_type, $product_cart);
@@ -373,9 +393,9 @@ class HomeController extends Controller
         }
 
 
-
-
     }
+
+
 
 
 
@@ -462,7 +482,10 @@ class HomeController extends Controller
                     'vat' => 0,
                     'quantity' => 0,
                     'total_price' => 0,
-                    'total_vat' => 0
+                    'total_vat' => 0,
+                    'discount' => 0,
+                    'coupon'=>0,
+                    'coupon_without_price' => 0
                 ]
             ];
 
@@ -471,53 +494,94 @@ class HomeController extends Controller
 
                 foreach($item as $key => $itemdata){
                     $product = product::find($itemdata['product_id']);
-                    $product_variant = VariantOption::find($itemdata['size']);
-                    $vat_info = Vat::find($product->vat);
-
+                  
                     if(!$product){
                         break;
                     }
 
-                    $cal_quantity =  $itemdata['quantaty'];
-                    $cal_price = $product_variant->selling_price ?? $product->selling_price;
-                    $cal_sub_price = $cal_price * $cal_quantity;
-
-
-                    $cat_vat_price = $vat_info ? (($cal_price * $vat_info->amount) / 100) : 0;
-                    $cal_total_vat = ($cat_vat_price * $cal_quantity);
-
-                    $cal_vat_with_price = $cal_price +  $cat_vat_price;
-
-                    $cal_total_vat_with_price =  $cal_total_vat + $cal_sub_price;
+                    $product_variant = VariantOption::find($itemdata['size']);
+                    $vat_info = Vat::find($product->vat);
                     $discount = Discount::find($product->discount_id);
+
+
+                    // Quantity
+                    $cal_quantity =  $itemdata['quantaty'];
+
+                    // Price
+                    $cal_price = $product_variant->selling_price ?? $product->selling_price;
+
+
+                   
+
+                    // Discount
                     $discount_price = $discount ? ($discount->type == 1 ? $discount->amount : (($cal_price * $discount->amount)/100)) : 0;//$cal_price
 
-                    // return $itemdata['quantaty'];
+
+                    // Price -  Discount = price_discount
+                    $price_discount = $cal_price - $discount_price;
+
+
+                    // Vat Price
+                    $cat_vat_price = $vat_info ? (($price_discount * $vat_info->amount) / 100) : 0;
+                
+
+                    // price_discount + vat price = final price
+                    $cal_total_with_vat = $cat_vat_price + $price_discount;
+
+
+
+
+                    
                     $data_array['product'][]=[
+                        // Raw data
+                        'size'=> $itemdata['size'],
+                        'quantity' =>  $cal_quantity,
+
+                        // Init Date
                         'session_id'=>  $key,
                         'product' => $product,
                         'product_variant' => $product_variant,
                         'vat' => $vat_info,
-                        'vat_price' =>  $cat_vat_price,
-                        'size'=> $itemdata['size'],
-                        'quantity' =>  $cal_quantity,
-                        'price' =>  $cal_price,
-                        'vat_with_price' =>  $cal_vat_with_price,
-                        'price_with_vat_price' =>  $cal_vat_with_price,
-                        'discount'=> $discount,
-                        'discount_price' => $discount_price,
-                        'total_price' => $cal_total_vat_with_price - $discount_price,
 
-                        'total_vat_price' => $cal_total_vat,
+                       
+                        'price' =>  $cal_price,                 //Selling Price
+                        'discount_price' => $discount_price,    // Discount
+                        'price_discount' => $price_discount,    // Price -  Discount = price_discount
+                        'vat_price' =>  $cat_vat_price,         // Vat Price
+                        'cal_total_with_vat' =>  $cal_total_with_vat,     // price_discount + vat price = final price
+
+
+                        // Summary
+                        'single_subtotal' => $cal_total_with_vat * $cal_quantity   //Single Subtotal Price
+
                     ];
+
 
                     $data_array['subtotal']['quantity'] +=  $cal_quantity;
                     $data_array['subtotal']['vat'] +=  $cat_vat_price;
-                    $data_array['subtotal']['total_vat'] +=   $cal_total_vat;
-                    $data_array['subtotal']['price'] +=  $cal_sub_price;
-                    $data_array['subtotal']['total_price'] += $cal_total_vat_with_price;
+                    $data_array['subtotal']['discount'] +=  $discount_price;
+                    
+                    $data_array['subtotal']['price'] +=   $cal_total_with_vat * $cal_quantity;
+
 
                 }
+            
+                $coupon_id = session()->get('coupon_id',0);
+                $coupon = coupon::find($coupon_id);
+
+                // Coupon price
+                if( $coupon && $coupon->expire_date > Carbon::now()){
+                    $coupon_price = $coupon ?  ($coupon->type == 1 ?  $coupon->amount  : ($data_array['subtotal']['price'] * $coupon->amount)/100) : 0;
+                }else{
+                    $coupon_price = 0;
+                }
+
+
+                $data_array['subtotal']['coupon'] =   $coupon_price;
+
+                // Final price - Coupoon price =  Final Coupon without price
+                $data_array['subtotal']['coupon_without_price'] =   $data_array['subtotal']['price'] -  $coupon_price;
+                
 
             }
 

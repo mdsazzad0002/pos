@@ -87,6 +87,10 @@
     <p class="light-gray">{!! $product->description !!}</p>
 </div>
 <div class="hr-line mb-24"></div>
+
+
+
+@if($product->variant_option_info != null)
 <div class="product_variant">
     <h6>Variant:</h6>
     <div class="product-text-container_fornt bg-white br-20">
@@ -101,9 +105,16 @@
             </div>
         @endforeach
     </div>
-
 </div>
+@endif
 
+@can('product edit')
+    <a href="{{ route('admin.product.edit', $product->id) }}?#variant_on" target="_blank" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit Variant</a>
+@endcan
+
+
+
+@if($product->unit_info)
 <div class=" gap-16 mb-16 product_unit">
     <h6>Unit:</h6>
     <div class="option-list unit_key">
@@ -133,6 +144,14 @@
     </div>
 
 </div>
+@endif
+
+
+@can('product edit')
+    <a href="{{ route('admin.product.edit', $product->id) }}?#unit" target="_blank" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit Unit</a>
+@endcan
+
+
 
 <div class="function-bar mb-16 quantity_parents">
     <div class="quantity quantity-wrap">
