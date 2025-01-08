@@ -105,6 +105,8 @@
                 success:function(data){
                      data = JSON.parse(data);
 
+                     document.querySelector('.compare_list .items_added').innerHTML = data.compare_list;
+
                     document.querySelector('.cart .items_added').innerHTML = data.front_product;
                     document.querySelector('#sidebar-cart .cart_items').innerHTML = data.front_product;
                 }
@@ -118,7 +120,7 @@
 
 
 
-        document.querySelector('.items_icon_parents').addEventListener('click', function(){
+        document.querySelector('.cart.items_icon_parents').addEventListener('click', function(){
             update_side_cart();
         });
 
@@ -170,13 +172,14 @@
             })
         }
 
-        function remove_cart(id){
+        function remove_cart(id, size = null){
             $.ajax({
                 type: 'get',
                 url:'{{ route('add_to_cart') }}',
                 data:{
                     'product_id': id,
-                    'type' : 'remove_cart'
+                    'type' : 'remove_cart',
+                    'size' : size
 
                 },
                 success:function(data){
@@ -209,6 +212,7 @@
                     },
                     success:function(data){
                         flasher.warning('Successfully removed compare list');
+                        wishlist_data()
                     }
                 })
 
@@ -225,13 +229,6 @@
             $('.name_price_old input').val($(thi).data('old_price'));
             price_calculation_change_option(thi)
         }
-
-        function unit_change(thi){
-            $('.unit_change input').val($(thi).data('count'));
-            price_calculation_change_option(thi)
-            console.log(thi)
-        }
-
 
         function data_unit_and_variant_check(){
 

@@ -5,7 +5,10 @@
     $contact_page = \App\Models\Page::where('page_type', 'contact')->first();
     $about_page = \App\Models\Page::where('page_type', 'about')->first();
     $register_page = \App\Models\Page::where('page_type', 'register')->first();
-    $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
+
+    if(!isset($wishlist_page)){
+        $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
+    }
 @endphp
 
 @if($filter_page)
@@ -121,12 +124,17 @@
                     </a>
                     @endif
                     @if($wishlist_page)
-                    <a href="{{ url($wishlist_page->slug) }}" class="button-block d-sm-flex d-none">
-                        <img src="{{asset('uploads/')}}/icons/wishlist.png" alt="">
+
+                    <a href="{{ url($wishlist_page->slug) }}" class="button-block d-sm-flex d-none  position-relative  items_icon_parents compare_list">
+
+                        <i class="fa-regular fa-heart"></i>
+                        <span class="items_added">0</span>
+
                     </a>
+
                     @endif
 
-                    <a href="#" class="button-block d-sm-flex d-none cart-button position-relative cart items_icon_parents">
+                    <a href="javascript:void(0);" class="button-block d-sm-flex d-none cart-button position-relative cart items_icon_parents">
                         {{-- <img src="{{asset('uploads/')}}/icons/cart.png" alt=""> --}}
                         <i class="bi bi-cart" style=""></i>
                         <span class="items_added">0</span>

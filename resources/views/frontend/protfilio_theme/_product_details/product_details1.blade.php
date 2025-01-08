@@ -7,7 +7,11 @@ if($request->has('slug')){
 }
 
 $filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
-$cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
+
+if(!isset($cart_page)){
+    $cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
+}
+
 @endphp
 
 <main class="main-wrapper bg-lightest-gray">

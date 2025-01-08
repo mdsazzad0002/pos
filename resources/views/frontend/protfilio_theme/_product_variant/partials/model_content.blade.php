@@ -114,37 +114,6 @@
 
 
 
-@if($product->unit_info)
-<div class=" gap-16 mb-16 product_unit">
-    <h6>Unit:</h6>
-    <div class="option-list unit_key">
-
-
-        <div class="option" data-count="1" onclick="unit_change(this)">
-            <input type="radio" id="unit{{ $product->unit_info->id}}" value="{{ $product->unit_info->id}}"  name="unit" class="option-input"
-                >
-                <label class="option-label" for="unit{{ $product->unit_info->id }}">
-                    <span class="option-text text-capitalize">1</span>
-                    <span class="option-price"> {{ $product->unit_info->name }}</span>
-                </label>
-        </div>
-
-
-
-        @foreach ($product->units_info as $unit)
-
-            <div class="option" data-count="{{ $unit->sub_items }}" onclick="unit_change(this)">
-                <input type="radio" id="unit{{ $unit->id}}" value="{{$unit->sub_items }}"  name="unit" class="option-input">
-                <label class="option-label" for="unit{{ $unit->id }}">
-                    <span class="option-text text-capitalize">{{ $unit->sub_items }}</span>
-                    <span class="option-price">{{ $unit->name }}</span>
-                </label>
-            </div>
-        @endforeach
-    </div>
-
-</div>
-@endif
 
 
 @can('product edit')
@@ -153,7 +122,7 @@
 
 
 
-<div class="function-bar mb-16 quantity_parents">
+<div class="function-bar mb-16 quantity_parents mt-2">
     <div class="quantity quantity-wrap">
         <div class="input-area quantity-wrap quantity_parents">
             <input class="decrement" type="button" value="-" onclick="product_counterUP(this, '-')">
@@ -183,7 +152,7 @@
 </div>
 
 @if(isset($cart_page))
-    <a href="{{ url($cart_page->slug) }}" class="cus-btn-3 w-100 mb-24">Buy Now</a>
+    <a href="{{ url($cart_page->slug) }}" onclick="add_to_cart(this)" data-id="{{ $product->id }}"  data-quantaty="true" class="cus-btn-3 w-100 mb-24">Buy Now</a>
 @endif
 
 </div>

@@ -5,6 +5,12 @@
     if(!isset($register_page)){
         $register_page = \App\Models\Page::where('status', 1)->where('page_type', 'register')->first();
     }
+    if(!isset($cart_page)){
+        $cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
+    }
+    if(!isset($wishlist_page)){
+        $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
+    }
 
     if(!auth()->guard('customer')->user()){
         echo '<script>window.location.href="'.url($register_page->slug).'"</script>';
@@ -39,10 +45,10 @@
                     </li>
                 @endif
                 <li>
-                    <a href="#"><i class="bi bi-basket-fill"></i> Cart Item</a>
+                    <a href="{{ url($cart_page->slug) }}"><i class="bi bi-basket-fill"></i> Cart Item</a>
                 </li>
                 <li>
-                    <a href="#"><i class="bi bi-heart-fill"></i> Wishlist</a>
+                    <a href="{{ url($wishlist_page->slug) }}"><i class="bi bi-heart-fill"></i> Wishlist</a>
                 </li>
                 <li>
                     <a href="#"><i class="bi bi-border-all"></i> Checkout item</a>

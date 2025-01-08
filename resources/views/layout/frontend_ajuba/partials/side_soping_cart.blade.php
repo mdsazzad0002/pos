@@ -15,7 +15,7 @@
     <div class="hr-line mb-24"></div>
     @if ($cart_page && $checkout_page)
 
-        <div class="action-buttons p-24">
+        <div class="action-buttons p-24  py-2">
             <a href="{{ url($cart_page->slug) }}" class="cus-btn-2">{{ $cart_page->name ?? '' }}</a>
             <a href="{{ url($checkout_page->slug) }}" class="cus-btn active-btn">{{ $checkout_page->name ?? '' }}</a>
         </div>

@@ -646,6 +646,7 @@ Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->n
 Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
 
 Route::get('add_to_compareList', [HomeController::class, 'add_to_compareList'])->name('add_to_compareList');
+Route::get('compare_list', [HomeController::class, 'compare_list'])->name('compare_list');
 
 
 
@@ -681,7 +682,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/productByID/{product}', [ProductController::class, 'productByID'])->name('productByID');
         Route::get('/barcode/{id}', [ProductController::class, 'barcode'])->name('barcode');
         Route::get('/filter_purchase/get', [ProductController::class, 'filterPurchase'])->name('filter_purchase');
-     
+
     });
 });
 // End product Management
@@ -711,7 +712,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/delete/{purchase}', [PurchaseController::class, 'delete'])->name('delete');
         Route::get('/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('select');
         Route::get('/single/purchase_report', [PurchaseController::class, 'report_single'])->name('report_single');
-    });    
+    });
 });
 // End Purchase Management
 

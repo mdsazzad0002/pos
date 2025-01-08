@@ -1,9 +1,10 @@
+
         <!-- Payment Method -->
         <div class="title-row title-row-2 bg-white mb-16">
             <h5>Payments Methods</h5>
         </div>
         <div class="shipping-radio-container bg-white">
-            <form action="tracking.html" method="post">
+            <form action="javascript:void(0)" method="post" class="contact-form">
                 <div class="plans mb-16">
                     <label class="plan basic-plan" for="credit">
                         <input checked type="radio" name="plan" id="credit">

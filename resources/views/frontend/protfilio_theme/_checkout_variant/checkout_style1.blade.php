@@ -1,3 +1,8 @@
+@php
+    if(!isset($register_page)){
+        $register_page = \App\Models\Page::where('status', 1)->where('page_type', 'register')->first();
+    }
+@endphp
 <main class="main-wrapper bg-lightest-gray">
 
     <!-- Title Banner Start -->
@@ -12,60 +17,11 @@
     </section>
     <!-- Title Banner End -->
 
-    <!-- Customer Container Start -->
-    <div class="customer-container py-40">
-        <div class="container-fluid">
-            <div class="customer-wrapper">
-                <div class="title-box">
-                    <p class="fw-500">Returning Customer? <a href="javascript:;" class="color-primary text-decoration-underline signin-button">Click here to login</a></p>
-                </div>
-                <div class="sign-form mt-48">
-                    <p class="fw-500 mb-16">If you’ve shopped with us before, enter your information below. New customers, please continue to the Billing section.</p>
-                    <form action="tracking.html" method="post">
-                        <div class="row row-gap-3">
-                            <div class="col-lg-6">
-                                <div class="input-block">
-                                    <input type="text" name="name" id="firstname" class="form-control" placeholder="Username or email address">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <path
-                                            d="M18.2422 2.96875H1.75781C0.786602 2.96875 0 3.76023 0 4.72656V15.2734C0 16.2455 0.792383 17.0312 1.75781 17.0312H18.2422C19.2053 17.0312 20 16.2488 20 15.2734V4.72656C20 3.76195 19.2165 2.96875 18.2422 2.96875ZM17.996 4.14062C17.6369 4.49785 11.4564 10.6458 11.243 10.8581C10.9109 11.1901 10.4695 11.3729 10 11.3729C9.53047 11.3729 9.08906 11.1901 8.75594 10.857C8.61242 10.7142 2.50012 4.63414 2.00398 4.14062H17.996ZM1.17188 15.0349V4.96582L6.23586 10.0031L1.17188 15.0349ZM2.00473 15.8594L7.06672 10.8296L7.9284 11.6867C8.48176 12.2401 9.21746 12.5448 10 12.5448C10.7825 12.5448 11.5182 12.2401 12.0705 11.6878L12.9333 10.8296L17.9953 15.8594H2.00473ZM18.8281 15.0349L13.7641 10.0031L18.8281 4.96582V15.0349Z"
-                                            fill    ="#141516" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="input-block">
-                                    <input type="password" name="password" id="passWord" class="form-control" placeholder="Password">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                        <g clip-path="url(#clip0_7968_54246)">
-                                            <path
-                                                d="M19.8898 10.3421C20.0368 10.1378 20.0368 9.86227 19.8898 9.65785C19.8451 9.5957 18.7753 8.11922 17.0388 6.62602L19.8898 10.3421ZM19.8898 10.3421C19.8451 10.4043 18.7753 11.8808 17.0388 13.374C16.0117 14.2571 14.9628 14.9625 13.9213 15.4705M19.8898 10.3421L6.33476 14.9827M2.96124 13.374L3.31779 12.9593L0.110303 10.3421C0.15499 10.4043 1.22472 11.8808 2.96124 13.374ZM2.96124 13.374L3.31781 12.9593M2.96124 13.374L3.31781 12.9593M3.31781 12.9593C3.32463 12.9652 3.33146 12.971 3.3383 12.9769C3.78259 13.3578 4.30002 13.7615 4.87535 14.1434C4.94379 14.1888 5.01304 14.2339 5.08309 14.2787L5.09608 14.287L5.10946 14.2946L5.99122 14.7983L6.16418 14.8971L6.17856 14.9054L6.19335 14.9128C6.23538 14.9339 6.27765 14.9549 6.32015 14.9756L6.07878 15.4705M3.31781 12.9593L5.73444 15.2904C5.83141 15.341 5.9444 15.3999 6.07878 15.4705M6.07878 15.4705L6.33476 14.9827M6.07878 15.4705C7.40507 16.1173 8.72437 16.4453 10 16.4453C11.2757 16.4453 12.595 16.1173 13.9213 15.4705M6.33476 14.9827C7.43018 15.5147 8.67705 15.8984 10 15.8984C11.3151 15.8984 12.56 15.5261 13.6814 14.9787L13.9213 15.4705M6.33476 14.9827L13.6814 14.9787L13.9213 15.4705M13.5053 9.93776C13.5053 11.8737 11.936 13.443 10 13.443C8.06414 13.443 6.49478 11.8737 6.49478 9.93776C6.49478 8.00186 8.06414 6.4325 10 6.4325C11.936 6.4325 13.5053 8.00186 13.5053 9.93776ZM13.9212 4.52961L13.9212 4.52972L13.9212 4.52961Z"
-                                                stroke="#141516" stroke-width="1.25" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_7968_54246">
-                                                <rect width="20" height="20" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="cus-checkBox mb-8">
-                                    <input type="checkbox" id="remember3">
-                                    <label for="remember3" class="light-gray">Remember me</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <button type="submit" class="cus-btn-3 sign-submit-btn">Sign In</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Customer Container End -->
+    @if(!auth()->guard('customer')->check())
+        <a href="{{url($register_page->slug)}}" class="cus-btn w-100">Already have an Account  Login Now. Or Register Now.</a>
+    @endif
+
+
 
     <!-- Billing Details Start -->
     <section class="billing-detail pb-40">
@@ -76,7 +32,7 @@
                         <h5>Billing Details</h5>
                     </div>
                     <div class="billing-wrapper p-24 bg-white br-10 mb-40">
-                        <form action="checkout.html" method="post" class="contact-form">
+                        <form action="javascript:void(0)" method="post" class="contact-form">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-block mb-16">
@@ -227,8 +183,11 @@
 
                             </div>
                         </form>
+
+
+
                         <!-- Different Billing Address Form -->
-                        <form action="tracking.html" method="post" class="billing-address contact-form mt-16">
+                        <form action="javascript:void(0)" method="post" class="billing-address contact-form mt-16">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-block mb-16">
@@ -365,6 +324,8 @@
                         </form>
                         <!-- Different Billing Address Form -->
                     </div>
+
+
                     @include('frontend.protfilio_theme._checkout_variant.partials.shipping_methods')
                     @include('frontend.protfilio_theme._checkout_variant.partials.payment_methods')
 
@@ -434,7 +395,7 @@
                             </div>
                         </div>
 
-                        <a href="checkout.html" class="cus-btn active-btn">Proceed to Checkout</a>
+                        <a href="javascript:void(0)" class="cus-btn active-btn checkout_process">Proceed to Checkout</a>
                     </div>
                 </div>
             </div>
@@ -691,3 +652,29 @@
     <!-- Benefits End -->
 </main>
 <!-- Main Sections -->
+
+
+
+@push('js')
+<script>
+    document.querySelector('.checkout_process').addEventListener('click', () => {
+        const contactForms = document.querySelectorAll('.contact-form');
+        
+        let form_data = {}; // Initialize an empty object to store all form data
+
+        contactForms.forEach(form => {
+            const formData = new FormData(form); // Create a FormData object for each form
+
+            // Add each field to the combined `form_data` object
+            formData.forEach((value, key) => {
+                form_data[key] = value; // This will overwrite keys with the same name
+            });
+        });
+
+        // Log the combined form data
+        console.log(form_data);
+
+
+    });
+</script>
+@endpush

@@ -12,7 +12,8 @@
                     <div class="product-text">
                         <div class="prod-title mb-16">
                             <h6>{{ $product['product']->name}}  {{ $product['product_variant'] ? '('. $product['product_variant']->name .')' : ''  }}</h6>
-                            <a href="javascript:void(0);" class="cancel" onclick="remove_cart({{ $product['product']->id }})">
+                            <a href="javascript:void(0);" class="cancel" onclick="remove_cart({{ $product['product']->id }}, {{ $product['size'] }})">
+
                                 <img src="{{asset('uploads/')}}/images/cancel.png" alt="" style="margin-bottom: 5px;">
                             </a>
                         </div>
@@ -38,11 +39,11 @@
         @endforeach
     @endif
 </ul>
-<div class="price-coupon p-24 d-flex justify-content-between">
+<div class="price-coupon p-24  py-1 d-flex justify-content-between">
     <span class="h5">Coupon</span>
     <span class="h5">{{settings('currency_symbol', 9) . ' '. $product_cart->subtotal['coupon'] ?? ''}}</span>
 </div>
-<div class="price-total p-24">
+<div class="price-total p-24  py-1">
     <span class="h5">SUBTOTAL</span>
 
     <span class="h5">{{settings('currency_symbol', 9) . ' '. $product_cart->subtotal['coupon_without_price'] ?? ''}}</span>

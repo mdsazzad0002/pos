@@ -3,6 +3,7 @@
 
             @endphp
 
+        <form action="javascript:void(0)" method="post" class="contact-form mt-16"></form>
             <!-- Shipping Method -->
              <div class="title-row title-row-2 bg-white mb-16">
                 <h5>Shipping Methods</h5>
@@ -12,8 +13,8 @@
                 <div class="row">
                  @foreach ( $shipping_methods as  $methods)
                     <div class="col-md-6 plans mb-16">
-                        <label class="plan basic-plan" for="basic">
-                            <input checked type="radio" name="plan" id="basic">
+                        <label class="plan basic-plan" for="basic{{ $method->id }}">
+                            <input checked type="radio" name="plan" id="basic"  value="{{ $methods->id }}">
                             <span class="plan-content">
                                 <img src="{{ $methods->upload_id ?? 0 }}" alt="">
                                 <span class="plan-details">
@@ -31,3 +32,4 @@
 
             </div>
             <!-- Shipping Method -->
+        </form>

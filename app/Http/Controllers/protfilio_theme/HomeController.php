@@ -344,12 +344,7 @@ class HomeController extends Controller
                 $size = 0;
             }
 
-            
-            if($request->has('unit')){
-                $unit = $request->unit;
-            }else{
-                $unit = 0;
-            }
+
 
 
             if (!$found) {
@@ -359,7 +354,7 @@ class HomeController extends Controller
                             'product_id' => $product_id,
                             'quantaty' => $request->quantity,
                             'size' => $size,
-                            'unit' => $unit
+
                         ]
                     ];
                 }else{
@@ -368,7 +363,7 @@ class HomeController extends Controller
                             'product_id' => $product_id,
                             'quantaty' => 1,
                             'size' => $size,
-                            'unit' => $unit 
+
                         ]
                     ];
 
@@ -395,6 +390,10 @@ class HomeController extends Controller
 
     }
 
+    public function compare_list(){
+        $compare_list = session('compare_list',[]);
+        return $products =  product::whereIn('id', $compare_list)->get();
+    }
 
 
 
@@ -402,27 +401,30 @@ class HomeController extends Controller
     public function add_to_compareList(Request $request){
         $compare_list = session('compare_list', []);
 
-        if($request->has('remove_list')) {
-            unset($compare_list[$request->product_id]);
+        if ($request->has('remove_list')) {
+            $compare_list = array_filter($compare_list, function ($id) use ($request) {
+                return $id != $request->product_id;
+            });
             session()->put('compare_list', $compare_list);
 
-            return json_encode([
-                'title'=>'Successfully  removed Compare List',
-                'type'=>'success',
+            return response()->json([
+                'title' => 'Successfully removed from Compare List',
+                'type' => 'success',
+                'compare_list' => $compare_list
             ]);
+        } else {
+            if (!in_array($request->product_id, $compare_list)) {
+                $compare_list[] = $request->product_id;
+                session()->put('compare_list', $compare_list);
+            }
 
-
-        }else{
-
-
-            $compare_list[] = $request->product_id;
-            session()->put('compare_list', $compare_list);
-
-            return json_encode([
-                'title'=>'Successfully  added Compare List',
-                'type'=>'success',
+            return response()->json([
+                'title' => 'Successfully added to Compare List',
+                'type' => 'success',
+                'compare_list' => $compare_list
             ]);
         }
+
 
     }
 
@@ -433,7 +435,7 @@ class HomeController extends Controller
     public function cart_and_wishlist(){
         $returned_data = [
             'front_product' => count(session('front_product', [])),
-            'front_wishlist' => count(session('front_wishlist', []))
+            'compare_list' => count(session('compare_list', []))
         ];
 
         return json_encode($returned_data);
@@ -494,7 +496,7 @@ class HomeController extends Controller
 
                 foreach($item as $key => $itemdata){
                     $product = product::find($itemdata['product_id']);
-                  
+
                     if(!$product){
                         break;
                     }
@@ -511,7 +513,7 @@ class HomeController extends Controller
                     $cal_price = $product_variant->selling_price ?? $product->selling_price;
 
 
-                   
+
 
                     // Discount
                     $discount_price = $discount ? ($discount->type == 1 ? $discount->amount : (($cal_price * $discount->amount)/100)) : 0;//$cal_price
@@ -523,7 +525,7 @@ class HomeController extends Controller
 
                     // Vat Price
                     $cat_vat_price = $vat_info ? (($price_discount * $vat_info->amount) / 100) : 0;
-                
+
 
                     // price_discount + vat price = final price
                     $cal_total_with_vat = $cat_vat_price + $price_discount;
@@ -531,7 +533,7 @@ class HomeController extends Controller
 
 
 
-                    
+
                     $data_array['product'][]=[
                         // Raw data
                         'size'=> $itemdata['size'],
@@ -543,7 +545,7 @@ class HomeController extends Controller
                         'product_variant' => $product_variant,
                         'vat' => $vat_info,
 
-                       
+
                         'price' =>  $cal_price,                 //Selling Price
                         'discount_price' => $discount_price,    // Discount
                         'price_discount' => $price_discount,    // Price -  Discount = price_discount
@@ -560,12 +562,12 @@ class HomeController extends Controller
                     $data_array['subtotal']['quantity'] +=  $cal_quantity;
                     $data_array['subtotal']['vat'] +=  $cat_vat_price;
                     $data_array['subtotal']['discount'] +=  $discount_price;
-                    
+
                     $data_array['subtotal']['price'] +=   $cal_total_with_vat * $cal_quantity;
 
 
                 }
-            
+
                 $coupon_id = session()->get('coupon_id',0);
                 $coupon = coupon::find($coupon_id);
 
@@ -581,7 +583,7 @@ class HomeController extends Controller
 
                 // Final price - Coupoon price =  Final Coupon without price
                 $data_array['subtotal']['coupon_without_price'] =   $data_array['subtotal']['price'] -  $coupon_price;
-                
+
 
             }
 
