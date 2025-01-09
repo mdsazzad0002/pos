@@ -13,8 +13,8 @@
                 <div class="row">
                  @foreach ( $shipping_methods as  $methods)
                     <div class="col-md-6 plans mb-16">
-                        <label class="plan basic-plan" for="basic{{ $method->id }}">
-                            <input checked type="radio" name="plan" id="basic"  value="{{ $methods->id }}">
+                        <label class="plan basic-plan" for="basic{{ $methods->id }}">
+                            <input  type="radio" name="plan" id="basic{{ $methods->id }}"  value="{{ $methods->id }}">
                             <span class="plan-content">
                                 <img src="{{ $methods->upload_id ?? 0 }}" alt="">
                                 <span class="plan-details">
