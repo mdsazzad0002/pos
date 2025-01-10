@@ -4,7 +4,7 @@ $payment_methods = \App\Models\payment\PaymentCredential::where('status', 1)->ge
 
 
 
-<div class="shipping-radio-container bg-white">
+
     <form action="javascript:void(0)" method="post" class="contact-form">
 
         <!-- Shipping Method -->
@@ -38,5 +38,5 @@ $payment_methods = \App\Models\payment\PaymentCredential::where('status', 1)->ge
     </form>
 
 
-</div>
+
 <!-- Payment Method -->

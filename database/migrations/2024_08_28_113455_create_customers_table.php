@@ -33,6 +33,7 @@ return new class extends Migration
             $table->integer('credit_limit')->nullable();
             $table->integer('prev_due')->nullable();
             $table->integer('area')->nullable();
+            $table->integer('password')->nullable();
 
             $table->string('bank_branch')->nullable();
             $table->string('upload_id')->default(0);

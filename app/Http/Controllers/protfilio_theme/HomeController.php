@@ -14,12 +14,16 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
+use App\Models\address;
 use App\Models\coupon;
+use App\Models\customer;
 use App\Models\Discount;
+use App\Models\order;
 use App\Models\VariantOption;
 use App\Models\Vat;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
@@ -487,7 +491,9 @@ class HomeController extends Controller
                     'total_vat' => 0,
                     'discount' => 0,
                     'coupon'=>0,
-                    'coupon_without_price' => 0
+                    'coupon_without_price' => 0,
+                    'quantitys'=>[],
+                    'product_ids' =>  $product_cart
                 ]
             ];
 
@@ -559,6 +565,7 @@ class HomeController extends Controller
                     ];
 
 
+                    $data_array['subtotal']['quantitys'][$product->id]=  $cal_quantity;
                     $data_array['subtotal']['quantity'] +=  $cal_quantity;
                     $data_array['subtotal']['vat'] +=  $cat_vat_price;
                     $data_array['subtotal']['discount'] +=  $discount_price;
@@ -592,6 +599,141 @@ class HomeController extends Controller
             // return response()->json($data_array);
 
 
+    }
+
+
+
+    public function checkout(Request $request){
+
+        $request->validate([
+            
+        ]);
+        
+        if(!auth()->guard('customer')->check()){
+            $user = customer::where('email', $request->email)->first();
+            if($user){
+                return json_encode([
+                    'status' => false,
+                    'status_code'=> 301,
+                    'message'=> 'User Already Exists please login first',
+                ]);
+            }
+
+
+            $user = new customer();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->password = Hash::make($request->email);
+            $user->phone = $request->phone;
+            $user->prev_due = 0;
+            $user->credit_limit = 20000;
+
+           $user->save();
+         
+            auth()->guard('customer')->login($user);
+        }else{
+            $user = auth()->guard('customer')->user();
+        }
+
+
+        $address_id = 0;
+        $billingaddress_id = 0;
+       
+        if(!$request->has('address_id')){
+            $address = new address();
+            $address->name = $request->name . ' ' . $request->lname;
+            $address->email = $request->email;
+            $address->phone = $request->phone;
+            $address->address = $request->address;
+            $address->address_optional = $request->apartment;
+            $address->district = $request->town;
+            $address->country = $request->country ;
+            $address->state = $request->state;
+            $address->postal = $request->postal;
+
+
+            $address->addressable_type = customer::class;
+            $address->addressable_id = $user->id;
+            $address->save();
+
+            $address_id = $address->id;
+        }else{
+            $address_id = $request->address_id;
+        }
+
+
+        if(!$request->has('billingaddress_id') && $request->has('shipAddress')){
+            $address = new address();
+            $address->name = $request->name1 . ' ' . $request->lname2;
+            $address->email = $request->email2;
+            $address->phone = $request->phone2;
+            $address->address = $request->address2;
+            $address->address_optional = $request->apartment2;
+            $address->district = $request->town2;
+            $address->country = $request->country2 ;
+            $address->state = $request->state2;
+            $address->postal = $request->postal2;
+
+            $address->addressable_type = customer::class;
+            $address->addressable_id = $user->id;
+            $address->save();
+
+            $billingaddress_id = $address->id;
+        }elseif($request->has('billingaddress_id')){
+            $billingaddress_id = $request->billingaddress_id;
+
+        }else{
+            $billingaddress_id = $address_id;
+
+        }
+
+
+      
+
+
+
+
+
+
+
+        if(auth()->guard('customer')->check()){
+            
+             $card_information = $this->cart_details($request);
+
+           
+            $order =  new order();
+            $order->customer_id = $user->id;
+            $order->order_id = time();
+            
+            $order->address = $address_id;
+            $order->billing_address = $billingaddress_id;
+
+            $order->product_ids = json_encode($card_information['subtotal']['product_ids']);
+            $order->product_json = json_encode($card_information);
+            $order->delivery_status = 0;
+            $order->quantity = $card_information['subtotal']['quantity'];
+            $order->quantitys = json_encode($card_information['subtotal']['quantitys']);
+            $order->discount_id = $card_information['subtotal']['discount'];
+            $order->price = $card_information['subtotal']['price'];
+            $order->cash_collection = $card_information['subtotal']['price'];
+            $order->vat = $card_information['subtotal']['vat'];
+            $order->status = 1;
+            $order->note = $request->textarea ?? '';
+            $order->save();
+            
+
+        }
+
+        session()->put('front_product', []);
+
+        return json_encode([
+            'status' => true,
+            'status_code' => 200,
+            'message' => 'Order Placed Successfully',
+            'order_id' => $order->id,
+            'price' => $order->price
+        ]);
     }
 
 }

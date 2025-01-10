@@ -13,19 +13,23 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('village')->nullable();
-            $table->string('post')->nullable();
-            $table->string('post_code')->nullable();
+            $table->string('address_optional')->nullable();
             $table->string('district')->nullable();
             $table->string('stay_time')->nullable();
             $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('postal')->nullable();
             $table->string('creator')->nullable();
             $table->string('updater')->nullable();
             $table->morphs('addressable');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

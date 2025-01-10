@@ -5244,7 +5244,7 @@ footer .footer-bottom-bar {
   display: flex;
   gap: 16px;
   padding: 16px 60px 16px 16px;
-  height: 120px;
+  height: 60px;
   border: 1px solid #6d6d6d;
   border-radius: 10px;
   position: relative;
@@ -5278,8 +5278,8 @@ footer .footer-bottom-bar {
   border: 3px solid #fff;
   -webkit-box-shadow: 0px 0px 0px 2px #006937;
   box-shadow: 0px 0px 0px 2px #006937;
-  transform: translate(-50%);
-  top: 46px;
+  transform: translateY(-50%);
+  top: 50%;
   right: 10px;
 }
 .billing-detail .shipping-radio-container .plans .plan input[type=radio]:checked + .plan-content {
@@ -5731,7 +5731,7 @@ footer .footer-bottom-bar {
 
   .banner-wrapper img {
     max-height: 118px;
-    width: auto !important;
+    /* width: auto !important; */
   }
 
   .product-detail-box img{
