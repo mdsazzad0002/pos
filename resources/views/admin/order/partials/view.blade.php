@@ -16,40 +16,40 @@ Product Info
         }else{
             $product_data =[];
         }
-       
+
     @endphp
     @foreach ($product_data->product as $key=> $items )
     <tr>
         <td>
             <img style="width: 100px" src="{{ $items->product->image_url }}" alt="">
-            
+
         </td>
         <td>
             {{ $items->product->name }} <br>
-            {{ $items->product_variant }}
+            {{ ($items->product_variant)->name ?? '' }}
         </td>
         <td>{{ $items->quantity }}</td>
         <td>{{ $items->price }}</td>
-        
+
     </tr>
 
     @endforeach
 
     <tr>
- 
-        
+
+
         <td>Price : {{ $product_data->subtotal->price }}</td>
         <td>Vat: {{ $product_data->subtotal->discount }}</td>
         <td>Discount: {{ $product_data->subtotal->discount }}</td>
         <td>Vat: {{ $product_data->subtotal->vat }}</td>
         <td>Coupon : {{ $product_data->subtotal->coupon }}</td>
         <td>Subtotal : {{ $product_data->subtotal->total_price }}</td>
-        
+
     </tr>
 
-   
+
     </tbody>
-   
+
 
 </table>
 

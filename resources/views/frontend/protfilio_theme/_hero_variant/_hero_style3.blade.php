@@ -20,8 +20,8 @@ if($variant_info->is_details_page){
                             style="background: url('{{ dynamic_asset( $slider_list[0]->upload_bg)}}') no-repeat; background-size: cover;">
                             <div class="text-box">
                                 <h6 class="color-ter mb-32 d-sm-block d-none">{{ $slider_list[0]->title }}</h6>
-                                <h2 class="white fw-600 mb-8">{{ $slider_list[0]->short_description }}</h2>
-                                <h6 class="white mb-32">{{ $slider_list[0]->sub_description }}</h6>
+                                <h2 class="white fw-600 mb-8">{!! $slider_list[0]->short_description !!}</h2>
+                                <h6 class="white mb-32">{!!  $slider_list[0]->sub_description !!}</h6>
                                 <a href="{{ $slider_list[0]->button_link }}" class="cus-btn-3 sec">{{ $slider_list[0]->button_title }}</a>
                             </div>
                             <div class="image-area">

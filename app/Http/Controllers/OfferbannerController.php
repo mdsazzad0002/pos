@@ -43,13 +43,13 @@ class OfferbannerController extends Controller
                     data-href='$edit_route'>Edit</button>";
 
                     $return_data = '';
-                    if(auth()->user()->can('offerbanner edit')==true){
+                    // if(auth()->user()->can('offerbanner edit')==true){
                         $return_data = $edit_button. '&nbsp;';
-                    }
+                    // }
 
-                    if(auth()->user()->can('offerbanner delete') == true){
+                    // if(auth()->user()->can('offerbanner delete') == true){
                         $return_data .= $delete_button ;
-                    }
+                    // }
 
                     return $return_data;
 
@@ -81,7 +81,7 @@ class OfferbannerController extends Controller
 
         $request['store_date'] = true;
          return  $this->update($request);
-       
+
     }
 
     /**
