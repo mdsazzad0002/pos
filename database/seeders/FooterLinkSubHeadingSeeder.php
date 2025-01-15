@@ -38,7 +38,10 @@ class FooterLinkSubHeadingSeeder extends Seeder
         for ($i=1; $i < 5; $i++) {
 
             foreach($data as $key => $item){
-                $footehead = new FooterLinkSubHeading;
+                $footehead =  FooterLinkSubHeading::where(['title'=> $item['title'], 'heading_id'=>$i])->first();
+                if(!$footehead){
+                    $footehead = new FooterLinkSubHeading;
+                }
                 $footehead->title = $item['title'];
                 $footehead->url = $item['url'];
                 $footehead->heading_id = $i;

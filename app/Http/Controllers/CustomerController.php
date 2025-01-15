@@ -125,17 +125,17 @@ class CustomerController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('customer')->attempt($credentials)) {
-            return json_encode([
+            return response()->json([
                 'title'=>'Successfully Customer Created',
                 'type'=>'success',
                 'page'=>'false',
-            ]);
+            ],200);
         }
 
         return response()->json([
             'success' => false,
             'message' => 'Invalid login credentials.',
-        ], 422);
+        ], 200);
     }
 
     /**

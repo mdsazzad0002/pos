@@ -53,7 +53,11 @@ class FeaturesSeeder extends Seeder
         ];
 
         foreach($data as $item){
-            $service =  new features;
+            $service =  features::where('title', $item['title'])->first();
+            if(!$service){
+                $service =  new features;
+
+            }
             $service->icon_class = $item['icon_class'];
             $service->title = $item['title'];
             $service->short_description = $item['short_description'];

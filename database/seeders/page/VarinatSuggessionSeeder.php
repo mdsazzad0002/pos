@@ -791,20 +791,70 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
 
+            'payment_page1' => [
+                'key' =>'_profile._payment_information.variant_1',
+                'title' => 'Payment Page 1',
+                'title_status' => 0,
+                'sub_title' => 'Payment Page 1',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+            'checkout_page1' => [
+                'key' =>'_profile._checkout.variant_1',
+                'title' => 'Checkout Page 1',
+                'title_status' => 0,
+                'sub_title' => 'Checkout Page 1',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
 
 
         ];
 
 
-        function seed_items($item, $sug= null){
+        function seed_items($item, $sug = null){
 
             if($sug == null){
+                $homepage =  VarinatSuggession::where('key', $item['key'])->first();
+                if(!$homepage){
                     $homepage = new VarinatSuggession();
-                }else{
-                    $homepage = new HomePageManage();
-                    $homepage->controlby = $sug;
-
                 }
+
+            }else  {
+                $homepage =  HomePageManage::where(['key'=> $item['key'], 'controlby'=> $sug])->first();
+                if(!$homepage){
+                    $homepage = new HomePageManage();
+                }
+                $homepage->controlby = $sug;
+            }
+
+
                 $homepage->key = $item['is_banner'] ?? 0;
                 $homepage->key = $item['key'];
                 $homepage->title = $item['title'];
@@ -818,8 +868,11 @@ class VarinatSuggessionSeeder extends Seeder
                 $homepage->background_color = $item['background_color'];
                 $homepage->view_all_status = $item['view_all_status'];
                 $homepage->background_type = $item['background_type'];
+                $homepage->short_read_more_page_url = '#';
+                $homepage->view_all_page_url = '#';
                 $homepage->save();
-            }
+
+        }
 
 
 
@@ -934,6 +987,23 @@ class VarinatSuggessionSeeder extends Seeder
 
          $about_us_id = Page::where('page_type', 'profile_cart')->first();
          $ecom_home = [ 'page_title1','profile_cart_1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+
+
+         $about_us_id = Page::where('page_type', 'checkout_page')->first();
+         $ecom_home = [ 'page_title1','checkout_page1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+
+         $about_us_id = Page::where('page_type', 'payment_page')->first();
+         $ecom_home = [ 'page_title1','payment_page1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);

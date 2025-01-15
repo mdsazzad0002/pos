@@ -5,6 +5,7 @@
     $contact_page = \App\Models\Page::where('page_type', 'contact')->first();
     $about_page = \App\Models\Page::where('page_type', 'about')->first();
     $register_page = \App\Models\Page::where('page_type', 'register')->first();
+    $profile_dashboard = \App\Models\Page::where('page_type', 'profile_dashboard')->first();
 
     if(!isset($wishlist_page)){
         $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
@@ -115,13 +116,24 @@
 
                 <div class="header-buttons">
                     @if($register_page)
-                    <a href="{{ url($register_page->slug) }}" class="button-block align-items-sm-unset align-items-end">
+
+                    @if(auth()->guard('customer')->user())
+                    <a href="{{ url($profile_dashboard->slug) }}" class="button-block align-items-sm-unset align-items-end">
                         <img src="{{asset('uploads/')}}/users/user-3.png" alt="" class="user">
                         <div>
-                            <p>{{ $register_page->name ?? '' }}</p>
-                            <h6>Account</h6>
+                            <p>Welcome</p>
+                            <h6>{{ auth()->guard('customer')->user()->name ?? '' }}</h6>
                         </div>
-                    </a>
+                        </a>
+                        @else
+                        <a href="{{ url($register_page->slug) }}" class="button-block align-items-sm-unset align-items-end">
+                            <img src="{{asset('uploads/')}}/users/user-3.png" alt="" class="user">
+                            <div>
+                                <p>{{ $register_page->name ?? '' }}</p>
+                                <h6>Account</h6>
+                            </div>
+                            </a>
+                        @endif
                     @endif
                     @if($wishlist_page)
 

@@ -18,60 +18,46 @@
 
             <div class="col-12">
                 <div class="row">
+                    {{-- {{ dd($customer->order) }} --}}
 
-                    @forelse ( $customer->addressable as $address)
+                    @forelse ( $customer->order as $order)
 
                     <div class="col-6 mt-2">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">Address <span> #1</span></div>
+                            <div class="card-header d-flex justify-content-between">Order_information <span> #1</span></div>
                             <div class="card-body">
                                 <table class="table table-bordered table-striped table-hover">
                                     {{-- {{ $customers }} --}}
-                                    <tr>
-                                        <td>Name :</td>
-                                        <td> {{ $address->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email :</td>
-                                        <td> {{ $address->email }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone :</td>
-                                        <td> {{ $address->phone }}</td>
-                                    </tr>
-
-                                    <tr>
+                                    {{-- <tr>
                                         <td>Address :</td>
                                         <td> {{ $address->address }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Apartment :</td>
-                                        <td> {{ $address->address_optional }}</td>
+                                        <td>village :</td>
+                                        <td> {{ $address->village }}</td>
                                     </tr>
                                     <tr>
-                                        <td>District :</td>
-                                        <td> {{ $address->town }}</td>
+                                        <td>post :</td>
+                                        <td> {{ $address->post }}</td>
                                     </tr>
-
                                     <tr>
-                                        <td>Post Code :</td>
-                                        <td> {{ $address->postal }}</td>
+                                        <td>post_code :</td>
+                                        <td> {{ $address->post_code }}</td>
                                     </tr>
-
                                     <tr>
-                                        <td>Country :</td>
+                                        <td>stay_time :</td>
+                                        <td> {{ $address->stay_time }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>country :</td>
                                         <td> {{ $address->country }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>State :</td>
-                                        <td> {{ $address->state }}</td>
                                     </tr>
                                     <tr>
                                         <td>updated_at :</td>
                                         <td> {{ $address->updated_at?->format('d-M-Y h:i A') }}</td>
-                                    </tr>
+                                    </tr> --}}
                                 </table>
-                           
+
 
                             </div>
                         </div>

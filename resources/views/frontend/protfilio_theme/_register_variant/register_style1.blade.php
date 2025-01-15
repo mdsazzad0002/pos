@@ -9,17 +9,7 @@ if(auth()->guard('customer')->user()){
 @endphp
 <main class="main-wrapper bg-lightest-gray">
 
-    <!-- Title Banner Start -->
-    <section class="title-banner">
-        <div class="container-fluid">
-            <div class="banner-wrapper">
-                <img src="assets/media/banner/left-image.png" alt="" class="banner-image1">
-                <h1 class="dark-black fw-600">My Account</h1>
-                <img src="assets/media/banner/right-image.png" alt="" class="banner-image2">
-            </div>
-        </div>
-    </section>
-    <!-- Title Banner End -->
+
 
     <section class="my-account py-40">
         <div class="container-fluid">
@@ -28,7 +18,7 @@ if(auth()->guard('customer')->user()){
                     <div class="account account-1">
                         <h4 class="mb-12">Login</h4>
                         <p class="mb-32 light-gray">Please Enter your details to Sign In.</p>
-                        <form id="loginForm" class="contact-form">
+                        <form id="loginForm" class="contact-form" method="POST" action="{{ route('customer_login')  }}" data-redirect="{{ url($profile_dashboard->slug) }}">
                             @csrf
                             <div class="row">
                                 {{-- <div class="col-sm-6">
@@ -87,7 +77,7 @@ if(auth()->guard('customer')->user()){
                     <div class="account">
                         <h4 class="mb-12">Register</h4>
                         <p class="mb-32 light-gray">Please Enter your detail to Sign Up.</p>
-                        <form class="contact-form" id="registerForm">
+                        <form class="contact-form" id="registerForm" method="POST" action="{{ route('customer_register') }}" data-redirect="{{ url($profile_dashboard->slug) }}">
                             @csrf
                             <div class="row">
                                 {{-- <div class="col-sm-6">
@@ -160,47 +150,7 @@ if(auth()->guard('customer')->user()){
 @push('js')
 
 <script>
-    $(document).ready(function () {
-        $('#registerForm').on('submit', function (e) {
-            e.preventDefault();
-
-            let formData = $(this).serialize();
-
-            $.ajax({
-                url: '{{ route('customer_register') }}',
-                type: 'POST',
-                data: formData,
-                // processData: false,
-                // contentType: false,
-                success: function (response) {
-                    // alert('Form submitted successfully!');
-                    // console.log(response);
-                    if(response.type == 'success'){
-                        @php
-                            if(!isset($profile_dashboard )){
-                                $profile_dashboard  = \App\Models\Page::where('status', 1)->where('page_type', 'profile_dashboard')->first();
-                            }
-                        @endphp
-                        window.location.href = ''
-                    }
-                    // $('#registerForm')[0].reset();
-                },
-                error: function (xhr, status, error) {
-                    if (xhr.status === 422) {
-                        const errors = xhr.responseJSON.errors;
-                        if (errors.email) {
-                            alert(errors.email[0]);
-                        } else {
-                            alert('Validation failed. Please check your input.');
-                        }
-                    } else {
-                        alert('There was an error submitting the form.');
-                    }
-                }
-            });
-        });
-    });
-
+    // Register account
     document.addEventListener("DOMContentLoaded", () => {
         const togglePassword = document.querySelector(".toggle-password");
         const passwordInput = document.querySelector(".password-input");
@@ -211,39 +161,13 @@ if(auth()->guard('customer')->user()){
             passwordInput.setAttribute("type", type);
         });
     });
-</script>
-<script>
-    $(document).ready(function() {
-    $('#loginForm').on('submit', function(e) {
-        e.preventDefault();
 
-        var formData = new FormData(this);
-        $.ajax({
-            url: '{{ route('customer_login') }}',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                if (response.success) {
-                    window.location.href = response.redirect_url;
-                } else {
-                    alert('Login failed: ' + response.message);
-                }
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors;
-                if (errors.email) {
-                    alert(errors.email[0]);
-                } else if (errors.password) {
-                    alert(errors.password[0]);
-                } else {
-                    alert('Something went wrong. Please try again later.');
-                }
-            }
-        });
-    });
-});
+    // end Register account
+</script>
+
+
+<script>
+// Login account
 document.addEventListener("DOMContentLoaded", () => {
     const toggleSignPassword = document.querySelector(".toggleSign-password");
     const passwordSignInput = document.querySelector(".signPassword");
@@ -261,9 +185,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
+// end Login account
 </script>
 @endpush
+
+
 
 @push('css')
     <style>
@@ -276,3 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     </style>
 @endpush
+
+
+

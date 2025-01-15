@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\order as orderclass;
 
 class customer extends Authenticatable
 {
@@ -25,6 +26,10 @@ class customer extends Authenticatable
     public function addressable()
     {
         return $this->morphMany(Address::class, 'addressable');
+    }
+
+    public function order(){
+        return $this->hasMany(orderclass::class, 'customer_id', 'id');
     }
 
 }

@@ -530,12 +530,15 @@ var MyScroll = "";
       });
     },
 
+
+
     // Form Validation
     formValidation: function () {
       if ($(".contact-form").length) {
         $(".contact-form").validate();
       }
     },
+
 
     // Contact Form
     contactForm: function () {
@@ -544,6 +547,7 @@ var MyScroll = "";
 
         var current_action = this.action;
         var current_method = this.method;
+        var current_redirect = this.getAttribute("data-redirect");
 
         if ($(".contact-form").valid()) {
           var _self = $(this);
@@ -551,6 +555,8 @@ var MyScroll = "";
             .closest("div")
             .find('button[type="submit"]')
             .attr("disabled", "disabled");
+
+
           var data = $(this).serialize();
           console.log(_self.action)
           $.ajax({
@@ -562,13 +568,13 @@ var MyScroll = "";
                 console.log(data.success)
               $(".contact-form").trigger("reset");
               _self.find('button[type="submit"]').removeAttr("disabled");
-              if (data.success) {
-                document.getElementById("message").innerHTML =
-                  "<h6 class='color-primary mt-3 p-3 bg-warning rounded'>"+data.success+"</h6>";
+
+              if (data.type == 'success') {
+                    window.location.href = current_redirect;
               } else {
-                document.getElementById("message").innerHTML =
-                  "<h6 class='color-primary mt-3  p-3 bg-danger rounded'>There is an error</h6>";
+                alert('Credential not valid. Please try again.');
               }
+
               $("#messages").show("slow");
               $("#messages").slideDown("slow");
               setTimeout(function () {

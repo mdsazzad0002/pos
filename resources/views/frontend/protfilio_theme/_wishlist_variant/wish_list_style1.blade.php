@@ -72,20 +72,19 @@
                             </a>
                         </div>
                         <div class="d-block text-start">
-                            <h6><a href="{{ url($view_page->slug) }}?slug=${product.slug}?slug=${product.slug}">${product.name}</a></h6>
+                            <h6><a href="{{ url($view_page->slug) }}?slug=${product.slug}">${product.name}</a></h6>
                         </div>
                         </div>
                     </td>
                     <td>
-                        <p class="fw-500">{{ settings('currency_symbol', 9) }} ${
-                    product.variant_on ? "In Variant" : product.selling_price
-                    }</p>
+                        <p class="fw-500">{{ settings('currency_symbol', 9) }} ${ product.variant_on == "1" ? "In Variant" : product.selling_price }</p>
                     </td>
                     <td>
-                        <a href="{{ url($view_page->slug) }}?slug=${product.slug}?slug=${product.slug}" class="cus-btn-3">View Details</a>
+                        <a href="{{ url($view_page->slug) }}?slug=${product.slug}" class="cus-btn-3">View Details</a>
                     </td>
                     </tr>
                     `;
+                    // console.log(product)
             });
         }
         $('#wishlist_list').html(html);

@@ -53,7 +53,10 @@ class ServiceSeeder extends Seeder
         ];
 
         foreach($data as $item){
-            $service =  new Service;
+            $service = Service::where('title', $item['title'])->first();
+            if(!$service){
+                $service =  new Service;
+            }
             $service->icon_class = $item['icon_class'];
             $service->title = $item['title'];
             $service->short_description = $item['short_description'];

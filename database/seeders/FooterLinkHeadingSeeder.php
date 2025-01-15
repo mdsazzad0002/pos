@@ -16,7 +16,7 @@ class FooterLinkHeadingSeeder extends Seeder
         $data = [
             [
                 'title'=> 'Useful Links',
-                
+
                 'status'=> 1
             ],
             [
@@ -36,7 +36,10 @@ class FooterLinkHeadingSeeder extends Seeder
             ],
         ];
         foreach($data as $key => $item){
-            $footehead = new FooterLinkHeading;
+            $footehead =  FooterLinkHeading::where('title', $item['title'])->first();
+            if(!$footehead){
+                $footehead = new FooterLinkHeading;
+            }
             $footehead->title = $item['title'];
 
             $footehead->status = $item['status'];

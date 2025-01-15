@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('customer_id')->default(0);
             $table->bigInteger('order_id')->default(0);
-            $table->string('product_ids')->default(0);
+            $table->text('product_ids')->default(0);
             $table->longText('product_json')->nullable();
             $table->string('delivery_status')->default(0);
             $table->integer('quantity')->default(0);

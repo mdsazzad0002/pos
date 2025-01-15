@@ -12,6 +12,14 @@
         $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
     }
 
+    if(!isset($checkout_page)){
+        $checkout_page = \App\Models\Page::where('page_type', 'checkout_page')->first();
+    }
+
+    if(!isset($payment_page)){
+        $payment_page = \App\Models\Page::where('page_type', 'payment_page')->first();
+    }
+
     if(!auth()->guard('customer')->user()){
         echo '<script>window.location.href="'.url($register_page->slug).'"</script>';
         exit();
@@ -20,7 +28,7 @@
 
 @endphp
 
-@include('frontend.protfilio_theme._variant_manage.page_title',['title'=> 'Profile'])
+
 <br>
 <br>
 <div class="container-fluid">
@@ -44,18 +52,31 @@
                         <a class="{{ Request::is($profile_dashboard->slug) ? 'active' : '' }}" href="{{ url($profile_dashboard->slug) }}"><i class="bi bi-speedometer2"></i> {{ $profile_dashboard->name }}</a>
                     </li>
                 @endif
+
+                @if($cart_page)
+                    <li>
+                        <a href="{{ url($cart_page->slug) }}" class="{{ Request::is($profile_dashboard->slug) ? 'active' : '' }}"><i class="bi bi-basket-fill"></i> Cart Item</a>
+                    </li>
+                @endif
+
+                @if($wishlist_page)
                 <li>
-                    <a href="{{ url($cart_page->slug) }}"><i class="bi bi-basket-fill"></i> Cart Item</a>
+                    <a href="{{ url($wishlist_page->slug) }}" class="{{ Request::is($wishlist_page->slug) ? 'active' : '' }}"><i class="bi bi-heart-fill"></i> Wishlist</a>
                 </li>
+                @endif
+
+                @if($checkout_page)
                 <li>
-                    <a href="{{ url($wishlist_page->slug) }}"><i class="bi bi-heart-fill"></i> Wishlist</a>
+                    <a href="{{ url($checkout_page->slug) }}" class="{{ Request::is($checkout_page->slug) ? 'active' : '' }}"><i class="bi bi-border-all"></i> Checkout item</a>
                 </li>
+                @endif
+
+                @if($payment_page)
                 <li>
-                    <a href="#"><i class="bi bi-border-all"></i> Checkout item</a>
+                    <a href="{{ url($payment_page->slug) }}" class="{{ Request::is($payment_page->slug) ? 'active' : '' }}"><i class="bi bi-wallet-fill"></i> Payment</a>
                 </li>
-                <li>
-                    <a href="#"><i class="bi bi-wallet"></i> Payment Information</a>
-                </li>
+                @endif
+
                 @if($profile_location)
                     <li>
                         <a class="{{ Request::is($profile_location->slug) ? 'active' : '' }}" href="{{ url($profile_location->slug) }}"><i class="bi bi-geo-alt-fill"></i> {{ $profile_location->name }}</a>
@@ -67,13 +88,13 @@
             </ul>
         </div>
         <div class="col-lg-8">
-            <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center" style="    border-left: 4px solid green;">
+            <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center mb-2" style="    border-left: 4px solid green;">
                 <div class="font-weight-bold">
                     <i class="bi bi-exclamation-triangle-fill text-white"></i> Please Verify your mail address.
                 </div>
                 <a class="btn btn-success"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
 
-             </div>
+            </div>
             @yield('profile')
         </div>
     </div>

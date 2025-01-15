@@ -22,6 +22,7 @@ use App\Models\order;
 use App\Models\VariantOption;
 use App\Models\Vat;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,7 +30,9 @@ class HomeController extends Controller
 {
     public function index(Request $request, $view = null){
 
-        if( $view == null){
+        if($request->has('preview_page')){
+              $homepage = Page::findOrFail($request->preview_page);
+        }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
             $homepage = Page::where('status', 1)->where('slug', $view)->first();
@@ -37,19 +40,14 @@ class HomeController extends Controller
 
         if($homepage){
 
+            $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
+
 
             if($request->has('preview_page')){
-                $items_id = $request->preview_page;
-
-                $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->where('id', $items_id)->orderBy('order', 'asc')->get();
-
                 return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage', 'request'));
             }
-
-            $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
-            // $sliders = slider::where('status', 1)->get();
-
             return view('frontend.protfilio_theme.home.index', compact(   'homepagemanage', 'homepage', 'request'));
+
 
         }else{
             if(env('APP_DEBUG') == true){
@@ -606,10 +604,13 @@ class HomeController extends Controller
     public function checkout(Request $request){
 
         $request->validate([
-            
+
         ]);
-        
-        if(!auth()->guard('customer')->check()){
+
+        // return auth()->guard('customer')->user();
+
+        if(!auth()->guard('customer')->user()){
+
             $user = customer::where('email', $request->email)->first();
             if($user){
                 return json_encode([
@@ -618,6 +619,7 @@ class HomeController extends Controller
                     'message'=> 'User Already Exists please login first',
                 ]);
             }
+
 
 
             $user = new customer();
@@ -630,7 +632,7 @@ class HomeController extends Controller
             $user->credit_limit = 20000;
 
            $user->save();
-         
+
             auth()->guard('customer')->login($user);
         }else{
             $user = auth()->guard('customer')->user();
@@ -639,25 +641,40 @@ class HomeController extends Controller
 
         $address_id = 0;
         $billingaddress_id = 0;
-       
+
         if(!$request->has('address_id')){
-            $address = new address();
-            $address->name = $request->name . ' ' . $request->lname;
-            $address->email = $request->email;
-            $address->phone = $request->phone;
-            $address->address = $request->address;
-            $address->address_optional = $request->apartment;
-            $address->district = $request->town;
-            $address->country = $request->country ;
-            $address->state = $request->state;
-            $address->postal = $request->postal;
+
+            $address_find = address::where('addressable_type', customer::class)
+            ->where('addressable_id', auth()->guard('customer')->user()->id)
+            ->where('address', $request->address)
+            ->where('email', $request->email)
+            ->where('phone', $request->phone)
+            ->where('post_code', $request->post_code)
+            ->where('country', $request->country)
+            ->where('state', $request->state)
+            ->first();
+
+            if($address_find){
+                $address_id = $address_find->id;
+            }else{
+                $address = new address();
+                $address->name = $request->name . ' ' . $request->lname;
+                $address->email = $request->email;
+                $address->phone = $request->phone;
+                $address->address = $request->address;
+                $address->address_optional = $request->apartment;
+                $address->district = $request->town;
+                $address->country = $request->country ;
+                $address->state = $request->state;
+                $address->postal = $request->postal;
 
 
-            $address->addressable_type = customer::class;
-            $address->addressable_id = $user->id;
-            $address->save();
+                $address->addressable_type = customer::class;
+                $address->addressable_id = $user->id;
+                $address->save();
 
-            $address_id = $address->id;
+                $address_id = $address->id;
+            }
         }else{
             $address_id = $request->address_id;
         }
@@ -689,7 +706,6 @@ class HomeController extends Controller
         }
 
 
-      
 
 
 
@@ -697,15 +713,16 @@ class HomeController extends Controller
 
 
 
-        if(auth()->guard('customer')->check()){
-            
+
+        if(auth()->guard('customer')->user()){
+
              $card_information = $this->cart_details($request);
+            // dd($card_information['subtotal']['product_ids']);
 
-           
             $order =  new order();
             $order->customer_id = $user->id;
             $order->order_id = time();
-            
+
             $order->address = $address_id;
             $order->billing_address = $billingaddress_id;
 
@@ -721,7 +738,7 @@ class HomeController extends Controller
             $order->status = 1;
             $order->note = $request->textarea ?? '';
             $order->save();
-            
+
 
         }
 

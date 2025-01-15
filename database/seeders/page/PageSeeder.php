@@ -157,11 +157,29 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'profile_location',
             ],
+            [
+                'name' => 'Order',
+                'slug' => 'user/order',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'checkout_page',
+            ],
+            [
+                'name' => 'Payment Information',
+                'slug' => 'user/payment-info',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'payment_page',
+            ],
 
 
         ];
         foreach($data as $item){
-            $page = new Page();
+            $page = Page::where('slug', $item['slug'])->first();
+            if(!$page){
+                $page = new Page();
+            }
+
             $page->name = $item['name'];
             $page->slug = $item['slug'];
             $page->page_type = $item['page_type'];

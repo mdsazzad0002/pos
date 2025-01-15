@@ -19,8 +19,10 @@ class order extends Model
     public function customer(){
         return $this->hasOne(customer::class, 'id', 'customer_id');
     }
-    
+
     public function getTotalPriceAttribute(){
         return (int) $this->quantity * (int) $this->price;
     }
+
+    
 }
