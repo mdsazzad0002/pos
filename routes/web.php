@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\admin\CustomerController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\Auth\LoginCheckController;
 use App\Http\Controllers\payment\Paypal\PaymentController;

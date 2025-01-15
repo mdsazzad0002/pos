@@ -9,6 +9,7 @@ use App\Models\category;
 use App\Models\reviewProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Discount;
 
 class product extends Model
 {
@@ -73,7 +74,7 @@ class product extends Model
     }
 
     public function discounts_info(){
-        return discount::whereIn('id', explode(',',$this->discount_id))->get();
+        return Discount::whereIn('id', explode(',',$this->discount_id))->get();
     }
 
     public function variant_option_info(){
