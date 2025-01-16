@@ -482,12 +482,11 @@ class HomeController extends Controller
             $product_cart = session()->get( $source_type, []);
             $data_array = [
                 'subtotal'=> [
-                    'price' => 0,
-                    'vat' => 0,
+                    'pre_price'=>0,
                     'quantity' => 0,
-                    'total_price' => 0,
-                    'total_vat' => 0,
                     'discount' => 0,
+                    'vat' => 0,
+                    'price' => 0,
                     'coupon'=>0,
                     'coupon_without_price' => 0,
                     'quantitys'=>[],
@@ -563,10 +562,11 @@ class HomeController extends Controller
                     ];
 
 
-                    $data_array['subtotal']['quantitys'][$product->id]=  $cal_quantity;
+                    $data_array['subtotal']['quantitys'][$product->id] =  $cal_quantity;
+                    $data_array['subtotal']['pre_price'] +=   $cal_price * $cal_quantity;
                     $data_array['subtotal']['quantity'] +=  $cal_quantity;
-                    $data_array['subtotal']['vat'] +=  $cat_vat_price;
-                    $data_array['subtotal']['discount'] +=  $discount_price;
+                    $data_array['subtotal']['vat'] +=  $cat_vat_price * $cal_quantity;
+                    $data_array['subtotal']['discount'] +=  $discount_price * $cal_quantity;
 
                     $data_array['subtotal']['price'] +=   $cal_total_with_vat * $cal_quantity;
 
@@ -592,7 +592,7 @@ class HomeController extends Controller
 
             }
 
-
+            // dd($data_array);
             return $data_array;
             // return response()->json($data_array);
 

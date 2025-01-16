@@ -287,7 +287,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
         // homepagemanage it's allover pagecontrol
         Route::resource('homePageManage', HomePageManageController::class)->names('homePageManage');
-        Route::get('/homePageManage/delete/{homePageManage}', [HomePageManageController::class, 'delete'])->name('homePageManage.delete');
         Route::get('/homePageManage/homePageManage/get', [HomePageManageController::class, 'homePageManage'])->name('homePageManage.select');
 
 

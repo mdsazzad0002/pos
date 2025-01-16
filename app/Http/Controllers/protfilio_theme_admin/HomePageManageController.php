@@ -35,13 +35,12 @@ class HomePageManageController extends Controller
     public function store(Request $request)
     {
 
-         $homePageManage = VarinatSuggession::find($request->VarinatSuggession);
-         $homePageManageArray = $homePageManage->toArray();
-        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater']);
-
+        $homePageManage = VarinatSuggession::find($request->items_id);
+        $homePageManageArray = $homePageManage->toArray();
+        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater', 'upload_id', 'image']);
         $homePageManage['controlby'] = $request->page_id;
-        $homePageManage['title'] = $request->title;
-        $homePageManage['sub_title'] = $request->subtitle;
+
+
 
         // Ensure the variable is properly named
         HomePageManage::create($homePageManage);
@@ -102,6 +101,7 @@ class HomePageManageController extends Controller
     $homePageManage->short_read_more_status = $request->short_read_more_status; // Short read more status
     $homePageManage->view_all_status = $request->view_all_status; // View all status
     $homePageManage->status = $request->status; // General status
+
     $homePageManage->background_type = $request->background_type; // Background type
     $homePageManage->background = $request->background; // Background value
     $homePageManage->background_color = $request->background_color; // Background color
@@ -109,7 +109,12 @@ class HomePageManageController extends Controller
     // Save the updated homePageManage
     $homePageManage->save();
 
-    return response()->json(['success' => true, 'message' => 'Page updated successfully']);
+    return response()->json([
+        'title'=>'Successfully  Added Items',
+        'type'=>'success',
+        'refresh'=>'true',
+    ]);
+
     }
 
 

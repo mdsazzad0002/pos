@@ -70,7 +70,7 @@ class VarinatSuggessionController extends Controller
             if ($request->has('q')) {
                 $query->where('title', 'LIKE', '%' . $request->q . '%');
             }
-        })->select('id', 'title as text')->get();
+        })->get();
 
         $result_make = [];
         $result_make['items']=$data_result;

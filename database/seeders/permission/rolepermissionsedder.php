@@ -106,7 +106,7 @@ class rolepermissionsedder extends Seeder
                 'order create',
                 'order edit',
                 'order delete',
-                
+
                 // offerbanner
                 'offerbanner read',
                 'offerbanner create',
@@ -228,7 +228,10 @@ class rolepermissionsedder extends Seeder
             ];
 
 
+            Permission::truncate();
+
             foreach ($permission_data as $data) {
+
                 $permission = Permission::create(['name' => $data]);
             }
 

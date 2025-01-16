@@ -3,10 +3,11 @@ Product Info
     <thead>
         <tr>
 
+            <th>Image</th>
             <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Total</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Quantity</th>
+            <th class="text-right">Total</th>
         </tr>
     </thead>
     <tbody>
@@ -20,32 +21,26 @@ Product Info
     @endphp
     @foreach ($product_data->product as $key=> $items )
     <tr>
+        {{-- {{ dd($items->product->selling_price) }} --}}
         <td>
-            <img style="width: 100px" src="{{ $items->product->image_url }}" alt="">
+            <img style="width: 100px" src="{{ dynamic_asset($items->product->upload_id) }}" alt="">
 
         </td>
         <td>
             {{ $items->product->name }} <br>
             {{ ($items->product_variant)->name ?? '' }}
         </td>
-        <td>{{ $items->quantity }}</td>
-        <td>{{ $items->price }}</td>
+        <td class="text-right">
+            {{ $items->product->variant_on == 1 ? ($items->product_variant->selling_price  ?? '') :  ($items->product->selling_price ?? '') }} <br>
+        </td>
+        <td class="text-right">{{ $items->quantity }}</td>
+        <td class="text-right">{{ $items->single_subtotal }} {{ settings('currency_symbol', 9) }}</td>
 
     </tr>
 
     @endforeach
 
-    <tr>
 
-
-        <td>Price : {{ $product_data->subtotal->price }}</td>
-        <td>Vat: {{ $product_data->subtotal->discount }}</td>
-        <td>Discount: {{ $product_data->subtotal->discount }}</td>
-        <td>Vat: {{ $product_data->subtotal->vat }}</td>
-        <td>Coupon : {{ $product_data->subtotal->coupon }}</td>
-        <td>Subtotal : {{ $product_data->subtotal->total_price }}</td>
-
-    </tr>
 
 
     </tbody>
@@ -53,6 +48,32 @@ Product Info
 
 </table>
 
+<table class="table talbe-bordered border table-striped table-hover text-right">
+   <tbody>
+
+            <tr>
+
+        {{-- {{ dd($product_data) }} --}}
+                <td>Price: </td><td>{{ $product_data->subtotal->pre_price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Discount: </td><td> {{ $product_data->subtotal->discount ?? null }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Vat: </td><td> {{ $product_data->subtotal->vat ?? null }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Total Price : </td><td>{{ $product_data->subtotal->price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Coupon :</td><td> {{ $product_data->subtotal->coupon ?? null }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Subtotal : </td><td>{{ $product_data->subtotal->coupon_without_price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+
+            </tr>
+   </tbody>
+</table>
 
 
 

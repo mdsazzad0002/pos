@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Offerbanner as offerbanner;
+use App\Models\OfferBanner as offerbanner;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

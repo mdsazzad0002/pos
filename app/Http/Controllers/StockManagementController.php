@@ -22,11 +22,12 @@ class StockManagementController extends Controller
     }
     public function stockalert()
     {
-           if (request()->ajax()) {
+
+        if (request()->ajax()) {
             return DataTables::make(product::query()->whereColumn('quantity', '<=', 'alert_quantity'))
                 ->make(true);
-
         }
+        
         return view('admin.stock.alert');
     }
 

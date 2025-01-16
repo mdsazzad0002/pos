@@ -78,17 +78,20 @@ sidebar-dark-primary elevation-4">
                                 <p>Order</p>
                             </a>
                         </li>
+                    @if(env('APP_ENV') == 'local')
                         @can('order create')
-                        <li class="nav-item">
-                            <a href="{{ route('admin.order.create') }}" class="nav-link ">
-                                <i class="fas fa-cart-plus nav-icon"></i>
-                                <p>Create</p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.order.create') }}" class="nav-link ">
+                                    <i class="fas fa-cart-plus nav-icon"></i>
+                                    <p>Create</p>
+                                </a>
+                            </li>
                         @endcan
+                    @endif
                     </ul>
                 </li>
                 @endcan
+
 
 
 
@@ -181,11 +184,11 @@ sidebar-dark-primary elevation-4">
 
                     </ul>
                 </li>
+               
 
 
 
-
-
+                @if(env('APP_ENV') == 'local')
                 @can('stock read')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -211,6 +214,7 @@ sidebar-dark-primary elevation-4">
                     </ul>
                 </li>
                 @endcan
+                @endif
 
 
                 @can('customer read')
@@ -242,6 +246,8 @@ sidebar-dark-primary elevation-4">
                         </li>
                         @endcan
 
+                        @if(env('APP_ENV') == 'local')
+
                         @can('purchase read')
                         <li class="nav-item">
                             <a href="{{ route('admin.purchase.index') }}" class="nav-link">
@@ -259,6 +265,7 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @endif
 
                     </ul>
                 </li>
@@ -284,6 +291,7 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @if(env('APP_ENV') == 'local')
 
                         @can('user read')
                         <li class="nav-item">
@@ -312,6 +320,7 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+                        @endif
 
                         @can('role read')
                         <li class="nav-item">
@@ -325,7 +334,7 @@ sidebar-dark-primary elevation-4">
                     </ul>
                 </li>
 
-
+                @if(env('APP_ENV') == 'local')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-user-cog nav-icon"></i>
@@ -394,6 +403,7 @@ sidebar-dark-primary elevation-4">
 
                     </ul>
                 </li>
+                @endif
 
 
 

@@ -1,6 +1,6 @@
 
 <!-- Button trigger modal -->
-<button type="button" hidden  class="btn btn-primary upload_ajax_modalbtn" data-toggle="modal" data-target="#upload_ajax_modal">
+<button type="button" hidden  class="btn btn-primary upload_ajax_modalbtn" data-bs-toggle="modal" data-bs-target="#upload_ajax_modal">
     Launch demo modal
 </button>
 
@@ -11,19 +11,24 @@
             <div class="modal-header pb-0 pl-0 pt-0">
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+
                          <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Upload</button>
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Upload</button>
                         </li>
+
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab"  onclick="load_image_ajax()" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Image</button>
+                            <button class="nav-link" id="profile-tab"  onclick="load_image_ajax()" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Image</button>
                         </li>
+
 
                     </ul>
-                <button type="button" class="close pb-0 pt-4" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                </button>
+
+                    <button type="button" class="close pb-0 pt-4" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
 
             </div>
+
             <div class="modal-body">
 
                   <div class="tab-content" id="myTabContent">
@@ -52,6 +57,9 @@
                     </div>
 
                   </div>
+
+
+
 
             </div>
 
@@ -220,7 +228,7 @@ dropArea.addEventListener('dragover', () => {
         var src_img = $(img_tag_form_upload_window).attr('src');
         var img_id = $(img_tag_form_upload_window).data('id');
 
-
+console.log(currnet_element_selected);
         //setting img info selecting window
        var selected_eleemtn =  $(currnet_element_selected).find('input');
        var selected_eleemtn_img =  $(currnet_element_selected).find('img');

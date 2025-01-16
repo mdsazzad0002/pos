@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\protfilio_theme_admin;
 
-use App\Models\faq;
+use App\Models\Faq as faq;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Str;

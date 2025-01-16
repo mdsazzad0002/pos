@@ -20,7 +20,7 @@
 
        </div>
 
-        <button onclick="html_render()">Refresh</button>
+        <button onclick="refresh_iframe()">Refresh</button>
         <div>
             @can('page create')
                 {{-- <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  page" data-href="{{ route('admin.homePageManage.create', 'page_id='.$id) }}">+ Add New page</button> --}}
@@ -43,41 +43,11 @@
 
             <div class="add_new_data_render">
 
-                <form action="{{ route('admin.homePageManage.store') }}" method="post" enctype="multipart/form-data">
-                    @csrf
+                    <label for="">Select Layout </label>
 
-                <input type="number" name="page_id" value="{{ $id }}" hidden>
-                    <div class="form-group mb-2">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" class="form-control mb-2" value="" id="title" placeholder="Enter title">
+                    <div class="add_to_layout_container">
+                            {{-- load by ajax --}}
                     </div>
-
-                    <div class="form-group mb-2">
-                        <label for="subtitle">Subtitle</label>
-                        <input type="text" name="subtitle" class="form-control mb-2" value="" id="subtitle" placeholder="Enter subtitle">
-                    </div>
-
-                    <div class="">
-                        <label for="">Select Layout </label>
-                        <div class="input-group mb-3">
-                            <select required type="text" name="VarinatSuggession" data-model="true" data-url="{{ route('admin.VarinatSuggession.select') }}" data-ajax="true" class="form-control input-group-prepend select2" placeholder="VarinatSuggession" aria-label="VarinatSuggession" aria-describedby="basic-addon1">
-                                <option value="">Lead Contact</option>
-                            </select>
-
-                        </div>
-                    </div>
-                    <div class="layout_render_box">
-                        <input type="radio" name="layout" value="1">
-                        <img src="{{asset('uploads/')}}/layout/1.png" alt="">
-                    </div>
-
-
-                    {{-- <div class="d-flex justify-content-end">
-                        <button class="btn btn-warning" type="submit">Save</button>
-                    </div> --}}
-
-                </form>
-
             </div>
         </div>
     </div>
@@ -85,80 +55,96 @@
 </div>
 
 
+
+
+
+
+
+
+
+
 @endsection
+
+
+
+
 
 @push('js')
 
+
 <script>
 
-    function submit_ajax_builder(){
 
-        $('.form_ajax_submit').on('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+    function refresh_iframe() {
+        const iframe = document.querySelector('.iframe_preview');
+        iframe.contentWindow.location.reload();
+    }
 
-            var form = $(this);
-            var actionUrl = form.attr('action'); // Get the action URL
+    function format_layout(data){
+        var html_output = '';
 
-            $.ajax({
-                url: actionUrl,
-                type: 'POST',
-                data: form.serialize(), // Serialize form data
-                success: function(response) {
-                    $('#responseMessage').append('<p>' + response.message + '</p>');
-                },
-                error: function(xhr) {
-                    let errors = xhr.responseJSON.errors;
-                    let errorMessages = '';
-                    for (let key in errors) {
-                        errorMessages += '<p>' + errors[key][0] + '</p>'; // Display the first error message
-                    }
-                    $('#responseMessage').append('<div class="error">' + errorMessages + '</div>');
+        data.forEach(element => {
+            console.log(element.image)
+                html_output +=  `
+                <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})">
+                    <img src="${element.image }" alt="" class="img-fulid">
+                    <div>${element.title}</div>
+
+
+                </div>`;
+        });
+
+        return html_output;
+    }
+
+
+
+
+    function load_template(data = ''){
+        $.ajax({
+            type:'get',
+            url:'{{ route('admin.VarinatSuggession.select') }}',
+            data:{
+                q:data
+            },
+            success:function(data){
+                data= JSON.parse(data)
+                data_items = format_layout(data.items);
+                $('.add_to_layout_container').html(data_items);
+
+            }
+
+        });
+    }
+
+
+
+    load_template();
+
+
+
+
+    function add_to_items(items_id, page_id){
+        $.ajax({
+            type:'get',
+            url:'{{ route('admin.homePageManage.store') }}',
+            method:'post',
+            data:{
+                page_id:page_id,
+                items_id:items_id
+            },
+            success:function(data){
+                data= JSON.parse(data)
+
+                if(data.type == 'success'){
+                    refresh_iframe();
                 }
-            });
+
+
+            }
+
         });
-
-
     }
-
-    function sorting(){
-
-    $("#sortable").sortable({
-          update: function(event, ui) {
-            var sortedIDs = $(this).sortable("toArray");
-            $.ajax({
-              url: '{{ route('admin.page.edit_builder_update') }}', // Your server endpoint
-              method: 'POST',
-              data: {
-                order: sortedIDs,
-                'id' : {{ $id }},
-                '_token' : '{{  csrf_token() }}'
-             },
-              success: function(response) {
-                console.log("Order updated successfully:", response);
-              },
-              error: function(xhr, status, error) {
-                console.error("Error updating order:", error);
-              }
-            });
-          }
-        });
-        $("#sortable").disableSelection();
-
-    }
-
-
-    //   function  html_render(){
-    //     $.ajax({
-    //         type: 'get',
-    //         url : '{{ route('admin.homePageManage.show', $id) }}',
-    //         success:function(data){
-    //             $('.html_render').html(data);
-    //             sorting();
-    //             submit_ajax_builder()
-    //         }
-    //     })
-    //   }
-    //   html_render()
 
 
 
@@ -166,27 +152,9 @@
 @endpush
 
 
-
 @push('css')
 <style>
-    ul#sortable {
-        list-style: none;
-        padding-left: 0;
-    }
 
-    ul#sortable li {
-        padding: 15px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        border: 2px solid white;
-        cursor: move;
-        position: relative;
-    }
-    ul#sortable li .btn.btn-danger{
-        position: absolute;
-            top: -20px;
-            right: -20px;
-    }
 
     .html_element_box{
         display: flex;

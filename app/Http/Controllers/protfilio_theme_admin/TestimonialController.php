@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\protfilio_theme_admin;
 
-use App\Models\testimonial;
+use App\Models\Testimonial as testimonial;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
