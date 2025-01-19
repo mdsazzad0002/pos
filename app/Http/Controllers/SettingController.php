@@ -48,6 +48,9 @@ class SettingController extends Controller
             $flag_target = 1;
         }elseif($slug == 'tracking_report' && $key == '27'){
             $flag_target = 1;
+
+        }elseif($slug == 'custom_js_css' && $key == '45'){
+            $flag_target = 1;
         }
 
 

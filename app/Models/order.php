@@ -24,5 +24,10 @@ class order extends Model
         return (int) $this->quantity * (int) $this->price;
     }
 
-    
+
+    public function order_events(){
+        return $this->hasMany(OrderEvent::class, 'order_id', 'id');
+    }
+
+
 }

@@ -1,6 +1,6 @@
 {{-- @extends('frontend.protfilio_theme.layout.master') --}}
 @extends('layout.frontend_ajuba.master')
-
+@section('title', $homepage->name)
 
 @section('content')
 

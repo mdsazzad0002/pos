@@ -284,3 +284,8 @@
 
 
     </script>
+
+
+
+{!! settings('custom_js_footer_code', 45) !!}
+{!! settings('custom_css__footer_code', 45) !!}

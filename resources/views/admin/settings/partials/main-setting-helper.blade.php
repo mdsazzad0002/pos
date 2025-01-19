@@ -17,6 +17,21 @@
 
 <input type="color" class="form-control" placeholder="Enter App Name" name="{{$items_key}}" id="{{ $key }}" value="{{  $items_value}}">
 
+
+@elseif(str_contains($key, 'text'))
+<textarea class="form-control summernote" name="{{$items_key}}" id="{{ $key }}">{{ $items_value }}</textarea>
+
+@elseif(str_contains($key, 'code'))
+<textarea class="form-control" name="{{$items_key}}" id="{{ $key }}">{{ $items_value }}</textarea>
+
+<script>
+    CodeMirror.fromTextArea(document.getElementById("{{ $key }}"), {
+        mode: "javascript",
+        theme: "default",
+        lineNumbers: true,
+    });
+</script>
+
 @elseif(str_contains($key, 'status'))
 <div>
 

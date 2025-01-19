@@ -7,14 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Accessory-Store">
 
-    <title>@yield('title')</title>
+    <title>@yield('title', '')</title>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon.png">
+
+    @include('layout.frontend_ajuba.additional_setting_and_chat.meta_verification')
     @include('layout.frontend_ajuba.partials.css')
 </head>
 
 <body class="tt-smooth-scroll">
+
+
+
+
+
+
+@include('layout.frontend_ajuba.additional_setting_and_chat.tag_management')
+@include('layout.frontend_ajuba.additional_setting_and_chat.chat')
+@include('layout.frontend_ajuba.additional_setting_and_chat.pwa')
+@include('layout.frontend_ajuba.additional_setting_and_chat.cookie')
+
+
+
+
+
+
+
 
     <!-- Main Wrapper Start -->
     <div id="scroll-container" class="main-wrapper">
@@ -55,7 +72,7 @@
     @include('layout.frontend_ajuba.partials.compare_list')
 
     @include('layout.frontend_ajuba.partials.scripts')
-
+    
 
 </body>
 

@@ -407,6 +407,12 @@
 
 
          $('.item_content_summary_html').html(html_data)
+
+
+
+         fbq('track', 'InitiateCheckout');
+         gtag('event', 'begin_checkout');
+
     }
 
 
@@ -484,9 +490,11 @@
             }
         });
     });
-        
-        {{--  console.log(form_data);  --}}
+
+
 
 
 </script>
+
+
 @endpush

@@ -70,6 +70,14 @@
         </li>
 
         <li class="nav-item">
+            <a href="{{ route('admin.setting.index', ['custom_js_css', '45']) }}"
+            class="nav-link">
+                <i class="fas fa-cookie-bite nav-icon"></i>
+                <p>{{ __('custom_js_css') }}</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a href="{{ route('admin.mail.index') }}"
             class="nav-link">
                  <i class="fas fa-envelope-open-text nav-icon"></i>

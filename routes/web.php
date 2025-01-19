@@ -80,9 +80,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-
-
-
+use App\Http\Controllers\TrackingOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -217,6 +215,8 @@ Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
     //SSLCOMMERZ END
 
 });
+
+
 
 Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
     Route::post('/purchase', [PaymentController::class, 'createPayment'])->name('payment.purchase');
@@ -619,15 +619,7 @@ Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
 
 
 
-
-// Route::get('/blog', [HomeController::class, 'blog'])->name('blog.index');
-// Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
-
-
-
-// Route::get('/', [HomeController::class, 'index']);
-// Route::get('/filter', [HomeController::class, 'filter'])->name('filter');
-
+Route::get('tracking_order', [TrackingOrderController::class, 'index'])->name('tracking_order.index');
 
 
 Route::get('/about', [HomeController::class, 'about']);

@@ -1,4 +1,9 @@
-    <!-- All CSS files -->
+    <!-- Favicon -->
+
+
+
+
+<!-- All CSS files -->
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/vendor/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/vendor/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/vendor/slick-slider.css') }}">
@@ -17,3 +22,7 @@
     @stack('css')
     @stack('style')
     @stack('styles')
+
+
+    {!! settings('custom_js_head_code', 45) !!}
+    {!! settings('custom_css__head_code', 45) !!}

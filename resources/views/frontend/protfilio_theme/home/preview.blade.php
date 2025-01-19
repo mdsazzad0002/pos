@@ -3,9 +3,9 @@
 
 @extends('layout.frontend_ajuba.master')
 
+@section('title', $homepage->name)
 
 @section('content')
-
     <ul id="sortable" class="accordion">
             @foreach ($homepagemanage as $items)
             <li id="{{ $items->id }}">
