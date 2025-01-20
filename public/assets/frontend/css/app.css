@@ -1904,7 +1904,7 @@ header .header-section .header-bottom-area .navigation {
 header .header-section .header-bottom-area .navigation .menu-button-right {
   display: flex;
   align-items: center;
-  gap: clamp(24px, 3.333vw, 72px);
+  gap: clamp(5px, 1.333vw, 18px);
 }
 header .header-section .header-bottom-area .navigation .menu-button-right .main-menu__nav {
   margin-left: auto;
@@ -2494,7 +2494,7 @@ header .header-section .mixin-container .input-field button {
   position: relative;
   height: 100%;
   overflow-y: auto;
-  padding-top: 30px;
+  padding-top: 15px;
   padding-bottom: 30px;
   padding-left: 15px;
   padding-right: 15px;
@@ -2513,11 +2513,12 @@ header .header-section .mixin-container .input-field button {
   padding: 0;
 }
 .mobile-nav__wrapper .mobile-nav__content .logo-box {
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   display: flex;
 }
 .mobile-nav__wrapper .mobile-nav__content .logo-box img {
-  width: clamp(120px, 15.625vw, 320px);
+  /* width: clamp(120px, 15.625vw, 320px); */
+  height: 50px;
 }
 .mobile-nav__wrapper .mobile-nav__content .main-menu__list,
 .mobile-nav__wrapper .mobile-nav__content .main-menu__list ul {

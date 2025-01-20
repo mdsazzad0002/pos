@@ -171,6 +171,28 @@ class VarinatSuggessionSeeder extends Seeder
                 'background_type' => 0,
 
             ],
+
+
+            'hero_slider1' => [
+                'key' =>'_hero_variant._hero_slider1',
+                'title' => 'Hero Slider',
+                'title_status' => 0,
+                'sub_title' => 'Hero Slider',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'background' => 1,
+                'is_banner' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+            ],
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
             // ===================================================================
             // ===================================================================
             // ===================================================================
@@ -835,6 +857,7 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 
+
         ];
 
 
@@ -881,7 +904,7 @@ class VarinatSuggessionSeeder extends Seeder
         }
 
         // Home page seeder default
-        $ecom_home = [ 'hero3','category2', 'product4','product1','product2','product3'];
+        $ecom_home = [ 'hero3','category2', 'product4','product1','product2','product3', 'hero_slider1'];
         foreach($ecom_home as $items){
             seed_items($data[$items],1);
         }

@@ -8,6 +8,11 @@
             Name <br />
             <input type="text" class="form-control" id="name" name="name" value="{{ $header_item->name ?? '' }}">
         </label>
+        <label for="slug" class="mb-2">
+            Slug <br />
+            <input type="text" class="form-control" id="slug" name="slug" value="{{ $header_item->slug ?? '' }}">
+        </label>
+        
         <label for="position" class="mb-2">
             Position <br />
             <select name="position" id="position" class="form-control">

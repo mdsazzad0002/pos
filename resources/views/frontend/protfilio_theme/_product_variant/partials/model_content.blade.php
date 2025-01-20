@@ -25,7 +25,11 @@
 <div class="hr-line mb-24"></div>
 <div class="d-flex  gap-16 mb-16">
     <h6>Brand:</h6>
-    <p class="light-gray"><span class="color-primary">{{ $product->brands->name ?? '' }}</span></p>
+    <p class="light-gray"><span class="color-primary">
+        <a href="{{ url($filter_page->slug) }}?brand={{  $product->brand_info->slug ?? '' }}">
+            {{ $product->brand_info->name ?? '' }}
+        </a>
+    </span></p>
 </div>
 <div class="d-flex  gap-16 mb-16">
     <h6>Category:</h6>

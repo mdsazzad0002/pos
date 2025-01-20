@@ -92,5 +92,27 @@
             },800)
         });
 
+
+        function copyToClipboard(text) {
+            // Create a temporary textarea element
+            const textarea = document.createElement('textarea');
+            textarea.value = text; // Set the text to copy
+            document.body.appendChild(textarea); // Add it to the DOM
+            textarea.select(); // Select the text
+            textarea.setSelectionRange(0, textarea.value.length); // For mobile compatibility
+            try {
+                // Attempt to copy to clipboard
+                document.execCommand('copy');
+                console.log('Text copied to clipboard');
+                flasher.success('Text copied to clipboard');
+            } catch (err) {
+                flasher.error('Failed to copy text: '+ err);
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textarea); // Remove the temporary element
+            }
+
+
+       // for datatable format
         var database_dom_format = "<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row mt-2'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>";
 </script>

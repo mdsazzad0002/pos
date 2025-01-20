@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('position')->comment(' left ,  center,  right');
             $table->integer('order')->default(0);
 
-            $table->integer('page_id')->default(0);
-            $table->boolean('is_page')->default(0);
 
-            $table->boolean('is_text')->default(0);
+
+            $table->boolean('key_name')->nullable();
+            $table->boolean('preset')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

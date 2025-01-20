@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\header;
 use App\Models\Page;
+use App\Models\category;
+use App\Models\SubCategory ;
 use Illuminate\Http\Request;
-
+use App\Models\brand;
+use App\Models\Service;
 
 class HeaderController extends Controller
 {
@@ -15,9 +18,13 @@ class HeaderController extends Controller
     public function index()
     {
         $pages = Page::get();
+        $category = category::get();
+        $subcategory = SubCategory::get();
+        $brand = brand::get();
+        $service = Service::get();
 
 
-        return view('admin.protfilio_theme.menu_builder.index', compact(  'pages'));
+        return view('admin.protfilio_theme.menu_builder.index', compact(  'pages', 'category', 'subcategory', 'brand', 'service'));
     }
 
     /**
@@ -35,34 +42,11 @@ class HeaderController extends Controller
     {
         if($request->has('type') && $request->type == 'new'){
             $header = new header;
-
-            if($request->has('pageid')){
-                $page = Page::find($request->pageid);
-                $header->name =  $page->name;
-                $header->slug =  $page->slug;
-                $header->position =  'center';
-                $header->page_id =  $request->pageid;
-                $header->is_page =  1;
-                $header->is_text =  0;
-
-            }elseif($request->has('text_item')){
-                $header->name =  $request->name;
-                $header->slug =  $request->url;
-                $header->position =  'right';
-                $header->page_id =  0;
-                $header->is_page =  0;
-                $header->is_text =  1;
-
-
-            }elseif($request->has('category_menu')){
-                $header->name = $request->category_menu;
-                $header->slug =  '#';
-                $header->position =  'left';
-                $header->page_id =  0;
-                $header->is_page =  0;
-                $header->is_text =  0;
-
-            }
+            $header->name =  $request->name;
+            $header->slug =  $request->slug;
+            $header->position =  $request->position;
+            $header->preset =  $request->preset;
+            $header->key_name = $request->name;
 
             $header->order =  0;
             $header->save();
@@ -106,8 +90,17 @@ class HeaderController extends Controller
         if($header_item){
             $header_item->name = $request->name;
             $header_item->position = $request->position;
+            $header_item->slug = $request->slug;
             $header_item->save();
         }
+
+        return json_encode(
+            [
+                'type' => 'success',
+                'title' => 'Header Updated Successfully',
+
+            ]
+        );
     }
 
     /**

@@ -12,12 +12,17 @@
 
             </span>
             <i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i><i class="fas fa-ellipsis-v"></i>
+            <div class="d-inline">
+                {!!  $items->name ?? '' !!}  <span class="btn btn-primary btn-sm"
 
-            {!!  $items->name ?? '' !!}
-        </span>
+                onclick="copyToClipboard('{{ url($items->slug) }}')"
+                ondblclick="window.open('{{ url($items->slug) }}', '_blank')"
 
-        <span>
-            Type : {{  $items->is_page ? 'Page' : ($items->is_page ? 'Text' : 'Category Menu') }}
+                title="Click to Copy and Dabble click to browse Link {{ url($items->slug) }}"><i class="fas fa-clipboard-list"></i></span>
+            </div>
+            <div class="d-inline">
+                Position: {{ $items->position ?? '' }}
+            </div>
         </span>
 
         <span>

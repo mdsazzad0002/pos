@@ -165,10 +165,13 @@ var MyScroll = "";
         dynamicCurrentMenuClass(mainNavUL);
       }
 
+    //   console.log($(".main-menu__nav").length)
       if ($(".main-menu__nav").length && $(".mobile-nav__container").length) {
-        let navContent = document.querySelector(".main-menu__nav").innerHTML;
+
         let mobileNavContainer = document.querySelector(".mobile-nav__container");
-        mobileNavContainer.innerHTML = navContent;
+        document.querySelectorAll(".main-menu__nav").forEach(function (items) {
+            mobileNavContainer.innerHTML += items.innerHTML;
+        })
       }
       if ($(".sticky-header__content").length) {
         let navContent = document.querySelector(".main-menu").innerHTML;
