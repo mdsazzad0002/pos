@@ -904,7 +904,7 @@ class VarinatSuggessionSeeder extends Seeder
         }
 
         // Home page seeder default
-        $ecom_home = [ 'hero3','category2', 'product4','product1','product2','product3', 'hero_slider1'];
+        $ecom_home = [ 'hero_slider1', 'hero3','category2', 'product4','product1','product2','product3'];
         foreach($ecom_home as $items){
             seed_items($data[$items],1);
         }

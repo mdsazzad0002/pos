@@ -16,7 +16,7 @@
       <div class="container">
         <h2>{{ $item->title }}</h2>
         <p>{{ $item->short_description }}</p>
-        @if($item->button_title != '')
+        @if ($items->button_link != '' && $items->button_title != '')
             <a href="{{ $item->button_link }}" class="btn-get-started">{{ $item->button_title }}</a>
         @endif
       </div>

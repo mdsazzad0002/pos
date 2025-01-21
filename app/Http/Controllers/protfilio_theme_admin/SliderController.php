@@ -76,7 +76,8 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('admin.protfilio_theme.slider.partials.create');
+        $slider = null;
+        return view('admin.protfilio_theme.slider.partials.edit', compact('slider'));
     }
 
     /**
@@ -84,20 +85,12 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        $slider =  new slider;
-        $slider->title =  $request->title;
-        $slider->upload_id =  $request->image;
-        $slider->upload_bg =  $request->upload_bg;
-        $slider->short_description = $request->description;
-        $slider->button_link = $request->button_link;
-        $slider->button_title = $request->button_title;
-        $slider->save();
 
-        return json_encode([
-            'title'=>'Successfully  Created slider',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+        $request['create_data'] = true;
+        $slider = null;
+        return $this->update($request,  $slider);
+
+
 
 
     }
@@ -121,17 +114,30 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, slider $slider)
+    public function update(Request $request,  $slider)
     {
+        if(!$slider){
+            $slider = new slider;
+        }else{
+            $slider = slider::find($slider);
+        }
 
         $slider->title =  $request->title;
         $slider->upload_id =  $request->image;
         $slider->upload_bg =  $request->upload_bg;
         $slider->short_description = $request->description;
+        $slider->sub_description = $request->sub_description;
         $slider->button_link = $request->button_link;
         $slider->button_title = $request->button_title;
         $slider->save();
 
+        if($request->has('create_new')){
+            return json_encode([
+                'title'=>'Successfully  Created slider',
+                'type'=>'success',
+                'refresh'=>'true',
+            ]);
+        }
 
 
         return json_encode([

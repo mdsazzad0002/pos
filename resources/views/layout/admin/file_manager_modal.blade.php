@@ -107,38 +107,122 @@
         // handleFiles(this.files);
       })
 
+      function generateUniqueFileName(originalName) {
+        const timestamp = Date.now(); // Current timestamp
+        const randomString = Math.random().toString(36).substring(2, 8); // Random string
+        const fileExtension = originalName.substring(originalName.lastIndexOf('.')) || ''; // Extract file extension
+        const baseName = originalName.substring(0, originalName.lastIndexOf('.')) || originalName; // Extract base name
 
-      function file_upload(files){
-        // Create a new FormData object
-        var formData = new FormData();
+        return `${baseName}_${timestamp}_${randomString}${fileExtension}`;
+    }
 
-        // Append each file to the FormData object
-        for (var i = 0; i < files.length; i++) {
-            formData.append('files[]', files[i]);
+
+
+      const CHUNK_SIZE = 0.2 * 1024 * 1024; // 1MB
+      const MAX_RETRIES = 3; // Maximum retries for a chunk
+
+
+      async function file_upload(files) {
+        const CHUNK_SIZE = 1 * 1024 * 1024; // 1 MB
+        const MAX_RETRIES = 3; // Maximum retry attempts
+
+        for(let j =0; j <files.length; j++){
+            let preview_image =  `<div  type="button"  class="border progress_${j}">
+                <div class="text-center">
+                    <i class="fas fa-spinner fa-pulse"></i>
+                </div>
+                <div> Please wait</div>
+                <div class="progress">
+
+                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"> 0%</div>
+                    </div>
+                </div>
+            </div>`;
+            $(previewContainer).prepend(preview_image)
         }
-        $.ajax({
-            type:'post',
-            url:'{{ url('/uploads') }}',
-            processData: false,              // Required for FormData
-            contentType: false,
-            data: formData,
-            success:function(data){
-                data = JSON.parse(data);
-                console.log(data)
-                Object.keys(data).forEach(function(id, key){
 
-                    preview_image = format_image_preview(data[id], id)
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            if (!file) continue;
+            const uniqueFileName = generateUniqueFileName(file.name);
 
-                    $(previewContainer).prepend(preview_image)
-                })
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error('Error uploading files:', textStatus, errorThrown); // Handle errors
+            const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+            let uploadedChunks = 0;
+
+            for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+                const start = chunkIndex * CHUNK_SIZE;
+                const end = Math.min(start + CHUNK_SIZE, file.size);
+                const chunk = file.slice(start, end);
+
+                let retryCount = 0;
+                let success = false;
+
+                while (retryCount < MAX_RETRIES && !success) {
+                    try {
+                        await uploadChunk(chunk, uniqueFileName, chunkIndex, totalChunks, file.size, i);
+                        success = true;
+                        uploadedChunks++;
+                    } catch (error) {
+                        retryCount++;
+                        console.error(
+                            `Error uploading chunk ${chunkIndex + 1}: ${error.message}. Retrying (${retryCount}/${MAX_RETRIES})`
+                        );
+                    }
+                }
+
+                if (!success) {
+                    console.error(`Failed to upload chunk ${chunkIndex + 1} after ${MAX_RETRIES} attempts.`);
+                    alert(`Upload failed for file: ${file.name}.`);
+                    return;
+                }
+
+                const progress = Math.floor((uploadedChunks / totalChunks) * 100);
+                console.log(`Progress: ${progress}%`);
+                $(`.progress_${i} .progress`).html(`
+                     <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${progress}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">${progress}%</div>`)
+                // Optionally update a progress bar or UI element here
             }
-        })
 
 
-      }
+
+            {{--  alert(`File ${file.name} uploaded successfully!`);  --}}
+            {{--  format_image_preview(uniqueFileName)  --}}
+
+        }
+    }
+
+
+
+        async function uploadChunk(chunk, fileName, chunkIndex, totalChunks, size, current_key) {
+            const formData = new FormData();
+            formData.append('file', chunk);
+            formData.append('fileName', fileName);
+            formData.append('chunkIndex', chunkIndex);
+            formData.append('totalChunks', totalChunks);
+            formData.append('file_size', size);
+
+            const response = await fetch('{{ url('uploads') }}', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            {{--  when uploaded complete check  --}}
+            const data = await response.json();
+            if(data.complete){
+                preview_image = format_image_preview(data.name, data.id)
+                $(`.progress_${current_key}`).html(`${preview_image}`)
+                $(`.progress_${current_key}`).removeClass(`progress_${current_key}`)
+            }
+            {{--  end checking  --}}
+
+        }
+
+
+
 
 
 
@@ -153,10 +237,31 @@ dropArea.addEventListener('dragover', () => {
 
 
   function format_image_preview(src_image, id){
+
     var src_image = '{{ asset('') }}uploads/'+src_image;
-    return `<div  type="button"  class="border"  onclick="select_image(this)">
-                <img data-id="${id}" class="img-fluid h-100 " style="object-fit:contain" src="${src_image}"
-            </div>`;
+
+    // Check the file extension to determine if it's a video
+    const videoExtensions = ['mp4', 'webm', 'ogg'];
+    const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+    const extension = src_image.split('.').pop().toLowerCase();
+
+    if (videoExtensions.includes(extension)) {
+
+
+        return `<div  type="button"  class="border"  onclick="select_image(this)">
+            <img hidden data-id="${id}" class="img-fluid h-100 " style="object-fit:contain" src="${src_image}"/>
+             <video   class="img-fluid " style="width:100%;height:100%;object-fit:contain"
+                        style="object-fit:contain;"
+                        src="${src_image}"
+                        preload="metadata">
+                    </video>
+        </div>`;
+    } else if (imageExtensions.includes(extension)) {
+        {{--  console.log('image')  --}}
+        return `<div  type="button"  class="border"  onclick="select_image(this)">
+                    <img data-id="${id}" class="img-fluid h-100 " style="object-fit:contain" src="${src_image}"
+                </div>`;
+    }
 
   }
   function isValidFileType(file) {
@@ -331,6 +436,11 @@ dropArea.addEventListener('dragover', () => {
     cursor: pointer;
 }
 
-
-
+#preview-container i.fas.fa-spinner.fa-pulse {
+    font-size: 23px;
+    margin-top: 10px;
+}
+#preview-container .progress {
+    margin: 5px;
+}
 </style>

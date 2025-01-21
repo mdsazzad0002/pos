@@ -1,0 +1,23 @@
+.hero_hero_slider1 .carousel-caption{
+    filter: invert(1);
+    display: flex !important;
+    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero_hero_slider1 .carousel-caption .cus-btn-3{
+    filter: invert(1);
+
+}
+
+.hero_hero_slider1 .carousel-inner{
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.hero_hero_slider1 .carousel-indicators,
+.hero_hero_slider1 .carousel-control-next,
+.hero_hero_slider1 .carousel-control-prev{
+    filter: invert(1);
+}

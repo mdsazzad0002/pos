@@ -21,7 +21,7 @@ return new class extends Migration
 
 
 
-            $table->boolean('key_name')->nullable();
+            $table->string('key_name')->nullable();
             $table->boolean('preset')->default(0);
             $table->boolean('status')->default(0);
             $table->timestamps();

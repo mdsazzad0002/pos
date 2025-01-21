@@ -15,27 +15,32 @@ class SliderSeeder extends Seeder
     {
         $data = [
             [
-                'title' =>  'In Service',
+                'title' =>  'In Service 1',
                 'short_description' =>  'Best sell tody',
                 'sub_description' =>  'Limited offer',
                 'upload_id' =>  0,
             ],
             [
-                'title' =>  'In Service',
+                'title' =>  'In Service 2',
                 'short_description' =>  'Best ',
                 'sub_description' =>  'Limited offer',
                 'upload_id' =>  0,
             ],
             [
-                'title' =>  'In Service',
+                'title' =>  'In Service 3',
                 'short_description' =>  'Best',
                 'sub_description' =>  'Limited offer',
                 'upload_id' =>  0,
             ],
         ];
 
+
+
         foreach($data as $item){
-            $slider = new slider;
+            $slider = slider::where(['title' => $item['title']])->first();
+            if(!$slider){
+                $slider = new slider;
+            }
             $slider->title = $item['title'];
             $slider->short_description = $item['short_description'];
             $slider->sub_description = $item['sub_description'];

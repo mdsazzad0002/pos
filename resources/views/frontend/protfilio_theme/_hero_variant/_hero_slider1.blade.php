@@ -8,7 +8,7 @@ if($variant_info->is_details_page){
 @endphp
 
 @if(count($slider_list) > 2)
-<x-frontend_section :items="$slider_list" :info="$variant_info" class="hero_hero_style3" css="_hero_style/_hero_style3.css">
+<x-frontend_section :items="$slider_list" :info="$variant_info" class="hero_hero_slider1" css="_hero_style/_hero_slider1.css">
 
 <section class="hero-slider py-24">
     <div class="container-fluid">
@@ -22,15 +22,15 @@ if($variant_info->is_details_page){
 
             <div class="carousel-inner">
                 @foreach ($slider_list as $key => $items)
-                <div class="carousel-item  @if($key == 0)
-active
-                @endif" data-bs-interval="10000">
+                <div class="carousel-item  @if($key == 0) active @endif" data-bs-interval="10000">
                     <img src="{{ dynamic_asset($items->upload_bg) }}" class="d-block w-100" alt="{{ $items->title }}">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>{{ $items->title }}</h5>
                         <p>{{ $items->short_description }}</p>
                         <p>{{ $items->sub_description }}</p>
-                        <a href="{{ $items->button_link }}" class="cus-btn-3 sec">{{ $items->button_title }}</a>
+                        @if ($items->button_link != '' && $items->button_title != '')
+                            <a href="{{ $items->button_link }}" class="cus-btn-3 sec">{{ $items->button_title }}</a>
+                        @endif
                     </div>
                 </div>
                 @endforeach
@@ -55,4 +55,5 @@ active
 @else
     <div class="text-danger p-2 bg-warni">Minimum 3 Items Require</div>
 @endif
+
 

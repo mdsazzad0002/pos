@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('customer_id')->default(0);
             $table->bigInteger('order_id')->default(0);
-            $table->text('product_ids')->default(0);
+            $table->text('product_ids')->nullable();
             $table->longText('product_json')->nullable();
             $table->string('delivery_status')->default(0);
             $table->integer('quantity')->default(0);
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('vat')->default(0);
             $table->string('status')->default(0);
             $table->text('note')->nullable();
+            
 
             $table->string('address')->default(0);
             $table->string('billing_address')->default(0);
