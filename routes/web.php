@@ -13,7 +13,7 @@ use App\Http\Controllers\payment\amarpay\amarpayController;
 use App\Http\Controllers\payment\braintree\BraintreeController;
 use App\Http\Controllers\payment\stripe\stripePaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
-use App\Http\Controllers\vatController;
+use App\Http\Controllers\VatController as vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
