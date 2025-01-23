@@ -13,7 +13,7 @@ if($variant_info->is_details_page){
 <x-frontend_section :items="$feature_category" :info="$variant_info" class="feature_product" css="_product_style/_product_feature.css" >
 
 
-    <section class="popular-product-sec py-40 bg-lightest-gray">
+    <div class="popular-product-sec py-40 ">
         <div class="container-fluid">
             <div class="row row-gap-3">
 
@@ -23,7 +23,7 @@ if($variant_info->is_details_page){
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
 
 </x-frontend_section>

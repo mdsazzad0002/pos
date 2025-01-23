@@ -139,17 +139,24 @@ class LanguageController extends Controller
      */
     public function update(Request $request, language $language)
     {
-        $language->name = $request->name;
-        $language->updater_id = auth()->user()->id ?? 0;
+        if($language){
+            $language->name = $request->name;
+            $language->updater_id = auth()->user()->id ?? 0;
+            $language->save();
 
-        $language->save();
+            return json_encode([
+                'title'=>'Successfully  Updated language',
+                'type'=>'success',
+                'refresh'=>'true',
+            ]);
 
-
-        return json_encode([
-            'title'=>'Successfully  Updated language',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+        }else{
+            return json_encode([
+                'title'=>'Failed to update language',
+                'type'=>'error',
+                'refresh'=>'false',
+            ]);
+        }
     }
 
     public function delete(language $language){
@@ -169,7 +176,7 @@ class LanguageController extends Controller
             ]);
         }
 
-        $translate = Translation::where('language', $language->id)->delete();
+        $translate = Translation::where('language', $language->id);
         if($translate){
             $language->delete();
         }else{
@@ -202,6 +209,7 @@ class LanguageController extends Controller
         return json_encode($result_make);
 
     }
+
 
     public function switchLanguage($lang){
 

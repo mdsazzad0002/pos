@@ -11,10 +11,10 @@ if($variant_info->is_details_page){
 @endphp
 
 @if(count($recommend_category) > 0)
+
 <x-frontend_section :items="$recommend_category" :info="$variant_info" class="recommend_product" css="_product_style/_product_recommend.css" >
 
-
-    <section class="recommended-product-sec py-40 bg-lightest-gray">
+    <div class="recommended-product-sec py-40">
         <div class="container-fluid">
             <div class="row row-gap-3">
 
@@ -24,7 +24,7 @@ if($variant_info->is_details_page){
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
 
 </x-frontend_section>

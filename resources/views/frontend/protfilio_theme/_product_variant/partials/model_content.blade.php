@@ -10,9 +10,12 @@
 <div class="product_description_parents">
 
 
-<div class="close-content text-end">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-</div>
+@if(!isset($close_model))
+    <div class="close-content text-end">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+@endif
+
 @isset($product)
 
 <h3 class="fw-600 mb-16">{{ $product->name ?? '' }}</h3>

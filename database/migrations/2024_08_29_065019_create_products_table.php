@@ -60,6 +60,7 @@ return new class extends Migration
             $table->string('landing_page_bg')->nullable();
             $table->string('landing_page_color')->nullable();
             $table->string('landing_page_deasing_id')->nullable();
+            $table->softDeletes();
 
 
 

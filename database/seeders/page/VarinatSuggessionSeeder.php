@@ -36,6 +36,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/brand_style1.png'
 
             ],
              'brand2' => [
@@ -52,6 +53,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/brand_style2.png'
 
             ],
             // ===================================================================
@@ -77,6 +79,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/contact_style1.png'
 
             ],
             // ===================================================================
@@ -98,6 +101,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/category_style1.png'
 
             ],
             'category2' => [
@@ -114,6 +118,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/category_style2.png'
 
             ],
             // ===================================================================
@@ -169,6 +174,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/hero_style3.png'
 
             ],
 
@@ -188,6 +194,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'is_banner' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/hero_slider1.png'
 
             ],
             // ===================================================================
@@ -203,7 +210,7 @@ class VarinatSuggessionSeeder extends Seeder
             // Product Variant =====================================================================
              'product1' => [
                 'key' =>'_product_variant._feature_product',
-                'title' => 'Product  Style 1',
+                'title' => 'Feature Product  Style 1',
                 'title_status' => 0,
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
@@ -215,11 +222,12 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/feature_product.png'
 
             ],
              'product2' => [
                 'key' =>'_product_variant._popular_product',
-                'title' => 'Product Style 2',
+                'title' => 'Popular Product Style 1',
                 'title_status' => 0,
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
@@ -231,11 +239,12 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/popular_product.png'
 
             ],
              'product3' => [
                 'key' =>'_product_variant._recommended_product',
-                'title' => 'Product Style 3',
+                'title' => 'Recommended Product Style 1',
                 'title_status' => 0,
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
@@ -247,11 +256,11 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-
+                'upload_id'=>'uploads/preset/page_variant/recommended_product.png'
             ],
              'product4' => [
                 'key' =>'_product_variant._recent_product',
-                'title' => 'Product Style 3',
+                'title' => 'Recent product Style 1',
                 'title_status' => 0,
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
@@ -263,6 +272,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                  'upload_id'=>'uploads/preset/page_variant/resent_product.png'
 
             ],
               // ===================================================================
@@ -868,6 +878,7 @@ class VarinatSuggessionSeeder extends Seeder
                 if(!$homepage){
                     $homepage = new VarinatSuggession();
                 }
+                $homepage->upload_id = $item['upload_id'] ?? '';
 
             }else  {
                 $homepage =  HomePageManage::where(['key'=> $item['key'], 'controlby'=> $sug])->first();
@@ -878,7 +889,7 @@ class VarinatSuggessionSeeder extends Seeder
             }
 
 
-                $homepage->key = $item['is_banner'] ?? 0;
+                $homepage->is_banner = $item['is_banner'] ?? 0;
                 $homepage->key = $item['key'];
                 $homepage->title = $item['title'];
                 $homepage->title_status = $item['title_status'];

@@ -1,6 +1,8 @@
 @php
 if($request->has('slug')){
     $products = \App\Models\product::where('slug', $request->slug)->first();
+    $products->views += 1;
+    $products->save();
 
 }else{
     echo 'product slug not found';
@@ -55,7 +57,7 @@ if(!isset($cart_page)){
 
 
                         <div class="product-text-container bg-white br-20">
-                            @include('frontend.protfilio_theme._product_variant.partials.model_content', ['product'=>$products])
+                            @include('frontend.protfilio_theme._product_variant.partials.model_content', ['product'=>$products, 'close_model' => false])
 
 
 
@@ -64,7 +66,7 @@ if(!isset($cart_page)){
                             <div class="hr-line mb-24"></div>
                             <div class="d-flex align-items-center gap-16 mb-24">
                                 <h6>Share:</h6>
-                                <ul class="list-unstyled social-link m-0">
+                                <ul class="list-unstyled social-link m-0" style="display:none">
                                     <li>
 
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}"  target="_blank">
@@ -349,4 +351,6 @@ if(!isset($cart_page)){
 
 
     </style>
+
+
 @endpush

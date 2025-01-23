@@ -15,9 +15,10 @@ if($variant_info->is_details_page){
           <div id="carouselExampleDark" class="carousel carousel-dark slide">
 
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                @foreach ($slider_list as $key => $items)
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ $key }}" class="@if ($key == 0) active  @endif" aria-current="true" aria-label="Slide {{ $key }}"></button>
+              
+                @endforeach
             </div>
 
             <div class="carousel-inner">
@@ -25,7 +26,7 @@ if($variant_info->is_details_page){
                 <div class="carousel-item  @if($key == 0) active @endif" data-bs-interval="10000">
                     <img src="{{ dynamic_asset($items->upload_bg) }}" class="d-block w-100" alt="{{ $items->title }}">
                     <div class="carousel-caption d-none d-md-block">
-                        <h5>{{ $items->title }}</h5>
+                        <h5>{{ $items->title }} {{ $key }}</h5>
                         <p>{{ $items->short_description }}</p>
                         <p>{{ $items->sub_description }}</p>
                         @if ($items->button_link != '' && $items->button_title != '')

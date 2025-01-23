@@ -13,6 +13,6 @@ class VarinatSuggession extends Model
 
 
     public function getImageAttribute(){
-        return dynamic_asset($this->upload_id);
+        return asset($this->upload_id);
     }
 }

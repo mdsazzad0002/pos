@@ -4,14 +4,19 @@
     }else{
         $brand_list = \App\Models\brand::where('status', 1)->limit($variant_info->items_show)->get();
     }
+    if(!isset($filter_page)){
+        $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
+    }
 @endphp
 
 
 <!-- Clients Section -->
 @if (count($brand_list) > 0)
-    <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_brand_style/_brand_style2.css') }}">
-    <section id="clients_brand_style2" class="clients_brand_style2 section p-0" style="{{ $variant_info->background_type ? 'background-image:url('.dynamic_asset($variant_info->background).')' : 'background:'.$variant_info->background_color  }}">
+<x-frontend_section :items="$brand_list" :info="$variant_info" class="clients_brand_style2 section p-0" css="_brand_style/_brand_style2.css" >
 
+    {{-- <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_brand_style/_brand_style2.css') }}">
+    <section id="clients_brand_style2" class="clients_brand_style2 section p-0" style="{{ $variant_info->background_type ? 'background-image:url('.dynamic_asset($variant_info->background).')' : 'background:'.$variant_info->background_color  }}"> --}}
+<div class="container-fluid">
         <div class="brand-sec">
             @include('frontend.protfilio_theme._variant_manage._title')
 
@@ -45,7 +50,7 @@
 
                   </script>
                 @foreach ($brand_list as $brand)
-                    <a href="{{ route('client.view', $brand->slug) }}" class="brand-block">
+                    <a href=" {{ url($filter_page->slug) }}?brand={{  $brand->slug }} " class="brand-block">
                         <img src="{{ dynamic_asset($brand->upload_id) }}" alt="">
                     </a>
                 @endforeach
@@ -63,9 +68,10 @@
                 </div>
             @endif
         </div>
+    </div>
+    </x-frontend_section>
 
-
-    </section><!-- /Clients Section -->
+    {{-- </section><!-- /Clients Section --> --}}
 
 
     @push('js')

@@ -12,12 +12,7 @@
     width: 100%;
 
   }
-  @media (max-width: 576px) {
-    .category_style1 .categories-sec .categories-wrapper {
-      flex-wrap: wrap;
-      row-gap: 24px;
-    }
-  }
+
   .category_style1 .categories-sec .categories-wrapper .category-block {
     display: flex;
     flex-direction: column;
@@ -58,3 +53,5 @@
   .category_style1  .categories-sec p{
     margin-bottom: 0;
 }
+
+

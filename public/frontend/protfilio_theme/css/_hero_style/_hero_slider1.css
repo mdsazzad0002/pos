@@ -21,3 +21,8 @@
 .hero_hero_slider1 .carousel-control-prev{
     filter: invert(1);
 }
+
+
+.hero_hero_slider1 .carousel-inner img{
+    min-height:250px;
+}

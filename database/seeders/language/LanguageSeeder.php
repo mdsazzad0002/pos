@@ -16,7 +16,12 @@ class LanguageSeeder extends Seeder
     {
         $languages = ['en', 'bn'];
 
+
         foreach ($languages as $key => $language) {
+            $new_translate = language::where('name', $language);
+            if($new_translate->count() != 0){
+                $new_translate->first();
+            }
             $new_translate =  new language;
             $new_translate->name = $language;
             $new_translate->creator = 1;

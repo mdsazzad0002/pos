@@ -2,11 +2,13 @@
 @isset($css)
 <link rel="stylesheet" href="{{asset('frontend/protfilio_theme/css/'.$css)}}">
 @endisset
-<section id="{{ $class ?? '' }}" class="{{ $class ?? '' }} section" style="{{ $info->background_type ? 'background-image:url('.dynamic_asset($info->background).')' : 'background:'.$info->background_color  }}">
+
+
+<section id="{{ $class ?? '' }}" class="{{ $class ?? '' }} section" style="{{ $info->background_type == 1 ? 'background-image:url('.dynamic_asset($info->background).')' : 'background:'.$info->background_color  }};    background-repeat: no-repeat; background-size: cover;">
 
     <!-- Section Title -->
     @if($info->sub_title_status || $info->title_status)
-    <div class="container section-title" data-aos="fade-up">
+    <div class="container-fluid section-title mb-3" data-aos="fade-up">
         @if($info->title_status)
         <h2>{{ __($info->title) }}</h2>
         @endif
@@ -22,7 +24,7 @@
 
 
     <div class="container-fluid  text-center  d-flex align-items-center justify-content-center">
-        @if($info->is_details_page)
+        @if($info->is_details_page && $items)
         <div class="links_nav mt-3">
             {{ $items->links()  }}
         </div>
@@ -32,7 +34,7 @@
 
 
     @if ($info->view_all_status)
-    <div class="text-center">
+    <div class="text-center my-4">
         <a href="{{ url($info->view_all_page_url ?? '') }}" class="btn_primary">{{ $info->short_read_more }}
             <i class="bi bi-arrow-right"></i></a>
     </div>

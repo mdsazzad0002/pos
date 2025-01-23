@@ -141,6 +141,22 @@ class enSeeder extends Seeder
             'sidebar.area' =>'Area',
             'visit.webiste' =>'Visit Website',
             'area.name' =>'Area',
+            'products.categories' =>'Product Category',
+            'product.price_by_filter' =>'Filter by Price',
+            'product.filter_by_brand' =>'Filter by Brand',
+            'product.filter_by_rating' =>'Filter by Rating',
+            'product.feature_product' =>'Feature Product',
+            'frontend.call_us247' =>'Call Us 24/7',
+            'category.name' =>'Category',
+            'category.description' =>'Category Description',
+            'band.title' =>'Brand',
+            'contact.front_address' =>'Address',
+            'contact.fornt_call_us' =>'Call Us',
+            'contact.front_email_us' =>'Email Us',
+            'contact.front_your_name' =>'Your Name',
+            'contact.front_your_email' =>' Email',
+            'contact.front_message' =>' Message',
+            'contact.front_phone' =>' Phone',
 
 
 
@@ -151,6 +167,11 @@ class enSeeder extends Seeder
 
 
         foreach($array as $key => $value){
+            $newLn = Translation::where(['key'=> $key, 'language' => $language]);
+            if($newLn->count() != 0){
+                $newLn->first();
+            }
+
 
             $newLn = new Translation;
             $newLn->key = $key;

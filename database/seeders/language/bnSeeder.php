@@ -18,8 +18,14 @@ class bnSeeder extends Seeder
             "log.in" => 'log in bn',
         ];
 
+
+
         $language = language::where('name', 'bn')->first()->id;
         foreach($array as $key => $value){
+            $newLn = Translation::where(['key'=> $key, 'language' => $language]);
+            if($newLn->count() != 0){
+                $newLn->first();
+            }
 
             $newLn = new Translation;
             $newLn->key = $key;

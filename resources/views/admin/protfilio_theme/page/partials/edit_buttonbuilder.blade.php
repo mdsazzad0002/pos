@@ -25,7 +25,7 @@
             @can('page create')
                 {{-- <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  page" data-href="{{ route('admin.homePageManage.create', 'page_id='.$id) }}">+ Add New page</button> --}}
 
-                <button class="btn btn-primary" onclick="document.querySelector('.add_new_item_box').classList.toggle('hide_content')">New Page</button>
+                <button class="btn btn-primary" onclick="document.querySelector('.add_new_item_box').classList.toggle('hide_content')">New Page Element</button>
             @endcan
         </div>
 
@@ -86,9 +86,9 @@
         data.forEach(element => {
             console.log(element.image)
                 html_output +=  `
-                <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})">
-                    <img src="${element.image }" alt="" class="img-fulid">
-                    <div>${element.title}</div>
+                <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})" style="    border: 1px solid #3e444a;cursor: pointer;">
+                    <img src="${element.image }" alt="" class="img-fulid" style="width: fit-content; max-width: 100%;">
+                    <div class="title_layout" style="background: #3e444a; color: white; padding: 1px 7px; border-radius: 0px;">${element.title}</div>
 
 
                 </div>`;

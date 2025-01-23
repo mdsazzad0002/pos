@@ -25,12 +25,13 @@ return new class extends Migration
             $table->string('vat')->default(0);
             $table->string('status')->default(0);
             $table->text('note')->nullable();
-            
+
 
             $table->string('address')->default(0);
             $table->string('billing_address')->default(0);
 
             $table->integer('cash_collection')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

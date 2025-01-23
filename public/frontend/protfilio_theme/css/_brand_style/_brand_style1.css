@@ -3,17 +3,17 @@
 # Clients Section
 --------------------------------------------------------------*/
 .clients_brand_style1 .clients-wrap {
+    padding:30px 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(186px, auto));
     gap: 6px;
 }
 
 .clients_brand_style1 .client-logo {
-  background-color: var(--surface-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+
   overflow: hidden;
   filter: grayscale(1);
 }
@@ -26,10 +26,20 @@
   padding: 5px;
   width:100%;
   transition: 0.3s;
+  height: 100%;
+  border: 2px solid #eaeaec;
+  object-fit:contain;
 }
 
 
 
 .clients_brand_style1 .client-logo:hover img {
   transform: scale(1.1);
+}
+
+
+@media (max-width:991px) {
+    .clients_brand_style1 .clients-wrap {
+        grid-template-columns: repeat(auto-fill, minmax(100px, auto));
+    }
 }
