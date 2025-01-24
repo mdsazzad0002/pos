@@ -321,10 +321,46 @@
                                         placeholder="Iframe Full TAG">{{ $product ? $product->youtube_video : 0 }}</textarea>
                                 </div>
 
-                                <div class="col-lg-6">
+                                {{--  <div class="col-lg-6">
                                     <label for="landing_page_color">Landing Page Variant</label>
                                     <div class="text-light p-3 bg-danger border"> Working on it</div>
+                                </div>  --}}
+
+                                {{--  <div class="col-lg-6">
+                                    <label for="landing_page_color">Landing Page Variant</label>
+                                    <div class="text-light p-3 bg-danger border"> Working on it</div>
+                                </div>  --}}
+                                <div class="col-12">
+
+                                    <div class="faq_container">
+                                        <div class="single_faq d-flex my-3">
+                                            <div class="w-100">
+                                                <input type="text" name="faq_id[]" value="">
+                                                <div class="faq_question">
+                                                    <label for="faq_title">FAQ Title</label>
+                                                    <input type="text" name="faq_title[]" class="faq_title form-control">
+                                                </div>
+                                                <div class="faq_answer">
+                                                    <label for="faq_answer">FAQ Answer</label>
+                                                    <textarea type="text" name="faq_answer[]" class="faq_title form-control">
+        
+                                                    </textarea>
+                                                </div>
+
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-danger" onclick="control_data_faq(this, '.single_faq', '-')">x</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                        <button type="button" onclick="control_data_faq(this, '.single_faq', '+')" class="faq btn btn-primary">+ Add New FAQ</button>
+                                  
                                 </div>
+
+
+
+
                             </div>
 
 
@@ -425,6 +461,36 @@
 </div>
 
 
+<script>
+    function control_data_faq(thi, key_class, type){
+        if(type == '-'){
+            $(thi).parents(key_class).remove();
+        }else if(type == '+'){
+            let data =`<div class="${key_class.replace('.', '')} d-flex my-3">
+                <div class="w-100">
+                    <input type="text" name="faq_id[]" value="" hidden>
+                    <div class="faq_question">
+                        <label for="faq_title">FAQ Title</label>
+                        <input type="text" name="faq_title[]" class="faq_title form-control">
+                    </div>
+                    <div class="faq_answer">
+                        <label for="faq_answer">FAQ Answer</label>
+                        <textarea type="text" name="faq_answer[]" class="faq_title form-control">
+
+                        </textarea>
+                    </div>
+
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger" onclick="control_data_faq(this, '${key_class}', '-')">x</button>
+                </div>
+            </div>`;
+
+            $('.faq_container').append(data);
+        }
+        
+    }
+</script>
 
 
 

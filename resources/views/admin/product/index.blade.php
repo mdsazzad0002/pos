@@ -25,23 +25,6 @@
     </div>
     <div class="card-body">
         <table id="users" class="table table-bordered table-striped table-hover">
-            <thead>
-                <th>
-                    SI
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    View
-                </th>
-                <th>
-                    Action
-                </th>
-            </thead>
         </table>
     </div>
 </div>
@@ -60,13 +43,17 @@
         processing:true,
         ajax:'',
         columns:[
-            { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
+            { data: null, name: null, orderable: false, searchable: false, title:'SI', render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:'name', name:'name'},
-            {data:'image', name:'image', searchable:false, orderable:false},
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
+            {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
+            {data:'view', name:'view', searchable:false, orderable:false, title:'View'},
+
+            {data:'name', name:'name', title:'Name'},
+            {data:'old_price', name:'old_price', title:'Old Price'},
+            {data:'selling_price', name:'selling_price', title:'Selling Price'},
+            {data:'image', name:'image', searchable:false, orderable:false, title:'Image'},
+
         ],
         error: function(xhr, error, thrown) {
             console.log(454)

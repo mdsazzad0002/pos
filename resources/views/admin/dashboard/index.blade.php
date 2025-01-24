@@ -9,11 +9,32 @@
 
 <!-- Small boxes (Stat box) -->
 <div class="row connectedSortable" >
+    <div class="col-lg-3 col-6">
 
+        <div class="card small-box  bg-secondary " onclick="copyToClipboard('{{ url('/') }}')" title="Click to Copy">
+            <div class="card-header card_count_loaded p-0">
+
+                <div class="icon">
+                    <i class="fab fa-firefox-browser"></i>
+                </div>
+                <div class="inner" style="zoom: 88%">
+                    {!! $data !!}
+                  </div>
+            </div>
+            <a href="{{ url('/') }}" target="_blank" class="small-box-footer">Visit Website <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+
+        <!-- small box -->
+    </div>
 
     {{--  Here is report Section  --}}
     @include('admin.dashboard._cards.users')
     @include('admin.dashboard._cards.payment')
+
+
+
+
+
 
 
     {{--  Order Card  --}}

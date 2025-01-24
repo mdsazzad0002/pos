@@ -10,6 +10,7 @@ use Database\Seeders\setting\CookieSeeder;
 use Database\Seeders\setting\generalsetting;
 use Database\Seeders\setting\main_settingSeeder;
 use Database\Seeders\setting\SiteVerificationSeeder;
+use Database\Seeders\setting\CustomCssJsSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class settingCaller extends Seeder
@@ -28,7 +29,8 @@ class settingCaller extends Seeder
             PwaSeeder::class,
             takto_messageSeeder::class,
             CookieSeeder::class,
-            CourierReportSeeder::class
+            CourierReportSeeder::class,
+            CustomCssJsSeeder::class
         ]);
     }
 }

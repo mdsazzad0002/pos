@@ -157,6 +157,22 @@ class enSeeder extends Seeder
             'contact.front_your_email' =>' Email',
             'contact.front_message' =>' Message',
             'contact.front_phone' =>' Phone',
+            'settings.courier-configration-sidebar' =>' Courier Configuration',
+            'settings.Walk In Delivery' =>'Working in Delivery',
+            'settings.EasyPost' =>'EasyPost',
+            'settings.SteadFast' =>'SteadFast',
+            'settings.Others' =>'Other',
+            'custom_js_css.custom_js_head_code' =>'Custom Script Head',
+            'custom_js_css.custom_css_head_code' =>'Custom Css Head',
+            'custom_js_css.custom_js_footer_code' =>'Custom Script Footer',
+            'custom_js_css.custom_css_footer_code' =>'Custom Css Footer',
+            'product.product_title' =>'Product Title',
+            'product.product_list' =>'Product List',
+            'product.create' =>'Product Create',
+            'product.information' =>'Product Information',
+            'product.landing_page_info' =>'Landing Page Info',
+            'product.variant_option' =>'Variant Option',
+            'settings.custom_js_css' =>'Custom Script',
 
 
 

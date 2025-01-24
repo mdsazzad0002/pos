@@ -30,11 +30,22 @@ use App\Models\SubCategory;
 use App\Notifications\NotificationDynamic;
 use Illuminate\Support\Facades\Notification;
 
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
+
 
 class dashboardController extends Controller
 {
     public function index(){
-        return view('admin.dashboard.index');
+        $current_url = url('/');
+        $qrCode = new QrCode($current_url);
+
+
+        // // Echo an HTML table
+        $output = new Output\Html();
+        $data = $output->output($qrCode);
+
+        return view('admin.dashboard.index', compact('data'));
     }
 
     public function items_load_card(Request $request)
@@ -221,6 +232,7 @@ class dashboardController extends Controller
             // Return the count based on the constructed query
             return response()->json( $query->count());
         }
+
 
         return response()->json(0); // Handle invalid requests
     }

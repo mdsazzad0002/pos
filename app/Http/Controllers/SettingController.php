@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
 class SettingController extends Controller
 {
@@ -201,5 +203,32 @@ class SettingController extends Controller
     public function destroy(setting $setting)
     {
         //
+    }
+
+    
+    public function downloadBackup()
+    {
+        // Run the mysqldump command to export the database
+        $databaseName = env('DB_DATABASE');
+        $username = env('DB_USERNAME');
+        $password = env('DB_PASSWORD');
+        $backupPath = storage_path('app/'.date('d-M-Y-h-i-s-A').'.sql');
+        $host = env('DB_HOST', '127.0.0.1');
+
+        // Create the mysqldump command string with shell redirection
+        $command = "mysqldump --host=$host --user=$username --password=$password $databaseName > $backupPath";
+
+        // Create a new Process instance and execute the command via the shell
+        try {
+            // Execute the command using the shell
+            $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
+            $process->mustRun();  // This will throw an exception if the process fails
+
+            // After the command runs, return the backup file as a download
+            return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
+        } catch (ProcessFailedException $exception) {
+            // Handle any errors in the process
+            return response()->json(['error' => 'Backup failed! ' . $exception->getMessage()]);
+        }
     }
 }

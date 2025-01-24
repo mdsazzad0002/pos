@@ -19,8 +19,8 @@ class generalsetting extends Seeder
             ['name' => 'theme_nav-compact', 'value' => '0', 'creator_id' => '1', 'key' => '1'],
 
         ];
-        
 
+        DB::table('settings')->where('key', $data[0]['key'])->delete();
         DB::table('settings')->insert($data);
     }
 }

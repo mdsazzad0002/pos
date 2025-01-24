@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\product;
 use App\Models\VariantOption;
 use Illuminate\Http\Request;
+use Picqer\Barcode\Renderers\HtmlRenderer;
+use Picqer\Barcode\Types\TypeCode128;
 use Yajra\DataTables\DataTables;
 
 use function PHPSTORM_META\type;
@@ -285,6 +287,27 @@ class ProductController extends Controller
 
     }
 
+    public function product_variant (Request $request)
+    {
+        $data_result = VariantOption::where(function($query) use ($request) {
+            if ($request->has('q')) {
+                $keyword =  $request->q;
+                $query->where('product_id', "%$keyword%");
+            }
+        })->select('id', 'name as text', 'selling_price as price','variant_on', 'variant_option')->get();
+
+        // Debugging the query
+        // dd($data_result);
+
+        $result_make = [];
+        $result_make['items']= $data_result;
+
+        return json_encode($result_make);
+
+    }
+
+
+
     public function single_filter (Request $request)
     {
 
@@ -306,8 +329,10 @@ class ProductController extends Controller
     }
 
     public function barcode($id = null){
+
         $products = product::findOrFail($id);
         return view('admin.product.barcode',compact('products'));
+
     }
 
 
@@ -325,6 +350,37 @@ class ProductController extends Controller
 
         return json_encode($data_result);
 
+    }
+
+
+    public function barcodeGenerate(Request $request){
+        // return $request->all();
+
+        $variant_find = null;
+        $product_find = null;
+        if($request->has('product') && $request->has('variant')){
+            $product_find = product::findOrFail($request->product);
+            if($request->variant != 0 && $request->variant != ''){
+                $variant_find = VariantOption::find($request->variant);
+            }
+
+            $qr_make_code =   'p_'.$product_find->id.'-' .( $product_find->variant_on ? $variant_find->id : 0);
+         
+            $barcode = (new TypeCode128())->getBarcode($qr_make_code);
+
+        // // Echo an HTML table
+        $renderer = new HtmlRenderer();
+        $bur_code = $renderer->render($barcode);
+        return  $extra_code = '<div class="container_every_code">
+           '.$bur_code.'
+           <div class="price text-center"> Price'.settings('currency_symbol', 9) . $product_find->selling_price. '  '.  $qr_make_code.'</div>
+        </div>';
+
+        
+        }
+
+
+        
     }
 
 }

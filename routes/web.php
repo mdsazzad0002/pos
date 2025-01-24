@@ -147,12 +147,11 @@ Route::get('clear', function () {
     // toastr()->success('Successfully cleared', 'Congrats');
     return back();
 });
-
-Route::get('fresh', function () {
-    Artisan::call('migrate:fresh --seed');
-    return back();
-});
-
+                                  
+// Route::get('fresh', function () {
+//     Artisan::call('migrate:fresh --seed');
+//     return back();
+// });
 
 
 // Route::get('/', function () {
@@ -541,6 +540,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     });
 
+    
+    Route::get('database/backup', [SettingController::class, 'downloadBackup'])->name('database.backup');
+
+
 });
 
 Route::get('/locale/{lang}', [LanguageController::class, 'switchLanguage']);
@@ -669,10 +672,16 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     Route::group(['as' => 'product.', 'prefix' => 'product'], function() {
         Route::get('/delete/{product}', [ProductController::class, 'delete'])->name('delete');
+
         Route::get('/getProduct/get', [ProductController::class, 'getProduct'])->name('select');
+        Route::get('/product_variant/get', [ProductController::class, 'product_variant'])->name('variant.select');
+
         Route::get('/single_filter/get', [ProductController::class, 'single_filter'])->name('single_filter');
         Route::get('/productByID/{product}', [ProductController::class, 'productByID'])->name('productByID');
+
         Route::get('/barcode/{id}', [ProductController::class, 'barcode'])->name('barcode');
+        Route::get('/barcode/barcodeGenerate/single', [ProductController::class, 'barcodeGenerate'])->name('barcode.generate');
+
         Route::get('/filter_purchase/get', [ProductController::class, 'filterPurchase'])->name('filter_purchase');
 
     });

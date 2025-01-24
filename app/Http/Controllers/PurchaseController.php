@@ -219,12 +219,12 @@ class PurchaseController extends Controller
     }
 
 
- 
+
 
 
 
     public function report_single(Request  $request){
-        
+
 
         $purchase = purchase::with('product', 'unit', 'supplier', 'user', 'variant')->where('purchase_id', $request->purchase_id)->get();
         if(count($purchase) > 0){
@@ -244,13 +244,15 @@ class PurchaseController extends Controller
                                 ->selectRaw('SUM(amount) as payment')
                                 ->first();
 
+
              $current_url = url()->current();
             $qrCode = new QrCode($current_url);
-            
+
+
             // // Echo an HTML table
             $output = new Output\Html();
             $data = $output->output($qrCode);
-            
+
             if($request->has('pdf')){
                 $pdf = PDF::loadView('admin.purchase.partials.print', compact('purchase', 'previous_due', 'supplier_payment', 'supplier_refund', 'data'));
                 return $pdf->download('invoice-'.Str::slug($supplier).'.pdf');
