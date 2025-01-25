@@ -73,6 +73,10 @@ class rolepermissionsedder extends Seeder
                 // Discoount
                 'discount read',  'discount create', 'discount edit',  'discount delete',
 
+                // Pos
+                'pos read',  'pos create', 'pos edit',  'pos delete',
+                
+
                 //[[[ Setting
                         'setting read', 'setting create', 'setting edit',  'setting delete',
 

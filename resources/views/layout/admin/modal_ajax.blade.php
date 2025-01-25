@@ -259,7 +259,18 @@ if($(thi).data('setelement')){
                 }
 
             }else{
-                $(element).select2();
+                if($(element).data('model')){
+                  let  model = $(element).closest('.modal')
+                    model = model[0].id;
+                    model = '#'+model;
+                    $(element).select2(
+                      {  dropdownParent:model}
+                    );
+                    console.log(2342)
+                }else{
+                    $(element).select2();
+                }
+
             }
         });
    }
@@ -277,29 +288,32 @@ if($(thi).data('setelement')){
             model = '#'+model;
         }
 
-        $(thi).select2({
-            dropdownParent:model,
-            placeholder: $(thi).placeholder,
-            ajax: {
-                url: $(thi).data('url'), // Replace with your API endpoint
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        q: params.term, // Search term
-                    };
-                },
-                processResults: function(data, params) {
-                    // Parse the results into the format expected by Select2
-                    return {
-                        results: data.items, // The array of items
-                    };
-                },
-                cache: true
-            },
-            minimumInputLength: 0 // Minimum length of input to trigger search
-        });
-    }
+      
+                $(thi).select2({
+                    dropdownParent:model,
+                    placeholder: $(thi).placeholder,
+                    ajax: {
+                        url: $(thi).data('url'), // Replace with your API endpoint
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                q: params.term, // Search term
+                            };
+                        },
+                        processResults: function(data, params) {
+                            // Parse the results into the format expected by Select2
+                            return {
+                                results: data.items, // The array of items
+                            };
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 0 // Minimum length of input to trigger search
+                });
+              
+           
+        }
 
 
 

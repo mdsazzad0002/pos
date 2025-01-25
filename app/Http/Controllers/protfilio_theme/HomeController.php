@@ -16,7 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
 use App\Models\address;
 use App\Models\coupon;
-use App\Models\customer;
+use App\Models\Customer as customer;
 use App\Models\Discount;
 use App\Models\order;
 use App\Models\VariantOption;
@@ -126,7 +126,7 @@ class HomeController extends Controller
             }
         })
 
-        ->paginate(3);
+        ->paginate($request->paginate_items);
 
         return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
     }

@@ -297,6 +297,9 @@
                         </div>
                     </div>
                 </div>
+                @if(env('local'))
+
+
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
@@ -343,7 +346,7 @@
                                                 <div class="faq_answer">
                                                     <label for="faq_answer">FAQ Answer</label>
                                                     <textarea type="text" name="faq_answer[]" class="faq_title form-control">
-        
+
                                                     </textarea>
                                                 </div>
 
@@ -353,9 +356,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                  
+
                                         <button type="button" onclick="control_data_faq(this, '.single_faq', '+')" class="faq btn btn-primary">+ Add New FAQ</button>
-                                  
+
                                 </div>
 
 
@@ -367,6 +370,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
 
             </div>
 
@@ -488,7 +492,7 @@
 
             $('.faq_container').append(data);
         }
-        
+
     }
 </script>
 

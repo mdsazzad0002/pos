@@ -1,14 +1,17 @@
 {{--  Master Include  --}}
 @extends('layout.admin.master')
 
-{{--  Define Site Title  --}}
-@section('title', settings('pages', 10))
-
-{{--  Content Extends  --}}
-@section('content')
 @php
     $page_content = App\Models\Page::find($id);
 @endphp
+
+
+{{--  Define Site Title  --}}
+@section('title', $page_content->name .' Page Builder')
+
+{{--  Content Extends  --}}
+@section('content')
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
        <div class="content_parents">

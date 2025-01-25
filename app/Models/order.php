@@ -29,6 +29,7 @@ class order extends Model
     public function order_events(){
         return $this->hasMany(OrderEvent::class, 'order_id', 'id');
     }
+    
 
 
 }

@@ -335,6 +335,7 @@
         var max_price = '{{ $_GET['max_price'] ?? '' }}';
         var brands_items = {!! json_encode($_GET['brands_key'] ?? []) !!};
         var rating_star = {{ $_GET['rating_star'] ?? 0 }};
+        var paginate_items = {{ $items?->items_show ?? 3 }}
 
 
 
@@ -346,6 +347,7 @@
             '&min_price='+min_price+
             '&max_price='+max_price+
             '&rating_star='+rating_star+
+            '&paginate_items='+paginate_items+
             '&q='+q;
 
             selectedCategories.forEach(element => {

@@ -173,6 +173,8 @@ class enSeeder extends Seeder
             'product.landing_page_info' =>'Landing Page Info',
             'product.variant_option' =>'Variant Option',
             'settings.custom_js_css' =>'Custom Script',
+            'sidebar.clear'=>'Cache Clear',
+            'sidebar.backup'=>'DatabaseBackup',
 
 
 

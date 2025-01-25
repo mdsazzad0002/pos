@@ -26,10 +26,10 @@
                             </div>
                             <div class="quantity quantity-wrap d-inline-flex">
                                 <div class="input-area quantity-wrap">
-                                    <input class="decrement" type="button" value="-">
+                                    <input class="decrement" type="button" value="-"  onclick="product_counterUP(this, '-')">
                                     <input type="text" name="quantity" value="{{ $product['quantity'] ?? 0 }}" maxlength="2" size="1"
                                         class="number qunataty_input">
-                                    <input class="increment" type="button" value="+">
+                                    <input class="increment" type="button" value="+" onclick="product_counterUP(this, '+')">
                                 </div>
                             </div>
                         </div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\order as orderclass;
 
-class customer extends Authenticatable
+class Customer extends Authenticatable
 {
     use HasFactory;
     protected $guarded = ['id'];

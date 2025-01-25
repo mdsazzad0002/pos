@@ -205,30 +205,47 @@ class SettingController extends Controller
         //
     }
 
-    
+
     public function downloadBackup()
     {
-        // Run the mysqldump command to export the database
         $databaseName = env('DB_DATABASE');
         $username = env('DB_USERNAME');
         $password = env('DB_PASSWORD');
         $backupPath = storage_path('app/'.date('d-M-Y-h-i-s-A').'.sql');
         $host = env('DB_HOST', '127.0.0.1');
 
-        // Create the mysqldump command string with shell redirection
-        $command = "mysqldump --host=$host --user=$username --password=$password $databaseName > $backupPath";
 
-        // Create a new Process instance and execute the command via the shell
+
+
+        $command = "mysqldump --host={$host} --user={$username} --password={$password} {$databaseName} > {$backupPath}";
+
         try {
-            // Execute the command using the shell
-            $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
-            $process->mustRun();  // This will throw an exception if the process fails
+            exec($command, $output, $returnVar);
+            if ($returnVar !== 0) {
+                // return response()->json(['error' => 'Backup failed!', 'details' => $output], 500);
 
-            // After the command runs, return the backup file as a download
-            return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
-        } catch (ProcessFailedException $exception) {
-            // Handle any errors in the process
-            return response()->json(['error' => 'Backup failed! ' . $exception->getMessage()]);
+
+                // Again try to backup
+                  try {
+                    // Execute the command using the shell
+                    $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
+                    $process->mustRun();  // This will throw an exception if the process fails
+
+                    // After the command runs, return the backup file as a download
+                    return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
+                } catch (ProcessFailedException $exception) {
+                    // Handle any errors in the process
+                    return response()->json(['error' => 'Backup failed! ' . $exception->getMessage()]);
+                }
+                // end to backup
+
+
+            }
+            // return response()->json(['message' => 'Backup successful!', 'path' => $backupPath], 200);
+            return response()->download($backupPath)->deleteFileAfterSend(true);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Exception occurred!', 'details' => $e->getMessage()], 500);
         }
+
     }
 }

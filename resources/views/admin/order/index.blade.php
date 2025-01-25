@@ -17,32 +17,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table id="users" class="table table-bordered table-striped table-hover">
-            <thead>
-                <th>
-                    SI
-                </th>
-                <th>
-                    Order Id
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Quantaty
-                </th>
-                <th>
-                    Price
-                </th>
-          
-                <th>
-                    View
-                </th>
-                <th>
-                    Action
-                </th>
-            </thead>
-        </table>
+        <table id="users" class="table table-bordered table-striped table-hover"> </table>
     </div>
 </div>
 
@@ -57,17 +32,20 @@
         processing:true,
         ajax:'',
         columns:[
-            { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
+            { data: null, name: null, orderable: false, searchable: false, title:'SL', render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:null, name:'order_id', render:function(data){
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false},
+            // {data:'view', name:'view', searchable:false, title:'View', orderable:false},
+            {data:null, name:'order_id', title:'Order ID', render:function(data){
                 return '#ID'+data.order_id;
             }},
-            {data:'name', name:'name'},
-            {data:'quantity', name:'quantity', searchable:false, orderable:false},
-            {data:'price', name:'price', searchable:false, orderable:false},
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
+            {data:'customer_name', name:'customers.name', title:'Name'},
+            {data:'customer_phone', name:'customers.phone', title:'Phone'},
+            {data:'order_status',  title:'Status', searchable:false, orderable:false},
+            {data:'quantity', name:'quantity', title:'Quantity', searchable:false, orderable:false},
+            {data:'price', name:'price', searchable:false, title:'Price', orderable:false},
+            
         ]
     })
 </script>

@@ -18,9 +18,11 @@
             <a href="{{ route('admin.order.index') }}" class="nav-link">Order</a>
         </li>
         @endcan
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('admin.pos.index') }}" class="nav-link">POS</a>
-        </li>
+        @can('pos read')
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{ route('admin.pos.index') }}" class="nav-link">POS</a>
+            </li>
+        @endcan
     </ul>
 
     <!-- Right navbar links -->

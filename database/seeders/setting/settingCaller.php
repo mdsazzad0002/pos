@@ -5,6 +5,7 @@ namespace Database\Seeders\setting;
 use Illuminate\Database\Seeder;
 use Database\Seeders\setting\PwaSeeder;
 use Database\Seeders\setting\CookieSeeder;
+use Database\Seeders\setting\CourierReportSeeder;
 
 
 use Database\Seeders\setting\generalsetting;

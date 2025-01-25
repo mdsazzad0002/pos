@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\OrderEvent;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Models\product;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -16,13 +19,21 @@ class OrderController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            return DataTables::make(order::query())
+            $order = order::leftJoin('customers', 'customers.id', '=', 'orders.customer_id')
+            ->select('orders.*', 'customers.name as customer_name', 'customers.phone as customer_phone');
+            return DataTables::make($order)
 
-                ->addColumn('name', function ($row) {
-                    return $row->customer->name;
+                
+
+                ->addColumn('order_status', function ($row) {
+                  $order_event = OrderEvent::where('order_id', $row->id)->latest()->first();
+                  if($order_event){
+                    return $order_event->status_data->name;
+                  }else{
+                    return 'Unread';
+                  }
 
                 })
-
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.order.show', $row->id);
                     return "<button class='btn btn-primary '
@@ -35,33 +46,51 @@ class OrderController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $delete_route = route('admin.order.delete', $row->id);
-
                     $delete_button =  "<button class='btn btn-danger '
-
                     data-title='$row->name'
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 
                     $edit_route = route('admin.order.edit', $row->id);
-                    $edit_button =  "<a class='btn btn-warning '
+                    $edit_button =  "<a class='btn btn-warning ' href='$edit_route'>Edit</a>";
+
+                    $view_route = route('admin.order.show', $row->id);
+                    $view_button = " <button class='btn btn-primary '
+                    data-dialog='modal-lg modal-dialog-centered'
+                    onclick='button_ajax(this)'
+                    data-title='$row->name  info'
+                    data-href='$view_route'>View</button>";
 
 
-                    href='$edit_route'>Edit</a>";
+                    $update_status_route = route('admin.order.update_status', $row->id);
+                    $update_status_button = " <button class='btn btn-primary '
+                    data-dialog='modal-lg modal-dialog-centered'
+                    onclick='button_ajax(this)'
+                    data-title='$row->name  info'
+                    data-href='$update_status_route'>Update Status </button>";
+
 
                     $return_data = '';
                     if(auth()->user()->can('order edit')==true){
                         $return_data = $edit_button. '&nbsp;';
+                        $return_data .= $update_status_button. '&nbsp;';
                     }
 
                     if(auth()->user()->can('order delete') == true){
                             $return_data .= $delete_button;
                     }
+                    if(auth()->user()->can('order read') == true){
+                            $return_data .= $view_button;
+                    }
+
+
+
 
                     return $return_data;
 
 
                 })
-                ->rawColumns(['name','action', 'view', ])
+                ->rawColumns(['action' ,'order_status'])
                 ->make(true);
         }
         return view('admin.order.index');
@@ -267,4 +296,50 @@ class OrderController extends Controller
     //     return json_encode($result_make);
 
     // }
+
+
+    public function update_status(Request $request, order $order){
+
+        $statuses = OrderStatus::get();
+
+        return view('admin.order.update_status', compact('order', 'statuses'));
+    }
+    public function update_status_post(Request $request, order $order){
+        // return $request->all();
+        $validator = Validator::make($request->all(), [
+            'status' => 'required',
+            'note' => 'nullable|string',
+
+        ]);
+        $validator->validate();
+
+        $order_event = OrderEvent::where('order_id', $order->id)->latest()->first();
+        if($order_event){
+            if($order_event->status_id == $request->status){
+                return json_encode([
+                    'title'=>'Already latest assigned',
+                    'type'=>'error',
+                    'refresh'=>'false',
+                ]);
+
+            }else{
+                $order_event = new OrderEvent();
+            }
+        }else{
+            $order_event = new OrderEvent();
+        }
+        $order_event->status_id = $request->status;
+        $order_event->order_id = $request->order->id;
+        $order_event->note = $request->note;
+        $order_event->creator = auth()->user()->id;
+        $order_event->updater = auth()->user()->id;
+        $order_event->save();
+
+        return json_encode([
+            'title'=>'Successfully Changed status',
+            'type'=>'success',
+            'refresh'=>'true',
+        ]);
+    }
+  
 }

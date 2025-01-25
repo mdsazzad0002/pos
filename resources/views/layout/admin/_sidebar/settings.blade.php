@@ -135,17 +135,12 @@
                 <p>{{ __('device_access_check.sidebar.list.name') }}</p>
             </a>
         </li>
-     
+
 
     </ul>
 </li>
 
-<li class="nav-item">
-    <a href="{{ route('admin.database.backup') }}" class="nav-link">
-        <i class="fas fa-redo-alt nav-icon"></i>
-        <p>{{ __('sidebar.backup') }}</p>
-    </a>
-</li>
+
 <li class="nav-item">
     <a href="{{ route('admin.database.backup') }}" class="nav-link">
         <i class="fas fa-hdd nav-icon"></i>

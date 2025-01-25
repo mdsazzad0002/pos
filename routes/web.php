@@ -456,6 +456,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         //  Order
         Route::resource('/order', OrderController::class)->names('order');
         Route::get('/order/delete/{order}', [OrderController::class, 'delete'])->name('order.delete');
+        Route::get('/order/update_status/{order}', [OrderController::class, 'update_status'])->name('order.update_status');
+        Route::post('/order/update_status/{order}', [OrderController::class, 'update_status_post'])->name('order.update_status_post');
         // Route::get('/order/getOrder/get', [OrderController::class, 'getOrder'])->name('order.select');
 
         //pos

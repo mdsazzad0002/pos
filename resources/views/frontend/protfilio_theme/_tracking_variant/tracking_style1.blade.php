@@ -9,11 +9,11 @@
                     <div class="col-lg-4 col-md-8">
                         <h3 class="mb-4p">Track Your Order</h3>
                         <p class="light-gray mb-24">Get Real-Time Order Updates</p>
-                        <form action="{{ route('tracking_order.index') }}" method="get" class="contact-form">
+                        <form action="{{ route('tracking_order.index') }}" method="get" class="contact-form-style1">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="input-block mb-16">
-                                        <input type="text" class="form-control" id="orderID" name="idOrder" required placeholder="Order ID">
+                                        <input type="text" class="form-control" id="orderID" value="{{ request('id') }}" name="idOrder" required placeholder="Order ID">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g clip-path="url(#clip0_7968_55155)">
                                                 <path
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="input-block mb-24">
-                                        <input type="email" class="form-control" id="billingEmail" name="email" required placeholder="Profile Email">
+                                        <input type="email" class="form-control" value="{{ request('email') }}" id="billingEmail" name="email" required placeholder="Profile Email">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path
                                                 d="M18.2164 4.36219L18.7533 3.82812H17.996H2.00398H1.24671L1.7836 4.36218L8.53498 11.078C8.53505 11.078 8.53512 11.0781 8.53519 11.0782C8.92678 11.4696 9.44753 11.6854 10 11.6854C10.5523 11.6854 11.0731 11.4698 11.4637 11.0793C11.4638 11.0792 11.4639 11.0791 11.4639 11.0791L18.2164 4.36219ZM0.859375 15.0349V15.786L1.39214 15.2566L6.45612 10.2248L6.67909 10.0032L6.45625 9.78157L1.39226 4.74427L0.859375 4.21419V4.96582V15.0349ZM1.78446 15.6377L1.24687 16.1719H2.00473H17.9953H18.7531L18.2155 15.6377L13.1535 10.6079L12.9332 10.3889L12.7129 10.608L11.8501 11.4663L11.8495 11.4668C11.3559 11.9604 10.6997 12.2323 10 12.2323C9.30034 12.2323 8.64412 11.9605 8.14937 11.4657L8.14879 11.4652L7.28711 10.608L7.06684 10.3889L6.84645 10.6079L1.78446 15.6377ZM18.6079 15.2566L19.1406 15.786V15.0349V4.96582V4.21419L18.6077 4.74427L13.5438 9.78157L13.3209 10.0032L13.5439 10.2248L18.6079 15.2566ZM1.75781 3.28125H18.2422C19.0428 3.28125 19.6875 3.93342 19.6875 4.72656V15.2734C19.6875 16.0748 19.0341 16.7188 18.2422 16.7188H1.75781C0.964203 16.7188 0.3125 16.0722 0.3125 15.2734V4.72656C0.3125 3.93226 0.959755 3.28125 1.75781 3.28125Z"
@@ -54,17 +54,293 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
+                           
                                     <button type="submit" class="cus-btn m-auto w-25">Track</button>
-                                     <!-- Alert Message -->
-                                     <div id="message" class="alert-msg"></div>
+                                 
                                 </div>
                             </div>
                         </form>
                     </div>
+
+                    
                 </div>
             </div>
+
+            <div class="bg-white">
+                {{-- Start tracking --}}
+                 <!-- Alert Message -->
+                 <div class="order_status_container">
+                 <div class="container py-5">
+                     <div class="row">
+                     
+                         <div class="col-md-12 col-lg-12">
+                         <div id="tracking-pre"></div>
+                         <div id="tracking">
+                             <div class="tracking-list">
+                                 {{-- load by ajax --}}
+                             </div>
+                         </div>
+                         </div>
+                     </div>
+                     </div>
+             </div>
+             {{-- end tracking --}}
+
+            </div>
+            
         </div>
     </section>
 
 </main>
 <!-- Main Sections -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function () {
+            var form = document.querySelector('.contact-form-style1');
+            var formId = '{{ request('id') ?? '' }}';  // Fallback to an empty string if `id` is null
+            var emailId = '{{ request('email') ?? '' }}';  // Fallback to an empty string if `email` is null
+
+            if (form && formId.length > 0 && emailId.length > 0) {
+                form.querySelector('button[type="submit"]').click();
+            }
+        },1500)
+    
+    })
+
+        document.querySelector('.contact-form-style1').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var current_action = this.action;
+            var current_method = this.method;
+            var current_redirect = this.getAttribute("data-redirect");
+            if ($('.contact-form-style1').valid()) {
+                var _self = $(this);
+                // _self.closest("div").find('button[type="submit"]').attr("disabled", "disabled");
+                var data = $(this).serialize();
+
+                $.ajax({
+                    url: current_action,
+                    type: current_method,
+                    dataType: "json",
+                    data: data,
+                    success: function (data) {
+                        // _self.trigger("reset");
+                        // _self.find('button[type="submit"]').removeAttr("disabled");
+                        // data = JSON.parse(data);
+                        format_tracking_data(data);
+                        // if (data.type == 'success') {
+                            
+                        //     console.log(data);
+                            
+                        // } else {
+                        //     // flasher.error(data.message);
+                        // }
+                    }
+                });
+            }
+        })
+
+        function format_tracking_data(data_format) {
+            var tracking_data = '';
+
+            $.each(data_format, function (index, value) {
+
+      
+            let createdAt = value.created_at; // e.g., "2025-01-25T12:34:56Z"
+            let date = new Date(createdAt);
+
+            let formattedDate  = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+               
+            tracking_data +=` <div class="tracking-item">
+                    <div class="tracking-icon status-intransit">
+                    <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                        <path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                    </svg>
+                    </div>
+                    <div class="tracking-date"><img src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg" class="img-responsive" alt="order-placed" /></div>
+                    
+                    <div class="tracking-content">
+                        ${ value.status }
+                         <span>${ value.note }</span>
+                         <span>${ formattedDate }</span>
+                         </div>
+                </div>   `;
+
+            });
+
+            $('.order_status_container .tracking-list').html(tracking_data);
+
+
+        }
+    
+</script>
+
+<style>
+    .tracking-detail {
+  padding: 3rem 0;
+}
+#tracking {
+  margin-bottom: 1rem;
+}
+[class*="tracking-status-"] p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+  text-transform: uppercase;
+
+}
+[class*="tracking-status-"] {
+  padding: 1.6rem 0;
+}
+.tracking-list {
+  border: 1px solid #e5e5e5;
+}
+.tracking-item {
+  border-left: 4px solid #00ba0d;
+  position: relative;
+  padding: 2rem 1.5rem 0.5rem 2.5rem;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+  min-height: 5rem;
+}
+.tracking-item:last-child {
+  padding-bottom: 4rem;
+}
+.tracking-item .tracking-date {
+  margin-bottom: 0.5rem;
+}
+.tracking-item .tracking-date span {
+  color: #888;
+  font-size: 85%;
+  padding-left: 0.4rem;
+}
+.tracking-item .tracking-content {
+  padding: 0.5rem 0.8rem;
+  background-color: #f4f4f4;
+  border-radius: 0.5rem;
+}
+.tracking-item .tracking-content span {
+  display: block;
+  color: #767676;
+  font-size: 13px;
+}
+.tracking-item .tracking-icon {
+  position: absolute;
+  left: -0.7rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  background-color: #fff;
+  color: #fff;
+}
+
+.tracking-item-pending {
+  border-left: 4px solid #d6d6d6;
+  position: relative;
+  padding: 2rem 1.5rem 0.5rem 2.5rem;
+  font-size: 0.9rem;
+  margin-left: 3rem;
+  min-height: 5rem;
+}
+.tracking-item-pending:last-child {
+  padding-bottom: 4rem;
+}
+.tracking-item-pending .tracking-date {
+  margin-bottom: 0.5rem;
+}
+.tracking-item-pending .tracking-date span {
+  color: #888;
+  font-size: 85%;
+  padding-left: 0.4rem;
+}
+.tracking-item-pending .tracking-content {
+  padding: 0.5rem 0.8rem;
+  background-color: #f4f4f4;
+  border-radius: 0.5rem;
+}
+.tracking-item-pending .tracking-content span {
+  display: block;
+  color: #767676;
+  font-size: 13px;
+}
+.tracking-item-pending .tracking-icon {
+  line-height: 2.6rem;
+  position: absolute;
+  left: -0.7rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: #d6d6d6;
+}
+.tracking-item-pending .tracking-content {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.tracking-item .tracking-icon.status-current {
+  width: 1.9rem;
+  height: 1.9rem;
+  left: -1.1rem;
+}
+.tracking-item .tracking-icon.status-intransit {
+  color: #00ba0d;
+  font-size: 0.6rem;
+}
+.tracking-item .tracking-icon.status-current {
+  color: #00ba0d;
+  font-size: 0.6rem;
+}
+@media (min-width: 992px) {
+  .tracking-item {
+    margin-left: 10rem;
+  }
+  .tracking-item .tracking-date {
+    position: absolute;
+    left: -10rem;
+    width: 7.5rem;
+    text-align: right;
+  }
+  .tracking-item .tracking-date span {
+    display: block;
+  }
+  .tracking-item .tracking-content {
+    padding: 10px;
+  }
+
+  .tracking-item-pending {
+    margin-left: 10rem;
+  }
+  .tracking-item-pending .tracking-date {
+    position: absolute;
+    left: -10rem;
+    width: 7.5rem;
+    text-align: right;
+  }
+  .tracking-item-pending .tracking-date span {
+    display: block;
+  }
+  .tracking-item-pending .tracking-content {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+.tracking-item .tracking-content {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.blinker {
+  border: 7px solid #e9f8ea;
+  animation: blink 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes blink { 50% { border-color:#fff ; }  }
+
+
+
+
+</style>

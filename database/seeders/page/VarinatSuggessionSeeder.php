@@ -432,9 +432,9 @@ class VarinatSuggessionSeeder extends Seeder
             'product_filter1' => [
                 'key' =>'_filter_variant.filter_vaiant1',
                 'title' => 'Product Filter  1',
-                'title_status' => 0,
+                'title_status' => 1,
                 'sub_title' => 'Product Filter Title',
-                'sub_title_status' => 0,
+                'sub_title_status' => 1,
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
@@ -443,7 +443,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'is_banner' => 1,
                 'background_color' => '#eeeeee',
-                'background_type' => 0,
+                'background_type' => 1,
 
             ],
             // ===================================================================
@@ -805,16 +805,24 @@ class VarinatSuggessionSeeder extends Seeder
             'page_title1' => [
                 'key' =>'_variant_manage.page_title',
                 'title' => 'Page Title style  1',
-                'title_status' => 0,
+                'title_status' => 1,
                 'sub_title' => 'Blog details Title',
                 'sub_title_status' => 0,
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
+
                 'view_all_status' => 0,
                 'items_per_row' => 0,
+                'item_exists' => 0,
+
                 'background' => 1,
                 'is_banner' => 0,
+
+                'upload_id1' => 0,
+                'upload_id2' => 0,
+                'upload_id_status' => 1,
+
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
 
@@ -878,7 +886,10 @@ class VarinatSuggessionSeeder extends Seeder
                 if(!$homepage){
                     $homepage = new VarinatSuggession();
                 }
-                $homepage->upload_id = $item['upload_id'] ?? '';
+                $homepage->upload_id1 = $item['upload_id1'] ?? 0;
+                $homepage->upload_id2 = $item['upload_id2'] ?? 0;
+                $homepage->upload_id_status = $item['upload_id_status'] ?? 0;
+                $homepage->item_exists = $item['item_exists'] ?? 1;
 
             }else  {
                 $homepage =  HomePageManage::where(['key'=> $item['key'], 'controlby'=> $sug])->first();

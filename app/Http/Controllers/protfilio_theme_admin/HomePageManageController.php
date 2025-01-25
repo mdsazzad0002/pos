@@ -57,6 +57,7 @@ class HomePageManageController extends Controller
      */
     public function show(Page $homePageManage)
     {
+        
         return view('admin.protfilio_theme.page.partials._edit_buttonbuilder', compact('homePageManage'));
     }
 

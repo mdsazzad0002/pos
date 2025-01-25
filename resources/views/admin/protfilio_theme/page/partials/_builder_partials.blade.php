@@ -29,6 +29,7 @@
                 <!-- Include CSRF token for security -->
 
 
+                {{-- @if($item->HasExists('title_status')) --}}
                 <div class="row">
                     <div class="col-md-9">
                         <div class="form-group">
@@ -43,8 +44,10 @@
                         </label>
                     </div>
                 </div>
+                {{-- @endif --}}
 
 
+                {{-- @if($item->HasExists('sub_title_status')) --}}
                 <div class="row">
                     <div class="col-md-9">
                         <div class="form-group">
@@ -59,8 +62,9 @@
                         </label>
                     </div>
                 </div>
+                {{-- @endif --}}
 
-
+                {{-- @if($item->HasExists('short_read_more_status')) --}}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -81,8 +85,10 @@
                         </label>
                     </div>
                 </div>
+                 {{-- @endif --}}
 
 
+                 {{-- @if($item->HasExists('view_all_status')) --}}
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -103,6 +109,8 @@
                         </label>
                     </div>
                 </div>
+                {{-- @endif --}}
+
 
 
                 <div class="row">
@@ -118,12 +126,14 @@
                             <input type="number" class="form-control" id="items_show" name="items_show" value="{{ $item->items_show }}" >
                         </div>
                     </div>
+
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <label for="is_details_page"> is_details_page <br />
                             <input type="checkbox" checked  class="" hidden name="is_details_page" value="0">
                             <input type="checkbox" class="toggle" {{ $item->is_details_page == 1 ? 'checked' : '' }}  placeholder="page is_details_page" name="is_details_page" id="is_details_page" value="1">
                         </label>
                     </div>
+
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <label for="status"> Page Status <br />
                             <input type="checkbox" checked class="" hidden name="status" value="0">
@@ -133,6 +143,7 @@
                 </div>
 
 
+                {{-- @if($item->HasExists('background_type')) --}}
                 <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group" onclick="upload_select(this)">
@@ -158,7 +169,9 @@
                     </div>
 
                 </div>
-                {{ $item }}
+                {{-- @endif --}}
+
+
 
 
                 <button type="submit" class="btn btn-primary">Submit</button>
