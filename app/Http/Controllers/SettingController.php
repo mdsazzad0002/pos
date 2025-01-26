@@ -208,9 +208,9 @@ class SettingController extends Controller
 
     public function downloadBackup()
     {
-        $databaseName = env('DB_DATABASE');
-        $username = env('DB_USERNAME');
-        $password = env('DB_PASSWORD');
+        $databaseName = env('DB_DATABASE', 'd_pos');
+        $username = env('DB_USERNAME', 'root');
+        $password = env('DB_PASSWORD','');
         $backupPath = storage_path('app/'.date('d-M-Y-h-i-s-A').'.sql');
         $host = env('DB_HOST', '127.0.0.1');
 
@@ -222,22 +222,14 @@ class SettingController extends Controller
         try {
             exec($command, $output, $returnVar);
             if ($returnVar !== 0) {
-                // return response()->json(['error' => 'Backup failed!', 'details' => $output], 500);
+                
 
-
-                // Again try to backup
-                  try {
                     // Execute the command using the shell
                     $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
                     $process->mustRun();  // This will throw an exception if the process fails
 
                     // After the command runs, return the backup file as a download
                     return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
-                } catch (ProcessFailedException $exception) {
-                    // Handle any errors in the process
-                    return response()->json(['error' => 'Backup failed! ' . $exception->getMessage()]);
-                }
-                // end to backup
 
 
             }

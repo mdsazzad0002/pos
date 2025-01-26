@@ -297,7 +297,7 @@
                         </div>
                     </div>
                 </div>
-                @if(env('local'))
+
 
 
                 <div class="col-md-6">
@@ -334,30 +334,33 @@
                                     <div class="text-light p-3 bg-danger border"> Working on it</div>
                                 </div>  --}}
                                 <div class="col-12">
-
+                                    <br>
+                                    <div class="text-center">=========== FAQ =========</div>
                                     <div class="faq_container">
-                                        <div class="single_faq d-flex my-3">
-                                            <div class="w-100">
-                                                <input type="text" name="faq_id[]" value="">
-                                                <div class="faq_question">
-                                                    <label for="faq_title">FAQ Title</label>
-                                                    <input type="text" name="faq_title[]" class="faq_title form-control">
+                                        @if( $product && $product->product_faq)
+                                            @foreach ($product->product_faq as $faq)
+                                                <div class="single_faq d-flex my-3">
+                                                    <div class="w-100">
+                                                        <input type="text" name="faq_id[]" value="{{ $faq->id }}" hidden>
+                                                        <div class="faq_question">
+                                                            <label for="faq_title">FAQ Title</label>
+                                                            <input type="text" name="faq_title[]" value="{{ $faq->question }}" class="faq_title form-control">
+                                                        </div>
+                                                        <div class="faq_answer">
+                                                            <label for="faq_answer">FAQ Answer</label>
+                                                            <textarea type="text" name="faq_answer[]" class="faq_title form-control">{{ $faq->answer }} </textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger" onclick="control_data_faq(this, '.single_faq', '-')">x</button>
+                                                    </div>
                                                 </div>
-                                                <div class="faq_answer">
-                                                    <label for="faq_answer">FAQ Answer</label>
-                                                    <textarea type="text" name="faq_answer[]" class="faq_title form-control">
+                                                @endforeach
+                                            @endif
 
-                                                    </textarea>
-                                                </div>
 
-                                            </div>
-                                            <div>
-                                                <button type="button" class="btn btn-danger" onclick="control_data_faq(this, '.single_faq', '-')">x</button>
-                                            </div>
                                         </div>
-                                    </div>
-
-                                        <button type="button" onclick="control_data_faq(this, '.single_faq', '+')" class="faq btn btn-primary">+ Add New FAQ</button>
+                                        <button type="button" onclick="control_data_faq(this, '.single_faq', '+')" class="faq btn btn-primary btn-block">+ Add New FAQ</button>
 
                                 </div>
 
@@ -370,7 +373,7 @@
                         </div>
                     </div>
                 </div>
-                @endif
+
 
             </div>
 
@@ -612,5 +615,31 @@
 
 
         }
+
+
+
+        $(".faq_container").sortable({
+            placeholder: "sortable-placeholder",
+            update: function (event, ui) {
+            console.log("Order updated!");
+            },
+        });
+
 </script>
+
+<style>
+    .sortable-placeholder {
+        border: 2px dashed #cccccc5d;
+        height: 40px;
+        margin: 5px 0;
+        background: #00000062;
+        }
+        .faq_container .single_faq {
+        border: 1px solid #dddddd77;
+        padding: 10px;
+        margin: 5px 0;
+        background: #00000071;
+        cursor: grab;
+        }
+</style>
 @endpush

@@ -72,6 +72,15 @@ Product Info
                 <td>Subtotal : </td><td>{{ $product_data->subtotal->coupon_without_price ?? null }} {{ settings('currency_symbol', 9) }}</td>
 
             </tr>
+            {{-- {{ dd($order->shipping_charge) }} --}}
+            <tr>
+                <td>Shipping Charge : </td><td>{{ $order->shipping_charge->amount ?? '(Delivery Charge Not Selected)' }} {{ settings('currency_symbol', 9) }}</td>
+            </tr>
+            <tr>
+                <td>Final Amount : </td><td>{{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->coupon_without_price ?? 0 + $order->shipping_charge->amount ?? 0 }} </td>
+            </tr>
+
+
    </tbody>
 </table>
 
@@ -103,4 +112,69 @@ Product Info
         <td>Creator Name</td>
         <td>{{ $order->customer->user->name ?? ''}}</td>
     </tr>
+</table>
+<div>
+    <br>
+   Billing Address
+</div>
+
+<table class="table talbe-bordered border table-striped table-hover">
+    <tr>
+        <td>Address</td>
+        <td>{{ $order->billing_info->address }}</td>
+    </tr>
+    <tr>
+        <td>district</td>
+        <td>{{ $order->billing_info->district }}</td>
+    </tr>
+    <tr>
+        <td>country</td>
+        <td>{{ $order->billing_info->country }}</td>
+    </tr>
+    <tr>
+        <td>Apartment / Flat</td>
+        <td>{{ $order->billing_info->address_optional }}</td>
+    </tr>
+    <tr>
+        <td>postal</td>
+        <td>{{ $order->billing_info->postal }}</td>
+    </tr>
+    <tr>
+        <td>state</td>
+        <td>{{ $order->billing_info->state }}</td>
+    </tr>
+
+</table>
+
+<div>
+    <br>
+    Address
+</div>
+
+<table class="table talbe-bordered border table-striped table-hover">
+    <tr>
+        <td>Address</td>
+        <td>{{ $order->address_info->address }}</td>
+    </tr>
+    <tr>
+        <td>district</td>
+        <td>{{ $order->address_info->district }}</td>
+    </tr>
+    <tr>
+        <td>country</td>
+        <td>{{ $order->address_info->country }}</td>
+    </tr>
+    <tr>
+        <td>Apartment / Flat</td>
+        <td>{{ $order->address_info->address_optional }}</td>
+    </tr>
+    <tr>
+        <td>postal</td>
+        <td>{{ $order->address_info->postal }}</td>
+    </tr>
+    <tr>
+        <td>state</td>
+        <td>{{ $order->address_info->state }}</td>
+    </tr>
+
 </table>

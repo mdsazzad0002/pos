@@ -142,6 +142,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                
 
             ],
             'hero2' => [

@@ -42,7 +42,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['tracking_report', '27']) }}"
             class="nav-link">
-                <i class="fas fa-tags nav-icon"></i>
+                <i class="fas fa-route nav-icon"></i>
                 <p>{{ __('settings.tracking_report') }}</p>
             </a>
         </li>
@@ -72,7 +72,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['custom_js_css', '45']) }}"
             class="nav-link">
-                <i class="fas fa-cookie-bite nav-icon"></i>
+                <i class="fas fa-code nav-icon"></i>
                 <p>{{ __('settings.custom_js_css') }}</p>
             </a>
         </li>
@@ -93,7 +93,7 @@
         </li>
         <li class="nav-item">
             <a href="{{ route('admin.settings.courier-configration.index') }}" class="nav-link ">
-                <i class="fas fa-money-check nav-icon"></i>
+                <i class="fas fa-truck-loading nav-icon"></i>
                 <p> {{ __('settings.courier-configration-sidebar') }}</p>
             </a>
         </li>

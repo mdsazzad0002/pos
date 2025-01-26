@@ -37,7 +37,7 @@ class rolepermissionsedder extends Seeder
 
 
                 // Product
-                'product read', 'product create', 'product edit', 'product delete',
+                'product read', 'product create', 'product edit', 'product delete', 'product barcode',
 
                 // Unit
                 'unit read', 'unit create', 'unit edit', 'unit delete',
@@ -75,7 +75,7 @@ class rolepermissionsedder extends Seeder
 
                 // Pos
                 'pos read',  'pos create', 'pos edit',  'pos delete',
-                
+
 
                 //[[[ Setting
                         'setting read', 'setting create', 'setting edit',  'setting delete',

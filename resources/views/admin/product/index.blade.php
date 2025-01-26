@@ -50,6 +50,7 @@
             {data:'view', name:'view', searchable:false, orderable:false, title:'View'},
 
             {data:'name', name:'name', title:'Name'},
+            {data:'status_text', name:'status', title:'Status'},
             {data:'old_price', name:'old_price', title:'Old Price'},
             {data:'selling_price', name:'selling_price', title:'Selling Price'},
             {data:'image', name:'image', searchable:false, orderable:false, title:'Image'},

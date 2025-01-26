@@ -29,7 +29,21 @@ class order extends Model
     public function order_events(){
         return $this->hasMany(OrderEvent::class, 'order_id', 'id');
     }
-    
+
+    public function address_info(){
+        return $this->hasOne(Address::class, 'id', 'address');
+    }
+    public function billing_info(){
+        return $this->hasOne(Address::class, 'id', 'billing_address');
+    }
+
+    public function shipping_info(){
+        return $this->hasOne(Address::class, 'id', 'shipping_charge_id');
+    }
+
+    public function shipping_charge(){
+        return $this->hasOne(ShippingCharge::class, 'id', 'shipping_charge_id');
+    }
 
 
 }

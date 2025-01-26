@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\ProductFaq;
 use App\Models\VariantOption;
 use Illuminate\Http\Request;
 use Picqer\Barcode\Renderers\HtmlRenderer;
@@ -36,34 +37,40 @@ class ProductController extends Controller
 
                 })
                 ->addColumn('action', function ($row) {
-                    $delete_route = route('admin.product.delete', $row->id);
 
-                    $delete_button =  "<button class='btn btn-danger '
 
-                    data-title='$row->name'
-                    onclick='button_ajax(this)'
-                    data-href='$delete_route'>Delete</button>";
 
-                    $edit_route = route('admin.product.edit', $row->id);
-                    $edit_button =  "<a class='btn btn-warning' href='$edit_route'>Edit</a>";
 
-                    $barcode_route = route('admin.product.barcode',$row->id);
-                    $bar_button =  "<a class='btn btn-warning ml-1' href='$barcode_route'>Barcode</a>";
+
 
                     $return_data = '';
                     if(auth()->user()->can('product edit')==true){
+                        $edit_route = route('admin.product.edit', $row->id);
+                        $edit_button =  "<a class='btn btn-warning' href='$edit_route'>Edit</a>";
                         $return_data = $edit_button. '&nbsp;';
                     }
 
-                    // if(auth()->user()->can('product barcode')==true){
-                    //     $return_data = $bar_button. '&nbsp;';
-                    // }
+          
 
                     if(auth()->user()->can('product delete') == true){
+                        $delete_route = route('admin.product.delete', $row->id);
+                        $delete_button =  "<button class='btn btn-danger '
+                        data-title='$row->name'
+                        onclick='button_ajax(this)'
+                        data-href='$delete_route'>Delete</button>";
+
                         $return_data .= $delete_button ;
                     }
 
-                    return $return_data. $bar_button ;
+                    if(auth()->user()->can('product barcode') == true && env('APP_ENV') == 'local'){
+                        $barcode_route = route('admin.product.barcode',$row->id);
+                        $bar_button =  "<a class='btn btn-warning ml-1' href='$barcode_route'>Barcode</a>";
+
+                        $return_data .= $bar_button ;
+                    }
+
+
+                    return $return_data;
 
 
                 })
@@ -101,11 +108,12 @@ class ProductController extends Controller
                 // 'selling_price'=>'required',
             ]
         );
-        $product = new product;
-        $product->save();
 
-        $product_update = new ProductController();
-        return $product_update = $product_update->update($request, $product);
+        $request['type']= 'create';
+
+
+
+        return $product_update = $this->update($request, null);
 
 
     }
@@ -129,8 +137,10 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, product $product = null)
+    public function update(Request $request,  $product = null)
     {
+
+        // return $request->all();
         $request->validate(
             [
                 'vat'=>'required|integer',
@@ -144,6 +154,12 @@ class ProductController extends Controller
                 // 'selling_price'=>'required',
             ]
         );
+
+        if($product == null){
+            $product = new product();
+        }else{
+            $product = product::findOrFail($product);
+        }
 
         if($product){
 
@@ -232,6 +248,48 @@ class ProductController extends Controller
                         }
                     }
                 }
+
+
+
+                $product_faqs = ProductFaq::where('product_id', $product->id)->pluck('id')->toArray();
+                $faq_remove_array = [];
+                if($request->has('faq_title')){
+                    foreach($request->faq_title as $key => $items){
+                        if(in_array($request->faq_id[$key], $product_faqs)){
+                            ProductFaq::where('id', $request->faq_id[$key])->update([
+                                'question'=>$items,
+                                'answer'=>$request->faq_answer[$key],
+                                'product_id'=>$product->id,
+                                'status'=>1,
+                                'order_sort'=>$key,
+                            ]);
+                            $faq_remove_array[] = $request->faq_id[$key];
+                        }else{
+                            ProductFaq::create([
+                                'product_id'=>$product->id,
+                                'question'=>$items,
+                                'answer'=>$request->faq_answer[$key],
+                                'status'=>1,
+                                'order_sort'=>$key,
+                            ]);
+                        }
+
+
+                    }
+
+                    $product_faqs = array_diff($product_faqs, $faq_remove_array);
+
+
+                    foreach($product_faqs as $items){
+                        $items_faq_for_delete = ProductFaq::findOrFail($items);
+                        if($items_faq_for_delete){
+                            $items_faq_for_delete->delete();
+                        }
+
+                    }
+                }
+
+
 
 
                 return json_encode([
@@ -365,7 +423,7 @@ class ProductController extends Controller
             }
 
             $qr_make_code =   'p_'.$product_find->id.'-' .( $product_find->variant_on ? $variant_find->id : 0);
-         
+
             $barcode = (new TypeCode128())->getBarcode($qr_make_code);
 
         // // Echo an HTML table
@@ -376,11 +434,11 @@ class ProductController extends Controller
            <div class="price text-center"> Price'.settings('currency_symbol', 9) . $product_find->selling_price. '  '.  $qr_make_code.'</div>
         </div>';
 
-        
+
         }
 
 
-        
+
     }
 
 }

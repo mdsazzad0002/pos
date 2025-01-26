@@ -14,25 +14,34 @@ return new class extends Migration
         Schema::create('varinat_suggessions', function (Blueprint $table) {
             $table->id();
             $table->string('key');
+
             $table->string('title')->nullable();
-            $table->string('title_status')->default(1);
+            $table->string('title_status')->default(1); //for show
+            $table->string('title_manage_status')->default(1); //for manage
+
 
             $table->string('sub_title')->nullable();
-            $table->string('sub_title_status')->default(1);
+            $table->string('sub_title_status')->default(1); //for show
+            $table->string('sub_title_manage_status')->default(1); //for manage
 
 
             $table->string('short_read_more')->default('Read More');
-            $table->boolean('short_read_more_status')->default(1);
             $table->string('short_read_more_page_url')->nullable();
+            $table->boolean('short_read_more_status')->default(1);  //for show
+            $table->boolean('short_read_more_manage_status')->default(1); //for manage
+
 
             $table->string('view_all')->default('See All');
-            $table->boolean('view_all_status')->default(1);
             $table->string('view_all_page_url')->nullable();
+            $table->boolean('view_all_status')->default(1); //for show
+            $table->boolean('view_all_manage_status')->default(1); //for manage
 
 
             $table->integer('items_per_row')->default(3);
             $table->integer('items_show')->default(4);
+            $table->integer('items_manage_status')->default(4);
 
+            
             $table->integer('is_details_page')->default(0);
 
 
@@ -42,6 +51,18 @@ return new class extends Migration
             $table->boolean('background_type')->default(1);
 
 
+            $table->string('upload_id')->default(0); //Define background image
+
+            $table->string('upload_id1')->default(0);   //Define background title image
+            $table->string('upload_id2')->default(0); //Define background title image
+            $table->string('upload_id_status')->default(0); //define title image show hide status id status
+
+            $table->string('upload_id3')->default(0); //Define background slider side  image
+            $table->string('upload_id3_status')->default(0); //Define background slider side  status
+
+            $table->string('title_status')->default(0);
+
+            $table->string('item_exists')->default(1);
 
 
             $table->integer('is_banner')->default(0);

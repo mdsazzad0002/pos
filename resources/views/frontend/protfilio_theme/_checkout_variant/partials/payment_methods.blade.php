@@ -14,10 +14,10 @@ $payment_methods = \App\Models\payment\PaymentCredential::where('status', 1)->ge
         <div class="shipping-radio-container bg-white mb-40">
 
             <div class="row">
-                @foreach ( $payment_methods as $methods)
+                @foreach ( $payment_methods as $key => $methods)
                 <div class="col-md-6 plans mb-16">
                     <label class="plan basic-plan" for="basicpay{{ $methods->id }}">
-                        <input type="radio" name="plan" id="basicpay{{ $methods->id }}" value="{{ $methods->id }}">
+                        <input type="radio" name="plan" id="basicpay{{ $methods->id }}" value="{{ $methods->id }}" @if($key == 0) checked @endif   >
                         <span class="plan-content">
                             <img src="{{ $methods->upload_id ?? 0 }}" alt="">
                             <span class="plan-details">

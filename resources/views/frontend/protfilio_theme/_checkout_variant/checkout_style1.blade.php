@@ -318,7 +318,8 @@
                     </div>
 
 
-                    @include('frontend.protfilio_theme._checkout_variant.partials.shipping_methods')
+                    {{-- @include('frontend.protfilio_theme._checkout_variant.partials.shipping_methods') --}}
+                    @include('frontend.protfilio_theme._checkout_variant.partials.shipping_charges')
                     @include('frontend.protfilio_theme._checkout_variant.partials.payment_methods')
 
                 </div>
@@ -439,18 +440,22 @@
 
 
     document.querySelector('.checkout_process').addEventListener('click', () => {
-        const contactForms = document.querySelectorAll('.contact-form');
+        let contactForms = document.querySelectorAll('.contact-form');
 
         let form_data = {}; // Initialize an empty object to store all form data
-
+        let formData;
         contactForms.forEach(form => {
-            const formData = new FormData(form); // Create a FormData object for each form
+             formData = new FormData(form); // Create a FormData object for each form
 
             // Add each field to the combined `form_data` object
             formData.forEach((value, key) => {
                 form_data[key] = value; // This will overwrite keys with the same name
             });
+
+
         });
+        
+        form_data['shipping_charge'] = $('input[name="shipping_charge"]').val();
 
 
 

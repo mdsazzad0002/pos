@@ -27,6 +27,8 @@ return new class extends Migration
             $table->text('note')->nullable();
 
 
+            $table->string('shipping_charge_id')->default(0);
+
             $table->string('address')->default(0);
             $table->string('billing_address')->default(0);
 

@@ -19,6 +19,7 @@ use App\Models\coupon;
 use App\Models\Customer as customer;
 use App\Models\Discount;
 use App\Models\order;
+use App\Models\OrderEvent;
 use App\Models\VariantOption;
 use App\Models\Vat;
 use Carbon\Carbon;
@@ -607,6 +608,9 @@ class HomeController extends Controller
 
         ]);
 
+        // return $request->all();
+
+
         // return auth()->guard('customer')->user();
 
         if(!auth()->guard('customer')->user()){
@@ -639,6 +643,9 @@ class HomeController extends Controller
         }
 
 
+
+
+        // Address
         $address_id = 0;
         $billingaddress_id = 0;
 
@@ -680,6 +687,7 @@ class HomeController extends Controller
         }
 
 
+
         if(!$request->has('billingaddress_id') && $request->has('shipAddress')){
             $address = new address();
             $address->name = $request->name1 . ' ' . $request->lname2;
@@ -704,7 +712,7 @@ class HomeController extends Controller
             $billingaddress_id = $address_id;
 
         }
-
+        // End Address
 
 
 
@@ -719,6 +727,7 @@ class HomeController extends Controller
              $card_information = $this->cart_details($request);
             // dd($card_information['subtotal']['product_ids']);
 
+            // Order add
             $order =  new order();
             $order->customer_id = $user->id;
             $order->order_id = time();
@@ -737,10 +746,24 @@ class HomeController extends Controller
             $order->vat = $card_information['subtotal']['vat'];
             $order->status = 1;
             $order->note = $request->textarea ?? '';
+
+            $order->shipping_charge_id = $request->shipping_charge ?? 0;
+
             $order->save();
+            // Order add end
 
 
+            // Order Event add
+            $order_event = new OrderEvent();
+            $order_event->order_id = $order->id;
+            $order_event->status_id = 1;
+            $order_event->creator = auth()->guard('customer')->user()->id;
+            $order_event->updater = auth()->guard('customer')->user()->id;
+            $order_event->save();
+            // Order Event add end
         }
+
+
 
         session()->put('front_product', []);
 

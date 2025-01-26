@@ -16,7 +16,7 @@ class product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $appends = ['image_url', 'avg_rat', 'rat_count'];
+    protected $appends = ['image_url', 'avg_rat', 'rat_count', 'status_text'];
 
 
     public function category_info(){
@@ -95,6 +95,12 @@ class product extends Model
         return $this->reviewCount() ?? 0;
     }
 
+    public function product_faq(){
+        return $this->hasMany(ProductFaq::class, 'product_id', 'id');
+    }
 
+    public function getStatusTextAttribute(){
+        return $this->status == 1 ? 'Active' : 'Inactive';
+    }
 
 }

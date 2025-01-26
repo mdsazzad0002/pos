@@ -104,14 +104,6 @@ sidebar-dark-primary elevation-4">
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        @can('product read')
-                        <li class="nav-item">
-                            <a href="{{ route('admin.product.index') }}" class="nav-link">
-                                <i class="fas fa-th-large nav-icon"></i>
-                                <p>{{ __('settings.product_list') }}</p>
-                            </a>
-                        </li>
-                        @endcan
                         @can('product create')
                         <li class="nav-item">
                             <a href="{{ route('admin.product.create') }}" class="nav-link {{ Request::routeIs('admin.product.edit') ? 'active': ''}}">
@@ -120,6 +112,32 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
+
+                        
+                        @can('product read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.product.index') }}" class="nav-link">
+                                <i class="fas fa-th-large nav-icon"></i>
+                                <p>{{ __('settings.product_list') }}</p>
+                            </a>
+                        </li>
+                        @endcan
+
+
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tools nav-icon "></i>
+                        <p>
+                            {{ __('sidebar.administrator') }}
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+
 
                         @can('category read')
                         <li class="nav-item">
@@ -184,7 +202,7 @@ sidebar-dark-primary elevation-4">
 
                     </ul>
                 </li>
-               
+
 
 
 
