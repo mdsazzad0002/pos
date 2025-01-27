@@ -29,11 +29,17 @@ class ProductController extends Controller
                 })
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.product.show', $row->id);
-                    return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered modal-lg'
-                    onclick='button_ajax(this)'
-                    data-title='$row->name  info'
-                    data-href='$view_route'>View</button>";
+                    $view_page = \App\Models\Page::where('page_type', 'view')->first();
+                    return "
+                    <div class='btn-group'>
+                        <button class='btn btn-primary '
+                        data-dialog=' modal-dialog-centered modal-lg'
+                        onclick='button_ajax(this)'
+                        data-title='$row->name  info'
+                        data-href='$view_route'>View</button>
+                        <a class='btn btn-success ml-1' target='_blank' href='".url($view_page->slug)."?slug=".$row->slug."'><i class='fas fa-external-link-alt'></i></a>
+                    </div>
+                    ";
 
                 })
                 ->addColumn('action', function ($row) {
@@ -50,7 +56,7 @@ class ProductController extends Controller
                         $return_data = $edit_button. '&nbsp;';
                     }
 
-          
+
 
                     if(auth()->user()->can('product delete') == true){
                         $delete_route = route('admin.product.delete', $row->id);

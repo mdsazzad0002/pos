@@ -21,45 +21,48 @@ class CategoryController extends Controller
                     return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
 
                 })
-                ->addColumn('view', function ($row) {
-                    $view_route = route('admin.category.show', $row->id);
-                    return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered'
-                    onclick='button_ajax(this)'
-                    data-title='$row->name  info'
-                    data-href='$view_route'>View</button>";
 
-                })
                 ->addColumn('action', function ($row) {
-                    $delete_route = route('admin.category.delete', $row->id);
 
-                    $delete_button =  "<button class='btn btn-danger '
 
-                    data-title='$row->name'
-                    onclick='button_ajax(this)'
-                    data-href='$delete_route'>Delete</button>";
 
-                    $edit_route = route('admin.category.edit', $row->id);
-                    $edit_button =  "<button class='btn btn-warning '
-                    data-dialog='modal-dialog-centered'
-                    data-title='$row->name'
-                    onclick='button_ajax(this)'
-                    data-href='$edit_route'>Edit</button>";
 
                     $return_data = '';
                     if(auth()->user()->can('category edit')==true){
+                        $edit_route = route('admin.category.edit', $row->id);
+                        $edit_button =  "<button class='btn btn-warning '
+                        data-dialog='modal-dialog-centered'
+                        data-title='$row->name'
+                        onclick='button_ajax(this)'
+                        data-href='$edit_route'>Edit</button>";
                         $return_data = $edit_button. '&nbsp;';
                     }
 
                     if(auth()->user()->can('category delete') == true){
+                        $delete_route = route('admin.category.delete', $row->id);
+                        $delete_button =  "<button class='btn btn-danger '
+                        data-title='$row->name'
+                        onclick='button_ajax(this)'
+                        data-href='$delete_route'>Delete</button>";
                         $return_data .= $delete_button ;
+                    }
+
+                    if(auth()->user()->can('category read') == true){
+                        $view_route = route('admin.category.show', $row->id);
+                        $view_button = " <button class='btn btn-primary '
+                        data-dialog=' modal-dialog-centered'
+                        onclick='button_ajax(this)'
+                        data-title='$row->name  info'
+                        data-href='$view_route'>View</button>";
+
+                        $return_data .= $view_button ;
                     }
 
                     return $return_data;
 
 
                 })
-                ->rawColumns(['action', 'view', 'image'])
+                ->rawColumns(['action', 'image'])
                 ->make(true);
         }
         return view('admin.category.index');

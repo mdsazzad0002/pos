@@ -23,7 +23,7 @@ class OrderController extends Controller
             ->select('orders.*', 'customers.name as customer_name', 'customers.phone as customer_phone');
             return DataTables::make($order)
 
-                
+
 
                 ->addColumn('order_status', function ($row) {
                   $order_event = OrderEvent::where('order_id', $row->id)->latest()->first();
@@ -58,7 +58,7 @@ class OrderController extends Controller
                     $view_button = " <button class='btn btn-primary '
                     data-dialog='modal-lg modal-dialog-centered'
                     onclick='button_ajax(this)'
-                    data-title='$row->name  info'
+                    data-title='Info #ID".$row->order_id."'
                     data-href='$view_route'>View</button>";
 
 
@@ -66,7 +66,7 @@ class OrderController extends Controller
                     $update_status_button = " <button class='btn btn-primary '
                     data-dialog='modal-lg modal-dialog-centered'
                     onclick='button_ajax(this)'
-                    data-title='$row->name  info'
+                    data-title='info #ID".$row->order_id."'
                     data-href='$update_status_route'>Update Status </button>";
 
 
@@ -341,5 +341,5 @@ class OrderController extends Controller
             'refresh'=>'true',
         ]);
     }
-  
+
 }

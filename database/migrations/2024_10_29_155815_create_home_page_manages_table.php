@@ -34,18 +34,18 @@ return new class extends Migration
             $table->integer('items_show')->default(4);
 
             $table->integer('is_details_page')->default(0);
-            
 
 
 
-            $table->string('background')->default(0);
+
+            $table->string('background')->default(0); //default upload id
             $table->string('background_color')->default('#eeeeee');
             $table->boolean('background_type')->default(1);
 
 
             $table->string('controlby')->default(1)->comment('1 => Homepage');
 
-            $table->integer('is_banner')->default(0);
+
             $table->integer('order')->default(1);
             $table->string('status')->default(1);
 
@@ -53,6 +53,16 @@ return new class extends Migration
             $table->string('updater')->default(0);
             $table->softDeletes();
             $table->timestamps();
+
+
+
+            $table->string('upload_id1')->default(0);   //Define background title image
+            $table->string('upload_id2')->default(0); //Define background title image
+
+
+            $table->string('upload_id3')->default(0); //Define background slider side  image
+
+
         });
     }
 

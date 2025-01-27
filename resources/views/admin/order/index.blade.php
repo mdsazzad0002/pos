@@ -8,15 +8,15 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        Order List
         <div>
             @can('user create')
-
-            <a class="btn btn-primary"  href="{{ route('admin.order.create') }}">+ Add New order</a>
+                <a class="btn btn-primary"  href="{{ route('admin.order.create') }}">+ Add New order</a>
             @endcan
         </div>
     </div>
     <div class="card-body">
+        
         <table id="users" class="table table-bordered table-striped table-hover"> </table>
     </div>
 </div>
@@ -50,7 +50,9 @@
                 return moment(data).format('DD-MM-YYYY hh:mm:ss A');
             }},
 
-        ]
+        ],
+        buttons: true,
+        dom:database_dom_format,
     })
 </script>
 @endpush

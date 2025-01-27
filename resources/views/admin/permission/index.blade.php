@@ -52,10 +52,13 @@
                 { data: 'edit', name: 'edit', orderable:false, searchable:false },
                 { data: 'view', name: 'view', orderable:false, searchable:false },
                 { data: 'name', name: 'name' },
+                { data: 'created_at', name: 'created_at', title:'Date', render(data, type, row, meta) {
+                    return moment(data).format('DD-MM-YYYY hh:mm:ss A');
+                }},
 
             ],
             buttons: true,
-            dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
+            dom: database_dom_format,
 
         });
     });

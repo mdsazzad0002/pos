@@ -6,23 +6,30 @@
 
 <section id="{{ $class ?? '' }}" class="{{ $class ?? '' }} section" style="{{ $info->background_type == 1 ? 'background-image:url('.dynamic_asset($info->background).')' : 'background:'.$info->background_color  }};    background-repeat: no-repeat; background-size: cover;">
 
+
+    @if(isset($info))
     <!-- Section Title -->
-    @if($info->sub_title_status || $info->title_status)
-    <div class="container-fluid section-title mb-3" data-aos="fade-up">
-        @if($info->title_status)
-        <h2>{{ __($info->title) }}</h2>
+
+    @if(!isset($title))
+        @if($info->sub_title_status || $info->title_status)
+            <div class="container-fluid section-title mb-3" data-aos="fade-up">
+                @if($info->title_status)
+                <h2>{{ __($info->title) }}</h2>
+                @endif
+                @if($info->sub_title_status)
+                <p>{{ __($info->sub_title) }}</p>
+                @endif
+            </div>
+            @endif
         @endif
-        @if($info->sub_title_status)
-        <p>{{ __($info->sub_title) }}</p>
-        @endif
-    </div>
-    @endif
+      @endif
+
     <!-- End Section Title -->
 
     {{ $slot }}
 
 
-
+    @if(isset($info))
     <div class="container-fluid  text-center  d-flex align-items-center justify-content-center">
         @if($info->is_details_page && $items)
         <div class="links_nav mt-3">
@@ -33,11 +40,13 @@
     </div>
 
 
+
     @if ($info->view_all_status)
     <div class="text-center my-4">
         <a href="{{ url($info->view_all_page_url ?? '') }}" class="btn_primary">{{ $info->short_read_more }}
             <i class="bi bi-arrow-right"></i></a>
     </div>
+    @endif
     @endif
 
     @isset($js)

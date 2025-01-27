@@ -94,10 +94,10 @@
                                         <p class="fw-500"> <span class="light-gray qtyPrice">{{ settings('currency_symbol', 9) }} ${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price} Vat) = ${element.cal_total_with_vat.toFixed(2)} </span></p>
                                     </td>
                                     <td>
-                                        <div class="quantity-controller quantity-wrap">
-                                            <input onclick="product_counterUP(this, '-')" class="decrement" type="button" value="-">
-                                            <input type="text" name="quantity" value="${element.quantity}" maxlength="2" size="1" class="input_quantity">
-                                            <input onclick="product_counterUP(this, '+')" class="increment" type="button" value="+">
+                                        <div class="quantity-controller quantity-wrap" data-id="${element.product.id}">
+                                            <input class="decrement" type="button" value="-">
+                                            <input type="number" min="0" name="quantity" value="${element.quantity}" maxlength="2" size="1" class="input_quantity" style="width: 54px;">
+                                            <input class="increment" type="button" value="+">
                                         </div>
                                     </td>
                                     <td>
@@ -135,7 +135,7 @@
                                 <h6>Coupon Discount</h6>
                                 <h6 class="light-gray">{{ settings('currency_symbol', 9) }} ${data.subtotal.coupon.toFixed(2)}</h6>
                             </div>
-                        
+
                             <div class="hr-line mb-16"></div>
                             <div class="title-price mb-16">
                                 <h5 class="color-primary">TOTAL</h5>
@@ -148,6 +148,9 @@
                         </div>
                     </div>`;
                     $('.subtotal_cart').html(html_data)
+                    setTimeout(() => {
+                        cart_page_increment_decrement()
+                    },500)
         }
 
      function cart_product_view(){

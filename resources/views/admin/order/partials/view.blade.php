@@ -34,7 +34,7 @@ Product Info
             {{ $items->product->variant_on == 1 ? ($items->product_variant->selling_price  ?? '') :  ($items->product->selling_price ?? '') }} <br>
         </td>
         <td class="text-right">{{ $items->quantity }}</td>
-        <td class="text-right">{{ $items->single_subtotal }} {{ settings('currency_symbol', 9) }}</td>
+        <td class="text-right"> {{ settings('currency_symbol', 9) }} {{ $items->single_subtotal }}</td>
 
     </tr>
 
@@ -54,30 +54,30 @@ Product Info
             <tr>
 
         {{-- {{ dd($product_data) }} --}}
-                <td>Price: </td><td>{{ $product_data->subtotal->pre_price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Price: </td><td> {{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->pre_price ?? null }}</td>
             </tr>
             <tr>
-                <td>Discount: </td><td> {{ $product_data->subtotal->discount ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Discount: </td><td>  {{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->discount ?? null }}</td>
             </tr>
             <tr>
-                <td>Vat: </td><td> {{ $product_data->subtotal->vat ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Vat: </td><td>  {{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->vat ?? null }}</td>
             </tr>
             <tr>
-                <td>Total Price : </td><td>{{ $product_data->subtotal->price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Total Price : </td><td> {{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->price ?? null }}</td>
             </tr>
             <tr>
-                <td>Coupon :</td><td> {{ $product_data->subtotal->coupon ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Coupon :</td><td>{{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->coupon ?? null }} </td>
             </tr>
             <tr>
-                <td>Subtotal : </td><td>{{ $product_data->subtotal->coupon_without_price ?? null }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Subtotal : </td><td>{{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->coupon_without_price ?? 0 }} </td>
 
             </tr>
             {{-- {{ dd($order->shipping_charge) }} --}}
             <tr>
-                <td>Shipping Charge : </td><td>{{ $order->shipping_charge->amount ?? '(Delivery Charge Not Selected)' }} {{ settings('currency_symbol', 9) }}</td>
+                <td>Shipping Charge : </td><td>{{ settings('currency_symbol', 9) }} {{ $order->shipping_charge->amount ?? '(Delivery Charge Not Selected)' }} </td>
             </tr>
             <tr>
-                <td>Final Amount : </td><td>{{ settings('currency_symbol', 9) }} {{ $product_data->subtotal->coupon_without_price ?? 0 + $order->shipping_charge->amount ?? 0 }} </td>
+                <td>Final Amount : </td><td>{{ settings('currency_symbol', 9) }} {{ ($product_data->subtotal->coupon_without_price ?? 0) + ($order->shipping_charge->amount ?? 0) }} </td>
             </tr>
 
 

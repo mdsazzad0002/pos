@@ -286,7 +286,7 @@ class HomeController extends Controller
             }else{
                 $request['size'] = 0;
             }
-            $product_cart = session()->get( $source_type, []);
+            $product_cart = session( $source_type, []);
 
             // Flag to check if the product was found
             $found = false;
@@ -437,8 +437,8 @@ class HomeController extends Controller
 
     public function cart_and_wishlist(){
         $returned_data = [
-            'front_product' => count(session('front_product', [])),
-            'compare_list' => count(session('compare_list', []))
+            'front_product' => count(session()->get('front_product') ?? []),
+            'compare_list' => count(session()->get('compare_list') ?? []),
         ];
 
         return json_encode($returned_data);

@@ -48,7 +48,7 @@ $slider_list = \App\Models\slider::where('status', 1)->get();
 
             </div>
             <a class="hero_image_style1_side_img" href="#">
-                <img src="{{ dynamic_asset($slider_list[0]->upload_id) }}" class="img-fluid" alt="">
+                <img src="{{ dynamic_asset($variant_info->upload_id3) }}" class="img-fluid" alt="">
             </a>
 
         </div><!-- /Hero Section -->

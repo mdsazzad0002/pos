@@ -61,6 +61,14 @@
       margin-left: 50px;
       margin-right: 50px;
     }
+
+ 
+  }
+
+  @media (min-width:1200px){
+    .hero_hero_style1 .carousel{
+        min-height:600px;
+    }
   }
 
   .hero_hero_style1 h2 {
@@ -73,6 +81,7 @@
     .hero_hero_style1 h2 {
       font-size: 30px;
     }
+
   }
 
   .hero_hero_style1 .btn-get-started {
@@ -111,6 +120,9 @@
       padding-right: 15px;
     }
   }
+
+
+
 
   .hero_hero_style1 .carousel-control-next-icon,
   .hero_hero_style1 .carousel-control-prev-icon {
@@ -171,15 +183,16 @@
 
 
   .hero_image_style1_side_img{
-      width:300px;
+      width:450px;
     }
     .hero_image_style1_side_img img{
         position:static;
+        object-fit: inherit;
     }
-    
+
     @media (max-width:600px){
       .hero_image_style1_side_img{
         display:none;
       }
-    
+
   }
