@@ -53,6 +53,8 @@ class SettingController extends Controller
 
         }elseif($slug == 'custom_js_css' && $key == '45'){
             $flag_target = 1;
+        }elseif($slug == 'footer_style' && $key == '88'){
+            $flag_target = 1;
         }
 
 

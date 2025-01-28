@@ -137,6 +137,14 @@
         </li>
 
 
+        <li class="nav-item">
+            <a href="{{ route('admin.setting.index', ['footer_style', '88']) }}" class="nav-link">
+                <i class="fas fa-user-tie nav-icon"></i>
+                <p>{{ __('sidebar.Footer_Style') }}</p>
+            </a>
+        </li>
+
+
     </ul>
 </li>
 

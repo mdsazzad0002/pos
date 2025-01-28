@@ -8,7 +8,11 @@
     <meta name="description" content="Accessory-Store">
 
     <title>@yield('title', '')</title>
-
+    <style>
+        :root {
+            --primary-color: #f7941d;
+        }
+    </style>
 
     @include('layout.frontend_ajuba.additional_setting_and_chat.meta_verification')
     @include('layout.frontend_ajuba.partials.css')
@@ -43,9 +47,14 @@
         <main class="main-wrapper">
 
             @yield('content')
+            
             <!-- Benefits Start -->
+            @if(settings('footer_style1_status', 88) == 1)
+                @include('layout.frontend_ajuba.partials.footer')
+            @elseif(settings('footer_style2_status', 88) == 1)
+                @include('layout.frontend_ajuba.partials.footer1')
+            @endif
 
-            @include('layout.frontend_ajuba.partials.footer')
             <!-- Benefits End -->
         </main>
         <!-- Main Sections -->
@@ -72,7 +81,7 @@
     @include('layout.frontend_ajuba.partials.compare_list')
 
     @include('layout.frontend_ajuba.partials.scripts')
-    
+
 
 </body>
 

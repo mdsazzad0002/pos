@@ -18,7 +18,16 @@
     <div class="header-section">
         <div class="header-top bg-color-primary">
             <div class="header-start d-lg-block d-none">
-                <p class="fw-500 white">{{ settings('welcome_note', 9) }}</p>
+                @if(settings('welcome_note', 9) != '')
+                    <p class="fw-500 white">{{ settings('welcome_note', 9) }}</p>
+                @else
+                <div class="welcome_note_button">
+                    <a href="mailto:{{ settings('app_email', 9) }}"> <i class="bi bi-envelope"></i> {{ settings('app_email', 9) }}</a>
+                    <a href="tel:{{ settings('app_tel', 9) }}"> <i class="bi bi-telephone"></i> {{ settings('app_tel', 9) }}</a>
+                </div>
+                @endif
+
+
             </div>
             <div class="header-end ">
                 @if($contact_page)
@@ -172,7 +181,9 @@
 .navbar_filter_section .mixin-container{
     display: flex;
     flex-wrap: nowrap;
-    align-items: center
+    align-items: center;
+    width: 100%;
+    width: -webkit-fill-available;
 
 }
 .navbar_filter_section .mixin-container form input{
@@ -232,6 +243,22 @@ span.items_added {
         font-size: clamp(45px, 0.833vw, 22px)
     }
 }
+
+.welcome_note_button {
+    display: flex;
+    color: white;
+    gap:10px
+}
+
+.welcome_note_button a:first-child{
+   padding-right:10px;
+   border-right:1px solid white;
+}
+
+.welcome_note_button a:hover {
+    color: white;
+}
+
 </style>
 
 @push('js')

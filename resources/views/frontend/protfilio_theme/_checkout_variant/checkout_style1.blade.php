@@ -92,6 +92,8 @@
                                         </svg>
                                     </div>
                                 </div>
+
+                                @if(settings('checkout_additional__info_status'))
                                 <div class="col-md-12">
                                     <div class="input-block mb-16">
                                         <input type="text" name="apartment" id="apartMent" class="form-control" placeholder="Apartment, Suite, Unit, ect. (optional)">
@@ -157,12 +159,15 @@
                                         </svg>
                                     </div>
                                 </div>
+                                @endif
+
                                 <div class="col-md-12">
                                     <div class="cus-checkBox ship-address mb-32">
                                         <input type="checkbox" id="shipAddress" name="shipAddress">
                                         <label for="shipAddress" class="fw-500">Ship to a diffrent address?</label>
                                     </div>
                                 </div>
+
 
                                 <div class="col-md-12">
                                     <div class="input-block">
@@ -247,6 +252,8 @@
                                         </svg>
                                     </div>
                                 </div>
+
+                                @if(settings('checkout_additional__info_status'))
                                 <div class="col-md-12">
                                     <div class="input-block mb-16">
                                         <input type="text" name="apartment2" id="apartMent2" class="form-control" placeholder="Apartment, Suite, Unit, ect. (optional)">
@@ -312,6 +319,9 @@
                                         </svg>
                                     </div>
                                 </div>
+                                @endif
+
+
                             </div>
                         </form>
                         <!-- Different Billing Address Form -->
@@ -372,8 +382,10 @@
             `
         });
 
+        console.log(data)
 
   html_data += `
+  
             <div class="hr-line mb-16"></div>
 
             <div class="d-flex align-items-center justify-content-between mb-16">
@@ -383,9 +395,10 @@
 
             <div class="hr-line mb-16"></div>
             <div class="d-flex align-items-center justify-content-between mb-16">
-                <h6>Coupon Discount</h6>
-                <h6 class="light-gray">-{{ settings('currency_symbol', 9) }} ${data.subtotal.price.toFixed(2)}</h6>
+                <h6>Coupon Price</h6>
+                <h6 class="light-gray">-{{ settings('currency_symbol', 9) }} ${data.subtotal.coupon.toFixed(2)}</h6>
             </div>
+
             <div class="hr-line mb-16"></div>
             <div class="d-flex align-items-center justify-content-between mb-16">
                 <h5 class="color-primary">TOTAL</h5>
@@ -395,15 +408,18 @@
             <p class="light-gray mb-16">
                 {{ settings('checkout_note', 9) }}
             </p>
-            <div class="col-md-12">
-                <form action="javascript:void(0)" method="post" class="contact-form">
-                    <div class="cus-checkBox mb-32">
-                        <input type="checkbox" id="terms">
-                        @csrf
-                        <label for="terms">{{ settings('terms_condition', 9) }}</label>
-                    </div>
-                </form>
-            </div>
+
+             @if(settings('checkout_additional__info_status'))
+                <div class="col-md-12">
+                    <form action="javascript:void(0)" method="post" class="contact-form">
+                        <div class="cus-checkBox mb-32">
+                            <input type="checkbox" id="terms">
+                            @csrf
+                            <label for="terms">{{ settings('checkout.terms_condition', 9) }}</label>
+                        </div>
+                    </form>
+                </div>
+            @endif
         `;
 
 

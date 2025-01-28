@@ -171,6 +171,13 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'payment_page',
             ],
+            [
+                'name' => 'Category Information',
+                'slug' => 'category/details',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'category_details_page',
+            ],
 
 
         ];

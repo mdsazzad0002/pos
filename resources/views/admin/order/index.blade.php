@@ -10,13 +10,16 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Order List
         <div>
-            @can('user create')
-                <a class="btn btn-primary"  href="{{ route('admin.order.create') }}">+ Add New order</a>
-            @endcan
+            @if(env('APP_ENV') == 'local')
+                @can('user create')
+                    <a class="btn btn-primary"  href="{{ route('admin.order.create') }}">+ Add New order</a>
+                @endcan
+
+            @endif
         </div>
     </div>
     <div class="card-body">
-        
+
         <table id="users" class="table table-bordered table-striped table-hover"> </table>
     </div>
 </div>

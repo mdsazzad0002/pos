@@ -147,7 +147,7 @@ Route::get('clear', function () {
     // toastr()->success('Successfully cleared', 'Congrats');
     return back();
 });
-                                  
+
 // Route::get('fresh', function () {
 //     Artisan::call('migrate:fresh --seed');
 //     return back();
@@ -542,7 +542,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     });
 
-    
+
     Route::get('database/backup', [SettingController::class, 'downloadBackup'])->name('database.backup');
 
 
@@ -665,6 +665,7 @@ Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
     Route::get('/recommend_view', [HomeController::class, 'recommend_view'])->name('recommend_view');
     Route::get('/recent_view', [HomeController::class, 'recent_view'])->name('recent_view');
     Route::get('/quickview', [HomeController::class, 'quickview'])->name('quickview');
+    Route::get('/product_category_wise', [HomeController::class, 'product_category_wise'])->name('category_wise');
 });
 
 

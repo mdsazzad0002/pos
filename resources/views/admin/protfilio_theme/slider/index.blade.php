@@ -25,6 +25,9 @@
                     Image
                 </th>
                 <th>
+                    Background Image
+                </th>
+                <th>
                     Title
                 </th>
                 <th>
@@ -54,6 +57,7 @@
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
             {data:'image', name:'image', searchable:false, orderable:false},
+            {data:'bg', name:'bg', searchable:false, orderable:false},
             {data:'title', name:'title'},
             {data:'view', name:'view', searchable:false, orderable:false},
             {data:'action', name:'action', searchable:false, orderable:false}

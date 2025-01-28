@@ -34,7 +34,7 @@
 
     <label  type="button" onclick="upload_select(this)">
         Image <br/>
-        <input type="text" name="image" value="{{ $slider?->upload_id }}" id="image" class="form-control mb-2" hidden >
+        <input type="text" name="image" value="{{ $slider?->upload_id ?? 0 }}" id="image" class="form-control mb-2" hidden >
         <img style="max-width: 100px" src="{{ dynamic_asset($slider?->upload_id) }}" alt="">
     </label>
 

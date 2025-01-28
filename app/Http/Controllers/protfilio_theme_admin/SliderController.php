@@ -23,6 +23,10 @@ class SliderController extends Controller
                    return  $view_route = "<img style='max-width:100px' src='".dynamic_asset($row->upload_id)."'/>";
 
                 })
+                ->addColumn('bg', function ($row) {
+                   return  $view_route = "<img style='max-width:100px' src='".dynamic_asset($row->upload_bg)."'/>";
+
+                })
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.slider.show', $row->id);
                     return "<button class='btn btn-primary '
@@ -65,7 +69,7 @@ class SliderController extends Controller
 
 
                 })
-                ->rawColumns(['image','action', 'view'])
+                ->rawColumns(['image','action', 'view', 'bg'])
                 ->make(true);
         }
         return view('admin.protfilio_theme.slider.index');

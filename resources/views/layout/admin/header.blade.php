@@ -11,18 +11,22 @@
         </li>
 
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('admin.order.create') }}" class="nav-link">Home</a>
+            <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
         </li>
-        @can('order read')
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ route('admin.order.index') }}" class="nav-link">Order</a>
-        </li>
-        @endcan
-        @can('pos read')
+
+        @if(env('APP_ENV') == 'local')
+            @can('order read')
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('admin.pos.index') }}" class="nav-link">POS</a>
+                <a href="{{ route('admin.order.index') }}" class="nav-link">Order</a>
             </li>
-        @endcan
+            @endcan
+
+            @can('pos read')
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ route('admin.pos.index') }}" class="nav-link">POS</a>
+                </li>
+            @endcan
+        @endif
     </ul>
 
     <!-- Right navbar links -->

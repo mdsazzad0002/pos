@@ -3,7 +3,10 @@
 
 <head>
     @include('frontend.protfilio_theme.layout.partials.head')
+
+
 </head>
+
 
 <body class="index-page">
 
@@ -35,7 +38,8 @@
     </main>
 
 
-    @include('frontend.protfilio_theme.layout.partials.footer')
+    @include('frontend.protfilio_theme.layout.partials.footer1')
+    {{-- @include('frontend.protfilio_theme.layout.partials.footer') --}}
 
     <!-- Vendor JS Files -->
     @include('frontend.protfilio_theme.layout.partials.scripts')

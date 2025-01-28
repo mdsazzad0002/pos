@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
-use App\Models\address;
+use App\Models\Address as address;
 use App\Models\coupon;
 use App\Models\Customer as customer;
 use App\Models\Discount;
@@ -196,6 +196,7 @@ class HomeController extends Controller
    }
 
 
+
    public function popular_view(Request $request){
 
         $features_product = product::withAvg('reviews_info', 'rating')
@@ -255,6 +256,25 @@ class HomeController extends Controller
            ];
            return $data;
        }
+
+   }
+
+
+   public function product_category_wise(Request $request){
+        $limit_product =  $request->limit ?? 10;
+        $paginate_data = $request->paginate_data ?? false;
+        $details_page_slug = $request->details_page_slug ?? false;
+        $category =  $request->category_id;
+
+        if($request->has('category')){
+            $products =  product::where('category', $category)->orderBy('id', 'desc')->paginate($limit_product);
+        }else{
+            $products = product::orderBy('id', 'desc')->paginate($limit_product);
+        }
+
+
+        return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request'=>$request]);
+
 
    }
 
@@ -627,11 +647,11 @@ class HomeController extends Controller
 
 
             $user = new customer();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
+            $user->name = $request->name ?? '';
+            $user->email = $request->email  ?? '';
+            $user->phone = $request->phone  ?? '';
             $user->password = Hash::make($request->email);
-            $user->phone = $request->phone;
+            $user->phone = $request->phone  ?? '';
             $user->prev_due = 0;
             $user->credit_limit = 20000;
 
@@ -653,27 +673,49 @@ class HomeController extends Controller
 
             $address_find = address::where('addressable_type', customer::class)
             ->where('addressable_id', auth()->guard('customer')->user()->id)
-            ->where('address', $request->address)
-            ->where('email', $request->email)
-            ->where('phone', $request->phone)
-            ->where('post_code', $request->post_code)
-            ->where('country', $request->country)
-            ->where('state', $request->state)
+            ->where(function($query) use ($request){
+                if($request->has('address')){
+                    $query->where('address', $request->address);
+
+                }
+                if($request->has('email')){
+                    $query->where('email', $request->email);
+
+                }
+                if($request->has('phone')){
+                    $query->where('phone', $request->phone);
+
+                }
+                if($request->has('post_code')){
+                    $query->where('post_code', $request->post_code);
+
+                }
+                if($request->has('country')){
+                    $query->where('country', $request->country);
+
+                }
+                if($request->has('state')){
+                    $query->where('state', $request->state);
+
+                }
+
+            })
             ->first();
+
 
             if($address_find){
                 $address_id = $address_find->id;
             }else{
                 $address = new address();
-                $address->name = $request->name . ' ' . $request->lname;
-                $address->email = $request->email;
-                $address->phone = $request->phone;
-                $address->address = $request->address;
-                $address->address_optional = $request->apartment;
-                $address->district = $request->town;
-                $address->country = $request->country ;
-                $address->state = $request->state;
-                $address->postal = $request->postal;
+                $address->name = $request->name ?? ''. ' ' . $request->lname  ?? '';
+                $address->email = $request->email ?? '';
+                $address->phone = $request->phone ?? '';
+                $address->address = $request->address  ?? '';
+                $address->address_optional = $request->apartment  ?? '';
+                $address->district = $request->town  ?? '';
+                $address->country = $request->country  ?? '';
+                $address->state = $request->state  ?? '';
+                $address->postal = $request->postal  ?? '';
 
 
                 $address->addressable_type = customer::class;
@@ -690,15 +732,15 @@ class HomeController extends Controller
 
         if(!$request->has('billingaddress_id') && $request->has('shipAddress')){
             $address = new address();
-            $address->name = $request->name1 . ' ' . $request->lname2;
-            $address->email = $request->email2;
-            $address->phone = $request->phone2;
-            $address->address = $request->address2;
-            $address->address_optional = $request->apartment2;
-            $address->district = $request->town2;
-            $address->country = $request->country2 ;
-            $address->state = $request->state2;
-            $address->postal = $request->postal2;
+            $address->name = $request->name1  ?? ''. ' ' . $request->lname2  ?? '';
+            $address->email = $request->email2  ?? '';
+            $address->phone = $request->phone2 ?? '';
+            $address->address = $request->address2 ?? '';
+            $address->address_optional = $request->apartment2 ?? '';
+            $address->district = $request->town2 ?? '';
+            $address->country = $request->country2  ?? '';
+            $address->state = $request->state2 ?? '';
+            $address->postal = $request->postal2 ?? '';
 
             $address->addressable_type = customer::class;
             $address->addressable_id = $user->id;
