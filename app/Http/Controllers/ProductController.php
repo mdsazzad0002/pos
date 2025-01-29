@@ -27,6 +27,11 @@ class ProductController extends Controller
                     return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
 
                 })
+
+                ->addColumn('category_name', function ($row) {
+                    return $row->category_info?->name ?? '';
+                })
+
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.product.show', $row->id);
                     $view_page = \App\Models\Page::where('page_type', 'view')->first();
@@ -80,7 +85,7 @@ class ProductController extends Controller
 
 
                 })
-                ->rawColumns(['action', 'view', 'image'])
+                ->rawColumns(['action', 'view', 'image', 'category_name'])
                 ->make(true);
         }
         return view('admin.product.index');
@@ -186,7 +191,7 @@ class ProductController extends Controller
                 $product->alert_quantity = $request->alert_quantity;
                 $product->weight = $request->weight;
                 $product->garage = $request->garage;
-                $product->route = $request->route;
+                $product->route = $request->route ?? '';
                 $product->feature = $request->feature;
                 $product->service = $request->service;
                 $product->status = $request->status;

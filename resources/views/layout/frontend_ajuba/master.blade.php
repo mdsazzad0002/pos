@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Accessory-Store">
 
-    <title>@yield('title', '')</title>
+    <title>@yield('title', '') | {{ settings('app_title', 9)  }}</title>
     <style>
         :root {
-            --primary-color: #f7941d;
+            --primary-color: {{ settings('theme_color', 9) }};
         }
     </style>
 
@@ -47,7 +47,7 @@
         <main class="main-wrapper">
 
             @yield('content')
-            
+
             <!-- Benefits Start -->
             @if(settings('footer_style1_status', 88) == 1)
                 @include('layout.frontend_ajuba.partials.footer')

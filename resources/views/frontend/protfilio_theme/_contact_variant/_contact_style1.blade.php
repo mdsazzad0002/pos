@@ -9,6 +9,10 @@
             <div class="col-lg-5">
 
                 <div class="info-wrap">
+                    <h3>Contact Info</h3>
+                    <p>{{ settings('contact_us_note', 9) }}</p>
+                    <br/>
+
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
                         <i class="bi bi-geo-alt flex-shrink-0"></i>
                         <div>
@@ -33,9 +37,14 @@
                         </div>
                     </div><!-- End Info Item -->
 
-                    <iframe src="{{ settings('app_maps', 9) }}" frameborder="0"
+
+                    @if(settings('contact_style1_map_status', 99) == 1)
+                        <iframe src="{{ settings('app_maps', 9) }}" frameborder="0"
                         style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @endif
+
+
                 </div>
             </div>
 

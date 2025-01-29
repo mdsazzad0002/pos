@@ -448,8 +448,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
         //  purchase
         Route::resource('/offerbanner', OfferbannerController::class)->names('offerbanner');
-        Route::get('/purchase/delete/{offerbanner}', [OfferbannerController::class, 'delete'])->name('offerbanner.delete');
-        Route::get('/purchase/getPurchase/get', [OfferbannerController::class, 'getofferbanner'])->name('offerbanner.select');
+        Route::get('/offerbanner/delete/{offerbanner}', [OfferbannerController::class, 'delete'])->name('offerbanner.delete');
+        Route::get('/offerbanner/getofferbanner/get', [OfferbannerController::class, 'getofferbanner'])->name('offerbanner.select');
 
 
 
@@ -616,7 +616,7 @@ Route::get('/client/{slug}/', [ClientController::class, 'show'])->name('client.v
 
 
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/team', [TeamController::class, 'index'])->name('team.index');

@@ -19,10 +19,10 @@
                                     <i class="fa-light fa-magnifying-glass"></i>
                                 </button>
                             </form>
+                            
+                            
+                            @if(settings('show_filter_by_category_status', 80) == 1)
                             <div class="hr-line mb-24"></div>
-
-
-
                                 {{-- Category and Subcategory filter --}}
                                 @php
                                 $categories_items = \App\Models\category::where('status', 1)->get();
@@ -76,15 +76,15 @@
                                 </div>
                                 @endif
                                 {{-- End filter by price --}}
+                            @endif
 
 
 
 
 
 
-
+                            @if(settings('show_filter_by_price_status', 80) == 1)
                                 {{-- Filte by price --}}
-
                                 <div class="filter_by_price">
                                     <div class="hr-line mb-24"> </div>
                                     <div class="category-block box-2 mb-24">
@@ -120,8 +120,11 @@
                                     </div>
                                 </div>
                                 {{-- end filter by price --}}
+                            @endif
 
 
+
+                            @if(settings('show_filter_by_brand_status', 80) == 1)
                                 {{-- Filter by brand --}}
                                 @php
                                 $brand_items = \App\Models\brand::where('status', 1)->get();
@@ -153,12 +156,13 @@
                                 </div>
                                 @endif
                                 {{-- end filter by brand --}}
+                            @endif
 
 
 
 
 
-
+                        @if(settings('show_filter_by_rating_status', 80) == 1)
                             <div class="hr-line mb-24"></div>
                             <div class="category-block box-6 mb-24 rating_block">
                                 <div class="title mb-24" data-count="6">
@@ -231,8 +235,10 @@
 
                                 </div>
                             </div>
+                        @endif
 
 
+                        @if(settings('show_filter_feature_product_status', 80) == 1)
                             @php
                                 $feature_product = \App\Models\product::where('status', 1)->where('feature', 1)->orderBy('id','desc')->limit(5)->get();
                                 $filter_page = \App\Models\page::where('status', 1)->where('page_type', 'view')->first();
@@ -266,9 +272,13 @@
                                 </div>
                             </div>
                             @endif
+                        @endif
 
+
+                        @if(settings('show_filter_offer_product_status', 80) == 1)
                             <div class="hr-line mb-24"></div>
                             @include('frontend.protfilio_theme._product_variant._offer_product_feature_side')
+                        @endif
 
                         </div>
                     </div>

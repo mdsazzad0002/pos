@@ -55,8 +55,12 @@ class SettingController extends Controller
             $flag_target = 1;
         }elseif($slug == 'footer_style' && $key == '88'){
             $flag_target = 1;
+        }elseif($slug == 'header_style' && $key == '80'){
+            $flag_target = 1;
+        }elseif($slug == 'variant_part_status' && $key == '99'){
+            $flag_target = 1;
         }
-
+        
 
         // return $settings;
         if($flag_target == 1){
@@ -224,7 +228,7 @@ class SettingController extends Controller
         try {
             exec($command, $output, $returnVar);
             if ($returnVar !== 0) {
-                
+
 
                     // Execute the command using the shell
                     $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell

@@ -179,6 +179,18 @@ class enSeeder extends Seeder
             'takto-messageing-management.crisp_chat_id'=>'Crisp Chat ID',
             'takto-messageing-management.crisp_chat_status'=>'Crisp Chat Status',
             'settings.tracking_report'=>'Courier Tracking Report',
+            'header_style.show_filter_offer_product_status'=>'Filter Offer Product Status',
+            'header_style.show_filter_feature_product_status'=>'Filter Feature Product Status',
+            'header_style.show_filter_by_rating_status'=>'Filter Rating Product Status',
+            'header_style.show_filter_by_brand_status'=>'Filter Brand Status',
+            'header_style.show_filter_by_price_status'=>'Filter Price Status',
+            'header_style.show_filter_by_category_status'=>'Filter Category Status',
+            'header_style.header_style_button_box_status'=>'Navbar Button Box Status',
+            'header_style.category_wise_filter_status'=>'Header Category Wise Filter Status',
+            'sidebar.Footer_Style'=>'Footer Status',
+            'sidebar.Header_Style'=>'Header Status',
+            'sidebar.variant_part_status'=>'Variant Part Status',
+            'variant_part_status.contact_style1_map_status'=>'Contact form maps Status',
 
 
 

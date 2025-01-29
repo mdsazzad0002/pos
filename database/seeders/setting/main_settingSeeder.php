@@ -40,6 +40,7 @@ class main_settingSeeder extends Seeder
 
             ['name' => 'app_preloader_image', 'value' => '0', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_preloader_status', 'value' => '0', 'creator_id' => '1', 'key' => '9'],
+            ['name' => 'theme_color', 'value' => '#000000', 'creator_id' => '1', 'key' => '9'],
         ];
 
 

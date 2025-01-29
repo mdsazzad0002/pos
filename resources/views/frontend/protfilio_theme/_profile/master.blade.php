@@ -88,11 +88,11 @@
             </ul>
         </div>
         <div class="col-lg-8">
-            <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center mb-2" style="    border-left: 4px solid green;">
+            <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center mb-2" style="    border-left: 4px solid var(--primary-color);">
                 <div class="font-weight-bold">
                     <i class="bi bi-exclamation-triangle-fill text-white"></i> Please Verify your mail address.
                 </div>
-                <a class="btn btn-success"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
+                <a class="btn btn-success" style="background: var(--primary-color);"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
 
             </div>
             @yield('profile')
@@ -120,7 +120,7 @@
 .profile_sidebar ul li a{
     border-bottom:1px dotted #868686;
     display:block;
-    border-left:4px solid #006937;
+    border-left:4px solid var(--primary-color);;
 
 }
 
@@ -140,13 +140,13 @@
 .profile_sidebar ul li a:hover i,
 .profile_sidebar ul li a.active,
 .profile_sidebar ul li a:hover{
-    background:#006937;
+    background:var(--primary-color);
     color:white;
 }
 .profile_sidebar  .form__li{
     text-align: center;
     padding: 15px;
-    border: 4px solid #006937;
+    border: 4px solid var(--primary-color);
 }
 </style>
 

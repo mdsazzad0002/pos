@@ -204,44 +204,38 @@
                                     <input type="text" name="weight" value="{{ $product ? $product->weight : 0 }}" class="form-control mb-2">
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <label for="">Garage</label>
-                                    <input type="text" name="garage" value="{{ $product ? $product->garage : 0 }}" class="form-control mb-2">
+
+
+
+
+                                <div class="col-lg-12">
+                                    <label for="">Short Description</label>
+                                    <textarea type="text" name="short_description" class="form-control mb-2 "
+                                        placeholder="short_description">{{ $product ? $product->short_description : '' }}</textarea>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label for="">Route</label>
-                                    <input type="text" name="route" value="{{ $product ? $product->route : 0 }}" class="form-control mb-2">
+                                <div class="col-lg-12">
+                                    <label for="">Description</label>
+                                    <textarea type="text" name="description" class="form-control mb-2 summernote"
+                                        placeholder="Description">{{ $product ? $product->description : '' }}</textarea>
                                 </div>
-                                <div class="col-lg-6">
-                                    <label for="feature"> Feature <br />
-                                        <input type="checkbox" checked class="" hidden name="feature" value="0">
-                                        <input type="checkbox" {{ $product ? ($product->feature ? 'checked' : '') : '' }} class="toggle" placeholder="Feature" name="feature"
-                                            id="feature" value="1">
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="service"> Service <br />
-                                        <input type="checkbox" checked class="" hidden name="service" value="0">
-                                        <input type="checkbox" class="service toggle" {{ $product ? ($product->service ? 'checked' : '') : '' }}  placeholder="service" name="service"
-                                            id="service" value="1">
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="service"> Status <br />
-                                        <input type="checkbox" checked class="" hidden name="status" value="0">
-                                        <input type="checkbox" class="status toggle" {{ $product ? ($product->status ? 'checked' : '') : '' }}  placeholder="status" name="status"
-                                            id="service" value="1">
-                                    </label>
+                                <div class="col-lg-12 pt-3">
+                                    <label for="">Additional Description</label>
+                                    <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
+                                        placeholder="Additional Description">{{ $product ? $product->additional_description : '' }}</textarea>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <label for="">For Selling</label>
-                                    <select name="for_selling" id="" class="form-control mb-2">
-                                        <option value="0">NO</option>
-                                        <option {{ $product ? ($product->for_selling ? 'selected' : '') : '' }}  value="1">YES</option>
-                                    </select>
-                                </div>
 
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            {{ __('product.image_and_slider') }}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
 
                                 <div class="col-lg-6">
                                     <label type="button" onclick="upload_select(this)"> Image <br>
@@ -276,26 +270,75 @@
 
                                 </div>
 
-                                <div class="col-lg-12">
-                                    <label for="">Short Description</label>
-                                    <textarea type="text" name="short_description" class="form-control mb-2 "
-                                        placeholder="short_description">{{ $product ? $product->short_description : '' }}</textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            {{ __('product.status_and_feature') }}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label for="feature"> Feature <br />
+                                        <input type="checkbox" checked class="" hidden name="feature" value="0">
+                                        <input type="checkbox" {{ $product ? ($product->feature ? 'checked' : '') : '' }} class="toggle" placeholder="Feature" name="feature"
+                                            id="feature" value="1">
+                                    </label>
                                 </div>
-                                <div class="col-lg-12">
-                                    <label for="">Description</label>
-                                    <textarea type="text" name="description" class="form-control mb-2 summernote"
-                                        placeholder="Description">{{ $product ? $product->description : '' }}</textarea>
+                                <div class="col-lg-6">
+                                    <label for="service"> Service <br />
+                                        <input type="checkbox" checked class="" hidden name="service" value="0">
+                                        <input type="checkbox" class="service toggle" {{ $product ? ($product->service ? 'checked' : '') : '' }}  placeholder="service" name="service"
+                                            id="service" value="1">
+                                    </label>
                                 </div>
-                                <div class="col-lg-12 pt-3">
-                                    <label for="">Additional Description</label>
-                                    <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
-                                        placeholder="Additional Description">{{ $product ? $product->additional_description : '' }}</textarea>
+                                <div class="col-lg-6">
+                                    <label for="service"> Status <br />
+                                        <input type="checkbox" checked class="" hidden name="status" value="0">
+                                        <input type="checkbox" class="status toggle" {{ $product ? ($product->status ? 'checked' : '') : '' }}  placeholder="status" name="status"
+                                            id="service" value="1">
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="for_selling"> For Selling <br />
+                                        <input type="checkbox" checked class="" hidden name="for_selling" value="0">
+                                        <input type="checkbox" class="status toggle" {{ $product ? ($product->for_selling ? 'checked' : '') : '' }}  placeholder="status" name="for_selling"
+                                            id="service" value="1">
+                                    </label>
                                 </div>
 
 
                             </div>
                         </div>
                     </div>
+
+                    {{-- Storeing information --}}
+                    <div class="card">
+                        <div class="card-header">
+                            {{ __('product.store_information') }}
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <label for="">Garage</label>
+                                    <input type="text" name="garage" value="{{ $product ? $product->garage : 0 }}" class="form-control mb-2">
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="">Route</label>
+                                    <input type="text" name="route" value="{{ $product ? $product->route : 0 }}" class="form-control mb-2">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{-- end storeing information --}}
+
+
+
                 </div>
 
 

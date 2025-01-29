@@ -98,23 +98,25 @@
 
                 <div class="mixin-container ">
                     <form action="{{ url( $filter_page->slug) }}" method="post" id="filter_form_all">
-                        <div class="drop-container d-flex align-items-center flex-nowrap">
-                            <div class="wrapper-dropdown" id="dropdown3">
-                                <span class="selected-display black fw-500" id="destination3">{{ $_GET['category_name'] ?? 'All Categories' }}</span>
-                                <svg id="drp-arrow3" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
-                                    <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                        stroke-linejoin="round"></path>
-                                </svg>
-                                <ul class="topbar-dropdown bg-lightest-gray box-shadow-1">
-                                    @foreach (category() as $items)
-                                    <li class="item dark-gray">{{ $items->name ?? '' }}</li>
-                                    @endforeach
+                       @if(settings('category_wise_filter_status', 80) == 1)
+                       <div class="drop-container d-flex align-items-center flex-nowrap">
+                           <div class="wrapper-dropdown" id="dropdown3">
+                               <span class="selected-display black fw-500" id="destination3">{{ $_GET['category_name'] ?? 'All Categories' }}</span>
+                               <svg id="drp-arrow3" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                               xmlns="http://www.w3.org/2000/svg" class="arrow transition-all ml-auto rotate-180">
+                               <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                               stroke-linejoin="round"></path>
+                            </svg>
+                            <ul class="topbar-dropdown bg-lightest-gray box-shadow-1">
+                                @foreach (category() as $items)
+                                <li class="item dark-gray">{{ $items->name ?? '' }}</li>
+                                @endforeach
 
-                                </ul>
-                            </div>
+                            </ul>
                         </div>
-                        <div class="vr-line vr-line-2"></div>
+                    </div>
+                    <div class="vr-line vr-line-2"></div>
+                    @endif
 
                         <div class="input-field">
                             <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search for products..." value="{{ $_GET['q'] ?? '' }}">
@@ -266,12 +268,20 @@ span.items_added {
 <script>
     $('#filter_form_all').on('submit', function(e){
         e.preventDefault();
-        var category_name = $(this).find('#destination3').html();
-        var searchInput = $(this).find('#searchInput').val();
-        // console.log(category_name);
-        // console.log(searchInput);
+        var category_name = $(this).find('#destination3');
+        var searchInput = $(this).find('#searchInput');
 
-        window.location.href= this.action+'?category_name='+category_name+'&q='+searchInput;
+        var data_filter = this.action+'?';
+
+        if(category_name){
+            data_filter += 'category_name=' + category_name.html() + '&';
+        }
+
+        if(searchInput){
+            data_filter +='q='+searchInput.val() + '&';
+        }
+
+        window.location.href = data_filter;
     })
 
 </script>

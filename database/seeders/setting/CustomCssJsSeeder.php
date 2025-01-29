@@ -18,6 +18,8 @@ class CustomCssJsSeeder extends Seeder
             ['name' => 'custom_css_head_code', 'value' => '', 'creator_id' => '1', 'key' => '45'],
             ['name' => 'custom_js_footer_code', 'value' => '', 'creator_id' => '1', 'key' => '45'],
             ['name' => 'custom_css_footer_code', 'value' => '', 'creator_id' => '1', 'key' => '45'],
+            ['name' => 'custom_css__head_code', 'value' => '', 'creator_id' => '1', 'key' => '45'],
+            ['name' => 'custom_css__footer_code', 'value' => '', 'creator_id' => '1', 'key' => '45'],
 
 
         ];

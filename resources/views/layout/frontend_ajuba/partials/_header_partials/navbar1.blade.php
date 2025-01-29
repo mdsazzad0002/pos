@@ -61,3 +61,17 @@
         </div> --}}
     </nav>
 </div>
+
+@if(settings('header_style_button_box_status', 80) == 1)
+    <style>
+        header .header-section .header-bottom-area .navigation .menu-button-right .main-menu__nav .main-menu__list > li > a.active, header .header-section .header-bottom-area .navigation .menu-button-right .main-menu__nav .stricky-header .main-menu__list > li > a.active{
+            background: #08775b padding-box;
+            color: white;
+            padding: 10px 25px;
+        }
+
+        header .header-section .header-bottom-area .navigation .menu-button-right .main-menu__nav .main-menu__list > li > a::after, header .header-section .header-bottom-area .navigation .menu-button-right .main-menu__nav .stricky-header .main-menu__list > li > a::after{
+            left: 0;
+        }
+    </style>
+@endif

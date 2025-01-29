@@ -8,8 +8,9 @@
                     {{ number_format((($product->old_price - $product->selling_price ) *  100 )/ $product->old_price,2)}} %
                 </span>
             @endif
+            {{-- {{ dd($product->category_info) }} --}}
 
-            <a href="{{ url($details_page_slug) }}?category={{ $product->category_info->slug }}"><img src="{{ dynamic_asset($product->upload_id) }}"  class="product-image" alt=""></a>
+            <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}"><img src="{{ dynamic_asset($product->upload_id) }}"  class="product-image" alt=""></a>
             <div class="side-icons">
                 <ul class="list-unstyled">
                     <li>
@@ -33,7 +34,7 @@
         <div class="product-desc">
             <h6 class="product-title mb-8">
 
-                <a href="{{ url($details_page_slug) }}?category={{ $product->category_info->slug }}">{{ $product->name }}</a>
+                <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}">{{ $product->name }}</a>
 
             </h6>
             <div class="text mb-16">
@@ -48,7 +49,7 @@
 
             </div>
 
-             <a href="{{ url($details_page_slug) }}?category={{ $product->category_info->slug }}"  data-id="{{ $product->id }}" class="cus-btn-2 w-100">View Details</a>
+             <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}"  data-id="{{ $product->id }}" class="cus-btn-2 w-100">View Details</a>
 
         </div>
     </div>

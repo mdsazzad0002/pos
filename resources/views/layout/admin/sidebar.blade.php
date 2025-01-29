@@ -113,7 +113,7 @@ sidebar-dark-primary elevation-4">
                         </li>
                         @endcan
 
-                        
+
                         @can('product read')
                         <li class="nav-item">
                             <a href="{{ route('admin.product.index') }}" class="nav-link">

@@ -29,7 +29,7 @@
     {{ $slot }}
 
 
-    @if(isset($info))
+    @if(isset($info) && isset($items))
     <div class="container-fluid  text-center  d-flex align-items-center justify-content-center">
         @if($info->is_details_page && $items)
         <div class="links_nav mt-3">
