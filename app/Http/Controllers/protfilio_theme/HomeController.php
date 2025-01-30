@@ -125,7 +125,7 @@ class HomeController extends Controller
                 ->havingRaw('COALESCE(review_avg_rating, 0) >= ?', [$request->rating_star]);
 
             }
-            
+
         })
 
         ->paginate($request->paginate_items);
@@ -826,7 +826,8 @@ class HomeController extends Controller
             'status_code' => 200,
             'message' => 'Order Placed Successfully',
             'order_id' => $order->id,
-            'price' => $order->price
+            'price' => $order->price,
+            'payment_method' => $request->plan
         ]);
     }
 

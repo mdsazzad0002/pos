@@ -27,7 +27,7 @@
             </div>
 
 
-            <div class="footer-link-block" style="width:30vw">
+            <div class="footer-link-block footer-link-maps" style="">
                 <ul class="list-unstyled mb-16">
                     <li class="mb-12 footer-link">
                         <a href="{{ settings('app_maps', 9) }}" class="d-flex align-items-center gap-2">
@@ -46,6 +46,7 @@
                         </a>
                     </li>
                 </ul>
+
                 <p class="fw-500 mb-16">{{ __('frontend.follow_us') }}</p>
                 <ul class="list-unstyled social-link">
                     <li>
@@ -114,18 +115,35 @@
                 </ul>
             </div>
         </div>
+
+        @if(settings('footer_payment_method_status', 88) == 1)
         <div class="hr-line"></div>
-
-
-        <div class="footer-bottom-bar py-24">
-            <div class="payment-cards-image">
-                <img src="{{ asset('uploads/bg/laptop.webp') }}" class="w-100" alt="">
+            <div class="footer-bottom-bar py-24">
+                <div class="payment-cards-image">
+                    <img src="{{ settings('footer_payment_method_image', 88) }}" class="w-100" alt="">
+                </div>
             </div>
-        </div>
+
+        @endif
+
 
         <div class="footer-bottom-bar py-24">
             <p class="light-gray text-sm-left text-center w-100">@ {{ date('Y') }} All Rights Copyright <a href="https://bdsofttechnology.com" class="color-primary"> BDsoftTechnology</a>. Design & Developed By <span class="color-primary"> BDsoftTechnology</span></p>
         </div>
-        
+
     </div>
 </footer>
+
+
+
+<style>
+    .footer-link-maps{
+        width: 40%;
+    }
+    @media (max-width: 768px) {
+        .footer-link-maps{
+            width: 100%;
+        }
+    }
+</style>
+

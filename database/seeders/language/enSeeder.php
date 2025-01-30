@@ -89,7 +89,7 @@ class enSeeder extends Seeder
             'main-setting.app_github' => 'App Github Link',
             'main-setting.app_figma' => 'App Figma Link',
             'main-setting.app_website' => 'App Website Link',
-            'main-setting.app_address' => 'App Website Link',
+            'main-setting.app_address' => 'App Address',
             'main-setting.app_maps' => 'App Maps Link',
             'main-setting.app_preloader_image' => 'App Preloader Image',
             'main-setting.app_preloader_status' => 'App Preloader Status',

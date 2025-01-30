@@ -5670,7 +5670,8 @@ footer .footer-bottom-bar {
 
   @media (max-width:500px){
       .featured-product-card{
-          zoom: 80%;
+          zoom: 70%;
+          height: auto;
       }
   }
 

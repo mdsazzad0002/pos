@@ -14,6 +14,9 @@ class categorySeeder extends Seeder
     public function run(): void
     {
         $categories = ['T Shirt', 'Shoes', 'Pant', 'Sheree', 'Underwire'];
+        if (category::count() > 0) {
+            return;
+        }
         foreach($categories as $category){
             $brand_data = new category();
             $brand_data->creator = 1;

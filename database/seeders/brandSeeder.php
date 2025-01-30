@@ -14,6 +14,9 @@ class brandSeeder extends Seeder
     public function run(): void
     {
         $brands = ['Apple', 'Bata', 'Lotto', 'Easy', 'Pran', 'RFL', 'Easy', 'Magna', 'Padma', 'Duronto','Sumsung'];
+        if(brand::count() > 0){
+            return;
+        }
         foreach($brands as $brand){
             $brand_data = new brand();
             $brand_data->creator = 1;

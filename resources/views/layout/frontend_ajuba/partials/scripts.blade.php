@@ -308,6 +308,9 @@
                     },
                     success:function(data){
                         flasher.success("Successfully added compare list");
+                        setTimeout(() => {
+                            load_cart_and_wishlist();
+                        },500)
                     }
                 })
 
@@ -322,6 +325,9 @@
                     success:function(data){
                         flasher.warning('Successfully removed compare list');
                         wishlist_data()
+                        setTimeout(() => {
+                            load_cart_and_wishlist();
+                        },500)
                     }
                 })
 

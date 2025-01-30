@@ -4,7 +4,7 @@
     display:grid;
     width: 100%;
     padding: 10px 0;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 10px; /* Optional spacing between grid items */
   }
 
@@ -42,4 +42,4 @@
     border-color:#eeeeee;
     transition: all 0.5s ease-in-out;
   }
- 
+

@@ -5,7 +5,7 @@
         <form action="javascript:void(0)" method="post" class="contact-form mt-16"></form>
             <!-- Shipping Method -->
              <div class="title-row title-row-2 bg-white mb-16">
-                <h5>Shipping Charge</h5>
+                <h5>Delivery Charge</h5>
             </div>
             <div class="shipping-radio-container bg-white mb-40">
 

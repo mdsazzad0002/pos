@@ -37,7 +37,7 @@ class PaymentCredentialController extends Controller
     }
 
 
-    public function show(PaymentCredential $payment_configuration){
+    public function show(Request $request, PaymentCredential $payment_configuration){
         $data = [
 
         ];
@@ -58,6 +58,11 @@ class PaymentCredentialController extends Controller
         }
 
         return 34534;
+
+    }
+    public function payment(Request $request){
+        return $this->show($request, $request->payment_method );
+        return $request->all();
 
     }
 }

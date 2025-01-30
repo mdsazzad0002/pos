@@ -47,6 +47,7 @@
             <div class="add_new_data_render">
 
                     <label for="">Select Layout </label>
+                    <input type="search" placeholder="Enter Layout Name ... .. ." name="Varinatfilter" oninput="filter_variant(this)" class="filter form-control mb-2" id="Varinatfilter">
 
                     <div class="add_to_layout_container">
                             {{-- load by ajax --}}
@@ -76,6 +77,22 @@
 
 
 <script>
+
+    function filter_variant(thi){
+    
+        const filterValue = thi.value.toLowerCase(); // Get the input value and convert to lowercase
+        const cards = document.querySelectorAll('.add_to_layout_container  .single_item_layout'); // Get all cards
+       
+        cards.forEach(card => {
+            const cardTitle = card.querySelector('.title_layout').innerHTML.toLowerCase(); // Get the card's title
+            console.log(cardTitle)
+            if (cardTitle.includes(filterValue)) {
+                card.classList.remove('d-none'); // Show the card if it matches the filter
+            } else {
+                card.classList.add('d-none'); // Hide the card if it doesn't match the filter
+            }
+        });
+    };
 
 
     function refresh_iframe() {

@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="{{asset('frontend/protfilio_theme/css/'.$css)}}">
 @endisset
 
-
 <section id="{{ $class ?? '' }}" class="{{ $class ?? '' }} section" style="{{ $info->background_type == 1 ? 'background-image:url('.dynamic_asset($info->background).')' : 'background:'.$info->background_color  }};    background-repeat: no-repeat; background-size: cover;">
 
 
@@ -12,7 +11,7 @@
 
     @if(!isset($title))
         @if($info->sub_title_status || $info->title_status)
-            <div class="container-fluid section-title mb-3" data-aos="fade-up">
+            <div class="container-fluid section-title pt-3" data-aos="fade-up">
                 @if($info->title_status)
                 <h2>{{ __($info->title) }}</h2>
                 @endif

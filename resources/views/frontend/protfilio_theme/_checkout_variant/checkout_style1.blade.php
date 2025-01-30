@@ -385,7 +385,7 @@
         console.log(data)
 
   html_data += `
-  
+
             <div class="hr-line mb-16"></div>
 
             <div class="d-flex align-items-center justify-content-between mb-16">
@@ -470,7 +470,7 @@
 
 
         });
-        
+
         form_data['shipping_charge'] = $('input[name="shipping_charge"]').val();
 
 
@@ -488,7 +488,15 @@
                 if (data.status === true) {
                     flasher.success(data.message);
                     setTimeout(function() {
-                        window.location.href= '{{url('/')}}'
+                        var shipping_methods = document.querySelector('.payment_method input[name="plan"]');
+                        if(data.payment_method  != 1){
+                            window.location.href = '{{ url('checkout/payment') }}?payment_method='+data.payment_method+'&order_id='+data.order_id;
+                        }else{
+                            //window.location.href= '{{url('/')}}'
+                            console.log('Cash On delivery');
+                        }
+
+                        //window.location.href= '{{url('/')}}'
                     },1500)
                 }
             },

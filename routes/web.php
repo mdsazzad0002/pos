@@ -191,6 +191,7 @@ Route::any('setting-store-update', [SettingController::class, 'store'])->name('s
 
 
 
+Route::get('/checkout/payment', [PaymentCredentialController::class, 'payment'])->name('payment');
 
 Route::group(['as' => 'amarpay.', 'prefix' => 'amarpay'], function () {
     Route::post('success', [amarpayController::class, 'success'])->name('success');

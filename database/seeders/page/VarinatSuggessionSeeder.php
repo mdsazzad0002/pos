@@ -138,6 +138,40 @@ class VarinatSuggessionSeeder extends Seeder
                 'upload_id'=>'uploads/preset/page_variant/category_style3.png'
 
             ],
+            'category4' => [
+                'key' =>'_category_variant._category_style4',
+                'title' => 'Category Style 4',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 12,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/category_style4.png'
+
+            ],
+            'category5' => [
+                'key' =>'_category_variant._category_style5',
+                'title' => 'Category Style 5',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 12,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/category_style5.png'
+
+            ],
             // ===================================================================
             // ===================================================================
             // ===================================================================
