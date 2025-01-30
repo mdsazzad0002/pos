@@ -191,6 +191,23 @@ class enSeeder extends Seeder
             'sidebar.Header_Style'=>'Header Status',
             'sidebar.variant_part_status'=>'Variant Part Status',
             'variant_part_status.contact_style1_map_status'=>'Contact form maps Status',
+            'frontend.follow_us'=>'Contact form maps Status',
+            'footer_style.footer_payment_method_image'=>'Footer Style 2 Payment Method Image',
+            'footer_style.footer_style1_status'=>'Footer Style 1 Status',
+            'footer_style.footer_style2_status'=>'Footer Style 2 Status',
+            'footer_style.footer_payment_method_status'=>'Footer style 2 payment method image Status',
+            'settings.footer_style'=>'Footer style Settings',
+            'settings.header_style'=>'Header style Settings',
+            'settings.variant_part_status'=>'Variant Part Status',
+            'takto-messageing-management.livechatinc_chat_status'=>'Livechatinc Chat  Status',
+            'takto-messageing-management.livechatinc_chat_id'=>'Livechatinc Chat  id',
+            'takto-messageing-management.intercom_chat_status'=>'Intercom Chat  Status',
+            'takto-messageing-management.intercom_chat_id'=>'Intercom Chat  id',
+            'takto-messageing-management.tidio_chat_status'=>'Tidio Chat  status',
+            'takto-messageing-management.tidio_chat_public_key'=>'Tidio Chat  public key',
+            'takto-messageing-management.chat_status'=>' Chat  Status',
+            'takto-messageing-management.tiledesk_chat_id'=>'Tidedesk chat id',
+            'takto-messageing-management.tiledesk_chat_status'=>'Tidedesk chat status',
 
 
 

@@ -137,25 +137,7 @@
         </li>
 
 
-        <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['footer_style', '88']) }}" class="nav-link">
-                <i class="fas nav-icon">F</i>
-                <p>{{ __('sidebar.Footer_Style') }}</p>
-            </a>
-        </li>
 
-        <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['header_style', '80']) }}" class="nav-link">
-                <i class="fas  nav-icon">H</i>
-                <p>{{ __('sidebar.Header_Style') }}</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['variant_part_status', '99']) }}" class="nav-link">
-                <i class="fas  nav-icon">P</i>
-                <p>{{ __('sidebar.variant_part_status') }}</p>
-            </a>
-        </li>
 
 
     </ul>

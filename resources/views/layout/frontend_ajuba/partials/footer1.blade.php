@@ -9,7 +9,7 @@
                 </p>
                 <a href="tel:{{ settings('app_tel', 9) }}" class="d-flex align-items-center gap-3">
                     <div class="icon-box">
-                        <img src="{{asset('uploads/')}}/icons/user-icon.png" alt="">
+                        <img src="{{asset('uploads/')}}/icons/user-icon.png" alt="" class="w-100">
                     </div>
                     <div>
                         <p class="light-gray mb-4p">
@@ -119,7 +119,7 @@
         @if(settings('footer_payment_method_status', 88) == 1)
         <div class="hr-line"></div>
             <div class="footer-bottom-bar py-24">
-                <div class="payment-cards-image">
+                <div class="payment-cards-image  w-100">
                     <img src="{{ settings('footer_payment_method_image', 88) }}" class="w-100" alt="">
                 </div>
             </div>

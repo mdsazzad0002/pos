@@ -14,12 +14,23 @@ class takto_messageSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            ['name' => 'chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
             ['name' => 's1_src_link_tawk_to', 'value' => 'https://embed.tawk.to/670faba22480f5b4f58e3fa8/1iaajctkv', 'creator_id' => '1', 'key' => '31'],
             ['name' => 'tawk_to_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
 
-            
+
             ['name' => 'crisp_chat_id', 'value' => '081aca0a-3ef7-42a7-bfb1-40311e186858', 'creator_id' => '1', 'key' => '31'],
-            ['name' => 'crisp_chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31']
+            ['name' => 'crisp_chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
+
+
+            ['name' => 'livechatinc_chat_id', 'value' => '19014517', 'creator_id' => '1', 'key' => '31'],
+            ['name' => 'livechatinc_chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
+
+            ['name' => 'tidio_chat_public_key', 'value' => '5qzknqts5kypovduysccptkdg41kbinq', 'creator_id' => '1', 'key' => '31'],
+            ['name' => 'tidio_chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
+
+            ['name' => 'tiledesk_chat_id', 'value' => '679bbecad8fd32001345ae09', 'creator_id' => '1', 'key' => '31'],
+            ['name' => 'tiledesk_chat_status', 'value' => '0', 'creator_id' => '1', 'key' => '31'],
 
 
 

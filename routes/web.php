@@ -147,7 +147,7 @@ Route::get('clear', function () {
     // toastr()->success('Successfully cleared', 'Congrats');
     return back();
 });
-
+ 
 // Route::get('fresh', function () {
 //     Artisan::call('migrate:fresh --seed');
 //     return back();
