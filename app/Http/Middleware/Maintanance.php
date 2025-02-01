@@ -9,15 +9,17 @@ use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class Maintanance
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (env('APP_MAINTENANCE', true)) { // Fix typo & provide default value
+        if (config('app.maintenance.status', true)) { // Use config() instead of env()
             // Allow authenticated users and login page access
             if (Auth::check() || FacadesRequest::is('login')) {
                 return $next($request);
             }
 
-            return response()->view('errors.503', ['time' => env('APP_MAINTENANCE_TIME')], 503);
+            return response()->view('errors.503', [
+                'time' => config('app.maintenance.time', 'Unknown')
+            ], 503);
         }
 
         return $next($request);

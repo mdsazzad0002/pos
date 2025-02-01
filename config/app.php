@@ -143,6 +143,8 @@ return [
     'maintenance' => [
         'driver' => 'file',
         // 'store' => 'redis',
+        'status' => env('APP_MAINTENANCE', 'false'),
+        'time' => env('APP_MAINTENANCE_TIME', 'Unknown')
     ],
 
     /*
@@ -170,8 +172,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        
-        
+
+
 
     ])->toArray(),
 
@@ -189,7 +191,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        
+
 
     ])->toArray(),
 

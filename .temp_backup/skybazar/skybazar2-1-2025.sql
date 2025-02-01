@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 29, 2025 at 11:58 AM
--- Server version: 8.3.0
--- PHP Version: 8.3.6
+-- Host: localhost:3306
+-- Generation Time: Feb 01, 2025 at 10:40 AM
+-- Server version: 10.6.19-MariaDB
+-- PHP Version: 8.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `d_pos`
+-- Database: `zaasmult_professonal`
 --
 
 -- --------------------------------------------------------
@@ -27,28 +27,32 @@ SET time_zone = "+00:00";
 -- Table structure for table `addresses`
 --
 
-DROP TABLE IF EXISTS `addresses`;
-CREATE TABLE IF NOT EXISTS `addresses` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address_optional` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `district` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `stay_time` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postal` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `addressable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `addressable_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `addresses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `address` varchar(125) DEFAULT NULL,
+  `address_optional` varchar(125) DEFAULT NULL,
+  `district` varchar(125) DEFAULT NULL,
+  `stay_time` varchar(125) DEFAULT NULL,
+  `country` varchar(125) DEFAULT NULL,
+  `state` varchar(125) DEFAULT NULL,
+  `postal` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
+  `updater` varchar(125) DEFAULT NULL,
+  `addressable_type` varchar(125) NOT NULL,
+  `addressable_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `addresses_addressable_type_addressable_id_index` (`addressable_type`,`addressable_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `name`, `email`, `phone`, `address`, `address_optional`, `district`, `stay_time`, `country`, `state`, `postal`, `creator`, `updater`, `addressable_type`, `addressable_id`, `created_at`, `updated_at`) VALUES
+(1, 'Md', 'forhad@gmail.com', '01814556688', '', '', '', NULL, '', '', '', NULL, NULL, 'App\\Models\\Customer', 3, '2025-01-31 07:53:16', '2025-01-31 07:53:16');
 
 -- --------------------------------------------------------
 
@@ -56,18 +60,16 @@ CREATE TABLE IF NOT EXISTS `addresses` (
 -- Table structure for table `advance_salaries`
 --
 
-DROP TABLE IF EXISTS `advance_salaries`;
-CREATE TABLE IF NOT EXISTS `advance_salaries` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `amount` bigint NOT NULL DEFAULT '0',
-  `user_id` bigint NOT NULL DEFAULT '0',
-  `month` bigint NOT NULL DEFAULT '0',
-  `year` bigint NOT NULL DEFAULT '0',
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `advance_salaries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `amount` bigint(20) NOT NULL DEFAULT 0,
+  `user_id` bigint(20) NOT NULL DEFAULT 0,
+  `month` bigint(20) NOT NULL DEFAULT 0,
+  `year` bigint(20) NOT NULL DEFAULT 0,
+  `description` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -76,19 +78,17 @@ CREATE TABLE IF NOT EXISTS `advance_salaries` (
 -- Table structure for table `areas`
 --
 
-DROP TABLE IF EXISTS `areas`;
-CREATE TABLE IF NOT EXISTS `areas` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upload_id` bigint NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `areas` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `slug` varchar(125) DEFAULT NULL,
+  `upload_id` bigint(20) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -97,16 +97,14 @@ CREATE TABLE IF NOT EXISTS `areas` (
 -- Table structure for table `attendances`
 --
 
-DROP TABLE IF EXISTS `attendances`;
-CREATE TABLE IF NOT EXISTS `attendances` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `year` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `month` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` bigint NOT NULL DEFAULT '0',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `attendances` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `year` varchar(125) NOT NULL DEFAULT '0',
+  `month` varchar(125) NOT NULL DEFAULT '0',
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `status` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -115,18 +113,16 @@ CREATE TABLE IF NOT EXISTS `attendances` (
 -- Table structure for table `blogs`
 --
 
-DROP TABLE IF EXISTS `blogs`;
-CREATE TABLE IF NOT EXISTS `blogs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `short_description` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_title` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(125) NOT NULL,
+  `short_description` varchar(125) NOT NULL,
+  `description` varchar(125) NOT NULL,
+  `meta_title` varchar(125) NOT NULL,
+  `meta_description` varchar(125) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -135,16 +131,12 @@ CREATE TABLE IF NOT EXISTS `blogs` (
 -- Table structure for table `blog_blog_category`
 --
 
-DROP TABLE IF EXISTS `blog_blog_category`;
-CREATE TABLE IF NOT EXISTS `blog_blog_category` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `blog_id` bigint UNSIGNED NOT NULL,
-  `blog_category_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `blog_blog_category` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `blog_id` bigint(20) UNSIGNED NOT NULL,
+  `blog_category_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `blog_blog_category_blog_id_foreign` (`blog_id`),
-  KEY `blog_blog_category_blog_category_id_foreign` (`blog_category_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -153,18 +145,16 @@ CREATE TABLE IF NOT EXISTS `blog_blog_category` (
 -- Table structure for table `blog_categories`
 --
 
-DROP TABLE IF EXISTS `blog_categories`;
-CREATE TABLE IF NOT EXISTS `blog_categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `blog_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `slug` varchar(125) NOT NULL,
+  `status` varchar(125) NOT NULL,
+  `creator` varchar(125) NOT NULL,
+  `updater` varchar(125) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -173,19 +163,17 @@ CREATE TABLE IF NOT EXISTS `blog_categories` (
 -- Table structure for table `branches`
 --
 
-DROP TABLE IF EXISTS `branches`;
-CREATE TABLE IF NOT EXISTS `branches` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `branches` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `location` varchar(125) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `branches`
@@ -203,18 +191,16 @@ INSERT INTO `branches` (`id`, `name`, `location`, `status`, `creator`, `updater`
 -- Table structure for table `brands`
 --
 
-DROP TABLE IF EXISTS `brands`;
-CREATE TABLE IF NOT EXISTS `brands` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `creator` bigint NOT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `brands` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `slug` varchar(125) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `upload_id` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -222,19 +208,16 @@ CREATE TABLE IF NOT EXISTS `brands` (
 -- Table structure for table `cash_counters`
 --
 
-DROP TABLE IF EXISTS `cash_counters`;
-CREATE TABLE IF NOT EXISTS `cash_counters` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `branch_id` bigint UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `cash_counters` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `branch_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `cash_counters_branch_id_foreign` (`branch_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -243,31 +226,29 @@ CREATE TABLE IF NOT EXISTS `cash_counters` (
 -- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `creator` bigint NOT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `slug` varchar(125) NOT NULL,
+  `description` text DEFAULT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `upload_id` varchar(125) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `creator`, `name`, `slug`, `description`, `status`, `upload_id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(6, 1, 'Agriculture & Machine', 'agriculture-machine', NULL, '1', '3', NULL, '2025-01-28 02:57:28', '2025-01-28 04:39:37'),
-(7, 1, 'Gradining Tools', 'gradining-tools', NULL, '1', '72', NULL, '2025-01-28 02:57:43', '2025-01-29 03:39:38'),
-(8, 1, 'Home Appliances', 'home-appliances', NULL, '1', '6', NULL, '2025-01-28 02:58:01', '2025-01-28 04:42:50'),
-(9, 1, 'Cookeries', 'cookeries', NULL, '1', '69', NULL, '2025-01-28 02:58:32', '2025-01-29 03:33:32'),
-(10, 1, 'Fashion House', 'fashion-house', NULL, '1', '4', NULL, '2025-01-28 02:58:59', '2025-01-28 04:39:56');
+(6, 1, 'Agriculture & Machine', 'agriculture-machine', NULL, '1', '77', NULL, '2025-01-28 02:57:28', '2025-01-30 02:06:15'),
+(7, 1, 'Gradining Tools', 'gradining-tools', NULL, '1', '76', NULL, '2025-01-28 02:57:43', '2025-01-30 02:06:30'),
+(8, 1, 'Home Appliances', 'home-appliances', NULL, '1', '79', NULL, '2025-01-28 02:58:01', '2025-01-30 02:06:40'),
+(9, 1, 'Cookeries', 'cookeries', NULL, '1', '84', NULL, '2025-01-28 02:58:32', '2025-01-30 02:33:15'),
+(10, 1, 'Fashion House', 'fashion-house', NULL, '1', '78', NULL, '2025-01-28 02:58:59', '2025-01-30 02:06:59');
 
 -- --------------------------------------------------------
 
@@ -275,20 +256,17 @@ INSERT INTO `categories` (`id`, `creator`, `name`, `slug`, `description`, `statu
 -- Table structure for table `contacts`
 --
 
-DROP TABLE IF EXISTS `contacts`;
-CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `source` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contact` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contactable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contactable_id` bigint UNSIGNED NOT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `source` varchar(125) DEFAULT NULL,
+  `contact` varchar(125) DEFAULT NULL,
+  `contactable_type` varchar(125) NOT NULL,
+  `contactable_id` bigint(20) UNSIGNED NOT NULL,
+  `creator` varchar(125) NOT NULL,
+  `updater` varchar(125) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `contacts_contactable_type_contactable_id_index` (`contactable_type`,`contactable_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -297,18 +275,16 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- Table structure for table `coupons`
 --
 
-DROP TABLE IF EXISTS `coupons`;
-CREATE TABLE IF NOT EXISTS `coupons` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `details` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0' COMMENT '1 = fixed 0 present',
-  `amount` int NOT NULL DEFAULT '0',
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
+  `title` varchar(125) DEFAULT NULL,
+  `details` varchar(125) DEFAULT NULL,
+  `type` varchar(125) NOT NULL DEFAULT '0' COMMENT '1 = fixed 0 present',
+  `amount` int(11) NOT NULL DEFAULT 0,
   `expire_date` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -317,12 +293,10 @@ CREATE TABLE IF NOT EXISTS `coupons` (
 -- Table structure for table `coupon_use_histories`
 --
 
-DROP TABLE IF EXISTS `coupon_use_histories`;
-CREATE TABLE IF NOT EXISTS `coupon_use_histories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `coupon_use_histories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -331,25 +305,23 @@ CREATE TABLE IF NOT EXISTS `coupon_use_histories` (
 -- Table structure for table `courier_credentials`
 --
 
-DROP TABLE IF EXISTS `courier_credentials`;
-CREATE TABLE IF NOT EXISTS `courier_credentials` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `provider` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Secret_Key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Api_Key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `client_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `client_secret` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `secret_token` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sandbox_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `creator` bigint NOT NULL DEFAULT '1',
-  `updater` bigint NOT NULL DEFAULT '1',
+CREATE TABLE `courier_credentials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `upload_id` varchar(125) DEFAULT NULL,
+  `provider` varchar(125) DEFAULT NULL,
+  `Secret_Key` varchar(125) DEFAULT NULL,
+  `Api_Key` varchar(125) DEFAULT NULL,
+  `client_id` varchar(125) DEFAULT NULL,
+  `client_secret` varchar(125) DEFAULT NULL,
+  `secret_token` varchar(125) DEFAULT NULL,
+  `key` varchar(125) DEFAULT NULL,
+  `sandbox_status` varchar(125) NOT NULL DEFAULT '1',
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `creator` bigint(20) NOT NULL DEFAULT 1,
+  `updater` bigint(20) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `courier_credentials`
@@ -367,34 +339,31 @@ INSERT INTO `courier_credentials` (`id`, `upload_id`, `provider`, `Secret_Key`, 
 -- Table structure for table `customers`
 --
 
-DROP TABLE IF EXISTS `customers`;
-CREATE TABLE IF NOT EXISTS `customers` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shop_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shop_phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shop_address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_holder` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci,
-  `bank_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `credit_limit` int DEFAULT NULL,
-  `prev_due` int DEFAULT NULL,
-  `area` int DEFAULT NULL,
-  `password` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_branch` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `customers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `shop_name` varchar(125) DEFAULT NULL,
+  `shop_phone` varchar(125) DEFAULT NULL,
+  `shop_address` varchar(125) DEFAULT NULL,
+  `type` varchar(125) DEFAULT NULL,
+  `user_id` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
+  `location` varchar(125) DEFAULT NULL,
+  `account_holder` varchar(125) DEFAULT NULL,
+  `account_number` varchar(125) DEFAULT NULL,
+  `note` text DEFAULT NULL,
+  `bank_name` varchar(125) DEFAULT NULL,
+  `credit_limit` int(11) DEFAULT NULL,
+  `prev_due` int(11) DEFAULT NULL,
+  `area` int(11) DEFAULT NULL,
+  `password` varchar(125) DEFAULT NULL,
+  `bank_branch` varchar(125) DEFAULT NULL,
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `customers_user_id_foreign` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `customers`
@@ -402,7 +371,8 @@ CREATE TABLE IF NOT EXISTS `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `shop_name`, `shop_phone`, `shop_address`, `type`, `user_id`, `creator`, `location`, `account_holder`, `account_number`, `note`, `bank_name`, `credit_limit`, `prev_due`, `area`, `password`, `bank_branch`, `upload_id`, `created_at`, `updated_at`) VALUES
 (1, 'Test User', 'test@gmail.com', '015*******', NULL, NULL, NULL, NULL, NULL, '1', 'Dhaka Bangladesh', 'MD SAZZAD', '01590084779', NULL, 'bKash', NULL, NULL, NULL, '$2y$12$Gc1x9TTAKMgkq/Gn9/Mn1OFCcEDpDXypStYS8MrXWgzvhFCvWW2lW', 'Bangladesh', '0', '2025-01-28 02:54:45', '2025-01-28 02:54:45'),
-(2, 'Kasper Leonard', 'julo@mailinator.com', '+1 (396) 273-7003', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$12$XNVfKO864/4linkJPtpYKuOfSdXoFgKwk23jaIUIxf1ETACUqKKsW', NULL, '13', '2025-01-29 00:46:15', '2025-01-29 00:46:24');
+(2, 'Kasper Leonard', 'julo@mailinator.com', '+1 (396) 273-7003', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$2y$12$XNVfKO864/4linkJPtpYKuOfSdXoFgKwk23jaIUIxf1ETACUqKKsW', NULL, '13', '2025-01-29 00:46:15', '2025-01-29 00:46:24'),
+(3, 'Md', 'forhad@gmail.com', '01814556688', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 20000, 0, NULL, '$2y$12$5O9jQn0Srci1Lo3WlgC6busHxLpCY8ek5eVKdCtRUFVJh/jWlkXmi', NULL, '0', '2025-01-31 07:53:16', '2025-01-31 07:53:16');
 
 -- --------------------------------------------------------
 
@@ -410,28 +380,23 @@ INSERT INTO `customers` (`id`, `name`, `email`, `phone`, `shop_name`, `shop_phon
 -- Table structure for table `devices`
 --
 
-DROP TABLE IF EXISTS `devices`;
-CREATE TABLE IF NOT EXISTS `devices` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `device_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ip` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logout` tinyint(1) NOT NULL DEFAULT '0',
+CREATE TABLE `devices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `device_type` varchar(125) NOT NULL,
+  `ip` varchar(40) NOT NULL,
+  `logout` tinyint(1) NOT NULL DEFAULT 0,
   `suspend_date` timestamp NULL DEFAULT NULL,
-  `data` json DEFAULT NULL,
-  `creator` bigint DEFAULT NULL,
-  `updater_id` bigint DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci,
-  `last_activity` int NOT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`data`)),
+  `creator` bigint(20) DEFAULT NULL,
+  `updater_id` bigint(20) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext DEFAULT NULL,
+  `last_activity` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `notification_data` text COLLATE utf8mb4_unicode_ci,
+  `notification_data` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `devices_device_type_index` (`device_type`),
-  KEY `devices_ip_index` (`ip`),
-  KEY `devices_last_activity_index` (`last_activity`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `devices`
@@ -440,7 +405,10 @@ CREATE TABLE IF NOT EXISTS `devices` (
 INSERT INTO `devices` (`id`, `device_type`, `ip`, `logout`, `suspend_date`, `data`, `creator`, `updater_id`, `user_agent`, `payload`, `last_activity`, `deleted_at`, `notification_data`, `created_at`, `updated_at`) VALUES
 (1, 'Windows \"Not A(Brand\"', '::1', 0, NULL, '{\"PATH\": \"C:\\\\Python312\\\\Scripts\\\\;C:\\\\Python312\\\\;C:\\\\WINDOWS\\\\system32;C:\\\\WINDOWS;C:\\\\WINDOWS\\\\System32\\\\Wbem;C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\;C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\;C:\\\\Program Files\\\\nodejs\\\\;C:\\\\ProgramData\\\\chocolatey\\\\bin;C:\\\\Program Files\\\\Git\\\\cmd;D:\\\\wamp64\\\\bin\\\\php\\\\php8.2.18;C:\\\\composer;C:\\\\Program Files (x86)\\\\cloudflared\\\\;C:\\\\Program Files\\\\Cloudflare\\\\Cloudflare WARP\\\\;D:\\\\wamp64\\\\bin\\\\mysql\\\\mysql8.3.0\\\\bin;C:\\\\WINDOWS\\\\system32\\\\config\\\\systemprofile\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\", \"WINDIR\": \"C:\\\\WINDOWS\", \"COMSPEC\": \"C:\\\\WINDOWS\\\\system32\\\\cmd.exe\", \"PATHEXT\": \".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW\", \"PHP_SELF\": \"/pos/index.php\", \"HTTP_HOST\": \"localhost\", \"SystemRoot\": \"C:\\\\WINDOWS\", \"HTTP_ACCEPT\": \"text/event-stream\", \"HTTP_COOKIE\": \"userNA45647854564785=MzI%3D; botble_footprints_cookie=eyJpdiI6ImxZaUI4K2h3NUFGNWxRcGUvbjhoV1E9PSIsInZhbHVlIjoiVHlXbzVhejNqMWp0QU1LSGVsckF0TkR4bVEwRFlRRnF6L2xHT1FuVVVWcGs5YXhocWNxQktJSHBMWEdRNVd4RHplMlNKMjI2WElPOUNMTVhtb2NZS0k2dWVlN2Q3cEpTWVJxVVdpNjdCNElMdGpIZDZ4VElFdTNBMElWdVhxQVMiLCJtYWMiOiJmNTJkMmIwZDlhYzNjZjc2Mzg0YWI0ZGEwNWU0NDRkMzUzZDE5NWI1NjZlMGNjOTIxZjljMDM2OTNmNjVjN2UyIiwidGFnIjoiIn0%3D; botble_footprints_cookie_data=eyJpdiI6IjlneEdhczArWVpXNTh0YU14NStlY1E9PSIsInZhbHVlIjoiNjNVNWlaSUk1UlJwai9SMEhjbGNpTFNzeFFlVEYyMG93QitDUXZLdEtIZEUwTEpMMGlqVjdTeCtHYlFxWTltQVJ3a09Pc0xUbk12SWZMMVZ1MkxwVnQvYjRRVFdvWHN6TGVvS2RpUjM5R0RFU1VEcnkyTTlFdE5NVGl4bjc3UnR6dnpuVHpoMjlLakZveGxnWTl4V3BqSUs1akFwREZET1lqZXFLK0lZUmZvbllkdlgybUk3aXhPWTkwZytPdlYwVElPdGxPY1pOdWkyM3lKNmJxUTBMQUlMNXFRWCtLK09hSEZJVXJ3M0tsUlF1bUdLUyttMk5VSW1CdjE3Vm9oQTZRTXVvV2U2RVVtNTcrWDFXSnFxdW0vejhVVVY4Y0V2R0YySExVTE9IYnBSWDhVcTU0bno4NTFCdG51VWFOUklaSVgrTi8xRk9lTzFBSGcySm8vYTMxMXdBRHZEcmU5ZUY4cXdWWmo1QkprQWYwenBMUGFSMTFhTkVXYXJPOXNBaitoMzlzVnZad1l4b2NLLy8wZHVmclB1VjFvdGYwQ2VWbXZOdDBJK05RMjQ0R01SVU03QmtEUHgxUkt2eFJZN05DUm0rQUhoZ1pGbk9oY3ZDdXU0OU5ETjNCRTlaR0NnanB5YUNTa3FTbHM9IiwibWFjIjoiYzcwNmFjNDYzNDI3MWIxMDc4NjQ3MWRkODFlZjE5MjI1N2EzMjFmMWI5MDgzYmM0ZTE2OTJiNTVhZjA3NTE3NyIsInRhZyI6IiJ9; _ga=GA1.1.1562615106.1730878582; _fbp=fb.0.1730878582290.398619031224172341; cookie_for_consent=1; remember_customer_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6Ijd2dDFHZjd0Rmw3a0ZhcmF0cTZiTUE9PSIsInZhbHVlIjoibUVTTDE3TW0wdXJoamtRTm1RYlJZc1JxZXZiSHRsQk9YWlhLS25SYk1pQlhyZVFoQ0g4OFByRnlhMUZqZERqOXE0SkZyRDJ0VGJrOXlZRmR1cERnU09ZbHptYnpkU1g2R3BYMHg4ZDdLTC9FRzAyRmtSUGdmdGpqcW5sc2dyakFJQ0xQZnZVKy9vTmYvdFQyRjZURnBOSkxhbjNDajNoSVRrQ29zSlBTWVdqNmlXbjBqM2NpRmRoZUdXL0lFWE1oQkk5Y3FnOXJOK1pCUUZUZm9qbGpCRVdwUkJNY3ZYZzZUV0Y4aG1yN3A0Zz0iLCJtYWMiOiJiNTAzMTUyNjY5YmFlNjViYTk5ODQ4YzczODUxYjA2YzQzN2IxOTcxOTUyNWIxNjQyMGU3NTM1NmYyNDA3MmRkIiwidGFnIjoiIn0%3D; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IkpnRWJBMmxZbzdVV1R3MFpkYkFJUXc9PSIsInZhbHVlIjoidU5TUk0zNElSeENqbllqcm5ac2xjaWFjMjE0d2JMYXhnU3IyY08xQmNVb0daVnZ0TFNSWlV5bFRNNnZVeTQwN3U5bzM0TEkxaFZkMWR0NExXVTlTbFp6N1lvdDFGTDJKOVFqTG1kdzdxSUxJMHpwM1dqdUhpaVBhU2t3TEE5UVRsYkxIcDJuaGZ4amdvVnoxSzMxOHhyakRnUmlkVUZLQWVTcEhSdGdCVklSUHpFREk0M0NFdTdDaGQrT2t2aVBvUml0eHhSaG9uU3NoVHRSNmZsbnRMWGtodS9zczgza3ZsWDlzZFQ5ckNyZz0iLCJtYWMiOiJmZmIyMjM0Mzg0YzRkMWQ3ODlmODUyODhmYWMxMWJiNzFlYWQ2M2FhYmQwNzEyNDIwYjRjMGU3Yzk5NDdlMmU3IiwidGFnIjoiIn0%3D; _ga_VWDV3J1R98=GS1.1.1730895913.3.1.1730895920.0.0.0; g_state={\\\"i_l\\\":0}; twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.HQ1yI0350LKGV8IGYpOj84yCyFszUYyslzvGcw54qhvreYsf4EfzymL5jAK496vj1ICUSZLYmfxdNNaKczEoHnUFvcYEseMdpoWdP%22%2C%22version%22%3A3%2C%22domain%22%3Anull%2C%22ts%22%3A1737877475663%7D; crisp-client%2Fsession%2F081aca0a-3ef7-42a7-bfb1-40311e186858=session_633f7a91-20c0-4bee-a7d7-60047b87b0b0; notunthikana_session=eyJpdiI6InRKaVJTUmlERXdEb3liMElEUEs0alE9PSIsInZhbHVlIjoiN1hpcFQva3RXN0wwUVM1N0tMdHdRTHRST0VXSnMwUDFDMlhKb2wvK2VMRkhVMFhGaGpIWGI1U0Q1NEVGNDV1M1JEcDlyclJPZ1gxaENWU0hycEVRbUIyLy9hdnNqRStPL0dNcTNQUGFYUmFVL3VyaE1GSDNtMGkxMmRjT0VTNEciLCJtYWMiOiI0YTcwNmNlMmU0MWIzZGE5YWM5YzNlNTdjZTQ3ZGExYjg0MDA3OWIyNzZhYzU2MWFmNjkxMDQxMTY4OTFjYTRhIiwidGFnIjoiIn0%3D; XSRF-TOKEN=eyJpdiI6IkN0WmkyMDJZdnZhRXlMeExwa0M3S0E9PSIsInZhbHVlIjoiZm9BNlBXc081TnQxa3BTQUprREEzcU0zaTdvWkw5bnRpMEROT1R4aU50OTV1cXNsbjhQdkpuVWhYTUxLUklhOGh2M0FwRktDaFNlQll4QzcyWHhWNHZtREdsQzdIaTR1L1ZPRWdiaTdFRTdXWHN1YVZnT3ZtVVlXdlZBdnVnTmUiLCJtYWMiOiJkNmUyZTE0OTc4YmEyZjBmNTE4YWU3MTM3NWQ5OWMwYmZiMmRlNTU0MTRmYzg4NWNlNjdkMmYxNjBlZGQ2YjQ2IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlllSVBWSXpKdGtFL2dxWTdkZGZEOHc9PSIsInZhbHVlIjoibVp3SXhSYUphMFhGMmFNdDU3WnVvYjdkaDgxN1dUdXJvd0E5SGdKbUVSTWd1OVZYNnhIUTRqMHI0WlVOSXBJVzE1cWVHV3A5V2VFYXVVZnFBNTEyUzJNYm0yNTlncHRWTFJjSlM5UnpNZnBxTFVteDlkUmxzVWlYUWdYd1R1eTMiLCJtYWMiOiI3NjZlYTQ3ZTQyZmFmNTY4NjFlMDc4YjhlMzJhNGQ3MWJhNTQ2NDg3ZjE0YmJiMzEyZWY4N2Y2YjExM2I0ZjQxIiwidGFnIjoiIn0%3D\", \"REMOTE_ADDR\": \"::1\", \"REMOTE_PORT\": \"64207\", \"REQUEST_URI\": \"/pos/device_access_check\", \"SCRIPT_NAME\": \"/pos/index.php\", \"SERVER_ADDR\": \"::1\", \"SERVER_NAME\": \"localhost\", \"SERVER_PORT\": \"80\", \"HTTP_REFERER\": \"http://localhost/pos/admin/order\", \"QUERY_STRING\": \"\", \"REDIRECT_URL\": \"/pos/device_access_check\", \"REQUEST_TIME\": 1738054504, \"SERVER_ADMIN\": \"wampserver@wampserver.invalid\", \"DOCUMENT_ROOT\": \"D:/wamp64/www\", \"CONTEXT_PREFIX\": \"\", \"HTTP_SEC_CH_UA\": \"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\", \"REQUEST_METHOD\": \"GET\", \"REQUEST_SCHEME\": \"http\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36\", \"REDIRECT_STATUS\": \"200\", \"SCRIPT_FILENAME\": \"D:/wamp64/www/pos/index.php\", \"SERVER_PROTOCOL\": \"HTTP/1.1\", \"SERVER_SOFTWARE\": \"Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev\", \"SERVER_SIGNATURE\": \"<address>Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>\\n\", \"GATEWAY_INTERFACE\": \"CGI/1.1\", \"HTTP_CACHE_CONTROL\": \"no-cache\", \"REQUEST_TIME_FLOAT\": 1738054504.10843, \"HTTP_SEC_FETCH_DEST\": \"empty\", \"HTTP_SEC_FETCH_MODE\": \"cors\", \"HTTP_SEC_FETCH_SITE\": \"same-origin\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate, br, zstd\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.9\", \"CONTEXT_DOCUMENT_ROOT\": \"D:/wamp64/www\", \"HTTP_SEC_CH_UA_MOBILE\": \"?0\", \"HTTP_SEC_CH_UA_PLATFORM\": \"\\\"Windows\\\"\"}', 1, 1, NULL, NULL, 1738070117, NULL, '', '2025-01-28 02:55:04', '2025-01-28 07:15:17'),
 (2, 'Windows \"Not A(Brand\"', '::1', 0, NULL, '{\"PATH\": \"C:\\\\Python312\\\\Scripts\\\\;C:\\\\Python312\\\\;C:\\\\WINDOWS\\\\system32;C:\\\\WINDOWS;C:\\\\WINDOWS\\\\System32\\\\Wbem;C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\;C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\;C:\\\\Program Files\\\\nodejs\\\\;C:\\\\ProgramData\\\\chocolatey\\\\bin;C:\\\\Program Files\\\\Git\\\\cmd;D:\\\\wamp64\\\\bin\\\\php\\\\php8.2.18;C:\\\\composer;C:\\\\Program Files (x86)\\\\cloudflared\\\\;C:\\\\Program Files\\\\Cloudflare\\\\Cloudflare WARP\\\\;D:\\\\wamp64\\\\bin\\\\mysql\\\\mysql8.3.0\\\\bin;C:\\\\WINDOWS\\\\system32\\\\config\\\\systemprofile\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\", \"WINDIR\": \"C:\\\\WINDOWS\", \"COMSPEC\": \"C:\\\\WINDOWS\\\\system32\\\\cmd.exe\", \"PATHEXT\": \".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW\", \"PHP_SELF\": \"/pos/index.php\", \"HTTP_HOST\": \"localhost\", \"SystemRoot\": \"C:\\\\WINDOWS\", \"HTTP_ACCEPT\": \"text/event-stream\", \"HTTP_COOKIE\": \"botble_footprints_cookie=eyJpdiI6ImxZaUI4K2h3NUFGNWxRcGUvbjhoV1E9PSIsInZhbHVlIjoiVHlXbzVhejNqMWp0QU1LSGVsckF0TkR4bVEwRFlRRnF6L2xHT1FuVVVWcGs5YXhocWNxQktJSHBMWEdRNVd4RHplMlNKMjI2WElPOUNMTVhtb2NZS0k2dWVlN2Q3cEpTWVJxVVdpNjdCNElMdGpIZDZ4VElFdTNBMElWdVhxQVMiLCJtYWMiOiJmNTJkMmIwZDlhYzNjZjc2Mzg0YWI0ZGEwNWU0NDRkMzUzZDE5NWI1NjZlMGNjOTIxZjljMDM2OTNmNjVjN2UyIiwidGFnIjoiIn0%3D; botble_footprints_cookie_data=eyJpdiI6IjlneEdhczArWVpXNTh0YU14NStlY1E9PSIsInZhbHVlIjoiNjNVNWlaSUk1UlJwai9SMEhjbGNpTFNzeFFlVEYyMG93QitDUXZLdEtIZEUwTEpMMGlqVjdTeCtHYlFxWTltQVJ3a09Pc0xUbk12SWZMMVZ1MkxwVnQvYjRRVFdvWHN6TGVvS2RpUjM5R0RFU1VEcnkyTTlFdE5NVGl4bjc3UnR6dnpuVHpoMjlLakZveGxnWTl4V3BqSUs1akFwREZET1lqZXFLK0lZUmZvbllkdlgybUk3aXhPWTkwZytPdlYwVElPdGxPY1pOdWkyM3lKNmJxUTBMQUlMNXFRWCtLK09hSEZJVXJ3M0tsUlF1bUdLUyttMk5VSW1CdjE3Vm9oQTZRTXVvV2U2RVVtNTcrWDFXSnFxdW0vejhVVVY4Y0V2R0YySExVTE9IYnBSWDhVcTU0bno4NTFCdG51VWFOUklaSVgrTi8xRk9lTzFBSGcySm8vYTMxMXdBRHZEcmU5ZUY4cXdWWmo1QkprQWYwenBMUGFSMTFhTkVXYXJPOXNBaitoMzlzVnZad1l4b2NLLy8wZHVmclB1VjFvdGYwQ2VWbXZOdDBJK05RMjQ0R01SVU03QmtEUHgxUkt2eFJZN05DUm0rQUhoZ1pGbk9oY3ZDdXU0OU5ETjNCRTlaR0NnanB5YUNTa3FTbHM9IiwibWFjIjoiYzcwNmFjNDYzNDI3MWIxMDc4NjQ3MWRkODFlZjE5MjI1N2EzMjFmMWI5MDgzYmM0ZTE2OTJiNTVhZjA3NTE3NyIsInRhZyI6IiJ9; _ga=GA1.1.1562615106.1730878582; _fbp=fb.0.1730878582290.398619031224172341; cookie_for_consent=1; remember_customer_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6Ijd2dDFHZjd0Rmw3a0ZhcmF0cTZiTUE9PSIsInZhbHVlIjoibUVTTDE3TW0wdXJoamtRTm1RYlJZc1JxZXZiSHRsQk9YWlhLS25SYk1pQlhyZVFoQ0g4OFByRnlhMUZqZERqOXE0SkZyRDJ0VGJrOXlZRmR1cERnU09ZbHptYnpkU1g2R3BYMHg4ZDdLTC9FRzAyRmtSUGdmdGpqcW5sc2dyakFJQ0xQZnZVKy9vTmYvdFQyRjZURnBOSkxhbjNDajNoSVRrQ29zSlBTWVdqNmlXbjBqM2NpRmRoZUdXL0lFWE1oQkk5Y3FnOXJOK1pCUUZUZm9qbGpCRVdwUkJNY3ZYZzZUV0Y4aG1yN3A0Zz0iLCJtYWMiOiJiNTAzMTUyNjY5YmFlNjViYTk5ODQ4YzczODUxYjA2YzQzN2IxOTcxOTUyNWIxNjQyMGU3NTM1NmYyNDA3MmRkIiwidGFnIjoiIn0%3D; remember_web_59ba36addc2b2f9401580f014c7f58ea4e30989d=eyJpdiI6IkpnRWJBMmxZbzdVV1R3MFpkYkFJUXc9PSIsInZhbHVlIjoidU5TUk0zNElSeENqbllqcm5ac2xjaWFjMjE0d2JMYXhnU3IyY08xQmNVb0daVnZ0TFNSWlV5bFRNNnZVeTQwN3U5bzM0TEkxaFZkMWR0NExXVTlTbFp6N1lvdDFGTDJKOVFqTG1kdzdxSUxJMHpwM1dqdUhpaVBhU2t3TEE5UVRsYkxIcDJuaGZ4amdvVnoxSzMxOHhyakRnUmlkVUZLQWVTcEhSdGdCVklSUHpFREk0M0NFdTdDaGQrT2t2aVBvUml0eHhSaG9uU3NoVHRSNmZsbnRMWGtodS9zczgza3ZsWDlzZFQ5ckNyZz0iLCJtYWMiOiJmZmIyMjM0Mzg0YzRkMWQ3ODlmODUyODhmYWMxMWJiNzFlYWQ2M2FhYmQwNzEyNDIwYjRjMGU3Yzk5NDdlMmU3IiwidGFnIjoiIn0%3D; _ga_VWDV3J1R98=GS1.1.1730895913.3.1.1730895920.0.0.0; g_state={\\\"i_l\\\":0}; twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.HQ1yI0350LKGV8IGYpOj84yCyFszUYyslzvGcw54qhvreYsf4EfzymL5jAK496vj1ICUSZLYmfxdNNaKczEoHnUFvcYEseMdpoWdP%22%2C%22version%22%3A3%2C%22domain%22%3Anull%2C%22ts%22%3A1737877475663%7D; crisp-client%2Fsession%2F081aca0a-3ef7-42a7-bfb1-40311e186858=session_633f7a91-20c0-4bee-a7d7-60047b87b0b0; XSRF-TOKEN=eyJpdiI6ImdhVkFDMHdhUlpuOFBwOVAxckFqWXc9PSIsInZhbHVlIjoiVDkzRngrMWJ0N1ZFWE5DelhvTUxySHNrYW5BclZJSXdINm9TdFVRbE1NaVQraDB4d09KYStEN2hUSzB5MDU3cFN3WFB5NnJ6N0Q3UVc3Um56ZFNpaHM0bDNDVVlGSXZIRGdhMldEOW9ITTlPd0VpUk1EWFVDOU1xZk5JMVpCd00iLCJtYWMiOiI4NTgyYmIwNWViYzk0MDA4M2Q2NTAyODA3ODBmOTM5YWIyM2RhYTkyNjkyM2EwMmU2ZGIyMDIwZWE5ZjYzNzJkIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IkdFTm1CNS9XOGRrUVVGbkw1SjlRY1E9PSIsInZhbHVlIjoiMGduWGc4bVJvQzVkRkJ1WXg0MkR2REQxM1FKMVZjOXF4R1dzQU9UZGpvYy9ZWXk1SXJ4cmFoaGZBOHRhWWl3ZnJTN0I1RjRpMGYzM2RZbE01L2xxWnlMMmNEd2JBRWk5ZjVzcUJ2RTJiMk00bTJOZUtkam1kcEZuTTBrU0ZzQTUiLCJtYWMiOiJlZGI3NzY0ZDhjZjhiYzBiOTliMWZjZmUwNGQ3NThiYzk3NzlmMDUyNDM5ODRmNDg3MjQxZTM2YmU5MjkxY2I0IiwidGFnIjoiIn0%3D\", \"REMOTE_ADDR\": \"::1\", \"REMOTE_PORT\": \"54662\", \"REQUEST_URI\": \"/pos/device_access_check\", \"SCRIPT_NAME\": \"/pos/index.php\", \"SERVER_ADDR\": \"::1\", \"SERVER_NAME\": \"localhost\", \"SERVER_PORT\": \"80\", \"HTTP_REFERER\": \"http://localhost/pos/admin\", \"QUERY_STRING\": \"\", \"REDIRECT_URL\": \"/pos/device_access_check\", \"REQUEST_TIME\": 1738124893, \"SERVER_ADMIN\": \"wampserver@wampserver.invalid\", \"DOCUMENT_ROOT\": \"D:/wamp64/www\", \"CONTEXT_PREFIX\": \"\", \"HTTP_SEC_CH_UA\": \"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\", \"REQUEST_METHOD\": \"GET\", \"REQUEST_SCHEME\": \"http\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36\", \"REDIRECT_STATUS\": \"200\", \"SCRIPT_FILENAME\": \"D:/wamp64/www/pos/index.php\", \"SERVER_PROTOCOL\": \"HTTP/1.1\", \"SERVER_SOFTWARE\": \"Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev\", \"SERVER_SIGNATURE\": \"<address>Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev Server at localhost Port 80</address>\\n\", \"GATEWAY_INTERFACE\": \"CGI/1.1\", \"HTTP_CACHE_CONTROL\": \"no-cache\", \"REQUEST_TIME_FLOAT\": 1738124893.330571, \"HTTP_SEC_FETCH_DEST\": \"empty\", \"HTTP_SEC_FETCH_MODE\": \"cors\", \"HTTP_SEC_FETCH_SITE\": \"same-origin\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate, br, zstd\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.9,bn;q=0.8\", \"CONTEXT_DOCUMENT_ROOT\": \"D:/wamp64/www\", \"HTTP_SEC_CH_UA_MOBILE\": \"?0\", \"HTTP_SEC_CH_UA_PLATFORM\": \"\\\"Windows\\\"\"}', 1, 1, NULL, NULL, 1738151928, NULL, '', '2025-01-28 22:28:13', '2025-01-29 05:58:48'),
-(3, 'Windows \"Not A(Brand\"', '192.168.0.104', 0, NULL, '{\"PATH\": \"C:\\\\Python312\\\\Scripts\\\\;C:\\\\Python312\\\\;C:\\\\WINDOWS\\\\system32;C:\\\\WINDOWS;C:\\\\WINDOWS\\\\System32\\\\Wbem;C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\;C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\;C:\\\\Program Files\\\\nodejs\\\\;C:\\\\ProgramData\\\\chocolatey\\\\bin;C:\\\\Program Files\\\\Git\\\\cmd;D:\\\\wamp64\\\\bin\\\\php\\\\php8.2.18;C:\\\\composer;C:\\\\Program Files (x86)\\\\cloudflared\\\\;C:\\\\Program Files\\\\Cloudflare\\\\Cloudflare WARP\\\\;D:\\\\wamp64\\\\bin\\\\mysql\\\\mysql8.3.0\\\\bin;C:\\\\WINDOWS\\\\system32\\\\config\\\\systemprofile\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\", \"WINDIR\": \"C:\\\\WINDOWS\", \"COMSPEC\": \"C:\\\\WINDOWS\\\\system32\\\\cmd.exe\", \"PATHEXT\": \".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW\", \"PHP_SELF\": \"/pos/index.php\", \"HTTP_HOST\": \"192.168.0.50\", \"SystemRoot\": \"C:\\\\WINDOWS\", \"HTTP_ACCEPT\": \"text/event-stream\", \"HTTP_COOKIE\": \"twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.Sww6LrALxeHWaVvqTraTrsrxugu1kBZQ247a4cDV0c0q13TgzcQ2fGXgkUqtLNkaQfiyUZ15GtPuhPrJpdsHZxdBw3PYaOYtMzx1XzgmtPBONBe6Op0bh%22%2C%22version%22%3A3%2C%22domain%22%3A%22192.168.0.50%22%2C%22ts%22%3A1737864303751%7D; _ga=GA1.1.1809262368.1738067855; _fbp=fb.3.1738067859396.742133090633363582; crisp-client%2Fsession%2Ff69fd138-69d5-4d24-9a1c-214dbdeaeb8a=session_cc7adaad-68a2-4205-9479-e18065114ddf; _ga_NZP1R3J96M=GS1.1.1738127732.3.1.1738132086.0.0.399204572; XSRF-TOKEN=eyJpdiI6ImRXbCtCTVhhc0RBbEVXSTlKVVlZekE9PSIsInZhbHVlIjoiODhVVWRVY2U5dlJxU0RkVzNwQ05EUWVpMk5KTWxraWp3ZVlheUtRMW9QdGRsdm5CVlNLZ1IwTVZvNllqeDBkRHNPcm11bzVkc01UVjg3eVFIVnFvelFoQm5HOVRMSXU1dkJERnhoRGt5ZE5JZWZjS29RdkxJS1BhOGJwelNlSHQiLCJtYWMiOiJjODk5MWY2OGJmYzNkMjRhNjk2ZWNhYjE3ZTkwOTgwNDFjMjRmMDFlNzE1YzljZGM0ODg1YWZkNDI3OGIyYzhiIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlVwNmtKbER5aDIxaFZ3MUcvNU9OQ1E9PSIsInZhbHVlIjoiR1pOK09wSGJFdU5qRURFeEd6VFhrSXREbVVySDFtUkY0VnZ4NFd4QmxUQ1cxOWRVeUFWcmVUbW9sUVBkZDRzZG9BUStndE8wRkpVcUlONFhzZ2NWT283NTA5eFM0ZEZ6ejNBNSthcnphaG5wQmRyYngvUGZvak11RW1MZzlOOU0iLCJtYWMiOiJjN2YzMWI3ZTY4ZDliMjU2MzFlYzI0NDg5NDEwMzc3NzVlYzBiMjA3MTFmMTNkZWI5ZWQ4ZTUzMjQ3MmEzYTEzIiwidGFnIjoiIn0%3D\", \"REMOTE_ADDR\": \"192.168.0.104\", \"REMOTE_PORT\": \"61964\", \"REQUEST_URI\": \"/pos/device_access_check\", \"SCRIPT_NAME\": \"/pos/index.php\", \"SERVER_ADDR\": \"192.168.0.50\", \"SERVER_NAME\": \"192.168.0.50\", \"SERVER_PORT\": \"80\", \"HTTP_REFERER\": \"http://192.168.0.50/pos/admin\", \"QUERY_STRING\": \"\", \"REDIRECT_URL\": \"/pos/device_access_check\", \"REQUEST_TIME\": 1738134880, \"SERVER_ADMIN\": \"wampserver@wampserver.invalid\", \"DOCUMENT_ROOT\": \"D:/wamp64/www\", \"CONTEXT_PREFIX\": \"\", \"HTTP_SEC_CH_UA\": \"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\", \"REQUEST_METHOD\": \"GET\", \"REQUEST_SCHEME\": \"http\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36\", \"REDIRECT_STATUS\": \"200\", \"SCRIPT_FILENAME\": \"D:/wamp64/www/pos/index.php\", \"SERVER_PROTOCOL\": \"HTTP/1.1\", \"SERVER_SOFTWARE\": \"Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev\", \"SERVER_SIGNATURE\": \"<address>Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev Server at 192.168.0.50 Port 80</address>\\n\", \"GATEWAY_INTERFACE\": \"CGI/1.1\", \"HTTP_CACHE_CONTROL\": \"no-cache\", \"REQUEST_TIME_FLOAT\": 1738134880.350546, \"HTTP_SEC_FETCH_DEST\": \"empty\", \"HTTP_SEC_FETCH_MODE\": \"cors\", \"HTTP_SEC_FETCH_SITE\": \"same-origin\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.9,bn;q=0.8\", \"CONTEXT_DOCUMENT_ROOT\": \"D:/wamp64/www\", \"HTTP_SEC_CH_UA_MOBILE\": \"?0\", \"HTTP_SEC_CH_UA_PLATFORM\": \"\\\"Windows\\\"\"}', 1, 1, NULL, NULL, 1738148375, NULL, '', '2025-01-29 01:14:40', '2025-01-29 04:59:35');
+(3, 'Windows \"Not A(Brand\"', '192.168.0.104', 0, NULL, '{\"PATH\": \"C:\\\\Python312\\\\Scripts\\\\;C:\\\\Python312\\\\;C:\\\\WINDOWS\\\\system32;C:\\\\WINDOWS;C:\\\\WINDOWS\\\\System32\\\\Wbem;C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\;C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\;C:\\\\Program Files\\\\nodejs\\\\;C:\\\\ProgramData\\\\chocolatey\\\\bin;C:\\\\Program Files\\\\Git\\\\cmd;D:\\\\wamp64\\\\bin\\\\php\\\\php8.2.18;C:\\\\composer;C:\\\\Program Files (x86)\\\\cloudflared\\\\;C:\\\\Program Files\\\\Cloudflare\\\\Cloudflare WARP\\\\;D:\\\\wamp64\\\\bin\\\\mysql\\\\mysql8.3.0\\\\bin;C:\\\\WINDOWS\\\\system32\\\\config\\\\systemprofile\\\\AppData\\\\Local\\\\Microsoft\\\\WindowsApps\", \"WINDIR\": \"C:\\\\WINDOWS\", \"COMSPEC\": \"C:\\\\WINDOWS\\\\system32\\\\cmd.exe\", \"PATHEXT\": \".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW\", \"PHP_SELF\": \"/pos/index.php\", \"HTTP_HOST\": \"192.168.0.50\", \"SystemRoot\": \"C:\\\\WINDOWS\", \"HTTP_ACCEPT\": \"text/event-stream\", \"HTTP_COOKIE\": \"twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.Sww6LrALxeHWaVvqTraTrsrxugu1kBZQ247a4cDV0c0q13TgzcQ2fGXgkUqtLNkaQfiyUZ15GtPuhPrJpdsHZxdBw3PYaOYtMzx1XzgmtPBONBe6Op0bh%22%2C%22version%22%3A3%2C%22domain%22%3A%22192.168.0.50%22%2C%22ts%22%3A1737864303751%7D; _ga=GA1.1.1809262368.1738067855; _fbp=fb.3.1738067859396.742133090633363582; crisp-client%2Fsession%2Ff69fd138-69d5-4d24-9a1c-214dbdeaeb8a=session_cc7adaad-68a2-4205-9479-e18065114ddf; _ga_NZP1R3J96M=GS1.1.1738127732.3.1.1738132086.0.0.399204572; XSRF-TOKEN=eyJpdiI6ImRXbCtCTVhhc0RBbEVXSTlKVVlZekE9PSIsInZhbHVlIjoiODhVVWRVY2U5dlJxU0RkVzNwQ05EUWVpMk5KTWxraWp3ZVlheUtRMW9QdGRsdm5CVlNLZ1IwTVZvNllqeDBkRHNPcm11bzVkc01UVjg3eVFIVnFvelFoQm5HOVRMSXU1dkJERnhoRGt5ZE5JZWZjS29RdkxJS1BhOGJwelNlSHQiLCJtYWMiOiJjODk5MWY2OGJmYzNkMjRhNjk2ZWNhYjE3ZTkwOTgwNDFjMjRmMDFlNzE1YzljZGM0ODg1YWZkNDI3OGIyYzhiIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlVwNmtKbER5aDIxaFZ3MUcvNU9OQ1E9PSIsInZhbHVlIjoiR1pOK09wSGJFdU5qRURFeEd6VFhrSXREbVVySDFtUkY0VnZ4NFd4QmxUQ1cxOWRVeUFWcmVUbW9sUVBkZDRzZG9BUStndE8wRkpVcUlONFhzZ2NWT283NTA5eFM0ZEZ6ejNBNSthcnphaG5wQmRyYngvUGZvak11RW1MZzlOOU0iLCJtYWMiOiJjN2YzMWI3ZTY4ZDliMjU2MzFlYzI0NDg5NDEwMzc3NzVlYzBiMjA3MTFmMTNkZWI5ZWQ4ZTUzMjQ3MmEzYTEzIiwidGFnIjoiIn0%3D\", \"REMOTE_ADDR\": \"192.168.0.104\", \"REMOTE_PORT\": \"61964\", \"REQUEST_URI\": \"/pos/device_access_check\", \"SCRIPT_NAME\": \"/pos/index.php\", \"SERVER_ADDR\": \"192.168.0.50\", \"SERVER_NAME\": \"192.168.0.50\", \"SERVER_PORT\": \"80\", \"HTTP_REFERER\": \"http://192.168.0.50/pos/admin\", \"QUERY_STRING\": \"\", \"REDIRECT_URL\": \"/pos/device_access_check\", \"REQUEST_TIME\": 1738134880, \"SERVER_ADMIN\": \"wampserver@wampserver.invalid\", \"DOCUMENT_ROOT\": \"D:/wamp64/www\", \"CONTEXT_PREFIX\": \"\", \"HTTP_SEC_CH_UA\": \"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\", \"REQUEST_METHOD\": \"GET\", \"REQUEST_SCHEME\": \"http\", \"HTTP_CONNECTION\": \"keep-alive\", \"HTTP_USER_AGENT\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36\", \"REDIRECT_STATUS\": \"200\", \"SCRIPT_FILENAME\": \"D:/wamp64/www/pos/index.php\", \"SERVER_PROTOCOL\": \"HTTP/1.1\", \"SERVER_SOFTWARE\": \"Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev\", \"SERVER_SIGNATURE\": \"<address>Apache/2.4.59 (Win64) PHP/8.3.6 mod_fcgid/2.3.10-dev Server at 192.168.0.50 Port 80</address>\\n\", \"GATEWAY_INTERFACE\": \"CGI/1.1\", \"HTTP_CACHE_CONTROL\": \"no-cache\", \"REQUEST_TIME_FLOAT\": 1738134880.350546, \"HTTP_SEC_FETCH_DEST\": \"empty\", \"HTTP_SEC_FETCH_MODE\": \"cors\", \"HTTP_SEC_FETCH_SITE\": \"same-origin\", \"HTTP_ACCEPT_ENCODING\": \"gzip, deflate\", \"HTTP_ACCEPT_LANGUAGE\": \"en-US,en;q=0.9,bn;q=0.8\", \"CONTEXT_DOCUMENT_ROOT\": \"D:/wamp64/www\", \"HTTP_SEC_CH_UA_MOBILE\": \"?0\", \"HTTP_SEC_CH_UA_PLATFORM\": \"\\\"Windows\\\"\"}', 1, 1, NULL, NULL, 1738148375, NULL, '', '2025-01-29 01:14:40', '2025-01-29 04:59:35'),
+(4, 'Windows \"Not A(Brand\"', '103.198.133.214', 0, NULL, '{\"PATH\":\"\\/usr\\/local\\/bin:\\/bin:\\/usr\\/bin\",\"HTTP_ACCEPT\":\"text\\/event-stream\",\"HTTP_ACCEPT_ENCODING\":\"gzip, deflate, br, zstd\",\"HTTP_ACCEPT_LANGUAGE\":\"en-US,en;q=0.9,bn;q=0.8\",\"HTTP_COOKIE\":\"twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.3Cf90lKpmF0K1M15ZWJLuKJGlpMH5eqlNdkHi4v2i0O7qu5OmV9dnAwNZ396Tms9zFQEUk6n39gFEkhkuLYbM9XXOTKvZqWMo7hgrWz0DihTMjLMhiTMsD3iVasBiRdVHCfiSmu%22%2C%22version%22%3A3%2C%22domain%22%3A%22zaasmultifoodbeverage.com%22%2C%22ts%22%3A1738154837851%7D; XSRF-TOKEN=eyJpdiI6IjN6WGJBWHYzYVFUUHJiUSs5WmgxK2c9PSIsInZhbHVlIjoiQXBEdk5UMmhRWGFiWGNEdXN0a3VSVkFVUklBTjN4VDV2WGJKTTZHSmxqTStteGdza1BJVkg2RkVEa3NEbDFqak1QcXoxdzN2Y2N5empKK01CbXhKR1ZpR0xLaVN5dHorUkNKQ1NuQVh5eUh1azVXa1lPc0EyaDVkSEkvQVNJbVoiLCJtYWMiOiI3Mzg5Njc0YWFkMGYxZDEyZTQ3ZDMzOTQ1MDlmYzEzNjQ4NWU3MzgyZjU3NTczMmQyYTQ4YWI2NGQxNWRlY2E2IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Ill1YU9lYkk4MGgxS2txdmZkZWtESFE9PSIsInZhbHVlIjoiNkRMdERtOVZFY29HMUM2SVhSMXpZVjdDY01Fb1VSUENkUHhkcGMvV1pyN0dCcm02RFBXOG9CdEdaN3FYQXNGQ3RXNlV5VjhGWnBadU9KcEkxcHpCNlFuUk9idDJLTmpBNU9RclF5SjJXdVQ2SVJqV1poNURyUXIwQVltTzJDblMiLCJtYWMiOiJiYjY0Mjc2YTZhNDAxNGUyNThjMTkxM2JkNTc3NDhjMzY2MzA4Nzg5NTA2NjM4MTZmZDhkNzNhNDNmZmQ4OGZkIiwidGFnIjoiIn0%3D\",\"HTTP_HOST\":\"n.zaasmultifoodbeverage.com\",\"HTTP_REFERER\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/admin\",\"HTTP_USER_AGENT\":\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/132.0.0.0 Safari\\/537.36\",\"HTTP_CACHE_CONTROL\":\"no-cache\",\"HTTP_SEC_CH_UA_PLATFORM\":\"\\\"Windows\\\"\",\"HTTP_SEC_CH_UA\":\"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\",\"HTTP_SEC_CH_UA_MOBILE\":\"?0\",\"HTTP_SEC_FETCH_SITE\":\"same-origin\",\"HTTP_SEC_FETCH_MODE\":\"cors\",\"HTTP_SEC_FETCH_DEST\":\"empty\",\"HTTP_PRIORITY\":\"u=1, i\",\"DOCUMENT_ROOT\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\",\"REMOTE_ADDR\":\"103.198.133.214\",\"REMOTE_PORT\":\"56962\",\"SERVER_ADDR\":\"103.191.241.188\",\"SERVER_NAME\":\"n.zaasmultifoodbeverage.com\",\"SERVER_ADMIN\":\"webmaster@n.zaasmultifoodbeverage.com\",\"SERVER_PORT\":\"443\",\"REQUEST_SCHEME\":\"https\",\"REQUEST_URI\":\"\\/device_access_check\",\"REDIRECT_URL\":\"\\/device_access_check\",\"REDIRECT_REQUEST_METHOD\":\"GET\",\"HTTPS\":\"on\",\"REDIRECT_STATUS\":\"200\",\"X_SPDY\":\"HTTP2\",\"SSL_PROTOCOL\":\"TLSv1.3\",\"SSL_CIPHER\":\"TLS_AES_128_GCM_SHA256\",\"SSL_CIPHER_USEKEYSIZE\":\"128\",\"SSL_CIPHER_ALGKEYSIZE\":\"128\",\"SCRIPT_FILENAME\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\\/index.php\",\"QUERY_STRING\":\"\",\"SCRIPT_URI\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/device_access_check\",\"SCRIPT_URL\":\"\\/device_access_check\",\"SCRIPT_NAME\":\"\\/index.php\",\"SERVER_PROTOCOL\":\"HTTP\\/1.1\",\"SERVER_SOFTWARE\":\"LiteSpeed\",\"REQUEST_METHOD\":\"GET\",\"X-LSCACHE\":\"on\",\"PHP_SELF\":\"\\/index.php\",\"REQUEST_TIME_FLOAT\":1738216649.9577720165252685546875,\"REQUEST_TIME\":1738216649,\"argv\":[],\"argc\":0,\"APP_NAME\":\"Laravel\",\"APP_ENV\":\"local\",\"APP_KEY\":\"base64:gL\\/AanXMDo0GNDHhAKpX5xOp0RzBBvT3c0T4Iggz7CY=\",\"APP_DEBUG\":\"false\",\"APP_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/\",\"ASSET_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/public\\/\",\"LOG_CHANNEL\":\"stack\",\"LOG_DEPRECATIONS_CHANNEL\":\"null\",\"LOG_LEVEL\":\"debug\",\"DB_CONNECTION\":\"mysql\",\"DB_HOST\":\"127.0.0.1\",\"DB_PORT\":\"3306\",\"DB_DATABASE\":\"zaasmult_professonal\",\"DB_USERNAME\":\"zaasmult_professonal\",\"DB_PASSWORD\":\"SZOPbr&@J;Y9\",\"BROADCAST_DRIVER\":\"log\",\"CACHE_DRIVER\":\"file\",\"FILESYSTEM_DISK\":\"local\",\"QUEUE_CONNECTION\":\"sync\",\"SESSION_DRIVER\":\"file\",\"SESSION_LIFETIME\":\"120\",\"MEMCACHED_HOST\":\"127.0.0.1\",\"REDIS_HOST\":\"127.0.0.1\",\"REDIS_PASSWORD\":\"null\",\"REDIS_PORT\":\"6379\",\"MAIL_MAILER\":\"smtp\",\"MAIL_HOST\":\"mailpit\",\"MAIL_PORT\":\"1025\",\"MAIL_USERNAME\":\"null\",\"MAIL_PASSWORD\":\"null\",\"MAIL_ENCRYPTION\":\"null\",\"MAIL_FROM_ADDRESS\":\"hello@example.com\",\"MAIL_FROM_NAME\":\"Laravel\",\"AWS_ACCESS_KEY_ID\":\"\",\"AWS_SECRET_ACCESS_KEY\":\"\",\"AWS_DEFAULT_REGION\":\"us-east-1\",\"AWS_BUCKET\":\"\",\"AWS_USE_PATH_STYLE_ENDPOINT\":\"false\",\"PUSHER_APP_ID\":\"\",\"PUSHER_APP_KEY\":\"\",\"PUSHER_APP_SECRET\":\"\",\"PUSHER_HOST\":\"\",\"PUSHER_PORT\":\"443\",\"PUSHER_SCHEME\":\"https\",\"PUSHER_APP_CLUSTER\":\"mt1\",\"VITE_APP_NAME\":\"Laravel\",\"VITE_PUSHER_APP_KEY\":\"\",\"VITE_PUSHER_HOST\":\"\",\"VITE_PUSHER_PORT\":\"443\",\"VITE_PUSHER_SCHEME\":\"https\",\"VITE_PUSHER_APP_CLUSTER\":\"mt1\",\"GOOGLE_CLIENT_ID\":\"7734250976-obt32uahupkmtaep4rr7gq0q8p0qibh7.apps.googleusercontent.com\",\"GOOGLE_CLIENT_SECRET\":\"xxxxxx-sl9vkVFFmovXgAOp2ZSektxxxxxx\",\"GOOGLE_REDIRECT_URL\":\"http:\\/\\/192.168.0.50\\/pos\\/google\\/callback\"}', 1, 1, NULL, NULL, 1738235442, NULL, '', '2025-01-29 23:57:30', '2025-01-30 05:10:42'),
+(5, 'Windows \"Not A(Brand\"', '103.198.133.214', 0, NULL, '{\"PATH\":\"\\/usr\\/local\\/bin:\\/bin:\\/usr\\/bin\",\"HTTP_ACCEPT\":\"text\\/event-stream\",\"HTTP_ACCEPT_ENCODING\":\"gzip, deflate, br, zstd\",\"HTTP_ACCEPT_LANGUAGE\":\"en-US,en;q=0.9\",\"HTTP_COOKIE\":\"XSRF-TOKEN=eyJpdiI6IitNZ2gvaGNOejZObmpsQ0QwazFOSmc9PSIsInZhbHVlIjoieHlDWHhpejNCSXlHRm1Yc3ZBRXhGOTVyTWRrNll2eU9ENXlTb1lSRFdKQjVrVmQ5NzFLd1NnK1h4QkZZeFJ5bXl2QStDVWtua01jcW56VHY0MHpUMGd1SldtVHZWV20vZExOUGhPTkVSY1Z1ZE52QVlCbHVIU0s0NkpRQ3BEMTkiLCJtYWMiOiJkOTE1ZWFjNGJkMjQ4NTA5NzIzMDk4OTRjMzFjNTkzM2FmZmIwZWZiOGQzNmI4MDVlN2I2ZmNhNGIzNjhhNmFhIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6InBnMjVVOGJ5RVJ5amh3clJrOEp4TEE9PSIsInZhbHVlIjoiK0tlTE9nREpQM3ZjbVlWMHg4cUVqRUhkelV3dENIREpwcTRodWpaNmN0Zk11aTQwS2w3dDhwSUQxeDFTTXZpelVjaXBjdGJkdStTL1h4QVNJSkFadUpGL0ZsUTQ5RUptZkRFdWpZZGdET1FUb3pmY1pHS29ZczErWWw0R244SUgiLCJtYWMiOiI3NGFmMGNhYjcyMzcwZTg4NmIyZTQ3MmZiNTE1MDk3NmMyYTA0YTVjODZjYmZiZWRiOGIxYmQ3NjMxYTQ3NWUxIiwidGFnIjoiIn0%3D\",\"HTTP_HOST\":\"n.zaasmultifoodbeverage.com\",\"HTTP_REFERER\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/admin\",\"HTTP_USER_AGENT\":\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/132.0.0.0 Safari\\/537.36\",\"HTTP_CACHE_CONTROL\":\"no-cache\",\"HTTP_SEC_CH_UA_PLATFORM\":\"\\\"Windows\\\"\",\"HTTP_SEC_CH_UA\":\"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\",\"HTTP_SEC_CH_UA_MOBILE\":\"?0\",\"HTTP_SEC_FETCH_SITE\":\"same-origin\",\"HTTP_SEC_FETCH_MODE\":\"cors\",\"HTTP_SEC_FETCH_DEST\":\"empty\",\"HTTP_PRIORITY\":\"u=1, i\",\"DOCUMENT_ROOT\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\",\"REMOTE_ADDR\":\"103.198.133.214\",\"REMOTE_PORT\":\"64347\",\"SERVER_ADDR\":\"103.191.241.188\",\"SERVER_NAME\":\"n.zaasmultifoodbeverage.com\",\"SERVER_ADMIN\":\"webmaster@n.zaasmultifoodbeverage.com\",\"SERVER_PORT\":\"443\",\"REQUEST_SCHEME\":\"https\",\"REQUEST_URI\":\"\\/device_access_check\",\"REDIRECT_URL\":\"\\/device_access_check\",\"REDIRECT_REQUEST_METHOD\":\"GET\",\"HTTPS\":\"on\",\"REDIRECT_STATUS\":\"200\",\"X_SPDY\":\"HTTP2\",\"SSL_PROTOCOL\":\"TLSv1.3\",\"SSL_CIPHER\":\"TLS_AES_128_GCM_SHA256\",\"SSL_CIPHER_USEKEYSIZE\":\"128\",\"SSL_CIPHER_ALGKEYSIZE\":\"128\",\"SCRIPT_FILENAME\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\\/index.php\",\"QUERY_STRING\":\"\",\"SCRIPT_URI\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/device_access_check\",\"SCRIPT_URL\":\"\\/device_access_check\",\"SCRIPT_NAME\":\"\\/index.php\",\"SERVER_PROTOCOL\":\"HTTP\\/1.1\",\"SERVER_SOFTWARE\":\"LiteSpeed\",\"REQUEST_METHOD\":\"GET\",\"X-LSCACHE\":\"on\",\"PHP_SELF\":\"\\/index.php\",\"REQUEST_TIME_FLOAT\":1738223894.6606540679931640625,\"REQUEST_TIME\":1738223894,\"argv\":[],\"argc\":0,\"APP_NAME\":\"Laravel\",\"APP_ENV\":\"local\",\"APP_KEY\":\"base64:gL\\/AanXMDo0GNDHhAKpX5xOp0RzBBvT3c0T4Iggz7CY=\",\"APP_DEBUG\":\"false\",\"APP_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/\",\"ASSET_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/public\\/\",\"LOG_CHANNEL\":\"stack\",\"LOG_DEPRECATIONS_CHANNEL\":\"null\",\"LOG_LEVEL\":\"debug\",\"DB_CONNECTION\":\"mysql\",\"DB_HOST\":\"127.0.0.1\",\"DB_PORT\":\"3306\",\"DB_DATABASE\":\"zaasmult_professonal\",\"DB_USERNAME\":\"zaasmult_professonal\",\"DB_PASSWORD\":\"SZOPbr&@J;Y9\",\"BROADCAST_DRIVER\":\"log\",\"CACHE_DRIVER\":\"file\",\"FILESYSTEM_DISK\":\"local\",\"QUEUE_CONNECTION\":\"sync\",\"SESSION_DRIVER\":\"file\",\"SESSION_LIFETIME\":\"120\",\"MEMCACHED_HOST\":\"127.0.0.1\",\"REDIS_HOST\":\"127.0.0.1\",\"REDIS_PASSWORD\":\"null\",\"REDIS_PORT\":\"6379\",\"MAIL_MAILER\":\"smtp\",\"MAIL_HOST\":\"mailpit\",\"MAIL_PORT\":\"1025\",\"MAIL_USERNAME\":\"null\",\"MAIL_PASSWORD\":\"null\",\"MAIL_ENCRYPTION\":\"null\",\"MAIL_FROM_ADDRESS\":\"hello@example.com\",\"MAIL_FROM_NAME\":\"Laravel\",\"AWS_ACCESS_KEY_ID\":\"\",\"AWS_SECRET_ACCESS_KEY\":\"\",\"AWS_DEFAULT_REGION\":\"us-east-1\",\"AWS_BUCKET\":\"\",\"AWS_USE_PATH_STYLE_ENDPOINT\":\"false\",\"PUSHER_APP_ID\":\"\",\"PUSHER_APP_KEY\":\"\",\"PUSHER_APP_SECRET\":\"\",\"PUSHER_HOST\":\"\",\"PUSHER_PORT\":\"443\",\"PUSHER_SCHEME\":\"https\",\"PUSHER_APP_CLUSTER\":\"mt1\",\"VITE_APP_NAME\":\"Laravel\",\"VITE_PUSHER_APP_KEY\":\"\",\"VITE_PUSHER_HOST\":\"\",\"VITE_PUSHER_PORT\":\"443\",\"VITE_PUSHER_SCHEME\":\"https\",\"VITE_PUSHER_APP_CLUSTER\":\"mt1\",\"GOOGLE_CLIENT_ID\":\"7734250976-obt32uahupkmtaep4rr7gq0q8p0qibh7.apps.googleusercontent.com\",\"GOOGLE_CLIENT_SECRET\":\"xxxxxx-sl9vkVFFmovXgAOp2ZSektxxxxxx\",\"GOOGLE_REDIRECT_URL\":\"http:\\/\\/192.168.0.50\\/pos\\/google\\/callback\"}', 1, 1, NULL, NULL, 1738226591, NULL, '', '2025-01-30 01:58:14', '2025-01-30 02:43:11'),
+(6, 'Windows \"Not A(Brand\"', '103.198.133.214', 0, NULL, '{\"PATH\":\"\\/usr\\/local\\/bin:\\/bin:\\/usr\\/bin\",\"HTTP_ACCEPT\":\"text\\/event-stream\",\"HTTP_ACCEPT_ENCODING\":\"gzip, deflate, br, zstd\",\"HTTP_ACCEPT_LANGUAGE\":\"en-US,en;q=0.9,bn;q=0.8\",\"HTTP_COOKIE\":\"twk_uuid_670faba22480f5b4f58e3fa8=%7B%22uuid%22%3A%221.3Cf90wkK24xUpFQvnKfD3ijwIlHM0zVherOAv2RzgnfJKQ8EkVPtv0KTjov0cRibGLf84xk5FvS6lQSrd1uT41zcr5taTiZ2VpxYex4mmVmVmLKLwQ1CeURXpqaqbYC6rkihCie%22%2C%22version%22%3A3%2C%22domain%22%3A%22zaasmultifoodbeverage.com%22%2C%22ts%22%3A1737547339547%7D; XSRF-TOKEN=eyJpdiI6ImNTbStDVlVCVThGUlpPUGNpN3E0d2c9PSIsInZhbHVlIjoiUERSRWZ6WXNuU2ROZ0k3OWt2ck4vN0lyN3NnOTZpUWwvK2FhNzVlUmxvL1pUb3h5MXArRXhTSXdjM2ttWmZCUS9zS2dNWmNMYUdyY25wNVordVlCMFh1YUVxMnFMQkFtY3dBckNBUjQxRkI0ODIrWFJGSHU0VEhWemlQaGs5bVkiLCJtYWMiOiJiNTA2NzRhNzhjMGIxMjkxZDVlYzliMzZkYWI5OGUyYzEyNjgyYjU5NDIyYjhjOGVjMDgxNjhiY2NhOWI3M2IwIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IlprNUhxNStncWUybGI5WnVOUDBETVE9PSIsInZhbHVlIjoiWEVpekkzZXN1UmhXL1V2RGJUaEhLUklhTWVLNjdQbnBGREl0bFU3VlpwWDd2bjVjWnFHQWxWd2xPTldNRlIxQnJ0eHlEdmNEUHZqYUxoTlRIcEFKOG0rR2xsVGQ3YkhtdExGZXlwMldSeWdFWk5SZXBXcGMwUy9oZzdVQXZVSTgiLCJtYWMiOiJlNDFmYjc2ZTEwMWYzYzcxYzY2MzVlY2M4NTRjNGI4YzdhZjI5YzAzZTdmN2RhMjNkZmNhZmU0YzIzY2E1MmE2IiwidGFnIjoiIn0%3D\",\"HTTP_HOST\":\"n.zaasmultifoodbeverage.com\",\"HTTP_REFERER\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/admin\",\"HTTP_USER_AGENT\":\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/132.0.0.0 Safari\\/537.36\",\"HTTP_CACHE_CONTROL\":\"no-cache\",\"HTTP_SEC_CH_UA_PLATFORM\":\"\\\"Windows\\\"\",\"HTTP_SEC_CH_UA\":\"\\\"Not A(Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"132\\\", \\\"Google Chrome\\\";v=\\\"132\\\"\",\"HTTP_SEC_CH_UA_MOBILE\":\"?0\",\"HTTP_SEC_FETCH_SITE\":\"same-origin\",\"HTTP_SEC_FETCH_MODE\":\"cors\",\"HTTP_SEC_FETCH_DEST\":\"empty\",\"HTTP_PRIORITY\":\"u=1, i\",\"DOCUMENT_ROOT\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\",\"REMOTE_ADDR\":\"103.198.133.214\",\"REMOTE_PORT\":\"60897\",\"SERVER_ADDR\":\"103.191.241.188\",\"SERVER_NAME\":\"n.zaasmultifoodbeverage.com\",\"SERVER_ADMIN\":\"webmaster@n.zaasmultifoodbeverage.com\",\"SERVER_PORT\":\"443\",\"REQUEST_SCHEME\":\"https\",\"REQUEST_URI\":\"\\/device_access_check\",\"REDIRECT_URL\":\"\\/device_access_check\",\"REDIRECT_REQUEST_METHOD\":\"GET\",\"HTTPS\":\"on\",\"REDIRECT_STATUS\":\"200\",\"X_SPDY\":\"HTTP2\",\"SSL_PROTOCOL\":\"TLSv1.3\",\"SSL_CIPHER\":\"TLS_AES_128_GCM_SHA256\",\"SSL_CIPHER_USEKEYSIZE\":\"128\",\"SSL_CIPHER_ALGKEYSIZE\":\"128\",\"SCRIPT_FILENAME\":\"\\/home\\/zaasmult\\/n.zaasmultifoodbeverage.com\\/index.php\",\"QUERY_STRING\":\"\",\"SCRIPT_URI\":\"https:\\/\\/n.zaasmultifoodbeverage.com\\/device_access_check\",\"SCRIPT_URL\":\"\\/device_access_check\",\"SCRIPT_NAME\":\"\\/index.php\",\"SERVER_PROTOCOL\":\"HTTP\\/1.1\",\"SERVER_SOFTWARE\":\"LiteSpeed\",\"REQUEST_METHOD\":\"GET\",\"X-LSCACHE\":\"on\",\"PHP_SELF\":\"\\/index.php\",\"REQUEST_TIME_FLOAT\":1738231341.260921001434326171875,\"REQUEST_TIME\":1738231341,\"argv\":[],\"argc\":0,\"APP_NAME\":\"Laravel\",\"APP_ENV\":\"local\",\"APP_KEY\":\"base64:gL\\/AanXMDo0GNDHhAKpX5xOp0RzBBvT3c0T4Iggz7CY=\",\"APP_DEBUG\":\"false\",\"APP_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/\",\"ASSET_URL\":\"\\/\\/n.zaasmultifoodbeverage.com\\/public\\/\",\"LOG_CHANNEL\":\"stack\",\"LOG_DEPRECATIONS_CHANNEL\":\"null\",\"LOG_LEVEL\":\"debug\",\"DB_CONNECTION\":\"mysql\",\"DB_HOST\":\"127.0.0.1\",\"DB_PORT\":\"3306\",\"DB_DATABASE\":\"zaasmult_professonal\",\"DB_USERNAME\":\"zaasmult_professonal\",\"DB_PASSWORD\":\"SZOPbr&@J;Y9\",\"BROADCAST_DRIVER\":\"log\",\"CACHE_DRIVER\":\"file\",\"FILESYSTEM_DISK\":\"local\",\"QUEUE_CONNECTION\":\"sync\",\"SESSION_DRIVER\":\"file\",\"SESSION_LIFETIME\":\"120\",\"MEMCACHED_HOST\":\"127.0.0.1\",\"REDIS_HOST\":\"127.0.0.1\",\"REDIS_PASSWORD\":\"null\",\"REDIS_PORT\":\"6379\",\"MAIL_MAILER\":\"smtp\",\"MAIL_HOST\":\"mailpit\",\"MAIL_PORT\":\"1025\",\"MAIL_USERNAME\":\"null\",\"MAIL_PASSWORD\":\"null\",\"MAIL_ENCRYPTION\":\"null\",\"MAIL_FROM_ADDRESS\":\"hello@example.com\",\"MAIL_FROM_NAME\":\"Laravel\",\"AWS_ACCESS_KEY_ID\":\"\",\"AWS_SECRET_ACCESS_KEY\":\"\",\"AWS_DEFAULT_REGION\":\"us-east-1\",\"AWS_BUCKET\":\"\",\"AWS_USE_PATH_STYLE_ENDPOINT\":\"false\",\"PUSHER_APP_ID\":\"\",\"PUSHER_APP_KEY\":\"\",\"PUSHER_APP_SECRET\":\"\",\"PUSHER_HOST\":\"\",\"PUSHER_PORT\":\"443\",\"PUSHER_SCHEME\":\"https\",\"PUSHER_APP_CLUSTER\":\"mt1\",\"VITE_APP_NAME\":\"Laravel\",\"VITE_PUSHER_APP_KEY\":\"\",\"VITE_PUSHER_HOST\":\"\",\"VITE_PUSHER_PORT\":\"443\",\"VITE_PUSHER_SCHEME\":\"https\",\"VITE_PUSHER_APP_CLUSTER\":\"mt1\",\"GOOGLE_CLIENT_ID\":\"7734250976-obt32uahupkmtaep4rr7gq0q8p0qibh7.apps.googleusercontent.com\",\"GOOGLE_CLIENT_SECRET\":\"xxxxxx-sl9vkVFFmovXgAOp2ZSektxxxxxx\",\"GOOGLE_REDIRECT_URL\":\"http:\\/\\/192.168.0.50\\/pos\\/google\\/callback\"}', 1, 1, NULL, NULL, 1738236258, NULL, '', '2025-01-30 04:02:21', '2025-01-30 05:24:18');
 
 -- --------------------------------------------------------
 
@@ -448,18 +416,16 @@ INSERT INTO `devices` (`id`, `device_type`, `ip`, `logout`, `suspend_date`, `dat
 -- Table structure for table `discounts`
 --
 
-DROP TABLE IF EXISTS `discounts`;
-CREATE TABLE IF NOT EXISTS `discounts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `amount` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `discounts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `type` varchar(125) NOT NULL DEFAULT '0',
+  `amount` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `discounts`
@@ -474,18 +440,16 @@ INSERT INTO `discounts` (`id`, `name`, `type`, `amount`, `creator`, `updater_id`
 -- Table structure for table `expenses`
 --
 
-DROP TABLE IF EXISTS `expenses`;
-CREATE TABLE IF NOT EXISTS `expenses` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `year` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `month` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `amount` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `expenses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `description` varchar(125) DEFAULT NULL,
+  `year` varchar(125) NOT NULL DEFAULT '0',
+  `month` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `amount` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -494,16 +458,14 @@ CREATE TABLE IF NOT EXISTS `expenses` (
 -- Table structure for table `expriences`
 --
 
-DROP TABLE IF EXISTS `expriences`;
-CREATE TABLE IF NOT EXISTS `expriences` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `company` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `designation` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `joining_date` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `exit_date` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `expriences` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `company` varchar(125) DEFAULT NULL,
+  `designation` varchar(125) DEFAULT NULL,
+  `joining_date` varchar(125) DEFAULT NULL,
+  `exit_date` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -512,17 +474,14 @@ CREATE TABLE IF NOT EXISTS `expriences` (
 -- Table structure for table `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
-CREATE TABLE IF NOT EXISTS `failed_jobs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(125) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -531,16 +490,14 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Table structure for table `faqs`
 --
 
-DROP TABLE IF EXISTS `faqs`;
-CREATE TABLE IF NOT EXISTS `faqs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `answer` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `faqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `answer` varchar(125) DEFAULT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `faqs`
@@ -566,18 +523,16 @@ INSERT INTO `faqs` (`id`, `title`, `answer`, `status`, `created_at`, `updated_at
 -- Table structure for table `fcms`
 --
 
-DROP TABLE IF EXISTS `fcms`;
-CREATE TABLE IF NOT EXISTS `fcms` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `fcm_private_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fcm_public_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fcm_status_key` tinyint(1) NOT NULL DEFAULT '0',
-  `creator` bigint DEFAULT NULL,
-  `updater_id` bigint DEFAULT NULL,
+CREATE TABLE `fcms` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `fcm_private_key` varchar(125) DEFAULT NULL,
+  `fcm_public_key` varchar(125) DEFAULT NULL,
+  `fcm_status_key` tinyint(1) NOT NULL DEFAULT 0,
+  `creator` bigint(20) DEFAULT NULL,
+  `updater_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `fcms`
@@ -592,20 +547,18 @@ INSERT INTO `fcms` (`id`, `fcm_private_key`, `fcm_public_key`, `fcm_status_key`,
 -- Table structure for table `features`
 --
 
-DROP TABLE IF EXISTS `features`;
-CREATE TABLE IF NOT EXISTS `features` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `icon_class` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `upload_id` bigint NOT NULL DEFAULT '0',
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `features` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `icon_class` varchar(125) DEFAULT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `upload_id` bigint(20) NOT NULL DEFAULT 0,
+  `slug` varchar(125) DEFAULT NULL,
+  `status` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `features`
@@ -624,17 +577,15 @@ INSERT INTO `features` (`id`, `icon_class`, `title`, `short_description`, `descr
 -- Table structure for table `footer_link_headings`
 --
 
-DROP TABLE IF EXISTS `footer_link_headings`;
-CREATE TABLE IF NOT EXISTS `footer_link_headings` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `footer_link_headings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(125) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `updater` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `footer_link_headings`
@@ -652,20 +603,18 @@ INSERT INTO `footer_link_headings` (`id`, `title`, `status`, `updater`, `creator
 -- Table structure for table `footer_link_sub_headings`
 --
 
-DROP TABLE IF EXISTS `footer_link_sub_headings`;
-CREATE TABLE IF NOT EXISTS `footer_link_sub_headings` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `heading_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `icon` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `footer_link_sub_headings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `heading_id` varchar(125) NOT NULL DEFAULT '1',
+  `title` varchar(125) DEFAULT NULL,
+  `url` varchar(125) DEFAULT NULL,
+  `icon` varchar(125) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `updater` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `footer_link_sub_headings`
@@ -695,31 +644,30 @@ INSERT INTO `footer_link_sub_headings` (`id`, `heading_id`, `title`, `url`, `ico
 -- Table structure for table `headers`
 --
 
-DROP TABLE IF EXISTS `headers`;
-CREATE TABLE IF NOT EXISTS `headers` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `position` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT ' left ,  center,  right',
-  `order` int NOT NULL DEFAULT '0',
-  `key_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `preset` tinyint(1) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+CREATE TABLE `headers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL DEFAULT '',
+  `slug` varchar(125) NOT NULL DEFAULT '',
+  `position` varchar(125) NOT NULL COMMENT ' left ,  center,  right',
+  `order` int(11) NOT NULL DEFAULT 0,
+  `key_name` varchar(125) DEFAULT NULL,
+  `preset` tinyint(1) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `headers`
 --
 
 INSERT INTO `headers` (`id`, `name`, `slug`, `position`, `order`, `key_name`, `preset`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Agriculture & Machine', 'filter?category=agriculture-machine', 'center', 0, 'Agriculture & Machine', 0, 1, '2025-01-28 02:59:09', '2025-01-28 02:59:17'),
-(2, 'Gradining Tools', 'filter?category=gradining-tools', 'center', 0, 'Gradining Tools', 0, 1, '2025-01-28 02:59:10', '2025-01-28 02:59:16'),
-(3, 'Home Appliances', 'filter?category=home-appliances', 'center', 0, 'Home Appliances', 0, 1, '2025-01-28 02:59:10', '2025-01-28 02:59:16'),
-(4, 'Cookeries', 'filter?category=cookeries', 'center', 0, 'Cookeries', 0, 1, '2025-01-28 02:59:11', '2025-01-28 02:59:15'),
-(5, 'Fashion House', 'filter?category=fashion-house', 'center', 0, 'Fashion House', 0, 1, '2025-01-28 02:59:11', '2025-01-28 02:59:14');
+(1, 'Agriculture & Machine', 'filter?category=agriculture-machine', 'center', 1, 'Agriculture & Machine', 0, 1, '2025-01-28 02:59:09', '2025-01-30 03:38:41'),
+(2, 'Gradining Tools', 'filter?category=gradining-tools', 'center', 2, 'Gradining Tools', 0, 1, '2025-01-28 02:59:10', '2025-01-30 03:38:41'),
+(3, 'Home Appliances', 'filter?category=home-appliances', 'center', 3, 'Home Appliances', 0, 1, '2025-01-28 02:59:10', '2025-01-30 03:38:41'),
+(4, 'Cookeries', 'filter?category=cookeries', 'center', 4, 'Cookeries', 0, 1, '2025-01-28 02:59:11', '2025-01-30 03:38:41'),
+(5, 'Fashion House', 'filter?category=fashion-house', 'center', 5, 'Fashion House', 0, 1, '2025-01-28 02:59:11', '2025-01-30 03:38:41'),
+(6, 'Home', '/', 'center', 0, 'Home', 0, 1, '2025-01-30 03:38:38', '2025-01-30 03:38:56');
 
 -- --------------------------------------------------------
 
@@ -727,49 +675,47 @@ INSERT INTO `headers` (`id`, `name`, `slug`, `position`, `order`, `key_name`, `p
 -- Table structure for table `home_page_manages`
 --
 
-DROP TABLE IF EXISTS `home_page_manages`;
-CREATE TABLE IF NOT EXISTS `home_page_manages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `sub_title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_title_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `short_read_more` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Read More',
-  `short_read_more_status` tinyint(1) NOT NULL DEFAULT '1',
-  `short_read_more_page_url` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `view_all` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'See All',
-  `view_all_status` tinyint(1) NOT NULL DEFAULT '1',
-  `view_all_page_url` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `items_per_row` int NOT NULL DEFAULT '3',
-  `items_show` int NOT NULL DEFAULT '4',
-  `is_details_page` int NOT NULL DEFAULT '0',
-  `background` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `background_color` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#eeeeee',
-  `background_type` tinyint(1) NOT NULL DEFAULT '1',
-  `controlby` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '1 => Homepage',
-  `order` int NOT NULL DEFAULT '1',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `home_page_manages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(125) NOT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `title_status` varchar(125) NOT NULL DEFAULT '1',
+  `sub_title` varchar(125) DEFAULT NULL,
+  `sub_title_status` varchar(125) NOT NULL DEFAULT '1',
+  `short_read_more` varchar(125) NOT NULL DEFAULT 'Read More',
+  `short_read_more_status` tinyint(1) NOT NULL DEFAULT 1,
+  `short_read_more_page_url` varchar(125) DEFAULT NULL,
+  `view_all` varchar(125) NOT NULL DEFAULT 'See All',
+  `view_all_status` tinyint(1) NOT NULL DEFAULT 1,
+  `view_all_page_url` varchar(125) DEFAULT NULL,
+  `items_per_row` int(11) NOT NULL DEFAULT 3,
+  `items_show` int(11) NOT NULL DEFAULT 4,
+  `is_details_page` int(11) NOT NULL DEFAULT 0,
+  `background` varchar(125) NOT NULL DEFAULT '0',
+  `background_color` varchar(125) NOT NULL DEFAULT '#eeeeee',
+  `background_type` tinyint(1) NOT NULL DEFAULT 1,
+  `controlby` varchar(125) NOT NULL DEFAULT '1' COMMENT '1 => Homepage',
+  `order` int(11) NOT NULL DEFAULT 1,
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `upload_id1` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id2` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id3` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `upload_id1` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id2` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id3` varchar(125) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `home_page_manages`
 --
 
 INSERT INTO `home_page_manages` (`id`, `key`, `title`, `title_status`, `sub_title`, `sub_title_status`, `short_read_more`, `short_read_more_status`, `short_read_more_page_url`, `view_all`, `view_all_status`, `view_all_page_url`, `items_per_row`, `items_show`, `is_details_page`, `background`, `background_color`, `background_type`, `controlby`, `order`, `status`, `creator`, `updater`, `deleted_at`, `created_at`, `updated_at`, `upload_id1`, `upload_id2`, `upload_id3`) VALUES
-(1, '_hero_variant._hero_slider1', 'Hero Slider', '0', 'Hero Slider', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 10, 0, '1', '#eeeeee', 0, '1', 1, '1', '0', '0', NULL, '2025-01-28 02:54:55', '2025-01-29 02:48:01', '0', '0', '0'),
+(1, '_hero_variant._hero_slider1', 'Hero Slider', '0', 'Hero Slider', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 10, 0, '1', '#74c3b6', 0, '1', 1, '1', '0', '0', NULL, '2025-01-28 02:54:55', '2025-01-30 02:08:58', '0', '0', '0'),
 (41, '_contact_variant._contact_style1', 'Contact Style 1', '0', 'Contact Sub Title', '0', 'Read More', 0, '#', 'View All', 0, '#', 3, 4, 0, '0', '#ededed', 0, '16', 2, '1', '0', '0', NULL, '2025-01-29 00:58:50', '2025-01-29 02:55:12', '0', '0', '0'),
 (39, '_product_variant._category_wise_product', 'Category Wise Product', '0', 'Category Wise Product', '0', '#', 0, '#', 'View All', 0, '#', 6, 40, 1, '0', '#eeeeee', 0, '23', 1, '1', '0', '0', NULL, '2025-01-28 06:16:36', '2025-01-29 03:33:34', '0', '0', '0'),
-(38, '_product_variant._category_wise_product', 'Category Wise Product', '0', 'Category Wise Product', '0', '#', 1, '#', 'View All', 0, '#', 6, 16, 0, '0', '#eeeeee', 0, '1', 3, '1', '0', '0', NULL, '2025-01-28 06:11:22', '2025-01-29 03:31:54', '0', '0', '0'),
+(38, '_product_variant._category_wise_product', 'Category Wise Product', '0', 'Category Wise Product', '0', '#', 1, '#', 'View All', 0, '#', 6, 16, 0, '0', '#8cc36f', 0, '1', 3, '1', '0', '0', NULL, '2025-01-28 06:11:22', '2025-01-30 02:26:55', '0', '0', '0'),
 (56, '_variant_manage.page_title1', 'About Us', '1', 'Page Title subtitle 2', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '1', '#ffffff', 0, '2', 1, '1', '0', '0', NULL, '2025-01-29 03:06:39', '2025-01-29 03:07:14', '0', '0', '0'),
 (55, '_contact_variant._contact_style1', 'Contact Style 1', '0', 'Contact Sub Title', '0', 'Read More', 0, '#', 'View All', 0, '#', 3, 4, 0, '0', '#eeeeee', 0, '2', 1, '1', '0', '0', NULL, '2025-01-29 03:05:54', '2025-01-29 03:06:09', '0', '0', '0'),
 (12, '_filter_variant.filter_vaiant1', 'Product Filter  1', '1', 'Product Filter Title', '1', 'Read More', 1, '#', 'View All', 0, '#', 0, 20, 0, '0', '#eeeeee', 1, '3', 1, '1', '0', '0', NULL, '2025-01-28 02:54:55', '2025-01-29 04:43:07', '0', '0', '0'),
@@ -798,7 +744,8 @@ INSERT INTO `home_page_manages` (`id`, `key`, `title`, `title_status`, `sub_titl
 (35, '_variant_manage.page_title', 'Page Title style  1', '1', 'Blog details Title', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '1', '#eeeeee', 0, '22', 1, '1', '0', '0', NULL, '2025-01-28 02:54:55', '2025-01-28 02:54:55', '0', '0', '0'),
 (36, '_profile._payment_information.variant_1', 'Payment Page 1', '0', 'Payment Page 1', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '1', '#eeeeee', 0, '22', 1, '1', '0', '0', NULL, '2025-01-28 02:54:55', '2025-01-28 02:54:55', '0', '0', '0'),
 (51, '_category_variant._category_style3', 'Category Style 3', '0', 'Category Sub Title', '0', 'Read More', 1, '#', 'View All', 0, '#', 12, 20, 0, '0', '#ffffff', 0, '1', 2, '1', '0', '0', NULL, '2025-01-29 02:46:06', '2025-01-29 04:50:14', '0', '0', '0'),
-(47, '_variant_manage.page_title1', 'Contact Us', '1', 'Page Title subtitle 2', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '1', '#ffffff', 0, '16', 1, '1', '0', '0', NULL, '2025-01-29 01:44:52', '2025-01-29 02:54:36', '0', '0', '0');
+(47, '_variant_manage.page_title1', 'Contact Us', '1', 'Page Title subtitle 2', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '1', '#ffffff', 0, '16', 1, '1', '0', '0', NULL, '2025-01-29 01:44:52', '2025-01-29 02:54:36', '0', '0', '0'),
+(57, '_wishlist_variant.wish_list_style1', 'Product wishlist  1', '0', 'Product wishlist Title', '0', 'Read More', 1, '#', 'View All', 0, '#', 0, 4, 0, '0', '#eeeeee', 1, '11', 1, '1', '0', '0', NULL, '2025-01-29 23:58:02', '2025-01-29 23:58:02', '0', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -806,17 +753,15 @@ INSERT INTO `home_page_manages` (`id`, `key`, `title`, `title_status`, `sub_titl
 -- Table structure for table `languages`
 --
 
-DROP TABLE IF EXISTS `languages`;
-CREATE TABLE IF NOT EXISTS `languages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `updater_id` bigint DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `languages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `updater_id` bigint(20) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `languages`
@@ -824,13 +769,7 @@ CREATE TABLE IF NOT EXISTS `languages` (
 
 INSERT INTO `languages` (`id`, `name`, `status`, `updater_id`, `creator`, `created_at`, `updated_at`) VALUES
 (1, 'en', 1, 1, 1, '2025-01-28 02:54:54', '2025-01-28 02:54:54'),
-(2, 'bn', 1, 1, 1, '2025-01-28 02:54:54', '2025-01-28 02:54:54'),
-(3, 'en', 1, 1, 1, '2025-01-28 06:09:24', '2025-01-28 06:09:24'),
-(4, 'bn', 1, 1, 1, '2025-01-28 06:09:24', '2025-01-28 06:09:24'),
-(5, 'en', 1, 1, 1, '2025-01-29 01:42:40', '2025-01-29 01:42:40'),
-(6, 'bn', 1, 1, 1, '2025-01-29 01:42:40', '2025-01-29 01:42:40'),
-(7, 'en', 1, 1, 1, '2025-01-29 01:52:00', '2025-01-29 01:52:00'),
-(8, 'bn', 1, 1, 1, '2025-01-29 01:52:00', '2025-01-29 01:52:00');
+(2, 'bn', 1, 1, 1, '2025-01-28 02:54:54', '2025-01-28 02:54:54');
 
 -- --------------------------------------------------------
 
@@ -838,18 +777,16 @@ INSERT INTO `languages` (`id`, `name`, `status`, `updater_id`, `creator`, `creat
 -- Table structure for table `leads`
 --
 
-DROP TABLE IF EXISTS `leads`;
-CREATE TABLE IF NOT EXISTS `leads` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `from_lead_id` bigint NOT NULL,
+CREATE TABLE `leads` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `from_lead_id` bigint(20) NOT NULL,
   `date` date NOT NULL,
-  `contact_id` bigint NOT NULL DEFAULT '0',
-  `creator` bigint NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+  `contact_id` bigint(20) NOT NULL DEFAULT 0,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `leads`
@@ -865,20 +802,18 @@ INSERT INTO `leads` (`id`, `from_lead_id`, `date`, `contact_id`, `creator`, `upd
 -- Table structure for table `lead_accounts`
 --
 
-DROP TABLE IF EXISTS `lead_accounts`;
-CREATE TABLE IF NOT EXISTS `lead_accounts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `lead_accounts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `website` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `address` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lead_accounts`
@@ -894,20 +829,18 @@ INSERT INTO `lead_accounts` (`id`, `name`, `phone`, `website`, `email`, `address
 -- Table structure for table `lead_contacts`
 --
 
-DROP TABLE IF EXISTS `lead_contacts`;
-CREATE TABLE IF NOT EXISTS `lead_contacts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `lead_contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `address` varchar(125) DEFAULT NULL,
+  `account_id` varchar(125) NOT NULL,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lead_contacts`
@@ -923,21 +856,19 @@ INSERT INTO `lead_contacts` (`id`, `name`, `phone`, `email`, `address`, `account
 -- Table structure for table `lead_deals`
 --
 
-DROP TABLE IF EXISTS `lead_deals`;
-CREATE TABLE IF NOT EXISTS `lead_deals` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `note` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note_replay` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` int DEFAULT NULL,
+CREATE TABLE `lead_deals` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `note` varchar(125) DEFAULT NULL,
+  `note_replay` varchar(125) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
-  `stage_id` int NOT NULL DEFAULT '0',
-  `lead_id` bigint NOT NULL DEFAULT '0',
-  `creator` bigint NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+  `stage_id` int(11) NOT NULL DEFAULT 0,
+  `lead_id` bigint(20) NOT NULL DEFAULT 0,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lead_deals`
@@ -953,16 +884,14 @@ INSERT INTO `lead_deals` (`id`, `note`, `note_replay`, `amount`, `date`, `stage_
 -- Table structure for table `lead_deal_stages`
 --
 
-DROP TABLE IF EXISTS `lead_deal_stages`;
-CREATE TABLE IF NOT EXISTS `lead_deal_stages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator` bigint NOT NULL,
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `lead_deal_stages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lead_deal_stages`
@@ -992,16 +921,14 @@ INSERT INTO `lead_deal_stages` (`id`, `name`, `creator`, `updater_id`, `created_
 -- Table structure for table `lead_sources`
 --
 
-DROP TABLE IF EXISTS `lead_sources`;
-CREATE TABLE IF NOT EXISTS `lead_sources` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `lead_sources` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lead_sources`
@@ -1043,21 +970,19 @@ INSERT INTO `lead_sources` (`id`, `name`, `creator`, `updater_id`, `created_at`,
 -- Table structure for table `mail_settings`
 --
 
-DROP TABLE IF EXISTS `mail_settings`;
-CREATE TABLE IF NOT EXISTS `mail_settings` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `from_address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `from_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_encryption` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_host` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_password` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_port` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_username` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `mail_settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `from_address` varchar(125) DEFAULT NULL,
+  `from_name` varchar(125) DEFAULT NULL,
+  `smtp_encryption` varchar(125) DEFAULT NULL,
+  `smtp_host` varchar(125) DEFAULT NULL,
+  `smtp_password` varchar(125) DEFAULT NULL,
+  `smtp_port` varchar(125) DEFAULT NULL,
+  `smtp_username` varchar(125) DEFAULT NULL,
+  `status` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `mail_settings`
@@ -1075,19 +1000,17 @@ INSERT INTO `mail_settings` (`id`, `from_address`, `from_name`, `smtp_encryption
 -- Table structure for table `mail_templates`
 --
 
-DROP TABLE IF EXISTS `mail_templates`;
-CREATE TABLE IF NOT EXISTS `mail_templates` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keywords` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `template` longtext COLLATE utf8mb4_unicode_ci,
-  `creator` bigint NOT NULL DEFAULT '0',
-  `updater_id` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `mail_templates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `keywords` varchar(125) NOT NULL,
+  `template` longtext DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `updater_id` bigint(20) NOT NULL DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `mail_templates`
@@ -1105,17 +1028,15 @@ INSERT INTO `mail_templates` (`id`, `name`, `keywords`, `template`, `creator`, `
 -- Table structure for table `messages`
 --
 
-DROP TABLE IF EXISTS `messages`;
-CREATE TABLE IF NOT EXISTS `messages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `message_type` int NOT NULL DEFAULT '0' COMMENT '1 text, 2 voice, 3 image, 4 video',
-  `thread_id` int UNSIGNED NOT NULL,
-  `user_id` int UNSIGNED NOT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `messages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `message_type` int(11) NOT NULL DEFAULT 0 COMMENT '1 text, 2 voice, 3 image, 4 video',
+  `thread_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `body` text NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1124,13 +1045,11 @@ CREATE TABLE IF NOT EXISTS `messages` (
 -- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `migration` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(125) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -1223,13 +1142,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `model_has_permissions`
 --
 
-DROP TABLE IF EXISTS `model_has_permissions`;
-CREATE TABLE IF NOT EXISTS `model_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`)
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(125) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1238,13 +1154,10 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
 -- Table structure for table `model_has_roles`
 --
 
-DROP TABLE IF EXISTS `model_has_roles`;
-CREATE TABLE IF NOT EXISTS `model_has_roles` (
-  `role_id` bigint UNSIGNED NOT NULL,
-  `model_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`)
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(125) NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1260,22 +1173,20 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 -- Table structure for table `offer_banners`
 --
 
-DROP TABLE IF EXISTS `offer_banners`;
-CREATE TABLE IF NOT EXISTS `offer_banners` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `subtitle` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image1` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `image2` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `image3` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `link` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#',
+CREATE TABLE `offer_banners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `subtitle` varchar(125) DEFAULT NULL,
+  `image1` varchar(125) NOT NULL DEFAULT '0',
+  `image2` varchar(125) NOT NULL DEFAULT '0',
+  `image3` varchar(125) NOT NULL DEFAULT '0',
+  `status` varchar(125) NOT NULL DEFAULT '0',
+  `link` varchar(125) NOT NULL DEFAULT '#',
   `offer_end_data` timestamp NULL DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0' COMMENT '1 => feature card 2 => full banner 3 => countdown',
+  `type` varchar(125) NOT NULL DEFAULT '0' COMMENT '1 => feature card 2 => full banner 3 => countdown',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `offer_banners`
@@ -1295,30 +1206,35 @@ INSERT INTO `offer_banners` (`id`, `title`, `subtitle`, `image1`, `image2`, `ima
 -- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `customer_id` bigint NOT NULL DEFAULT '0',
-  `order_id` bigint NOT NULL DEFAULT '0',
-  `product_ids` text COLLATE utf8mb4_unicode_ci,
-  `product_json` longtext COLLATE utf8mb4_unicode_ci,
-  `delivery_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `quantity` int NOT NULL DEFAULT '0',
-  `quantitys` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `discount_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `price` int NOT NULL DEFAULT '0',
-  `vat` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `note` text COLLATE utf8mb4_unicode_ci,
-  `shipping_charge_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `address` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `billing_address` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `cash_collection` int NOT NULL DEFAULT '0',
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` bigint(20) NOT NULL DEFAULT 0,
+  `order_id` bigint(20) NOT NULL DEFAULT 0,
+  `product_ids` text DEFAULT NULL,
+  `product_json` longtext DEFAULT NULL,
+  `delivery_status` varchar(125) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT 0,
+  `quantitys` varchar(125) NOT NULL DEFAULT '0',
+  `discount_id` varchar(125) NOT NULL DEFAULT '0',
+  `price` int(11) NOT NULL DEFAULT 0,
+  `vat` varchar(125) NOT NULL DEFAULT '0',
+  `status` varchar(125) NOT NULL DEFAULT '0',
+  `note` text DEFAULT NULL,
+  `shipping_charge_id` varchar(125) NOT NULL DEFAULT '0',
+  `address` varchar(125) NOT NULL DEFAULT '0',
+  `billing_address` varchar(125) NOT NULL DEFAULT '0',
+  `cash_collection` int(11) NOT NULL DEFAULT 0,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `order_id`, `product_ids`, `product_json`, `delivery_status`, `quantity`, `quantitys`, `discount_id`, `price`, `vat`, `status`, `note`, `shipping_charge_id`, `address`, `billing_address`, `cash_collection`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 3, 1738331596, '[{\"pd_10\":{\"product_id\":\"10\",\"quantaty\":1,\"size\":0}}]', '{\"subtotal\":{\"pre_price\":627,\"quantity\":1,\"discount\":62.7000000000000028421709430404007434844970703125,\"vat\":0,\"price\":564.299999999999954525264911353588104248046875,\"coupon\":0,\"coupon_without_price\":564.299999999999954525264911353588104248046875,\"quantitys\":{\"10\":1},\"product_ids\":[{\"pd_10\":{\"product_id\":\"10\",\"quantaty\":1,\"size\":0}}]},\"product\":[{\"size\":0,\"quantity\":1,\"session_id\":\"pd_10\",\"product\":{\"id\":10,\"name\":\"Hitter\",\"product_id\":\"p-7\",\"sku\":null,\"slug\":\"hitter\",\"category\":\"9\",\"brand\":\"0\",\"weight\":\"200\",\"description\":\"<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio<\\/p>\",\"additional_description\":\"<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio<\\/p>\",\"unit\":\"1\",\"for_selling\":\"1\",\"garage\":\"2\",\"route\":\"\",\"feature\":\"1\",\"alert_quantity\":\"10\",\"discount_id\":\"1\",\"creator\":\"1\",\"upload_id\":\"20\",\"uploads_id\":\"0\",\"sub_category\":\"0\",\"short_description\":\"Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio\",\"youtube_video\":\"Facere quisquam nisi\",\"tags\":null,\"views\":0,\"old_price\":718,\"selling_price\":627,\"vat\":\"0\",\"service\":1,\"variant_on\":\"0\",\"variant_option\":\"{\\\"variant_key\\\":null,\\\"vairant_value\\\":null}\",\"status\":\"1\",\"landing_page_bg\":\"#dee7ca\",\"landing_page_color\":\"#43cafa\",\"landing_page_deasing_id\":null,\"deleted_at\":null,\"created_at\":\"2025-01-29T07:23:45.000000Z\",\"updated_at\":\"2025-01-29T07:23:45.000000Z\",\"image_url\":\"\\/\\/n.zaasmultifoodbeverage.com\\/public\\/uploads\\/biggest-ceramic-city-300x300_1738135415869_vghizr.png\",\"avg_rat\":0,\"rat_count\":0,\"status_text\":\"Active\"},\"product_variant\":null,\"vat\":null,\"price\":627,\"discount_price\":62.7000000000000028421709430404007434844970703125,\"price_discount\":564.299999999999954525264911353588104248046875,\"vat_price\":0,\"cal_total_with_vat\":564.299999999999954525264911353588104248046875,\"single_subtotal\":564.299999999999954525264911353588104248046875}]}', '0', 1, '{\"10\":1}', '62.7', 564, '0', '1', '', '1', '1', '1', 564, NULL, '2025-01-31 07:53:16', '2025-01-31 07:53:16');
 
 -- --------------------------------------------------------
 
@@ -1326,19 +1242,24 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Table structure for table `order_events`
 --
 
-DROP TABLE IF EXISTS `order_events`;
-CREATE TABLE IF NOT EXISTS `order_events` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order_id` bigint NOT NULL,
-  `status_id` bigint NOT NULL,
-  `creator` bigint NOT NULL,
-  `updater` bigint NOT NULL,
-  `upload_id` bigint NOT NULL DEFAULT '0',
-  `note` text COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `order_events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `status_id` bigint(20) NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `updater` bigint(20) NOT NULL,
+  `upload_id` bigint(20) NOT NULL DEFAULT 0,
+  `note` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_events`
+--
+
+INSERT INTO `order_events` (`id`, `order_id`, `status_id`, `creator`, `updater`, `upload_id`, `note`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 3, 3, 0, NULL, '2025-01-31 07:53:16', '2025-01-31 07:53:16');
 
 -- --------------------------------------------------------
 
@@ -1346,15 +1267,13 @@ CREATE TABLE IF NOT EXISTS `order_events` (
 -- Table structure for table `order_statuses`
 --
 
-DROP TABLE IF EXISTS `order_statuses`;
-CREATE TABLE IF NOT EXISTS `order_statuses` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `order_statuses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `order_statuses`
@@ -1384,22 +1303,20 @@ INSERT INTO `order_statuses` (`id`, `name`, `creator`, `created_at`, `updated_at
 -- Table structure for table `pages`
 --
 
-DROP TABLE IF EXISTS `pages`;
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `homepage` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `order` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `page_type` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Like filter, homepage',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `pages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `slug` varchar(125) DEFAULT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `homepage` varchar(125) NOT NULL DEFAULT '0',
+  `order` varchar(125) NOT NULL DEFAULT '1',
+  `page_type` varchar(125) DEFAULT NULL COMMENT 'Like filter, homepage',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `pages`
@@ -1436,17 +1353,15 @@ INSERT INTO `pages` (`id`, `name`, `slug`, `status`, `homepage`, `order`, `page_
 -- Table structure for table `participants`
 --
 
-DROP TABLE IF EXISTS `participants`;
-CREATE TABLE IF NOT EXISTS `participants` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `thread_id` int UNSIGNED NOT NULL,
-  `user_id` int UNSIGNED NOT NULL,
-  `user_type` int NOT NULL DEFAULT '1' COMMENT '1 user, 2 customer',
+CREATE TABLE `participants` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `thread_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `user_type` int(11) NOT NULL DEFAULT 1 COMMENT '1 user, 2 customer',
   `last_read` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1455,12 +1370,10 @@ CREATE TABLE IF NOT EXISTS `participants` (
 -- Table structure for table `password_reset_tokens`
 --
 
-DROP TABLE IF EXISTS `password_reset_tokens`;
-CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`email`)
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(125) NOT NULL,
+  `token` varchar(125) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1469,18 +1382,16 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
 -- Table structure for table `payments`
 --
 
-DROP TABLE IF EXISTS `payments`;
-CREATE TABLE IF NOT EXISTS `payments` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order_id` bigint NOT NULL,
-  `amount` bigint NOT NULL,
-  `method` bigint NOT NULL,
-  `tnxid` bigint NOT NULL,
-  `status` bigint NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `method` bigint(20) NOT NULL,
+  `tnxid` bigint(20) NOT NULL,
+  `status` bigint(20) NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1489,36 +1400,34 @@ CREATE TABLE IF NOT EXISTS `payments` (
 -- Table structure for table `payment_credentials`
 --
 
-DROP TABLE IF EXISTS `payment_credentials`;
-CREATE TABLE IF NOT EXISTS `payment_credentials` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `provider` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_password` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `merchant_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `api_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `signature_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `app_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `app_secret` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `merchant_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `public_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `private_key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `client_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `secret` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `publishable` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sandbox_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `charge` double(8,2) NOT NULL DEFAULT '1.00',
-  `banach` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '1',
-  `updater` bigint NOT NULL DEFAULT '1',
+CREATE TABLE `payment_credentials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `provider` varchar(125) DEFAULT NULL,
+  `store_id` varchar(125) DEFAULT NULL,
+  `store_password` varchar(125) DEFAULT NULL,
+  `merchant_id` varchar(125) DEFAULT NULL,
+  `api_key` varchar(125) DEFAULT NULL,
+  `signature_key` varchar(125) DEFAULT NULL,
+  `app_key` varchar(125) DEFAULT NULL,
+  `app_secret` varchar(125) DEFAULT NULL,
+  `username` varchar(125) DEFAULT NULL,
+  `password` varchar(125) DEFAULT NULL,
+  `merchant_number` varchar(125) DEFAULT NULL,
+  `public_key` varchar(125) DEFAULT NULL,
+  `private_key` varchar(125) DEFAULT NULL,
+  `client_id` varchar(125) DEFAULT NULL,
+  `secret` varchar(125) DEFAULT NULL,
+  `publishable` varchar(125) DEFAULT NULL,
+  `sandbox_status` varchar(125) NOT NULL DEFAULT '1',
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `charge` double(8,2) NOT NULL DEFAULT 1.00,
+  `banach` varchar(125) DEFAULT NULL,
+  `country` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 1,
+  `updater` bigint(20) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `payment_credentials`
@@ -1539,24 +1448,21 @@ INSERT INTO `payment_credentials` (`id`, `provider`, `store_id`, `store_password
 -- Table structure for table `payment_methods`
 --
 
-DROP TABLE IF EXISTS `payment_methods`;
-CREATE TABLE IF NOT EXISTS `payment_methods` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `card_holder` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `account_no` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `identifier_code` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `provider` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `branch` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `charge` double(8,2) NOT NULL DEFAULT '0.00',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `paymethodable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paymethodable_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `payment_methods` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `card_holder` varchar(125) NOT NULL,
+  `account_no` varchar(125) NOT NULL,
+  `identifier_code` varchar(125) NOT NULL,
+  `provider` varchar(125) DEFAULT NULL,
+  `branch` varchar(125) DEFAULT NULL,
+  `charge` double(8,2) NOT NULL DEFAULT 0.00,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
+  `paymethodable_type` varchar(125) NOT NULL,
+  `paymethodable_id` bigint(20) UNSIGNED NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `payment_methods_paymethodable_type_paymethodable_id_index` (`paymethodable_type`,`paymethodable_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1565,16 +1471,13 @@ CREATE TABLE IF NOT EXISTS `payment_methods` (
 -- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `permissions`;
-CREATE TABLE IF NOT EXISTS `permissions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `guard_name` varchar(125) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -1748,21 +1651,17 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 -- Table structure for table `personal_access_tokens`
 --
 
-DROP TABLE IF EXISTS `personal_access_tokens`;
-CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(125) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1771,48 +1670,46 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 -- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `products`;
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sku` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `brand` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `weight` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `additional_description` longtext COLLATE utf8mb4_unicode_ci,
-  `unit` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `for_selling` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `garage` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `route` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `feature` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `alert_quantity` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `discount_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `uploads_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `sub_category` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `youtube_video` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tags` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `views` bigint NOT NULL DEFAULT '0',
-  `old_price` int NOT NULL DEFAULT '0',
-  `selling_price` int NOT NULL DEFAULT '0',
-  `vat` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `service` tinyint(1) NOT NULL DEFAULT '0',
-  `variant_on` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `variant_option` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `landing_page_bg` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `landing_page_color` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `landing_page_deasing_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `product_id` varchar(125) DEFAULT NULL,
+  `sku` varchar(125) DEFAULT NULL,
+  `slug` varchar(125) DEFAULT NULL,
+  `category` varchar(125) DEFAULT NULL,
+  `brand` varchar(125) DEFAULT NULL,
+  `weight` varchar(125) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `additional_description` longtext DEFAULT NULL,
+  `unit` varchar(125) DEFAULT NULL,
+  `for_selling` varchar(125) NOT NULL DEFAULT '0',
+  `garage` varchar(125) NOT NULL DEFAULT '0',
+  `route` varchar(125) NOT NULL DEFAULT '0',
+  `feature` varchar(125) NOT NULL DEFAULT '0',
+  `alert_quantity` varchar(125) NOT NULL DEFAULT '0',
+  `discount_id` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
+  `uploads_id` varchar(125) NOT NULL DEFAULT '0',
+  `sub_category` varchar(125) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `youtube_video` varchar(125) DEFAULT NULL,
+  `tags` varchar(125) DEFAULT NULL,
+  `views` bigint(20) NOT NULL DEFAULT 0,
+  `old_price` int(11) NOT NULL DEFAULT 0,
+  `selling_price` int(11) NOT NULL DEFAULT 0,
+  `vat` varchar(125) NOT NULL DEFAULT '0',
+  `service` tinyint(1) NOT NULL DEFAULT 0,
+  `variant_on` varchar(125) NOT NULL DEFAULT '0',
+  `variant_option` varchar(125) DEFAULT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '0',
+  `landing_page_bg` varchar(125) DEFAULT NULL,
+  `landing_page_color` varchar(125) DEFAULT NULL,
+  `landing_page_deasing_id` varchar(125) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
@@ -1823,16 +1720,16 @@ INSERT INTO `products` (`id`, `name`, `product_id`, `sku`, `slug`, `category`, `
 (2, 'Tree Planting Earth Auger Machine', 'p', NULL, 'tree-planting-earth-auger-machine', '6', '1', '0', '<ul style=\"margin-bottom: 2.5rem; padding-left: 18px; color: rgb(34, 34, 34); font-family: Raleway, HelveticaNeue, &quot;Helvetica Neue&quot;, &quot;Hind Siliguri&quot;, Helvetica, Arial, sans-serif; font-size: 16.5px;\"><li>Single cylinder, two-stroke, air-cooling&nbsp;</li><li>1E40F-5 match engine&nbsp;</li><li>42.7cc engine displacement &nbsp;</li><li>1.4kW rated output power &nbsp;&nbsp;</li><li>1200ml fuel tank capacity&nbsp;</li><li>3 feet drive ration&nbsp;</li><li>1.85 module of gear</li><li>25:1 fuel mixture ratio&nbsp;</li><li>9.5Kg weight</li></ul>', '<p><span style=\"color: rgb(34, 34, 34); font-family: Raleway, HelveticaNeue, &quot;Helvetica Neue&quot;, &quot;Hind Siliguri&quot;, Helvetica, Arial, sans-serif; font-size: 16.5px;\">This soil drill machine has suitable for all kinds of geological, Gardening / agriculture / fishing / geophysical exploration, and construction all employ this auger machine. It uses a powerful yet efficient 42.7cc engine displacement, Your 12-ml fuel tank, and 2-stroke petrol engine enable you to dig deeper in refills. It is very easy to use, 59 x 36.5 x 31.5cm dimension.</span></p>', '1', '1', '0', '0', '1', '0', '1', '1', '10', '12,11,9,10', '0', 'The lowest price of Tree planting earth auger machine in Bangladesh is Tk 17,000 only. Buy from Dhaka at low price in Bdstall. There is currently 2 sellers.', '0', NULL, 20, 17000, 19500, '0', 0, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#000000', '#000000', NULL, NULL, '2025-01-28 04:58:04', '2025-01-28 22:25:29'),
 (3, 'Tree Planting Earth Auger Machine', 'p-1', NULL, 'tree-planting-earth-auger-machine-1', '6', '1', '0', '<ul style=\"margin-bottom: 2.5rem; padding-left: 18px; color: rgb(34, 34, 34); font-family: Raleway, HelveticaNeue, &quot;Helvetica Neue&quot;, &quot;Hind Siliguri&quot;, Helvetica, Arial, sans-serif; font-size: 16.5px;\"><li>Single cylinder, two-stroke, air-cooling&nbsp;</li><li>1E40F-5 match engine&nbsp;</li><li>42.7cc engine displacement &nbsp;</li><li>1.4kW rated output power &nbsp;&nbsp;</li><li>1200ml fuel tank capacity&nbsp;</li><li>3 feet drive ration&nbsp;</li><li>1.85 module of gear</li><li>25:1 fuel mixture ratio&nbsp;</li><li>9.5Kg weight</li></ul>', '<p><span style=\"color: rgb(34, 34, 34); font-family: Raleway, HelveticaNeue, &quot;Helvetica Neue&quot;, &quot;Hind Siliguri&quot;, Helvetica, Arial, sans-serif; font-size: 16.5px;\">This soil drill machine has suitable for all kinds of geological, Gardening / agriculture / fishing / geophysical exploration, and construction all employ this auger machine. It uses a powerful yet efficient 42.7cc engine displacement, Your 12-ml fuel tank, and 2-stroke petrol engine enable you to dig deeper in refills. It is very easy to use, 59 x 36.5 x 31.5cm dimension.</span></p>', '1', '1', '0', '0', '0', '0', '1', '1', '10', '12,11,9,10', '0', 'The lowest price of Tree planting earth auger machine in Bangladesh is Tk 17,000 only. Buy from Dhaka at low price in Bdstall. There is currently 2 sellers.', '0', NULL, 11, 17000, 19500, '0', 0, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#000000', '#000000', NULL, NULL, '2025-01-28 04:58:28', '2025-01-28 06:36:53'),
 (4, 'Test Product', NULL, NULL, 'test-product', '1', '1', NULL, NULL, NULL, NULL, '0', '0', '0', '0', '0', NULL, '0', '0', '0', NULL, NULL, NULL, NULL, 0, 0, 0, '0', 0, '0', NULL, '0', NULL, NULL, NULL, '2025-01-29 03:14:38', '2025-01-28 06:09:24', '2025-01-29 03:14:38'),
-(5, 'Madaline Collier', 'p-2', NULL, 'madaline-collier', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '14', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:18:54', '2025-01-29 04:48:32'),
+(5, 'Madaline Collier', 'p-2', NULL, 'madaline-collier', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '14', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 2, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:18:54', '2025-01-30 03:25:36'),
 (6, 'Hotpot', 'p-3', NULL, 'hotpot', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '15', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:19:42', '2025-01-29 01:19:42'),
 (7, 'Presser Cooker', 'p-4', NULL, 'presser-cooker', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '16', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:20:26', '2025-01-29 01:20:26'),
-(8, 'pan', 'p-5', NULL, 'pan', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '17', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:21:36', '2025-01-29 01:21:36'),
+(8, 'pan', 'p-5', NULL, 'pan', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '17', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:21:36', '2025-01-30 03:26:32'),
 (9, 'Rice Cooker', 'p-6', NULL, 'rice-cooker', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '19', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:22:55', '2025-01-29 01:22:55'),
 (10, 'Hitter', 'p-7', NULL, 'hitter', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '20', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:23:45', '2025-01-29 01:23:45'),
 (11, 'Harvesters', 'p-8', NULL, 'harvesters', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '21', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 718, 627, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:30:31', '2025-01-29 01:30:31'),
-(12, 'Power Tiller', 'p-9', NULL, 'power-tiller', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '22', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 20718, 19962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:31:23', '2025-01-29 01:31:23'),
-(13, 'Agriculture Machinery', 'p-10', NULL, 'agriculture-machinery', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '23', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 20718, 19962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:32:05', '2025-01-29 01:32:05'),
-(14, 'Agriculture Katting machine', 'p-11', NULL, 'agriculture-katting-machine', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '24', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 50718, 45962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:33:24', '2025-01-29 01:33:24'),
+(12, 'Power Tiller', 'p-9', NULL, 'power-tiller', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '22', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 2, 20718, 19962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:31:23', '2025-01-30 04:27:51'),
+(13, 'Agriculture Machinery', 'p-10', NULL, 'agriculture-machinery', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '23', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 2, 20718, 19962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:32:05', '2025-01-31 08:02:05'),
+(14, 'Agriculture Katting machine', 'p-11', NULL, 'agriculture-katting-machine', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '24', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 3, 50718, 45962, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:33:24', '2025-01-30 12:49:07'),
 (15, 'Mini Harvesters', 'p-12', NULL, 'mini-harvesters', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '26', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 4, 100718, 90718, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:34:38', '2025-01-29 04:07:25'),
 (16, 'Test Product', NULL, NULL, 'test-product', '1', '1', NULL, NULL, NULL, NULL, '0', '0', '0', '0', '0', NULL, '0', '0', '0', NULL, NULL, NULL, NULL, 0, 0, 0, '0', 0, '0', NULL, '0', NULL, NULL, NULL, '2025-01-29 03:14:31', '2025-01-29 01:42:40', '2025-01-29 03:14:31'),
 (17, 'Hardscape', 'p-13', NULL, 'hardscape', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '27', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 22180, 20180, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:44:43', '2025-01-29 01:44:43'),
@@ -1846,23 +1743,31 @@ INSERT INTO `products` (`id`, `name`, `product_id`, `sku`, `slug`, `category`, `
 (25, 'Kitchen Appliances', 'p-20', NULL, 'kitchen-appliances', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '35', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:54:31', '2025-01-29 01:54:31'),
 (26, 'Fashion Store Interior', 'p-21', NULL, 'fashion-store-interior', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '36', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:56:00', '2025-01-29 01:56:00'),
 (27, 'Fashion Store Interior Design', 'p-22', NULL, 'fashion-store-interior-design', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '38', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 01:57:08', '2025-01-29 01:57:08'),
-(28, 'Fashion House - Cascavelle', 'p-23', NULL, 'fashion-house-cascavelle', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '39', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:06:14', '2025-01-29 02:06:14'),
-(29, 'Fashion house showroom', 'p-24', NULL, 'fashion-house-showroom', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '40', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:33:37', '2025-01-29 02:33:37'),
+(28, 'Fashion House - Cascavelle', 'p-23', NULL, 'fashion-house-cascavelle', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '39', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 3, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:06:14', '2025-01-30 04:05:26'),
+(29, 'Fashion house showroom', 'p-24', NULL, 'fashion-house-showroom', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '40', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:33:37', '2025-01-30 03:28:01'),
 (30, 'Best interior design', 'p-25', NULL, 'best-interior-design', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '41', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:39:52', '2025-01-29 02:39:52'),
-(31, 'Fashion House International', 'p-26', NULL, 'fashion-house-international', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '42', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:40:29', '2025-01-29 02:40:29'),
-(32, 'Gurwani\'s Boutique', 'p-27', NULL, 'gurwanis-boutique', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '43', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:41:51', '2025-01-29 02:41:51'),
+(31, 'Fashion House International', 'p-26', NULL, 'fashion-house-international', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '42', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:40:29', '2025-01-30 04:06:13'),
+(32, 'Gurwani\'s Boutique', 'p-27', NULL, 'gurwanis-boutique', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '43', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:41:51', '2025-01-30 03:27:26'),
 (33, '𝐇𝐨𝐮𝐬𝐞 𝐎𝐟 𝐅𝐚𝐬𝐡𝐢𝐨𝐧 𝐁𝐨𝐮𝐭𝐢𝐪𝐮𝐞', 'p-28', NULL, '', '10', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '44', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:42:40', '2025-01-29 02:42:40'),
 (34, 'Walton brings 2 model', 'p-29', NULL, 'walton-brings-2-model', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '45', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:44:50', '2025-01-29 02:44:50'),
-(35, 'Home Appliances that Consume', 'p-30', NULL, 'home-appliances-that-consume', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '47', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:46:02', '2025-01-29 02:46:02'),
+(35, 'Home Appliances that Consume', 'p-30', NULL, 'home-appliances-that-consume', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '47', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:46:02', '2025-01-30 03:57:51'),
 (36, 'Save Big on the Top 8 Home', 'p-31', NULL, 'save-big-on-the-top-8-home', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '48', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 63000, 55500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:47:07', '2025-01-29 02:47:07'),
 (37, 'Latest Range of Consumer Products', 'p-32', NULL, 'latest-range-of-consumer-products', '8', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '52', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 43000, 35500, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:48:47', '2025-01-29 02:48:47'),
-(38, 'Cookeriess Cookeries Hand Hammered', 'p-33', NULL, 'cookeriess-cookeries-hand-hammered', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '53', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 1300, 1000, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:51:17', '2025-01-29 02:51:17'),
+(38, 'Cookeriess Cookeries Hand Hammered', 'p-33', NULL, 'cookeriess-cookeries-hand-hammered', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '53', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 2, 1300, 1000, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:51:17', '2025-01-30 04:01:30'),
 (39, 'Cookeriess Cookeries Hand Stahl', 'p-34', NULL, 'cookeriess-cookeries-hand-stahl', '9', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '55', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 2200, 2000, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:52:35', '2025-01-29 02:52:35'),
-(40, 'Agriculture Equipment', 'p-35', NULL, 'agriculture-equipment', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '57', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 2, 510200, 500200, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:55:05', '2025-01-29 04:00:15'),
-(41, 'Hello fellas', 'p-36', NULL, 'hello-fellas', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '59', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 2500, 2200, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:57:51', '2025-01-29 02:57:51'),
+(40, 'Agriculture Equipment', 'p-35', NULL, 'agriculture-equipment', '6', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '57', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 4, 510200, 500200, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:55:05', '2025-01-30 00:33:18'),
+(41, 'Hello fellas', 'p-36', NULL, 'hello-fellas', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '59', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 2500, 2200, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:57:51', '2025-01-30 07:16:07'),
 (42, 'Grading Tools', 'p-37', NULL, 'grading-tools', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '60', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 90500, 87050, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 02:59:04', '2025-01-29 02:59:04'),
 (43, 'Garden Tools for sale in Dublin', 'p-38', NULL, 'garden-tools-for-sale-in-dublin', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '67', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 0, 6500, 5050, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 03:01:01', '2025-01-29 03:01:01'),
-(44, 'Garden Tools for sale in Nelson', 'p-39', NULL, 'garden-tools-for-sale-in-nelson', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '68', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 6500, 5050, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 03:02:08', '2025-01-29 04:50:26');
+(44, 'Garden Tools for sale in Nelson', 'p-39', NULL, 'garden-tools-for-sale-in-nelson', '7', '0', '200', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque&nbsp;</p>', '<p>Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio&nbsp;Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio</p>', '1', '1', '2', '', '1', '10', '1', '1', '68', '0', '0', 'Quisquam itaque odio Quisquam itaque odio Quisquam itaque odio', 'Facere quisquam nisi', NULL, 1, 6500, 5050, '0', 1, '0', '{\"variant_key\":null,\"vairant_value\":null}', '1', '#dee7ca', '#43cafa', NULL, NULL, '2025-01-29 03:02:08', '2025-01-29 04:50:26'),
+(45, 'Shoes For men', 'p-40', 'Tyrone Valencia', 'shoes-for-men', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '85', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 2, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:08:35', '2025-01-30 04:28:51'),
+(46, 'Shoes For men', 'p-41', 'Tyrone Valencia', 'shoes-for-men-1', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '86', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 2, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:09:14', '2025-01-30 06:19:23'),
+(47, 'Shoes For men', 'p-42', 'Tyrone Valencia', 'shoes-for-men-2', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '87', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 2, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:09:44', '2025-01-31 06:47:27'),
+(48, 'Shoes For men', 'p-43', 'Tyrone Valencia', 'shoes-for-men-3', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '90', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 0, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:10:58', '2025-01-30 04:10:58'),
+(49, 'Shoes For men', 'p-44', 'Tyrone Valencia', 'shoes-for-men-4', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '91', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 1, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:11:31', '2025-01-30 04:12:24'),
+(50, 'Shoes For Women', 'p-45', 'Tyrone Valencia', 'shoes-for-women', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '94', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 0, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red,yellow\",\"vairant_value\":\"S,L\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:14:26', '2025-01-30 04:14:26'),
+(51, 'Shoes For Women', 'p-46', 'Tyrone Valencia', 'shoes-for-women-2', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '96', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 1, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"yellow\",\"vairant_value\":\"39,40,41,42,43,44\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:15:22', '2025-01-30 04:27:55'),
+(52, 'Shoes For Women', 'p-47', 'Tyrone Valencia', 'shoes-for-women-3', '10', '0', NULL, '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '<p><strong style=\"margin: 0px; padding: 0px; color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">Lorem Ipsum</strong><span style=\"color: rgb(0, 0, 0); font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,</span></p>', '0', '1', 'ddsf', 'fdfds', '0', '20', '0', '1', '98', '0', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.', 'Ea quae exercitation', NULL, 2, 5741, 5684, '0', 0, '1', '{\"variant_key\":\"red\",\"vairant_value\":\"39,40,41,42,43,44\"}', '1', '#9d2cab', '#9e86ec', NULL, NULL, '2025-01-30 04:16:07', '2025-01-30 12:52:03');
 
 -- --------------------------------------------------------
 
@@ -1870,17 +1775,15 @@ INSERT INTO `products` (`id`, `name`, `product_id`, `sku`, `slug`, `category`, `
 -- Table structure for table `product_faqs`
 --
 
-DROP TABLE IF EXISTS `product_faqs`;
-CREATE TABLE IF NOT EXISTS `product_faqs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `question` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `answer` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_id` bigint DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `order_sort` int NOT NULL DEFAULT '1',
+CREATE TABLE `product_faqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `question` varchar(125) DEFAULT NULL,
+  `answer` varchar(125) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `order_sort` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1889,18 +1792,16 @@ CREATE TABLE IF NOT EXISTS `product_faqs` (
 -- Table structure for table `product_refs`
 --
 
-DROP TABLE IF EXISTS `product_refs`;
-CREATE TABLE IF NOT EXISTS `product_refs` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `model_no` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `taka` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `product_refs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `model_no` varchar(125) DEFAULT NULL,
+  `taka` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) NOT NULL,
+  `updater` varchar(125) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1909,27 +1810,23 @@ CREATE TABLE IF NOT EXISTS `product_refs` (
 -- Table structure for table `purchases`
 --
 
-DROP TABLE IF EXISTS `purchases`;
-CREATE TABLE IF NOT EXISTS `purchases` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `purchase_id` bigint NOT NULL,
-  `productId` bigint NOT NULL,
-  `supplierId` bigint NOT NULL,
-  `quantity` bigint NOT NULL,
-  `unit_id` bigint DEFAULT NULL,
-  `varinat_id` bigint DEFAULT NULL,
-  `status` bigint NOT NULL,
-  `price` bigint NOT NULL,
-  `total` bigint NOT NULL,
+CREATE TABLE `purchases` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `purchase_id` bigint(20) NOT NULL,
+  `productId` bigint(20) NOT NULL,
+  `supplierId` bigint(20) NOT NULL,
+  `quantity` bigint(20) NOT NULL,
+  `unit_id` bigint(20) DEFAULT NULL,
+  `varinat_id` bigint(20) DEFAULT NULL,
+  `status` bigint(20) NOT NULL,
+  `price` bigint(20) NOT NULL,
+  `total` bigint(20) NOT NULL,
   `buying_date` timestamp NULL DEFAULT NULL,
   `expiring_date` timestamp NULL DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `purchases_unit_id_foreign` (`unit_id`),
-  KEY `purchases_varinat_id_foreign` (`varinat_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1938,12 +1835,10 @@ CREATE TABLE IF NOT EXISTS `purchases` (
 -- Table structure for table `refrence_users`
 --
 
-DROP TABLE IF EXISTS `refrence_users`;
-CREATE TABLE IF NOT EXISTS `refrence_users` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `refrence_users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1952,19 +1847,17 @@ CREATE TABLE IF NOT EXISTS `refrence_users` (
 -- Table structure for table `review_products`
 --
 
-DROP TABLE IF EXISTS `review_products`;
-CREATE TABLE IF NOT EXISTS `review_products` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `comment` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rating` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_id` bigint DEFAULT NULL,
+CREATE TABLE `review_products` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `comment` varchar(125) DEFAULT NULL,
+  `rating` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `review_products`
@@ -1979,16 +1872,13 @@ INSERT INTO `review_products` (`id`, `name`, `email`, `comment`, `rating`, `crea
 -- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `guard_name` varchar(125) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -2003,12 +1893,9 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 -- Table structure for table `role_has_permissions`
 --
 
-DROP TABLE IF EXISTS `role_has_permissions`;
-CREATE TABLE IF NOT EXISTS `role_has_permissions` (
-  `permission_id` bigint UNSIGNED NOT NULL,
-  `role_id` bigint UNSIGNED NOT NULL,
-  PRIMARY KEY (`permission_id`,`role_id`),
-  KEY `role_has_permissions_role_id_foreign` (`role_id`)
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -2183,19 +2070,17 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 -- Table structure for table `salaries`
 --
 
-DROP TABLE IF EXISTS `salaries`;
-CREATE TABLE IF NOT EXISTS `salaries` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `amount` bigint NOT NULL DEFAULT '0',
-  `user_id` bigint NOT NULL DEFAULT '0',
-  `month` bigint NOT NULL DEFAULT '0',
-  `year` bigint NOT NULL DEFAULT '0',
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
-  `status` int NOT NULL DEFAULT '0',
+CREATE TABLE `salaries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `amount` bigint(20) NOT NULL DEFAULT 0,
+  `user_id` bigint(20) NOT NULL DEFAULT 0,
+  `month` bigint(20) NOT NULL DEFAULT 0,
+  `year` bigint(20) NOT NULL DEFAULT 0,
+  `description` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
+  `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2204,20 +2089,18 @@ CREATE TABLE IF NOT EXISTS `salaries` (
 -- Table structure for table `services`
 --
 
-DROP TABLE IF EXISTS `services`;
-CREATE TABLE IF NOT EXISTS `services` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `icon_class` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `upload_id` bigint NOT NULL DEFAULT '0',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `icon_class` varchar(125) DEFAULT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `upload_id` bigint(20) NOT NULL DEFAULT 0,
+  `status` varchar(125) DEFAULT NULL,
+  `slug` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2225,17 +2108,13 @@ CREATE TABLE IF NOT EXISTS `services` (
 -- Table structure for table `sessions`
 --
 
-DROP TABLE IF EXISTS `sessions`;
-CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `sessions_user_id_index` (`user_id`),
-  KEY `sessions_last_activity_index` (`last_activity`)
+CREATE TABLE `sessions` (
+  `id` varchar(125) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2244,17 +2123,15 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 -- Table structure for table `settings`
 --
 
-DROP TABLE IF EXISTS `settings`;
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `value` varchar(1750) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `key` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `settings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `value` varchar(1750) DEFAULT NULL,
+  `creator_id` varchar(125) DEFAULT NULL,
+  `key` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `settings`
@@ -2263,27 +2140,27 @@ CREATE TABLE IF NOT EXISTS `settings` (
 INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`, `updated_at`) VALUES
 (180, 'theme_nav-collapse-hide-child', 'Theme Nav-Collapse-Hide-Child', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (4, 'currency_symbol', '৳', '1', '9', NULL, '2025-01-28 03:00:00'),
-(5, 'app_image', '73', '1', '9', NULL, '2025-01-29 04:04:36'),
-(6, 'app_name_short', 'Amjad Agro', '1', '9', NULL, '2025-01-28 03:00:30'),
-(7, 'app_title', 'Amjad Agro', '1', '9', NULL, '2025-01-29 01:02:46'),
-(8, 'app_footer_image', '73', '1', '9', NULL, '2025-01-29 04:04:47'),
+(5, 'app_image', '82', '1', '9', NULL, '2025-01-30 02:28:26'),
+(6, 'app_name_short', 'Sky Bazar BD', '1', '9', NULL, '2025-01-30 02:35:08'),
+(7, 'app_title', 'Sky Bazar BD', '1', '9', NULL, '2025-01-30 02:35:08'),
+(8, 'app_footer_image', '82', '1', '9', NULL, '2025-01-30 02:28:45'),
 (9, 'app_email', 'info@amjadagro.com', '1', '9', NULL, '2025-01-28 03:01:25'),
 (10, 'app_about', 'Amjad Agro core values are customer-oriented, honesty, quality and commitment. These values guide everything we do and enable us to make a positive difference. We are honest and fair with suppliers, customers and colleagues.', '1', '9', NULL, '2025-01-28 03:02:42'),
-(11, 'app_tel', '01590084779', '1', '9', NULL, NULL),
-(12, 'app_linkedin', 'https://linkedin.com/mdsazzad0002', '1', '9', NULL, NULL),
+(11, 'app_tel', '+88 01712 258 911', '1', '9', NULL, '2025-01-30 02:39:12'),
+(12, 'app_linkedin', '#', '1', '9', NULL, '2025-01-30 02:35:15'),
 (13, 'app_facebook', 'https://facebook.com/mdsazzad0002', '1', '9', NULL, NULL),
-(14, 'app_whatsapp', 'https://wa.me/01590084779', '1', '9', NULL, NULL),
-(15, 'app_twitter', 'https://twitter.com/mdsazzad0002', '1', '9', NULL, NULL),
+(14, 'app_whatsapp', 'https://wa.me/+88 01712 258 911', '1', '9', NULL, '2025-01-30 02:39:15'),
+(15, 'app_twitter', '#', '1', '9', NULL, '2025-01-30 02:35:19'),
 (16, 'app_youtube', 'https://youtube.com/mdsazzad0002', '1', '9', NULL, NULL),
 (17, 'app_telegram', 'https://t.me/mdsazzad0002', '1', '9', NULL, NULL),
 (18, 'app_linkedin', 'https://linkedin.com/in/mdsazzad0002', '1', '9', NULL, NULL),
 (19, 'app_pinterest', 'https://pinterest.com/mdsazzad0002', '1', '9', NULL, NULL),
 (20, 'app_github', 'https://github.com/mdsazzad0002', '1', '9', NULL, NULL),
-(21, 'app_figma', 'https://figma.com/mdsazzad0002', '1', '9', NULL, NULL),
+(21, 'app_figma', '#', '1', '9', NULL, '2025-01-30 02:35:24'),
 (22, 'app_website', 'https://code.dengrweb.com/users/superadmin', '1', '9', NULL, NULL),
-(23, 'app_address', 'Dhaka Mirpur', '1', '9', NULL, NULL),
+(23, 'app_address', 'House # 1,3. Road # E2, Block - G, Eastern Housing, Rupnagar, Mirpur, Dhaka - 1216, Bangladesh.', '1', '9', NULL, '2025-01-30 05:09:31'),
 (24, 'app_maps', 'https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3651.591705560146!2d90.38453078641228!3d23.761935033330907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sus!4v1738055099191!5m2!1sen!2sus', '1', '9', NULL, '2025-01-28 03:05:27'),
-(25, 'app_preloader_image', '1', '1', '9', NULL, '2025-01-28 03:05:39'),
+(25, 'app_preloader_image', '82', '1', '9', NULL, '2025-01-30 02:28:52'),
 (26, 'app_preloader_status', '0', '1', '9', NULL, NULL),
 (27, 'google-site-verification', 'Google-Site-Verification', '0', '25', '2025-01-28 02:54:44', '2025-01-28 02:54:44'),
 (28, 'msvalidate.01', 'Msvalidate.01', '0', '25', '2025-01-28 02:54:44', '2025-01-28 02:54:44'),
@@ -2328,7 +2205,7 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 (164, 'custom_css__footer_code', '', '1', '45', NULL, NULL),
 (163, 'custom_css__head_code', '', '1', '45', NULL, NULL),
 (70, 'order', 'Order', '0', '10', '2025-01-28 02:55:03', '2025-01-28 02:55:03'),
-(71, 'app_fav_image', '1', '1', '9', '2025-01-28 02:55:03', '2025-01-28 03:05:33'),
+(71, 'app_fav_image', '82', '1', '9', '2025-01-28 02:55:03', '2025-01-30 02:28:56'),
 (178, 'nav-flat', 'Nav-Flat', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (177, 'theme_brand_link', 'Theme Brand Link', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (175, 'theme_sidebar-no-expand', 'Theme Sidebar-No-Expand', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
@@ -2342,7 +2219,7 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 (168, 'theme_sidebar-mini', 'Theme Sidebar-Mini', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (167, 'theme_layout-fixed', 'Theme Layout-Fixed', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (166, 'theme_layout-navbar-fixed', 'Theme Layout-Navbar-Fixed', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
-(165, 'theme_mode', 'Theme Mode', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
+(165, 'theme_mode', '0', '1', '1', '2025-01-29 01:52:21', '2025-01-30 04:04:31'),
 (89, 'pages', 'Pages', '0', '10', '2025-01-28 02:55:30', '2025-01-28 02:55:30'),
 (162, 'custom_css_footer_code', '', '1', '45', NULL, NULL),
 (91, 'welcome_note', NULL, '1', '9', '2025-01-28 02:55:42', '2025-01-28 03:05:45'),
@@ -2353,7 +2230,7 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 (96, 'footerlinksubheadings', 'Footerlinksubheadings', '0', '10', '2025-01-28 02:56:08', '2025-01-28 02:56:08'),
 (97, 'category', 'Category', '0', '10', '2025-01-28 02:56:20', '2025-01-28 02:56:20'),
 (98, 'sliders', 'Sliders', '0', '10', '2025-01-28 03:07:21', '2025-01-28 03:07:21'),
-(99, 'login_admin_image', 'Login Admin Image', '0', '9', '2025-01-28 04:25:17', '2025-01-28 04:25:17'),
+(99, 'login_admin_image', '82', '1', '9', '2025-01-28 04:25:17', '2025-01-30 02:36:02'),
 (158, 'theme_nav-compact', '0', '1', '1', NULL, NULL),
 (157, 'theme_nav-legacy', '0', '1', '1', NULL, NULL),
 (156, 'theme_sidebar-collapse', '0', '1', '1', NULL, NULL),
@@ -2362,7 +2239,7 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 (126, 'dashboard_title', 'Dashboard Title', '0', '10', '2025-01-28 22:28:11', '2025-01-28 22:28:11'),
 (127, 'category_wise_filter_status', '0', '1', '80', '2025-01-29 00:23:43', '2025-01-29 00:28:21'),
 (128, 'a', 'A', '0', '9', '2025-01-29 01:01:21', '2025-01-29 01:01:21'),
-(129, 'theme_color', '#08775b', '1', '9', '2025-01-29 01:06:23', '2025-01-29 01:13:26'),
+(129, 'theme_color', '#3871c1', '1', '9', '2025-01-29 01:06:23', '2025-01-30 02:33:17'),
 (181, 'theme_nav-flat', 'Theme Nav-Flat', '0', '1', '2025-01-29 01:52:21', '2025-01-29 01:52:21'),
 (182, 'checkout_note', NULL, '1', '9', '2025-01-29 03:01:42', '2025-01-29 04:06:13'),
 (183, 'services', 'Services', '0', '10', '2025-01-29 03:08:02', '2025-01-29 03:08:02'),
@@ -2385,7 +2262,9 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 (200, 'show_filter_by_brand_status', 'Show Filter By Brand Status', '0', '80', '2025-01-29 05:24:20', '2025-01-29 05:24:20'),
 (201, 'show_filter_by_rating_status', 'Show Filter By Rating Status', '0', '80', '2025-01-29 05:24:20', '2025-01-29 05:24:20'),
 (202, 'show_filter_feature_product_status', '1', '1', '80', '2025-01-29 05:24:20', '2025-01-29 05:24:34'),
-(203, 'show_filter_offer_product_status', 'Show Filter Offer Product Status', '0', '80', '2025-01-29 05:24:20', '2025-01-29 05:24:20');
+(203, 'show_filter_offer_product_status', 'Show Filter Offer Product Status', '0', '80', '2025-01-29 05:24:20', '2025-01-29 05:24:20'),
+(204, 'Translation', 'Translation', '0', '10', '2025-01-30 02:39:51', '2025-01-30 02:39:51'),
+(205, 'footer_maps_status', 'Footer Maps Status', '0', '88', '2025-01-30 04:02:44', '2025-01-30 04:02:44');
 
 -- --------------------------------------------------------
 
@@ -2393,18 +2272,16 @@ INSERT INTO `settings` (`id`, `name`, `value`, `creator_id`, `key`, `created_at`
 -- Table structure for table `shipping_charges`
 --
 
-DROP TABLE IF EXISTS `shipping_charges`;
-CREATE TABLE IF NOT EXISTS `shipping_charges` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+CREATE TABLE `shipping_charges` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `amount` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
+  `updater` varchar(125) DEFAULT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `shipping_charges`
@@ -2420,32 +2297,30 @@ INSERT INTO `shipping_charges` (`id`, `name`, `amount`, `creator`, `updater`, `s
 -- Table structure for table `sliders`
 --
 
-DROP TABLE IF EXISTS `sliders`;
-CREATE TABLE IF NOT EXISTS `sliders` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `sub_description` text COLLATE utf8mb4_unicode_ci,
-  `upload_id` bigint DEFAULT NULL,
-  `upload_bg` bigint DEFAULT NULL,
-  `button_title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `button_link` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+CREATE TABLE `sliders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `sub_description` text DEFAULT NULL,
+  `upload_id` bigint(20) DEFAULT NULL,
+  `upload_bg` bigint(20) DEFAULT NULL,
+  `button_title` varchar(125) DEFAULT NULL,
+  `button_link` varchar(125) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sliders`
 --
 
 INSERT INTO `sliders` (`id`, `title`, `short_description`, `sub_description`, `upload_id`, `upload_bg`, `button_title`, `button_link`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, NULL, NULL, 0, 3, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-28 04:27:48'),
-(4, NULL, NULL, NULL, 0, 6, NULL, NULL, 1, '2025-01-28 04:28:53', '2025-01-28 04:28:53'),
-(2, NULL, NULL, NULL, 0, 4, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-28 04:28:28'),
-(3, NULL, NULL, NULL, 0, 5, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-28 04:28:42'),
-(5, NULL, NULL, NULL, 0, 8, NULL, NULL, 1, '2025-01-28 04:30:23', '2025-01-28 04:36:59');
+(1, NULL, NULL, NULL, 77, 77, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-30 02:01:11'),
+(4, NULL, NULL, NULL, 0, 83, NULL, NULL, 1, '2025-01-28 04:28:53', '2025-01-30 02:31:30'),
+(2, NULL, NULL, NULL, 0, 78, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-30 02:01:31'),
+(3, NULL, NULL, NULL, 0, 74, NULL, '#', 1, '2025-01-28 02:54:45', '2025-01-30 02:01:47'),
+(5, NULL, NULL, NULL, 0, 76, NULL, NULL, 1, '2025-01-28 04:30:23', '2025-01-30 02:01:58');
 
 -- --------------------------------------------------------
 
@@ -2453,20 +2328,17 @@ INSERT INTO `sliders` (`id`, `title`, `short_description`, `sub_description`, `u
 -- Table structure for table `social_contacts`
 --
 
-DROP TABLE IF EXISTS `social_contacts`;
-CREATE TABLE IF NOT EXISTS `social_contacts` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `lead_source_id` bigint NOT NULL,
-  `url` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sociable_type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sociable_id` bigint UNSIGNED NOT NULL,
+CREATE TABLE `social_contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `lead_source_id` bigint(20) NOT NULL,
+  `url` varchar(125) NOT NULL,
+  `creator` varchar(125) NOT NULL,
+  `updater` varchar(125) NOT NULL,
+  `sociable_type` varchar(125) NOT NULL,
+  `sociable_id` bigint(20) UNSIGNED NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `social_contacts_sociable_type_sociable_id_index` (`sociable_type`,`sociable_id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2475,12 +2347,10 @@ CREATE TABLE IF NOT EXISTS `social_contacts` (
 -- Table structure for table `special_events`
 --
 
-DROP TABLE IF EXISTS `special_events`;
-CREATE TABLE IF NOT EXISTS `special_events` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE `special_events` (
+  `id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2489,17 +2359,15 @@ CREATE TABLE IF NOT EXISTS `special_events` (
 -- Table structure for table `stocks`
 --
 
-DROP TABLE IF EXISTS `stocks`;
-CREATE TABLE IF NOT EXISTS `stocks` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `order_id` bigint NOT NULL,
-  `product_id` bigint NOT NULL,
-  `variant_id` bigint NOT NULL DEFAULT '0',
-  `quantity` bigint NOT NULL,
-  `status` int NOT NULL DEFAULT '0',
+CREATE TABLE `stocks` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `variant_id` bigint(20) NOT NULL DEFAULT 0,
+  `quantity` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2508,20 +2376,18 @@ CREATE TABLE IF NOT EXISTS `stocks` (
 -- Table structure for table `sub_categories`
 --
 
-DROP TABLE IF EXISTS `sub_categories`;
-CREATE TABLE IF NOT EXISTS `sub_categories` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `creator` bigint NOT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `category_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `feature` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `sub_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `name` varchar(125) NOT NULL,
+  `slug` varchar(125) NOT NULL,
+  `description` text DEFAULT NULL,
+  `category_id` varchar(125) NOT NULL,
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `feature` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2530,25 +2396,23 @@ CREATE TABLE IF NOT EXISTS `sub_categories` (
 -- Table structure for table `suppliers`
 --
 
-DROP TABLE IF EXISTS `suppliers`;
-CREATE TABLE IF NOT EXISTS `suppliers` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `area` bigint NOT NULL DEFAULT '0',
-  `location` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `business_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_holder` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_branch` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `suppliers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `area` bigint(20) NOT NULL DEFAULT 0,
+  `location` varchar(125) DEFAULT NULL,
+  `type` varchar(125) DEFAULT NULL,
+  `business_name` varchar(125) DEFAULT NULL,
+  `account_holder` varchar(125) DEFAULT NULL,
+  `account_number` varchar(125) DEFAULT NULL,
+  `bank_name` varchar(125) DEFAULT NULL,
+  `bank_branch` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2557,19 +2421,17 @@ CREATE TABLE IF NOT EXISTS `suppliers` (
 -- Table structure for table `supplier_payments`
 --
 
-DROP TABLE IF EXISTS `supplier_payments`;
-CREATE TABLE IF NOT EXISTS `supplier_payments` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `supplier_id` bigint NOT NULL,
-  `amount` bigint NOT NULL,
-  `method` bigint NOT NULL,
-  `tnxid` bigint NOT NULL,
-  `creator` bigint NOT NULL,
-  `status` bigint NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `supplier_payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `supplier_id` bigint(20) NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `method` bigint(20) NOT NULL,
+  `tnxid` bigint(20) NOT NULL,
+  `creator` bigint(20) NOT NULL,
+  `status` bigint(20) NOT NULL,
+  `note` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2578,15 +2440,13 @@ CREATE TABLE IF NOT EXISTS `supplier_payments` (
 -- Table structure for table `supplier_types`
 --
 
-DROP TABLE IF EXISTS `supplier_types`;
-CREATE TABLE IF NOT EXISTS `supplier_types` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `supplier_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `supplier_types`
@@ -2612,21 +2472,19 @@ INSERT INTO `supplier_types` (`id`, `name`, `creator`, `created_at`, `updated_at
 -- Table structure for table `testimonials`
 --
 
-DROP TABLE IF EXISTS `testimonials`;
-CREATE TABLE IF NOT EXISTS `testimonials` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `designation` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upload_id` bigint NOT NULL DEFAULT '0',
-  `rating` int NOT NULL DEFAULT '2',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `creator` tinyint(1) NOT NULL DEFAULT '1',
-  `updater` tinyint(1) NOT NULL DEFAULT '1',
+CREATE TABLE `testimonials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `designation` varchar(125) DEFAULT NULL,
+  `description` varchar(125) DEFAULT NULL,
+  `upload_id` bigint(20) NOT NULL DEFAULT 0,
+  `rating` int(11) NOT NULL DEFAULT 2,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `creator` tinyint(1) NOT NULL DEFAULT 1,
+  `updater` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `testimonials`
@@ -2652,16 +2510,14 @@ INSERT INTO `testimonials` (`id`, `name`, `designation`, `description`, `upload_
 -- Table structure for table `threads`
 --
 
-DROP TABLE IF EXISTS `threads`;
-CREATE TABLE IF NOT EXISTS `threads` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `subject` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` int NOT NULL DEFAULT '1' COMMENT '1 single, 2 group',
-  `status` int NOT NULL,
+CREATE TABLE `threads` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `subject` varchar(125) NOT NULL,
+  `type` int(11) NOT NULL DEFAULT 1 COMMENT '1 single, 2 group',
+  `status` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2670,39 +2526,37 @@ CREATE TABLE IF NOT EXISTS `threads` (
 -- Table structure for table `transection_information`
 --
 
-DROP TABLE IF EXISTS `transection_information`;
-CREATE TABLE IF NOT EXISTS `transection_information` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `payment_method_id` int NOT NULL,
-  `user_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `location_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mer_txnid` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `currency` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ip_address` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `by_method` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tnx_id_by_user` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `amount` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_amount` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `service_charge` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payment_charge` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `all_response` text COLLATE utf8mb4_unicode_ci,
-  `secret` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `PayerID` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `token` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `client_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `transection_information` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `payment_method_id` int(11) NOT NULL,
+  `user_id` varchar(125) DEFAULT NULL,
+  `location_id` varchar(125) DEFAULT NULL,
+  `order_id` varchar(125) DEFAULT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `email` varchar(125) DEFAULT NULL,
+  `phone` varchar(125) DEFAULT NULL,
+  `address` varchar(125) DEFAULT NULL,
+  `status` varchar(125) DEFAULT NULL,
+  `mer_txnid` varchar(125) DEFAULT NULL,
+  `currency` varchar(125) DEFAULT NULL,
+  `ip_address` varchar(125) DEFAULT NULL,
+  `by_method` varchar(125) DEFAULT NULL,
+  `description` varchar(125) DEFAULT NULL,
+  `tnx_id_by_user` varchar(125) DEFAULT NULL,
+  `amount` varchar(125) DEFAULT NULL,
+  `store_amount` varchar(125) DEFAULT NULL,
+  `service_charge` varchar(125) DEFAULT NULL,
+  `payment_charge` varchar(125) DEFAULT NULL,
+  `all_response` text DEFAULT NULL,
+  `secret` varchar(125) DEFAULT NULL,
+  `PayerID` varchar(125) DEFAULT NULL,
+  `token` varchar(125) DEFAULT NULL,
+  `client_id` varchar(125) DEFAULT NULL,
+  `updater` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `transection_information`
@@ -2718,19 +2572,17 @@ INSERT INTO `transection_information` (`id`, `payment_method_id`, `user_id`, `lo
 -- Table structure for table `translations`
 --
 
-DROP TABLE IF EXISTS `translations`;
-CREATE TABLE IF NOT EXISTS `translations` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language` int NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'general',
-  `updater_id` bigint DEFAULT NULL,
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `translations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(125) NOT NULL,
+  `language` int(11) NOT NULL,
+  `value` text NOT NULL,
+  `type` varchar(125) NOT NULL DEFAULT 'general',
+  `updater_id` bigint(20) DEFAULT NULL,
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1297 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `translations`
@@ -4035,7 +3887,9 @@ INSERT INTO `translations` (`id`, `key`, `language`, `value`, `type`, `updater_i
 (1293, 'product.variant_option', 2, 'ভেরিয়েন্ট অপশন', 'product', NULL, 0, '2025-01-29 01:52:03', '2025-01-29 01:52:03'),
 (1294, 'settings.custom_js_css', 2, 'কাস্টম স্ক্রিপ্ট', 'settings', NULL, 0, '2025-01-29 01:52:03', '2025-01-29 01:52:03'),
 (1295, 'sidebar.clear', 2, 'ক্যাশ পরিষ্কার করুন', 'sidebar', NULL, 0, '2025-01-29 01:52:03', '2025-01-29 01:52:03'),
-(1296, 'sidebar.backup', 2, 'ডাটাবেস ব্যাকআপ', 'sidebar', NULL, 0, '2025-01-29 01:52:03', '2025-01-29 01:52:03');
+(1296, 'sidebar.backup', 2, 'ডাটাবেস ব্যাকআপ', 'sidebar', NULL, 0, '2025-01-29 01:52:03', '2025-01-29 01:52:03'),
+(1297, 'frontend.follow_us', 1, 'Follow Us', 'Follow Us', 1, 1, '2025-01-30 02:40:43', '2025-01-30 02:40:43'),
+(1298, 'frontend.follow_us', 2, 'অনুসরন করুন', 'Follow Us', 1, 1, '2025-01-30 02:40:43', '2025-01-30 02:40:43');
 
 -- --------------------------------------------------------
 
@@ -4043,19 +3897,17 @@ INSERT INTO `translations` (`id`, `key`, `language`, `value`, `type`, `updater_i
 -- Table structure for table `units`
 --
 
-DROP TABLE IF EXISTS `units`;
-CREATE TABLE IF NOT EXISTS `units` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sort_name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decimal` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `sub_items_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `sub_items` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `units` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `sort_name` varchar(125) DEFAULT NULL,
+  `decimal` varchar(125) NOT NULL DEFAULT '0',
+  `sub_items_id` varchar(125) NOT NULL DEFAULT '0',
+  `sub_items` varchar(125) NOT NULL DEFAULT '0',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `units`
@@ -4070,18 +3922,16 @@ INSERT INTO `units` (`id`, `name`, `sort_name`, `decimal`, `sub_items_id`, `sub_
 -- Table structure for table `uploads`
 --
 
-DROP TABLE IF EXISTS `uploads`;
-CREATE TABLE IF NOT EXISTS `uploads` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `extension` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `size` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `source` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `uploads` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `extension` varchar(125) DEFAULT NULL,
+  `size` varchar(125) DEFAULT NULL,
+  `source` varchar(125) DEFAULT NULL,
+  `user_id` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `uploads`
@@ -4160,7 +4010,32 @@ INSERT INTO `uploads` (`id`, `name`, `extension`, `size`, `source`, `user_id`, `
 (70, 'images_1738143286947_fonesv.jpg', 'jpg', NULL, 'Local', '1', '2025-01-29 03:34:45', '2025-01-29 03:34:45'),
 (71, 'images_1738143286947_fonesv.jpg', 'jpg', NULL, 'Local', '1', '2025-01-29 03:34:53', '2025-01-29 03:34:53'),
 (72, 'leaf-rakes-0586-64b574ff9369a_1738143575951_vmlbqr.jpg', 'jpg', NULL, 'Local', '1', '2025-01-29 03:39:34', '2025-01-29 03:39:34'),
-(73, 'skybazar bd_1738145073842_alggga.png', 'png', NULL, 'Local', '1', '2025-01-29 04:04:34', '2025-01-29 04:04:34');
+(73, 'skybazar bd_1738145073842_alggga.png', 'png', NULL, 'Local', '1', '2025-01-29 04:04:34', '2025-01-29 04:04:34'),
+(74, 'Home Appliances_1738224083031_irr9kz.png', 'png', NULL, 'Local', '1', '2025-01-30 01:59:30', '2025-01-30 01:59:30'),
+(75, '2_1738224094451_o40qvx.png', 'png', NULL, 'Local', '1', '2025-01-30 01:59:44', '2025-01-30 01:59:44'),
+(76, '3_1738224100903_cmteb8.png', 'png', NULL, 'Local', '1', '2025-01-30 01:59:51', '2025-01-30 01:59:51'),
+(77, '4_1738224107860_l6hv1g.png', 'png', NULL, 'Local', '1', '2025-01-30 01:59:56', '2025-01-30 01:59:56'),
+(78, 'fashion_1738224112163_x0erd1.png', 'png', NULL, 'Local', '1', '2025-01-30 02:00:00', '2025-01-30 02:00:00'),
+(79, 'Home Appliances_1738224116766_e5hsk7.png', 'png', NULL, 'Local', '1', '2025-01-30 02:00:04', '2025-01-30 02:00:04'),
+(80, '1_1738225727219_45qx00.png', 'png', NULL, 'Local', '1', '2025-01-30 02:26:51', '2025-01-30 02:26:51'),
+(81, 'ww_1738225727765_urozun.png', 'png', NULL, 'Local', '1', '2025-01-30 02:26:51', '2025-01-30 02:26:51'),
+(82, 'new_1738225818101_g1y8qz.png', 'png', NULL, 'Local', '1', '2025-01-30 02:28:22', '2025-01-30 02:28:22'),
+(83, '2_1738225998114_so8glb.png', 'png', NULL, 'Local', '1', '2025-01-30 02:31:25', '2025-01-30 02:31:25'),
+(84, '2_1738226103916_1fik3q.png', 'png', NULL, 'Local', '1', '2025-01-30 02:33:11', '2025-01-30 02:33:11'),
+(85, 'fd3455e99baa513a3c03bb170e6a6d22.jpg_720x720q80_1738231663674_1t11r8.jpg', 'jpg_720x720q80_1738231663674_1t11r8', NULL, 'Local', '1', '2025-01-30 04:05:47', '2025-01-30 04:05:47'),
+(86, '2_1738231865528_gz9ffd.jpg', 'jpg', NULL, 'Local', '1', '2025-01-30 04:09:09', '2025-01-30 04:09:09'),
+(87, 'WhatsApp-Image-2021-09-21-at-10.34.07-AM_1738231895344_k0bcsh.jpg', '34', NULL, 'Local', '1', '2025-01-30 04:09:39', '2025-01-30 04:09:39'),
+(88, 'product-jpeg-500x500_1738231921816_jxegxi.webp', 'webp', NULL, 'Local', '1', '2025-01-30 04:10:05', '2025-01-30 04:10:05'),
+(89, 'Skechers_shoes_1731391986044_1731391994648_1738231958128_hqc163.avif', 'avif', NULL, 'Local', '1', '2025-01-30 04:10:42', '2025-01-30 04:10:42'),
+(90, 'SPT307-6_1738231970736_oyez3b.jpg', 'jpg', NULL, 'Local', '1', '2025-01-30 04:10:54', '2025-01-30 04:10:54'),
+(91, '4FdlbUyNRE0PQjNx36fx8E0llAGOeYkVDiJZ6UYJ_1738232004120_fz0m9n.jpg', 'jpg', NULL, 'Local', '1', '2025-01-30 04:11:28', '2025-01-30 04:11:28'),
+(92, 'ndncc_512_1738232111120_rrysom.webp', 'webp', NULL, 'Local', '1', '2025-01-30 04:13:14', '2025-01-30 04:13:14'),
+(93, 'casual-women-shoes-500x500_1738232126840_1m7l8k.webp', 'webp', NULL, 'Local', '1', '2025-01-30 04:13:30', '2025-01-30 04:13:30'),
+(94, '71u+SsPGwUL._AC_UY900__1738232170720_szryio.jpg', '_AC_UY900__1738232170720_szryio', NULL, 'Local', '1', '2025-01-30 04:14:14', '2025-01-30 04:14:14'),
+(95, 'khiq1_512_1738232208912_2qr84e.webp', 'webp', NULL, 'Local', '1', '2025-01-30 04:14:52', '2025-01-30 04:14:52'),
+(96, 'images_1738232235799_rqk7g0.jpg', 'jpg', NULL, 'Local', '1', '2025-01-30 04:15:19', '2025-01-30 04:15:19'),
+(97, 'Hb8103df741844329a36c99c868be9892X_1738232265433_4wywvm.avif', 'avif', NULL, 'Local', '1', '2025-01-30 04:15:49', '2025-01-30 04:15:49'),
+(98, '61V98P7+jiL_1738232280737_fmstxb.jpg', 'jpg', NULL, 'Local', '1', '2025-01-30 04:16:04', '2025-01-30 04:16:04');
 
 -- --------------------------------------------------------
 
@@ -4168,52 +4043,49 @@ INSERT INTO `uploads` (`id`, `name`, `extension`, `size`, `source`, `user_id`, `
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `prefix` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `father` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mother` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `designation` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `religion` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slug` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nationality` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nid` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `salary` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `branch_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `prefix` varchar(125) DEFAULT NULL,
+  `name` varchar(125) NOT NULL,
+  `father` varchar(125) DEFAULT NULL,
+  `mother` varchar(125) DEFAULT NULL,
+  `username` varchar(125) DEFAULT NULL,
+  `designation` varchar(125) DEFAULT NULL,
+  `religion` varchar(125) DEFAULT NULL,
+  `slug` varchar(125) DEFAULT NULL,
+  `nationality` varchar(125) DEFAULT NULL,
+  `nid` varchar(125) DEFAULT NULL,
+  `salary` varchar(125) NOT NULL DEFAULT '0',
+  `branch_id` varchar(125) NOT NULL DEFAULT '0',
   `joining_date` date DEFAULT NULL,
   `exit_date` date DEFAULT NULL,
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `sales_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `birth` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `blood_group` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `alt_mobile_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `family_mobile_number` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_tax_payer_id` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `marital_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `sales_commission_present` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `email` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
+  `status` varchar(125) NOT NULL DEFAULT '0',
+  `sales_status` varchar(125) NOT NULL DEFAULT '0',
+  `birth` varchar(125) DEFAULT NULL,
+  `blood_group` varchar(125) DEFAULT NULL,
+  `mobile_number` varchar(125) DEFAULT NULL,
+  `alt_mobile_number` varchar(125) DEFAULT NULL,
+  `family_mobile_number` varchar(125) DEFAULT NULL,
+  `account_tax_payer_id` varchar(125) DEFAULT NULL,
+  `gender` varchar(125) NOT NULL DEFAULT '0',
+  `marital_status` varchar(125) NOT NULL DEFAULT '0',
+  `sales_commission_present` varchar(125) NOT NULL DEFAULT '0',
+  `email` varchar(125) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fcm_token` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(125) NOT NULL,
+  `fcm_token` varchar(125) DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `prefix`, `name`, `father`, `mother`, `username`, `designation`, `religion`, `slug`, `nationality`, `nid`, `salary`, `branch_id`, `joining_date`, `exit_date`, `upload_id`, `status`, `sales_status`, `birth`, `blood_group`, `mobile_number`, `alt_mobile_number`, `family_mobile_number`, `account_tax_payer_id`, `gender`, `marital_status`, `sales_commission_present`, `email`, `email_verified_at`, `password`, `fcm_token`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Super Admin', NULL, NULL, 'superadmin', NULL, NULL, 'super-admin', NULL, NULL, '0', '1', NULL, NULL, '0', '1', '0', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', 'admin@gmail.com', '2025-01-28 02:54:47', '$2y$12$MhTX2WyKjv6QTpDcFv9jQumTtj7BNI/qq1HScZpeqdAs9BPPe6ClW', NULL, 'SGGKKxrO59', '2025-01-28 02:54:47', '2025-01-28 02:54:47');
+(1, NULL, 'Super Admin', NULL, NULL, 'superadmin', NULL, NULL, 'super-admin', NULL, NULL, '0', '1', NULL, NULL, '0', '1', '0', NULL, NULL, NULL, NULL, NULL, NULL, '0', '0', '0', 'admin@gmail.com', '2025-01-28 02:54:47', '$2y$12$MhTX2WyKjv6QTpDcFv9jQumTtj7BNI/qq1HScZpeqdAs9BPPe6ClW', NULL, 'VeGONIb8MRomk3937Upe2ncqwLpvFKHLXDO4QVZqzBcSUfPURcrBp2TdR79E', '2025-01-28 02:54:47', '2025-01-28 02:54:47');
 
 -- --------------------------------------------------------
 
@@ -4221,19 +4093,62 @@ INSERT INTO `users` (`id`, `prefix`, `name`, `father`, `mother`, `username`, `de
 -- Table structure for table `variant_options`
 --
 
-DROP TABLE IF EXISTS `variant_options`;
-CREATE TABLE IF NOT EXISTS `variant_options` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `product_id` bigint NOT NULL,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `old_price` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `selling_price` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `alert_quantity` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `creator` bigint NOT NULL DEFAULT '0',
+CREATE TABLE `variant_options` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `old_price` varchar(125) NOT NULL DEFAULT '0',
+  `selling_price` varchar(125) NOT NULL DEFAULT '0',
+  `alert_quantity` varchar(125) NOT NULL DEFAULT '0',
+  `creator` bigint(20) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `variant_options`
+--
+
+INSERT INTO `variant_options` (`id`, `product_id`, `name`, `old_price`, `selling_price`, `alert_quantity`, `creator`, `created_at`, `updated_at`) VALUES
+(1, 45, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:08:35', '2025-01-30 04:08:35'),
+(2, 45, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:08:35', '2025-01-30 04:08:35'),
+(3, 45, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:08:35', '2025-01-30 04:08:35'),
+(4, 45, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:08:35', '2025-01-30 04:08:35'),
+(5, 46, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:09:14', '2025-01-30 04:09:14'),
+(6, 46, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:09:14', '2025-01-30 04:09:14'),
+(7, 46, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:09:14', '2025-01-30 04:09:14'),
+(8, 46, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:09:14', '2025-01-30 04:09:14'),
+(9, 47, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:09:44', '2025-01-30 04:09:44'),
+(10, 47, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:09:44', '2025-01-30 04:09:44'),
+(11, 47, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:09:44', '2025-01-30 04:09:44'),
+(12, 47, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:09:44', '2025-01-30 04:09:44'),
+(13, 48, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:10:58', '2025-01-30 04:10:58'),
+(14, 48, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:10:58', '2025-01-30 04:10:58'),
+(15, 48, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:10:58', '2025-01-30 04:10:58'),
+(16, 48, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:10:58', '2025-01-30 04:10:58'),
+(17, 49, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:11:31', '2025-01-30 04:11:31'),
+(18, 49, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:11:31', '2025-01-30 04:11:31'),
+(19, 49, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:11:31', '2025-01-30 04:11:31'),
+(20, 49, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:11:31', '2025-01-30 04:11:31'),
+(21, 50, 'red:S', '5000', '4500', '0', 1, '2025-01-30 04:14:26', '2025-01-30 04:14:26'),
+(22, 50, 'red:L', '5000', '4500', '0', 1, '2025-01-30 04:14:26', '2025-01-30 04:14:26'),
+(23, 50, 'yellow:S', '5000', '4500', '0', 1, '2025-01-30 04:14:26', '2025-01-30 04:14:26'),
+(24, 50, 'yellow:L', '5000', '4500', '0', 1, '2025-01-30 04:14:26', '2025-01-30 04:14:26'),
+(41, 51, 'yellow:41', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(40, 51, 'yellow:40', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(39, 51, 'yellow:39', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(33, 52, 'red:39', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(34, 52, 'red:40', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(35, 52, 'red:41', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(36, 52, 'red:42', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(37, 52, 'red:43', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(38, 52, 'red:44', '4500', '4000', '0', 1, '2025-01-30 04:23:45', '2025-01-30 04:23:45'),
+(42, 51, 'yellow:42', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(43, 51, 'yellow:42', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(44, 51, 'yellow:43', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(45, 51, 'yellow:43', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(46, 51, 'yellow:44', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08'),
+(47, 51, 'yellow:44', '4500', '4000', '0', 1, '2025-01-30 04:25:08', '2025-01-30 04:25:08');
 
 -- --------------------------------------------------------
 
@@ -4241,49 +4156,47 @@ CREATE TABLE IF NOT EXISTS `variant_options` (
 -- Table structure for table `varinat_suggessions`
 --
 
-DROP TABLE IF EXISTS `varinat_suggessions`;
-CREATE TABLE IF NOT EXISTS `varinat_suggessions` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `key` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `title_manage_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `sub_title` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sub_title_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `sub_title_manage_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `short_read_more` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Read More',
-  `short_read_more_page_url` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_read_more_status` tinyint(1) NOT NULL DEFAULT '1',
-  `short_read_more_manage_status` tinyint(1) NOT NULL DEFAULT '1',
-  `view_all` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'See All',
-  `view_all_page_url` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `view_all_status` tinyint(1) NOT NULL DEFAULT '1',
-  `view_all_manage_status` tinyint(1) NOT NULL DEFAULT '1',
-  `items_per_row` int NOT NULL DEFAULT '3',
-  `items_show` int NOT NULL DEFAULT '4',
-  `items_manage_status` int NOT NULL DEFAULT '0',
-  `is_details_page` int NOT NULL DEFAULT '0',
-  `is_details_page_manage_status` int NOT NULL DEFAULT '0',
-  `background` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `background_color` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '#eeeeee',
-  `background_type` tinyint(1) NOT NULL DEFAULT '1',
-  `background_manage_status` int NOT NULL DEFAULT '0',
-  `upload_id` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id1` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id2` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_manage_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_id3` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `upload_manage_id3_status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `order` int NOT NULL DEFAULT '1',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `updater` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+CREATE TABLE `varinat_suggessions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `key` varchar(125) NOT NULL,
+  `title` varchar(125) DEFAULT NULL,
+  `title_status` varchar(125) NOT NULL DEFAULT '1',
+  `title_manage_status` varchar(125) NOT NULL DEFAULT '1',
+  `sub_title` varchar(125) DEFAULT NULL,
+  `sub_title_status` varchar(125) NOT NULL DEFAULT '1',
+  `sub_title_manage_status` varchar(125) NOT NULL DEFAULT '1',
+  `short_read_more` varchar(125) NOT NULL DEFAULT 'Read More',
+  `short_read_more_page_url` varchar(125) DEFAULT NULL,
+  `short_read_more_status` tinyint(1) NOT NULL DEFAULT 1,
+  `short_read_more_manage_status` tinyint(1) NOT NULL DEFAULT 1,
+  `view_all` varchar(125) NOT NULL DEFAULT 'See All',
+  `view_all_page_url` varchar(125) DEFAULT NULL,
+  `view_all_status` tinyint(1) NOT NULL DEFAULT 1,
+  `view_all_manage_status` tinyint(1) NOT NULL DEFAULT 1,
+  `items_per_row` int(11) NOT NULL DEFAULT 3,
+  `items_show` int(11) NOT NULL DEFAULT 4,
+  `items_manage_status` int(11) NOT NULL DEFAULT 0,
+  `is_details_page` int(11) NOT NULL DEFAULT 0,
+  `is_details_page_manage_status` int(11) NOT NULL DEFAULT 0,
+  `background` varchar(125) NOT NULL DEFAULT '0',
+  `background_color` varchar(125) NOT NULL DEFAULT '#eeeeee',
+  `background_type` tinyint(1) NOT NULL DEFAULT 1,
+  `background_manage_status` int(11) NOT NULL DEFAULT 0,
+  `upload_id` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id_status` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id1` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id2` varchar(125) NOT NULL DEFAULT '0',
+  `upload_manage_status` varchar(125) NOT NULL DEFAULT '0',
+  `upload_id3` varchar(125) NOT NULL DEFAULT '0',
+  `upload_manage_id3_status` varchar(125) NOT NULL DEFAULT '0',
+  `order` int(11) NOT NULL DEFAULT 1,
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `creator` varchar(125) NOT NULL DEFAULT '0',
+  `updater` varchar(125) NOT NULL DEFAULT '0',
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `varinat_suggessions`
@@ -4339,18 +4252,16 @@ INSERT INTO `varinat_suggessions` (`id`, `key`, `title`, `title_status`, `title_
 -- Table structure for table `vats`
 --
 
-DROP TABLE IF EXISTS `vats`;
-CREATE TABLE IF NOT EXISTS `vats` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1' COMMENT '0 means include  1 means exclude',
-  `status` varchar(125) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
-  `amount` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `creator` varchar(125) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `vats` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(125) DEFAULT NULL,
+  `type` varchar(125) NOT NULL DEFAULT '1' COMMENT '0 means include  1 means exclude',
+  `status` varchar(125) NOT NULL DEFAULT '1',
+  `amount` varchar(125) DEFAULT NULL,
+  `creator` varchar(125) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `vats`
@@ -4361,6 +4272,1016 @@ INSERT INTO `vats` (`id`, `name`, `type`, `status`, `amount`, `creator`, `create
 (2, 'Include Vat', '0', '1', '0', '1', '2025-01-28 06:09:24', '2025-01-28 06:09:24'),
 (3, 'Include Vat', '0', '1', '0', '1', '2025-01-29 01:42:40', '2025-01-29 01:42:40'),
 (4, 'Include Vat', '0', '1', '0', '1', '2025-01-29 01:51:59', '2025-01-29 01:51:59');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `addresses_addressable_type_addressable_id_index` (`addressable_type`,`addressable_id`);
+
+--
+-- Indexes for table `advance_salaries`
+--
+ALTER TABLE `advance_salaries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `areas`
+--
+ALTER TABLE `areas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attendances`
+--
+ALTER TABLE `attendances`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_blog_category`
+--
+ALTER TABLE `blog_blog_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `blog_blog_category_blog_id_foreign` (`blog_id`),
+  ADD KEY `blog_blog_category_blog_category_id_foreign` (`blog_category_id`);
+
+--
+-- Indexes for table `blog_categories`
+--
+ALTER TABLE `blog_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `branches`
+--
+ALTER TABLE `branches`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cash_counters`
+--
+ALTER TABLE `cash_counters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cash_counters_branch_id_foreign` (`branch_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contacts_contactable_type_contactable_id_index` (`contactable_type`,`contactable_id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupon_use_histories`
+--
+ALTER TABLE `coupon_use_histories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `courier_credentials`
+--
+ALTER TABLE `courier_credentials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customers_user_id_foreign` (`user_id`);
+
+--
+-- Indexes for table `devices`
+--
+ALTER TABLE `devices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `devices_device_type_index` (`device_type`),
+  ADD KEY `devices_ip_index` (`ip`),
+  ADD KEY `devices_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `discounts`
+--
+ALTER TABLE `discounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `expriences`
+--
+ALTER TABLE `expriences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `fcms`
+--
+ALTER TABLE `fcms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `features`
+--
+ALTER TABLE `features`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `footer_link_headings`
+--
+ALTER TABLE `footer_link_headings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `footer_link_sub_headings`
+--
+ALTER TABLE `footer_link_sub_headings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `headers`
+--
+ALTER TABLE `headers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `home_page_manages`
+--
+ALTER TABLE `home_page_manages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `leads`
+--
+ALTER TABLE `leads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead_accounts`
+--
+ALTER TABLE `lead_accounts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead_contacts`
+--
+ALTER TABLE `lead_contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead_deals`
+--
+ALTER TABLE `lead_deals`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead_deal_stages`
+--
+ALTER TABLE `lead_deal_stages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead_sources`
+--
+ALTER TABLE `lead_sources`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mail_settings`
+--
+ALTER TABLE `mail_settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `mail_templates`
+--
+ALTER TABLE `mail_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Indexes for table `offer_banners`
+--
+ALTER TABLE `offer_banners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_events`
+--
+ALTER TABLE `order_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_statuses`
+--
+ALTER TABLE `order_statuses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `participants`
+--
+ALTER TABLE `participants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_credentials`
+--
+ALTER TABLE `payment_credentials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payment_methods_paymethodable_type_paymethodable_id_index` (`paymethodable_type`,`paymethodable_id`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_faqs`
+--
+ALTER TABLE `product_faqs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_refs`
+--
+ALTER TABLE `product_refs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `purchases`
+--
+ALTER TABLE `purchases`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchases_unit_id_foreign` (`unit_id`),
+  ADD KEY `purchases_varinat_id_foreign` (`varinat_id`);
+
+--
+-- Indexes for table `refrence_users`
+--
+ALTER TABLE `refrence_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `review_products`
+--
+ALTER TABLE `review_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`);
+
+--
+-- Indexes for table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Indexes for table `salaries`
+--
+ALTER TABLE `salaries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sessions_user_id_index` (`user_id`),
+  ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipping_charges`
+--
+ALTER TABLE `shipping_charges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `social_contacts`
+--
+ALTER TABLE `social_contacts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `social_contacts_sociable_type_sociable_id_index` (`sociable_type`,`sociable_id`);
+
+--
+-- Indexes for table `special_events`
+--
+ALTER TABLE `special_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `stocks`
+--
+ALTER TABLE `stocks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supplier_payments`
+--
+ALTER TABLE `supplier_payments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supplier_types`
+--
+ALTER TABLE `supplier_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `threads`
+--
+ALTER TABLE `threads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transection_information`
+--
+ALTER TABLE `transection_information`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `translations`
+--
+ALTER TABLE `translations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `uploads`
+--
+ALTER TABLE `uploads`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `variant_options`
+--
+ALTER TABLE `variant_options`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `varinat_suggessions`
+--
+ALTER TABLE `varinat_suggessions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vats`
+--
+ALTER TABLE `vats`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `advance_salaries`
+--
+ALTER TABLE `advance_salaries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `areas`
+--
+ALTER TABLE `areas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `attendances`
+--
+ALTER TABLE `attendances`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_blog_category`
+--
+ALTER TABLE `blog_blog_category`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_categories`
+--
+ALTER TABLE `blog_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `branches`
+--
+ALTER TABLE `branches`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `cash_counters`
+--
+ALTER TABLE `cash_counters`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `coupon_use_histories`
+--
+ALTER TABLE `coupon_use_histories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `courier_credentials`
+--
+ALTER TABLE `courier_credentials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `devices`
+--
+ALTER TABLE `devices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `discounts`
+--
+ALTER TABLE `discounts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `expenses`
+--
+ALTER TABLE `expenses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `expriences`
+--
+ALTER TABLE `expriences`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `fcms`
+--
+ALTER TABLE `fcms`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `features`
+--
+ALTER TABLE `features`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `footer_link_headings`
+--
+ALTER TABLE `footer_link_headings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `footer_link_sub_headings`
+--
+ALTER TABLE `footer_link_sub_headings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `headers`
+--
+ALTER TABLE `headers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `home_page_manages`
+--
+ALTER TABLE `home_page_manages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `leads`
+--
+ALTER TABLE `leads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lead_accounts`
+--
+ALTER TABLE `lead_accounts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lead_contacts`
+--
+ALTER TABLE `lead_contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lead_deals`
+--
+ALTER TABLE `lead_deals`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `lead_deal_stages`
+--
+ALTER TABLE `lead_deal_stages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `lead_sources`
+--
+ALTER TABLE `lead_sources`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `mail_settings`
+--
+ALTER TABLE `mail_settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `mail_templates`
+--
+ALTER TABLE `mail_templates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
+--
+-- AUTO_INCREMENT for table `offer_banners`
+--
+ALTER TABLE `offer_banners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_events`
+--
+ALTER TABLE `order_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `order_statuses`
+--
+ALTER TABLE `order_statuses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `participants`
+--
+ALTER TABLE `participants`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment_credentials`
+--
+ALTER TABLE `payment_credentials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `payment_methods`
+--
+ALTER TABLE `payment_methods`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `product_faqs`
+--
+ALTER TABLE `product_faqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_refs`
+--
+ALTER TABLE `product_refs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `refrence_users`
+--
+ALTER TABLE `refrence_users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `review_products`
+--
+ALTER TABLE `review_products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `salaries`
+--
+ALTER TABLE `salaries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+
+--
+-- AUTO_INCREMENT for table `shipping_charges`
+--
+ALTER TABLE `shipping_charges`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `social_contacts`
+--
+ALTER TABLE `social_contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `special_events`
+--
+ALTER TABLE `special_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stocks`
+--
+ALTER TABLE `stocks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sub_categories`
+--
+ALTER TABLE `sub_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `supplier_payments`
+--
+ALTER TABLE `supplier_payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `supplier_types`
+--
+ALTER TABLE `supplier_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `threads`
+--
+ALTER TABLE `threads`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transection_information`
+--
+ALTER TABLE `transection_information`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `translations`
+--
+ALTER TABLE `translations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1299;
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `uploads`
+--
+ALTER TABLE `uploads`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `variant_options`
+--
+ALTER TABLE `variant_options`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT for table `varinat_suggessions`
+--
+ALTER TABLE `varinat_suggessions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `vats`
+--
+ALTER TABLE `vats`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

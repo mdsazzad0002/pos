@@ -211,7 +211,12 @@ class ProductController extends Controller
                 $product->landing_page_bg = $request->landing_page_bg;
                 $product->landing_page_color = $request->landing_page_color;
                 $product->variant_on = $request->variant_on;
-                $product->variant_option = json_encode(['variant_key'=>$request->variant_name_key, 'vairant_value'=>$request->variant_name_value]);
+                $product->variant_option = json_encode([
+                    'variant_key'=>$request->variant_key_name ?? '', //variant key name
+                    'vairant_value'=>$request->variant_name_key ?? '',
+                    'variant_details_key' => $request->variant_key_name_details ?? '',
+                    'variant_details_value' => $request->variant_name_key_details ?? '',
+                ]);
 
 
                 $product->creator = auth()->user()->id ?? 0;
@@ -232,22 +237,44 @@ class ProductController extends Controller
 
 
                     foreach ($requestOptionNames as $key => $items) {
+                            $items_data_var = [];
+                            for ($i = 0; $i < 20; $i++) {
+                                if ($request->has('details_key_value_'.$i)) {
+                                    array_push($items_data_var, 'details_key_value_'.$i);
+                                }else{
+                                    break;
+                            }
+
+                        }
+
+
+                        // return  $items_data;
+                        // return $request->all();
+                        $items_data = [
+                            'old_price' => $request->old_price_v[$key],
+                            'selling_price' => $request->selling_price_v[$key],
+                            'creator' => auth()->user()->id  ?? 0,
+                        ];
+
+                        foreach ($items_data_var as $keydata => $value) {
+                            // dd($value);
+                            if($value){
+                                $items_data[$value] = $request->$value[$key];
+                            }
+                        }
+                        // dd($items_data);
+
 
                         VariantOption::updateOrCreate(
                             [
                                 'product_id' => $product->id,
                                 'name' => $items, // Use this for finding existing options
                             ],
-                            [
-
-                                'old_price' => $request->old_price_v[$key],
-                                'selling_price' => $request->selling_price_v[$key],
-                                'creator' => auth()->user()->id  ?? 0,
-                            ]
-
+                            $items_data
                         );
                     }
 
+                    // dd($items_data);
                     $array_diff = array_diff($existingOptionNames, $requestOptionNames);
 
                     foreach($array_diff as $items){

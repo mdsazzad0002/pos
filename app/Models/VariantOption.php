@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class VariantOption extends Model
 {
     use HasFactory;
-    protected $fillable = ['product_id','name','old_price','selling_price', 'creator'];
+    // protected $fillable = ['product_id','name','old_price','selling_price', 'creator'];
+    protected $guarded = [];
+
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }

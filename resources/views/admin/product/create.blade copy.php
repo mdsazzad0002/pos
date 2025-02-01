@@ -439,130 +439,55 @@
                     <div class="card-body variant_body" style="display: {{ $product ?( $product->variant_on ? 'block' : 'none') : 'none' }}">
                         <div class="variant_input">
                             <div class="row mb-2">
-
                                 <div class="col-12">
-                                    <span  class="text-primary">NB: Every items separate by
+                                    <span onclick="demo_varinat_data()" class="text-primary">NB: Every items separate by
                                         `,` Comma example <span
                                             class="cursor-pointer text-danger">`red,yellow,blue`</span> </span>
                                 </div>
-
-
-                                <div class="col-12 items_container_key_header">
-                                    @php
-                                        $data_items_variant_json = json_decode($product->variant_option);
-                                    @endphp
-
-
-                                    @foreach ($data_items_variant_json->variant_key as $key => $items)
-                                    <div class=" key_items_header" style="background:#1595859e">
-                                        <div>
-                                            <label for="variant_key_name">Key Key Name</label>
-                                            <input type="text" class="form-control variant_key_name" id="variant_key_name" name="variant_key_name[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
-                                        </div>
-                                        <div>
-                                            <label for="variant_name_key">Variant Name</label>
-                                            <input type="text" class="form-control variant_name_key" id="variant_name_key" value="{{  $data_items_variant_json->vairant_value[$key] ?? '' }}" name="variant_name_key[]"
-                                                placeholder="Variant Value">
-                                        </div>
-                                        <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
-                                    </div>
-                                    @endforeach
-
-
-
-                                    @if(is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key))
-                                        @foreach ($data_items_variant_json->variant_details_key as $key => $items)
-                                        <div class=" key_items_header" style="background:#b2971b4d">
-                                            <div>
-                                                <label for="variant_key_name_details">Key Name</label>
-                                                <input type="text" class="form-control variant_key_name_details" id="variant_key_name_details" name="variant_key_name_details[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
-                                            </div>
-                                            <div>
-                                                <label for="variant_name_key_details">Variant Name</label>
-                                                <input type="text" class="form-control variant_name_key_details" id="variant_name_key_details" value="{{  $data_items_variant_json->variant_details_value[$key] ?? '' }}" name="variant_name_key_details[]"
-                                                    placeholder="Variant Value">
-                                            </div>
-                                            <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
-                                        </div>
-                                        @endforeach
-                                    @endif
-
-
-                                    {{-- variant item container key --}}
+                                <div class="col-4">
+                                    <label for="variant_name">Variant Name</label>
+                                    <input type="text" class="form-control" id="variant_name" name="variant_name_key"
+                                        placeholder="Variant Name">
                                 </div>
-
-
-                                <div class="col-12 ">
-                                    <div class="btn-group w-100">
-
-                                        <button type="button" class="btn btn-success mt-4" onclick="create_filed_variant(this, 1)"> + Add Variant Combination </button>
-                                        <button type="button" class="btn btn-warning mt-4" onclick="create_filed_variant(this, 2)">  + Add Variant Details </button>
-                                        <button type="button" class="btn btn-primary mt-4" onclick="generate_variant_filed()">  Generate Filed  </button>
-                                    </div>
+                                <div class="col-4">
+                                    <label for="variant_option">Variant Option</label>
+                                    <input type="text" class="form-control" id="variant_option" name="variant_name_value"
+                                        placeholder="Variant Option">
                                 </div>
-
-
-
+                                <div class="col-4">
+                                    <button type="button" class="btn btn-primary mt-4"
+                                        onclick="generate_variant_filed()">
+                                        Generate Filed
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        {{-- <div>
+                        <div>
                             <div class="row text-center font-weight-bold text-primary mt-3">
                                 <div class="col-md-4">Variant Name</div>
                                 <div class="col-md-4">Old Price</div>
                                 <div class="col-md-4">New Price</div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="variant_output">
                             {{--  variant outpur  --}}
-                            @if($product && $product->variant_on == 1 )
-                                    <div class="d-flex  bg-info rounded variant_heading">
-                                        <div class="single_heading">Key</div>
-                                        @if((is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key)))
-                                            @foreach ($data_items_variant_json->variant_details_key as $key => $item)
-                                                <div class="single_heading">{{ $item ?? '' }}</div>
-                                            @endforeach
-                                        @endif
-                                        <div class="single_heading">Old Price</div>
-                                        <div class="single_heading">Selling Price</div>
-                                        <div class="single_heading">Close</div>
+                            @if($product)
+                                    @foreach ($product->variant_option_info as $items)
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <input type="hidden" name="product_id" value="{{ $items->id }}">
+                                            <input type="text" name="variant_key[]" value="{{ $items->name ?? '' }}" class="form-control"
+                                                placeholder="veriant key" id="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="old_price_v[]" value="{{ $items->old_price ?? 0 }}" class="form-control"
+                                                placeholder="Old Price" id="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="text" name="selling_price_v[]" value="{{ $items->selling_price ?? 0 }}" class="form-control"
+                                                placeholder="Current Price" id="">
+                                        </div>
                                     </div>
-
-                                    @foreach ($product->variant_option_info as $key => $items)
-
-
-
-                                    <div class="row mb-2 items_parents">
-                                                <div class="items">
-                                                    <input type="text" name="variant_key[]" value="{{ $items->name ?? ''  }}" class="form-control"
-                                                        placeholder="variant key" id="">
-                                                </div>
-
-                                                @if(is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key))
-                                                    @for($i = 0; $i < count($data_items_variant_json->variant_details_key); $i++)
-                                                        <div class="items">
-                                                            <input type="text" name="details_key_value_{{ $i }}[]" class="form-control"
-                                                                placeholder="Details" value="{{  $items->{"details_key_value_".$i} ?? '' }}" id="">
-                                                        </div>
-                                                       
-
-                                                    @endfor
-                                                @endif
-
-
-
-
-                                               <div class="items">
-                                                    <input type="text" name="old_price_v[]" class="form-control"
-                                                        placeholder="Old Price" id="" value="{{ $items->old_price ?? 0 }}">
-                                                </div>
-                                                  <div class="items">
-                                                    <input type="text" name="selling_price_v[]" class="form-control"
-                                                        placeholder="Current Price" id="" value="{{ $items->selling_price ?? 0 }}">
-                                                </div>
-                                                <div class="items">
-                                                    <button type="button" class="btn btn-danger" onclick="removeParents(this, '.items_parents')">x</button>
-                                                </div>
-                                         </div>
                                     @endforeach
                             @endif
                             {{--  variant outpur  --}}
@@ -587,7 +512,6 @@
 
 
 <script>
-    // generate faq items
     function control_data_faq(thi, key_class, type){
         if(type == '-'){
             $(thi).parents(key_class).remove();
@@ -616,184 +540,6 @@
         }
 
     }
-    // end generate faq items
-
-
-
-    // VAriant information
-
-        // add new variant key add
-        function create_filed_variant(thi, key_item = 1){
-            if(key_item == 1){
-                key_name = 'variant_key_name';
-                key_value = 'variant_name_key';
-                bg = '#1595859e';
-            }else{
-                key_name = 'variant_key_name_details';
-                key_value = 'variant_name_key_details';
-                bg = '#b2971b4d';
-            }
-
-            let data = `<div class=" key_items_header" style="background:${bg}">
-                            <div>
-                                <label for="${key_name}">Key Key Name</label>
-                                <input type="text" class="form-control ${key_name}" id="${key_name}" name="${key_name}[]"
-                                    placeholder="Variant Key">
-                            </div>
-                            <div>
-                                <label for="${key_value}">Variant Name</label>
-                                <input type="text" class="form-control ${key_value}" id="${key_value}" name="${key_value}[]"
-                                    placeholder="Variant Value">
-                            </div>
-                            <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
-                        </div>  `;
-
-            $('.items_container_key_header').append(data);
-        }
-        // end add new variant key add
-
-
-
-        // generate variant Filed
-        function generate_variant_filed(){
-            // Variant key and variant value
-            let variant_key_name = $('.items_container_key_header .variant_key_name');
-            let variant_key_value = $('.items_container_key_header .variant_name_key');
-
-            // Vairant details key value
-            let variant_key_name_details = $('.items_container_key_header .variant_key_name_details');
-            let variant_key_value_details = $('.items_container_key_header .variant_name_key_details');
-
-
-
-
-            // price variant generate complate
-            var items_combinations = [];
-            var all_values = [];
-
-            // Collect values from inputs
-            variant_key_value.each(function () {
-                var variant_key_value = $(this).val(); // Get input value
-                if (variant_key_value) {
-                    all_values.push(variant_key_value.split(',')); // Convert comma-separated values to an array
-                }
-            });
-
-            // Generate combinations
-            function generateCombinations(arr, prefix = '') {
-                if (arr.length === 0) {
-                    items_combinations.push(prefix.slice(0, -1)); // Remove last ":"
-                    return;
-                }
-
-                arr[0].forEach(value => {
-                    generateCombinations(arr.slice(1), prefix + value + ':');
-                });
-            }
-
-            // Start generating combinations
-            generateCombinations(all_values);
-
-            // Join final result with ","
-            var final_combination = items_combinations.join(',');
-
-
-
-
-            console.log(items_combinations);
-
-
-
-
-
-
-
-            // console.log(variant_key_name)
-            // console.log(variant_key_value)
-
-
-
-            let final_combination_output = '';
-
-            // heading generate
-            final_combination_output += `<div class="d-flex  bg-info rounded variant_heading"><div class="single_heading">Key</div>`;
-
-            variant_key_name_details.each(function(){
-                final_combination_output += `<div class="single_heading">${this.value}</div>`;
-            })
-
-            final_combination_output += `<div class="single_heading">Old Price</div>`;
-            final_combination_output += `<div class="single_heading">Selling Price</div>`;
-            final_combination_output += `<div class="single_heading">Close</div></div>`;
-            // end heading
-
-
-
-
-            items_combinations.forEach(function(item, index){
-                    let rendered = ' <div class="row mb-2 items_parents">';
-
-                        rendered +=  `
-                                <div class="items">
-                                    <input type="text" name="variant_key[]" value="${item}" class="form-control"
-                                        placeholder="variant key" id="">
-                                </div>
-
-                                `;
-
-                                if(variant_key_value_details.length > 0){
-
-                                    variant_key_value_details.each(function(index, item){
-
-                                    rendered += ` <div class="items">
-                                                        <input type="text" name="details_key_value_${index}[]" class="form-control"
-                                                            placeholder="Details" value="${this.value}" id="">
-                                                    </div>`;
-                                    })
-                                }
-
-
-                            rendered += `
-                               <div class="items">
-                                    <input type="text" name="old_price_v[]" class="form-control"
-                                        placeholder="Old Price" id="">
-                                </div>
-                                  <div class="items">
-                                    <input type="text" name="selling_price_v[]" class="form-control"
-                                        placeholder="Current Price" id="">
-                                </div>
-                                <div class="items">
-                                    <button type="button" class="btn btn-danger" onclick="removeParents(this, '.items_parents')">x</button>
-                                </div>
-                            `;
-                            rendered += ' </div>';
-
-                            final_combination_output += rendered;
-                        });
-
-                        $('.variant_output').html(final_combination_output);
-
-
-
-
-
-        }
-        // end generate variant Filed
-
-
-        // String to array
-        function string_to_array(string, separator = ' '){
-            if(string.length == 0){
-                return [];
-            }else{
-                return string.split(separator);
-
-            }
-        }
-        // end String to array
-
-
-
 </script>
 
 
@@ -803,6 +549,11 @@
 
 @push('js')
 <script>
+    @if ($product ? $product->variant_on : 0)
+        var variant_data = JSON.parse(@json($product->variant_option));
+            $('#variant_name').val(variant_data.variant_key)
+            $('#variant_option').val(variant_data.vairant_value)
+    @endif
 
 
 
@@ -843,16 +594,83 @@
         });
 
 
+        function demo_varinat_data(){
+            document.querySelector('#variant_name').value='red,yellow,blue'
+            document.querySelector('#variant_option').value='S,L,T'
+        }
 
+        function render_html(items){
+            rendered = '';
+            items.forEach(function(item){
+                rendered +=  `
+                    <div class="row mb-2 items_parents">
+                        <div class="items">
+                            <input type="text" name="variant_key[]" value="${item}" class="form-control"
+                                placeholder="variant key" id="">
+                        </div>
+                        <div class="items">
+                            <input type="text" name="old_price_v[]" class="form-control"
+                                placeholder="Old Price" id="">
+                        </div>
+                        <div class="items">
+                            <input type="text" name="selling_price_v[]" class="form-control"
+                                placeholder="Current Price" id="">
+                        </div>
+                        <div class="items">
+                            <button type="button" class="btn btn-danger" onclick="removeParents(this, '.items_parents')">x</button>
+                        </div>
+                    </div>`;
+            });
 
+            return rendered;
+        }
+        function string_to_array(string, separator = ' '){
+            if(string.length == 0){
+                return [];
+            }else{
+                return string.split(separator);
 
-
+            }
+        }
 
         function removeParents(thi, items_class){
             $(thi).parents(items_class).remove();
         }
 
+        function generate_variant_filed(){
+            var variant_key = document.querySelector('#variant_name').value;
+                 variant_key = string_to_array(variant_key, ',');
 
+            var variant_option = document.querySelector('#variant_option').value;
+                variant_option = string_to_array(variant_option, ',');
+
+
+            var items_combanitaion = [];
+            if(variant_key.length > 0 && variant_option.length > 0){
+
+                variant_key.forEach(element => {
+                    variant_option.forEach(option => {
+                        var items = element +':'+option;
+                        items_combanitaion.push(items)
+                    })
+                });
+                
+            }else if(variant_key.length > 0){
+                items_combanitaion.concat(variant_key)
+            }else if( variant_option.length){
+                items_combanitaion.concat(variant_option)
+            }else{
+                alert('Please add Veriant key')
+            }
+
+            if(items_combanitaion.length > 0 ){
+                document.querySelector('.variant_output').innerHTML = render_html(items_combanitaion);
+
+            }
+
+
+
+        }
 
 
 
@@ -881,38 +699,6 @@
         }
         .items_parents{
             gap: 10px;
-            padding: 0 10px;
-        }
-        .items_container_key_header {
-            display:flex;
-            flex-wrap:wrap;
-            gap: 10px;
-        }
-        .key_items_header{
-            width:150px;;
-            position:relative;
-            width: 150px;
-            padding: 6px;
-            border: 1px solid #00000014;
-            border-radius: 5px;
-        }
-
-        .key_items_header .remove_btn{
-            position:absolute;
-            top:0;
-            right:0px;
-
-
-            height:auto;
-        }
-        .variant_heading {
-            padding: 12px;
-            margin-bottom: 15px;
-        }
-        .items_parents .items input,
-        .variant_heading .single_heading{
-            text-align: center;
-            width: 150px;
         }
 </style>
 @endpush

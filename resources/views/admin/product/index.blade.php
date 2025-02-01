@@ -52,6 +52,9 @@
             {data:'name', name:'name', title:'Name'},
             {data:'category_name', name:'category', title:'Category', searchable:false, orderable:false},
             {data:'status_text', name:'status', title:'Status'},
+            {data:'variant_on', name:'variant_on', title:'Variant Status', render: function (data, type, row, meta) {
+                return data == 1 ? 'Variant' : '';
+            }},
             {data:'old_price', name:'old_price', title:'Old Price'},
             {data:'selling_price', name:'selling_price', title:'Selling Price'},
             {data:'image', name:'image', searchable:false, orderable:false, title:'Image'},

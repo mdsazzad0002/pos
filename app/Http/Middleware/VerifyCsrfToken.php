@@ -19,7 +19,8 @@ class VerifyCsrfToken extends Middleware
         'sslcommerz/*',
         'paypal/*',
         'checkout',
-        'admin/homePageManage'
+        'admin/homePageManage',
+        'admin/product/*'
 
     ];
 }
