@@ -521,6 +521,10 @@
                                             @foreach ($data_items_variant_json->variant_details_key as $key => $item)
                                                 <div class="single_heading">{{ $item ?? '' }}</div>
                                             @endforeach
+                                            {{-- @foreach ($data_items_variant_json->variant_key as $key => $item)
+                                                <div class="single_heading">{{ $item ?? '' }}</div>
+                                            @endforeach --}}
+
                                         @endif
                                         <div class="single_heading">Old Price</div>
                                         <div class="single_heading">Selling Price</div>
@@ -543,9 +547,21 @@
                                                             <input type="text" name="details_key_value_{{ $i }}[]" class="form-control"
                                                                 placeholder="Details" value="{{  $items->{"details_key_value_".$i} ?? '' }}" id="">
                                                         </div>
-                                                       
+                                                        {{-- @php
+                                                            $key_items_key_name = explode(":", $items->name);
+                                                        @endphp
+                                                        @foreach ( $key_items_key_name as $key => $key_name_item)
+                                                            <div class="items">
+                                                                <input disabled type="text" class="form-control"
+                                                                    placeholder="Details" value="{{  $key_name_item }}" id="">
+                                                            </div>
+
+                                                        @endforeach --}}
+
+
 
                                                     @endfor
+
                                                 @endif
 
 

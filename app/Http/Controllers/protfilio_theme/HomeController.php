@@ -291,6 +291,24 @@ class HomeController extends Controller
    }
 
 
+   public function random_wise_product_category_wise(Request $request){
+        $limit_product =  $request->limit ?? 10;
+        $paginate_data = $request->paginate_data ?? false;
+        $details_page_slug = $request->details_page_slug ?? false;
+
+        if($paginate_data){
+            $products = product::inRandomOrder()->paginate($limit_product);
+        }else{
+            $products = product::inRandomOrder()->limit($limit_product)->get();
+        }
+
+
+        return view('frontend.protfilio_theme._filter_variant.partials.product_category_wise', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request' => $request]);
+
+
+   }
+
+
     public function blog(){
         return view('frontend.protfilio_theme.blog.index');
     }

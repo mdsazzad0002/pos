@@ -54,6 +54,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->string('title_style')->default('title_style_0');
 
 
             $table->string('upload_id1')->default(0);   //Define background title image

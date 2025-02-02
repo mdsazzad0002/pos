@@ -66,7 +66,7 @@ if(!isset($cart_page)){
                             <div class="hr-line mb-24"></div>
                             <div class="d-flex align-items-center gap-16 mb-24">
                                 <h6>Share:</h6>
-                                <ul class="list-unstyled social-link m-0" style="display:none">
+                                <ul class="list-unstyled social-link m-0" >
                                     <li>
 
                                         <a href="https://www.facebook.com/sharer/sharer.php?u={{ url()->full() }}"  target="_blank">

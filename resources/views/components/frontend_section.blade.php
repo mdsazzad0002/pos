@@ -10,14 +10,17 @@
     <!-- Section Title -->
 
     @if(!isset($title))
+
         @if($info->sub_title_status || $info->title_status)
             <div class="container-fluid section-title pt-3" data-aos="fade-up">
-                @if($info->title_status)
-                <h2>{{ __($info->title) }}</h2>
-                @endif
-                @if($info->sub_title_status)
-                <p>{{ __($info->sub_title) }}</p>
-                @endif
+                <div class="{{ $info->title_style }}">
+                    @if($info->title_status)
+                    <h2 class="title">{{ __($info->title) }}</h2>
+                    @endif
+                    @if($info->sub_title_status)
+                    <p class="sub_title">{{ __($info->sub_title) }}</p>
+                    @endif
+                </div>
             </div>
             @endif
         @endif

@@ -44,7 +44,10 @@
                         </label>
                     </div>
                 </div>
+
                 {{-- @endif --}}
+
+          
 
 
                 {{-- @if($item->HasExists('sub_title_status')) --}}
@@ -65,6 +68,27 @@
                 {{-- @endif --}}
 
                 {{-- @if($item->HasExists('short_read_more_status')) --}}
+                
+                {{-- Title preset --}}
+                <div class="my-3 row">
+                    <div class="col-6">
+                        <select name="title_style" onchange="change_title_style(this)" class="form-control" data-class=".title_style_img{{ $item->id }}">
+                            <option @if($item->title_style == 'title_style_0') selected  @endif value="title_style_0">Default</option>
+                            <option @if($item->title_style == 'title_style_1') selected  @endif value="title_style_1">Title style 1</option>
+                            <option @if($item->title_style == 'title_style_2') selected  @endif value="title_style_2">Title style 2</option>
+                            <option @if($item->title_style == 'title_style_3') selected  @endif value="title_style_3">Title style 3</option>
+                            <option @if($item->title_style == 'title_style_4') selected  @endif value="title_style_4">Title style 4</option>
+                            <option @if($item->title_style == 'title_style_5') selected  @endif value="title_style_5">Title style 5</option>
+                            <option @if($item->title_style == 'title_style_6') selected  @endif value="title_style_6">Title style 6</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <img class="title_style_img{{ $item->id }}" src="{{ asset('uploads/preset/title/'.$item->title_style.'.png') }}" alt="">
+                    </div>    
+                </div>
+                {{-- // Title preset --}}
+
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">

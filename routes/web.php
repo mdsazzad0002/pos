@@ -147,7 +147,7 @@ Route::get('clear', function () {
     // toastr()->success('Successfully cleared', 'Congrats');
     return back();
 });
- 
+
 // Route::get('fresh', function () {
 //     Artisan::call('migrate:fresh --seed');
 //     return back();
@@ -667,6 +667,7 @@ Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
     Route::get('/recent_view', [HomeController::class, 'recent_view'])->name('recent_view');
     Route::get('/quickview', [HomeController::class, 'quickview'])->name('quickview');
     Route::get('/product_category_wise', [HomeController::class, 'product_category_wise'])->name('category_wise');
+    Route::get('/random_wise_product_category_wise', [HomeController::class, 'random_wise_product_category_wise'])->name('random_wise_product_category_wise');
 });
 
 
