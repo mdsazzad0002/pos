@@ -63,7 +63,7 @@
 @push('js')
 <script>
   function format_cart_items(data){
-    // console.log('removed');
+    console.log('removed');
             var html_data = '';
 
             // console.log(data['product'])
@@ -74,7 +74,7 @@
 
                 html_data+=`
               
-                            <tr class="table-row  border-top-1">
+                            <tr class="table-row">
                                     <td class="pd">
                                         <div class="product-detail-box">
                                             <a href="javascript:void(0)" onclick="pos_remove_cart(${element.product.id},${element.size})" class="h5 dark-black"><i class="fal fa-times"></i></a>
@@ -84,14 +84,16 @@
 
                                             <div class="d-block text-start">
                                                 <h6><a href="{{ $view_page->slug }}?slug=${element.product.slug}">${element.product.name}</a></h6>
-                                                   
-                                    
+                                                    <div class="small mb-2" style="${element.product_variant ? 'display:block': 'display:none'}">
+                                                        - size: ${element.product_variant ? element.product_variant.name : ''}<br>
+
+                                                    </div>
                                             </div>
 
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="fw-500"> <span class="light-gray qtyPrice">{{ settings('currency_symbol', 9) }}  ${element.cal_total_with_vat.toFixed(2)} </span></p>
+                                        <p class="fw-500"> <span class="light-gray qtyPrice">{{ settings('currency_symbol', 9) }} ${element.product_variant ? element.product_variant.selling_price :  element.product.selling_price}(+ ${element.vat_price} Vat) = ${element.cal_total_with_vat.toFixed(2)} </span></p>
                                     </td>
                                     <td>
                                         <div class="quantity-controller quantity-wrap" data-id="${element.product.id}">
@@ -104,85 +106,9 @@
                                         <p class="fw-500">{{ settings('currency_symbol', 9) }} ${element.single_subtotal.toFixed(2)}</p>
                                         
                                     </td>
-                                </tr>
-                                  `;
+                                </tr> `;
 
-
-                                  if(element.product_variant){
-                                    var variant_option = JSON.parse(element.product.variant_option);
-                                    //console.log(variant_option.variant_details_key)
-
-                                    html_data+=` <tr class="table-row">
-                                        <td colspan="4">
-                                            <div class="product-detail-box_heading">
-                                        `;
-
-                                        //  console.log(element.product_variant)
-                                      
-                                        for(var i = 0; i < variant_option.variant_key.length; i++){
-                                            // let key = variant_option.variant_key[i];
-                                         //   console.log(variant_option.variant_key[0])
-                                            html_data+=`
-                                            <div>
-                                                ${variant_option.variant_key[i]}
-                                            </div>
-                                            `
-                                        }
-                                        for(var i = 0; i < variant_option.variant_details_key.length; i++){
-                                            let key = variant_option.variant_details_key[i];
-                                            html_data+=`
-                                            <div>
-                                                ${key}
-                                            </div>
-                                            `
-                                        }
-
-
-                                        html_data+=`
-                                        </div>
-                                        <div class="product-detail-box_heading">
-                                            `;
-
-                                       
-
-                                            // Form key name variant product
-                                            let variant_key = element.product_variant.name.split(','); 
-                                                for(var i = 0; i < variant_key.length; i++){
-                                                    html_data+=`
-                                                    <div>
-                                                        ${variant_key[i]}
-                                                    </div>
-                                                    `
-                                            }
-                                            // End product name 
-
-
-                                            // Form key value variant product
-                                            for(var i = 0; i < 50; i++){
-                                                let key = `details_key_value_${i}`;
-                                                if(element.product_variant[key]){
-                                                    html_data+=`
-                                                    <div>
-                                                        <p class="fw-500">${element.product_variant[key]}</p>
-                                                    </div>
-                                                    `
-                                                }else{
-                                                    break;
-                                                }
-                                                // Form key value variant product
-                                            }
-
-                                    html_data+=`
-                                    </div>
-                                    </td></tr>`;
-
-                                    }
-
-                             
-                                
-                              
-
-                // console.log(element)
+                console.log(element)
             })
 
         }else{
@@ -196,7 +122,7 @@
 
         function format_cart_subtotal(data){
 
-            // console.log(data);
+            console.log(data);
             let html_data = '';
             html_data+=`<div class="checkout-box bg-semi-white mt-xl-0 mt-48">
                         <div class="checkout-title text-center mb-16">
@@ -283,35 +209,5 @@
         }
 
 </script>
-
-<style>
-    .product-detail-box_heading {
-    display: flex;
-    padding: 4px 32px;
-    display: flex;
-    gap: 15px;
-    justify-content: space-around;
-}
-
-.product-detail-box_heading div {
-    flex: 1 1 100px;
-    border: 1px solid #eee;
-    text-align: left;
-    padding: 6px;
-    background: #110202;
-    color: white;
-    border-radius: 4px;
-    text-align: center;
-    font-weight: 700;
-}
-
-tr.table-row.border-top-1 {
-    border-top: 2px solid #a2a2a2;
-}
-
-.table-row:not(.border-top-1) td{
-    padding-top: 0px !important;
-}
-</style>
 
 @endpush

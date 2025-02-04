@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -16,7 +16,8 @@ class CustomerController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            return DataTables::make(customer::query())
+            $customer = Customer::query()->orderBy('id', 'desc');
+            return DataTables::make(  $customer)
                 ->addColumn('image', function ($row) {
 
                     return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
@@ -141,7 +142,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(customer $customer)
+    public function show(Customer $customer)
     {
         return view('admin.customer.partials.view', compact('customer'));
     }
@@ -149,7 +150,7 @@ class CustomerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(customer $customer)
+    public function edit(Customer $customer)
     {
         return view('admin.customer.partials.edit', compact('customer'));
     }
@@ -157,7 +158,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, customer $customer)
+    public function update(Request $request, Customer $customer)
     {
         $request->validate([
             'area' => 'required|integer'
@@ -184,14 +185,14 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function delete(customer $customer){
+    public function delete(Customer $customer){
         return view('layout.admin.modal_content_delete');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(customer $customer)
+    public function destroy(Customer $customer)
     {
 
         $customer->delete();
@@ -205,7 +206,7 @@ class CustomerController extends Controller
 
     public function getCustomer(Request $request)
     {
-        $data_result = customer::where(function($query) use ($request) {
+        $data_result = Customer::where(function($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%');
             }
@@ -219,7 +220,7 @@ class CustomerController extends Controller
     }
 
 
-    public function customer_profile_pic(Request $request, customer $customer){
+    public function customer_profile_pic(Request $request, Customer $customer){
         $customer->upload_id = uploads($request->profile_pic, $customer->upload_id);
         $customer->save();
         return back();

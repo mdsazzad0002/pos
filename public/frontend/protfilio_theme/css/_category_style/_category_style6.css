@@ -1,0 +1,33 @@
+
+._category_style6  img {
+    width: 100%;
+}
+
+
+._category_style6 .row > div {
+    padding: 7px;
+}
+
+   
+
+
+
+._category_style6 .hero-link {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.3rem;
+    color: #ffffff;
+    text-align: center;
+    background: linear-gradient(0deg, rgb(0 0 0 / 60%) 0%, rgb(0 0 0 / 45%) 30%, rgb(0 0 0 / 16%) 66%, rgb(0 0 0 / 0%) 100%);
+    height: 75px;
+    line-height: 100px;
+    font-family: 'Fjalla One', sans-serif;
+    /* display: none; */
+}
+
+
+
+    ._category_style6 .product-link{
+        position:relative;
+    }

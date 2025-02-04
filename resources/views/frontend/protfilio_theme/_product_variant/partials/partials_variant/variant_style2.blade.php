@@ -9,12 +9,14 @@
 
         @endphp
 
-        @if((is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key)))
-            @foreach ($data_items_variant_json->variant_details_key as $key => $item)
+        @if((is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key)) && (is_array($data_items_variant_json->variant_key) || is_object($data_items_variant_json->variant_key)))
+
+
+            @foreach ($data_items_variant_json->variant_key as $key => $item)
                 <div class="single_heading">{{ $item ?? '' }}</div>
             @endforeach
 
-            @foreach ($data_items_variant_json->variant_key as $key => $item)
+            @foreach ($data_items_variant_json->variant_details_key as $key => $item)
                 <div class="single_heading">{{ $item ?? '' }}</div>
             @endforeach
         @endif
@@ -32,6 +34,25 @@
           <input type="radio" id="size{{ $items_variant->id }}" value="{{ $items_variant->id }}"  name="size" class="option-input variant_size">
 
 
+            {{-- Variant Info print --}}
+                 @php
+                        $key_items_key_name = explode(":", $items_variant->name);
+                @endphp
+
+                @foreach ($key_items_key_name as $i => $key_name_item)
+
+                    <div class="items">
+                        <input type="radio" id="sizevar{{ $items_variant->id.$key_name_item }}" value="{{ $items_variant->id }}"  name="size" class="option-input variant_size">
+                        <label for="size{{ $items_variant->id }}">
+                            <span class="option-text text-capitalize">{{ $key_name_item ?? '' }}</span>
+                        </label>
+                    </div>
+                @endforeach
+                {{-- End Variant Info print --}}
+
+
+
+                {{-- Additional info print --}}
                 @if(is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key))
                     @for($i = 0; $i < count($data_items_variant_json->variant_details_key); $i++)
                         <div class="items">
@@ -46,21 +67,7 @@
                 {{-- End Additional info print --}}
 
 
-                {{-- Variant Info print --}}
-                @php
-                        $key_items_key_name = explode(":", $items_variant->name);
-                @endphp
 
-                @foreach ($key_items_key_name as $i => $key_name_item)
-
-                    <div class="items">
-                        <input type="radio" id="sizevar{{ $items_variant->id.$key_name_item }}" value="{{ $items_variant->id }}"  name="size" class="option-input variant_size">
-                        <label for="size{{ $items_variant->id }}">
-                            <span class="option-text text-capitalize">{{ $key_name_item ?? '' }}</span>
-                        </label>
-                    </div>
-                @endforeach
-                {{-- End Variant Info print --}}
 
 
         </div>

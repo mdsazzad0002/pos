@@ -448,45 +448,49 @@
 
 
                                 <div class="col-12 items_container_key_header">
-                                    @php
-                                        $data_items_variant_json = json_decode($product->variant_option);
-                                    @endphp
+                                    @if($product)
+                                        @php
+                                            if( $product->variant_on){
+                                                $data_items_variant_json = json_decode($product->variant_option);
+                                            }
+                                        @endphp
 
-
-                                    @foreach ($data_items_variant_json->variant_key as $key => $items)
-                                    <div class=" key_items_header" style="background:#1595859e">
-                                        <div>
-                                            <label for="variant_key_name">Key Key Name</label>
-                                            <input type="text" class="form-control variant_key_name" id="variant_key_name" name="variant_key_name[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
-                                        </div>
-                                        <div>
-                                            <label for="variant_name_key">Variant Name</label>
-                                            <input type="text" class="form-control variant_name_key" id="variant_name_key" value="{{  $data_items_variant_json->vairant_value[$key] ?? '' }}" name="variant_name_key[]"
-                                                placeholder="Variant Value">
-                                        </div>
-                                        <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
-                                    </div>
-                                    @endforeach
-
-
-
-                                    @if(is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key))
-                                        @foreach ($data_items_variant_json->variant_details_key as $key => $items)
-                                        <div class=" key_items_header" style="background:#b2971b4d">
-                                            <div>
-                                                <label for="variant_key_name_details">Key Name</label>
-                                                <input type="text" class="form-control variant_key_name_details" id="variant_key_name_details" name="variant_key_name_details[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
+                                        @if( $product->variant_on)
+                                            @foreach ($data_items_variant_json->variant_key as $key => $items)
+                                            <div class=" key_items_header" style="background:#1595859e">
+                                                <div>
+                                                    <label for="variant_key_name">Key Key Name</label>
+                                                    <input type="text" class="form-control variant_key_name" id="variant_key_name" name="variant_key_name[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
+                                                </div>
+                                                <div>
+                                                    <label for="variant_name_key">Variant Name</label>
+                                                    <input type="text" class="form-control variant_name_key" id="variant_name_key" value="{{  $data_items_variant_json->vairant_value[$key] ?? '' }}" name="variant_name_key[]"
+                                                        placeholder="Variant Value">
+                                                </div>
+                                                <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
                                             </div>
-                                            <div>
-                                                <label for="variant_name_key_details">Variant Name</label>
-                                                <input type="text" class="form-control variant_name_key_details" id="variant_name_key_details" value="{{  $data_items_variant_json->variant_details_value[$key] ?? '' }}" name="variant_name_key_details[]"
-                                                    placeholder="Variant Value">
-                                            </div>
-                                            <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
-                                        </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
+
+                                        @if( $product->variant_on)
+                                            @if(is_array($data_items_variant_json->variant_details_key) || is_object($data_items_variant_json->variant_details_key))
+                                                @foreach ($data_items_variant_json->variant_details_key as $key => $items)
+                                                <div class=" key_items_header" style="background:#b2971b4d">
+                                                    <div>
+                                                        <label for="variant_key_name_details">Key Name</label>
+                                                        <input type="text" class="form-control variant_key_name_details" id="variant_key_name_details" name="variant_key_name_details[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
+                                                    </div>
+                                                    <div>
+                                                        <label for="variant_name_key_details">Variant Name</label>
+                                                        <input type="text" class="form-control variant_name_key_details" id="variant_name_key_details" value="{{  $data_items_variant_json->variant_details_value[$key] ?? '' }}" name="variant_name_key_details[]"
+                                                            placeholder="Variant Value">
+                                                    </div>
+                                                    <button onclick="removeParents(this, '.key_items_header')" type="button" class="btn btn-sm btn-danger btn_items remove_btn ">x</button>
+                                                </div>
+                                                @endforeach
+                                            @endif
+                                        @endif
                                     @endif
-
 
                                     {{-- variant item container key --}}
                                 </div>

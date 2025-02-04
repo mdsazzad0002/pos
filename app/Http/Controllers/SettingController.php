@@ -60,7 +60,7 @@ class SettingController extends Controller
         }elseif($slug == 'variant_part_status' && $key == '99'){
             $flag_target = 1;
         }
-        
+
 
         // return $settings;
         if($flag_target == 1){
@@ -214,16 +214,17 @@ class SettingController extends Controller
 
     public function downloadBackup()
     {
-        $databaseName = env('DB_DATABASE', 'd_pos');
-        $username = env('DB_USERNAME', 'root');
-        $password = env('DB_PASSWORD','');
+        $databaseName = config('database.connections.mysql.database'); //env('DB_DATABASE', 'd_pos');
+        $username = config('database.connections.mysql.username');//env('DB_USERNAME', 'root');
+        $password = config('database.connections.mysql.password'); //env('DB_PASSWORD','');
         $backupPath = storage_path('app/'.date('d-M-Y-h-i-s-A').'.sql');
-        $host = env('DB_HOST', '127.0.0.1');
+        $host = config('database.connections.mysql.host');//env('DB_HOST', '127.0.0.1');
 
 
 
 
-        $command = "mysqldump --host={$host} --user={$username} --password={$password} {$databaseName} > {$backupPath}";
+        $command = "mysqldump --host={$host} --user={$username} --password='{$password}' {$databaseName} > {$backupPath}";
+        //dd($command);
 
         try {
             exec($command, $output, $returnVar);

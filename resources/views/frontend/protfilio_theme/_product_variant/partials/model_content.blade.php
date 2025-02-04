@@ -96,9 +96,13 @@
 <div class="hr-line mb-24"></div>
 
 
-
-@include('frontend.protfilio_theme._product_variant.partials.partials_variant.variant_style2', ['product' => $product])
-
+{{-- Product Variant --}}
+    @if(settings('product_variant_style1_status', 99) == 1)
+        @include('frontend.protfilio_theme._product_variant.partials.partials_variant.variant_style1', ['product' => $product])
+    @elseif (settings('product_variant_style2_status', 99) == 1)
+        @include('frontend.protfilio_theme._product_variant.partials.partials_variant.variant_style2', ['product' => $product])
+    @endif
+{{-- Product Variant --}}
 
 
 

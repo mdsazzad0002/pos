@@ -47,24 +47,31 @@
 
         function add_to_cart(thi){
 
-            // console.log(thi)
             if ($(thi).data('quantaty')) {
-
+           
+                var variant;
+                var unit;
                 var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
-                if($(thi).closest('.product_variant').length > 0){
-                    var variant = $(thi).closest('.product_variant').find('input.variant_size:checked').val();
+
+              //  console.log($(thi).closest('.product_description_parents').length + 'sda');
+
+                if($(thi).closest('.product_description_parents').length > 0){
+                    variant = $(thi).closest('.product_description_parents').find('input.variant_size:checked').val();
+                  //  console.log(variant+'here');
                 }else{
-                    var variant = $(thi).closest('.modal').find('input.variant_size:checked').val();
+                     variant = $(thi).closest('.modal').find('input.variant_size:checked').val();
 
                 }
                 if($(thi).closest('.product_unit').length > 0){
-                    var unit = $(thi).closest('.product_unit').find('input.option-input:checked').val();
+                     unit = $(thi).closest('.product_unit').find('input.option-input:checked').val();
                 }else{
-                    var unit = $(thi).closest('.modal').find('input.option-input:checked').val();
+                     unit = $(thi).closest('.modal').find('input.option-input:checked').val();
                 }
+                
+                // console.log(variant)
 
+                // console.log(45645);
 
-                // console.log(quantaty);
                 $.ajax({
                     type: 'get',
                     url:'{{ route('add_to_cart') }}',
@@ -83,6 +90,8 @@
                         },500)
                     }
                 })
+
+
             }else{
                 $.ajax({
                     type: 'get',

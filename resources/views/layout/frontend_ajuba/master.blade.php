@@ -61,8 +61,21 @@
     </div>
     <!-- Main Wrapper End -->
 
+
+
     <!-- Back To Top Start -->
     <a href="#main-wrapper" id="backto-top" class="back-to-top"><i class="fas fa-angle-up"></i></a>
+
+    {{-- Quick Connect Social --}}
+    <div class="quick_connect">
+        @if(settings('app_whatssap_fixed_status',9) == 1)
+            <a href="{{ settings('app_whatsapp', 9) }}" id="" target="_blank" class="whatsapp"><i class="fa-brands fa-square-whatsapp"></i></a>
+        @endif
+        @if(settings('app_messenger_fixed_status',9) == 1)
+         <a href="{{ settings('app_messenger', 9) }}" id="" target="_blank" class="messenger"><i class="fa-brands fa-facebook-messenger"></i></a>
+        @endif
+    </div>
+    {{-- // Quick Connect Social --}}
 
 
     <!-- Mobile Menu Start -->
