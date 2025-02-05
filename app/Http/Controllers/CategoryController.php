@@ -21,6 +21,11 @@ class CategoryController extends Controller
                     return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
 
                 })
+                ->addColumn('background', function ($row) {
+
+                    return "<img style='max-width:100px;' src='".dynamic_asset($row->upload_bg)."'/>";
+
+                })
 
                 ->addColumn('action', function ($row) {
 
@@ -62,7 +67,7 @@ class CategoryController extends Controller
 
 
                 })
-                ->rawColumns(['action', 'image'])
+                ->rawColumns(['action', 'image', 'background'])
                 ->make(true);
         }
         return view('admin.category.index');
@@ -89,6 +94,7 @@ class CategoryController extends Controller
         $category->creator = auth()->user()->id ?? 0;
 
         $category->upload_id = $request->image ?? 0;
+        $category->upload_bg = $request->background ?? 0;
         $category->slug = create_slug($request->name, 'category', 'slug');
         $category->save();
 
@@ -126,6 +132,7 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->status = $request->status;
         $category->description = $request->description;;
+        $category->upload_bg = $request->background ?? 0;
         $category->upload_id = $request->image ?? 0;
         $category->save();
 

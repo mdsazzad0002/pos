@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status')->default(1);
             $table->string('upload_id')->nullable();
+            $table->string('upload_bg')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

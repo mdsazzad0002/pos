@@ -20,23 +20,35 @@ class VarinatSuggessionSeeder extends Seeder
      */
     public function run(): void
     {
+
+
         $data = [
               // Brand =====================================================================
              'brand1' => [
                 'key' =>'_brand_variant._brand_style1',
                 'title' => 'Brand Style 1',
                 'title_status' => 1,
+
                 'sub_title' => 'Brand Sub Title',
                 'sub_title_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 1,
+
                 'view_all' => 'View All',
                 'view_all_status' => 1,
+
                 'items_per_row' => 3,
+                'items_per_row_status' => 0,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/brand_style1.png'
+                'upload_id'=>'uploads/preset/page_variant/brand_style1.png',
+                'background_manage_status'=> 1,
+                'items_manage_status' => 1
+
+
 
             ],
              'brand2' => [
@@ -172,6 +184,24 @@ class VarinatSuggessionSeeder extends Seeder
                 'upload_id'=>'uploads/preset/page_variant/category_style5.png'
 
             ],
+            'category6' => [
+                'key' =>'_category_variant._category_style6',
+                'title' => 'Category Style 6',
+                'title_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 12,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/category_style6.png'
+
+            ],
+
             // ===================================================================
             // ===================================================================
             // ===================================================================
@@ -367,6 +397,80 @@ class VarinatSuggessionSeeder extends Seeder
                 'upload_id'=>'uploads/preset/page_variant/randomize_product_category_wise.png'
 
             ],
+             'product7' => [
+                'key' =>'_filter_variant.partials1.recent_product',
+                'title' => 'Recent Product',
+                'title_status' => 0,
+                'sub_title' => 'Category Wise Product',
+                'sub_title_status' => 0,
+                'short_read_more' => '#',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+                'upload_id'=>'uploads/preset/page_variant/recent_product.png'
+
+            ],
+             'product8' => [
+                'key' =>'_product_variant._category_wise_product1',
+                'title' => 'Recent Product',
+                'title_status' => 0,
+                'sub_title' => 'Category Wise Product',
+                'sub_title_status' => 0,
+                'short_read_more' => '#',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+                'upload_id'=>'uploads/preset/page_variant/_category_wise_product1.png'
+
+            ],
+             'product9' => [
+                'key' =>'_product_cat_brand_wise._cat_band_wise_product',
+                'title' => 'Recent Product',
+                'title_status' => 0,
+                'sub_title' => 'Category Wise Product ',
+                'sub_title_status' => 0,
+                'short_read_more' => '#',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_lg.png'
+
+            ],
+             'product10' => [
+                'key' =>'_product_cat_brand_wise._cat_product_sm',
+                'title' => 'Category Wise Product Small',
+                'title_status' => 0,
+                'sub_title' => 'Category Wise Product ',
+                'sub_title_status' => 0,
+                'short_read_more' => '#',
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'items_per_row' => 6,
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_sm.png'
+
+            ],
+
+
 
               // ===================================================================
             // ===================================================================
@@ -1004,7 +1108,10 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 
+
+
         ];
+
 
 
         function seed_items($item, $sug = null){
@@ -1019,6 +1126,7 @@ class VarinatSuggessionSeeder extends Seeder
                 $homepage->upload_id1 = $item['upload_id1'] ?? 0;
                 $homepage->upload_id2 = $item['upload_id2'] ?? 0;
 
+                $homepage->items_per_row_status = $item['items_per_row_status'] ?? 0;
                 $homepage->upload_manage_status = $item['upload_id_status'] ?? 0;
 
 
@@ -1029,7 +1137,7 @@ class VarinatSuggessionSeeder extends Seeder
                 $homepage->items_manage_status = $item['items_manage_status'] ?? 0;
                 $homepage->is_details_page_manage_status = $item['is_details_page_manage_status'] ?? 0;
                 $homepage->background_manage_status = $item['background_manage_status'] ?? 0;
-                $homepage->background_manage_status = $item['background_manage_status'] ?? 0;
+
 
                 $homepage->upload_manage_id3_status = $item['upload_manage_id3_status'] ?? 0;
 

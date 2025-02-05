@@ -46,6 +46,7 @@
             {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
 
             {data:'image', name:'image', title:'Image', searchable:false, orderable:false},
+            {data:'background', name:'upload_bd', title:'Background', searchable:false, orderable:false},
             {data:'name', name:'name', title:'Name'},
             {data:'status', name:'status', title:'Status', render: function (data, type, row, meta) {
                 return data == 1 ? 'Active' : 'Inactive';

@@ -29,7 +29,7 @@
                 <!-- Include CSRF token for security -->
 
 
-                {{-- @if($item->HasExists('title_status')) --}}
+                @if($item->HasExists('title_status'))
                 <div class="row">
                     <div class="col-md-9">
                         <div class="form-group">
@@ -45,12 +45,12 @@
                     </div>
                 </div>
 
-                {{-- @endif --}}
-
-          
+                @endif
 
 
-                {{-- @if($item->HasExists('sub_title_status')) --}}
+
+
+                @if($item->HasExists('sub_title_status'))
                 <div class="row">
                     <div class="col-md-9">
                         <div class="form-group">
@@ -65,10 +65,10 @@
                         </label>
                     </div>
                 </div>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if($item->HasExists('short_read_more_status')) --}}
-                
+                @if($item->HasExists('short_read_more_status'))
+
                 {{-- Title preset --}}
                 <div class="my-3 row">
                     <div class="col-6">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-6">
                         <img class="title_style_img{{ $item->id }}" src="{{ asset('uploads/preset/title/'.$item->title_style.'.png') }}" alt="">
-                    </div>    
+                    </div>
                 </div>
                 {{-- // Title preset --}}
 
@@ -109,10 +109,10 @@
                         </label>
                     </div>
                 </div>
-                 {{-- @endif --}}
+                 @endif
 
 
-                 {{-- @if($item->HasExists('view_all_status')) --}}
+                 @if($item->HasExists('view_all_status'))
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -133,17 +133,20 @@
                         </label>
                     </div>
                 </div>
-                {{-- @endif --}}
+                @endif
 
 
 
+                @if($item->HasExists('items_manage_status'))
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="items_per_row">Items Per Row</label>
-                            <input type="number" class="form-control" id="items_per_row" name="items_per_row" value="{{ $item->items_per_row }}" >
+                    @if($item->HasExists('items_per_row_status'))
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="items_per_row">Items Per Row</label>
+                                <input type="number" class="form-control" id="items_per_row" name="items_per_row" value="{{ $item->items_per_row }}" >
+                            </div>
                         </div>
-                    </div>
+                    @endif
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="items_show">Items Show</label>
@@ -157,17 +160,12 @@
                             <input type="checkbox" class="toggle" {{ $item->is_details_page == 1 ? 'checked' : '' }}  placeholder="page is_details_page" name="is_details_page" id="is_details_page" value="1">
                         </label>
                     </div>
+                @endif
 
-                    <div class="col-md-6 col-lg-4 col-xl-3">
-                        <label for="status"> Page Status <br />
-                            <input type="checkbox" checked class="" hidden name="status" value="0">
-                            <input type="checkbox" class="toggle" {{ $item->status == 1 ? 'checked' : '' }}  placeholder="page Status" name="status" id="status" value="1">
-                        </label>
-                    </div>
                 </div>
 
 
-                {{-- @if($item->HasExists('background_type')) --}}
+                @if($item->HasExists('background_manage_status'))
                 <div class="row">
                     <div class="col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group" onclick="upload_select(this)">
@@ -193,28 +191,6 @@
                     </div>
 
                 </div>
-                {{-- @endif --}}
-
-
-
-                @if($item->HasExists('upload_manage_status'))
-                <div class="row">
-                    <div class="col-md-6 ">
-                        <div class="form-group" onclick="upload_select(this)">
-                            <label for="background d-block" id="upload_id1">Left Side Image</label> <br>
-                            <input hidden type="text" class="form-control" id="upload_id1" name="upload_id1" value="{{ $item->upload_id1 }}">
-                            <img style="max-height: 60px" src="{{  dynamic_asset($item->upload_id1) }}" alt="">
-                        </div>
-                    </div>
-                    <div class="col-md-6 ">
-                        <div class="form-group" onclick="upload_select(this)">
-                            <label for="background d-block" id="upload_id2">Right Side Image</label> <br>
-                            <input hidden type="text" class="form-control" id="upload_id2" name="upload_id2" value="{{ $item->upload_id2 }}">
-                            <img style="max-height: 60px" src="{{  dynamic_asset($item->upload_id2) }}" alt="">
-                        </div>
-                    </div>
-
-                </div>
                 @endif
 
 
@@ -238,6 +214,10 @@
 
                 </div>
                 @endif
+
+
+
+
 
                 @if($item->HasExists('upload_manage_id3_status'))
                 <div class="row">
@@ -253,10 +233,19 @@
                 @endif
 
 
+                <div class="row">
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <label for="status"> Page Status <br />
+                            <input type="checkbox" checked class="" hidden name="status" value="0">
+                            <input type="checkbox" class="toggle" {{ $item->status == 1 ? 'checked' : '' }}  placeholder="page Status" name="status" id="status" value="1">
+                        </label>
+                    </div>
+                </div>
+
 
 
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <iframe src="" frameborder="0"></iframe>
+                {{-- <iframe src="" frameborder="0"></iframe> --}}
             </form>
 
 

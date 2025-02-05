@@ -23,7 +23,12 @@
             <img style="max-height: 60px" src="{{ dynamic_asset($category->upload_id) }}" alt="">
         </label>
     </div>
-
+    <div class="">
+        <label  type="button" onclick="upload_select(this)"> Background <br>
+            <input type="text" name="background" id="background" class="form-control mb-2"  value="{{ $category->upload_bg }}" hidden >
+            <img style="max-height: 60px" src="{{ dynamic_asset($category->upload_bg) }}" alt="">
+        </label>
+    </div>
 
     <div class="d-flex justify-content-end">
         <button class="btn btn-warning" type="submit">Save</button>

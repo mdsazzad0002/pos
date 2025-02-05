@@ -1,7 +1,12 @@
 @php
 if($request->has('slug')){
     $products = \App\Models\product::where('slug', $request->slug)->first();
-    $products->views += 1;
+   // dd($products);
+    if(is_numeric($products->views)){
+        $products->views += 1;
+    }else{
+        $products->views = 1;
+    }
     $products->save();
 
 }else{

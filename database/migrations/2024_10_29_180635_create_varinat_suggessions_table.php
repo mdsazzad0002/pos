@@ -38,6 +38,9 @@ return new class extends Migration
 
 
             $table->integer('items_per_row')->default(3);
+            $table->integer('items_per_row_status')->default(0);
+
+
             $table->integer('items_show')->default(4);
             $table->integer('items_manage_status')->default(0);
 

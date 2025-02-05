@@ -19,6 +19,13 @@
         </label>
     </div>
 
+    <div class="">
+        <label  type="button" onclick="upload_select(this)"> Background <br>
+            <input type="text" name="background" id="background" class="form-control mb-2" hidden >
+            <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt="">
+        </label>
+    </div>
+
     <label for="status"> category Status <br/>
         <input type="checkbox" checked class="" hidden  name="status"   value="0">
         <input type="checkbox" class="toggle"  placeholder=" Status" name="status"  id="status" value="1">
