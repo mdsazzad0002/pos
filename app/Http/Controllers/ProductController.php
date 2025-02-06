@@ -196,6 +196,7 @@ class ProductController extends Controller
                 $product->service = $request->service;
                 $product->status = $request->status;
                 $product->for_selling = $request->for_selling;
+                $product->free_delivery = $request->free_delivery;
 
 
                 $product->upload_id = $request->image;

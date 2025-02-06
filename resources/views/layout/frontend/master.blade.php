@@ -28,7 +28,6 @@
 <a href="admin">gdg</a>
     @yield('content')
 
-
 </body>
 </html>
 

@@ -47,6 +47,8 @@ return new class extends Migration
 
             $table->integer('old_price')->default(0);
             $table->integer('selling_price')->default(0);
+            
+            $table->integer('free_delivery')->default(0);
 
 
             $table->string('vat')->default(0);

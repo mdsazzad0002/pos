@@ -27,45 +27,77 @@ class VarinatSuggessionSeeder extends Seeder
              'brand1' => [
                 'key' =>'_brand_variant._brand_style1',
                 'title' => 'Brand Style 1',
-                'title_status' => 1,
+                'title_status' => 0,
+                'title_manage_status' => 1,
 
                 'sub_title' => 'Brand Sub Title',
-                'sub_title_status' => 1,
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
 
                 'short_read_more' => 'Read More',
-                'short_read_more_status' => 1,
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
 
                 'view_all' => 'View All',
-                'view_all_status' => 1,
+                'view_all_status' => 0,
+                'view_all_manage_status' => 1,
+                'is_details_page_manage_status'=> 1,
 
-                'items_per_row' => 3,
+
+                'items_per_row' => 0,
                 'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 1,
+
 
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
                 'upload_id'=>'uploads/preset/page_variant/brand_style1.png',
                 'background_manage_status'=> 1,
-                'items_manage_status' => 1
 
-
+                'upload_manage_id3_status'=> 0,
+                'upload_manage_status'=> 0,
 
             ],
              'brand2' => [
                 'key' =>'_brand_variant._brand_style2',
                 'title' => 'Brand Style 2',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Brand Sub Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
+
+                'items_per_row' => 0,
+                'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 1,
+
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 15,
+                'view_all_manage_status' => 1,
+                'is_details_page_manage_status'=> 1,
+
+
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/brand_style2.png'
+                'upload_id'=>'uploads/preset/page_variant/brand_style2.png',
+                'background_manage_status'=> 1,
 
             ],
             // ===================================================================
@@ -80,18 +112,38 @@ class VarinatSuggessionSeeder extends Seeder
             'contact1' => [
                 'key' =>'_contact_variant._contact_style1',
                 'title' => 'Contact Style 1',
-                'title_status' => 1,
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
+
                 'sub_title' => 'Contact Sub Title',
-                'sub_title_status' => 1,
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 1,
-                'items_per_row' => 3,
+                'view_all_manage_status' => 0,
+                'is_details_page_manage_status'=> 0,
+
+
+                'items_per_row' => 0,
+                'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 0,
+
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/contact_style1.png'
+                'upload_id'=>'uploads/preset/page_variant/contact_style1.png',
+                'background_manage_status'=> 1,
 
             ],
             // ===================================================================
@@ -103,34 +155,66 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_category_variant._category_style1',
                 'title' => 'Category Style 1',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
+
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 12,
+                'view_all_manage_status' => 1,
+                'is_details_page_manage_status'=> 1,
+
+                'items_per_row' => 0,
+                'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style1.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style1.png',
+                'background_manage_status'=> 1,
 
             ],
+
             'category2' => [
                 'key' =>'_category_variant._category_style2',
                 'title' => 'Category Style 2',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 12,
+                'view_all_manage_status' => 1,
+                'is_details_page_manage_status'=> 1,
+
+                'items_per_row' => 0,
+                'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style2.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style2.png',
+                'background_manage_status'=> 1,
 
             ],
             'category3' => [
@@ -147,7 +231,8 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style3.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style3.png',
+                'background_manage_status'=> 1,
 
             ],
             'category4' => [
@@ -164,7 +249,8 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style4.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style4.png',
+                'background_manage_status'=> 1,
 
             ],
             'category5' => [
@@ -181,24 +267,39 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style5.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style5.png',
+                'background_manage_status'=> 1,
 
             ],
             'category6' => [
                 'key' =>'_category_variant._category_style6',
                 'title' => 'Category Style 6',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Sub Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 12,
+                'view_all_manage_status' => 1,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/category_style6.png'
+                'upload_id'=>'uploads/preset/page_variant/category_style6.png',
+                'background_manage_status'=> 1,
+
 
             ],
 
@@ -212,53 +313,97 @@ class VarinatSuggessionSeeder extends Seeder
               'hero1' => [
                 'key' =>'_hero_variant._hero_style1',
                 'title' => 'Hero Style 1',
-                'title_status' => 1,
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
                 'sub_title' => 'Hero Sub Title',
-                'sub_title_status' => 1,
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 1,
+                'view_all_manage_status' => 0,
+
+
                 'items_per_row' => 3,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+
+
+
+                'upload_manage_id3_status'=> 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_manage_id3_status'=> 1,
-                'upload_id'=>'uploads/preset/page_variant/hero_style1.png'
+                'upload_id'=>'uploads/preset/page_variant/hero_style1.png',
+                'background_manage_status'=> 1,
 
             ],
             'hero2' => [
                 'key' =>'_hero_variant._hero_style2',
                 'title' => 'Hero Style 2',
-                'title_status' => 1,
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
                 'sub_title' => 'Hero Sub Title',
-                'sub_title_status' => 1,
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 1,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 3,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/hero_style2.png'
+                'upload_id'=>'uploads/preset/page_variant/hero_style2.png',
+                'background_manage_status'=> 1,
 
             ],
             'hero3' => [
                 'key' =>'_hero_variant._hero_style3',
                 'title' => 'Hero Style 3',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Hero Sub Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/hero_style3.png'
+                'upload_id'=>'uploads/preset/page_variant/hero_style3.png',
+                'background_manage_status'=> 1,
 
             ],
 
@@ -267,17 +412,30 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_hero_variant._hero_slider1',
                 'title' => 'Hero Slider',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Hero Slider',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 0,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
-                'upload_id'=>'uploads/preset/page_variant/hero_slider1.png'
+                'upload_id'=>'uploads/preset/page_variant/hero_slider1.png',
+                'background_manage_status'=> 1,
+
 
             ],
             // ===================================================================
@@ -383,90 +541,159 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_product_variant._randomize_product_category_wise',
                 'title' => 'Product as Category & Random Wise Product',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Wise Product',
                 'sub_title_status' => 0,
+                'sub_title_manage_status'=> 1 ,
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 1,
+
                 'items_per_row' => 6,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
 
-                'upload_id'=>'uploads/preset/page_variant/randomize_product_category_wise.png'
+                'upload_id'=>'uploads/preset/page_variant/_randomize_product_category_wise.png',
+                'background_manage_status'=> 1,
 
             ],
              'product7' => [
                 'key' =>'_filter_variant.partials1.recent_product',
                 'title' => 'Recent Product',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Wise Product',
                 'sub_title_status' => 0,
+                'sub_title_manage_status'=> 1 ,
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 6,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
 
-                'upload_id'=>'uploads/preset/page_variant/recent_product.png'
-
+                'upload_id'=>'uploads/preset/page_variant/recent_product.png',
+                // 'category_manage_status' => 1,
+                'background_manage_status'=> 1,
             ],
              'product8' => [
                 'key' =>'_product_variant._category_wise_product1',
                 'title' => 'Recent Product',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
+
                 'sub_title' => 'Category Wise Product',
                 'sub_title_status' => 0,
+                'sub_title_manage_status'=> 1 ,
+
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+
                 'items_per_row' => 6,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/_category_wise_product1.png',
+                'background_manage_status'=> 1,
 
-                'upload_id'=>'uploads/preset/page_variant/_category_wise_product1.png'
+                'category_manage_status' => 1,
 
             ],
              'product9' => [
                 'key' =>'_product_cat_brand_wise._cat_band_wise_product',
-                'title' => 'Recent Product',
+                'title' => 'Category Brand',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Wise Product ',
                 'sub_title_status' => 0,
+                'sub_title_manage_status'=> 1 ,
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 6,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_lg.png',
+                'background_manage_status'=> 1,
 
-                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_lg.png'
+
 
             ],
              'product10' => [
                 'key' =>'_product_cat_brand_wise._cat_product_sm',
                 'title' => 'Category Wise Product Small',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Wise Product ',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 1,
+
                 'items_per_row' => 6,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_sm.png',
+                'background_manage_status'=> 1,
 
-                'upload_id'=>'uploads/preset/page_variant/_cat_band_wise_product_sm.png'
+                'category_manage_status' => 1,
+
+
 
             ],
 
@@ -794,22 +1021,61 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
 
 
+            // 'key' =>'_hero_variant._hero_style3',
+            //     'title' => 'Hero Style 3',
+            //     'title_status' => 0,
+            //     'title_manage_status' => 1,
+
+            //     'sub_title' => 'Hero Sub Title',
+            //     'sub_title_status' => 0,
+            //     'sub_title_manage_status' => 1,
+
+            //     'short_read_more' => 'Read More',
+            //     'short_read_more_status' => 0,
+            //     'short_read_more_manage_status' => 0,
+
+
+            //     'view_all' => 'View All',
+            //     'view_all_status' => 0,
+            //     'view_all_manage_status' => 0,
+
+            //     'items_per_row' => 15,
+            //     'items_per_row_status' => 0,
+            //     'items_manage_status' => 0,
+
+            //     'background' => 0,
+            //     'background_color' => '#eeeeee',
+            //     'background_type' => 0,
+            //     'upload_id'=>'uploads/preset/page_variant/hero_style3.png',
+            //     'background_manage_status'=> 1,
             // Product contact 1
             '_404v_1' => [
                 'key' =>'_404_variant.404_style1',
                 'title' => '404 page  1',
+                'title_manage_status' => 1,
+
                 'title_status' => 0,
-                'sub_title' => 'contact us Title',
+                'sub_title' => 'Something went wrong',
                 'sub_title_status' => 0,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
-                'background' => 0,
-                'background_type' => 1,
-                'background_color' => '#eeeeee',
+                'view_all_manage_status' => 0,
 
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/404_style1.png',
+                'background_manage_status'=> 0,
 
             ],
             // ===================================================================
@@ -1121,25 +1387,28 @@ class VarinatSuggessionSeeder extends Seeder
                 if(!$homepage){
                     $homepage = new VarinatSuggession();
                 }
-                $homepage->upload_id = $item['upload_id'] ?? 0;
+                foreach($item as $key => $value){
+                    $homepage->$key = $value;
+                }
+                // $homepage->upload_id = $item['upload_id'] ?? 0;
 
-                $homepage->upload_id1 = $item['upload_id1'] ?? 0;
-                $homepage->upload_id2 = $item['upload_id2'] ?? 0;
+                // $homepage->upload_id1 = $item['upload_id1'] ?? 0;
+                // $homepage->upload_id2 = $item['upload_id2'] ?? 0;
 
-                $homepage->items_per_row_status = $item['items_per_row_status'] ?? 0;
-                $homepage->upload_manage_status = $item['upload_id_status'] ?? 0;
-
-
-                $homepage->title_manage_status = $item['title_manage_status'] ?? 0;
-                $homepage->sub_title_manage_status = $item['sub_title_manage_status'] ?? 0;
-                $homepage->short_read_more_manage_status = $item['short_read_more_manage_status'] ?? 0;
-                $homepage->view_all_manage_status = $item['view_all_manage_status'] ?? 0;
-                $homepage->items_manage_status = $item['items_manage_status'] ?? 0;
-                $homepage->is_details_page_manage_status = $item['is_details_page_manage_status'] ?? 0;
-                $homepage->background_manage_status = $item['background_manage_status'] ?? 0;
+                // $homepage->items_per_row_status = $item['items_per_row_status'] ?? 0;
+                // $homepage->upload_manage_status = $item['upload_id_status'] ?? 0;
 
 
-                $homepage->upload_manage_id3_status = $item['upload_manage_id3_status'] ?? 0;
+                // $homepage->title_manage_status = $item['title_manage_status'] ?? 0;
+                // $homepage->sub_title_manage_status = $item['sub_title_manage_status'] ?? 0;
+                // $homepage->short_read_more_manage_status = $item['short_read_more_manage_status'] ?? 0;
+                // $homepage->view_all_manage_status = $item['view_all_manage_status'] ?? 0;
+                // $homepage->items_manage_status = $item['items_manage_status'] ?? 0;
+                // $homepage->is_details_page_manage_status = $item['is_details_page_manage_status'] ?? 0;
+                // $homepage->background_manage_status = $item['background_manage_status'] ?? 0;
+
+
+                // $homepage->upload_manage_id3_status = $item['upload_manage_id3_status'] ?? 0;
 
 
 

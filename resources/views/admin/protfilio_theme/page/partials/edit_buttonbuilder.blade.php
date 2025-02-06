@@ -84,11 +84,14 @@
         const cards = document.querySelectorAll('.add_to_layout_container  .single_item_layout'); // Get all cards
        
         cards.forEach(card => {
-            const cardTitle = card.querySelector('.title_layout').innerHTML.toLowerCase(); // Get the card's title
-            console.log(cardTitle)
+            const cardTitle = card.querySelector('.title_layout.main').innerHTML.toLowerCase(); // Get the card's title
+            const cardTitleKey = card.querySelector('.title_layout.sm').innerHTML.toLowerCase(); // Get the card's title
+          //  console.log(cardTitle)
             if (cardTitle.includes(filterValue)) {
                 card.classList.remove('d-none'); // Show the card if it matches the filter
-            } else {
+            } else if(cardTitleKey.includes(filterValue)) {
+                card.classList.remove('d-none'); // Show the card if it matches the filter
+            }else{
                 card.classList.add('d-none'); // Hide the card if it doesn't match the filter
             }
         });
@@ -108,7 +111,8 @@
                 html_output +=  `
                 <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})" style="    border: 1px solid #3e444a;cursor: pointer;">
                     <img src="${element.image }" alt="" class="img-fulid" style="width: fit-content; max-width: 100%;">
-                    <div class="title_layout" style="background: #3e444a; color: white; padding: 1px 7px; border-radius: 0px;">${element.title}</div>
+                    <div class="title_layout main" style="background: #3e444a; color: white; padding: 1px 7px; border-radius: 0px;">${element.title}</div>
+                    <div class="title_layout sm " style="background: #08775b; color: white; padding: 1px 7px; border-radius: 0px;">#${element.key}</div>
 
 
                 </div>`;

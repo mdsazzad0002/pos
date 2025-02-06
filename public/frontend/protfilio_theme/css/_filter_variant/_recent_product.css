@@ -1,0 +1,60 @@
+._recent_product{
+    padding:15px 0;
+}
+._recent_product .card.product-card{
+    margin-bottom:10px;
+}
+._recent_product .productQuickViewbtn{
+    cursor: pointer;
+}
+._recent_product .product-card{
+    position: relative;
+}
+._recent_product .products-cart-button {
+    background: #2d2d2d;
+    text-align: center;
+    color: white;
+    padding: 9px;
+    font-weight: 700;
+}
+
+._recent_product .free_delivery {
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    background: #0b0a0a;
+    color: white;
+    padding: 3px 11px;
+}
+
+
+._recent_product .sale {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ff4e4e;
+    color: white;
+    padding: 3px 11px;
+}
+
+
+
+._recent_product .discounted_amount {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d2d2d;
+    color: white;
+    padding: 0px 6px;
+    font-size: 14px;
+}
+
+._recent_product .price_card {
+    position: relative;
+}
+._recent_product .card-text.truncate{
+    margin: 7px 0;
+    line-clamp: 2;
+    text-overflow: ellipsis;
+}

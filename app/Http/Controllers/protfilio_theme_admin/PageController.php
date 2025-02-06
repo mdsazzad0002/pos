@@ -35,10 +35,13 @@ class PageController extends Controller
 
                 ->addColumn('action', function ($row) {
 
+                        $visit_page =  url($row->slug);
+                        $visit_button =  "<a class='btn btn-primary '
+                        data-title='$row->name' href='$visit_page' target='_blank' >Visit</a>";
+
+
                         $delete_route = route('admin.page.delete', $row->id);
-
                         $delete_button =  "<button class='btn btn-danger '
-
                         data-title='$row->name'
                         onclick='button_ajax(this)'
                         data-href='$delete_route'>Delete</button>";
@@ -55,6 +58,7 @@ class PageController extends Controller
                         $edit_buttonbuilder =  "<a target='_blank' href='$builder_route' class='btn btn-warning'>Edit Element</a>";
 
                         $return_data = '';
+                        $return_data .= $visit_button. '&nbsp;';
                         if(auth()->user()->can('page edit')==true){
                             $return_data .= $edit_button. '&nbsp;';
                             $return_data .= $edit_buttonbuilder. '&nbsp;';

@@ -1,17 +1,25 @@
 @php
-$category_first = \App\Models\Category::where('id', 7)->first();
-$filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
-$detail_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
+$category_first = \App\Models\Category::where('id', $variant_info->category)->first();
+if(!isset($filter_page)):
+    $filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
+endif;
+if(!isset($detail_page)):
+    $detail_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
+endif;
+
 $products = [];
 if($category_first){
-$products = \App\Models\Product::where('category', $category_first->id)->where('status', 1)->limit(8)->get();
+$products = \App\Models\Product::where('category', $category_first->id)->where('status', 1)->limit($variant_info->items_show)->get();
 }
 @endphp
 
 
-<link rel="stylesheet"
-    href="{{ asset('frontend/protfilio_theme/css/_product_variant/_category_wise_product1.css') }}" />
-<div class="home-element category_wise_product">
+
+    <x-frontend_section  :info="$variant_info" class="category_wise_product" css="_product_variant/_category_wise_product1.css" >
+{{-- <div class="home-element category_wise_product"> --}}
+    @if($products && $category_first && $filter_page && $detail_page)
+        
+
     <div class="container-fluid">
         <div class="product_column_container">
 
@@ -77,5 +85,7 @@ $products = \App\Models\Product::where('category', $category_first->id)->where('
 
         </div>
     </div>
+    @endif
 
-</div>
+{{-- </div> --}}
+    </x-frontend_section>

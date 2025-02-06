@@ -309,6 +309,13 @@
                                             id="service" value="1">
                                     </label>
                                 </div>
+                                <div class="col-lg-6">
+                                    <label for="free_delivery"> Free Delivery <br />
+                                        <input type="checkbox" checked class="" hidden name="free_delivery" value="0">
+                                        <input type="checkbox" class="status toggle" {{ $product ? ($product->free_delivery ? 'checked' : '') : '' }}  placeholder="status" name="free_delivery"
+                                            id="service" value="1">
+                                    </label>
+                                </div>
 
 
                             </div>

@@ -82,6 +82,8 @@
     @include('layout.frontend_ajuba.partials.mobile_nav')
     <!-- Mobile Menu End -->
 
+    @include('layout.frontend_ajuba.partials.offer_bannar')
+
     <!-- Modal -->
     @include('layout.frontend_ajuba.partials.product_quick_view')
     <!-- Modal -->

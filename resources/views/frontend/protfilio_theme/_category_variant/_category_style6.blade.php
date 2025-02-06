@@ -2,10 +2,9 @@
     $category_list = \App\Models\Category::where('status', 1)->get();
     $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
 @endphp
-<link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_category_style/_category_style6.css') }}">
 
-<div class="_category_style6 home-element">
 
+<x-frontend_section :info="$variant_info" class="_category_style6" css="_category_style/_category_style6.css">
     <div class="container-fluid">
         <div class="row">
             @foreach ($category_list as  $key => $category)
@@ -23,4 +22,4 @@
 
         </div>
     </div>
-</div>
+</x-frontend_section>

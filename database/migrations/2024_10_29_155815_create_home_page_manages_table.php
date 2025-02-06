@@ -54,6 +54,7 @@ return new class extends Migration
             $table->softDeletes();
             $table->timestamps();
 
+            $table->string('category')->default('0');
             $table->string('title_style')->default('title_style_0');
 
 

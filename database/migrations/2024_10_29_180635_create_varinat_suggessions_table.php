@@ -55,6 +55,8 @@ return new class extends Migration
             $table->string('background_color')->default('#eeeeee');
             $table->boolean('background_type')->default(1);
             $table->integer('background_manage_status')->default(0);
+            
+            $table->integer('category_manage_status')->default(0);
 
 
             $table->string('upload_id')->default(0); //Define background image

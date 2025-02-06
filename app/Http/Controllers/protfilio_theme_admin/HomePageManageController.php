@@ -37,7 +37,7 @@ class HomePageManageController extends Controller
 
         $homePageManage = VarinatSuggession::find($request->items_id);
         $homePageManageArray = $homePageManage->toArray();
-        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater', 'upload_id', 'image','upload_id_status', 'title_manage_status', 'sub_title_manage_status', 'short_read_more_manage_status', 'view_all_manage_status', 'items_manage_status', 'is_details_page_manage_status', 'background_manage_status' ,'upload_manage_id3_status', 'upload_manage_status' ]);
+        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater', 'upload_id', 'image','upload_id_status', 'title_manage_status', 'sub_title_manage_status', 'short_read_more_manage_status', 'view_all_manage_status', 'items_manage_status', 'is_details_page_manage_status', 'background_manage_status' ,'upload_manage_id3_status', 'upload_manage_status', 'items_per_row_status' , 'category_manage_status']);
 
 
 
@@ -91,26 +91,27 @@ class HomePageManageController extends Controller
 
 
 
-    $homePageManage->title = $request->title;
-    $homePageManage->sub_title = $request->sub_title;
-    $homePageManage->short_read_more = $request->short_read_more;
-    $homePageManage->view_all = $request->view_all;
+    $homePageManage->title = $request->title ?? '';
+    $homePageManage->sub_title = $request->sub_title ?? '';
+    $homePageManage->short_read_more = $request->short_read_more ?? '';
+    $homePageManage->view_all = $request->view_all ?? '';
 
-    $homePageManage->items_per_row = $request->items_per_row;
-    $homePageManage->items_show = $request->items_show;
-    $homePageManage->view_all_page_url = $request->view_all_page_url;
-    $homePageManage->short_read_more_page_url = $request->short_read_more_page_url;
-    $homePageManage->is_details_page = $request->is_details_page;
+    $homePageManage->items_per_row = $request->items_per_row ?? 0;
+    $homePageManage->items_show = $request->items_show ?? 0;
+    $homePageManage->view_all_page_url = $request->view_all_page_url ?? '';
+    $homePageManage->short_read_more_page_url = $request->short_read_more_page_url ?? '';
+    $homePageManage->is_details_page = $request->is_details_page ?? 0;
 
-    $homePageManage->title_status = $request->title_status; // Only keep one status for title
-    $homePageManage->sub_title_status = $request->sub_title_status; // Only keep one status for subtitle
-    $homePageManage->short_read_more_status = $request->short_read_more_status; // Short read more status
-    $homePageManage->view_all_status = $request->view_all_status; // View all status
-    $homePageManage->status = $request->status; // General status
+    $homePageManage->title_status = $request->title_status ?? 0; // Only keep one status for title
+    $homePageManage->sub_title_status = $request->sub_title_status ?? 0; // Only keep one status for subtitle
+    $homePageManage->short_read_more_status = $request->short_read_more_status ?? 0; // Short read more status
+    $homePageManage->view_all_status = $request->view_all_status ?? 0; // View all status
+    $homePageManage->status = $request->status ?? 0; // General status
 
-    $homePageManage->background_type = $request->background_type; // Background type
+    $homePageManage->background_type = $request->background_type ?? 0; // Background type
     $homePageManage->background = $request->background ?? 0; // Background value
-    $homePageManage->background_color = $request->background_color; // Background color
+    $homePageManage->background_color = $request->background_color ?? 0; // Background color
+    $homePageManage->category = $request->category ?? 0; // Background color
 
     $homePageManage->upload_id1 = $request->upload_id1 ?? 0; // Background color
     $homePageManage->upload_id2 = $request->upload_id2 ?? 0; // Background color

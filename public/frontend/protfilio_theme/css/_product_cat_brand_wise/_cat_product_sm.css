@@ -11,8 +11,8 @@
 
 
 ._cat_product_sm {
-    border-radius: 5px;
-    box-shadow: 0 7px 15px 0 rgb(0 0 0 / 13%), 0 1px 4px 0 rgb(0 0 0 / 11%);
+    
+    padding:15px 0;
     text-decoration: none;
     position: relative;
 }

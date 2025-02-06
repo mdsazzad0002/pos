@@ -1,16 +1,29 @@
 
 @php
-$category_first = \App\Models\Category::where('id', 6)->first();
+// echo $variant_info->category;
+$category_first = \App\Models\Category::where('id', $variant_info->category)->first();
+// dd($category_first);
+
+if(!isset($filter_page)) :
 $filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter')->first();
+endif;
+
+if(!isset($detail_page)):
 $detail_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
+endif;
+
 $products = [];
 if($category_first){
-$products = \App\Models\Product::where('category', $category_first->id)->where('status', 1)->limit(8)->get();
+    $products = \App\Models\Product::where('category', $category_first->id)->where('status', 1)->limit($variant_info->items_show)->get();
 }
 @endphp
-<link rel="stylesheet" href="{{asset('frontend/protfilio_theme/css/_product_cat_brand_wise/_cat_product_sm.css')}}"/>
+{{-- <link rel="stylesheet" href="{{asset('frontend/protfilio_theme/css/_product_cat_brand_wise/_cat_product_sm.css')}}"/> --}}
 
-<div class="_cat_product_sm home-element">
+
+<x-frontend_section  :info="$variant_info" class="_cat_product_sm home-element" css="_product_cat_brand_wise/_cat_product_sm.css" >
+{{-- <div class="_cat_product_sm home-element"> --}}
+    @if($category_first && $products && $filter_page && $detail_page)
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-xl-2 col-lg-3 col-md-4    col-6">
@@ -73,6 +86,8 @@ $products = \App\Models\Product::where('category', $category_first->id)->where('
         </div>
     </div>
 
-</div>
-</div>
+{{-- </div> --}}
+
+@endif
+</x-frontend_section>
 

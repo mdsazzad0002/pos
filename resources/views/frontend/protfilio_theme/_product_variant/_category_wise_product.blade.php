@@ -24,7 +24,7 @@
         <div class="product_wise_cateogry-product-sec py-40">
             <div class="container-fluid">
                 <a href="{{ url($category_wise_details_page->slug) }}?category={{ $category_item->slug }}" class="w-100">
-                    <img src="{{ dynamic_asset($category_item->upload_id) }}" alt="" class="w-100 mb-3">
+                    <img src="{{ dynamic_asset($category_item->upload_bg) }}" alt="" class="w-100 mb-3">
                 </a>
                 <div class="row row-gap-3">
 

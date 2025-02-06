@@ -122,6 +122,7 @@ class OfferbannerController extends Controller
 
         $offerbanner->title = $request->title;
         $offerbanner->subtitle = $request->subtitle;
+        $offerbanner->link = $request->link;
         $offerbanner->image1 = $request->image1;
         $offerbanner->image2 = $request->image2;
         $offerbanner->image3 = $request->image3;

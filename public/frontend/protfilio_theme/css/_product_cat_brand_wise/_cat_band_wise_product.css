@@ -1,26 +1,30 @@
 
 
-.home-element img {
+._cat_band_wise_product{
+
+    padding:22px 0;
+}
+._cat_band_wise_product img {
     width: 100%;
 }
 
 
 
-.row > div {
+._cat_band_wise_product .row > div {
     padding: 7px;
 }
 
 
 
 
-.flex-cat-img {
+._cat_band_wise_product .flex-cat-img {
     border-radius: 5px;
     overflow: hidden;
     position: relative;
 }
 
 
-.flex-cat-button {
+._cat_band_wise_product .flex-cat-button {
     width: 100%;
     position: absolute;
     top: -3px;
@@ -28,7 +32,7 @@
 }
 
 
-.flex-cat-button a {
+._cat_band_wise_product .flex-cat-button a {
     padding: 4px 10px;
     background: #fff;
     border-radius: 0px 0px 10px 10px;
@@ -39,13 +43,13 @@
     box-shadow: 0 5px 15px 0 rgba(37,44,97,.15), 0 2px 4px 0 rgba(93,100,148,.2);
 }
 
-.flex-cat-description {
+._cat_band_wise_product .flex-cat-description {
     display: flex;
     margin-top: 20px;
     min-height: 8em;
 }
 
-.flex-cat-description i {
+._cat_band_wise_product .flex-cat-description i {
     width: auto;
     text-align: center;
     padding-top: 8px;
@@ -53,7 +57,7 @@
     padding-right: 7%;
 }
 
-.flex-cat-description-text {
+._cat_band_wise_product .flex-cat-description-text {
     display: flex;
     flex-direction: column;
 }

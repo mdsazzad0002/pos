@@ -1823,7 +1823,7 @@ header {
 header .header-section {
   /*HEADER BOTTOM*/
 }
-header .header-section .header-top {
+.top-head .header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1831,29 +1831,29 @@ header .header-section .header-top {
   padding-left: 5vw;
   padding-right: 5vw;
 }
-header .header-section .header-top .header-end {
+.top-head .header-top .header-end {
   display: flex;
   align-items: center;
   gap: clamp(12px, 1.25vw, 32px);
 }
 @media (max-width: 490px) {
-  header .header-section .header-top .header-end {
+  .top-head .header-top .header-end {
     gap: 40px;
   }
 }
-header .header-section .header-top .header-end .top-bar-links {
+.top-head .header-top .header-end .top-bar-links {
   color: #fafafa;
   transition: all 0.5s ease-in-out;
 }
-header .header-section .header-top .header-end .top-bar-links p {
+.top-head .header-top .header-end .top-bar-links p {
   transition: all 0.5s ease-in-out;
   color: #fafafa;
 }
-header .header-section .header-top .header-end .top-bar-links p:hover {
+.top-head .header-top .header-end .top-bar-links p:hover {
   transition: all 0.5s ease-in-out;
   color: #ffe603;
 }
-header .header-section .header-top .header-end .top-bar-links:hover {
+.top-head .header-top .header-end .top-bar-links:hover {
   transition: all 0.5s ease-in-out;
   color: #ffe603;
 }
