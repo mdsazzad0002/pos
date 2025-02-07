@@ -67,7 +67,7 @@
             }},
 
             {data:'name', name:'name'},
-            {data:'slug', name:'slug'},
+            {data:'visit_page', name:'slug'},
 
             {data:'status', name:'status', render: function (data, type, row, meta) {
                 return  data == 1 ? 'Active' : 'Inactive';

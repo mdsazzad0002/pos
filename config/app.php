@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,8 +144,9 @@ return [
     'maintenance' => [
         'driver' => 'file',
         // 'store' => 'redis',
-        'status' => env('APP_MAINTENANCE', 'false'),
-        'time' => env('APP_MAINTENANCE_TIME', 'Unknown')
+        'status' => env('APP_MAINTANANCE', 'false'),
+        'time' => env('APP_MAINTENANCE_TIME', 'Unknown'),
+        'from' => env('APP_MAINTENANCE_TIME_FROM', 'Unknown')
     ],
 
     /*

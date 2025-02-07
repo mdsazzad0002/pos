@@ -39,7 +39,15 @@ sidebar-dark-primary elevation-4">
         {{ settings('theme_nav-collapse-hide-child', 1) ? 'nav-collapse-hide-child' :''}}
 
         " data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="{{ url('/') }}" class="nav-link " target="_blank">
 
+                    <i class="fas fa-external-link-alt nav-icon"></i>
+                    <p>
+                    {{ __('visit.webiste') }}
+                    </p>
+                </a>
+            </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link
                     {{ Request::routeIs('admin.dashboard') ||
@@ -431,15 +439,7 @@ sidebar-dark-primary elevation-4">
 
                 @include('layout.admin._sidebar.settings')
 
-                <li class="nav-item">
-                    <a href="{{ url('/') }}" class="nav-link" target="_blank">
 
-                        <i class="fas fa-external-link-alt nav-icon"></i>
-                        <p>
-                           {{ __('visit.webiste') }}
-                        </p>
-                    </a>
-                </li>
 
 
         </nav>

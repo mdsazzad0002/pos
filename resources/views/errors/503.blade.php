@@ -68,6 +68,7 @@
                     clearInterval(countdown);
                     document.getElementById("countdown").innerHTML = "We are back online!";
                     document.getElementById("countdown").style.color = "#00ff00";
+                    window.location.href= ''
                 } else {
                     var hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
                     var minutes = Math.floor((timeLeft / (1000 * 60)) % 60);

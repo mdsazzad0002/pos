@@ -20,7 +20,10 @@
 
 <body class="tt-smooth-scroll">
 
-
+{{-- maintanance & page builder helper --}}
+@include('layout.frontend_ajuba.partials.maintanance_alert')
+@include('layout.frontend_ajuba.partials.page_builder_drictory')
+{{-- // maintanance & page builder helper --}}
 
 
 

@@ -81,6 +81,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TrackingOrderController;
+use App\Http\Controllers\MaintainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,8 +106,6 @@ use App\Http\Controllers\TrackingOrderController;
 Route::get('bdcouriertracking', [trackingController::class, 'tracking'])->name('tracking');
 Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
 Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCredentialController::class, 'update'])->name('admin.settings.courier-configration.update');
-
-
 
 
 
@@ -547,7 +546,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('database/backup', [SettingController::class, 'downloadBackup'])->name('database.backup');
 
 
+    // Maintanance Mode
+    Route::any('maintanance', [MaintainController::class, 'index'])->name('maintanance');
+    Route::any('maintanance/update', [MaintainController::class, 'update'])->name('maintanance.update');
+
+
 });
+
 
 Route::get('/locale/{lang}', [LanguageController::class, 'switchLanguage']);
 

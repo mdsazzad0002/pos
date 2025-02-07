@@ -31,13 +31,22 @@ class PageController extends Controller
                     data-href='$view_route'>View</button>";
 
                 })
+                ->addColumn('visit_page', function ($row){
 
+                      $visit_page =  url($row->slug);
+                      $visit_page_string =  '"'.url($row->slug).'"';
+                      
+                   return $visit_button =  "<div class='btn-group' >
+                        <button class='btn btn-secondary' title='Click To Copy' onclick='copyToClipboard(".$visit_page_string.")'>".$row->slug."</button>
+                        <a title='Visit link new tab' class='btn btn-primary '
+                        data-title='$row->name' href='$visit_page' target='_blank' ><i class='fas fa-external-link-alt'></i></a>
+                    </div>
+                    ";
+
+                })
 
                 ->addColumn('action', function ($row) {
 
-                        $visit_page =  url($row->slug);
-                        $visit_button =  "<a class='btn btn-primary '
-                        data-title='$row->name' href='$visit_page' target='_blank' >Visit</a>";
 
 
                         $delete_route = route('admin.page.delete', $row->id);
@@ -58,7 +67,7 @@ class PageController extends Controller
                         $edit_buttonbuilder =  "<a target='_blank' href='$builder_route' class='btn btn-warning'>Edit Element</a>";
 
                         $return_data = '';
-                        $return_data .= $visit_button. '&nbsp;';
+
                         if(auth()->user()->can('page edit')==true){
                             $return_data .= $edit_button. '&nbsp;';
                             $return_data .= $edit_buttonbuilder. '&nbsp;';
@@ -72,7 +81,7 @@ class PageController extends Controller
 
 
                 })
-                ->rawColumns(['action', 'view'])
+                ->rawColumns(['action', 'view', 'visit_page'])
                 ->make(true);
         }
         return view('admin.protfilio_theme.page.index');

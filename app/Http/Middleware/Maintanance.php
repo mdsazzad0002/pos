@@ -17,6 +17,18 @@ class Maintanance
                 return $next($request);
             }
 
+
+            $maintenanceTime = \Carbon\Carbon::parse(config('app.maintenance.time'))->timestamp; // Parse the maintenance time
+            $maintenanceTimeFrom = \Carbon\Carbon::parse(config('app.maintenance.from'))->timestamp; // Parse the maintenance time
+
+
+            if ($maintenanceTimeFrom >= \Carbon\Carbon::now()->timestamp) {
+                return $next($request); // Proceed with the request if the maintenance time is still in the future
+            }elseif ($maintenanceTime <= \Carbon\Carbon::now()->timestamp) {
+                updateEnvFile('APP_MAINTANANCE', 'false');
+                return $next($request); // Proceed with the request if the maintenance time is still in the future
+            }else
+
             return response()->view('errors.503', [
                 'time' => config('app.maintenance.time', 'Unknown')
             ], 503);

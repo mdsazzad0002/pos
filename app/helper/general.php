@@ -270,3 +270,33 @@ function numToWordsRec($number) {
 
 
 
+/**
+ * Update the value of a key in the .env file.
+ *
+ * @param string $key The key to be updated.
+ * @param string $value The new value for the key.
+ * @return void
+ */
+function updateEnvFile($key, $value)
+{
+    $path = base_path('.env'); // Path to the .env file
+
+    if (file_exists($path)) {
+        // Read the .env file into an array
+        $envFile = file_get_contents($path);
+
+        // Search for the key and update it
+        $envFile = preg_replace("/^{$key}=[^\n]*$/m", "{$key}={$value}", $envFile);
+
+        // If the key wasn't found, add it to the end of the file
+        if (strpos($envFile, "{$key}=") === false) {
+            $envFile .= "\n{$key}={$value}";
+        }
+
+        // Write the changes back to the .env file
+        file_put_contents($path, $envFile);
+    }
+}
+
+
+
