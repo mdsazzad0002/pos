@@ -22,11 +22,13 @@ class LanguageSeeder extends Seeder
             if($new_translate->count() != 0){
                 $new_translate->first();
             }
-            $new_translate =  new language;
-            $new_translate->name = $language;
-            $new_translate->creator = 1;
-            $new_translate->updater_id = 1;
-            $new_translate->save();
+            if(language::count() < 2){
+                $new_translate =  new language;
+                $new_translate->name = $language;
+                $new_translate->creator = 1;
+                $new_translate->updater_id = 1;
+                $new_translate->save();
+            }
 
         }
 

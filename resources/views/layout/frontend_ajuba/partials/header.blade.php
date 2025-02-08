@@ -222,7 +222,7 @@
                     @endif
                     @if($wishlist_page)
 
-                    <a href="{{ url($wishlist_page->slug) }}" class="button-block d-sm-flex d-none  position-relative  items_icon_parents compare_list">
+                    <a href="{{ url($wishlist_page->slug) }}" class="button-block d-sm-flex   position-relative  items_icon_parents compare_list">
 
                         <i class="fa-regular fa-heart"></i>
                         <span class="items_added">0</span>
@@ -231,12 +231,17 @@
 
                     @endif
 
-                    <a href="javascript:void(0);" class="button-block d-sm-flex d-none cart-button position-relative cart items_icon_parents">
+                    <a href="javascript:void(0);" class="button-block d-sm-flex  cart-button position-relative cart items_icon_parents">
                         {{-- <img src="{{asset('uploads/')}}/icons/cart.png" alt=""> --}}
                         <i class="bi bi-cart" style=""></i>
                         <span class="items_added">0</span>
 
                     </a>
+
+                    <a href="#" class="main-menu__toggler mobile-nav__toggler ml-auto header_nav_bar_manu">
+                        <img src="{{asset('uploads/')}}/icons/menu-2.png" alt="">
+                    </a>
+
                 </div>
             </div>
 
@@ -268,6 +273,10 @@
 .navbar_filter_section #dropdown3{
     min-width: 150px;
 }
+.header_nav_bar_manu{
+    display:none;
+}
+
 @media(max-width:1300px){
     .navbar_filter_section .mixin-container{
         order:1;
@@ -289,6 +298,7 @@
         width: max-content;
     }
 }
+
 
 span.items_added {
     position: absolute;
@@ -341,8 +351,51 @@ span.items_added {
     .second-header{
         position: sticky;
         top: 0;
-        z-index: 999;
+        z-index: 1;
         background: white;
+    }
+
+    @media(max-width:1300px){
+        .navbar_filter_section .mixin-container{
+            order:0;
+        }
+
+        .navbar_filter_section .header-center .mixin-container {
+            width: 40%;
+        }
+        header .header-section .mixin-container,
+        .navbar_filter_section .header-center a.header-logo,
+        .navbar_filter_section .header-center .header-buttons{
+            margin-bottom: 0;
+        }
+
+
+    }
+    @media (max-width: 1199px) {
+        .header-bottom-area{
+            display: none;
+        }
+        .header_nav_bar_manu{
+            display:block;
+        }
+    }
+
+    @media screen and (max-width: 991px) and (min-width: 0) {
+        .navbar_filter_section .mixin-container{
+            order:1;
+        }
+
+        .navbar_filter_section .header-center .mixin-container {
+            width: 100%;
+        }
+
+        .navbar_filter_section .header-center a.header-logo,
+        .navbar_filter_section .header-center .header-buttons{
+            margin-bottom: 20px;
+        }
+
+
+
     }
 </style>
 

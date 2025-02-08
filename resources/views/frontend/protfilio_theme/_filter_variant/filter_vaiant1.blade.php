@@ -6,9 +6,23 @@
     <!-- Main Sections -->
     <main class="main-wrapper">
 
+
+
+
+
+@php
+    $categories = App\Models\Category::where('status', 1)->get();
+@endphp
+
+
+
+
         <!-- Featured Product Start -->
         <section class="featured-product-sec py-40 bg-lightest-gray">
             <div class="container-fluid">
+
+
+
                 <div class="row row-gap-3">
                     <div class="col-xl-3">
                         <div class="sidebar bg-white">
@@ -19,8 +33,10 @@
                                     <i class="fa-light fa-magnifying-glass"></i>
                                 </button>
                             </form>
-                            
-                            
+
+
+
+
                             @if(settings('show_filter_by_category_status', 80) == 1)
                             <div class="hr-line mb-24"></div>
                                 {{-- Category and Subcategory filter --}}
@@ -263,7 +279,7 @@
                                         <div>
                                             <p class="mb-8">{{ $product->name ?? '' }}</p>
                                             <p class="color-primary"><span
-                                                    class="light-gray text-decoration-line-through">${{ $product->old_price }}</span>&nbsp;${{ $product->selling_price }}
+                                                    class="light-gray text-decoration-line-through">{{ settings('currency_symbol', 9) .' '. $product->old_price }}</span>&nbsp;{{ settings('currency_symbol', 9) .' '. $product->selling_price }}
                                             </p>
                                         </div>
                                     </a>
@@ -288,7 +304,7 @@
                                 <div class="visual-btns">
 
                                 </div>
-                                <div class="results d-lg-block d-none">
+                                <div class="results d-lg-block">
                                     <p class="dark-gray">Showing <span class="v_first">0</span> - <span class="v_last">0</span> of <span class="v_total">0</span>  Results</p>
                                 </div>
                             </div>

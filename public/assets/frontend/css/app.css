@@ -1339,6 +1339,7 @@ Elements
   text-align: center;
   overflow: hidden;
   display: flex;
+  justify-content: center;
 }
 .pagination #border-pagination {
   display: flex;
@@ -5354,6 +5355,7 @@ footer .footer-bottom-bar {
   #sidebar-cart,
   #sidebar-wishlist {
     width: 444px;
+    max-width: 80%;
   }
 }
 @media (max-width: 1024px) {
@@ -5469,7 +5471,7 @@ footer .footer-bottom-bar {
     display: flex;
     align-items: flex-start;
     gap: 16px;
-    flex-direction: column;
+    /* flex-direction: column; */
   }
 }
 #sidebar-cart .action-buttons a,
@@ -5478,6 +5480,7 @@ footer .footer-bottom-bar {
   width: 240px;
   display: inline-grid;
   text-align: center;
+  max-width: 100%;
 }
 
 #sidebar-cart-curtain,
@@ -5812,6 +5815,33 @@ footer .footer-bottom-bar {
   /* title style 4 */
 
 
+  /* title style 5 */
+
+  .title_style_5 {
+    text-align: center;
+    background:#f9ebd7;
+    text-transform:uppercase;
+    padding:10px;
+}
+
+.title_style_5 .title {
+    color:#95540f;
+    font-size:28px;
+    font-weight:700;
+}
+
+.title_style_5 .sub_title {
+    color:#95540f;
+    font-size:18px;
+    margin-top:5px;
+    font-weight:700;
+}
+
+
+
+  /* title style 5 */
+
+
 
 
 
@@ -5852,3 +5882,84 @@ footer .footer-bottom-bar {
     color: #0089fb;
 }
   /* Quick connect messanger whatsapp */
+
+
+
+/* Product Style 2 */
+
+.product_style_2 .card.product-card{
+    margin-bottom:10px;
+    transition:0.3s;
+}
+.product_style_2 .card.product-card:hover{
+    margin-bottom:10px;
+    border: 1px solid var(--primary-color);
+}
+.product_style_2 .productQuickViewbtn{
+    cursor: pointer;
+}
+.product_style_2 .product-card{
+    position: relative;
+}
+.product_style_2 .products-cart-button {
+    background: #2d2d2d;
+    text-align: center;
+    color: white;
+    padding: 9px;
+    font-weight: 700;
+}
+
+.product_style_2 .free_delivery {
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    background: #0b0a0a;
+    color: white;
+    padding: 3px 11px;
+}
+
+
+.product_style_2 .sale {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ff4e4e;
+    color: white;
+    padding: 3px 11px;
+}
+
+
+
+.product_style_2 .discounted_amount {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d2d2d;
+    color: white;
+    padding: 0px 6px;
+    font-size: 14px;
+    width:max-content;
+}
+
+.product_style_2 .price_card {
+    position: relative;
+}
+.product_style_2 .card-text.truncate{
+    margin: 7px 0;
+    line-clamp: 2;
+    text-overflow: ellipsis;
+}
+
+/* Product Style 2 */
+
+@media (max-width:525px) {
+    .container-fluid{
+        zoom:70%
+    }
+}
+@media (max-width:400px) {
+    .container-fluid{
+        zoom:60%
+    }
+}

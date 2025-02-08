@@ -16,14 +16,19 @@
         padding: 15px 25px 22px;
         transition: right 0.3s ease;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
     }
 
     .cookie_wrapper.show {
         right: 20px;
     }
-.cookie_wrapper.show h2{
-    color:{{ settings('cookie_btn_1_color', 40) }};
-}
+    .cookie_wrapper i.fas.fa-cookie{
+        font-size: 40px;
+        color: #d84a08;
+    }
+    .cookie_wrapper.show h2{
+        color:{{ settings('cookie_btn_1_color', 40) }};
+    }
 
 
 
@@ -107,7 +112,7 @@
                 //if button has acceptBtn id
                 if (button.id == "acceptBtn") {
                     //set cookies for 1 month. 60 = 1 min, 60 = 1 hours, 24 = 1 day, 30 = 30 days
-                    document.cookie = "laravel_cookie_consent = https://dengrweb.com; max-age=" + 60 * 60 * 24 * 30;
+                    document.cookie = "laravel_cookie_consent = {{ url('/') }}; max-age=" + 60 * 60 * 24 * 30;
                 }
             });
         });

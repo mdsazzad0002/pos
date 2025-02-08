@@ -857,17 +857,29 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_filter_variant.filter_vaiant1',
                 'title' => 'Product Filter  1',
                 'title_status' => 1,
+                'title_manage_status' => 0,
+
                 'sub_title' => 'Product Filter Title',
                 'sub_title_status' => 1,
+                'sub_title_manage_status' => 0,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 0,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
-
+                'background_manage_status' => 1,
+                'upload_id'=>'uploads/preset/page_variant/category_style6.png',
 
             ],
             // ===================================================================
@@ -880,17 +892,29 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_cart_variant.cart_style1',
                 'title' => 'Product Filter  1',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
+
                 'sub_title' => 'Product Filter Title',
                 'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
                 'short_read_more' => 'Read More',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
                 'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
                 'items_per_row' => 0,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
-
+                'background_manage_status' => 1,
 
             ],
             // ===================================================================

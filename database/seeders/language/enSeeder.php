@@ -209,6 +209,9 @@ class enSeeder extends Seeder
             'takto-messageing-management.tiledesk_chat_id'=>'Tidedesk chat id',
             'takto-messageing-management.tiledesk_chat_status'=>'Tidedesk chat status',
 
+            'sidebar.maintanance'=>'Maintenance Mode',
+            'tracking_report.bd_courier_tracking_id'=>'Courier Tracking Id',
+            'tracking_report.bd_courier_tracking_status'=>'Courier Tracking  Status',
 
 
 
