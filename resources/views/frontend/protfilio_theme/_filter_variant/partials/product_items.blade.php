@@ -93,7 +93,7 @@
 
                             {{ settings('currency_symbol', 9). ' '.$product->selling_price }}
 
-                            
+
                             @if($product->old_price > $product->selling_price)
                                 <div style="display:block" class="discounted_amount">
                                     <span>Save Tk. {{ settings('currency_symbol', 9) . ' '. $product->old_price -
@@ -111,7 +111,7 @@
                 </div>
             </a>
 
-            <div data-title="{{ Str::title($product->name ?? '') }}" data-id="8" data-bs-toggle="modal"
+            <div data-title="{{ Str::title($product->name ?? '') }}" data-id="{{$product->id}}" data-bs-toggle="modal"
                 data-bs-target="#productQuickView" class="products-cart-button productQuickViewbtn"><i
                     class="fa fa-cart-plus"></i> Buy Now </div>
 

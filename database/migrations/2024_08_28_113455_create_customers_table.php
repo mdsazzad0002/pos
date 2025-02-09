@@ -34,6 +34,9 @@ return new class extends Migration
             $table->integer('prev_due')->nullable();
             $table->integer('area')->nullable();
             $table->string('password')->nullable();
+            
+            $table->string('v_code')->nullable();
+            $table->boolean('v_status')->default(0);
 
             $table->string('bank_branch')->nullable();
             $table->string('upload_id')->default(0);

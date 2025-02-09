@@ -4,6 +4,7 @@ namespace App\Http\Controllers\mail;
 
 use App\Mail\TestMail;
 use App\Mail\MailerDynamic;
+
 use Illuminate\Http\Request;
 use App\Models\mail\MailSetting;
 use App\Http\Controllers\Controller;
@@ -114,7 +115,7 @@ class MailSettingController extends Controller
                 'refresh' => false,
             ]);
 
-        
+
 
     }
 

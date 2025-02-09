@@ -82,6 +82,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
+use App\Http\Controllers\AddressController;
 
 /*
 |--------------------------------------------------------------------------
@@ -761,8 +762,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 // End Customer Management
 
 Route::get('/invoice', [HomeController::class, 'order_invoice'])->name('order_invoice');
+Route::put('/address/{address}', [AddressController::class, 'update'])->name('address.update');
+Route::delete('/address/{address}', [AddressController::class, 'destroy'])->name('address.delete');
 
+Route::get('customer/verify_mail_send', [App\Http\Controllers\CustomerController::class, 'verify_mail_send'])->name('customer.verify_mail_send');
 
+Route::get('customer/verify_mail_verify', [App\Http\Controllers\CustomerController::class, 'verify_mail_verify'])->name('customer.verify');
 
 // User Defined Route Web So Check Route not exists
 Route::get('previdw_page_and_fornt_page', [HomeController::class, 'index'])->name('previdw_page_and_fornt_page');

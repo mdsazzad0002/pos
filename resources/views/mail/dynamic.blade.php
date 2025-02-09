@@ -7,9 +7,26 @@
     <title>{{ $mailInfo_data['title'] }}</title>
 </head>
 <body>
-    {{ $mailInfo_data['body'] }} </br>
-    name: {{ $mailInfo_data['user']->name }} <br/>
-    email: {{ $mailInfo_data['user']->email }} <br/>
+    @php
+
+        $template_file =  \App\Models\mail\MailTemplate::where('name', $mailInfo_data['template'])->first();
+        $temptemplate = $template_file->template;
+        $key_words=  explode(',', $template_file->keywords);
+
+        foreach ($key_words as $key => $value) {
+            $temptemplate = str_replace('`'.$value.'`', $mailInfo_data[$value], $temptemplate); //Replace Code
+        }
+
+
+    @endphp
+
+        {{$mailInfo_data['subject']}}
+        {!! $temptemplate !!}
+
+        @if (isset($mailInfo_data['additional_text']))
+            {!! $mailInfo_data['additional_text'] !!}
+        @endif
+
 
 </body>
 </html>

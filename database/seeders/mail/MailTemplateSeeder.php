@@ -34,6 +34,11 @@ class MailTemplateSeeder extends Seeder
                 'template' => 'test_mail',
                 'keywords' => 'name',
             ],
+            [
+                'name' => 'verification_customer',
+                'template' => 'test_mail',
+                'keywords' => 'name,code,email',
+            ],
 
         ];
 

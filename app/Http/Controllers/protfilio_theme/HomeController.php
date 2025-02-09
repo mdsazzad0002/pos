@@ -338,7 +338,7 @@ class HomeController extends Controller
             }else{
                 $request['size'] = 0;
             }
-            $product_cart = session( $source_type, []);
+             $product_cart = session( $source_type, []);
 
             // Flag to check if the product was found
             $found = false;
@@ -381,8 +381,8 @@ class HomeController extends Controller
                     }
                 }
             }
-            if($request->has('type') && $request->type == 'remove_cart') {
 
+            if($request->has('type') && $request->type == 'remove_cart') {
                 return response()->json([
                     'title' => 'Failed to find items',
                     'type'  => 'error',
@@ -425,7 +425,7 @@ class HomeController extends Controller
                 }
             }
 
-
+// return $product_cart;
 
             // Save the updated cart back to the session
             session()->put( $source_type, $product_cart);

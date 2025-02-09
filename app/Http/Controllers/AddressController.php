@@ -87,7 +87,16 @@ class AddressController extends Controller
      */
     public function update(Request $request, address $address)
     {
-        //
+      $request =  $request->except(['_token', '_method']);
+        // return $request;
+
+        if($address){
+            foreach($request as  $key => $value){
+                $address->$key = $value ?? '';
+            }
+            $address->save();
+        }
+        return back();
     }
 
     /**
@@ -95,6 +104,9 @@ class AddressController extends Controller
      */
     public function destroy(address $address)
     {
-        //
+        if($address){
+            $address->delete();
+        }
+        return back();
     }
 }

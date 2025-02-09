@@ -38,9 +38,10 @@
                 <li class="form__li">
                     <form action="{{ route('customer_profile_pic.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <label for="update_profile_pic">
-                            <img src="{{ dynamic_asset($customer->upload_id ?? 0) }}" alt="">
+                        <label for="update_profile_pic" class="update_profile_pic">
+                            <img class="rounded rounded-circle" style="aspect-ratio:1/1; border: 2px solid var(--primary-color);" src="{{ dynamic_asset($customer->upload_id ?? 0) }}" alt="">
                             <input type="file" id="update_profile_pic"  hidden name="profile_pic">
+                            <i class="fas fa-camera top-right-0"></i>
                         </label>
                     </form>
                     <h3>{{ $customer->name ?? '' }}</h3>
@@ -55,7 +56,7 @@
 
                 @if($cart_page)
                     <li>
-                        <a href="{{ url($cart_page->slug) }}" class="{{ Request::is($profile_dashboard->slug) ? 'active' : '' }}"><i class="bi bi-basket-fill"></i> Cart Item</a>
+                        <a href="{{ url($cart_page->slug) }}" class=""><i class="bi bi-basket-fill"></i> Cart Item</a>
                     </li>
                 @endif
 
@@ -88,13 +89,16 @@
             </ul>
         </div>
         <div class="col-lg-8">
+
+            @if ($customer->v_status == 0)
             <div class="bg-warning p-2 rounded-1 d-flex justify-content-between align-items-center mb-2" style="    border-left: 4px solid var(--primary-color);">
                 <div class="font-weight-bold">
                     <i class="bi bi-exclamation-triangle-fill text-white"></i> Please Verify your mail address.
                 </div>
-                <a class="btn btn-success" style="background: var(--primary-color);"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
+                <a class="btn btn-success" style="background: var(--primary-color);" href="{{url('customer/verify_mail_send')}}"> <i class="bi bi-envelope-arrow-up text-white"></i> Send Mail</a>
 
             </div>
+            @endif
             @yield('profile')
         </div>
     </div>
@@ -147,6 +151,39 @@
     text-align: center;
     padding: 15px;
     border: 4px solid var(--primary-color);
+}
+
+
+
+
+label.update_profile_pic i.fas.fa-camera.top-right-0 {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    font-size: 72px;
+    cursor: pointer;
+    opacity:0;
+    color:var(--primary-color);
+}
+
+
+
+label.update_profile_pic{
+    position: relative;
+}
+
+label.update_profile_pic *{
+    transition:0.5s;
+}
+
+label.update_profile_pic:hover img.rounded.rounded-circle{
+     opacity: 0.5;
+
+
+}
+label.update_profile_pic:hover i.fas.fa-camera.top-right-0{
+    opacity:1;
 }
 </style>
 

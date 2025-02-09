@@ -15,7 +15,6 @@
 
     @section('profile')
 
-
             <div class="col-12">
                 <div class="row">
 
@@ -23,57 +22,83 @@
 
                     <div class="col-6 mt-2">
                         <div class="card">
-                            <div class="card-header d-flex justify-content-between">Address <span> #1</span></div>
-                            <div class="card-body">
+                            <div class="card-header d-flex justify-content-between">Address
+
+                                <div class="d-flex gap-1">
+                                    <span class="btn btn-primary"> <i class="fa fa-pencil" onclick="editor_toggle(this, '.form{{$address->id}}')" aria-hidden="true"></i>
+                                    </span>
+                                    <form action="{{route('address.delete', $address->id)}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <form class="card-body form{{$address->id}}" method="POST" action="{{route('address.update', $address->id)}}">
+                                @csrf
+                                @method('put')
                                 <table class="table table-bordered table-striped table-hover">
                                     {{-- {{ $customers }} --}}
                                     <tr>
                                         <td>Name :</td>
-                                        <td> {{ $address->name }}</td>
+                                        <td> <input type="text" value="{{ $address->name }}" name="name" class="w-100" disabled ></td>
                                     </tr>
                                     <tr>
                                         <td>Email :</td>
-                                        <td> {{ $address->email }}</td>
+                                        <td> <input type="email" name="email" class="w-100" disabled  value="{{ $address->email }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Phone :</td>
-                                        <td> {{ $address->phone }}</td>
+                                        <td>  <input type="tel" name="phone" class="w-100" disabled  value="{{ $address->phone }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Address :</td>
-                                        <td> {{ $address->address }}</td>
+                                        <td>  <input type="text" name="address" class="w-100" disabled  value="{{ $address->address }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Apartment :</td>
-                                        <td> {{ $address->address_optional }}</td>
+                                        <td>  <input type="text" name="address_optional" class="w-100" disabled  value="{{ $address->address_optional }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>District :</td>
-                                        <td> {{ $address->town }}</td>
+                                        <td> <input type="text" name="district" class="w-100" disabled  value="{{ $address->district }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Post Code :</td>
-                                        <td> {{ $address->postal }}</td>
+                                        <td>  <input type="number" name="postal" class="w-100" disabled  value="{{ $address->postal }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Country :</td>
-                                        <td> {{ $address->country }}</td>
+                                        <td> <input type="text" name="country" class="w-100" disabled  value="{{ $address->country }}"/> </td>
                                     </tr>
                                     <tr>
                                         <td>State :</td>
-                                        <td> {{ $address->state }}</td>
+                                        <td>  <input type="text" name="state" class="w-100" disabled  value="{{ $address->state }}"/></td>
                                     </tr>
                                     <tr>
-                                        <td>updated_at :</td>
+                                        <td>Updated By :</td>
                                         <td> {{ $address->updated_at?->format('d-M-Y h:i A') }}</td>
                                     </tr>
-                                </table>
-                           
+                                    <tr  class="action_button_edit">
+                                        <td>
+                                            <button class="btn btn-primary" type="submit">Save</button>
+                                        </td>
+                                        <td>  <button class="btn btn-danger" type="button" onclick="cancel_edit(this, '.form{{$address->id}}')">Cancel</button></td>
+                                    </tr>
 
-                            </div>
+
+
+                                </table>
+
+
+
+                            </form>
                         </div>
                     </div>
                     @empty
@@ -94,3 +119,26 @@
 
     @endsection
 @endif
+
+
+<script>
+    function editor_toggle(thi, id){
+        $(id).find('input').removeAttr('disabled');
+        $(id).addClass('editing_enabled')
+    }
+    function cancel_edit(thi, id){
+        $(id).find('input').attr('disabled', true);
+        $(id).removeClass('editing_enabled')
+    }
+</script>
+
+
+<style>
+    .action_button_edit{
+        display: none;
+    }
+    .editing_enabled .action_button_edit{
+        display: contents;
+    }
+    </style>
+

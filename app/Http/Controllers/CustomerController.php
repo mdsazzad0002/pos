@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\MailerDynamic;
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
+
 
 class CustomerController extends Controller
 {
@@ -230,5 +234,47 @@ class CustomerController extends Controller
     public function customer_logout(){
         auth()->guard('customer')->logout();
         return back();
+    }
+
+
+    public function verify_mail_send(Request $request) {
+        // $request->validate(['mail' => 'required|email']);
+
+        $user =  auth()->guard('customer')->user();
+        $code = rand(1000,9999);
+        $mailInfo = [
+
+            'title' => settings('app_title', 9).'Verification Code',
+            'subject' => settings('app_title', 9).'Verification Code',
+            // 'user' => $user?->email,
+            'email' => $user?->email,
+            'code' => $code,
+            'template' => 'verification_customer',
+            'name' => $user?->name,
+            'additional_text' => route('customer.verify')."?id=".$user->id."&code=".$code."<br/>
+            <a  href='".route('customer.verify')."?id=".$user->id."&code=".$code."'> Verify Now </a>"
+        ];
+
+        $user->v_code =  $mailInfo['code'];
+        $user->save();
+
+        Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+
+        return back();
+    }
+
+    public function verify_mail_verify (Request $request){
+        $request->validate([
+            'id'=>'required',
+            'code' => 'required'
+        ]);
+        $user =  Customer::where(['id'=> $request->id, 'v_code'=> $request->code])->first();
+        if($user){
+            $user->v_code = rand(4545,54545);
+            $user->v_status = 1;
+            $user->save();
+        }
+
+        return redirect('/');
     }
 }

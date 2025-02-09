@@ -46,7 +46,7 @@
                                 Description
                             </label>
                             <div class="card-body">
-                              
+
                                 <textarea type="text" name="description" class="form-control summernote {{ $items->name }}" placeholder="Description">{{ $items->template }}</textarea>
                                 <div class="items_list_list_mail my-2 " data-target=".{{ $items->name }}">
                                     @foreach (explode(',', $items->keywords) as $word)
@@ -77,12 +77,12 @@
             var items =  element.querySelectorAll('span').forEach(item =>{
                 item.addEventListener('click', function(){
                    $(target_element).summernote('insertText', this.innerHTML);
-                
+
                     $(target_element).summernote('focus');
                 })
             })
         });
-         
+
     </script>
 @endpush
 
