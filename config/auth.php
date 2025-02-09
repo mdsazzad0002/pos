@@ -72,7 +72,7 @@ return [
 
         'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\customer::class,  // Replace with your actual Customer model
+            'model' => App\Models\Customer::class,  // Replace with your actual Customer model
         ],
         // 'users' => [
         //     'driver' => 'database',

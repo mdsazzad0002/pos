@@ -1,8 +1,8 @@
 @php
 if($variant_info->is_details_page){
-    $recommend_category = \App\Models\category::where('status', 1)->paginate($variant_info->items_show);
+    $recommend_category = \App\Models\Category::where('status', 1)->paginate($variant_info->items_show);
 }else{
-    $recommend_category = \App\Models\category::where('status', 1)->limit($variant_info->items_show)->get();
+    $recommend_category = \App\Models\Category::where('status', 1)->limit($variant_info->items_show)->get();
 }
 
 

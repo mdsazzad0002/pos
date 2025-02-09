@@ -81,16 +81,27 @@
                         class="card-text price_card">
                         <span style="font-size:.8em; color: gray;"></span>
                         <br>
-                        @if($product->old_price > $product->selling_price && $product->variant_on == 0)
-                        <span style="text-decoration: line-through;color: red;font-size: 1rem;">
-                            {{ settings('currency_symbol', 9). ' '.$product->old_price }}
-                        </span>
-                        {{ settings('currency_symbol', 9). ' '.$product->selling_price }}
+                        @if($product->variant_on == 0)
+                            @if($product->old_price > $product->selling_price)
 
-                        <div style="display:block" class="discounted_amount">
-                            <span>Save Tk. {{ settings('currency_symbol', 9) . ' '. $product->old_price -
-                                $product->selling_price }}</span>
-                        </div>
+                                <span style="text-decoration: line-through;color: red;font-size: 1rem;">
+                                    {{ settings('currency_symbol', 9). ' '.$product->old_price }}
+                                </span>
+
+                            @endif
+
+
+                            {{ settings('currency_symbol', 9). ' '.$product->selling_price }}
+
+                            
+                            @if($product->old_price > $product->selling_price)
+                                <div style="display:block" class="discounted_amount">
+                                    <span>Save Tk. {{ settings('currency_symbol', 9) . ' '. $product->old_price -
+                                        $product->selling_price }}</span>
+                                </div>
+                            @endif
+
+
                         @else
                             Variant Available
                         @endif

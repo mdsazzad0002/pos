@@ -83,7 +83,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.order.index') }}" class="nav-link ">
                                 <i class="fas fa-shopping-cart nav-icon"></i>
-                                <p>Order</p>
+                                <p>Order <span class="right badge badge-danger">{{ unchecked_order() }}</span></p>
                             </a>
                         </li>
                     @if(env('APP_ENV') == 'local')
@@ -252,7 +252,7 @@ sidebar-dark-primary elevation-4">
                     </li>
                 @endcan
 
-
+                @if(env('APP_ENV') == 'local')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-swatchbook nav-icon"></i>
@@ -272,7 +272,6 @@ sidebar-dark-primary elevation-4">
                         </li>
                         @endcan
 
-                        @if(env('APP_ENV') == 'local')
 
                         @can('purchase read')
                         <li class="nav-item">
@@ -291,10 +290,9 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
-                        @endif
-
                     </ul>
                 </li>
+                @endif
 
 
 

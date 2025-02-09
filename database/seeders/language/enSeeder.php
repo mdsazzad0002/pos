@@ -49,7 +49,7 @@ class enSeeder extends Seeder
             'site-pwa-management.pwa_sizes' => 'PWA image size',
             'site-pwa-management.pwa_display' => 'PWA Display',
             'site-pwa-management.pwa_status' => 'PWA Status',
-            'setting.sidebar.list' => 'Settings',
+            'setting.sidebar.list' => 'System Settings',
             'crm.management_sidebar_name' => 'Crm Management',
             'user.management_sidebar_name' => 'User Management',
             'supplier.management_sidebar_name' => 'Supplier Management',

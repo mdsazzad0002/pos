@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\payment\PaymentCredential;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,5 +46,12 @@ class order extends Model
         return $this->hasOne(ShippingCharge::class, 'id', 'shipping_charge_id');
     }
 
+    public function order_status(){
+        return OrderEvent::where('order_id', $this->order_id)->latest()->first()?->status_data?->name ?? 'Pending';
+    }
+
+    public function payment_method_info(){
+        return $this->hasOne(PaymentCredential::class, 'id', 'payment_method');
+    }
 
 }

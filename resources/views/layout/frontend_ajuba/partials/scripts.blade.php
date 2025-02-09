@@ -48,7 +48,7 @@
         function add_to_cart(thi){
 
             if ($(thi).data('quantaty')) {
-           
+
                 var variant;
                 var unit;
                 var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
@@ -67,7 +67,7 @@
                 }else{
                      unit = $(thi).closest('.modal').find('input.option-input:checked').val();
                 }
-                
+
                 // console.log(variant)
 
                 // console.log(45645);
@@ -123,7 +123,10 @@
                  document.querySelector('.compare_list .items_added').innerHTML = data.compare_list;
 
                  document.querySelector('.cart .items_added').innerHTML = data.front_product;
-                 document.querySelector('#sidebar-cart .cart_items').innerHTML = data.front_product;
+                 document.querySelector('.sidebar-cart .items_added').innerHTML = data.front_product;
+
+                 document.querySelector('.cart_sidebar_toggler .items_added').innerHTML = data.front_product;
+
              }
          })
 
@@ -144,6 +147,18 @@
         document.querySelector('.cart.items_icon_parents').addEventListener('click', function(){
             update_side_cart();
         });
+
+        // sidebar cart toggle
+        document.querySelector('.sidebar-cart').addEventListener('click', function(){
+            var sidebar = document.querySelector('#sidebar-cart');
+            if(sidebar.style.right == '0px'){
+                document.querySelector('#sidebar-cart .close-button.close-popup').click();
+            }else{
+                document.querySelector('.cart.items_icon_parents').click();
+            }
+
+        });
+        // end sidebar cart toggle
 
 
         function update_side_cart(){

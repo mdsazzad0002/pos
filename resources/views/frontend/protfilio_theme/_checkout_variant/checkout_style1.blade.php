@@ -492,8 +492,8 @@
                         if(data.payment_method  != 1){
                             window.location.href = '{{ url('checkout/payment') }}?payment_method='+data.payment_method+'&order_id='+data.order_id;
                         }else{
-                            //window.location.href= '{{url('/')}}'
-                            console.log('Cash On delivery');
+                            window.location.href= '{{url('/')}}'
+                           // console.log('Cash On delivery');
                         }
 
                         //window.location.href= '{{url('/')}}'

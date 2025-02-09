@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\Category as category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 

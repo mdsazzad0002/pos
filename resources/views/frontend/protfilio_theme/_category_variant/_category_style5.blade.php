@@ -1,8 +1,8 @@
 @php
     if($variant_info->is_details_page){
-        $category_list = \App\Models\category::where('status', 1)->paginate($variant_info->items_show);
+        $category_list = \App\Models\Category::where('status', 1)->paginate($variant_info->items_show);
     }else{
-        $category_list = \App\Models\category::where('status', 1)->limit($variant_info->items_show)->get();
+        $category_list = \App\Models\Category::where('status', 1)->limit($variant_info->items_show)->get();
     }
     $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
 @endphp
@@ -10,9 +10,9 @@
 
 <!-- Clients Section -->
 @if (count($category_list) > 0 && $filter_page)
-    
+
     <x-frontend_section :items="$category_list" :info="$variant_info" class="clients_category_style5 section p-0" css="_category_style/_category_style5.css" id="clients_category_style5">
-    
+
         <div class="category-sec">
 
             <div class="categories-sec py-24">

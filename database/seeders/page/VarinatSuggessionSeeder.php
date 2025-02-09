@@ -291,7 +291,7 @@ class VarinatSuggessionSeeder extends Seeder
 
                 'items_per_row' => 3,
                 'items_per_row_status' => 0,
-                'items_manage_status' => 0,
+                'items_manage_status' => 1,
 
 
                 'background' => 0,
@@ -397,7 +397,7 @@ class VarinatSuggessionSeeder extends Seeder
 
                 'items_per_row' => 15,
                 'items_per_row_status' => 0,
-                'items_manage_status' => 0,
+                'items_manage_status' => 1,
 
                 'background' => 0,
                 'background_color' => '#eeeeee',

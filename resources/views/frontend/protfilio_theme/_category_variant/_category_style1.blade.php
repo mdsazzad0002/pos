@@ -1,11 +1,11 @@
 @php
 if($variant_info->is_details_page){
-$category_list = \App\Models\category::withCount(['products' => function ($query) {
+$category_list = \App\Models\Category::withCount(['products' => function ($query) {
 $query->where('status', 1);
 }])->where('status', 1)->paginate($variant_info->items_show);
 
 }else{
-$category_list = \App\Models\category::withCount(['products' => function ($query) {
+$category_list = \App\Models\Category::withCount(['products' => function ($query) {
 $query->where('status', 1);
 }])->where('status', 1)->limit($variant_info->items_show)->get();
 

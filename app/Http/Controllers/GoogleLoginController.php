@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customer;
+use App\Models\Customer as customer;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -45,10 +45,10 @@ class GoogleLoginController extends Controller
         }else{
         {
             $user = customer::create([
-                'google_id' => $googleUser->id, 
-                'name' => $googleUser->name, 
-                'email' => $googleUser->email, 
-                'image' => $googleUser->image, 
+                'google_id' => $googleUser->id,
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'image' => $googleUser->image,
                 'password' => '',
             ]);
         }

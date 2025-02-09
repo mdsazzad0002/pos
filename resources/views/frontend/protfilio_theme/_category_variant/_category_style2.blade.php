@@ -1,8 +1,8 @@
 @php
     if($variant_info->is_details_page){
-        $category_list = \App\Models\category::where('status', 1)->paginate($variant_info->items_show);
+        $category_list = \App\Models\Category::where('status', 1)->paginate($variant_info->items_show);
     }else{
-        $category_list = \App\Models\category::where('status', 1)->limit($variant_info->items_show)->get();
+        $category_list = \App\Models\Category::where('status', 1)->limit($variant_info->items_show)->get();
     }
     $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
 @endphp
@@ -41,7 +41,7 @@
 
             </div>
             @endif
-            
+
             @if ($variant_info->view_all_status)
                 <div class="text-center">
                     <a href="{{ url($variant_info->view_all_page_url ?? '') }}" class="btn_primary">{{ $variant_info->short_read_more }}

@@ -5,6 +5,14 @@
 @endphp
 
 <aside id="sidebar-cart">
+    <div class="sidebar-cart">
+        <div>
+            <i class="fas fa-shopping-basket"></i>
+        </div>
+        <div class="items_added">
+            0
+        </div>
+    </div>
     <div class="title-cart-block mb-32 bg-lightest-gray">
         <h6>Shopping Cart (<span class="cart_items">0</span>)</h6>
         <a href="#" class="close-button close-popup"><span class="close-icon">X</span></a>

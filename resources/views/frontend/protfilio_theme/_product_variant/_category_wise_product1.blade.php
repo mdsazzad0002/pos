@@ -9,7 +9,7 @@ endif;
 
 $products = [];
 if($category_first){
-$products = \App\Models\Product::where('category', $category_first->id)->where('status', 1)->limit($variant_info->items_show)->get();
+$products = \App\Models\product::where('category', $category_first->id)->where('status', 1)->limit($variant_info->items_show)->get();
 }
 @endphp
 
@@ -18,7 +18,7 @@ $products = \App\Models\Product::where('category', $category_first->id)->where('
     <x-frontend_section  :info="$variant_info" class="category_wise_product" css="_product_variant/_category_wise_product1.css" >
 {{-- <div class="home-element category_wise_product"> --}}
     @if($products && $category_first && $filter_page && $detail_page)
-        
+
 
     <div class="container-fluid">
         <div class="product_column_container">

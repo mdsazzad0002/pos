@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('vat')->default(0);
             $table->string('status')->default(0);
             $table->text('note')->nullable();
+            $table->bigInteger('payment_method')->default(0);
 
 
             $table->string('shipping_charge_id')->default(0);

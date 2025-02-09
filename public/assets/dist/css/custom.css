@@ -49,6 +49,7 @@
 
     &:checked {
       &::before {
+        content:'';
         clip-path:
           polygon(50% 0%, 100% 0%, 100% 100%,50% 100% );
           border: 0.45em solid green;

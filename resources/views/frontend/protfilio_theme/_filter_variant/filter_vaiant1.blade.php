@@ -41,7 +41,7 @@
                             <div class="hr-line mb-24"></div>
                                 {{-- Category and Subcategory filter --}}
                                 @php
-                                $categories_items = \App\Models\category::where('status', 1)->get();
+                                $categories_items = \App\Models\Category::where('status', 1)->get();
                                 @endphp
                                 @if(count($categories_items) > 0)
                                 <div class="category-block box-1 mb-24">

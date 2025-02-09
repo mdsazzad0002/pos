@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\brand;
-use App\Models\category;
+use App\Models\Category as category;
 use App\Models\courier\CourierCredential;
 use App\Models\payment\PaymentCredential;
 use App\Models\product;
@@ -75,6 +75,6 @@ class PosController extends Controller
     }
 
     public function getProduct(){
-        
+
     }
 }

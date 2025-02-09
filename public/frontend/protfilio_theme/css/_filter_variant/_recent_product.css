@@ -21,7 +21,7 @@
 ._recent_product .free_delivery {
     position: absolute;
     top: 0;
-    z-index: 99;
+    z-index: 9;
     background: #0b0a0a;
     color: white;
     padding: 3px 11px;

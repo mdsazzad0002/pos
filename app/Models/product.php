@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Models\unit;
 use App\Models\User;
 use App\Models\brand;
-use App\Models\category;
+use App\Models\Category;
 use App\Models\reviewProduct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

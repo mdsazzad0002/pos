@@ -1,11 +1,12 @@
 <?php
 
-use App\Models\category;
+use App\Models\Category;
 use App\Models\upload;
 use App\Models\setting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Models\language\language;
+use App\Models\order;
 use Illuminate\Support\Facades\File;
 
 
@@ -298,5 +299,12 @@ function updateEnvFile($key, $value)
     }
 }
 
+
+
+function unchecked_order(){
+    return Order::whereDoesntHave('order_events', function ($query) {
+        $query->whereNot('status_id', 1);
+    })->count();
+}
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\header;
 use App\Models\Page;
-use App\Models\category;
+use App\Models\Category as category;
 use App\Models\SubCategory ;
 use Illuminate\Http\Request;
 use App\Models\brand;

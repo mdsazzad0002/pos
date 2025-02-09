@@ -4,17 +4,17 @@
 
     <tr>
         <td>Image Items : </td>
-        <td> <img src="{{ dynamic_asset($offerbanner->image1 ?? 0) }}"/> </td>
+        <td> <img src="{{ dynamic_asset($offerbanner->image1 ?? 0) }}"  style="width: 250px"/> </td>
     </tr>
     @if($offerbanner->type != 1 )
         <tr>
             <td>Image Items : </td>
-            <td> <img src="{{ dynamic_asset($offerbanner->image2 ?? 0) }}"/> </td>
+            <td> <img src="{{ dynamic_asset($offerbanner->image2 ?? 0) }}"  style="width: 250px"/> </td>
         </tr>
     @endif
     <tr>
         <td>Background Image : </td>
-        <td> <img src="{{ dynamic_asset($offerbanner->image3 ?? 0) }}"/> </td>
+        <td> <img src="{{ dynamic_asset($offerbanner->image3 ?? 0) }}" style="width: 250px"/> </td>
     </tr>
     <tr>
         <td colspan="2">Action Info : </td>

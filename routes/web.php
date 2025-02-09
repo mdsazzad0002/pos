@@ -760,6 +760,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 });
 // End Customer Management
 
+Route::get('/invoice', [HomeController::class, 'order_invoice'])->name('order_invoice');
 
 
 

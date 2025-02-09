@@ -8,7 +8,7 @@ use App\Models\brand;
 
 use App\Models\slider;
 use App\Models\product;
-use App\Models\category;
+use App\Models\Category as category;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use App\Models\HomePageManage;
@@ -26,6 +26,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Mpdf\Mpdf;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -818,6 +820,7 @@ class HomeController extends Controller
             $order->vat = $card_information['subtotal']['vat'];
             $order->status = 1;
             $order->note = $request->textarea ?? '';
+            $order->payment_method =  $request->plan ?? '';
 
             $order->shipping_charge_id = $request->shipping_charge ?? 0;
 
@@ -847,6 +850,39 @@ class HomeController extends Controller
             'price' => $order->price,
             'payment_method' => $request->plan
         ]);
+    }
+
+
+    public function order_invoice(Request $request){
+        if($request->has('order_id')){
+            $order = order::where('order_id', $request->order_id)->first();
+            if($order){
+
+                $final = 4000;
+                if($final = 400){
+                    // Load the Blade view and render it into HTML
+                    $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'))->render();
+
+                    // Initialize mPDF
+                    $mpdf = new Mpdf();
+                    $mpdf->WriteHTML($html);
+                    $pdfOutput = $mpdf->Output('', 'S'); // 'S' returns the PDF as a string
+
+                    // // Return response for download
+                    return response($pdfOutput)
+                        ->header('Content-Type', 'application/pdf')
+                        ->header('Content-Disposition', 'attachment; filename="'.$order->order_id.'.pdf');
+
+                    // Output PDF as a response
+                    // return response($mpdf->Output($order->order_id.'.pdf', 'I'))->header('Content-Type', 'application/pdf');
+                }
+
+
+
+                return view('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'));
+            }
+        }
+        return back();
     }
 
 }

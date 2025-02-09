@@ -107,8 +107,6 @@ class OfferbannerController extends Controller
     public function update(Request $request,  $offerbanner = null)
     {
         $request->validate([
-            'title' => 'required',
-            'subtitle' => 'nullable',
             'type' => 'required',
         ]);
 

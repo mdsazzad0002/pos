@@ -6,12 +6,12 @@
 
     if($variant_info->is_details_page){
         if(\request('category')){
-            $recommend_category = \App\Models\category::where('status', 1)->limit(1)->where('slug', \request('category'))->get();
+            $recommend_category = \App\Models\Category::where('status', 1)->limit(1)->where('slug', \request('category'))->get();
         }else{
-            $recommend_category = \App\Models\category::where('status', 1)->limit(1)->get();
+            $recommend_category = \App\Models\Category::where('status', 1)->limit(1)->get();
         }
     }else{
-        $recommend_category = \App\Models\category::where('status', 1)->get();
+        $recommend_category = \App\Models\Category::where('status', 1)->get();
     }
 
 
