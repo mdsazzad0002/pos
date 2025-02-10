@@ -34,9 +34,10 @@ class Category extends Model
 
     public function brands_by_cat() {
         return brand::where('brands.status', 1)
-            ->leftjoin('products', 'products.brand', '=', 'brands.id')  // Join products with brands
+            ->join('products', 'products.brand', '=', 'brands.id')  // Join products with brands
             ->where('products.category', $this->id)  // Filter products by category
             ->select('brands.name', 'brands.slug')
+            ->distinct() 
             ->get();
     }
     public function most_view_by_cat() {

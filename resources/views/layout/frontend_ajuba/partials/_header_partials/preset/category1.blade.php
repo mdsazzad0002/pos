@@ -7,8 +7,9 @@
             <span class="all-category-list list-unstyled">
                @foreach (category() as $items)
                     @php
+// dd( $items);
                         $brands = $items->brands_by_cat();
-                        // dd( $brands);
+                        // dd( $brands);/
                     @endphp
                     <span class="all-category-list-item "><a href="{{ url($filter_page->slug) }}?category={{ $items->slug }}"
                             class="all-category-list-link dark-black fw-500 d-flex align-items-center justify-content-between">{{ $items->name ?? '' }}
@@ -23,10 +24,11 @@
                                 <span class="wrapper-1">
                                     <span class="category-second-list-ul list-unstyled mb-40">
                                         <span class="dark-black fw-500 mb-16">Brands</span>
+
                                         @foreach ($brands as $brand)
                                             <span class="category-second-item">
                                                 <a href="{{ url($filter_page->slug) }}?category={{ $items->slug }}&brand={{ $brand->slug }}">
-                                                    {{ $brand->name }}
+                                                    {{ $brand->name }} sd
                                                 </a>
                                             </span>
                                         @endforeach
@@ -87,7 +89,7 @@
                                 </span>
                             </span>
                             @if($product = $items->most_view_by_cat())
-                                 <span class="img-product-menu" style="background: url('{{ asset('uploads/images/dropdown-image.png') }}') no-repeat;">
+                                 <span class="img-product-menu" style="background: url('{{ dynamic_asset($items->upload_id) }}') no-repeat;">
                                     <span class="image-content">
                                         <span class="h6 d-block fw-400 white mb-4p">{{ $items->name }}</span>
                                         <span class="h6 d-block fw-500 white mb-24">{{ $product->name ?? '' }}</span>

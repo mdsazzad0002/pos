@@ -43,7 +43,13 @@
     <!-- Main Wrapper Start -->
     <div id="scroll-container" class="main-wrapper">
         <!-- Header Menu Start -->
-        @include('layout.frontend_ajuba.partials.header')
+
+
+        @php
+            $header_style = \App\Models\HeaderStyle::where('status',1)->first();
+        @endphp
+        @include('layout.frontend_ajuba.'.$header_style->key, ['header_style' => $header_style])
+
         <!-- Header Menu End -->
 
         <!-- Main Sections -->
