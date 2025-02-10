@@ -178,6 +178,27 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'category_details_page',
             ],
+            [
+                'name' => 'Bluk Order',
+                'slug' => 'bluk-order',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'bluk_order',
+            ],
+            [
+                'name' => 'Custom Order',
+                'slug' => 'custom-order',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'custom_order',
+            ],
+            [
+                'name' => 'Login',
+                'slug' => 'customer/login',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'customer_login',
+            ],
 
 
         ];

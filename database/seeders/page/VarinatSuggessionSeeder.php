@@ -1395,6 +1395,122 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
 
+            '_custom_order' => [
+                'key' =>'_order._order_form1',
+                'title' => 'Custom Order',
+                'title_manage_status' => 1,
+
+                'title_status' => 0,
+                'sub_title' => 'Custom Order Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/custom_order_form1.png',
+                'background_manage_status'=> 1,
+
+            ],
+            '_custom_order2' => [
+                'key' =>'_order._order_form2',
+                'title' => 'Custom Order',
+                'title_manage_status' => 1,
+
+                'title_status' => 0,
+                'sub_title' => 'Custom Order Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/custom_order_form2.png',
+                'background_manage_status'=> 1,
+
+            ],
+            '_authenticate_login' => [
+                'key' =>'_authenticate_form._login',
+                'title' => 'Login',
+                'title_manage_status' => 1,
+
+                'title_status' => 0,
+                'sub_title' => 'Login Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/custom_order_form2.png',
+                'background_manage_status'=> 1,
+
+            ],
+            '_authenticate_register' => [
+                'key' =>'_authenticate_form._registration',
+                'title' => 'Register',
+                'title_manage_status' => 1,
+
+                'title_status' => 0,
+                'sub_title' => 'Register Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'uploads/preset/page_variant/register.png',
+                'background_manage_status'=> 1,
+
+            ],
 
 
 

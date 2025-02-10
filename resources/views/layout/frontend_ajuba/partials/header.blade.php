@@ -28,6 +28,19 @@
 
         </div>
         <div class="header-end d-none d-md-flex flex-md-row">
+            
+            @if($about_page)
+            <div class="d-sm-block d-none">
+                <a href="{{ url($about_page->slug) }}"><span class="fw-500 top-bar-links">{{ $about_page->name ?? '' }}</span></a>
+            </div>
+            @endif
+
+            @if($about_page)
+            <div class="d-sm-block d-none">
+                <a href="{{ url($about_page->slug) }}"><span class="fw-500 top-bar-links">{{ $about_page->name ?? '' }}</span></a>
+            </div>
+            @endif
+
             @if($contact_page)
             <a href="{{ url($contact_page->slug) }}" class="top-bar-links d-flex  align-items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
