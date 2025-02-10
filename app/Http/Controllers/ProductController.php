@@ -175,7 +175,13 @@ class ProductController extends Controller
         if($product){
 
                 $product->name = $request->name;
-                $product->slug = create_slug($request->name, 'product', 'slug');
+
+
+                    if($request->has('slug') && $request->slug != $product->slug){
+                        $product->slug = create_slug($request->slug, 'product', 'slug');
+                    }
+                
+
                 if(!$product->product_id){
                     $product->product_id = create_slug('P-', 'product', 'product_id');
                 }

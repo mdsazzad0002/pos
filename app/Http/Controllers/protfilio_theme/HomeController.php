@@ -338,7 +338,8 @@ class HomeController extends Controller
             }else{
                 $request['size'] = 0;
             }
-             $product_cart = session( $source_type, []);
+
+             $product_cart = session()->get( $source_type, []);
 
             // Flag to check if the product was found
             $found = false;
@@ -425,7 +426,7 @@ class HomeController extends Controller
                 }
             }
 
-// return $product_cart;
+            // return $product_cart;
 
             // Save the updated cart back to the session
             session()->put( $source_type, $product_cart);
@@ -444,6 +445,7 @@ class HomeController extends Controller
 
 
     }
+
 
     public function compare_list(){
         $compare_list = session('compare_list',[]);
@@ -661,6 +663,13 @@ class HomeController extends Controller
         ]);
 
         // return $request->all();
+        if ($request->has('address_id') && $request->address_id == '') {
+            $request->merge(['address_id' => 0]);
+        }
+
+        if ($request->has('billingaddress_id') && $request->billingaddress_id == '') {
+            $request->merge(['billingaddress_id' => 0]);
+        }
 
 
         // return auth()->guard('customer')->user();
@@ -701,7 +710,7 @@ class HomeController extends Controller
         $address_id = 0;
         $billingaddress_id = 0;
 
-        if(!$request->has('address_id')){
+        if(!$request->has('address_id') || $request->address_id == 0){
 
             $address_find = address::where('addressable_type', customer::class)
             ->where('addressable_id', auth()->guard('customer')->user()->id)
@@ -762,7 +771,7 @@ class HomeController extends Controller
 
 
 
-        if(!$request->has('billingaddress_id') && $request->has('shipAddress')){
+        if(!$request->has('billingaddress_id') || $request->billingaddress_id == 0){
             $address = new address();
             $address->name = $request->name1  ?? ''. ' ' . $request->lname2  ?? '';
             $address->email = $request->email2  ?? '';

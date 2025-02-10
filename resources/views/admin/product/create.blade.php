@@ -40,7 +40,12 @@
                                 <div class="col-lg-12">
                                     <label for="">Name</label>
                                     <input type="text" name="name" class="form-control mb-2"
-                                        placeholder="Enter product name" value="{{ $product->name ?? '' }}">
+                                        placeholder="Enter product name" value="{{ $product->name ?? '' }}" required oninput="generateSlugMake(this)">
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="">Slug</label>
+                                    <input type="text" name="slug" class="form-control mb-2"
+                                        placeholder="Enter slug name" id="generateSlug" value="{{ $product->slug ?? '' }}">
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="">Sku</label>
@@ -614,6 +619,21 @@
 
 
 <script>
+      function generateSlugMake(thi) {
+            var text = thi.value;
+
+            let output = text
+                .toLowerCase()                  // Convert to lowercase
+                .trim()                          // Trim spaces
+                .replace(/[^a-z0-9\s-]/g, '')    // Remove special characters
+                .replace(/\s+/g, '-')            // Replace spaces with dashes
+                .replace(/-+/g, '-');            // Remove multiple dashes
+
+
+            document.querySelector('#generateSlug').value = output;
+
+        }
+
     // generate faq items
     function control_data_faq(thi, key_class, type){
         if(type == '-'){
@@ -889,6 +909,9 @@
             console.log("Order updated!");
             },
         });
+
+
+
 
 </script>
 

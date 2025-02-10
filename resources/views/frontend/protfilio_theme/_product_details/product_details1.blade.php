@@ -1,6 +1,9 @@
 @php
 if($request->has('slug')){
     $products = \App\Models\product::where('slug', $request->slug)->first();
+    if($products == null){
+        return redirect()->back();
+    }
    // dd($products);
     if(is_numeric($products->views)){
         $products->views += 1;

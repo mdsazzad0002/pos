@@ -87,11 +87,12 @@
 
 <div class="d-flex  gap-16 mb-16">
     <h6>Short Description:</h6>
-    <p class="light-gray">{{ $product->short_description }}</p>
+    <div class="light-gray d-flex flex-column">{{ $product->short_description }}</div>
 </div>
 <div class="d-flex  gap-16 mb-16">
     <h6>Description:</h6>
-    <p class="light-gray">{!! $product->description !!}</p>
+
+    <div class="light-gray d-flex flex-column">{!! $product->description !!}</div>
 </div>
 <div class="hr-line mb-24"></div>
 
@@ -150,7 +151,7 @@
 </div>
 
 @if(isset($cart_page))
-    <a href="{{ url($cart_page->slug) }}" onclick="add_to_cart(this)" data-id="{{ $product->id }}"  data-quantaty="true" class="cus-btn-3 w-100 mb-24">Buy Now</a>
+    <a data-href="{{ url($cart_page->slug) }}" onclick="add_to_cart(this)" data-id="{{ $product->id }}"  data-quantaty="true" class="cus-btn-3 w-100 cursor-pointer mb-24">Buy Now</a>
 @endif
 
 </div>

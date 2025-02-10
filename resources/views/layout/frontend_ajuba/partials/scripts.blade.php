@@ -49,9 +49,13 @@
 
             if ($(thi).data('quantaty')) {
 
+                var current = thi;
+
+
                 var variant;
                 var unit;
-                var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
+                var quantaty = $(thi).closest('.modal').find('input.qunataty_number').val();
+                // var quantaty = $(thi).closest('.quantity_parents').find('input.qunataty_number').val();
 
               //  console.log($(thi).closest('.product_description_parents').length + 'sda');
 
@@ -88,6 +92,11 @@
                         setTimeout(() => {
                             load_cart_and_wishlist();
                         },500)
+                        setTimeout(() => {
+                            if($(current).data('href')){
+                                    window.location.href = $(current).data('href');
+                            }
+                        },1000)
                     }
                 })
 
@@ -124,16 +133,28 @@
 
                  document.querySelector('.cart .items_added').innerHTML = data.front_product;
                  document.querySelector('.sidebar-cart .items_added').innerHTML = data.front_product;
+                 document.querySelector('#sidebar-cart .cart_items').innerHTML = data.front_product;
 
-                 document.querySelector('.cart_sidebar_toggler .items_added').innerHTML = data.front_product;
+                 var togler_pitems = document.querySelectorAll('.cart_sidebar_toggler .items_added');
+                 if(togler_pitems.length > 0){
+                    togler_pitems.forEach(element => {
+                        element.innerHTML = data.front_product;
+                    })
+                    // document.querySelector('.cart_sidebar_toggler .items_added').innerHTML = data.front_product;
+                 }
+                // document.querySelector('.cart_sidebar_toggler .items_added').innerHTML = data.front_product;
 
              }
          })
 
      }
+
+
+    //  update script
         setTimeout(() => {
             load_cart_and_wishlist();
-        }, 1000);
+        }, 700);
+    // end update script
 
 
 

@@ -275,7 +275,7 @@ class OrderController extends Controller
     public function destroy(order $order)
     {
 
-        $this->old_product_quantity($order);
+        // $this->old_product_quantity($order);
        $order->delete();
 
         return json_encode([

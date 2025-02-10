@@ -6,7 +6,7 @@
             <div class="items_element">
 
                         <h2>
-                            {{ \App\Models\Order::where('customer_id', Auth::guard('customer')->user()->id)->count() }}
+                            {{ \App\Models\order::where('customer_id', Auth::guard('customer')->user()->id)->count() }}
                         </h2>
                         <p>Orders</p>
 

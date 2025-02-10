@@ -26,6 +26,42 @@
                     <div class="billing-wrapper p-24 bg-white br-10 mb-40">
                         <form action="javascript:void(0)" method="post" class="contact-form">
                             <div class="row">
+
+                               {{-- Use preevious address --}}
+                                @if(auth()->guard('customer')->user())
+                                    @foreach (auth()->guard('customer')->user()->addressable as $key => $address)
+                                        <div class="col-md-6">
+                                            <div class="input-block mb-16 address_data">
+                                                <input type="radio" name="address_id" id="address_id{{ $key }}" value="{{ $address->id }}" class="form-control" placeholder="First Name">
+
+                                                <label for="address_id{{ $key }}">
+                                                    Address: {{ $address->address }} </br>
+                                                    Apartment: {{ $address->address_optional }} </br>
+                                                    District: {{ $address->district }} </br>
+                                                    Postal: {{ $address->postal }} </br>
+                                                    Country: {{ $address->country }} </br>
+                                                    State: {{ $address->state }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+                                <div class="col-md-6">
+                                    <div class="input-block mb-16 address_data">
+                                        <input type="radio" checked name="address_id" id="address_idcustome" value="" class="form-control" placeholder="First Name">
+
+                                        <label for="address_idcustome">
+                                            Use Another Location
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row new_previous_address">
+
+                                {{-- End use preevious address --}}
+
                                 <div class="col-md-6">
                                     <div class="input-block mb-16">
                                         <input type="text" name="name" id="name" class="form-control" placeholder="First Name">
@@ -160,7 +196,10 @@
                                     </div>
                                 </div>
                                 @endif
+                            </div>
 
+
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="cus-checkBox ship-address mb-32">
                                         <input type="checkbox" id="shipAddress" name="shipAddress">
@@ -175,9 +214,6 @@
                                         <textarea name="textarea" id="textbox" cols="8" rows="5" class="form-control" placeholder="Note About Your Order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </form>
 
@@ -186,6 +222,42 @@
                         <!-- Different Billing Address Form -->
                         <form action="javascript:void(0)" method="post" class="billing-address contact-form mt-16">
                             <div class="row">
+                                 {{-- Use preevious address --}}
+                                 @if(auth()->guard('customer')->user())
+                                 @foreach (auth()->guard('customer')->user()->addressable as $key => $address)
+                                     <div class="col-md-6">
+                                         <div class="input-block mb-16 address_data">
+                                             <input type="radio" name="billingaddress_id" id="billingaddress_id{{ $key }}" value="{{ $address->id }}" class="form-control" placeholder="First Name">
+
+                                             <label for="billingaddress_id{{ $key }}">
+                                                 Address: {{ $address->address }} </br>
+                                                 Apartment: {{ $address->address_optional }} </br>
+                                                 District: {{ $address->district }} </br>
+                                                 Postal: {{ $address->postal }} </br>
+                                                 Country: {{ $address->country }} </br>
+                                                 State: {{ $address->state }}
+                                             </label>
+                                         </div>
+                                     </div>
+                                 @endforeach
+                             @endif
+
+                             <div class="col-md-6">
+                                 <div class="input-block mb-16 address_data">
+                                     <input type="radio" name="billingaddress_id" checked id="billingaddress_idsd" value="" class="form-control" placeholder="First Name">
+
+                                     <label for="billingaddress_idsd">
+                                         Use Another Location
+                                     </label>
+                                 </div>
+                             </div>
+
+                             {{-- End use preevious address --}}
+                            </div>
+
+
+                            <div class="row new_previous_billaddress">
+
                                 <div class="col-md-6">
                                     <div class="input-block mb-16">
                                         <input type="text" name="name1" id="name1" class="form-control" placeholder="First Name">
@@ -524,6 +596,46 @@
 
 
 </script>
+
+<style>
+    .address_data {
+        border: 1px solid #979494;
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .address_data input{
+        display:none;
+    }
+
+    .address_data label{
+        width:-webkit-fill-available;
+        cursor:pointer;
+    }
+
+    .address_data:has(input:checked)  {
+        border-color:var(--primary-color);
+        background:#eaeaea;
+    }
+
+
+    .new_previous_address{
+        display:none;
+    }
+    :has(#address_idcustome:checked) .new_previous_address{
+        display:flex;
+    }
+
+
+    .new_previous_billaddress{
+        display: none;
+    }
+
+    :has(#billingaddress_idsd:checked) .new_previous_billaddress{
+        display:flex;
+    }
+
+</style>
 
 
 @endpush
