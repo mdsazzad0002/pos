@@ -1397,11 +1397,11 @@ class VarinatSuggessionSeeder extends Seeder
 
             '_custom_order' => [
                 'key' =>'_order._order_form1',
-                'title' => 'Custom Order',
+                'title' => 'Costom Form Bluk Order',
                 'title_manage_status' => 1,
 
                 'title_status' => 0,
-                'sub_title' => 'Custom Order Sub Title',
+                'sub_title' => 'Costom Form Bluk Order Sub Title',
                 'sub_title_status' => 0,
                 'sub_title_manage_status' => 1,
 
@@ -1420,7 +1420,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'uploads/preset/page_variant/custom_order_form1.png',
+                'upload_id'=>'uploads/preset/page_variant/custom_form_bluk_order_form1.png',
                 'background_manage_status'=> 1,
 
             ],

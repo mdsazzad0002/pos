@@ -21,16 +21,16 @@ if(auth()->guard('customer')->user()){
                         <form id="loginForm" class="contact-form" method="POST" action="{{ route('customer_login')  }}" data-redirect="{{ url($profile_dashboard->slug) }}">
                             @csrf
                             <div class="row">
-                                {{-- <div class="col-sm-6">
+                                <div class="col-sm-6">
                                     <a href="{{ route('google.redirect') }}" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
+                                    <a href="{{ route('facebook.redirect') }}" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
                                 </div>
 
                                 <div class="col-sm-12">
                                     <p class="or mb-12">Or</p>
-                                </div> --}}
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="input-block mb-16">
                                         <input type="email" id="email" name="email" autocomplete="off" class="form-control" placeholder="Your Email" required>

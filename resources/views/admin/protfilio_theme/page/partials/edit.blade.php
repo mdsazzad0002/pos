@@ -19,8 +19,11 @@
 
     <label for="page_type"> Page Type <br/>
         <select name="page_type" id="page_type" class="form-control">
-             <option value="">Default</option>
-             <option @if($page->page_type =='filter') selected @endif value="filter">Filter</option>
+
+             @foreach ($page->page_type() as $page_type)
+                <option @if($page->page_type == $page_type) selected @endif value="{{ $page_type }}">{{ Str::title($page_type != '' ? $page_type : 'Default') }}</option>
+             @endforeach
+{{--
              <option @if($page->page_type =='view') selected @endif value="view">View</option>
              <option @if($page->page_type =='tracking') selected @endif value="tracking">tracking</option>
              <option @if($page->page_type =='contact') selected @endif value="contact">contact</option>
@@ -32,7 +35,7 @@
              <option @if($page->page_type =='service') selected @endif value="service">service</option>
              <option @if($page->page_type =='service_details') selected @endif value="service_details">service_details</option>
              <option @if($page->page_type =='profile_dashboard') selected @endif value="profile_dashboard">profile_dashboard</option>
-             <option @if($page->page_type =='profile_location') selected @endif value="profile_location">profile_location</option>
+             <option @if($page->page_type =='profile_location') selected @endif value="profile_location">profile_location</option> --}}
 
         </select>
      </label>

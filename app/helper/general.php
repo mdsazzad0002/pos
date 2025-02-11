@@ -120,6 +120,10 @@ function dynamic_asset($id)
     $destinationPath = 'uploads/';
     if ($id != null || $id != '') {
         if ($file1 = Upload::find($id)) {
+            if (filter_var($file1->name, FILTER_VALIDATE_URL)) {
+                return $file1->name;
+            }
+            
             $file1 = $destinationPath . $file1->name;
             if (File::exists(public_path($file1)) || is_dir(public_path($file1))) {
                 return asset($file1);
@@ -127,6 +131,8 @@ function dynamic_asset($id)
                 $file = $destinationPath . 'fixing.png';
                 return asset($file);
             }
+
+
         } else {
             $file = $destinationPath . 'fixing.png';
             return asset($file);

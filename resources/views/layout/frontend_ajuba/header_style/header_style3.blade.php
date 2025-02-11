@@ -5,7 +5,10 @@
     $contact_page = \App\Models\Page::where('page_type', 'contact')->first();
     $about_page = \App\Models\Page::where('page_type', 'about')->first();
     $register_page = \App\Models\Page::where('page_type', 'register')->first();
+    $login_page = \App\Models\Page::where('page_type', 'customer_login')->first();
     $profile_dashboard = \App\Models\Page::where('page_type', 'profile_dashboard')->first();
+    $bluk_order = \App\Models\Page::where('page_type', 'bluk_order')->first();
+    $custom_order = \App\Models\Page::where('page_type', 'custom_order')->first();
 
     if(!isset($wishlist_page)){
         $wishlist_page = \App\Models\Page::where('page_type', 'wishlist')->first();
@@ -22,6 +25,17 @@
             </div>
         </div>
         <div class="header-end d-none d-md-flex flex-md-row">
+
+            @if($bluk_order)
+            <div class="d-sm-block d-none">
+                <a href="{{ url($bluk_order->slug) }}"><span class="fw-500 top-bar-links">{{ $bluk_order->name ?? '' }}</span></a>
+            </div>
+            @endif
+            @if($custom_order)
+            <div class="d-sm-block d-none">
+                <a href="{{ url($custom_order->slug) }}"><span class="fw-500 top-bar-links">{{ $custom_order->name ?? '' }}</span></a>
+            </div>
+            @endif
 
             @if($contact_page)
             <a href="{{ url($contact_page->slug) }}" class="top-bar-links d-flex  align-items-center gap-2">
@@ -136,7 +150,7 @@
                 </div>
 
                 <div class="header-buttons">
-                    @if($register_page)
+                    @if($login_page)
 
                     @if(auth()->guard('customer')->user())
                     <a href="{{ url($profile_dashboard->slug) }}" class="button-block align-items-sm-unset align-items-end">
@@ -147,10 +161,10 @@
                         </div>
                         </a>
                         @else
-                        <a href="{{ url($register_page->slug) }}" class="button-block align-items-sm-unset align-items-end">
+                        <a href="{{ url($login_page->slug) }}" class="button-block align-items-sm-unset align-items-end">
                             <img src="{{asset('uploads/')}}/users/user-3.png" alt="" class="user">
                             <div>
-                                <p>{{ $register_page->name ?? '' }}</p>
+                                <p>{{ $login_page->name ?? '' }}</p>
                                 <h6>Account</h6>
                             </div>
                             </a>

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use Yajra\DataTables\DataTables;
 
 
@@ -143,6 +145,18 @@ class CustomerController extends Controller
         ], 200);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Display the specified resource.
      */
@@ -158,6 +172,14 @@ class CustomerController extends Controller
     {
         return view('admin.customer.partials.edit', compact('customer'));
     }
+
+
+
+
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -277,4 +299,38 @@ class CustomerController extends Controller
 
         return redirect('/');
     }
+
+    public function customerUpdate(Request $request, customer $customer){
+
+         // Remove _token and _method from the request
+        $data = $request->except(['_token', '_method']);
+
+        // Check if password and confirm password are provided
+        if ($request->filled('password') && $request->filled('c_password')) {
+            // Check if passwords match
+            if ($request->password === $request->c_password) {
+                // Hash the password before saving
+                $data['password'] = Hash::make($request->password);
+            } else {
+                return back()->withErrors(['password' => 'Passwords do not match.']);
+            }
+        } else {
+            // Remove password and confirm password if not provided
+            unset($data['password'], $data['c_password']);
+        }
+
+        // Update customer fields with the rest of the request data
+        foreach ($data as $key => $value) {
+            $customer->$key = $value;
+        }
+
+        // Save the updated customer
+        $customer->save();
+
+        return back()->with('success', 'Profile updated successfully!');
+
+
+    }
+
+
 }

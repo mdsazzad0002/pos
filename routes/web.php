@@ -17,6 +17,7 @@ use App\Http\Controllers\VatController as vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
+use App\Http\Controllers\Admin\WholeSaleProductTypeController;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -174,9 +175,18 @@ Route::post('user/customer-register',[App\Http\Controllers\CustomerController::c
 Route::post('user/customer-login', [App\Http\Controllers\CustomerController::class, 'customerLogin'])->name('customer_login');
 Route::get('user/customer-logout', [App\Http\Controllers\CustomerController::class, 'customer_logout'])->name('customer_logout');
 
+Route::put('user/customer-customerUpdate/{customer}',[App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customerUpdate');
+
+
 Route::get('user/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('user/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
 
+Route::get('user/facebook/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToFacebook'])->name('facebook.redirect');
+Route::get('user/facebook/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleFacebookCallback'])->name('facebook.callback');
+
+
+// Route::get('auth/google', [CustomerController::class, 'redirectToGoogle']);
+// Route::get('auth/google/callback', [CustomerController::class, 'handleGoogleCallback']);
 
 
 
@@ -476,6 +486,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
+        //whole sele product type
+        Route::resource('whole/sale/product',WholeSaleProductTypeController::class)->names('whole.sele');
+        Route::get('whole/sale/product/delete/{whole}', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
+
+
 
         Route::any('/backup', [BackupController::class, 'createBackup']);
 
@@ -566,6 +581,8 @@ Route::middleware(['guest', 'web'])->group(function () {
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
+
+
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 

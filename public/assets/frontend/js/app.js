@@ -536,11 +536,11 @@ var MyScroll = "";
 
 
     // Form Validation
-    formValidation: function () {
-      if ($(".contact-form").length) {
-        $(".contact-form").validate();
-      }
-    },
+    // formValidation: function () {
+    //   if ($(".contact-form").length) {
+    //     $(".contact-form").validate();
+    //   }
+    // },
 
 
     // Contact Form
@@ -554,10 +554,10 @@ var MyScroll = "";
 
         if ($(".contact-form").valid()) {
           var _self = $(this);
-          _self
-            .closest("div")
-            .find('button[type="submit"]')
-            .attr("disabled", "disabled");
+        //   _self
+        //     .closest("div")
+        //     .find('button[type="submit"]')
+            // .attr("disabled", "disabled");
 
 
           var data = $(this).serialize();
@@ -568,7 +568,7 @@ var MyScroll = "";
             dataType: "json",
             data: data,
             success: function (data) {
-                console.log(data.success)
+                //console.log(data.success)
               $(".contact-form").trigger("reset");
               _self.find('button[type="submit"]').removeAttr("disabled");
 

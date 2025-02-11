@@ -34,8 +34,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-4 profile_sidebar">
+
+
             <ul>
                 <li class="form__li">
+                    <button type="button" class="btn btn-primary customer_edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fas fa-pencil"></i>
+                      </button>
+
                     <form action="{{ route('customer_profile_pic.update', $customer->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <label for="update_profile_pic" class="update_profile_pic">
@@ -185,6 +191,27 @@ label.update_profile_pic:hover img.rounded.rounded-circle{
 label.update_profile_pic:hover i.fas.fa-camera.top-right-0{
     opacity:1;
 }
+.form__li{
+    position: relative;
+}
+.form__li .customer_edit{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#staticBackdrop .modal-content{
+    width:550px;
+}
+
+
+@media (max-width:550px) {
+    #staticBackdrop .modal-content{
+        width:300px;
+    }
+
+}
+
 </style>
 
 <script>
@@ -196,3 +223,48 @@ label.update_profile_pic:hover i.fas.fa-camera.top-right-0{
     });
 
  </script>
+
+
+<!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <form class="modal-content bg-white" style="" action="{{ route('customerUpdate', $customer->id) }}" method="post">
+
+        @csrf
+        @method('put')
+
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Update Profile</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body d-flex flex-column">
+            <label for="name" class="mb-2">
+                Name <br/>
+                <input type="text" name="name" class="form-control" value="{{ $customer->name }}">
+            </label>
+            <label for="phone" class="mb-2">
+                Phone <br/>
+                <input type="text" name="phone" class="form-control" value="{{ $customer->phone }}">
+            </label>
+            <label for="email" class="mb-2">
+                email <br/>
+                <input type="text" name="email" class="form-control" value="{{ $customer->email }}">
+            </label>
+            <label for="password"  class="mb-2">
+                Password <br/>
+                <input type="password" id="password" name="password" class="form-control" value="">
+            </label>
+            <label for="c_password"  class="mb-2">
+                Confirm Password <br/>
+                <input type="password" id="password" name="c_password" class="form-control" value="">
+            </label>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>

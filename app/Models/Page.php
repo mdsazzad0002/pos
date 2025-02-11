@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\header;
 use App\Models\HomePageManage;
+use App\Models\VarinatSuggession;
 
 class Page extends Model
 {
@@ -18,5 +19,11 @@ class Page extends Model
 
     public function header_items(){
         return $this->belongsTo(header::class,'page_id', 'id');
+    }
+
+    public function page_type(){
+        return Page::select('page_type')->distinct()->pluck('page_type');
+
+
     }
 }
