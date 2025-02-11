@@ -84,9 +84,13 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
+
 use App\Http\Controllers\WholeSaleOrderController;
 use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderController;
 
+
+
+use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 
 
 /*
@@ -102,7 +106,9 @@ use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderCo
 
 
 
-
+Route::get('latest_order', [AdminDashboardController::class, 'latest_order'])->name('latest_order');
+Route::get('latest_customer', [AdminDashboardController::class, 'latest_customer'])->name('latest_customer');
+Route::get('recent_product', [AdminDashboardController::class, 'recent_product'])->name('recent_product');
 
 
 

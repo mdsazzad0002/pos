@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class order extends Model
 {
+
     use HasFactory,SoftDeletes;
+
+    protected $appends =['order_status'];
+
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
     }
@@ -50,6 +54,9 @@ class order extends Model
         return OrderEvent::where('order_id', $this->order_id)->latest()->first()?->status_data?->name ?? 'Pending';
     }
 
+    public function getOrderStatusAttribute(){
+        return $this->order_status();
+    }
     public function payment_method_info(){
         return $this->hasOne(PaymentCredential::class, 'id', 'payment_method');
     }

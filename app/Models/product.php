@@ -16,7 +16,7 @@ class product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $appends = ['image_url', 'avg_rat', 'rat_count', 'status_text'];
+    protected $appends = ['image_url', 'avg_rat', 'rat_count', 'status_text', 'instance_price'];
 
 
     public function category_info(){
@@ -101,6 +101,10 @@ class product extends Model
 
     public function getStatusTextAttribute(){
         return $this->status == 1 ? 'Active' : 'Inactive';
+    }
+
+    public function getInstancePriceAttribute(){
+        return ($this->variant_on == 0 )? (settings('currency_symbol', 9) . ' '.$this->selling_price) : ('Variant Product');
     }
 
 }
