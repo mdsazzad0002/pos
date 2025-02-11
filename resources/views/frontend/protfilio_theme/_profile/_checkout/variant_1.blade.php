@@ -41,7 +41,7 @@ $customer = auth()->guard('customer')->user();
                         <td>{{ settings('currency_symbol', 9). ' '. $order->price }}</td>
                         <td>{{ $order->payment_method_info?->provider ?? 'Cash On Delivery'}}</td>
                         <td>{{ $order->order_status() }}</td>
-                        <td>{{ $order->cash_collection}}</td>
+                        <td>{{ settings('currency_symbol', 9) .' '. $order->cash_collection}}</td>
                         <td>
                              <a href="{{ url($tracking_page->slug) }}?id={{ $order->order_id }}&email={{ auth()->guard('customer')->user()->email }}" class="btn btn-primary">Track Now</a>
                              <a href="{{ route('order_invoice') }}?order_id={{ $order->order_id }}" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i></a>

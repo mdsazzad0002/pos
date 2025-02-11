@@ -199,6 +199,13 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'customer_login',
             ],
+            [
+                'name' => 'Order Success',
+                'slug' => 'order/success',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'order_success',
+            ],
 
 
         ];

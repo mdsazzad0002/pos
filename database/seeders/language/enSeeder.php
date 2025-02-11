@@ -212,6 +212,8 @@ class enSeeder extends Seeder
             'sidebar.maintanance'=>'Maintenance Mode',
             'tracking_report.bd_courier_tracking_id'=>'Courier Tracking Id',
             'tracking_report.bd_courier_tracking_status'=>'Courier Tracking  Status',
+            'frontend.order_success'=>'Success',
+            'order.success_text'=>'Successfully Received your Order. Keep With Us.',
 
 
 

@@ -87,7 +87,7 @@ class WholeSaleProductTypeController extends Controller
      */
     public function edit(WholeSaleProductType $wholeSaleProductType)
     {
-        return view('admin.wholeSeleProduct.partials.edit', compact('wholeSeleProduct'));
+        return view('admin.wholeSeleProduct.partials.edit', compact('wholeSaleProductType'));
     }
 
     /**

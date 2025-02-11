@@ -4,7 +4,10 @@
     }
 
     if(!isset($view_page)){
-        $view_page = \App\Models\Page::where('page_type', 'view')->first();
+        $view_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
+    }
+    if(!isset($order_success_page)){
+        $order_success_page = \App\Models\Page::where('status', 1)->where('page_type', 'order_success')->first();
     }
 
     if(count(session('front_product', [])) == 0){
@@ -564,7 +567,11 @@
                         if(data.payment_method  != 1){
                             window.location.href = '{{ url('checkout/payment') }}?payment_method='+data.payment_method+'&order_id='+data.order_id;
                         }else{
-                            window.location.href= '{{url('/')}}'
+                            @if ($order_success_page)
+                                window.location.href= '{{url($order_success_page->slug)}}?order_id='+data.order_id
+                            @else
+                                window.location.href= '{{url('/')}}'
+                            @endif
                            // console.log('Cash On delivery');
                         }
 

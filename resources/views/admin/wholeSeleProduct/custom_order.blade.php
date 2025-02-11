@@ -15,13 +15,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Product Type List
-        <div>
-            {{-- @can('user create') --}}
-
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Product Type Name" data-href="{{ route('admin.whole.sele.create') }}">+ Add New Product Type Name</button>
-            {{-- @endcan --}}
-        </div>
+        Custom Product List
     </div>
     <div class="card-body">
         <table id="users" class="table table-bordered table-striped table-hover">
@@ -46,9 +40,15 @@
             {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
 
             {data:'name', name:'name', title:'Name'},
-            {data:'status', name:'status', title:'Status', render: function (data, type, row, meta) {
-                return data == 1 ? 'Active' : 'Inactive';
+            {data:'email', name:'email', title:'Email'},
+            {data:'phone', name:'phone', title:'Phone'},
+            {data:'address', name:'address', title:'Address'},
+            {data:'order_type', name:'order_type', title:'Type', render: function (data, type, row, meta) {
+                return data == 0 ? 'Bluk' : 'Custom';
             }},
+            {data:'date', name:'date', title:'Date'},
+            {data:'quantity', name:'quantity', title:'Quantity'},
+            {data:'description', name:'description', title:'Description'},
             {data:'created_at', name:'created_at', title:'Date', render: function (data, type, row, meta) {
                 return moment(data).format('DD-MM-YYYY hh:mm:ss A');
             }},

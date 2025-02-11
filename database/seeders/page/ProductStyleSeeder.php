@@ -15,14 +15,24 @@ class ProductStyleSeeder extends Seeder
     {
 
         $data_array =[
-            'footer_style' => [
-                'key' => 'footer_style.footer_style1',
-                'title' => 'Footer Style Style',
-                'upload_id'=>'uploads/preset/footer_style/footer_style1.png',
+            'Product_style' => [
+                'key' => '_product_style.product_style1',
+                'title' => 'Product Style Style',
+                'upload_id'=>'uploads/preset/_product_style/product_style1.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '
-                   Compare Style 1
+                   Product Style 1
+                ',
+            ],
+            'Product_style2' => [
+                'key' => '_product_style.product_style2',
+                'title' => 'Product Style Style',
+                'upload_id'=>'uploads/preset/_product_style/product_style2.png',
+                'status' => 1,
+                'background_color' => '#ffffff',
+                'details' => '
+                   Product Style 2
                 ',
             ],
         ];

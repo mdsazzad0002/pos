@@ -6,7 +6,7 @@
         <input type="text" name="name" class="form-control mb-2" placeholder="Enter Product Type name">
     </div>
 
-    <label for="status"> category Status <br/>
+    <label for="status">Status <br/>
         <input type="checkbox" checked class="" hidden  name="status"   value="0">
         <input type="checkbox" class="toggle"  placeholder=" Status" name="status"  id="status" value="1">
     </label>

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\userController;
+use App\Mail\MailerDynamic;
 use App\Models\Address as address;
 use App\Models\coupon;
 use App\Models\Customer as customer;
@@ -26,6 +27,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
 
@@ -848,8 +850,32 @@ class HomeController extends Controller
         }
 
 
+        if(!isset($tracking_page)){
+            $tracking_page = \App\Models\Page::where('status', 1)->where('page_type', 'tracking')->first();
+        }
 
-        session()->put('front_product', []);
+        if($tracking_page){
+            $mailInfo = [
+
+                'title' => settings('app_title', 9).' From Order Invoice Generated',
+                'subject' => settings('app_title', 9).'From Order Invoice Generated',
+                // 'user' => $user?->email,
+                'email' => $user?->email,
+                'template' => 'order_create',
+                'name' => $user?->name,
+                'additional_text' => " <iframe src='".route('order_invoice')."?order_id=". $order->order_id ."'/>
+                                        <a  href='".url('/')."'> Visit Our Shop Now </a>
+                                        <a  href='". url($tracking_page->slug) ."?id=". $order->order_id ."&email=". $user->email."'> Track Order </a>
+                                        "
+            ];
+
+            Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+
+        }
+
+
+
+        // session()->put('front_product', []);
 
         return json_encode([
             'status' => true,
@@ -875,15 +901,15 @@ class HomeController extends Controller
                     // Initialize mPDF
                     $mpdf = new Mpdf();
                     $mpdf->WriteHTML($html);
-                    $pdfOutput = $mpdf->Output('', 'S'); // 'S' returns the PDF as a string
+                    // $pdfOutput = $mpdf->Output('', 'S'); // 'S' returns the PDF as a string
 
                     // // Return response for download
-                    return response($pdfOutput)
-                        ->header('Content-Type', 'application/pdf')
-                        ->header('Content-Disposition', 'attachment; filename="'.$order->order_id.'.pdf');
+                    // return response($pdfOutput)
+                        // ->header('Content-Type', 'application/pdf')
+                        // ->header('Content-Disposition', 'attachment; filename="'.$order->order_id.'.pdf');
 
                     // Output PDF as a response
-                    // return response($mpdf->Output($order->order_id.'.pdf', 'I'))->header('Content-Type', 'application/pdf');
+                    return response($mpdf->Output($order->order_id.'.pdf', 'I'))->header('Content-Type', 'application/pdf');
                 }
 
 

@@ -96,6 +96,25 @@ sidebar-dark-primary elevation-4">
                             </li>
                         @endcan
                     @endif
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.whole.sele.index') }}" class="nav-link ">
+                            <i class="fas fa-shopping-cart nav-icon"></i>
+                            <p>Product Type</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.bluk.order') }}" class="nav-link ">
+                            <i class="fas fa-shopping-cart nav-icon"></i>
+                            <p>Bluk Order</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.custom.order') }}" class="nav-link ">
+                            <i class="fas fa-shopping-cart nav-icon"></i>
+                            <p>Custom Order</p>
+                        </a>
+                    </li>
                     </ul>
                 </li>
                 @endcan

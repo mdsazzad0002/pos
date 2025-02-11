@@ -26,6 +26,16 @@ class FooterStyleSeeder extends Seeder
                    Compare Style 1
                 ',
             ],
+            'footer_style2' => [
+                'key' => 'footer_style.footer_style2',
+                'title' => 'Footer Style Style 2',
+                'upload_id'=>'uploads/preset/footer_style/footer_style2.png',
+                'status' => 1,
+                'background_color' => '#ffffff',
+                'details' => '
+                   Compare Style 1
+                ',
+            ],
         ];
 
 

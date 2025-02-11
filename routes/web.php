@@ -84,6 +84,10 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\WholeSaleOrderController;
+use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -264,7 +268,9 @@ Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
 
 
 
+//custom order
 
+Route::post('bluk-order/store',[WholeSaleOrderController::class, 'blukOderStore'])->name('bluk.order.store');
 
 
 
@@ -474,6 +480,12 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         //pos
         Route::resource('/pos', PosController::class)->names('pos');
 
+
+        //bluk order
+        Route::get('/bluk/order', [AdminWholeSaleOrderController::class, 'blukOrder'])->name('bluk.order');
+        //custom order
+        Route::get('/custom/order', [AdminWholeSaleOrderController::class, 'customOrder'])->name('custom.order');
+
         // unit purchase
         Route::get('/stock', [StockManagementController::class, 'index'])->name('stock.index');
         Route::get('/stockalert', [StockManagementController::class, 'stockalert'])->name('stock.stockalert');
@@ -487,8 +499,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
         //whole sele product type
-        Route::resource('whole/sale/product',WholeSaleProductTypeController::class)->names('whole.sele');
-        Route::get('whole/sale/product/delete/{whole}', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
+        Route::resource('whole/sale/wholeSaleProductType',WholeSaleProductTypeController::class)->names('whole.sele');
+        Route::get('whole/sale/wholeSaleProductType/delete/{wholeSaleProductType}', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
 
 
 

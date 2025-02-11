@@ -15,7 +15,7 @@ class CompareStyleSeeder extends Seeder
     {
         $data_array =[
             'compare_style' => [
-                'key' => 'header_style.compare_style1',
+                'key' => '_compare_style.compare_style1',
                 'title' => 'Header Style',
                 'upload_id'=>'uploads/preset/compare_variant/compare_style1.png',
                 'status' => 1,

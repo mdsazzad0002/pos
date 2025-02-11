@@ -47,8 +47,12 @@
 
         @php
             $header_style = \App\Models\HeaderStyle::where('status',1)->first();
+            $footer_style = \App\Models\FooterStyle::where('status',1)->first();
         @endphp
-        @include('layout.frontend_ajuba.'.$header_style->key, ['header_style' => $header_style])
+
+        @if($header_style)
+            @include('layout.frontend_ajuba.'.$header_style->key, ['header_style' => $header_style])
+        @endif
 
         <!-- Header Menu End -->
 
@@ -58,10 +62,9 @@
             @yield('content')
 
             <!-- Benefits Start -->
-            @if(settings('footer_style1_status', 88) == 1)
-                @include('layout.frontend_ajuba.partials.footer')
-            @elseif(settings('footer_style2_status', 88) == 1)
-                @include('layout.frontend_ajuba.partials.footer1')
+
+            @if($header_style)
+                @include('layout.frontend_ajuba.'.$footer_style->key, ['footer_style' => $footer_style])
             @endif
 
             <!-- Benefits End -->
