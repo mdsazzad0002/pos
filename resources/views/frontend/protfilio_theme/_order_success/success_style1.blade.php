@@ -1,5 +1,9 @@
 @php
+if(\request('order_id')){
     $order_history = \App\Models\order::findOrFail(\request()->order_id);
+}else{
+    $order_history =null;
+}
 
 if(!isset($tracking_page)){
     $tracking_page = \App\Models\Page::where('status', 1)->where('page_type', 'tracking')->first();

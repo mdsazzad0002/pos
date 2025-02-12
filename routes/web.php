@@ -17,7 +17,7 @@ use App\Http\Controllers\VatController as vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
-use App\Http\Controllers\Admin\WholeSaleProductTypeController;
+
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -85,6 +85,7 @@ use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
 
+use App\Http\Controllers\admin\WholeSaleProductTypeController;
 use App\Http\Controllers\WholeSaleOrderController;
 use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderController;
 

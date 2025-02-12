@@ -108,22 +108,19 @@
                         $header_preset =  \App\Models\header::where('status', 1)->where('preset', 1)->orderBy('order', 'asc')->first();
                     @endphp
 
-
-                    <div class="header-bottom-area mt-1 d-flex align-items-center justify-content-center gap-2">
+                    <a href="{{ url('/') }}" class="header-logo">
+                        <img style="max-height: 40px;" src="{{ settings('app_image',9)}}" alt="">
+                    </a>
+                    <div class="header-bottom-area mt-1">
                         <div class="nav-container" style="padding-left: 0px;">
                             <div class="all-category-nav">
                                 @include('layout.frontend_ajuba.partials._header_partials.preset.category1', ['items'=>$header_preset])
                             </div>
                         </div>
-
-                        <a href="{{ url('/') }}" class="header-logo">
-                            <img style="max-height: 40px;" src="{{ settings('app_image',9)}}" alt="">
-                        </a>
                     </div>
-
                 </div>
 
-                <div class="mixin-container  container_items_search">
+                <div class="mixin-container ">
                     <form action="{{ url( $filter_page->slug) }}" method="post" id="filter_form_all">
                        @if(settings('category_wise_filter_status', 80) == 1)
                        <div class="drop-container d-flex align-items-center flex-nowrap">
@@ -147,17 +144,12 @@
 
                         <div class="input-field">
                             <input type="text" name="search" id="searchInput" class="form-control" placeholder="Search for products..." value="{{ $_GET['q'] ?? '' }}">
-                            <button type="submit" class="cus-btn"><i class="fa fa-search" aria-hidden="true"></i>
-                            </button>
+                            <button type="submit" class="cus-btn">Search</button>
                         </div>
                     </form>
                 </div>
 
                 <div class="header-buttons">
-                        <div class="button_toogle" onclick="document.querySelector('.container_items_search').classList.toggle('show_hide')">
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </div>
-
                     @if($login_page)
 
                     @if(auth()->guard('customer')->user())
@@ -392,48 +384,6 @@ span.items_added {
             display: none;
         }
     }
-
-
-    header .header-section .header-center {
-        padding: 5px;
-    }
-
-    header .header-section .mixin-container .input-field input {
-        padding: 11px;
-    }
-
-    header .header-section .mixin-container .input-field button {
-        width: 10px;border: none;background: none;color: black;
-    }
-
-    header .header-section .mixin-container{
-        max-width: 500px;
-    }
-
-
-
-.button_toogle {
-    cursor:pointer;
-    display:none;
-}
-@media (max-width:1024px){
-    .mixin-container.container_items_search {
-        height:0px;
-        opacity:0;
-        transition:0.3s;
-    }
-
-     .mixin-container.container_items_search.show_hide{
-         height:auto;
-         opacity:1;
-     }
-    .button_toogle {
-        display:block;
-    }
-}
-
-
-
 </style>
 
 

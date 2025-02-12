@@ -27,7 +27,7 @@ class MailTemplateSeeder extends Seeder
             [
                 'name' => 'order_status_change',
                 'template' => 'test_mail',
-                'keywords' => 'name',
+                'keywords' => 'name,order_id,status,email,note',
             ],
             [
                 'name' => 'order_reject',

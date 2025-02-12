@@ -37,13 +37,14 @@
             { data: null, name: null, orderable: false, searchable: false, title:'SL', render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
+            // {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
 
             {data:'name', name:'name', title:'Name'},
             {data:'email', name:'email', title:'Email'},
             {data:'phone', name:'phone', title:'Phone'},
             {data:'address', name:'address', title:'Address'},
-            {data:'order_type', name:'order_type', title:'Type', render: function (data, type, row, meta) {
+            {data:'type', name:'type', title:'Type'},
+            {data:'order_type', name:'order_type', title:'Order Type', render: function (data, type, row, meta) {
                 return data == 0 ? 'Bluk' : 'Custom';
             }},
             {data:'date', name:'date', title:'Date'},

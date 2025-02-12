@@ -86,6 +86,30 @@ class HeaderStyleSeeder extends Seeder
 
                 ',
             ],
+            'header_style4' => [
+                'key' => 'header_style.header_style4',
+                'title' => 'Header Style 4',
+                'upload_id'=>'uploads/preset/header_variant/header_style4.png',
+                'status' => 0,
+                'background_color' => '#ffffff',
+                'details' => '
+                    Left Email Phone
+                    Right contact,
+                    Track Order,
+                    About,
+                    Language
+
+                    Middle Logo,
+                    Search,
+                    Register,
+                    Login,
+                    Cart,
+
+                    Navbar
+                    With Sticky
+
+                ',
+            ],
         ];
 
 

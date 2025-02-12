@@ -1,19 +1,21 @@
-{{-- <x-frontend_section :items="null" :info="$variant_info" class="contact_contact_style1 py-24"
-    css="_contact_style/_contact_style1.css"> --}}
-
 <?php
 
     $wholeSale = \App\Models\WholeSaleProductType::all();
 ?>
+<x-frontend_section :items="null" :info="$variant_info" class="contact_contact_style1 py-24"
+    css="_contact_style/_contact_style1.css">
+
 <style>
     button:hover{
         background: green;
     }
 </style>
+<!-- Include jQuery & Select2 -->
 
+
+<br>
     <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
-            <div><h1>Bluk Upload</h1></div>
             <div class="col-lg-3"></div>
             <div class="col-lg-6">
                 <form id="bulkOrderForm" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
@@ -40,13 +42,31 @@
                             <label for="company-field" class="pb-2">Company</label>
                             <input type="text" class="form-control" name="company" id="company-field" required>
                         </div>
-                        <div class="col-md-12">
-                            <label for="type-field" class="pb-2">Product Type (T-shirt, Polo T-shirt, Jacket, Gift Item etc.)</label>
-                            <select name="type" id="" class="form-control">
+                        {{-- <div class="col-md-12">
+                            <label for="type-field" class="pb-2">
+                                Product Type (T-shirt, Polo T-shirt, Jacket, Gift Item etc.)
+                            </label>
+                            <select name="type[]" id="type-field" class="form-control select2" multiple>
                                 @foreach ($wholeSale as $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->name }}"
+                                        {{ in_array($item->name, old('type', [])) ? 'selected' : '' }}>
+                                        {{ $item->name }}
+                                    </option>
                                 @endforeach
                             </select>
+                        </div> --}}
+                        <div class="col-md-12">
+                            <label for="type-field" class="pb-2">Product Type</label>
+                            <div class="items_check">
+                                @foreach ($wholeSale as $item)
+                                <div class="items_single">
+                                    <input  {{ in_array($item->name, old('type', [])) ? 'checked' : '' }} type="checkbox" id="type-field{{ $item->id }}" name="type[]" value="{{ $item->name }}">
+                                    <label for="type-field{{ $item->id }}" class="pb-2" >
+                                        {{ $item->name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="date-field" class="pb-2">Estimated Delivery Date</label>
@@ -111,6 +131,34 @@
         });
 
     </script>
-{{-- </x-frontend_section>
+    <style>
+        .items_check{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            border: 1px solid black;
+            padding: 4px;
+            border-radius: 5px;
+        }
+        .items_single{
+            flex: 0 0 150px;
 
-<script src="{{ asset('frontend/protfilio_theme/css/_contact_style/_contact_form.js') }}"></script> --}}
+        }
+        .items_single input{
+            display: none;
+
+        }
+        .items_single input ~ label{
+            cursor: pointer;
+            border: 1px solid rgb(221, 221, 221);
+            padding: 5px 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .items_single input:checked ~ label{
+            cursor: pointer;
+            border: 1px solid rgb(5, 77, 119);
+        }
+    </style>
+
+</x-frontend_section>

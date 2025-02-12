@@ -45,7 +45,7 @@ var MyScroll = "";
       Init.priceRangeSlider();
       Init.billingAddress();
       Init.cartSidebar();
-      Init.formValidation();
+    //   Init.formValidation();
       Init.contactForm();
     },
 

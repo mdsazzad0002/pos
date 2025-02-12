@@ -54,7 +54,7 @@
                         <img src="${response[key].image_url}" alt="Product Image" class="img-size-50">
                     </div>
                     <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title"> ${response[key].name}
+                        <a data-dialog=" modal-dialog-centered modal-lg"  href="javascript:void(0)" onclick="button_ajax(this)" data-title="${response[key].name}" data-href="{{ url('admin/product') }}/${response[key].id}" class="product-title"> ${response[key].name}
                         <span class="badge badge-success float-right">${response[key].instance_price}</span></a>
                         <span class="product-description">
                             ${response[key].short_description}

@@ -11,7 +11,9 @@ class WholeSaleOrderController extends Controller
 
         $request->validate([
             'name' => 'required'
+
         ]);
+
 
         $wholesale = new WholeSaleOrder();
         $wholesale->order_type = $request->order_type;
@@ -21,7 +23,9 @@ class WholeSaleOrderController extends Controller
         $wholesale->address = $request->address;
         $wholesale->company = $request->company;
         $wholesale->date = $request->date;
-        $wholesale->type = $request->type;
+        if($request->has('type')) {
+            $wholesale->type = implode(',', $request->type);
+        }
         $wholesale->quantity = $request->quantity;
         $wholesale->description = $request->description;
         $wholesale->save();

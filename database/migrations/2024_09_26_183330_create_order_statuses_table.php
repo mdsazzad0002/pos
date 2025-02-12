@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('order_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+
+            $table->integer('qty')->default(0);
+            $table->integer('qty_status')->default(0);
+            $table->integer('qty_add_remove')->default(0);
+
+            $table->text('under_items')->default('');
+
             $table->bigInteger('creator')->default(0);
             $table->timestamps();
         });

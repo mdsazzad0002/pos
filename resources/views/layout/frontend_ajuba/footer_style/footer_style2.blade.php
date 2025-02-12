@@ -128,7 +128,7 @@
 
 
         <div class="footer-bottom-bar py-24">
-            <p class="light-gray text-sm-left text-center w-100">@ {{ date('Y') }} All Rights Copyright <a href="https://bdsofttechnology.com" class="color-primary"> BDsoftTechnology</a>. Design & Developed By <span class="color-primary"> BDsoftTechnology</span></p>
+            <p class="light-gray text-sm-left text-center w-100">@ {{ date('Y') }} All Rights Copyright <a href="{{ settings('app_website', 9) }}" class="color-primary"> {{ settings('app_title', 9) }}</a>. Design & Developed By <span class="color-primary"> BDsoftTechnology</span></p>
         </div>
 
     </div>

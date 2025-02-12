@@ -65,12 +65,12 @@
                 Object.keys(response).forEach(([key, value]) => {
                    // console.log(response[key])
                     let data = `  <tr>
-                    <td><a href="">#${response[key].order_id}</a></td>
+                    <td><a  data-dialog="modal-lg modal-dialog-centered" onclick="button_ajax(this)" data-title="Info #ID${response[key].order_id}" data-href="{{ url('admin/order') }}/${response[key].id}" href="javascript:void(0)">#${response[key].order_id}</a></td>
                     <td>${response[key].customer.name}</td>
                     <td>${response[key].quantity}</td>
                     <td><span class="badge badge-success">${response[key].order_status}</span></td>
                     <td>
-                    <div class="sparkbar" data-color="#00a65a" data-height="20">${response[key].price}</div>
+                    <div class="sparkbar" data-color="#00a65a" data-height="20">{{ settings('currency_symbol', 9) }}${response[key].price}</div>
                     </td>
                 </tr>`;
 
@@ -83,3 +83,4 @@
         })
     })
 </script>
+

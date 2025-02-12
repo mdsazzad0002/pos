@@ -159,7 +159,7 @@
         </div>
         <div class="hr-line"></div>
         <div class="footer-bottom-bar py-24">
-            <p class="light-gray text-sm-left text-center">@ {{ date('Y') }} All Rights Copyright <a href="https://bdsofttechnology.com" class="color-primary"> BDsoftTechnology</a>. Design & Developed By <span class="color-primary"> BDsoftTechnology</span></p>
+            <p class="light-gray text-sm-left text-center">@ {{ date('Y') }} All Rights Copyright <a href="{{ settings('app_website', 9) }}" class="color-primary"> {{ settings('app_title', 9) }}</a>. Design & Developed By <span class="color-primary"> BDsoftTechnology</span></p>
             <div class="payment-cards d-flex align-items-center gap-16">
                 <p class="fw-500 light-gray d-sm-flex d-none">Payment Mathods:</p>
                 <div class="card-block">

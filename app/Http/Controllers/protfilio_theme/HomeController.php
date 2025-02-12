@@ -19,6 +19,7 @@ use App\Models\Address as address;
 use App\Models\coupon;
 use App\Models\Customer as customer;
 use App\Models\Discount;
+use App\Models\mail\MailSetting;
 use App\Models\order;
 use App\Models\OrderEvent;
 use App\Models\VariantOption;
@@ -852,30 +853,37 @@ class HomeController extends Controller
 
         if(!isset($tracking_page)){
             $tracking_page = \App\Models\Page::where('status', 1)->where('page_type', 'tracking')->first();
-        }
-
-        if($tracking_page){
-            $mailInfo = [
-
-                'title' => settings('app_title', 9).' From Order Invoice Generated',
-                'subject' => settings('app_title', 9).'From Order Invoice Generated',
-                // 'user' => $user?->email,
-                'email' => $user?->email,
-                'template' => 'order_create',
-                'name' => $user?->name,
-                'additional_text' => " <iframe src='".route('order_invoice')."?order_id=". $order->order_id ."'/>
-                                        <a  href='".url('/')."'> Visit Our Shop Now </a>
-                                        <a  href='". url($tracking_page->slug) ."?id=". $order->order_id ."&email=". $user->email."'> Track Order </a>
-                                        "
-            ];
-
-            Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
-
+            $mail_settings=  MailSetting::first();
         }
 
 
+        if($tracking_page && $mail_settings){
+            if($mail_settings->status == 1){
 
-        // session()->put('front_product', []);
+                $mailInfo = [
+
+                    'title' => settings('app_title', 9).' From Order Invoice Generated', //must
+                    'subject' => settings('app_title', 9).'From Order Invoice Generated', //must
+                    // 'user' => $user?->email,
+                    'email' => $user?->email,
+                    'template' => 'order_create', //must
+                    'name' => $user?->name,
+                    'additional_text' => " <iframe src='".route('order_invoice')."?order_id=". $order->order_id ."'></iframe>
+                                            <div>
+                                                    <a  href='".url('/')."'> Visit Our Shop Now </a>
+                                                    <a  href='". url($tracking_page->slug) ."?id=". $order->order_id ."&email=". $user->email."'> Track Order </a>
+                                                     <a  href='".route('order_invoice')."?order_id=". $order->order_id ."'> View Invoice </a>
+                                            </div>
+                                            "
+                ];
+
+                Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+            }
+        }
+
+
+
+        session()->put('front_product', []);
 
         return json_encode([
             'status' => true,

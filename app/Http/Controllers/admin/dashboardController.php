@@ -17,11 +17,11 @@ class dashboardController extends Controller
 
 
     public function latest_order(){
-        return response()->json(order::with('customer')->limit(8)->select('order_id', 'id', 'customer_id', 'price', 'quantity')->orderByDesc('id')->get());
+        return response()->json(order::with('customer')->limit(6)->select('order_id', 'id', 'customer_id', 'price', 'quantity')->orderByDesc('id')->get());
     }
 
     public function latest_customer(){
-        $customer = Customer::orderByDesc('id')->limit(15)->get();
+        $customer = Customer::orderByDesc('id')->limit(8)->get();
         $count = Customer::whereDate('created_at' ,'>=', Carbon::today()->subDays(3))->count();
         return response()->json(['customer'=>$customer, 'count'=>$count]);
     }
@@ -31,4 +31,6 @@ class dashboardController extends Controller
         ->select('name', 'id','short_description', 'variant_on', 'selling_price')
         ->orderByDesc('id')->get());
     }
+
+    
 }

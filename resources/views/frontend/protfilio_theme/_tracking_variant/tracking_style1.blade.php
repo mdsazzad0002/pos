@@ -54,15 +54,15 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                           
+
                                     <button type="submit" class="cus-btn m-auto w-25">Track</button>
-                                 
+
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    
+
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                  <div class="order_status_container">
                  <div class="container py-5">
                      <div class="row">
-                     
+
                          <div class="col-md-12 col-lg-12">
                          <div id="tracking-pre"></div>
                          <div id="tracking">
@@ -87,7 +87,7 @@
              {{-- end tracking --}}
 
             </div>
-            
+
         </div>
     </section>
 
@@ -104,7 +104,7 @@
                 form.querySelector('button[type="submit"]').click();
             }
         },1500)
-    
+
     })
 
         document.querySelector('.contact-form-style1').addEventListener('submit', function (e) {
@@ -128,9 +128,9 @@
                         // data = JSON.parse(data);
                         format_tracking_data(data);
                         // if (data.type == 'success') {
-                            
+
                         //     console.log(data);
-                            
+
                         // } else {
                         //     // flasher.error(data.message);
                         // }
@@ -144,12 +144,12 @@
 
             $.each(data_format, function (index, value) {
 
-      
+
             let createdAt = value.created_at; // e.g., "2025-01-25T12:34:56Z"
             let date = new Date(createdAt);
 
             let formattedDate  = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
-               
+
             tracking_data +=` <div class="tracking-item">
                     <div class="tracking-icon status-intransit">
                     <svg class="svg-inline--fa fa-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
@@ -157,10 +157,10 @@
                     </svg>
                     </div>
                     <div class="tracking-date"><img src="https://raw.githubusercontent.com/shajo/portfolio/a02c5579c3ebe185bb1fc085909c582bf5fad802/delivery.svg" class="img-responsive" alt="order-placed" /></div>
-                    
+
                     <div class="tracking-content">
                         ${ value.status }
-                         <span>${ value.note }</span>
+                         <span>${ value.note  ?? '' }</span>
                          <span>${ formattedDate }</span>
                          </div>
                 </div>   `;
@@ -171,7 +171,7 @@
 
 
         }
-    
+
 </script>
 
 <style>

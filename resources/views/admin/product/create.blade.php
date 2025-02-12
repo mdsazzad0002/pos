@@ -121,7 +121,6 @@
 
                                 <div class="row">
 
-
                                 <div class="col-lg-6">
                                     <label for="">Brand</label>
                                     <div class="input-group mb-3">
@@ -161,8 +160,6 @@
                                             data-href="{{ route('admin.vat.create') }}">+</button>
                                     </div>
                                 </div>
-
-
                                 <div class="col-lg-6">
                                     <label for="">Old Price</label>
                                     <input type="number" step="0.1" name="old_price" class="form-control mb-2"
@@ -198,20 +195,16 @@
                                     </div>
                                 </div>
 
-
-                                <div class="col-lg-6">
-                                    <label for="">Alert Quantaty</label>
-                                    <input type="number" name="alert_quantity" value="{{ $product ? $product->alert_quantity : 0 }}" class="form-control mb-2">
-                                </div>
-
+                                @if (env('APP_ENV') == 'local')
+                                    <div class="col-lg-6">
+                                        <label for="">Alert Quantaty</label>
+                                        <input type="number" name="alert_quantity" value="{{ $product ? $product->alert_quantity : 0 }}" class="form-control mb-2">
+                                    </div>
+                                @endif
                                 <div class="col-lg-6">
                                     <label for="">Weight</label>
                                     <input type="text" name="weight" value="{{ $product ? $product->weight : 0 }}" class="form-control mb-2">
                                 </div>
-
-
-
-
 
                                 <div class="col-lg-12">
                                     <label for="">Short Description</label>
@@ -228,12 +221,8 @@
                                     <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
                                         placeholder="Additional Description">{{ $product ? $product->additional_description : '' }}</textarea>
                                 </div>
-
-
                             </div>
                         </div>
-
-
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -271,11 +260,7 @@
                                             +
                                         </button>
                                     </div>
-
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -348,13 +333,7 @@
                         </div>
                     </div>
                     {{-- end storeing information --}}
-
-
-
                 </div>
-
-
-
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">

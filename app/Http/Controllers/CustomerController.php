@@ -6,6 +6,7 @@ use App\Mail\MailerDynamic;
 use Illuminate\Support\Facades\Mail;
 
 use App\Models\Customer;
+use App\Models\mail\MailSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -262,26 +263,33 @@ class CustomerController extends Controller
     public function verify_mail_send(Request $request) {
         // $request->validate(['mail' => 'required|email']);
 
-        $user =  auth()->guard('customer')->user();
-        $code = rand(1000,9999);
-        $mailInfo = [
+        $mail_settings=  MailSetting::first();
 
-            'title' => settings('app_title', 9).'Verification Code',
-            'subject' => settings('app_title', 9).'Verification Code',
-            // 'user' => $user?->email,
-            'email' => $user?->email,
-            'code' => $code,
-            'template' => 'verification_customer',
-            'name' => $user?->name,
-            'additional_text' => route('customer.verify')."?id=".$user->id."&code=".$code."<br/>
-            <a  href='".route('customer.verify')."?id=".$user->id."&code=".$code."'> Verify Now </a>"
-        ];
 
-        $user->v_code =  $mailInfo['code'];
-        $user->save();
 
-        Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+        if($mail_settings){
+            if($mail_settings->status == 1){
+                $user =  auth()->guard('customer')->user();
+                $code = rand(1000,9999);
+                $mailInfo = [
 
+                    'title' => settings('app_title', 9).'Verification Code',
+                    'subject' => settings('app_title', 9).'Verification Code',
+                    // 'user' => $user?->email,
+                    'email' => $user?->email,
+                    'code' => $code,
+                    'template' => 'verification_customer',
+                    'name' => $user?->name,
+                    'additional_text' => route('customer.verify')."?id=".$user->id."&code=".$code."<br/>
+                    <a  href='".route('customer.verify')."?id=".$user->id."&code=".$code."'> Verify Now </a>"
+                ];
+
+                $user->v_code =  $mailInfo['code'];
+                $user->save();
+
+                Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+            }
+        }
         return back();
     }
 

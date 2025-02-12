@@ -25,9 +25,6 @@ class WholeSaleOrderController extends Controller
                         // $return_data .= $delete_button ;
                     // }
 
-                    return $return_data;
-
-
                 })
                 ->rawColumns(['action'])
                 ->make(true);

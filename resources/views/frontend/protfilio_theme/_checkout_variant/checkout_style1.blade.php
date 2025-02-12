@@ -13,6 +13,7 @@
     if(count(session('front_product', [])) == 0){
         echo '<script>window.location.href = "'.url('/').'"</script>';
     }
+    $profile_location = \App\Models\Page::where('status', 1)->where('page_type', 'profile_location')->first();
 @endphp
 
 
@@ -37,13 +38,16 @@
                                             <div class="input-block mb-16 address_data">
                                                 <input type="radio" name="address_id" id="address_id{{ $key }}" value="{{ $address->id }}" class="form-control" placeholder="First Name">
 
-                                                <label for="address_id{{ $key }}">
-                                                    Address: {{ $address->address }} </br>
-                                                    Apartment: {{ $address->address_optional }} </br>
-                                                    District: {{ $address->district }} </br>
-                                                    Postal: {{ $address->postal }} </br>
-                                                    Country: {{ $address->country }} </br>
-                                                    State: {{ $address->state }}
+                                                <label for="address_id{{ $key }}" style="display: flex; justify-content: space-between">
+                                                    <div>
+                                                        Address: {{ $address->address }} </br>
+                                                        Apartment: {{ $address->address_optional }} </br>
+                                                        District: {{ $address->district }} </br>
+                                                        Postal: {{ $address->postal }} </br>
+                                                        Country: {{ $address->country }} </br>
+                                                        State: {{ $address->state }}
+                                                    </div>
+                                                    <div><a href="{{ url($profile_location->slug) }}"><h5 class="btn btn-primary"><i class="fa fa-pencil"></i></h5></a></div>
                                                 </label>
                                             </div>
                                         </div>

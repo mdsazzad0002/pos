@@ -24,16 +24,9 @@ if(auth()->guard('customer')->user()){
                         <form class="contact-form" id="registerForm" method="POST" action="{{ route('customer_register') }}" data-redirect="{{ url($profile_dashboard->slug) }}">
                             @csrf
                             <div class="row">
-                                <div class="col-sm-6">
-                                    <a href="{{ route('google.redirect') }}" class="link-btn fw-500"><img src="assets/media/icons/google-icon.png" alt=""> Login with Google</a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <a href="{{ route('facebook.redirect') }}" class="link-btn fw-500 mt-sm-0 mt-16"><img src="assets/media/icons/fb-icon.png" alt=""> Login with Facebook</a>
-                                </div>
 
-                                <div class="col-sm-12">
-                                    <p class="or mb-12">Or</p>
-                                </div>
+                                @include('frontend.protfilio_theme._auth_customer_socalite.socalite_style1')
+
                                 <div class="col-md-12">
                                     <div class="input-block mb-16">
                                         <input type="text" name="name" id="name" class="form-control" required placeholder="Name">
@@ -117,27 +110,6 @@ if(auth()->guard('customer')->user()){
 </script>
 
 
-<script>
-// Login account
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleSignPassword = document.querySelector(".toggleSign-password");
-    const passwordSignInput = document.querySelector(".signPassword");
-
-    toggleSignPassword.addEventListener("click", () => {
-
-        toggleSignPassword.classList.toggle('bi-eye')
-        const isPassword = passwordSignInput.getAttribute("type") === "password";
-        passwordSignInput.setAttribute("type", isPassword ? "text" : "password");
-
-        if (isPassword) {
-            toggleSignPassword.style.fill = "#677c757d";
-        } else {
-            toggleSignPassword.style.fill = "#141516";
-        }
-    });
-});
-// end Login account
-</script>
 @endpush
 
 

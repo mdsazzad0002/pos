@@ -46,7 +46,8 @@
             {data:'phone', name:'phone', title:'Phone'},
             {data:'address', name:'address', title:'Address'},
             {data:'company', name:'company', title:'Company'},
-            {data:'order_type', name:'order_type', title:'Type', render: function (data, type, row, meta) {
+            {data:'type', name:'type', title:'Type'},
+            {data:'order_type', name:'order_type', title:'Order dType', render: function (data, type, row, meta) {
                 return data == 0 ? 'Bluk' : 'Custom';
             }},
             {data:'date', name:'date', title:'Date'},

@@ -60,7 +60,7 @@
                     console.log(response[key])
                     let data = `  <li>
                         <img src="${response['customer'][key].upload_image}" alt="User Image">
-                        <a class="users-list-name" href="#">${response['customer'][key].name}</a>
+                        <a data-dialog=" modal-dialog-centered"  onclick="button_ajax(this)" data-title="${response['customer'][key].name} info" data-href="{{ url('admin/customer') }}/${response['customer'][key].id}" class="users-list-name" href="#">${response['customer'][key].name}</a>
                         <span class="users-list-date">${response['customer'][key].time_ago}</span>
                     </li>`;
 
@@ -75,3 +75,4 @@
         })
     })
 </script>
+
