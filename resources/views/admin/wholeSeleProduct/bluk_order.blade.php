@@ -56,6 +56,7 @@
             {data:'created_at', name:'created_at', title:'Date', render: function (data, type, row, meta) {
                 return moment(data).format('DD-MM-YYYY hh:mm:ss A');
             }},
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false},
 
 
 

@@ -106,13 +106,13 @@ sidebar-dark-primary elevation-4">
                     <li class="nav-item">
                         <a href="{{ route('admin.bluk.order') }}" class="nav-link ">
                             <i class="fas fa-boxes nav-icon"></i>
-                            <p>Bluk Order</p>
+                            <p>Bluk Order <span class="right badge badge-danger">{{ blukOrder() }}</span></p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.custom.order') }}" class="nav-link ">
                             <i class="fas fa-boxes nav-icon custom-order-icon"></i>
-                            <p>Custom Order</p>
+                            <p>Custom Order <span class="right badge badge-danger">{{ customOrder() }}</span></p>
                         </a>
                     </li>
                     </ul>

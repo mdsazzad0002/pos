@@ -17,13 +17,14 @@ class WholeSaleOrderController extends Controller
                 ->addColumn('action', function ($row) {
                     $return_data = '';
                     // if(auth()->user()->can('whole.sele delete') == true){
-                        // $delete_route = route('admin.whole.sele.delete', $row->id);
-                        // $delete_button =  "<button class='btn btn-danger '
-                        // data-title='$row->name'
-                        // onclick='button_ajax(this)'
-                        // data-href='$delete_route'>Delete</button>";
-                        // $return_data .= $delete_button ;
+                        $delete_route = route('admin.bluk.order.delete', $row->id);
+                        $delete_button =  "<button class='btn btn-danger '
+                        data-title='$row->name'
+                        onclick='button_ajax(this)'
+                        data-href='$delete_route'>Delete</button>";
+                        $return_data .= $delete_button ;
                     // }
+                    return $return_data;
 
                 })
                 ->rawColumns(['action'])
@@ -39,7 +40,7 @@ class WholeSaleOrderController extends Controller
                 ->addColumn('action', function ($row) {
                     $return_data = '';
                     // if(auth()->user()->can('whole.sele delete') == true){
-                        $delete_route = route('admin.whole.sele.delete', $row->id);
+                        $delete_route = route('admin.bluk.order.delete', $row->id);
                         $delete_button =  "<button class='btn btn-danger '
                         data-title='$row->name'
                         onclick='button_ajax(this)'
@@ -57,17 +58,17 @@ class WholeSaleOrderController extends Controller
         return view('admin.wholeSeleProduct.custom_order');
     }
 
-    public function delete(WholeSaleOrder $wholeSaleOrder){
+    public function delete(WholeSaleOrder $order){
         return view('layout.admin.modal_content_delete');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(WholeSaleOrder $wholeSaleOrder)
+    public function destroy(WholeSaleOrder $order)
     {
 
-        $wholeSaleOrder->delete();
+        $order->delete();
 
         return json_encode([
             'title'=>'Successfully  Deleted wholeSeleProduct',

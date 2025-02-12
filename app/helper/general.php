@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use App\Models\language\language;
 use App\Models\order;
+use App\Models\WholeSaleOrder;
 use Illuminate\Support\Facades\File;
 
 
@@ -123,23 +124,32 @@ function dynamic_asset($id)
             if (filter_var($file1->name, FILTER_VALIDATE_URL)) {
                 return $file1->name;
             }
-            
+
             $file1 = $destinationPath . $file1->name;
             if (File::exists(public_path($file1)) || is_dir(public_path($file1))) {
-                return asset($file1);
+                $file1 = asset($file1);
+                 $file1 = preg_replace('/([^:])\/{2,}/', '$1/',  $file1);
+                 return $file1;
             } else {
                 $file = $destinationPath . 'fixing.png';
-                return asset($file);
+                $file = asset($file);
+                $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
+                return   $file;
+
             }
 
 
         } else {
             $file = $destinationPath . 'fixing.png';
-            return asset($file);
+            $file = asset($file);
+            $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
+            return $file;
         }
     } else {
         $file = $destinationPath . 'fixing.png';
-        return asset($file);
+        $file = asset($file);
+        $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
+        return $file;
     }
 }
 
@@ -313,4 +323,11 @@ function unchecked_order(){
     })->count();
 }
 
-
+function blukOrder()
+{
+    return WholeSaleOrder::where('order_type',0)->count();
+}
+function customOrder()
+{
+    return WholeSaleOrder::where('order_type',1)->count();
+}

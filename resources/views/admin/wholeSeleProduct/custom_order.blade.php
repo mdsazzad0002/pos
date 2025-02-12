@@ -54,6 +54,7 @@
                 return moment(data).format('DD-MM-YYYY hh:mm:ss A');
             }},
 
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false},
 
 
         ],

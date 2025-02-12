@@ -180,7 +180,7 @@ class ProductController extends Controller
                     if($request->has('slug') && $request->slug != $product->slug){
                         $product->slug = create_slug($request->slug, 'product', 'slug');
                     }
-                
+
 
                 if(!$product->product_id){
                     $product->product_id = create_slug('P-', 'product', 'product_id');
@@ -194,7 +194,7 @@ class ProductController extends Controller
                 $product->discount_id = $request->discount_id ? implode(',',$request->discount_id) : 0;
                 $product->old_price = $request->old_price;
                 $product->selling_price = $request->selling_price;
-                $product->alert_quantity = $request->alert_quantity;
+                $product->alert_quantity = $request->alert_quantity ?? 0;
                 $product->weight = $request->weight;
                 $product->garage = $request->garage;
                 $product->route = $request->route ?? '';

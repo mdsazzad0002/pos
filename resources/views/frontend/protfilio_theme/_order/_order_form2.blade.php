@@ -71,8 +71,8 @@
 
                         <div class="col-md-12 text-center">
                             <div class="loading" style="display: none;">Loading...</div>
-                            <div class="error-message" style="display: none; color: red;">Something went wrong. Please try again later.</div>
-                            <div class="sent-message" style="display: none; color: green;">Your message has been sent. Thank you!</div>
+                            <div class="error-message" style="display: none; color: rgb(255, 255, 255);">Something went wrong. Please try again later.</div>
+                            <div class="sent-message" style="display: none; color: rgb(255, 255, 255);">Your message has been sent. Thank you!</div>
 
                             <button class="form-control" type="submit">Send Message</button>
                         </div>

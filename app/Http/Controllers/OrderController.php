@@ -352,27 +352,32 @@ class OrderController extends Controller
         if($mail_settings){
             if($mail_settings->status == 1){
                 $user = $order->customer;
+                if($order->customer->email != null){
 
-                $mailInfo = [
+                    $mailInfo = [
 
-                    'title' => settings('app_title', 9).' Changed Status #'.$order->order_id, //must
-                    'subject' => settings('app_title', 9).'Changed Status #'.$order->order_id, //must
-                    // 'user' => $user?->email,
-                    'email' => $user?->email,
-                    'template' => 'order_status_change', //must
-                    'name' => $user?->name,
-                    'status' => $order_event->status_data->name,
-                    'order_id' =>'#'.$order->order_id,
-                    'note' =>$order_event->note,
-                    'additional_text' => "  <div>
-                                                    <a  href='".url('/')."'> Visit Our Shop Now </a>
-                                                    <a  href='". url($tracking_page->slug) ."?id=". $order->order_id ."&email=". $user->email."'> Track Order </a>
-                                                     <a  href='".route('order_invoice')."?order_id=". $order->order_id ."'> View Invoice </a>
-                                            </div>
-                                            "
-                ];
+                        'title' => settings('app_title', 9).' Changed Status #'.$order->order_id, //must
+                        'subject' => settings('app_title', 9).'Changed Status #'.$order->order_id, //must
+                        // 'user' => $user?->email,
+                        'email' => $user?->email,
+                        'template' => 'order_status_change', //must
+                        'name' => $user?->name,
+                        'status' => $order_event->status_data->name,
+                        'order_id' =>'#'.$order->order_id,
+                        'note' =>$order_event->note,
+                        'additional_text' => "  <div>
+                                                        <a  href='".url('/')."'> Visit Our Shop Now </a>
+                                                        <a  href='". url($tracking_page->slug) ."?id=". $order->order_id ."&email=". $user->email."'> Track Order </a>
+                                                        <a  href='".route('order_invoice')."?order_id=". $order->order_id ."'> View Invoice </a>
+                                                </div>
+                                                "
+                    ];
 
-                Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                    Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                    
+                }
+
+
             }
         }
 

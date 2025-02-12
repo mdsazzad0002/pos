@@ -416,7 +416,7 @@ span.items_added {
     cursor:pointer;
     display:none;
 }
-@media (max-width:1024px){
+/* @media (max-width:1024px){ */
     .mixin-container.container_items_search {
         height:0px;
         opacity:0;
@@ -430,7 +430,7 @@ span.items_added {
     .button_toogle {
         display:block;
     }
-}
+/* } */
 
 
 

@@ -25,6 +25,8 @@ class WholeSaleOrderController extends Controller
         $wholesale->date = $request->date;
         if($request->has('type')) {
             $wholesale->type = implode(',', $request->type);
+        }else{
+            $wholesale->type = '';
         }
         $wholesale->quantity = $request->quantity;
         $wholesale->description = $request->description;
@@ -38,4 +40,5 @@ class WholeSaleOrderController extends Controller
         ]);
 
     }
+
 }

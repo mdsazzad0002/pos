@@ -37,8 +37,8 @@ return [
         'redirect' => '/user/google/callback',//env('GOOGLE_REDIRECT_URL'),
     ],
     'facebook' => [
-        'client_id' =>  '2034141270377312',//env('FACEBOOK_CLIENT_ID'),
-        'client_secret' => 'ceabcb574affbc86ee9d4422a29defd8',//env('FACEBOOK_CLIENT_SECRET'),
+        'client_id' =>  '9225246180874753',//'2034141270377312',//env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => 'da6dbb317696e7e1dddcb3e15cb58e46', //'ceabcb574affbc86ee9d4422a29defd8',//env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => '/user/facebook/callback', //env('FACEBOOK_REDIRECT_URI'),
     ],
 

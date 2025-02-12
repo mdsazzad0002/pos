@@ -490,6 +490,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
         //bluk order
         Route::get('/bluk/order', [AdminWholeSaleOrderController::class, 'blukOrder'])->name('bluk.order');
+        Route::delete('/bluk/order/{order}', [AdminWholeSaleOrderController::class, 'destroy']);
+        Route::get('/bluk/order/{order}/delete', [AdminWholeSaleOrderController::class, 'delete'])->name('bluk.order.delete');
         //custom order
         Route::get('/custom/order', [AdminWholeSaleOrderController::class, 'customOrder'])->name('custom.order');
 
@@ -507,7 +509,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
         //whole sele product type
         Route::resource('whole/sale/wholeSaleProductType',WholeSaleProductTypeController::class)->names('whole.sele');
-        Route::get('whole/sale/wholeSaleProductType/delete/{wholeSaleProductType}', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
+        Route::get('whole/sale/wholeSaleProductType/{wholeSaleProductType}/delete/', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
 
 
 

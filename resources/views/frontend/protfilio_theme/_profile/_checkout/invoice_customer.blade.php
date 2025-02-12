@@ -69,7 +69,8 @@
         <div class="invoice-header">
             <div class="invoice-header-left">
 
-             <img src="{{ settings('app_image', 9) }}" alt="Company Logo" width="150">
+             {{-- <img src="{{ settings('app_image', 9) }}" alt="Company Logo" width="150"> --}}
+             <img src="{{ asset('frontend/protfilio_theme/img/pdf_image/Logo 03_1739195641132_fboaph.png') }}" alt="Company Logo" width="150">
                 <h1>{{$order->address_info->name ?? '' }}</h1>
                 <p>Address: {{ $order->address_info->address ?? '' }}</p>
                 <p>Email: {{ $order->address_info->email }}</p>

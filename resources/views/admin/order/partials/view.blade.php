@@ -27,14 +27,14 @@ Product Info
 
         </td>
         <td>
-            {{ $items->product->name }} <br>
+            {{ $items->product->name ?? '' }} <br>
             {{ ($items->product_variant)->name ?? '' }}
         </td>
         <td class="text-right">
             {{ $items->product->variant_on == 1 ? ($items->product_variant->selling_price  ?? '') :  ($items->product->selling_price ?? '') }} <br>
         </td>
         <td class="text-right">{{ $items->quantity }}</td>
-        <td class="text-right"> {{ settings('currency_symbol', 9) }} {{ $items->single_subtotal }}</td>
+        <td class="text-right"> {{ settings('currency_symbol', 9) }} {{ $items->single_subtotal ?? '' }}</td>
 
     </tr>
 
