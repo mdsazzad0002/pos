@@ -6,6 +6,9 @@
 {{--  Content Extends  --}}
 @section('content')
 
+    <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
+
+
     <div class="row">
         <!-- Small boxes (Stat box) -->
         <div class="col-12 mb-3">
@@ -16,8 +19,9 @@
         <div class="col-12 mb-3">
 
             <div class="row connectedSortable">
-                <div class="col-lg-3 col-6">
 
+                {{-- small box --}}
+                <div class="col-lg-3 col-6">
                     <div class="card small-box  bg-secondary " onclick="copyToClipboard('{{ url('/') }}')"
                         title="Click to Copy">
                         <div class="card-header card_count_loaded p-0">
@@ -32,27 +36,85 @@
                         <a href="{{ url('/') }}" target="_blank" class="small-box-footer">Visit Website <i
                                 class="fas fa-arrow-circle-right"></i></a>
                     </div>
-
-                    <!-- small box -->
                 </div>
+                <!-- small box -->
             </div>
+            <br>
 
+            <div class="row connectedSortable">
+                <div class="col-lg-12 col-12">
+                       <livewire:sales-report-month />
+                </div>
+                <div class="col-lg-8 col-12">
+                    <livewire:latest-order />
+                </div>
+
+
+                <div class="col-lg-4 col-12">
+                    <livewire:recent-customer />
+                    {{-- @include('admin.dashboard.dashboard_report.recent_customer') --}}
+                </div>
+                <div class="col-lg-8 col-12">
+                    <livewire:recent-product />
+                    {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
+                </div>
+                <div class="col-lg-4 col-12">
+                    <livewire:browser-history />
+                    {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
+                </div>
+                <div class="col-lg-4 col-12">
+     <!-- Calendar -->
+     <div class="card bg-gradient-success">
+              <div class="card-header border-0">
+
+                <h3 class="card-title">
+                  <i class="far fa-calendar-alt"></i>
+                  Calendar
+                </h3>
+                <!-- tools card -->
+                <div class="card-tools">
+                  <!-- button with a dropdown -->
+                 
+                  <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button> -->
+                </div>
+                <!-- /. tools -->
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body pt-0">
+                <!--The calendar -->
+                <div id="calendar" style="width: 100%"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+            <script>
+                  // The Calender
+                  document.addEventListener(
+                    'livewire:load',
+                    function () {
+                      $('#calendar').datetimepicker({
+                        format: 'L',
+                        inline: true
+                      });
+                    }
+                  )
+                
+                
+                  
+            </script>
+                </div>
+
+            </div>
         </div>
 
 
-        <section class="col-lg-8 connectedSortable">
-
-            @include('admin.dashboard.dashboard_report.recent_order')
-
-
-
-        </section>
-        <section class="col-lg-4 connectedSortable">
-            @include('admin.dashboard.dashboard_report.recent_customer')
-            @include('admin.dashboard.dashboard_report.recent_product')
-
-
-        </section>
 
 
     </div>
@@ -64,7 +126,7 @@
         /* Preloader Style */
         .card-body {
             position: relative;
-            min-height: 400px;
+            min-height: 200px;
         }
 
         .preloader_body {
@@ -127,4 +189,6 @@
             }
         }
     </style>
+
+
 @endsection

@@ -85,6 +85,8 @@ use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
 
+
+
 use App\Http\Controllers\admin\WholeSaleProductTypeController;
 use App\Http\Controllers\WholeSaleOrderController;
 use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderController;
@@ -809,7 +811,7 @@ Route::get('customer/verify_mail_verify', [App\Http\Controllers\CustomerControll
 
 // User Defined Route Web So Check Route not exists
 Route::get('previdw_page_and_fornt_page', [HomeController::class, 'index'])->name('previdw_page_and_fornt_page');
-Route::get('{view}', [HomeController::class, 'index'])->name('home')-> where('view', '^(?!admin).*');
+Route::get('{view}', [HomeController::class, 'index'])->middleware('TrackUniqueVisitor')->name('home')-> where('view', '^(?!admin).*');
 // end protflio_web_theme
 
 
