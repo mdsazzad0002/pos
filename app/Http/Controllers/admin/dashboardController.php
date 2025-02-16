@@ -32,5 +32,5 @@ class dashboardController extends Controller
         ->orderByDesc('id')->get());
     }
 
-    
+
 }

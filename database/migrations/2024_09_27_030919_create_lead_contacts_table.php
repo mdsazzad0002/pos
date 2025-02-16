@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
+            $table->text('message')->nullable();
             $table->string('account_id')->nullable(0);
             $table->string('creator')->default(0);
             $table->bigInteger('updater_id')->default(0);

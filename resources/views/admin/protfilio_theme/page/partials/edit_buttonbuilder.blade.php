@@ -47,7 +47,7 @@
             <div class="add_new_data_render">
 
                     <label for="">Select Layout </label>
-                    <input type="search" placeholder="Enter Layout Name ... .. ." name="Varinatfilter" oninput="filter_variant(this)" class="filter form-control mb-2" id="Varinatfilter">
+                    <input type="search" placeholder="Enter Layout Name ... .. ." name="Varinatfilter"  oninput="filter_variant(this)" class="filter form-control mb-2" id="Varinatfilter">
 
                     <div class="add_to_layout_container">
                             {{-- load by ajax --}}

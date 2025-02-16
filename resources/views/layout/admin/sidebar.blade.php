@@ -270,6 +270,14 @@ sidebar-dark-primary elevation-4">
                         </a>
                     </li>
                 @endcan
+                @can('LeadContact read')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.LeadContact.index') }}" class="nav-link">
+                            <i class="fas fa-user-tie nav-icon"></i>
+                            <p>Contact Message</p>
+                        </a>
+                    </li>
+                @endcan
 
                 @if(env('APP_ENV') == 'local')
                 <li class="nav-item">

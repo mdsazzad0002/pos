@@ -37,17 +37,17 @@ class LeadContactController extends Controller
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 
-                    $edit_route = route('admin.LeadContact.edit', $row->id);
-                    $edit_button =  "<button class='btn btn-warning '
-                    data-dialog='modal-dialog-centered'
-                    data-title='$row->name'
-                    onclick='button_ajax(this)'
-                    data-href='$edit_route'>Edit</button>";
+                    // $edit_route = route('admin.LeadContact.edit', $row->id);
+                    // $edit_button =  "<button class='btn btn-warning '
+                    // data-dialog='modal-dialog-centered'
+                    // data-title='$row->name'
+                    // onclick='button_ajax(this)'
+                    // data-href='$edit_route'>Edit</button>";
 
                     $return_data = '';
-                    if(auth()->user()->can('LeadContact edit')==true){
-                        $return_data = $edit_button. '&nbsp;';
-                    }
+                    // if(auth()->user()->can('LeadContact edit')==true){
+                    //     $return_data = $edit_button. '&nbsp;';
+                    // }
 
                     if(auth()->user()->can('LeadContact delete') == true){
                         $return_data .= $delete_button ;

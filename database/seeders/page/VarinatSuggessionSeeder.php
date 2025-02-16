@@ -523,18 +523,29 @@ class VarinatSuggessionSeeder extends Seeder
                 'key' =>'_product_variant._category_wise_product',
                 'title' => 'Product as Category & category Wise Product',
                 'title_status' => 0,
+                'title_manage_status' => 1,
+
                 'sub_title' => 'Category Wise Product',
                 'sub_title_status' => 0,
+                'sub_title_manage_status'=> 1 ,
+
                 'short_read_more' => '#',
                 'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
                 'view_all' => 'View All',
+                'view_all_manage_status' => 1,
+
                 'view_all_status' => 0,
                 'items_per_row' => 6,
+
                 'background' => 0,
                 'background_color' => '#eeeeee',
-                'background_type' => 0,
+                'background_type' => 1,
 
-                'upload_id'=>'uploads/preset/page_variant/category_wise_product.png'
+                'upload_id'=>'uploads/preset/page_variant/category_wise_product.png',
+                'background_manage_status'=> 1,
+                'category_manage_status' => 1,
 
             ],
              'product6' => [
@@ -561,10 +572,11 @@ class VarinatSuggessionSeeder extends Seeder
 
                 'background' => 0,
                 'background_color' => '#eeeeee',
-                'background_type' => 0,
+                'background_type' => 1,
 
                 'upload_id'=>'uploads/preset/page_variant/_randomize_product_category_wise.png',
                 'background_manage_status'=> 1,
+               
 
             ],
              'product7' => [

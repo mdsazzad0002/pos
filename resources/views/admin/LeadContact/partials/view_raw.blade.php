@@ -19,5 +19,9 @@
          <td> Address</td>
          <td>{{ $LeadContact->address }}</td>
      </tr>
+     <tr>
+         <td> Message</td>
+         <td>{{ $LeadContact->message }}</td>
+     </tr>
      <x-quick.table_action_info :info='$LeadContact'/>
  </table>

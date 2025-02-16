@@ -44,6 +44,7 @@
             <div class="row connectedSortable">
                 <div class="col-lg-12 col-12">
                        <livewire:sales-report-month />
+
                 </div>
                 <div class="col-lg-8 col-12">
                     <livewire:latest-order />
@@ -64,7 +65,7 @@
                 </div>
                 <div class="col-lg-4 col-12">
      <!-- Calendar -->
-     <div class="card bg-gradient-success">
+     {{-- <div class="card bg-gradient-success">
               <div class="card-header border-0">
 
                 <h3 class="card-title">
@@ -74,7 +75,7 @@
                 <!-- tools card -->
                 <div class="card-tools">
                   <!-- button with a dropdown -->
-                 
+
                   <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button>
@@ -105,14 +106,14 @@
                       });
                     }
                   )
-                
-                
-                  
+
+
+
             </script>
                 </div>
 
             </div>
-        </div>
+        </div> --}}
 
 
 

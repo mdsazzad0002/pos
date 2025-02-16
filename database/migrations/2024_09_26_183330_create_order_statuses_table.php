@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('qty_status')->default(0);
             $table->integer('qty_add_remove')->default(0);
 
-            $table->text('under_items')->default('');
+            $table->text('under_items')->nullable();
 
             $table->bigInteger('creator')->default(0);
             $table->timestamps();

@@ -10,10 +10,10 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Contacts
         <div>
-            @can('user create')
+            {{-- @can('user create')
 
             <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Contact" data-href="{{ route('admin.LeadContact.create') }}">+ Add New Contact</button>
-            @endcan
+            @endcan --}}
         </div>
     </div>
     <div class="card-body">

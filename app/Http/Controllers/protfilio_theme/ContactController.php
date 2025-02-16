@@ -38,6 +38,7 @@ class ContactController extends Controller
             $lead_contact->email = $request->email;
             $lead_contact->phone = $request->phone;
             $lead_contact->address = $request->address;
+            $lead_contact->message = $request->message;
             $lead_contact->save();
 
         }
@@ -59,13 +60,11 @@ class ContactController extends Controller
         $lead_deal->save();
 
 
-
-
         return json_encode([
             'title'=>'Your requirement has been successfully received. We will contact you as soon as possible.',
             'type'=>'success',
             'refresh'=>'true',
-        ]);;
+        ]);
     }
 
 }

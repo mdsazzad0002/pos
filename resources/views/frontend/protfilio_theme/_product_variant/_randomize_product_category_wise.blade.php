@@ -34,7 +34,9 @@
                           'paginate_data': true,
                           'page' : {{ request('page') ?? 1 }},
                           'category' : '{{ request('category') }}',
-                        @endif
+                          
+                          @endif
+                        
                       'details_page_slug' : '{{ $category_wise_details_page->slug }}',
                       'limit' :{{ $variant_info->items_show }},
                 },

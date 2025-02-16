@@ -15,6 +15,14 @@
                 ( Design ID: <span class="text-danger">#{{ $item->key }}</span>)
 
             </button>
+
+            <button class="btn btn-warning" onclick="window.parent.document.querySelector('#Varinatfilter').value='{{ $item->key}}'"   title="Click to filter">
+                <i class="fas fa-pencil-alt" ></i>
+            </button>
+            
+            @if(env('APP_ENV') == 'local')
+                <button class="btn btn-warning" onclick="window.parent.copyToClipboard('{{ str_replace('.','/',$item->key) }}')"   title="Click to Copy for dev only"><i class="fas fa-copy" ></i></button>
+            @endif
         </h2>
     </div>
 

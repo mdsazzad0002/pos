@@ -51,6 +51,119 @@
                     </div>
                 </form>
             </div>
+
+
+            <div class="col-md-6">
+                <form class="card" method="POST" action="{{route('admin.maintanance.update')}}">
+                    @csrf
+                    <div class="card-header d-flex justify-content-between">
+                        <label for="debug_status" class="curson-pointer">
+                           Debug & Maintanance Status
+                        </label>
+                        <div>
+                        
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="row">
+                        {{-- Debug status --}}
+                            <div class="col-6">
+                                <label for="debug_status" class="mb-2">Debug Status</label>
+                                <select name="debug_status" id="debug_status" class="form-control">
+                                    <option value="true" @if($debug_status == true) selected @endif>True</option>
+                                    <option value="false" @if($debug_status == false) selected @endif>False</option>
+                                </select>
+                            </div>
+                            {{-- End degub status --}}
+
+                            {{-- App_name --}}
+                            <div class="col-6">
+                                <label for="app_name" class="mb-2">App Name</label>
+                                <input required type="text" value="{{$app_name}}" class="form-control" name="app_name" id="app_name"/>
+                            </div>
+                            {{-- End App Name --}}
+
+                            {{--  APP_ENV --}}
+                            <div class="col-6">
+                                <label for="app_env" class="mb-2">APP ENV</label>
+                               <select name="app_env" id="app_env" class="form-control">
+                                   <option value="local" @if($app_env == 'local') selected @endif>Local</option>
+                                   <option value="production" @if($app_env == 'production') selected @endif>Production</option>
+                                   <option value="live" @if($app_env == 'live') selected @endif>Live</option>
+                               </select>
+                            </div>
+                            {{-- End APP_ENV --}}
+
+
+
+                       </div>
+
+                        <button class="btn btn-primary btn-block my-2">Save Change</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <form class="card" method="POST" action="{{route('admin.maintanance.update')}}">
+                    @csrf
+                    <div class="card-header d-flex justify-content-between">
+                        <label for="debug_status" class="curson-pointer">
+                           Database Connection 
+                        </label>
+                        <div>
+                        
+                        </div>
+                    </div>
+                    <div class="card-body">
+                       <div class="row">
+
+                        <div class="col-6">
+                            <label for="pp_connection">Connection</label>
+                            <select name="pp_connection" id="pp_connection" class="form-control">
+                                <option value="mysql" @if($pp_connection == 'mysql') selected @endif>MySQL</option>
+                                <option value="pgsql" @if($pp_connection == 'pgsql') selected @endif>PostgreSQL</option>
+                                <option value="sqlite" @if($pp_connection == 'sqlite') selected @endif>SQLite</option>
+                                <option value="sqlsrv" @if($pp_connection == 'sqlsrv') selected @endif>SQL Server</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="app_port" class="mb-2">Port</label>
+                            <input required type="text" value="{{$app_port}}" class="form-control" name="app_port" id="app_port"/>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="app_db" class="mb-2">Database</label>
+                            <input required type="text" value="{{$app_db}}" class="form-control" name="app_db" id="app_db"/>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="app_pass" class="mb-2">Password</label>
+                            <input required type="text" value="{{$app_pass}}" class="form-control" name="app_pass" id="app_pass"/>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="app_user" class="mb-2">User</label>
+                            <input required type="text" value="{{$app_user}}" class="form-control" name="app_user" id="app_user"/>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="app_host" class="mb-2">Host</label>
+                            <input required type="text" value="{{$app_host}}" class="form-control" name="app_host" id="app_host"/>
+                        </div>
+
+
+
+
+
+                       </div>
+
+                        <button class="btn btn-primary btn-block my-2">Save Change</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -34,7 +34,7 @@
         <div class="product-desc">
             <h6 class="product-title mb-8">
 
-                <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}">{{ $product->name }}</a>
+                <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}&p={{ $product->id }}">{{ $product->name }}</a>
 
             </h6>
             <div class="text mb-16">
@@ -49,7 +49,7 @@
 
             </div>
 
-             <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}"  data-id="{{ $product->id }}" class="cus-btn-2 w-100">View Details</a>
+             <a href="{{ url($details_page_slug) }}?category={{ $product->category_info?->slug }}&p={{ $product->id }}"  data-id="{{ $product->id }}" class="cus-btn-2 w-100">View Details</a>
 
         </div>
     </div>

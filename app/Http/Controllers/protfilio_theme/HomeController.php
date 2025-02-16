@@ -271,23 +271,33 @@ class HomeController extends Controller
         $paginate_data = $request->paginate_data ?? false;
         $details_page_slug = $request->details_page_slug ?? false;
         $category =  $request->category_id;
-        if($paginate_data){
+        
 
-            if($request->has('category_id')){
-                $products =  product::where('category', $category)->orderBy('id', 'desc')->paginate($limit_product);
-            }else{
-                $products = product::orderBy('id', 'desc')->paginate($limit_product);
-            }
+        $specific_product_id = $request->p ?? false; // Replace with your desired product ID
 
-        }else{
+        $products = Product::query();
 
-            if($request->has('category_id')){
-                $products =  product::where('category', $category)->orderBy('id', 'desc')->limit($limit_product)->get();
-            }else{
-                $products = product::orderBy('id', 'desc')->limit($limit_product)->get();
-            }
-
+         // Filter by category
+        if ($category) {
+            $products = $products->where('category', $category);
         }
+        
+        // Filter by product ID
+        if ($specific_product_id) {
+            $products = $products->orderByRaw('id = ? desc', [$specific_product_id]);
+        }
+
+        // order by id desc  
+        $products = $products->orderBy('id', 'desc');
+        
+       
+        if ($request->has('paginate_data') && !$paginate_data) {
+            $products = $products->paginate($limit_product);
+        } else {
+            $products = $products->limit($limit_product)->get();
+        }
+        
+
 
 
         return view('frontend.protfilio_theme._filter_variant.partials.product_category_wise', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request' => $request]);

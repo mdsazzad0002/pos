@@ -217,7 +217,7 @@ class SettingController extends Controller
         $databaseName = config('database.connections.mysql.database'); //env('DB_DATABASE', 'd_pos');
         $username = config('database.connections.mysql.username');//env('DB_USERNAME', 'root');
         $password = config('database.connections.mysql.password'); //env('DB_PASSWORD','');
-        $backupPath = storage_path('app/'.date('d-M-Y-h-i-s-A').'.sql');
+        $backupPath = storage_path( 'app/'.str_replace(' ', '_',  settings('app_name', 9)).'_'.date('d-M-Y-h-i-s-A').'.sql');
         $host = config('database.connections.mysql.host');//env('DB_HOST', '127.0.0.1');
 
 

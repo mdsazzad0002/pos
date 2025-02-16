@@ -446,7 +446,8 @@
                                             }
                                         @endphp
 
-                                        @if( $product->variant_on)
+
+                                        @if( $product->variant_on && (is_array($data_items_variant_json->variant_key) || is_object($data_items_variant_json->variant_key)))
                                             @foreach ($data_items_variant_json->variant_key as $key => $items)
                                             <div class=" key_items_header" style="background:#1595859e">
                                                 <div>
@@ -454,7 +455,7 @@
                                                     <input type="text" class="form-control variant_key_name" id="variant_key_name" name="variant_key_name[]" value="{{ $items ?? '' }}" placeholder="Variant Key">
                                                 </div>
                                                 <div>
-                                                    <label for="variant_name_key">Variant Name</label>
+                                                    <label for="variant_name_key">Variant Name Separate By comma(,)</label>
                                                     <input type="text" class="form-control variant_name_key" id="variant_name_key" value="{{  $data_items_variant_json->vairant_value[$key] ?? '' }}" name="variant_name_key[]"
                                                         placeholder="Variant Value">
                                                 </div>

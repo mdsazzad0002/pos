@@ -109,9 +109,9 @@ use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 
 
 
-Route::get('latest_order', [AdminDashboardController::class, 'latest_order'])->name('latest_order');
-Route::get('latest_customer', [AdminDashboardController::class, 'latest_customer'])->name('latest_customer');
-Route::get('recent_product', [AdminDashboardController::class, 'recent_product'])->name('recent_product');
+// Route::get('latest_order', [AdminDashboardController::class, 'latest_order'])->name('latest_order');
+// Route::get('latest_customer', [AdminDashboardController::class, 'latest_customer'])->name('latest_customer');
+// Route::get('recent_product', [AdminDashboardController::class, 'recent_product'])->name('recent_product');
 
 
 

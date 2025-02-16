@@ -4,22 +4,22 @@
 @php
     $category_wise_details_page = \App\Models\Page::where('page_type', 'category_details_page')->first();
 
-    if($variant_info->is_details_page){
-        if(\request('category')){
-            $recommend_category = \App\Models\Category::where('status', 1)->limit(1)->where('slug', \request('category'))->get();
-        }else{
-            $recommend_category = \App\Models\Category::where('status', 1)->limit(1)->get();
-        }
-    }else{
-        $recommend_category = \App\Models\Category::where('status', 1)->get();
+    $recommend_category = \App\Models\Category::where('status', 1);
+
+    if(\request('category') ){
+        $recommend_category = $recommend_category->where('slug', \request('category'));
+    }elseif($variant_info->category != 0){
+        $recommend_category = $recommend_category->where('id', $variant_info->category);
     }
+
+    $recommend_category = $recommend_category->get();
 
 
 @endphp
 
+
+
 @foreach ($recommend_category as $category_item)
-
-
     <x-frontend_section  :info="$variant_info" class="recommend_product" css="_product_style/_product_recommend.css" >
         <div class="product_wise_cateogry-product-sec py-40">
             <div class="container-fluid">
@@ -54,6 +54,9 @@
                           'paginate_data': true,
                           'page' : {{ request('page') ?? 1 }},
                           'category' : '{{ request('category') }}',
+                        @endif
+                        @if (\request('p'))
+                            'p' : '{{ request('p') }}',
                         @endif
                       'details_page_slug' : '{{ $category_wise_details_page->slug }}',
                       'limit' :{{ $variant_info->items_show }},
