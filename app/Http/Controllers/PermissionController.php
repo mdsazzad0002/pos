@@ -41,7 +41,7 @@ class PermissionController extends Controller
 
                     $return_data = '';
 
-                    if($row->id != 1){
+                    if($row->id != 1 || config('app.env') == 'local'){
                         if(auth()->user()->can('role edit')==true){
                             $return_data = $edit_button. '&nbsp;';
                         }

@@ -69,7 +69,7 @@ sidebar-dark-primary elevation-4">
 
 
 
-                @can('order read')
+                @canany(['order read', 'order create'])
                 <li class="nav-item">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-luggage-cart"></i>
@@ -80,44 +80,70 @@ sidebar-dark-primary elevation-4">
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('order read')
                         <li class="nav-item">
                             <a href="{{ route('admin.order.index') }}" class="nav-link ">
                                 <i class="fas fa-shopping-cart nav-icon"></i>
                                 <p>Order <span class="right badge badge-danger">{{ unchecked_order() }}</span></p>
                             </a>
+                        </li>    
+                         @endcan
+                        @if(config('app.env') == 'local')
+                            @can('order create')
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.order.create') }}" class="nav-link ">
+                                        <i class="fas fa-cart-plus nav-icon"></i>
+                                        <p>Create</p>
+                                    </a>
+                                </li>
+                            @endcan
+                        @endif
+                    </ul>
+                </li>
+                @endcanany
+
+
+                @canany(['custom_order type read', 'custom_order bulk read', 'custom_order custom read'])
+                <li class="nav-item">
+                    <a href="#" class="nav-link ">
+                        <i class="nav-icon fas fa-luggage-cart"></i>
+                        <p>
+                            Custom Order
+                            <i class="fas fa-angle-left right"></i>
+
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        @can('custom_order type read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.whole.sele.index') }}" class="nav-link ">
+                                <i class="fas fa-tags nav-icon"></i>
+                                <p>Product Type</p>
+                            </a>
                         </li>
-                    @if(env('APP_ENV') == 'local')
-                        @can('order create')
+                        @endcan
+
+                        @can('custom_order bulk read')
                             <li class="nav-item">
-                                <a href="{{ route('admin.order.create') }}" class="nav-link ">
-                                    <i class="fas fa-cart-plus nav-icon"></i>
-                                    <p>Create</p>
+                                <a href="{{ route('admin.bluk.order') }}" class="nav-link ">
+                                    <i class="fas fa-boxes nav-icon"></i>
+                                    <p>Bluk Order <span class="right badge badge-danger">{{ blukOrder() }}</span></p>
                                 </a>
                             </li>
                         @endcan
-                    @endif
 
-                    <li class="nav-item">
-                        <a href="{{ route('admin.whole.sele.index') }}" class="nav-link ">
-                            <i class="fas fa-tags nav-icon"></i>
-                            <p>Product Type</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.bluk.order') }}" class="nav-link ">
-                            <i class="fas fa-boxes nav-icon"></i>
-                            <p>Bluk Order <span class="right badge badge-danger">{{ blukOrder() }}</span></p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.custom.order') }}" class="nav-link ">
-                            <i class="fas fa-boxes nav-icon custom-order-icon"></i>
-                            <p>Custom Order <span class="right badge badge-danger">{{ customOrder() }}</span></p>
-                        </a>
-                    </li>
+                        @can('custom_order custom read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.custom.order') }}" class="nav-link ">
+                                    <i class="fas fa-boxes nav-icon custom-order-icon"></i>
+                                    <p>Custom Order <span class="right badge badge-danger">{{ customOrder() }}</span></p>
+                                </a>
+                            </li>
+                            @endif
                     </ul>
                 </li>
-                @endcan
+                @endcanany
+
 
 
 
@@ -233,7 +259,7 @@ sidebar-dark-primary elevation-4">
 
 
 
-                @if(env('APP_ENV') == 'local')
+                @if(config('app.env') == 'local')
                 @can('stock read')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -279,7 +305,7 @@ sidebar-dark-primary elevation-4">
                     </li>
                 @endcan
 
-                @if(env('APP_ENV') == 'local')
+                @if(config('app.env') == 'local')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-swatchbook nav-icon"></i>
@@ -329,7 +355,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>
-                            User Management
+                            User Management 
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -342,7 +368,7 @@ sidebar-dark-primary elevation-4">
                             </a>
                         </li>
                         @endcan
-                        @if(env('APP_ENV') == 'local')
+                        @if(config('app.env') == 'local')
 
                         @can('user read')
                         <li class="nav-item">
@@ -385,7 +411,8 @@ sidebar-dark-primary elevation-4">
                     </ul>
                 </li>
 
-                @if(env('APP_ENV') == 'local')
+           
+                @if(config('app.env') == 'local')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-user-cog nav-icon"></i>

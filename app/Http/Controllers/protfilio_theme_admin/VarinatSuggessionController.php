@@ -5,6 +5,7 @@ namespace App\Http\Controllers\protfilio_theme_admin;
 use Illuminate\Http\Request;
 use App\Models\VarinatSuggession;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class VarinatSuggessionController extends Controller
 {
@@ -66,16 +67,27 @@ class VarinatSuggessionController extends Controller
 
     public function VarinatSuggession(Request $request)
     {
-        $data_result = VarinatSuggession::where(function($query) use ($request) {
+        $data_result = VarinatSuggession::where(function ($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('title', 'LIKE', '%' . $request->q . '%');
             }
-        })->get();
+        })->get()->filter(function ($variant) {
+            // if (empty($variant->permission)) {
+            //     return true;
+            // }
+            
+            // if(auth()->user()->can($variant->permission ?? '') == true){
+            //     return true;
+            // }
+        
+            // Check if the user has the specific permission
+           return empty($variant->permission) ? true : Auth::user()->can($variant->permission ?? '');
+        });
 
         $result_make = [];
         $result_make['items']=$data_result;
 
-        return json_encode($result_make);
+        return response()->json($result_make);
 
     }
 }

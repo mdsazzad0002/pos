@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class MaintainController extends Controller
 {
-    public function index(){
 
+    
+    public function index(){
+          if (!auth()->check() || !Gate::any(['maintenance mode', 'maintenance debug', 'maintenance database'])) {
+            abort(403); // Forbidden
+        }
         $maintanance_status =  config('app.maintenance.status');
         $maintanance_to =  config('app.maintenance.time');
         $maintanance_from =  config('app.maintenance.from');
@@ -28,6 +34,9 @@ class MaintainController extends Controller
         return view('admin.maintainance.index', compact('maintanance_status', 'maintanance_to', 'maintanance_from','debug_status','app_name','app_env','pp_connection','app_port','app_db','app_pass','app_user','app_host'));
     }
     public function update(Request $request){
+        if (!auth()->check() || !Gate::any(['maintenance mode', 'maintenance debug', 'maintenance database'])) {
+            abort(403); // Forbidden
+        }
 
         if($request->has('debug_status') && $request->has('app_name') && $request->has('app_env')){
             updateEnvFile('APP_DEBUG', $request->debug_status);

@@ -105,11 +105,14 @@
 
     function format_layout(data){
         var html_output = '';
+        // console.log(data)
+        
 
-        data.forEach(element => {
-            console.log(element.image)
+        Object.keys(data).forEach((key, element) => {
+            // console.log(key)  
+                element = data[key];
                 html_output +=  `
-                <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})" style="    border: 1px solid #3e444a;cursor: pointer;">
+                   <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})" style="    border: 1px solid #3e444a;cursor: pointer;">
                     <img src="${element.image }" alt="" class="img-fulid" style="width: fit-content; max-width: 100%;">
                     <div class="title_layout main" style="background: #3e444a; color: white; padding: 1px 7px; border-radius: 0px;">${element.title}</div>
                     <div class="title_layout sm " style="background: #08775b; color: white; padding: 1px 7px; border-radius: 0px;">#${element.key}</div>
@@ -132,7 +135,7 @@
                 q:data
             },
             success:function(data){
-                data= JSON.parse(data)
+                // data= JSON.parse(data)
                 data_items = format_layout(data.items);
                 $('.add_to_layout_container').html(data_items);
 

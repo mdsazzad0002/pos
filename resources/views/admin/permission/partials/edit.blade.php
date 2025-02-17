@@ -16,7 +16,7 @@
                 <td></td>
             </tr>
             @foreach ($permission_list as $key => $items)
-                 @can( $key.' read')
+                 {{-- @can( $key.' read') --}}
                     <tr>
                         <td>
                             <label for="{{ $key }}" >
@@ -27,7 +27,7 @@
                         <td>
 
                             @foreach ($items as $item)
-                                @can($item->name)
+                            @if( auth()->user()->can($item->name) || config('app.env') == 'local')
                                     <label for="target_id_{{ $item->id }}" class="badge badge-primary">
                                         <input id="target_id_{{ $item->id }}" {{ in_array($item->id, $current_permission) ?'checked' : '' }} name="permission[]" type="checkbox" value="{{ $item->id }}">&nbsp;
                                         {{ $item->name }}
@@ -36,7 +36,7 @@
                             @endforeach
                         </td>
                     </tr>
-                @endcan
+                {{-- @endcan --}}
             @endforeach
         </table>
     </div>

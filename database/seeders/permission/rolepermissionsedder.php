@@ -32,8 +32,8 @@ class rolepermissionsedder extends Seeder
                 // Branch
                 'branch read', 'branch create', 'branch edit', 'branch delete',
 
-                    // CAshcounter
-                    'cashcounter read', 'cashcounter create', 'cashcounter edit', 'cashcounter delete',
+                // CAshcounter
+                'cashcounter read', 'cashcounter create', 'cashcounter edit', 'cashcounter delete',
 
 
                 // Product
@@ -78,7 +78,7 @@ class rolepermissionsedder extends Seeder
 
 
                 //[[[ Setting
-                        'setting read', 'setting create', 'setting edit',  'setting delete',
+                        // 'setting read', 'setting create', 'setting edit',  'setting delete',
 
                         // Site Verification Setting
                         'siteverification read', 'siteverification edit',
@@ -103,6 +103,22 @@ class rolepermissionsedder extends Seeder
 
                         // Tak.to Setting
                         'payment_credentials read',  'payment_credentials edit',
+
+
+                        // Maintanance Setting
+                        'maintenance mode', 'maintenance debug', 'maintenance database',
+
+                        // Database backup
+                        'database backup',
+
+                        'device_access_check read',
+                        'settings payment_configration',
+
+                      'settings main',   'settings notification', 'settings site_verification', 'settings site_tag', 
+                      'settings tracking_report', 'settings site_pwa',  'settings messagesdk',  'settings cookie',
+                      'settings email_setting',
+
+
                 //]]]
 
                 // Order
@@ -110,6 +126,9 @@ class rolepermissionsedder extends Seeder
                 'order create',
                 'order edit',
                 'order delete',
+
+                // custom order
+                'custom_order type read', 'custom_order bulk read', 'custom_order custom read',
 
                 // offerbanner
                 'offerbanner read',
@@ -217,6 +236,15 @@ class rolepermissionsedder extends Seeder
                    'footerlinksubheading create',
                    'footerlinksubheading edit',
                    'footerlinksubheading delete',
+
+                   // headernav management
+                   'headernav read',
+                   'headernav create',
+                   'headernav edit',
+                   'headernav delete',
+
+
+
 
                    // faq
                    'faq read',

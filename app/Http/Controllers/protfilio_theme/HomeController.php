@@ -842,7 +842,7 @@ class HomeController extends Controller
             $order->vat = $card_information['subtotal']['vat'];
             $order->status = 1;
             $order->note = $request->textarea ?? '';
-            $order->payment_method =  $request->plan ?? '';
+            $order->payment_method =  $request->plan ?? '0';
 
             $order->shipping_charge_id = $request->shipping_charge ?? 0;
 
@@ -918,6 +918,7 @@ class HomeController extends Controller
 
                     // Initialize mPDF
                     $mpdf = new Mpdf();
+                      // $mpdf->showImageErrors = true;
                     $mpdf->WriteHTML($html);
                     // $pdfOutput = $mpdf->Output('', 'S'); // 'S' returns the PDF as a string
 

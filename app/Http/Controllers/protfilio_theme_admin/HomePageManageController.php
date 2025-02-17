@@ -37,7 +37,7 @@ class HomePageManageController extends Controller
 
         $homePageManage = VarinatSuggession::find($request->items_id);
         $homePageManageArray = $homePageManage->toArray();
-        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater', 'upload_id', 'image','upload_id_status', 'title_manage_status', 'sub_title_manage_status', 'short_read_more_manage_status', 'view_all_manage_status', 'items_manage_status', 'is_details_page_manage_status', 'background_manage_status' ,'upload_manage_id3_status', 'upload_manage_status', 'items_per_row_status' , 'category_manage_status']);
+        $homePageManage =Arr::except($homePageManageArray, ['created_at', 'deleted_at', 'updated_at', 'id', 'status', 'creator', 'updater', 'upload_id', 'image','upload_id_status', 'title_manage_status', 'sub_title_manage_status', 'short_read_more_manage_status', 'view_all_manage_status', 'items_manage_status', 'is_details_page_manage_status', 'background_manage_status' ,'upload_manage_id3_status', 'upload_manage_status', 'items_per_row_status' , 'category_manage_status','permission']);
 
 
 

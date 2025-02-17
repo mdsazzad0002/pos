@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('maintanance.title'))
+@section('title', 'Maintenance & DB Management')
 
 {{--  Content Extends  --}}
 
@@ -17,7 +17,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        {{ __('maintanance.info') }}
+       Database & Maintenance
         <div>
             {{-- @can('brand create')
 
@@ -27,6 +27,14 @@
     </div>
     <div class="card-body">
         <div class="row">
+        <div class="col-12 mb-2">
+            <div class="p-2 px-3 bg-warning text-dark border rounded border-left-1">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                &nbsp; This Change apply need few moments. Try to <a href="{{ url('clear') }}" class="btn btn-primary">Cache Clear</a> the page
+            </div>
+        </div>
+     
+         @can('maintenance mode')
             <div class="col-md-6">
                 <form class="card" method="POST" action="{{route('admin.maintanance.update')}}">
                     @csrf
@@ -51,8 +59,11 @@
                     </div>
                 </form>
             </div>
+            @endcan
 
 
+
+            @can('maintenance debug')
             <div class="col-md-6">
                 <form class="card" method="POST" action="{{route('admin.maintanance.update')}}">
                     @csrf
@@ -102,9 +113,10 @@
                     </div>
                 </form>
             </div>
+            @endcan
 
 
-
+            @can('maintenance database')
             <div class="col-md-6">
                 <form class="card" method="POST" action="{{route('admin.maintanance.update')}}">
                     @csrf
@@ -164,6 +176,8 @@
                     </div>
                 </form>
             </div>
+            @endcan
+
         </div>
     </div>
 </div>

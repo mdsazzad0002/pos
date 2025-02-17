@@ -76,7 +76,7 @@ class OrderController extends Controller
                     $return_data = '';
 
                     if(auth()->user()->can('order edit')==true){
-                        if(env('APP_ENV') == 'local'){
+                        if(config('app.env') == 'local'){
                             $return_data = $edit_button. '&nbsp;';
                         }
                         $return_data .= $update_status_button. '&nbsp;';

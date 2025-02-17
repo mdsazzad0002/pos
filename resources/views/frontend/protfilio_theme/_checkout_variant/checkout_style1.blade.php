@@ -14,6 +14,11 @@
         echo '<script>window.location.href = "'.url('/').'"</script>';
     }
     $profile_location = \App\Models\Page::where('status', 1)->where('page_type', 'profile_location')->first();
+
+    $address_array = [];
+    if(auth()->guard('customer')->check()){
+        $address_array = auth()->guard('customer')->user()->addressable;
+    }
 @endphp
 
 
@@ -33,7 +38,7 @@
 
                                {{-- Use preevious address --}}
                                 @if(auth()->guard('customer')->user())
-                                    @foreach (auth()->guard('customer')->user()->addressable as $key => $address)
+                                    @foreach ( $address_array as $key => $address)
                                         <div class="col-md-6">
                                             <div class="input-block mb-16 address_data">
                                                 <input type="radio" name="address_id" id="address_id{{ $key }}" value="{{ $address->id }}" class="form-control" placeholder="First Name">
@@ -52,17 +57,20 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                @endif
-
-                                <div class="col-md-6">
-                                    <div class="input-block mb-16 address_data">
-                                        <input type="radio" checked name="address_id" id="address_idcustome" value="" class="form-control" placeholder="First Name">
-
-                                        <label for="address_idcustome">
-                                            Use Another Location
-                                        </label>
+                                    @endif
+                                <div class="col-md-6" 
+                                    @if(count( $address_array) == 0)
+                                    hidden
+                                    @endif
+                                    >
+                                        <div class="input-block mb-16 address_data">
+                                            <input type="radio" checked name="address_id" id="address_idcustome" value="" class="form-control" placeholder="First Name">
+    
+                                            <label for="address_idcustome">
+                                                Use Another Location
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
 
                             </div>
                             <div class="row new_previous_address">
@@ -231,7 +239,7 @@
                             <div class="row">
                                  {{-- Use preevious address --}}
                                  @if(auth()->guard('customer')->user())
-                                 @foreach (auth()->guard('customer')->user()->addressable as $key => $address)
+                                 @foreach ( $address_array as $key => $address)
                                      <div class="col-md-6">
                                          <div class="input-block mb-16 address_data">
                                              <input type="radio" name="billingaddress_id" id="billingaddress_id{{ $key }}" value="{{ $address->id }}" class="form-control" placeholder="First Name">
@@ -249,7 +257,11 @@
                                  @endforeach
                              @endif
 
-                             <div class="col-md-6">
+                             <div class="col-md-6"
+                             @if(count( $address_array) == 0)
+                             hidden
+                             @endif
+                             >
                                  <div class="input-block mb-16 address_data">
                                      <input type="radio" name="billingaddress_id" checked id="billingaddress_idsd" value="" class="form-control" placeholder="First Name">
 

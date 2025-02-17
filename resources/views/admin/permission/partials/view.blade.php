@@ -3,12 +3,12 @@
         @foreach ($permissions as $key => $items)
         <tr>
             <td>
-                {{ $key }}
+                {{ Str::title($key) }}
             </td>
             <td>
 
                 @foreach ($items as $item)
-                <span class="badge badge-primary">{{ $item->name }}</span>
+                <span class="badge badge-primary">{{ Str::title($item->name) }}</span>
                 @endforeach
             </td>
         </tr>

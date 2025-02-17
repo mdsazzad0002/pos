@@ -10,7 +10,7 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Order List
         <div>
-            @if(env('APP_ENV') == 'local')
+            @if(config('app.env') == 'local')
                 @can('user create')
                     <a class="btn btn-primary"  href="{{ route('admin.order.create') }}">+ Add New order</a>
                 @endcan

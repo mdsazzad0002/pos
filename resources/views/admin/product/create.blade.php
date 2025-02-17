@@ -195,7 +195,7 @@
                                     </div>
                                 </div>
 
-                                @if (env('APP_ENV') == 'local')
+                                @if (config('app.env') == 'local')
                                     <div class="col-lg-6">
                                         <label for="">Alert Quantaty</label>
                                         <input type="number" name="alert_quantity" value="{{ $product ? $product->alert_quantity : 0 }}" class="form-control mb-2">

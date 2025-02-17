@@ -20,7 +20,7 @@
                 <i class="fas fa-pencil-alt" ></i>
             </button>
             
-            @if(env('APP_ENV') == 'local')
+            @if(config('app.env') == 'local')
                 <button class="btn btn-warning" onclick="window.parent.copyToClipboard('{{ str_replace('.','/',$item->key) }}')"   title="Click to Copy for dev only"><i class="fas fa-copy" ></i></button>
             @endif
         </h2>

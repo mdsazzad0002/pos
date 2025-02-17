@@ -1434,6 +1434,9 @@ class VarinatSuggessionSeeder extends Seeder
                 'background_type' => 0,
                 'upload_id'=>'uploads/preset/page_variant/custom_form_bluk_order_form1.png',
                 'background_manage_status'=> 1,
+                'permission'=>'custom_order bulk read',
+               
+                
 
             ],
             '_custom_order2' => [
@@ -1463,6 +1466,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background_type' => 0,
                 'upload_id'=>'uploads/preset/page_variant/custom_order_form2.png',
                 'background_manage_status'=> 1,
+                'permission'=>'custom_order custom read',
 
             ],
             '_authenticate_login' => [

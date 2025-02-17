@@ -6,6 +6,7 @@ use App\Models\payment\PaymentCredential;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Customer;
 
 class order extends Model
 {
@@ -23,7 +24,7 @@ class order extends Model
     }
 
     public function customer(){
-        return $this->hasOne(customer::class, 'id', 'customer_id');
+        return $this->hasOne(Customer::class, 'id', 'customer_id');
     }
 
     public function getTotalPriceAttribute(){

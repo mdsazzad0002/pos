@@ -73,7 +73,7 @@ class ProductController extends Controller
                         $return_data .= $delete_button ;
                     }
 
-                    if(auth()->user()->can('product barcode') == true && env('APP_ENV') == 'local'){
+                    if(auth()->user()->can('product barcode') == true && config('app.env') == 'local'){
                         $barcode_route = route('admin.product.barcode',$row->id);
                         $bar_button =  "<a class='btn btn-warning ml-1' href='$barcode_route'>Barcode</a>";
 

@@ -14,7 +14,7 @@
             <a href="{{ route('admin.dashboard') }}" class="nav-link">Home</a>
         </li>
 
-        @if(env('APP_ENV') == 'local')
+        @if(config('app.env') == 'local')
             @can('order read')
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{ route('admin.order.index') }}" class="nav-link">Order</a>
