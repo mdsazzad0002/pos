@@ -135,25 +135,31 @@
 
 @push('js')
     <script>
+        function formatVariantName(name) {
+            return name.replace(/:/gi, ' - ').replace(/\b\w/g, c => c.toUpperCase()).trim();
+        }
+        function formatkey_unique(name) {
+            return name.replace(/:/gi, '_').replace(/\b\w/g, c => c.toUpperCase()).trim();
+        }
+
       function format_query_result(data_items){
 
         var product_filter ='';
         Object.keys(data_items).forEach(function(data){
-            var items_variant_data = (JSON.parse(data_items[data].variant_option));
+            var items_variant_data = data_items[data].variant_option_info;
             var html_data_key = '';
-            var html_data_value = '';
+            
 
             if(data_items[data].variant_on == 1){
 
-
-
-                var item_data_key = items_variant_data.variant_key.split(",");
-
-                if(item_data_key.length > 0){
+                
+                if(items_variant_data.length > 0){
                      html_data_key+=`<select class="form-control variant_key" >`
-                    item_data_key.forEach(element => {
-                        console.log(element);
-                        html_data_key+=`<option value="${element}">${element}</option>`
+                     Object.keys(items_variant_data).forEach(function(key){
+
+                     
+                        // console.log(element);
+                        html_data_key+=`<option value="${items_variant_data[key].name}">${formatVariantName(items_variant_data[key].name)}</option>`
                     });
                       html_data_key+=`</select>`
                 }
@@ -161,25 +167,8 @@
 
 
 
-
-
-                var item_data_key = items_variant_data.vairant_value.split(",");
-                html_data_value+=`<select class="form-control variant_value" >`
-                if(item_data_key.length > 0){
-                    item_data_key.forEach(element => {
-                        console.log(element);
-                        html_data_value+=`<option value="${element}">${element}</option>`
-                    });
-                }else{
-                    html_data_value+=`<option value="">Variant Not Found</option>`
-                }
-                html_data_value+=`</select>`
-
-
-
             }else{
-                  html_data_key+=`<select class="form-control variant_key" ><option value="">Variant Key</option></select>`
-                  html_data_value+=`<select class="form-control variant_value" ><option value="">Variant Value</option></select>`
+                  html_data_key+=``
             }
 
 
@@ -203,7 +192,7 @@
                 </td>
                 <td class="p-1">
                     <div class="d-flex variant_c" style="gap:5px;">
-                        ${ html_data_key + html_data_value  }
+                        ${ html_data_key }
                     </div>
                 </td>
 
@@ -225,6 +214,7 @@
       }
 
 
+        //   input change and filter
         var search_var = document.querySelector('#product_filter');
         search_var.addEventListener('input', function(e){
             e.preventDefault();
@@ -232,6 +222,9 @@
 
         })
 
+
+
+        // filter function
         function filter_product_for_purchase(thi){
             if ($('#scan_match_andInput').is(':checked')) {
                 $.ajax({
@@ -270,10 +263,14 @@
             }
         }
 
+
+        // default call purchase filter result
         filter_product_for_purchase(search_var)
 
 
 
+
+        // add items from quey
         function items_add_from_quey(thi){
 
             var id = $(thi).parents('tr').find('.img_c .data_id').val();
@@ -282,16 +279,28 @@
             var name = $(thi).parents('tr').find('.product_c').html();
 
 
-            var variant_key = $(thi).parents('tr').find('.variant_c .variant_key').val();
-            var variant_key_html = $(thi).parents('tr').find('.variant_c .variant_key option:selected').html();
+            var variant_key = $(thi).parents('tr').find('.variant_c .variant_key');
+            if(variant_key.length > 0){
+                variant_key = variant_key.val();
+            }else{
+                variant_key = '';
+            }
 
-            var variant_value = $(thi).parents('tr').find('.variant_c .variant_value').val();
-            var variant_value_html = $(thi).parents('tr').find('.variant_c .variant_value option:selected').html();
+            var variant_key_html = $(thi).parents('tr').find('.variant_c .variant_key option:selected');
+            if(variant_key_html.length > 0){
+                variant_key_html = variant_key_html.html()
+            }else{
+                variant_key_html = ''
+
+            }
+            
+          
+            
 
             var unit_c = $(thi).parents('tr').find('.unit_c').val();
             var unit_c_html = $(thi).parents('tr').find('.unit_c option:selected').html();
 
-            var key_unique = id+'_'+variant_key+'_'+variant_value+'_'+unit_c;
+            var key_unique = id+'_'+formatkey_unique(variant_key)+'_'+unit_c;
 
             var data_format = ` <tr class="curent_parents_data items${key_unique}">
                             <td>
@@ -301,9 +310,10 @@
                                 ${name}
                                 <input type="hidden" value="${id}" name="productId[]"/>
                             </td>
-                           <td>
-                                ${variant_key_html+' & '+variant_value_html}
-                                <input hidden value="${variant_key+':'+variant_value}" name="variant_name[]"/>
+                           <td >
+                           
+                                ${variant_key_html}
+                                <input hidden value="${variant_key}" name="variant_name[]"/>
                             </td>
                            <td>
                                 ${unit_c_html}
@@ -341,6 +351,8 @@
         }
 
 
+
+        // calculate inline total
         function calclute_inline(class_name){
             var items = document.querySelector(class_name+' .quantaty').value;
             var price = document.querySelector(class_name+' .price').value;
@@ -354,6 +366,8 @@
             calculateSubtotal()
         }
 
+
+        // calculate Subtotal
         function calculateSubtotal() {
             var items = document.querySelectorAll('#data_insert_list tr');
             var totalItems = 0;
@@ -382,6 +396,10 @@
         }
 
 
+
+
+        // latest solution
+        // Submit form
         $('.purchause_create').on('submit', function(e){
             e.preventDefault();
             $.ajax({

@@ -23,7 +23,7 @@ class purchase extends Model
     }
 
     public function supplier(){
-        return $this->hasOne(supplier::class, 'id', 'supplierId');
+        return $this->belongsTo(supplier::class, 'supplierId');
     }
 
     public function getTotalPriceAttribute(){
@@ -34,7 +34,7 @@ class purchase extends Model
     }
 
     public function variant(){
-        return $this->belongsTo(VariantOption::class, 'variant_id');
+        return $this->belongsTo(VariantOption::class, 'varinat_id');
 
     }
 

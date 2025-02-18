@@ -26,59 +26,73 @@ class PurchaseController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
-            $query = purchase::join('units', 'purchases.unit_id', '=', 'units.id')->select('purchases.*', 'units.name as unit_name');
+            $query = Purchase::join('suppliers', 'purchases.supplierId', '=', 'suppliers.id')
+            ->selectRaw('
+                purchases.purchase_id as purchase_id, 
+                ANY_VALUE(purchases.supplierId) as supplier_id, 
+                ANY_VALUE(suppliers.upload_id) as upload_id, 
+                ANY_VALUE(suppliers.name) as supplier_name, 
+                
+                ANY_VALUE(purchases.buying_date) as buying_date, 
+                SUM(purchases.total) as price
+            ')
+            ->groupBy('purchases.purchase_id');
+        
+        
+
             return DataTables::make($query)
 
-                ->addColumn('name', function ($row) {
-                    $view_route = route('admin.purchase.show', $row->id);
-                    return $row->product->name;
-
-                })
                 ->addColumn('view', function ($row) {
-                    $view_route = route('admin.purchase.show', $row->id);
-                    return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered'
-                    onclick='button_ajax(this)'
-                    data-title='".$row->product->name."  info'
-                    data-href='$view_route'>View</button>";
+                    $view_route = route('admin.purchase.report_single',['purchase_id'=> $row->purchase_id]);
+                    return "<a class='btn btn-primary' target='_blank' href='$view_route'>View</a>";
 
                 })
                 ->addColumn('image', function ($row) {
-                   return  $view_route = "<img style='max-width:100px' src='".$row->product->image_url."'/>";
+                    
+                   return  $view_route = "<img style='max-width:100px' src='".dynamic_asset($row->upload_id ?? 0)."'/></br> ";
+
+                })
+                ->addColumn('supplier', function ($row) {
+                    $supplier_view_route = route('admin.supplier.show', $row->supplier_id);
+                    return "<button class='btn btn-primary '
+                    data-dialog=' modal-dialog-centered'
+                    onclick='button_ajax(this)'
+                    data-title='$row->supplier_name  info'
+                    data-href='$supplier_view_route'>$row->supplier_name</button>";
 
                 })
                 ->addColumn('action', function ($row) {
-                    $delete_route = route('admin.purchase.delete', $row->id);
+                    $delete_route = route('admin.purchase.delete', $row->purchase_id);
 
                     $delete_button =  "<button class='btn btn-danger '
 
-                    data-title='".$row->product->name."'
+                    data-title='#".$row->purchase_id."'
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 
-                    $edit_route = route('admin.purchase.edit', $row->id);
+                    $edit_route = route('admin.purchase.edit', $row->purchase_id);
                     $edit_button =  "<button class='btn btn-warning '
                     data-dialog='modal-dialog-centered'
-                    data-title='".$row->product->name."'
+                    data-title='#".$row->purchase_id."'
                     onclick='button_ajax(this)'
                     data-href='$edit_route'>Change Status</button>";
 
                     $return_data = '';
-                    if(auth()->user()->can('purchase edit')==true){
-                        $return_data = $edit_button. '&nbsp;';
-                    }
+                    // if(auth()->user()->can('purchase edit')==true){
+                    //     $return_data = $edit_button. '&nbsp;';
+                    // }
 
-                    if(auth()->user()->can('purchase delete') == true){
-                        if($row->status == 2){
-                            $return_data .= $delete_button;
-                        }
-                    }
+                    // if(auth()->user()->can('purchase delete') == true){
+                    //     if($row->status == 2){
+                    //         $return_data .= $delete_button;
+                    //     }
+                    // }
 
                     return $return_data;
 
 
                 })
-                ->rawColumns(['name','image','action', 'view', ])
+                ->rawColumns(['image','action', 'view', 'supplier' ])
                 ->make(true);
         }
         return view('admin.purchase.index');
@@ -108,10 +122,24 @@ class PurchaseController extends Controller
         $purchase_last =$purchase_last ? $purchase_last->purchase_id+1 : 1;
 
         foreach($request->productId as $key => $value){
-            $units = unit::find($request->unit[$key])->first();
-
-
+            $product = product::find($value);
             $variant = VariantOption::where('name', $request->variant_name[$key])->first();
+            $units = unit::find($request->unit[$key]);
+
+            $actual_quantity = 1;
+            if($product->unit != $units->id){
+                $actual_quantity = $units->sub_items;
+            }
+
+            if($variant){
+                $variant->quantity +=   ($actual_quantity * $request->quantity[$key]);
+                $variant->save();
+            }elseif(!$variant){
+                $product->quantity += ($actual_quantity * $request->quantity[$key]);
+                $product->save();
+            }
+
+
 
             $purchase = new purchase;
             $purchase->purchase_id = $purchase_last;
@@ -184,6 +212,8 @@ class PurchaseController extends Controller
         ]);
     }
 
+
+
     public function delete(purchase $purchase){
         return view('layout.admin.modal_content_delete');
     }
@@ -245,7 +275,7 @@ class PurchaseController extends Controller
                                 ->first();
 
 
-             $current_url = url()->current();
+             $current_url = url()->full();
             $qrCode = new QrCode($current_url);
 
 

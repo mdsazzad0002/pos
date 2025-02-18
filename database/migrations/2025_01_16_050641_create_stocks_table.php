@@ -16,8 +16,8 @@ return new class extends Migration
             $table->bigInteger('order_id');
             $table->bigInteger('product_id');
             $table->bigInteger('variant_id')->default(0);
-            $table->bigInteger('quantity');
-            $table->integer('status')->default(0);
+            $table->bigInteger('quantity')->default(0);
+            $table->integer('status')->default(0)->comment('1 for positive 0 for negative'); 
             $table->timestamps();
         });
     }

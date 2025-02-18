@@ -14,47 +14,83 @@
     <div class="card-body">
         <table id="users" class="table table-bordered table-striped table-hover">
             <thead>
-                <th>
-                    SI
-                </th>
+             
                 <th>
                     Name
                 </th>
                 <th>
                     Image
-                </th>
+                </th>  <th>Stock Info</th>
                 <th>
                     Sotck Alert
                 </th>
 
             </thead>
+            <tbody>
+                @foreach($stock_data as $key => $items)
+                <tr>
+                    <td>
+                        {{$items->name ?? ''}} <br/>
+                        <a class="btn btn-warning" href="{{route('admin.product.edit', $items->id)}}">Edit Product</a>
+                        <a class="btn btn-warning" href="{{route('admin.supplier.create')}}">Buy Product</a>
+                        <a class="btn btn-warning" href="#">History Unser working</a>
+
+                    </td>
+                    <td> <img src="{{$items->image_url}}" alt="" style="max-width:80px"></td>
+                  
+                    <td>
+                    @if($items->variant_on == 0)
+                       Stock : {{$items->quantity}} <br/>
+                       Stock Alert : {{$items->alert_quantity}}
+                    @else
+                        In Variant
+                        
+                    @endif
+                    </td>
+                    <td>
+                        @if($items->variant_on == 1)
+                            @foreach($items->variant_option_info as $item_key => $variant)
+                                <div class="variant_stack">
+                                    {{Str::title(Str::replace(':', ' - ',$variant->name))}}
+                                    @if($variant->quantity > $variant->alert_quantity)
+                                     <span class="badge badge-success">In Stock </span>
+                                    @else
+                                     <span class="badge badge-danger"> Out of Stock </span>
+                                    @endif
+                                    <br/>
+                                    Stock : {{$variant->quantity}} <br/>
+                                    Stock Alert : {{$variant->alert_quantity}}
+                                </div>
+                            @endforeach
+                        @elseif($items->quantity > $items->alert_quantity)
+                            <span class="badge badge-success">In Stock </span>
+                        @else
+                        <span class="badge badge-danger"> Out of Stock </span>
+                        @endif
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
+
+
     </div>
+    {{$stock_data->links()}}
 </div>
 
+<style>
+    .variant_stack {
+    padding:8px
+}
 
+.variant_stack:nth-child(odd) {
+    background: #ffffff;
+}
+
+td:has(.variant_stack){
+    padding:0px
+}
+</style>
 
 @endsection
 
-@push('js')
-<script>
-    var datatableM =  $('#users').DataTable({
-        serverSide:true,
-        processing:true,
-        ajax:'',
-        columns:[
-            { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
-                return meta.row + meta.settings._iDisplayStart + 1;
-            }},
-            {data:'name', name:'name'},
-            {data:null, name:null, searchable:false, orderable:false, render:function(data){
-                return '<img style="max-width:100px;" src="'+data.image_url+'"/>';
-            }},
-            {data:null, name:null, searchable:false, orderable:false, render:function(data){
-                return data.quantity > 0 ? 'InStok' : 'Out of Stok';
-            }}
-
-        ]
-    })
-</script>
-@endpush

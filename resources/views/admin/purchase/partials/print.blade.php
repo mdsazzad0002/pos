@@ -139,7 +139,7 @@
                 <div class="breadcrumb" style="line-height:0.5">
                     <img src="{{ settings('app_image', 9) }}" alt="" style="height: 80px;">
                 </div>
-                <div class="breadcrumb" style="line-height:0.5">
+                <div class="breadcrumb d-flex flex-column" style="line-height:0.5">
                     <h2>{{settings('app_title', 9)}}</h2>
                     <p>{{settings('address', 9)}}</p>
                     <p>{{settings('app_tel', 9)}}</p>
@@ -219,9 +219,22 @@
                     @endphp
                     <tr>
                         <td>{{ $key+1 }}</td>
-                        <td>{{ $item->product->name }}</td>
+                        <td>{{ Str::title($item->product?->name) }}
+                            
+                            @if($item->varinat_id != 0)
+                                </br>
+                                {{Str::title(Str::replace(':', ' ', $item->variant?->name ?? ''))}}
+                            @endif
+
+                        </td>
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->unit->name }}</td>
+                        <td>{{ $item->unit->name }}
+
+                        @if($item?->product?->unit != $item?->unit?->id)
+                            {{ $item?->unit?->subitems?->name ?? '' }}
+                        @endif
+
+                        </td>
                         <td> &nbsp;{{settings('currency_symbol',9)}} &nbsp; {{ $item->price }}</td>
                         <td> &nbsp;{{settings('currency_symbol',9)}} &nbsp; {{ $item->total }}</td>
                     </tr>

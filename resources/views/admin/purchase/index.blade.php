@@ -36,13 +36,11 @@
             { data: null, name: null,  title:'SL', orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:'image',  name:'image',title:'Image', searchable:false, orderable:false},
-            {data:'name',  name:'name',title:'Name',},
-            {data:'quantity', name:'quantity', title:'Quantity', render(data, type, row, meta) {
-                return row.quantity+' '+row.unit_name;
-            }},
-            {data:'total', title:'Total', name:'total'},
-            {data:'total_price',  name:'total_price', title:'Total Price', searchable:false, orderable:false},
+            {data:'image',  name:'image',title:'Supplier Image', searchable:false, orderable:false},
+            {data:'supplier',  name:'suppliers.name',title:'Supplier Name',},
+            
+            {data:'price', title:'Total', name:'purchases.total'},
+           
             {data:'buying_date',  name:'buying_date', title:'Buying Date', render(data, type, row, meta) {
                 const date = new Date(row.buying_date);  // Convert the data into a Date object
                 return date.toLocaleDateString('en-GB', {

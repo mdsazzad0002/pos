@@ -40,6 +40,8 @@ return new class extends Migration
             $table->string('selling_price')->default(0);
 
             $table->string('alert_quantity')->default(0);
+            $table->bigInteger('quantity')->default(0);
+
             $table->bigInteger('creator')->default(0);
             $table->timestamps();
         });

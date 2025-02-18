@@ -35,9 +35,7 @@
 
 @push('js')
 <script>
-    {{--  $.fn.dataTable.ext.errMode = 'none';  --}}
-    {{--  $.fn.dataTableExt.sErrMode = 'throw';  --}}
-    {{--  $.fn.dataTable.ext.errMode = 'throw';  --}}
+
     var datatableM =  $('#users').DataTable({
         serverSide:true,
         processing:true,
@@ -54,6 +52,13 @@
             {data:'status_text', name:'status', title:'Status'},
             {data:'variant_on', name:'variant_on', title:'Variant Status', render: function (data, type, row, meta) {
                 return data == 1 ? 'Variant' : '';
+            }},
+            {data: 'quantity', name:'quantity', title: 'Stock Quantity', render :function(data, type,row,meta){
+                if(row.variant_on == 1){
+                    return 'Variant Product'
+                }else{
+                    return data;
+                }
             }},
             {data:'old_price', name:'old_price', title:'Old Price'},
             {data:'selling_price', name:'selling_price', title:'Selling Price'},

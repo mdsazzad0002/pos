@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('feature')->default(0);
 
             $table->string('alert_quantity')->default(0);
+            $table->bigInteger('quantity')->default(0);
 
             $table->string('discount_id')->nullable();
             $table->string('creator')->default(0);

@@ -13,12 +13,8 @@ class StockManagementController extends Controller
      */
     public function index()
     {
-           if (request()->ajax()) {
-            return DataTables::make(product::query())
-                ->make(true);
-
-        }
-        return view('admin.stock.index');
+        $stock_data = Product::select('id','name','variant_on', 'alert_quantity', 'quantity')->paginate(30);
+        return view('admin.stock.index', ['stock_data' => $stock_data]);
     }
     public function stockalert()
     {
