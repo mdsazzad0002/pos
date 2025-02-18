@@ -131,7 +131,7 @@ function dynamic_asset($id)
                  $file1 = preg_replace('/([^:])\/{2,}/', '$1/',  $file1);
                  return $file1;
             } else {
-                $file = $destinationPath . 'fixing.png';
+                $file = $destinationPath . 'preset/fixing.png';
                 $file = asset($file);
                 $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
                 return   $file;
@@ -140,13 +140,13 @@ function dynamic_asset($id)
 
 
         } else {
-            $file = $destinationPath . 'fixing.png';
+            $file = $destinationPath . 'preset/fixing.png';
             $file = asset($file);
             $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
             return $file;
         }
     } else {
-        $file = $destinationPath . 'fixing.png';
+        $file = $destinationPath . 'preset/fixing.png';
         $file = asset($file);
         $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
         return $file;

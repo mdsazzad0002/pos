@@ -31,8 +31,11 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        @include('layout.admin.notification.message')
-        @include('layout.admin.notification.system')
+
+        @if(config('app.env') == 'local')
+            @include('layout.admin.notification.message')
+            @include('layout.admin.notification.system')            
+        @endif
 
 
 
