@@ -94,7 +94,7 @@ use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderCo
 
 
 use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
-
+use App\Http\Controllers\FooterStyleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -334,19 +334,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::resource('testimonial', TestimonialController::class)->names('testimonial');
         Route::get('/testimonial/delete/{testimonial}', [TestimonialController::class, 'delete'])->name('testimonial.delete');
         Route::get('/brand/getTesimonials/get', [TestimonialController::class, 'getTestimonial'])->name('testimonial.select');
-
-
-        // footerlinkheading
-        Route::resource('footerlinkheading', FooterLinkHeadingController::class)->names('footerlinkheading');
-        Route::get('/footerlinkheading/delete/{footerlinkheading}', [FooterLinkHeadingController::class, 'delete'])->name('footerlinkheading.delete');
-        Route::get('/brand/getFooterlinkheading/get', [FooterLinkHeadingController::class, 'getFooterlinkheading'])->name('footerlinkheading.select');
-
-
-
-        // footerlinksubheading
-        Route::resource('footerlinksubheading', FooterLinkSubHeadingController::class)->names('footerlinksubheading');
-        Route::get('/footerlinksubheading/delete/{footerlinksubheading}', [FooterLinkSubHeadingController::class, 'delete'])->name('footerlinksubheading.delete');
-        Route::get('/brand/getfooterlinksubheading/get', [FooterLinkSubHeadingController::class, 'getfooterlinksubheading'])->name('footerlinksubheading.select');
 
 
         // faq
@@ -717,8 +704,16 @@ Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
 });
 
 
+
+// ============================== Admin Management ===================================== Admin Management =================
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    
+// ============================= Management AND Function ======================= Management AND Function =========================
+// ============================= Management AND Function ======================= Management AND Function =========================
+// ============================= Management AND Function ======================= Management AND Function =========================
+
     // Admin
+    // product Management
     Route::resource('/product', ProductController::class)->names('product'); // Use an empty string here
 
     Route::group(['as' => 'product.', 'prefix' => 'product'], function() {
@@ -736,78 +731,128 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/filter_purchase/get', [ProductController::class, 'filterPurchase'])->name('filter_purchase');
 
     });
-});
-// End product Management
+    // End product Management
 
-
-
-// Area Management
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    
     // Admin
+    // Area Management
     Route::resource('/area', AreaController::class)->names('area');
-
     Route::group(['as' => 'area.', 'prefix' => 'supplier'], function() {
         Route::get('/delete/{area}', [AreaController::class, 'delete'])->name('delete');
         Route::get('/getArea/get', [AreaController::class, 'getAreas'])->name('select');
     });
-});
-// End Area Management
+    // End Area Management
 
 
-
-// Purchase Management
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    
     // Admin
+    // Purchase Management
     Route::resource('/purchase', PurchaseController::class)->names('purchase');
-
     Route::group(['as' => 'purchase.', 'prefix' => 'purchase'], function() {
         Route::get('/delete/{purchase}', [PurchaseController::class, 'delete'])->name('delete');
         Route::get('/getPurchase/get', [PurchaseController::class, 'getPurchase'])->name('select');
         Route::get('/single/purchase_report', [PurchaseController::class, 'report_single'])->name('report_single');
     });
-});
-// End Purchase Management
 
 
-
-
-
-
-// Supplier Management
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
     // Admin
+    // Supplier Management
     Route::resource('/supplier', SupplierController::class)->names('supplier');
-
     Route::group(['as' => 'supplier.', 'prefix' => 'supplier'], function() {
         Route::get('/delete/{supplier}', [SupplierController::class, 'delete'])->name('delete');
         Route::get('/getSupplier/get', [SupplierController::class, 'getSupplier'])->name('select');
     });
-});
-// End Supplier Management
+    // End Supplier Management
 
 
-
-
-// Customer Management
-// Admin
-Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
+    // Admin
+    // Customer Management
     Route::resource('/customer', CustomerController::class)->names('customer');
-
     Route::group(['as' => 'customer.', 'prefix' => 'customer'], function() {
         Route::get('/delete/{customer}', [CustomerController::class, 'delete'])->name('delete');
         Route::get('/getCustomer/get', [CustomerController::class, 'getCustomer'])->name('select');
     });
+    // End Customer Management
+
+
+// ========================= End Management AND Function =========================== End Management AND Function =================
+// ========================= End Management AND Function =========================== End Management AND Function =================
+// ========================= End Management AND Function =========================== End Management AND Function =================
+
+
+// =======================x=x=x=x=x=x=x=x=x=x============ Cross Line ======================x=x=x=x=x======================x=x=x=============
+
+
+// ================================================= CMS =================================== CMS ==================================
+// ================================================= CMS =================================== CMS ==================================
+// ================================================= CMS =================================== CMS ==================================
+
+    // Admin
+    // footerlinkheading
+    Route::resource('footerlinkheading', FooterLinkHeadingController::class)->names('footerlinkheading');
+    Route::group(['as' => 'footerlinkheading.', 'prefix' => 'footerlinkheading'], function() {
+        Route::get('/delete/{footerlinkheading}', [FooterLinkHeadingController::class, 'delete'])->name('delete');
+        Route::get('/getFooterlinkheading/get', [FooterLinkHeadingController::class, 'getFooterlinkheading'])->name('select');  
+    });
+    // end footerlinkheading
+
+
+    // Admin
+    // footerlinksubheading
+    Route::resource('footerlinksubheading', FooterLinkSubHeadingController::class)->names('footerlinksubheading');
+    Route::group(['as' => 'footerlinksubheading.', 'prefix' => 'footerlinksubheading'], function() {
+        Route::get('/delete/{footerlinksubheading}', [FooterLinkSubHeadingController::class, 'delete'])->name('delete');
+        Route::get('/getfooterlinksubheading/get', [FooterLinkSubHeadingController::class, 'getfooterlinksubheading'])->name('select');
+    });
+    // end Footer Sub Heading
+
+    
+    // Admin
+    // footer Style Management
+    Route::get('footer-style', [FooterStyleController::class, 'index'])->name('footer-style.index');
+    // end footer Style Management
+
+    // ======================== END CMS ================== END CMS ================ END CMS ================================================================
+    // ======================== END CMS ================== END CMS ================ END CMS ================================================================
+    // ======================== END CMS ================== END CMS ================ END CMS ================================================================
+
 
 });
-// End Customer Management
+// End Purchase Management
+// ============================== End Admin Management ===================================== End Admin Management =================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get('/invoice', [HomeController::class, 'order_invoice'])->name('order_invoice');
 Route::put('/address/{address}', [AddressController::class, 'update'])->name('address.update');
 Route::delete('/address/{address}', [AddressController::class, 'destroy'])->name('address.delete');
 
-Route::get('customer/verify_mail_send', [App\Http\Controllers\CustomerController::class, 'verify_mail_send'])->name('customer.verify_mail_send');
 
+
+Route::get('customer/verify_mail_send', [App\Http\Controllers\CustomerController::class, 'verify_mail_send'])->name('customer.verify_mail_send');
 Route::get('customer/verify_mail_verify', [App\Http\Controllers\CustomerController::class, 'verify_mail_verify'])->name('customer.verify');
+
+
+
+
+// Duplicate route helped for seo
+Route::get('/product-details/{slug}', [HomeController::class,'product_view_by_slug'])->name('product_view_by_slug');
+
 
 // User Defined Route Web So Check Route not exists
 Route::get('previdw_page_and_fornt_page', [HomeController::class, 'index'])->name('previdw_page_and_fornt_page');

@@ -86,14 +86,10 @@
 
 
 <div class="d-flex  gap-16 mb-16">
-    <h6>Short Description:</h6>
+
     <div class="light-gray d-flex flex-column">{{ $product->short_description }}</div>
 </div>
-<div class="d-flex  gap-16 mb-16">
-    <h6>Description:</h6>
 
-    <div class="light-gray d-flex flex-column">{!! $product->description !!}</div>
-</div>
 <div class="hr-line mb-24"></div>
 
 

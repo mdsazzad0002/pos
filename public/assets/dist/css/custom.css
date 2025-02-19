@@ -122,7 +122,9 @@ fieldset legend{
 
 
 
-
+table table{
+  width:100% !important;
+}
 
 
 

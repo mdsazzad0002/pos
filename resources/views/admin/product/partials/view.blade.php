@@ -4,6 +4,23 @@
         <td>{{ $product->name }}</td>
     </tr>
     <tr>
+        <td>Links</td>
+        @php
+            $details_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
+        @endphp
+        <td>
+            <div>
+                General Links: <br/>
+                {{ url($details_page->slug.'?slug='.$product->slug ?? '')  }} 
+                <button class="btn btn-warning" onclick="copyToClipboard('{{ url($details_page->slug.'?slug='.$product->slug ?? '') }}')">Copy</button> 
+            </div>
+            <div>
+                Seo Links: <br/>
+                {{ url('/product-details/'.$product->slug ?? '') }} <button class="btn btn-warning" onclick="copyToClipboard('{{ url('/product-details/'.$product->slug ?? '') }}')">Copy</button>
+            </div>
+        </td>
+    </tr>
+    <tr>
         <td>SkU</td>
         <td>{{ $product->sku }}</td>
     </tr>

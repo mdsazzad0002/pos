@@ -56,11 +56,11 @@ class HomeController extends Controller
 
 
         }else{
-            if(env('APP_DEBUG') == true){
-                abort('404', 'Not Set Home Page');
-            }else{
-                return redirect('/');
-            }
+            // if(env('APP_DEBUG') == true){
+            //     abort('404', 'Not Set Home Page');
+            // }else{
+            //     return redirect('/');
+            // }
         }
 
 
@@ -937,6 +937,15 @@ class HomeController extends Controller
             }
         }
         return back();
+    }
+
+
+    public function product_view_by_slug(Request $request, $slug){
+        // return $request->all();
+        
+        $request['slug'] = $slug;
+        $details_page = Page::where('status', 1)->where('page_type', 'view')->first();
+        return   $this->index($request, $details_page?->slug);
     }
 
 }

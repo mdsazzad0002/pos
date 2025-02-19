@@ -28,21 +28,19 @@
 
           
       
-            @can('custom_order bulk read')
+        
                 @if($bluk_order)
                 <div class="d-sm-block d-none">
                     <a href="{{ url($bluk_order->slug) }}"><span class="fw-500 top-bar-links">{{ $bluk_order->name ?? '' }}</span></a>
                 </div>
                 @endif
-            @endcan
-
-            @can('custom_order custom read')
+    
                 @if($custom_order)
                 <div class="d-sm-block d-none">
                     <a href="{{ url($custom_order->slug) }}"><span class="fw-500 top-bar-links">{{ $custom_order->name ?? '' }}</span></a>
                 </div>
                 @endif
-            @endcan
+            
      
 
 
