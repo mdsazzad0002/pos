@@ -73,11 +73,49 @@
                         <p>Footer Link</p>
                     </a>
                     @endcan
+
+                    @can('footerlinksubheading read')
+                    <a href="{{ route('admin.footer-style.index') }}" class="nav-link ">
+                        <i class="fas fa-link nav-icon"></i>
+                        <p>Footer Style</p>
+                    </a>
+                    @endcan
                 </li>
             </ul>
         </li>
         @endcanany
+        
 
+        @canany(['footerlinkheading read', 'footerlinksubheading read'])
+        <li class="nav-item">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon fab fa-staylinked"></i>
+                <p>
+                   Header Management
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                    @can('headernav read')
+                        <li class="nav-item">
+                            <a href="{{ route('admin.header.index') }}" class="nav-link ">
+                                <i class="fas fa-book nav-icon"></i>
+                                <p>Header Manage</p>
+                            </a>
+                        </li>            
+                    @endcan
+                
+                    {{-- @can('footerlinksubheading read') --}}
+                    <li class="nav-item">
+                        <a href="{{ route('admin.header-style.index') }}" class="nav-link ">
+                            <i class="fas fa-link nav-icon"></i>
+                            <p>Header Style</p>
+                        </a>
+                    </li>
+                    {{-- @endcan --}}
+            </ul>
+        </li>
+        @endcanany
 
         <li class="nav-item">
             <a href="#" class="nav-link ">
@@ -110,14 +148,7 @@
             </ul>
         </li>
 
-        @can('headernav read')
-            <li class="nav-item">
-                <a href="{{ route('admin.header.index') }}" class="nav-link ">
-                    <i class="fas fa-book nav-icon"></i>
-                    <p>Header Manage</p>
-                </a>
-            </li>            
-        @endcan
+      
 
         @can('page read')
              <li class="nav-item">

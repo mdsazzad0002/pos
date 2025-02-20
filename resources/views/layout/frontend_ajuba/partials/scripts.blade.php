@@ -88,7 +88,16 @@
 
                     },
                     success:function(data){
-                        flasher.success('Successfully added cart');
+                        if(data.type == 'error'){
+                            flasher.error(data.title);
+                        } 
+                        if(data.type == 'info'){
+                            flasher.info(data.title);
+                        }
+                        if(data.type == 'success'){
+                            flasher.success(data.title);
+                        }
+
                         setTimeout(() => {
                             load_cart_and_wishlist();
                         },500)

@@ -12,11 +12,11 @@
             <div>
                 General Links: <br/>
                 {{ url($details_page->slug.'?slug='.$product->slug ?? '')  }} 
-                <button class="btn btn-warning" onclick="copyToClipboard('{{ url($details_page->slug.'?slug='.$product->slug ?? '') }}')">Copy</button> 
+                <button type="button" class="btn btn-warning btn-sm" onclick="window.copyToClipboard('{{ url($details_page->slug.'?slug='.$product->slug ?? '') }}')">Copy</button> 
             </div>
             <div>
                 Seo Links: <br/>
-                {{ url('/product-details/'.$product->slug ?? '') }} <button class="btn btn-warning" onclick="copyToClipboard('{{ url('/product-details/'.$product->slug ?? '') }}')">Copy</button>
+                {{ url('/product-details/'.$product->slug ?? '') }} <button type="button" class="btn btn-warning btn-sm" onclick="window.copyToClipboard('{{ url('/product-details/'.$product->slug ?? '') }}')">Copy</button>
             </div>
         </td>
     </tr>

@@ -1,4 +1,4 @@
-<div style="position:relative" class="product-grid-single col-sm-6 col-md-6 col-lg-3 product_style_2">
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_2">
     <div class="card product-card">
         <a class="no-style-link" href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">
             <div class="gallerythumbWrapper gallerythumbWrapperLoaded"

@@ -1,7 +1,26 @@
 <footer>
     <div class="container-fluid">
 
-        <div class="footer-wrapper pt-40 mb-32">
+       <div class="row py-3">
+            @php
+                $footer_heading = App\Models\FooterLinkHeading::where('status', 1)->get();
+            @endphp
+
+            @foreach ($footer_heading as $items)
+                <div class="col-lg-3 col-md-4 col-sm-6 footer-links">
+                    <h6 class="fw-600 mb-24">{{ $items->title }}</h6>
+                    <ul class="list-unstyled m-0">
+                        @foreach ($items->sub_heading as $links)
+                        <li class="mb-8"><a href="{{ $links->url }}" class="light-gray"><i class="{{ $links->icon }}"></i>{{ $links->title }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </div>
+
+
+
+        <div class="footer-wrapper pt-40 mb-32">  
             <div class="store-desc">
                 <a href="{{ url('/') }}"><img style="max-height: 80px;" src="{{ settings('app_footer_image', 9) }}" alt="" class="mb-16"></a>
                 <p class="light-gray mb-xl-32 mb-lg-0 mb-32">

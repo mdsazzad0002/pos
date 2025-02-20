@@ -12,7 +12,7 @@ class HeaderStyleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.protfilio_theme.headerstyle.index');
     }
 
     /**

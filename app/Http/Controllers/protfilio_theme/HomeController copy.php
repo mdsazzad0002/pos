@@ -336,13 +336,8 @@ class HomeController extends Controller
 
     // verifying exist in cart
         public function verify_add_to_cart(Request $request){
-            $product_cart = [];
-            $found = false;
-            $product_key = '';
-            $source_type = 'front_product';
-
             if ($request->has('product_id')) {
-              
+                $source_type = 'front_product';
                 if($request->has('source_type')){
                     $source_type = $request->source_type;
                 }
@@ -357,6 +352,8 @@ class HomeController extends Controller
 
                 $product_cart = session()->get( $source_type, []);
 
+                // Flag to check if the product was found
+                $found = false;
 
                 // Loop through the cart to check if the product exists
                 foreach ($product_cart as $key =>  &$item) {
@@ -367,14 +364,8 @@ class HomeController extends Controller
                 }
             }
             
-            $return_data = [
-                'found' => $found,
-                'key' => $product_key,
-                'cart' => $product_cart,
-                'source_type' => $source_type
-            ];
 
-            return $return_data;
+            return $found;
         }
 
     // end verifying exist in cart
@@ -383,69 +374,68 @@ class HomeController extends Controller
 
     public function add_to_cart(Request $request){
 
-        $attempt = $request->attempt ?? 1;
-        $primary_find_result = $this->verify_add_to_cart($request);
-        $product_cart = $primary_find_result['cart'];
-        $found = $primary_find_result['found'];
-        $product_key = $key = $primary_find_result['key'];
-        $source_type = $primary_find_result['source_type'];
-        $product_id = $request->product_id;
-        
-    
-
-        // return $product_id;
-        if($found == true){
-            if($request->has('type') && $request->type == 'remove_cart') {
-                unset($product_cart[$key]);
-                session()->put( $source_type, $product_cart);
-               
-                // Check if the product was successfully removed
-                if ($this->verify_add_to_cart($request)['found'] == false) {
-                    // Return success response if product was removed
-                    return response()->json([
-                        'title' => 'Successfully removed from Cart',
-                        'type'  => 'success',
-                        'cart'  => $product_cart, // Return the updated cart
-                    ]);
-                } else {
-                    if($attempt == 1){
-                        $attempt++;
-                        $request['attempt'] = $attempt;
-                        return $this->add_to_cart($request);
-                    }
-                    // This case should never happen because we already called unset.
-                    return response()->json([
-                        'title' => 'Failed to remove product from Cart',
-                        'type'  => 'error',
-                    ]);
-                }
-
-
-            }else{
-
-                // If the product exists, increase the quantity
-                if($request->has('quantity')) {
-                    $product_cart[ $product_key]['quantaty'] = $request->quantity;
-                }else{
-                    $product_cart[ $product_key]['quantaty'] += 1;
-
-                }
-                $found = true;
-
-                session()->put( $source_type, $product_cart);
-                return response()->json([
-                    'title' => 'Successfully updated to Cart',
-                    'type'  => 'info',
-                    'cart'  => $product_cart, // Return the updated cart
-                ]);
-                
-                
-
+        if ($request->has('product_id')) {
+            $source_type = 'front_product';
+            if($request->has('source_type')){
+                $source_type = $request->source_type;
             }
-        }else{
+
+            $product_id = $request->product_id;
+            $product_key = 'pd_' . $product_id;
+            if($request->has('size') && $request->size != 0  && $request->size != ''){
+                $product_key =  $product_key .'vr_'. $request->size;
+            }else{
+                $request['size'] = 0;
+            }
+
+             $product_cart = session()->get( $source_type, []);
+
+            // Flag to check if the product was found
+            $found = false;
+
+            // Loop through the cart to check if the product exists
+            foreach ($product_cart as $key =>  &$item) {
+                if (isset($item[$product_key])) {
+
+                    // return $item;
+                    if($request->has('type') && $request->type == 'remove_cart') {
+                        unset($product_cart[$key]);
+                        session()->put( $source_type, $product_cart);
+                        // Check if the product was successfully removed
+                        if (!isset($product_cart[$key])) {
+                            // Return success response if product was removed
+                            return response()->json([
+                                'title' => 'Successfully removed from Cart',
+                                'type'  => 'success',
+                                'cart'  => $product_cart, // Return the updated cart
+                            ]);
+                        } else {
+                            // This case should never happen because we already called unset.
+                            return response()->json([
+                                'title' => 'Failed to remove product from Cart',
+                                'type'  => 'error',
+                            ]);
+                        }
+
+
+                    }else{
+                        // If the product exists, increase the quantity
+                        if($request->has('quantity')) {
+                            $item[ $product_key]['quantaty'] = $request->quantity;
+                        }else{
+                            $item[ $product_key]['quantaty'] += 1;
+
+                        }
+                        $found = true;
+                        break;
+                    }
+                }
+            }
+
             if($request->has('type') && $request->type == 'remove_cart') {
+                
                 // run again function if not remove product
-                if($this->verify_add_to_cart($request)['found'] == false){
+                if($this->verify_add_to_cart($request)){
                     $product_cart = $this->add_to_cart($request);   
                 }
     
@@ -453,69 +443,70 @@ class HomeController extends Controller
                     'title' => 'Failed to find items',
                     'type'  => 'error',
                 ]);
-            }else{
-
-                // If the product doesn't exist, add it to the cart
-                if($request->has('size')){
-                    $size = $request->size;
-                }else{
-                    $size = 0;
-                }
-    
-                
-                if (!$found) {
-                    if($request->has('quantity')) {
-                        $product_cart[] = [
-                             $product_key => [
-                                'product_id' => $product_id,
-                                'quantaty' => $request->quantity,
-                                'size' => $size,
-    
-                            ]
-                        ];
-                    }else{
-                        $product_cart[] = [
-                             $product_key => [
-                                'product_id' => $product_id,
-                                'quantaty' => 1,
-                                'size' => $size,
-    
-                            ]
-                        ];
-    
-                    }
-                }
-
-                session()->put( $source_type, $product_cart);
-
-                if($this->verify_add_to_cart($request)['found'] == false){
-                    if($attempt == 1){
-                        $attempt++;
-                        $request['attempt'] = $attempt;
-                        return $this->add_to_cart($request);
-                    }
-                    return response()->json([
-                        'title'=>'Failed  added Cart',
-                        'type'=>'error',
-                    ]);
-                }
-                // return end add to cart;
-
-                return response()->json([
-                    'title'=>'Successfully  added Cart',
-                    'type'=>'success',
-                    'product' =>  $product_cart
-                ]);
-                
             }
 
+
+
+
+            // If the product was not found, add a new product entry
+            if($request->has('size')){
+                $size = $request->size;
+            }else{
+                $size = 0;
+            }
+
+
+
+
+            if (!$found) {
+                if($request->has('quantity')) {
+                    $product_cart[] = [
+                         $product_key => [
+                            'product_id' => $product_id,
+                            'quantaty' => $request->quantity,
+                            'size' => $size,
+
+                        ]
+                    ];
+                }else{
+                    $product_cart[] = [
+                         $product_key => [
+                            'product_id' => $product_id,
+                            'quantaty' => 1,
+                            'size' => $size,
+
+                        ]
+                    ];
+
+                }
+            }
+
+            // return $product_cart;
+
+            // Save the updated cart back to the session
+            session()->put( $source_type, $product_cart);
+
+
+            if(!$this->verify_add_to_cart($request)){
+                $product_cart = $this->add_to_cart($request);   
+            }
+
+
+
+            return json_encode([
+                'title'=>'Successfully  added Cart',
+                'type'=>'success',
+                'product' =>  $product_cart
+            ]);
+        }else{
+            return json_encode([
+                'title'=>'Failed  added Cart',
+                'type'=>'error',
+            ]);
         }
-              
+
 
     }
-
-
-    
 
 
     public function compare_list(){
@@ -604,7 +595,7 @@ class HomeController extends Controller
             if($request->has('source_type')){
                 $source_type = $request->source_type;
             }
-// session()->forget($source_type);
+
             $product_cart = session()->get( $source_type, []);
             $data_array = [
                 'subtotal'=> [

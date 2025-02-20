@@ -2,48 +2,47 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title --}}
-@section('title', settings('footerlinkheadings', 10))
+@section('title', 'Header Style Management')
 
 {{-- Content Extends --}}
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Footer Style
+        Header Style
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col-lg-6">
-                @livewire('footerstyle')
+                @livewire('headerstyle')
             </div>
             <div class="col-lg-6">
-
                 <div class="card">
                     <div class="card-header">
-                        Footer Style 2
+                        Universal
                     </div>
                     <div class="card-body">
                         @php
                         $data = [
                             [
-                                'name' => 'footer_payment_method_status',
-                                'key' => '88'
+                                'name' => 'category_wise_filter_status',
+                                'key' => '80'
                             ],
                             [
-                                'name' => 'footer_payment_method_image',
-                                'key' => '88'
+                                'name' => 'category_wise_filter_status1',
+                                'key' => '80'
                             ]
                         ];
 
                         @endphp
 
-                        <div class="row">
-                            @foreach (settings_data($data) as $setting)
-                            <div class="col-6">
-                                @include( 'admin.settings.partials.main-setting', ['slug' => 88])
+                            <div class="row">
+                                @foreach (settings_data($data) as $setting)
+                                    <div class="col-6">
+                                        @include( 'admin.settings.partials.main-setting', ['slug' => 80])
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
-
                     </div>
                 </div>
             </div>

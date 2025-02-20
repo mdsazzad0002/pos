@@ -331,3 +331,17 @@ function customOrder()
 {
     return WholeSaleOrder::where('order_type',1)->count();
 }
+
+
+function settings_data(array $data){
+    return setting::where(function ($query) use ($data) {
+        foreach ($data as $condition) {
+            $query->orWhere(function ($q) use ($condition) {
+                $q->where('name', $condition['name'])
+                  ->where('key', $condition['key']);
+            });
+        }
+    })->get();
+
+}
+

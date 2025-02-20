@@ -24,6 +24,10 @@ if(!isset($cart_page)){
 
 @endphp
 
+@section('title_p', $products->name)
+@section('description_p', $products->short_description)
+@section('canonical', route('product_view_by_slug', ['slug' => $products->slug]))
+
 <main class="main-wrapper bg-lightest-gray">
     @if(isset($products))
 
@@ -37,22 +41,22 @@ if(!isset($cart_page)){
                             <div class="product-slider-asnav asnav-2">
 
                                 <div class="nav-image">
-                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
+                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="{{ $products->name }}">
                                 </div>
                                 @foreach(dynamic_assets($products->uploads_id) as $key => $item)
                                     <div class="nav-image">
-                                        <img  src="{{ $item }}" alt="">
+                                        <img  src="{{ $item }}" alt="{{ $products->name }}">
                                     </div>
                                 @endforeach
 
                             </div>
                             <div class="product-slider slider-2">
                                 <div class="detail-image">
-                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="">
+                                    <img src="{{ dynamic_asset($products->upload_id) }}" alt="{{ $products->name }}">
                                 </div>
                                 @foreach(dynamic_assets($products->uploads_id) as $key => $item)
                                 <div class="detail-image">
-                                    <img class="w-100 " src="{{ $item }}" alt="">
+                                    <img class="w-100 " src="{{ $item }}" alt="{{ $products->name }}">
                                 </div>
                                 @endforeach
 
@@ -152,11 +156,11 @@ if(!isset($cart_page)){
                 <div class="description-wrapper bg-white br-20">
                     <nav class="mb-32">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link " id="nav-desc-tab" data-bs-toggle="tab"
+                            <button class="nav-link active" id="nav-desc-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-desc" type="button" role="tab" aria-controls="nav-desc"
                                 aria-selected="true">Description</button>
 
-                            <button class="nav-link active" id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
+                            <button class="nav-link " id="nav-info-tab" data-bs-toggle="tab" data-bs-target="#nav-info"
                                 type="button" role="tab" aria-controls="nav-info" aria-selected="true">Additional
                                 Information</button>
 
@@ -166,12 +170,12 @@ if(!isset($cart_page)){
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade " id="nav-desc" role="tabpanel"
+                        <div class="tab-pane fade  active show " id="nav-desc" role="tabpanel"
                             aria-labelledby="nav-desc-tab">
 
                             {!! $products->description ?? '' !!}
                         </div>
-                        <div class="tab-pane fade active show" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
+                        <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-info-tab">
                            {!! $products->additional_description ?? '' !!}
 
                         </div>
@@ -183,7 +187,7 @@ if(!isset($cart_page)){
 
                                 @foreach ($products->reviews_info as $review)
                                     <div class="comment-box mb-24">
-                                        <img src="{{ $review->review_image }}" alt="" class="br-5">
+                                        <img src="{{ $review->review_image }}" alt="{{ $products->name }}" class="br-5">
                                         <div class="block">
                                             <div class="top-row mb-16">
                                                 <div class="info">

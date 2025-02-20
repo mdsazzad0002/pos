@@ -95,6 +95,7 @@ use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderCo
 
 use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 use App\Http\Controllers\FooterStyleController;
+use App\Http\Controllers\HeaderStyleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -342,15 +343,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/brand/getfaq/get', [FaqController::class, 'getFaq'])->name('faq.select');
 
 
-        Route::get('/header', [HeaderController::class, 'index'])->name('header.index');
-        Route::get('/header/view', [HeaderController::class, 'view'])->name('header.view');
-        Route::post('/header/store', [HeaderController::class, 'store'])->name('header.store');
 
-        Route::put('/header/{header_item}/update', [HeaderController::class, 'update'])->name('header.update');
-
-        Route::post('/header/delete', [HeaderController::class, 'destroy'])->name('header.delete');
-
-        Route::get('/header/{header_item}/edit', [HeaderController::class, 'edit'])->name('header.edit');
 
 
         Route::get('device_access_check/list', [LoginCheckController::class, 'logedList'])->name('device_access_check.list');
@@ -811,6 +804,21 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // footer Style Management
     Route::get('footer-style', [FooterStyleController::class, 'index'])->name('footer-style.index');
     // end footer Style Management
+
+
+    // Admin
+    // Header Management
+    Route::get('/header', [HeaderController::class, 'index'])->name('header.index');
+    Route::get('/header/view', [HeaderController::class, 'view'])->name('header.view');
+    Route::post('/header/store', [HeaderController::class, 'store'])->name('header.store');
+    Route::put('/header/{header_item}/update', [HeaderController::class, 'update'])->name('header.update');
+    Route::post('/header/delete', [HeaderController::class, 'destroy'])->name('header.delete');
+    Route::get('/header/{header_item}/edit', [HeaderController::class, 'edit'])->name('header.edit');
+
+    // Admin
+    // Header Style Manage
+    Route::get('header-style', [HeaderStyleController::class, 'index'])->name('header-style.index');
+    // end Header Style Management
 
     // ======================== END CMS ================== END CMS ================ END CMS ================================================================
     // ======================== END CMS ================== END CMS ================ END CMS ================================================================

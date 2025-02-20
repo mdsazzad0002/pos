@@ -6,7 +6,7 @@
 {{--  Content Extends  --}}
 @section('content')
 
-    <script src="{{ asset('vendor/livewire/livewire.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/livewire/livewire.js') }}"></script> --}}
 
 
     <div class="row">

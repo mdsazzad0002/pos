@@ -5,9 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Accessory-Store">
+    <meta name="description" content="@yield('description_p')">
 
-    <title>@yield('title', '') | {{ settings('app_title', 9)  }}</title>
+    <meta name="author" content="{{ settings('app_title', 9) }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="@if(!empty($__env->yieldContent('canonical'))){{ $__env->yieldContent('canonical') }}@else{{ url()->current() }}@endif">
+
+    <title>
+        @if(!empty($__env->yieldContent('title_p')))
+            @yield('title_p')
+        @else
+            @yield('title')
+        @endif
+        | {{ settings('app_title', 9)  }}</title>
     <style>
         :root {
             --primary-color: {{ settings('theme_color', 9) }};
@@ -63,8 +74,9 @@
 
             <!-- Benefits Start -->
 
-            @if($header_style)
+            @if($footer_style)
                 @include('layout.frontend_ajuba.'.$footer_style->key, ['footer_style' => $footer_style])
+                
             @endif
 
             <!-- Benefits End -->

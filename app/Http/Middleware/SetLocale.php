@@ -21,19 +21,19 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Schema::hasTable('translations')){
-            $locale = session('locale', 1);
-            App::setLocale($locale);
+        // if(Schema::hasTable('translations')){
+        //     $locale = session('locale', 1);
+        //     App::setLocale($locale);
 
-            $translations = Translation::where('language', $locale)->get();
-            $lines = [];
-            foreach ($translations as $translation) {
-                $lines[$translation->key] = $translation->value;
-            }
-            Lang::addLines($lines, $locale);
+        //     $translations = Translation::where('language', $locale)->get();
+        //     $lines = [];
+        //     foreach ($translations as $translation) {
+        //         $lines[$translation->key] = $translation->value;
+        //     }
+        //     Lang::addLines($lines, $locale);
 
 
-        }
+        // }
 
         return $next($request);
     }
