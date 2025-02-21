@@ -35,6 +35,7 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
+        //return 4545;
 
           // Temporary directory for chunks
           $tempPath = public_path('uploads/temp');

@@ -33,7 +33,7 @@
 
 @push('js')
 
-@include('layout.admin.file_manager_modal1')
+{{-- @include('layout.admin.file_manager_modal1') --}}
 
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 

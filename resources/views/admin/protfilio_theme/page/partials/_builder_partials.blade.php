@@ -178,7 +178,7 @@
                 @if($item->HasExists('background_manage_status'))
                 <div class="row  py-1" style="background: #c3c6f1">
                     <div class="col-md-6 col-lg-4 col-xl-3">
-                        <div class="form-group" onclick="upload_select(this)">
+                        <div class="form-group" onclick="window.parent.upload_select(this)">
                             <label for="background d-block">Background (  On)</label> <br>
                             <input hidden type="text" class="form-control" id="background" name="background" value="{{ $item->background }}">
                             <img style="max-height: 60px" src="{{  dynamic_asset($item->background) }}" alt="">
@@ -209,14 +209,14 @@
                 @if($item->HasExists('upload_manage_status'))
                 <div class="row  py-1" style="background: #f1c3ed">
                     <div class="col-md-6 ">
-                        <div class="form-group" onclick="upload_select(this)">
+                        <div class="form-group" onclick="window.parent.upload_select(this)">
                             <label for="background d-block" id="upload_id1">Left Side Image</label> <br>
                             <input hidden type="text" class="form-control" id="upload_id1" name="upload_id1" value="{{ $item->upload_id1 }}">
                             <img style="max-height: 60px" src="{{  dynamic_asset($item->upload_id1) }}" alt="">
                         </div>
                     </div>
                     <div class="col-md-6 ">
-                        <div class="form-group" onclick="upload_select(this)">
+                        <div class="form-group" onclick="window.parent.upload_select(this)">
                             <label for="background d-block" id="upload_id2">Right Side Image</label> <br>
                             <input hidden type="text" class="form-control" id="upload_id2" name="upload_id2" value="{{ $item->upload_id2 }}">
                             <img style="max-height: 60px" src="{{  dynamic_asset($item->upload_id2) }}" alt="">
@@ -246,7 +246,7 @@
                 @if($item->HasExists('upload_manage_id3_status'))
                 <div class="row  py-1" style="background: #ecc3f1">
                     <div class="col-md-6 ">
-                        <div class="form-group" onclick="upload_select(this)">
+                        <div class="form-group" onclick="window.parent.upload_select(this)">
                             <label for="background d-block" id="upload_id3">Right Side Image</label> <br>
                             <input hidden type="text" class="form-control" id="upload_id3" name="upload_id3" value="{{ $item->upload_id3 }}">
                             <img style="max-height: 60px" src="{{  dynamic_asset($item->upload_id3) }}" alt="">

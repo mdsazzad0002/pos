@@ -178,7 +178,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::post('/uploads', [UploadController::class, 'store']);
+Route::post('/uploads/post', [UploadController::class, 'store']);
 Route::get('/uploads/get', [UploadController::class, 'index']);
 
 Route::get('notification', [dashboardController::class, 'noti']);
