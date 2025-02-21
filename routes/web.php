@@ -502,11 +502,25 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/mail', [MailSettingController::class, 'index'])->name('mail.index');
         Route::post('/mail', [MailSettingController::class, 'store'])->name('mail.store');
         Route::post('/mail/test', [MailSettingController::class, 'testMail'])->name('mail.test');
-
+        
         Route::put('/mail/template/{mailTemplate}', [MailTemplateController::class, 'update'])->name('mail.update');
+        
+        // Route::get('/imap',
+        // function () {
+        //     /** @var \Webklex\PHPIMAP\Client $client */
+        //         $client = Webklex\IMAP\Facades\Client::account('mailtrap');
 
+        //         //Connect to the IMAP Server
+        //         $client->connect();
+        // }
+        // )->name('imap.index');
 
+        
+        Route::get('/imap', [MailSettingController::class, 'imap_index'])->name('imap.index');
 
+        
+        
+     
 
 
 
@@ -700,7 +714,7 @@ Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
 
 // ============================== Admin Management ===================================== Admin Management =================
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
-    
+
 // ============================= Management AND Function ======================= Management AND Function =========================
 // ============================= Management AND Function ======================= Management AND Function =========================
 // ============================= Management AND Function ======================= Management AND Function =========================
@@ -726,7 +740,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     });
     // End product Management
 
-    
+
     // Admin
     // Area Management
     Route::resource('/area', AreaController::class)->names('area');
@@ -737,7 +751,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // End Area Management
 
 
-    
+
     // Admin
     // Purchase Management
     Route::resource('/purchase', PurchaseController::class)->names('purchase');
@@ -785,7 +799,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('footerlinkheading', FooterLinkHeadingController::class)->names('footerlinkheading');
     Route::group(['as' => 'footerlinkheading.', 'prefix' => 'footerlinkheading'], function() {
         Route::get('/delete/{footerlinkheading}', [FooterLinkHeadingController::class, 'delete'])->name('delete');
-        Route::get('/getFooterlinkheading/get', [FooterLinkHeadingController::class, 'getFooterlinkheading'])->name('select');  
+        Route::get('/getFooterlinkheading/get', [FooterLinkHeadingController::class, 'getFooterlinkheading'])->name('select');
     });
     // end footerlinkheading
 
@@ -799,7 +813,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     });
     // end Footer Sub Heading
 
-    
+
     // Admin
     // footer Style Management
     Route::get('footer-style', [FooterStyleController::class, 'index'])->name('footer-style.index');

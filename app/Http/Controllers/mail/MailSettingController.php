@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Models\mail\MailTemplate;
 use Illuminate\Support\Facades\Mail;
 
+
 class MailSettingController extends Controller
 {
     /**
@@ -119,6 +120,42 @@ class MailSettingController extends Controller
 
     }
 
+
+
+    public function imap_index(){
+        
+      
+        // dd($client);
+        // $client->connect();
+
+            //Get all Mailboxes
+            /** @var \Webklex\PHPIMAP\Support\FolderCollection $folders */
+            // $folders = $client->getFolders();
+
+            //Loop through every Mailbox
+            /** @var \Webklex\PHPIMAP\Folder $folder */
+            // foreach($folders as $folder){
+
+            //     //Get all Messages of the current Mailbox $folder
+            //     /** @var \Webklex\PHPIMAP\Support\MessageCollection $messages */
+            //     $messages = $folder->messages()->all()->get();
+
+            //     /** @var \Webklex\PHPIMAP\Message $message */
+            //     foreach($messages as $message){
+            //         echo $message->getSubject().'<br />';
+            //         echo 'Attachments: '.$message->getAttachments()->count().'<br />';
+            //         echo $message->getHTMLBody();
+
+            //         //Move the current Message to 'INBOX.read'
+            //         // if($message->move('INBOX.read') == true){
+            //         //     echo 'Message has been moved';
+            //         // }else{
+            //         //     echo 'Message could not be moved';
+            //         // }
+            //     }
+            // }
+        return view('admin.MailConfiguration.imap');
+    }
 
 
 }
