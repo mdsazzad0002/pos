@@ -1,6 +1,6 @@
 
 @php
-   
+
 @endphp
 <div class="card card-primary card-outline">
     <div class="card-header">
@@ -32,57 +32,37 @@
           </button>
         </div>
         <!-- /.btn-group -->
-        <button type="button" class="btn btn-default btn-sm" title="Print">
+        <button type="button" class="btn btn-default btn-sm" onclick="printElement('.mailbox-read-message')" title="Print">
           <i class="fas fa-print"></i>
         </button>
       </div>
       <!-- /.mailbox-controls -->
       <div class="mailbox-read-message">
-        {!! ( $message->getHtmlBody()) !!}
-      </div>  </div>
+        {!! ( $message_body['body']) !!}
+      </div>
+     </div>
       <!-- /.card-body -->
       <div class="card-footer bg-white">
         <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-            @foreach($message->getAttachments() as $attachment)
+            @foreach($message_body['image'] as $key => $attachment)
             <li>
-                @php
-                //dd($attachment); 
-                    $fileExtension = pathinfo($attachment->name, PATHINFO_EXTENSION);
-                    $icon = '';
-                    switch(strtolower($fileExtension)) {
-                        case 'pdf':
-                            $icon = 'far fa-file-pdf';
-                            break;
-                        case 'docx':
-                        case 'doc':
-                            $icon = 'far fa-file-word';
-                            break;
-                        case 'jpg':
-                        case 'jpeg':
-                        case 'png':
-                        case 'gif':
-                            $icon = 'fas fa-camera';
-                            break;
-                        default:
-                            $icon = 'fas fa-paperclip';
-                    }
-                @endphp
-    
-                <span class="mailbox-attachment-icon @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif'])) has-img @endif">
-                    @if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif']))
-                        <img src="data:image/{{ $fileExtension }};base64,{{ base64_encode($attachment->content) }}" alt="Attachment">
+
+
+                <span class="mailbox-attachment-icon ">
+                    @if($attachment['icon'] == 'img')
+                        <img src="{{ $attachment['image'] }}" alt="Attachment">
                     @else
-                        <i class="{{ $icon }}"></i>
+                        <i class="{{ $attachment['icon'] }}"></i>
                     @endif
                 </span>
-    
+
                 <div class="mailbox-attachment-info">
-                    <a href="javascript:void(0);" wire:click.prevent="downloadAttachment({{ $attachment->getId() }})" class="mailbox-attachment-name">
-                        <i class="fas fa-paperclip"></i> {{ $attachment->name }}
+                    <a   href="javascript:void(0);" class="mailbox-attachment-name">
+                        <i class="fas fa-paperclip"></i> {{ $attachment['name'] }}
                     </a>
                     <span class="mailbox-attachment-size clearfix mt-1">
-                        <span>{{ number_format($attachment->getSize() / 1024, 2) }} KB</span>
-                        <a href="" class="btn btn-default btn-sm float-right">
+                        <span>{{ $attachment['size_megabite'] }} KB</span>
+                        <a  download="{{ $attachment['name'] }}" href="{{ $attachment['image'] }}"  class="btn btn-default btn-sm float-right">
                             <i class="fas fa-cloud-download-alt"></i>
                         </a>
                     </span>
@@ -98,8 +78,9 @@
           <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
         </div>
         <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
-        <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+        <button type="button" class="btn btn-default" onclick="printElement('.mailbox-read-message')"><i class="fas fa-print"></i> Print</button>
       </div>
       <!-- /.card-footer -->
     </div>
     <!-- /.card -->
+

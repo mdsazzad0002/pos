@@ -44,8 +44,17 @@ class AppServiceProvider extends ServiceProvider
                     'username' => $mail_information->smtp_username,
                     'password' => $mail_information->smtp_password,
 
+
                 ];
                 Config::set('mail.mailers.smtp',  $smtp);
+
+                $from = [
+                    'address' => $mail_information->from_address,
+                    'name' => $mail_information->from_name,
+                ];
+                Config::set('mail.from',  $from);
+                // dd(Config::get('mail'));
+
             }
         }
 

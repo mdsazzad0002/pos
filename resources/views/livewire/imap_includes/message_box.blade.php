@@ -1,11 +1,9 @@
 
-@if ($active_message)
-@include('livewire.imap_includes.message_read')
-@else
+
 <div class="card card-primary card-outline">
 
-                   
-            
+
+
     <div class="card-header">
         <h3 class="card-title">{{ $box }}</h3>
 
@@ -67,7 +65,7 @@
                 <tbody>
                     @foreach ($messages as $message)
 
-                   
+
                     <tr wire:key="{{ $message->getUid() }}">
                         <td>
                             <div class="icheck-primary">
@@ -96,7 +94,7 @@
                         </td>
                     </tr>
                     @endforeach
-                
+
                 </tbody>
             </table>
             <!-- /.table -->
@@ -141,4 +139,3 @@
         </div>
     </div>
 </div>
-@endif

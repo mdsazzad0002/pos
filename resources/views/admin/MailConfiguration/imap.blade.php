@@ -19,8 +19,28 @@
 }
 </style>
 
+<script>
+    function printElement(selector) {
+    let element = document.querySelector(selector);
+    if (!element) {
+        console.error("Element not found!");
+        return;
+    }
+
+    let newWindow = window.open('', '_blank');
+    newWindow.document.write(`<html><head><title>Print</title></head><body>`);
+    newWindow.document.write(element.innerHTML);
+    newWindow.document.write(`</body></html>`);
+    newWindow.document.close();
+    newWindow.print();
+    newWindow.close();
+}
+
+</script>
+
 
 @endsection
 
 @push('js')
+@livewireScripts
 @endpush

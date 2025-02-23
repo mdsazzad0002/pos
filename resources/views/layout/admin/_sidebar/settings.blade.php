@@ -29,7 +29,7 @@
             </li>
         @endcan
 
-        @can('settings site_verification')     
+        @can('settings site_verification')
             <li class="nav-item">
                 <a href="{{ route('admin.setting.index', ['site-verification-setting', '25']) }}" class="nav-link">
                     <i class="fas fa-certificate nav-icon"></i>
@@ -44,7 +44,7 @@
                 <i class="fas fa-tags nav-icon"></i>
                 <p>{{ __('settings.site-tag-management') }}</p>
             </a>
-        </li>     
+        </li>
         @endcan
 
         @can('settings tracking_report')
@@ -56,7 +56,7 @@
         </li>
         @endcan
 
-        @can('settings site_pwa')          
+        @can('settings site_pwa')
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}" class="nav-link">
                 <i class="bi bi-app-indicator nav-icon"></i>
@@ -98,7 +98,7 @@
                 <i class="fas fa-envelope-open-text nav-icon"></i>
                 <p>{{ __('settings.email_setting_sidebar') }}</p>
             </a>
-        </li>    
+        </li>
         @endcan
 
         @can('settings payment_configration')
@@ -107,7 +107,7 @@
                 <i class="fas fa-money-check nav-icon"></i>
                 <p> {{ __('settings.payment-configration-sidebar') }}</p>
             </a>
-        </li>            
+        </li>
         @endcan
 
         @can('settings courier_configration')
