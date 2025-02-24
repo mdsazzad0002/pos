@@ -43,23 +43,30 @@ class AppServiceProvider extends ServiceProvider
                     'encryption' => $mail_information->smtp_encryption,
                     'username' => $mail_information->smtp_username,
                     'password' => $mail_information->smtp_password,
-
-
                 ];
                 Config::set('mail.mailers.smtp',  $smtp);
+
 
                 $from = [
                     'address' => $mail_information->from_address,
                     'name' => $mail_information->from_name,
                 ];
                 Config::set('mail.from',  $from);
-                // dd(Config::get('mail'));
 
+
+
+                // for imap mail host
+                $mailtrap = [ // account identifier
+                    'host' => $mail_information->host,
+                    'port' => 993,
+                    'encryption' => $mail_information->smtp_encryption,
+                    'validate_cert' => true,
+                    'username' => $mail_information->smtp_username,
+                    'password' => $mail_information->smtp_password,
+                    'authentication' => true,
+                ];
+                Config::set('imap.accounts.mailtrap',   $mailtrap);
             }
         }
-
-        // dd(config('mail.mailers.smtp'));
-
-        // dd(User::first());
     }
 }

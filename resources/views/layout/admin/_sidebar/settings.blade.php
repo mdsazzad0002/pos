@@ -174,6 +174,15 @@
     </a>
 </li>
 @endcanany
+{{-- @canany(['maintenance mode', 'maintenance debug', 'maintenance database']) --}}
+<li class="nav-item">
+    <a href="{{ route('admin.imap.index') }}" class="nav-link">
+        
+        <i class="fas fa-envelope-square nav-icon"></i>
+        <p>Mail Inbox</p>
+    </a>
+</li>
+{{-- @endcanany --}}
 
 
 @can('database backup')
