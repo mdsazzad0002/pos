@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\MailBox;
 use Livewire\Component;
 use Carbon\Carbon;
 
@@ -14,6 +15,7 @@ use Livewire\Attributes\Validate;
 class ImapInbox extends Component
 {
 
+    
 
     public $unread_message = 0;
     public $box = 'INBOX';
@@ -130,7 +132,7 @@ class ImapInbox extends Component
                 $active_messages= null;
                 $message_body = $this->parseEmailBody($active_message);
             }else{
-                $active_messages = $active_message_box->messages()->all()->paginate($this->show);
+                $active_messages = $active_message_box->messages()->all()->setFetchOrderDesc()->paginate($this->show);
                 $active_message = null;
             }
 
@@ -188,9 +190,70 @@ class ImapInbox extends Component
            $body;
 }
 
+
+
+
+
+
 public function resetsender()
 {
     $this->reset(['sender', 'subject', 'body']);
 }
+
+
+
+    protected $sync_page = 1;
+    protected $sync_items = 20;
+
+    public function mail_box_refresh($box){
+//         //  $this->box = $box;
+
+//         /** @var \Webklex\PHPIMAP\Client $client */
+//         $client = Client::account('mailtrap');
+
+//         //Connect to the IMAP Server
+//         $client->connect();
+//         $active_message_box = $client->getFolder($this->box);
+//         // $current_message = $active_message_box->messages()->getMessage($this->active_message); // Use getMessage() instead of find()
+//         $active_messages= null;
+//         // $message_body = $this->parseEmailBody($active_message);
+//         if(MailBox::where('box', $this->box)->count() > 0){
+
+//         }else{
+//             $active_messages = $active_message_box->messages()->all()->get();
+
+//         }
+//         // dd($active_messages);
+
+//         foreach($active_messages as $key => $items){
+//             $subject = $items->getSubject();
+//             $form =  optional($items->getFrom()[0])->mail ?? 'Unknown';
+//             $to = optional($items->getTo()[0])->mail ?? 'Unknown';
+//             $reference_id = $items->getHeaders()->get('In-Reply-To');
+
+
+//             $mail_find = MailBox::where(['from'=> $subject, 'box' => $box, 'form'=>$form, 'to'=>$to])->first();
+//             if(!$mail_find){
+//                 $mail_find = new MailBox();
+//                 $mail_find->subject = $subject;
+//                 $mail_find->form = $form;
+//                 $mail_find->to = $to;
+
+
+
+//                 id	name	from	to	cc	bcc	reply_id	subject	message	type
+// Important, Promotions, Social	box
+// INBOX, Sent, Draft, Trash	creator	created_at	updated_at	
+//                 $mail_find->save();
+//                 // $mail_find->to = $to;
+//             }
+
+//         }
+
+
+        
+    }
+
+
 
 }

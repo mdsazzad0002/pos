@@ -422,13 +422,13 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            1 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -922,20 +922,25 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Livewire\\BrowserHistory' => __DIR__ . '/../..' . '/app/Livewire/BrowserHistory.php',
         'App\\Livewire\\Headerstyle' => __DIR__ . '/../..' . '/app/Livewire/Headerstyle.php',
+        'App\\Livewire\\ImapInbox' => __DIR__ . '/../..' . '/app/Livewire/ImapInbox.php',
         'App\\Livewire\\LatestOrder' => __DIR__ . '/../..' . '/app/Livewire/LatestOrder.php',
         'App\\Livewire\\RecentCustomer' => __DIR__ . '/../..' . '/app/Livewire/RecentCustomer.php',
         'App\\Livewire\\RecentProduct' => __DIR__ . '/../..' . '/app/Livewire/RecentProduct.php',
         'App\\Livewire\\SalesReportMonth' => __DIR__ . '/../..' . '/app/Livewire/SalesReportMonth.php',
+        'App\\Mail\\MailSender' => __DIR__ . '/../..' . '/app/Mail/MailSender.php',
         'App\\Mail\\MailerDynamic' => __DIR__ . '/../..' . '/app/Mail/MailerDynamic.php',
         'App\\Mail\\TestMail' => __DIR__ . '/../..' . '/app/Mail/TestMail.php',
+        'App\\Models\\Address' => __DIR__ . '/../..' . '/app/Models/Address.php',
         'App\\Models\\Attendance' => __DIR__ . '/../..' . '/app/Models/Attendance.php',
         'App\\Models\\Blog' => __DIR__ . '/../..' . '/app/Models/Blog.php',
         'App\\Models\\BlogCategory' => __DIR__ . '/../..' . '/app/Models/BlogCategory.php',
         'App\\Models\\CashCounter' => __DIR__ . '/../..' . '/app/Models/CashCounter.php',
+        'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\CompanyPermission' => __DIR__ . '/../..' . '/app/Models/CompanyPermission.php',
         'App\\Models\\CompareStyle' => __DIR__ . '/../..' . '/app/Models/CompareStyle.php',
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
         'App\\Models\\CouponUseHistory' => __DIR__ . '/../..' . '/app/Models/CouponUseHistory.php',
+        'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\Device' => __DIR__ . '/../..' . '/app/Models/Device.php',
         'App\\Models\\Discount' => __DIR__ . '/../..' . '/app/Models/Discount.php',
         'App\\Models\\Expense' => __DIR__ . '/../..' . '/app/Models/Expense.php',
