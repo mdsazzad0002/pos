@@ -414,6 +414,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::resource('/category', CategoryController::class)->names('category');
         Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
         Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
+        
+        Route::get('/category/category_/for_order', [CategoryController::class, 'category_for_order'])->name('category.category_for_order');
+        Route::post('/category/category_/for_order', [CategoryController::class, 'category_for_order_post']);
+
 
         // subcategory management
         Route::resource('/subcategory', SubCategoryController::class)->names('subcategory');

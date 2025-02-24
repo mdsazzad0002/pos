@@ -21,6 +21,7 @@
 
             <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>
             @endcan
+            <a href="{{route('admin.category.category_for_order')}}">Manage Order</a>
         </div>
     </div>
     <div class="card-body">

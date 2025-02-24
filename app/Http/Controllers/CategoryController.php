@@ -178,4 +178,12 @@ class CategoryController extends Controller
         return json_encode($result_make);
 
     }
+
+
+
+
+
+    public function category_for_order(){
+        return category::orderBy('position_order', 'desc')->get();
+    }
 }
