@@ -54,11 +54,10 @@ class AppServiceProvider extends ServiceProvider
                 Config::set('mail.from',  $from);
 
 
-
-                // for imap mail host
                 $mailtrap = [ // account identifier
-                    'host' => $mail_information->host,
+                 'host' => $mail_information->smtp_host,
                     'port' => 993,
+
                     'encryption' => $mail_information->smtp_encryption,
                     'validate_cert' => true,
                     'username' => $mail_information->smtp_username,
