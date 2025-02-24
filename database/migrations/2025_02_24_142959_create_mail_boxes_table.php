@@ -23,10 +23,14 @@ return new class extends Migration
             $table->longText('message')->nullable();
             $table->string('type')->comment(' Important, Promotions, Social');
             $table->string('box')->comment('INBOX, Sent, Draft, Trash');
+            $table->text('image')->nullable();
+            $table->string('date_message')->nullable();
             $table->bigInteger('creator')->default(0);
             $table->boolean('status')->default(0);
 
             $table->timestamps();
+
+      
         });
     }
 

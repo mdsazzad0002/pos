@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+
 class MailSender extends Mailable
 {
     use Queueable, SerializesModels;
@@ -16,10 +17,11 @@ class MailSender extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($subject, $body)
+    public function __construct($subject, $body, $attachment = [])
     {
         $this->subject = $subject;
         $this->body = $body;
+        $this->attachment =$attachment;
     }
 
     /**
@@ -43,6 +45,7 @@ class MailSender extends Mailable
                 'subject' => $this->subject,
                 'body' => $this->body,
             ],
+
         );
     }
 
@@ -53,6 +56,20 @@ class MailSender extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $attachments = [];
+        $this->attachments = collect($this->attachments)->map(function ($file) {
+            return $file->store('attachments', 'public'); // Store files in the 'attachments' directory
+        })->toArray();
+
+        if ($this->attachments) {
+            foreach ($this->attachments as $attachment) {
+                $attachments[] = \Illuminate\Mail\Mailables\Attachment::fromStorageDisk('public', $attachment->getRealPath())
+                    ->as($attachment->getClientOriginalName())  // Original file name
+                    ->withMime($attachment->getMimeType()); // MIME type
+            }
+        }
+
+        return $attachments;
     }
+
 }

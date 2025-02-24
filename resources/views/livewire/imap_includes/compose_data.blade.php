@@ -1,4 +1,4 @@
-<div class="card card-primary card-outline"  x-show="compose_message">
+<div class="card card-primary card-outline compose_box" style="display: none"  x-show="compose_message" @mousedown.outside="compose_message=false">
     <div class="card-header d-flex justify-content-between">
       <h3 class="card-title">Compose New Message</h3>
       <div class="btn btn-default" x-on:click="compose_message = false">x</div>
@@ -21,10 +21,7 @@
 
       <div class="form-group">
           <textarea id="compose-textarea" class="form-control" wire:model="body" style="height: 300px">
-            <h1><u>Heading Of Message</u></h1>
 
-            <p>Thank you,</p>
-            <p>John Doe</p>
           </textarea>
           @error('body')
               <span class="text-danger">{{ $message }}</span>
@@ -33,15 +30,18 @@
       <div class="form-group">
         <div class="btn btn-default btn-file">
           <i class="fas fa-paperclip"></i> Attachment
-          <input type="file" name="attachment">
+          <input type="file" wire:model="attachment[]" multiple>
         </div>
-        <p class="help-block">Max. 32MB</p>
+        <p class="help-block">Max. 5MB </p>
+        @error('attachments.*')
+            <span class="error">{{ $message }}</span>
+        @enderror
       </div>
     </div>
     <!-- /.card-body -->
     <div class="card-footer">
       <div class="float-right d-flex gap-3">
-        <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Draft</button>
+        <button type="button" class="btn btn-default" x-on:click="compose_message = false"  wire:click="saveDraf()"><i class="fas fa-pencil-alt"></i> Draft</button>
 
 
 
@@ -75,3 +75,8 @@
     </div>
     <!-- /.card-footer -->
   </div>
+
+<button class="fixed_write_message" x-show="!compose_message" x-on:click = "compose_message = true">
+    <i class="fas fa-edit"></i>
+</button>
+

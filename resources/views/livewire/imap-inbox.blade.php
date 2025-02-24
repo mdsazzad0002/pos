@@ -47,7 +47,7 @@
                             <li class="nav-item @if ($box == 'Junk') active @endif" wire:click="changeBox('Junk')">
                                 <a href="javascript:void(0)" class="nav-link">
                                     <i class="fas fa-filter"></i> Junk
-                                    <span class="badge bg-warning float-right">65</span>
+
                                 </a>
                             </li>
                             <li class="nav-item @if ($box == 'Trash') active @endif" wire:click="changeBox('Trash')">
@@ -60,7 +60,7 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Labels</h3>
 
@@ -92,7 +92,7 @@
                         </ul>
                     </div>
                     <!-- /.card-body -->
-                </div>
+                </div> --}}
                 <!-- /.card -->
             </div>
             <!-- /.col -->

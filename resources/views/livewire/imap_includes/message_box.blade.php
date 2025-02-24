@@ -9,7 +9,7 @@
 
         <div class="card-tools">
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control" placeholder="Search Mail">
+                <input type="text" class="form-control" wire:model.live.debounce.700ms="q" placeholder="Search Mail">
                 <div class="input-group-append">
                     <div class="btn btn-primary">
                         <i class="fas fa-search"></i>
@@ -27,26 +27,27 @@
                     class="far fa-square"></i>
             </button>
             <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm">
+                {{-- <button type="button" class="btn btn-default btn-sm">
                     <i class="far fa-trash-alt"></i>
-                </button>
+                </button> --}}
                 <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="changeBox">
                     <i class="fas fa-sync-alt" wire:loading.class="fa-spin" wire:target="changeBox"></i>
                 </button>
             </div>
             <!-- /.btn-group -->
             <div class="float-right">
-                1-50/200  &nbsp; <select wire:model.live="show" id="">
+                {{$showing_form}}-{{$showing_to}}/{{$total_items}}  &nbsp; <select wire:model.live="show" id="">
                     <option value="5">5</option>
                     <option selected value="10">10</option>
                     <option value="20">20</option>
                     <option value="30">30</option>
                 </select>
+
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm" wire:click="showPage('-')">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button type="button" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm" wire:click="showPage('+')">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
@@ -57,41 +58,44 @@
         <div class="table-responsive mailbox-messages">
             <table class="table table-hover table-striped">
                 <tbody>
+                    @if ($messages)
+
                     @foreach ($messages as $message)
 
 
-                    <tr wire:key="{{ $message->getUid() }}">
+                    <tr wire:key="{{ $message->id }}">
                         <td>
                             <div class="icheck-primary">
-                                <input type="checkbox" id="check{{ $loop->index }}">
-                                <label for="check{{ $loop->index }}"></label>
+                                <input type="checkbox" id="check{{$message->id }}">
+                                <label for="check{{ $message->id }}"></label>
                             </div>
                         </td>
                         <td class="mailbox-star">
                             <a href="#"><i class="fas fa-star text-warning"></i></a>
                         </td>
                         <td class="mailbox-name">
-                            <a wire:click="readMail({{ $message->getUid() }})" href="javascript:void(0);">
-                                <b>{{ Str::title($message->getSubject()) }}</b>
+                            <a wire:click="readMail({{ $message->id }})" href="javascript:void(0);">
+                                <b>{{ Str::title($message->subject) }}</b>
                                 <br/>
                                 @if($box == 'Sent')
-                                    {{ optional($message->getTo()[0])->mail ?? 'Unknown' }}
+                                    {{ $message->to ?? 'Unknown' }}
                                 @else
-                                {{ optional($message->getFrom()[0])->mail ?? 'Unknown' }}
+                                {{ $message->from ?? 'Unknown' }}
                                 @endif
                             </a>
                         </td>
-                   
+
                         <td class="mailbox-attachment">
-                            @if($message->hasAttachments())
+                            @if($message->image != "[]")
                                 📎
                             @endif
                         </td>
                         <td class="mailbox-date">
-                            {{ $message->getDate() }}
+                            {{ $message->created_at }}
                         </td>
                     </tr>
                     @endforeach
+                    @endif
 
                 </tbody>
             </table>
@@ -107,27 +111,28 @@
                 <i class="far fa-square"></i>
             </button>
             <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm">
+                {{-- <button type="button" class="btn btn-default btn-sm">
                     <i class="far fa-trash-alt"></i>
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
+                </button> --}}
+                {{-- <button type="button" class="btn btn-default btn-sm">
                     <i class="fas fa-reply"></i>
                 </button>
                 <button type="button" class="btn btn-default btn-sm">
                     <i class="fas fa-share"></i>
-                </button>
+                </button> --}}
             </div>
             <!-- /.btn-group -->
-            <button type="button" class="btn btn-default btn-sm">
-                <i class="fas fa-sync-alt"></i>
+            <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="changeBox">
+                <i class="fas fa-sync-alt" wire:loading.class="fa-spin" wire:target="changeBox"></i>
+
             </button>
             <div class="float-right">
-                1-50/200
+                {{$showing_form}}-{{$showing_to}}/{{$total_items}}
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm" wire:click="showPage('-')">
                         <i class="fas fa-chevron-left"></i>
                     </button>
-                    <button type="button" class="btn btn-default btn-sm">
+                    <button type="button" class="btn btn-default btn-sm" wire:click="showPage('+')">
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
