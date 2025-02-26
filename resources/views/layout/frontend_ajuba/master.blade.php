@@ -76,7 +76,7 @@
 
             @if($footer_style)
                 @include('layout.frontend_ajuba.'.$footer_style->key, ['footer_style' => $footer_style])
-                
+
             @endif
 
             <!-- Benefits End -->

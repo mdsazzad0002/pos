@@ -54,4 +54,5 @@
 
 
 
+@livewireScripts
 @endsection

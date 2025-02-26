@@ -3,6 +3,12 @@
 
 @php
     $page_content = App\Models\Page::find($id);
+    $url = $url ? url($url) : url($page_content->slug);
+    $url = explode('?/',$url);
+    $url = $url[0];
+    $separator = strpos($url, '?') !== false ? '&' : '?';
+    $finalUrl = $url . $separator . 'preview_page=' . $id;
+   
 @endphp
 
 
@@ -16,7 +22,7 @@
     <div class="card-header d-flex align-items-center justify-content-between">
        <div class="content_parents">
            <div class="title_content"> Page : {{ $page_content->name }}</div>
-           <div class="title_content"> Slug : <a href="{{ url($page_content->slug) }}" target="_blank"> {{ url($page_content->slug) }} </a></div>
+           <div class="title_content"> Slug : <a href="{{  $url }}" target="_blank"> {{  $url }} </a></div>
            <div class="title_content"> Page ID : {{ $page_content->id }}</div>
            <div class="title_content"> Page Type : {{ $page_content->page_type }}</div>
            <div class="title_content"> Page Status : {{ $page_content->status == 1 ? 'Active' : 'Inactive' }}</div>
@@ -36,7 +42,7 @@
 
     <div class="card-body html_element_box">
         <div class="html_render">
-            <iframe class="iframe_preview" src="{{ url('previdw_page_and_fornt_page?preview_page='.$id) }}" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
+            <iframe class="iframe_preview" src="{{  $finalUrl }}" frameborder="0" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%"></iframe>
         </div>
 
 

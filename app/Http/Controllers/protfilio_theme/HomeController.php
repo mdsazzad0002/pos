@@ -35,9 +35,16 @@ use Illuminate\Support\Facades\View;
 class HomeController extends Controller
 {
     public function index(Request $request, $view = null){
+        $edit_url =  $url = $request->url() . '?' . http_build_query(request()->query());
 
         if($request->has('preview_page')){
               $homepage = Page::findOrFail($request->preview_page);
+               
+                // $url = $request->url; 
+                // $homepage['slug'] = $url;
+                //   #requestUri: "/previdw_page_and_fornt_page?preview_page=4&url=http://pos.localhost/product/details?slug=test-product"
+          
+             
         }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
@@ -50,17 +57,17 @@ class HomeController extends Controller
 
 
             if($request->has('preview_page')){
-                return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage', 'request'));
+                return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage', 'request', 'edit_url'));
             }
-            return view('frontend.protfilio_theme.home.index', compact(   'homepagemanage', 'homepage', 'request'));
+            return view('frontend.protfilio_theme.home.index', compact(   'homepagemanage', 'homepage', 'request', 'edit_url'));
 
 
         }else{
-            // if(env('APP_DEBUG') == true){
-            //     abort('404', 'Not Set Home Page');
-            // }else{
-            //     return redirect('/');
-            // }
+            if(env('APP_DEBUG') == true){
+                abort('404', 'Not Set Home Page');
+            }else{
+                return redirect('404');
+            }
         }
 
 

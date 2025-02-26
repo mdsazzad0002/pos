@@ -69,7 +69,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['takto-messageing-management', '31']) }}" class="nav-link">
                 <i class="bi bi-chat-left-dots-fill nav-icon"></i>
-                <p>Message SDK management</p>
+                <p>Message SDK</p>
             </a>
         </li>
         @endcan

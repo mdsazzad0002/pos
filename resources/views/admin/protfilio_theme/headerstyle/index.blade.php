@@ -52,5 +52,5 @@
 </div>
 
 
-
+@livewireScripts
 @endsection

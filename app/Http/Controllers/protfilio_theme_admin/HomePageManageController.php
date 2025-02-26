@@ -14,10 +14,17 @@ class HomePageManageController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
+        $url = null;
+        
+        if($request->has('url')){
+            $url = urldecode($request->url);
+        }
+
         $id = $request->id;
-        return view('admin.protfilio_theme.page.partials.edit_buttonbuilder', compact('id'));
+        return view('admin.protfilio_theme.page.partials.edit_buttonbuilder', compact('url', 'id'));
     }
 
     /**

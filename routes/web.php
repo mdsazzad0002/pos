@@ -881,7 +881,6 @@ Route::get('/product-details/{slug}', [HomeController::class,'product_view_by_sl
 
 
 // User Defined Route Web So Check Route not exists
-Route::get('previdw_page_and_fornt_page', [HomeController::class, 'index'])->name('previdw_page_and_fornt_page');
 Route::get('{view}', [HomeController::class, 'index'])->middleware('TrackUniqueVisitor')->name('home')-> where('view', '^(?!admin).*');
 // end protflio_web_theme
 

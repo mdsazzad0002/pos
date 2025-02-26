@@ -1,0 +1,10 @@
+Reporting-MTA: dns; srvbdix2.noc223.com
+
+Action: failed
+Final-Recipient: rfc822;web.developer.sazzad0002@gmail.com
+Status: 5.0.0
+Remote-MTA: dns; gmail-smtp-in.l.google.com
+Diagnostic-Code: smtp; 550-5.1.1 The email account that you tried to reach does not exist. Please try
+ 550-5.1.1 double-checking the recipient's email address for typos or
+ 550-5.1.1 unnecessary spaces. For more information, go to
+ 550 5.1.1  https://support.google.com/mail/?p=NoSuchUser 41be03b00d2f7-adece7028fesi28526642a12.25 - gsmtp

@@ -41,7 +41,6 @@
 
 
 
-        @include('layout.frontend_ajuba.partials.language')
 
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
