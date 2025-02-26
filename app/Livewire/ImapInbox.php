@@ -187,23 +187,27 @@ class ImapInbox extends Component
             'attachment.*' => 'file|mimes:jpg,jpeg,png,pdf,docx|max:10240', // Validate file types and size
 
         ]);
-            // Send the email via SMTP
-        Mail::to($this->sender)->send(new MailSender($this->subject, $this->body, $this->attachment));
+        try {
+                // Send the email via SMTP
+            Mail::to($this->sender)->send(new MailSender($this->subject, $this->body, $this->attachment));
 
-        // Connect to IMAP to save the sent message in the Sent folder
-        $client = Client::account('mailtrap');  // Use your IMAP account credentials here
-        $client->connect();
+            // Connect to IMAP to save the sent message in the Sent folder
+            $client = Client::account('mailtrap');  // Use your IMAP account credentials here
+            $client->connect();
 
-        // Get the Sent folder
-        // Prepare the raw message
-        $rawMessage = $this->buildRawMessage(config('imap.accounts.mailtrap.username'), $this->sender, $this->subject, $this->body);
+            // Get the Sent folder
+            // Prepare the raw message
+            $rawMessage = $this->buildRawMessage(config('imap.accounts.mailtrap.username'), $this->sender, $this->subject, $this->body);
 
-        // Get the Sent folder and append the raw message
-        $sentFolder = $client->getFolder('Sent');
-        $sentFolder->appendMessage($rawMessage);
+            // Get the Sent folder and append the raw message
+            $sentFolder = $client->getFolder('Sent');
+            $sentFolder->appendMessage($rawMessage);
 
-        session()->flash('message', 'Message sent successfully.');
-        $this->dispatch('message-sent', session('message'));
+            session()->flash('message', 'Message sent successfully.');
+            $this->dispatch('message-sent', session('message'));
+        }catch (\Exception $e) {
+            $this->dispatch('message-error', $e->getMessage());
+        }
     }
 
 
@@ -313,60 +317,64 @@ class ImapInbox extends Component
     }
 
     public function mail_box_refresh($box){
+    
+        try {
+            /** @var \Webklex\PHPIMAP\Client $client */
+            $client = Client::account('mailtrap');
 
+            //Connect to the IMAP Server
+            $client->connect();
+            $active_message_box = $client->getFolder($box);
+            $active_messages= null;
+            // $message_body = $this->parseEmailBody($active_message);
+            if(MailBox::where('box', $box)->count() > 0){
+                if($box == 'INBOX'){
+                    $active_messages = $active_message_box->query()->unseen()->get(); // Get unread
+                }else {
+                    $active_messages = $active_message_box->messages()->all()->get(); // Get unread
+                }
+            }else{
+                $active_messages = $active_message_box->messages()->all()->get();
 
-        /** @var \Webklex\PHPIMAP\Client $client */
-        $client = Client::account('mailtrap');
-
-        //Connect to the IMAP Server
-        $client->connect();
-        $active_message_box = $client->getFolder($box);
-        $active_messages= null;
-        // $message_body = $this->parseEmailBody($active_message);
-        if(MailBox::where('box', $box)->count() > 0){
-            if($box == 'INBOX'){
-                $active_messages = $active_message_box->query()->unseen()->get(); // Get unread
-            }else {
-                $active_messages = $active_message_box->messages()->all()->get(); // Get unread
             }
-        }else{
-            $active_messages = $active_message_box->messages()->all()->get();
+            // dd($active_messages);
 
+            foreach($active_messages as $key => $items){
+                $subject = $items->get("subject")->toString();;
+                $form =  optional($items->getFrom()[0])->mail ?? 'Unknown';
+                $to = optional($items->getTo()[0])->mail ?? 'Unknown';
+                $date = $items->getDate();
+
+
+                $mail_find = MailBox::where(['from'=> $form, 'box' => $box, 'subject'=>$subject, 'to'=>$to,'date_message'=>$date])->first();
+
+                if(!$mail_find){
+
+                    $type = $this->messagetype($form, $subject);
+                    $reply_id = $items->getHeaders()->get('In-Reply-To');
+                    $attachment_body = $this->attachment_store($items);
+                    $cc = optional($items->getCc()[0])->mail ?? 'Unknown';
+                    $bcc = optional($items->getBcc()[0])->mail ?? 'Unknown';
+
+
+                    $mail_find = new MailBox();
+                    $mail_find->subject = $subject;
+                    $mail_find->from = $form;
+                    $mail_find->to = $to;
+                    $mail_find->type = $type;
+                    $mail_find->box = $box;
+                    $mail_find->cc = $cc;
+                    $mail_find->bcc = $bcc;
+                    $mail_find->reply_id = $reply_id;
+                    $mail_find->message = json_encode($attachment_body['body']);
+                    $mail_find->image = json_encode($attachment_body['image']);
+                    $mail_find->date_message = $date;
+                    $mail_find->save();
+                }
+            }
         }
-        // dd($active_messages);
-
-        foreach($active_messages as $key => $items){
-            $subject = $items->get("subject")->toString();;
-            $form =  optional($items->getFrom()[0])->mail ?? 'Unknown';
-            $to = optional($items->getTo()[0])->mail ?? 'Unknown';
-            $date = $items->getDate();
-
-
-            $mail_find = MailBox::where(['from'=> $form, 'box' => $box, 'subject'=>$subject, 'to'=>$to,'date_message'=>$date])->first();
-
-            if(!$mail_find){
-
-                $type = $this->messagetype($form, $subject);
-                $reply_id = $items->getHeaders()->get('In-Reply-To');
-                $attachment_body = $this->attachment_store($items);
-                $cc = optional($items->getCc()[0])->mail ?? 'Unknown';
-                $bcc = optional($items->getBcc()[0])->mail ?? 'Unknown';
-
-
-                $mail_find = new MailBox();
-                $mail_find->subject = $subject;
-                $mail_find->from = $form;
-                $mail_find->to = $to;
-                $mail_find->type = $type;
-                $mail_find->box = $box;
-                $mail_find->cc = $cc;
-                $mail_find->bcc = $bcc;
-                $mail_find->reply_id = $reply_id;
-                $mail_find->message = json_encode($attachment_body['body']);
-                $mail_find->image = json_encode($attachment_body['image']);
-                $mail_find->date_message = $date;
-                $mail_find->save();
-            }
+        catch (\Exception $e) {
+            $this->dispatch('message-error', $e->getMessage());
         }
     }
 

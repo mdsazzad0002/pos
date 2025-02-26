@@ -184,6 +184,17 @@ class CategoryController extends Controller
 
 
     public function category_for_order(){
-        return category::orderBy('position_order', 'desc')->get();
+        $category =  category::orderBy('position_order', 'desc')->get();
+        return view('admin.category.reorder.index', compact('category'));
+    }
+
+    public function category_for_order_post(Request $request){
+        if($request->has('orderid')){
+            foreach ($request->orderid as $key => $value) {
+                category::where('id', $value)->update(['position_order' => $key]);
+            }
+
+        }
+        return json_encode(['status'=>true]);
     }
 }

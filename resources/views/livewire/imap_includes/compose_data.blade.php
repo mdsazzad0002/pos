@@ -55,7 +55,7 @@
             @this.on('message-sent', msg => {
                 showMessage = true;
                 message = msg;
-                setTimeout(() => showMessage = false, 500);
+                setTimeout(() => showMessage = false, 2500);
             })
             ">
             @if(session('message'))

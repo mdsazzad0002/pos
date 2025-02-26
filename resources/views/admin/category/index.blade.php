@@ -18,10 +18,12 @@
         {{ __('category.list') }}
         <div>
             @can('user create')
-
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>
+                <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>
             @endcan
-            <a href="{{route('admin.category.category_for_order')}}">Manage Order</a>
+            @can('user read')
+                <a class="btn btn-primary" href="{{route('admin.category.category_for_order')}}"> <i class="fa fa-th-large" aria-hidden="true"></i>
+                    Manage Order</a>
+            @endcan
         </div>
     </div>
     <div class="card-body">

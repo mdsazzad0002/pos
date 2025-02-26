@@ -117,6 +117,7 @@ class rolepermissionsedder extends Seeder
                       'settings main',   'settings notification', 'settings site_verification', 'settings site_tag', 
                       'settings tracking_report', 'settings site_pwa',  'settings messagesdk',  'settings cookie',
                       'settings email_setting',
+                      'imap management',
 
 
                 //]]]

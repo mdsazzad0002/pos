@@ -30,8 +30,8 @@
                 {{-- <button type="button" class="btn btn-default btn-sm">
                     <i class="far fa-trash-alt"></i>
                 </button> --}}
-                <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="changeBox">
-                    <i class="fas fa-sync-alt" wire:loading.class="fa-spin" wire:target="changeBox"></i>
+                <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="mail_box_refresh">
+                    <i class="fas fa-sync-alt"></i>
                 </button>
             </div>
             <!-- /.btn-group -->
@@ -122,9 +122,8 @@
                 </button> --}}
             </div>
             <!-- /.btn-group -->
-            <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="changeBox">
-                <i class="fas fa-sync-alt" wire:loading.class="fa-spin" wire:target="changeBox"></i>
-
+            <button type="button" class="btn btn-default btn-sm"  wire:click="mail_box_refresh('{{$box}}')" wire.loading.attr="disabled" wire:target="mail_box_refresh">
+                <i class="fas fa-sync-alt" ></i>
             </button>
             <div class="float-right">
                 {{$showing_form}}-{{$showing_to}}/{{$total_items}}

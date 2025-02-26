@@ -1,9 +1,47 @@
 <div>
 
 
-    <div class="p-3 bg-warning mb-2 d-none" wire:offline.class.remove="d-none">
-        Whoops, your device has lost connection. The web page you are viewing is offline.
-    </div>
+<div style="min-height: 60px">
+    {{-- error --}}
+                {{-- Network Error --}}
+                <div class="p-3 bg-warning mb-2 d-none" wire:offline.class.remove="d-none">
+                    Whoops, your device has lost connection. The web page you are viewing is offline.
+                </div>
+                {{-- Network Error --}}
+            
+            
+                {{-- Error Message --}}
+                <div x-data="{ errorMessage: '' , showError : false, connectionError: false }"  
+                    @message-error.window="
+                        errorMessage = $event.detail;
+                        showError = true;
+                        connectionError = true;
+                        setTimeout(() => showError = false, 10000);
+                    "
+                >
+                    <div class="p-3 mb-2 bg-secondary rounded" x-show="connectionError" style="display: none">
+                        Try to Check Connection SMTP <a class="float-right btn btn-primary btn-sm" href="{{ route('admin.mail.index') }}">Click here</a>
+                    </div>
+
+                    <template x-if="errorMessage" x-show="showError">
+                        <p class="bg-warning mt-2 p-2 bg-red-200 text-red-700 rounded">
+                            <strong>Error:</strong> <span x-text="errorMessage"></span>
+                        </p>
+                    </template>
+                </div>
+                {{-- Error Message --}}
+            
+                <div 
+                    wire:loading.class.remove="d-none" 
+                    wire-target="mail_box_refresh"
+                    class="p-2 bg-warning mb-2 d-none rounded">
+                    <i class="fa fa-spinner fa-spin"></i> <span>Loading. Please Wait...</span>
+                </div>
+    
+    {{-- error --}}
+</div>
+
+    
 
 
     <!-- Main content -->
@@ -94,6 +132,10 @@
                     <!-- /.card-body -->
                 </div> --}}
                 <!-- /.card -->
+
+        
+
+
             </div>
             <!-- /.col -->
             <div class="col-md-9">

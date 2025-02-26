@@ -44,7 +44,7 @@ sidebar-dark-primary elevation-4">
 
                     <i class="fas fa-external-link-alt nav-icon"></i>
                     <p>
-                    {{ __('visit.webiste') }}
+                        Visit Site
                     </p>
                 </a>
             </li>
@@ -152,7 +152,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            {{ __('sidebar.product_management') }}
+                            Product Management
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -161,7 +161,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.product.create') }}" class="nav-link {{ Request::routeIs('admin.product.edit') ? 'active': ''}}">
                                 <i class="fas fa-plus nav-icon"></i>
-                                <p>{{ __('sidebar.product_create') }}</p>
+                                <p>Product Create</p>
                             </a>
                         </li>
                         @endcan
@@ -171,7 +171,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.product.index') }}" class="nav-link">
                                 <i class="fas fa-th-large nav-icon"></i>
-                                <p>{{ __('settings.product_list') }}</p>
+                                <p>Product List</p>
                             </a>
                         </li>
                         @endcan
@@ -185,7 +185,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="fas fa-tools nav-icon "></i>
                         <p>
-                            {{ __('sidebar.administrator') }}
+                            Administration
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -194,9 +194,9 @@ sidebar-dark-primary elevation-4">
 
                         @can('category read')
                         <li class="nav-item">
-                            <a href="{{ route('admin.category.index') }}" class="nav-link ">
+                            <a href="{{ route('admin.category.index') }}" class="nav-link @if(Request::routeIs('admin.category.category_for_order')) active @endif">
                                 <i class="fab fa-linode nav-icon"></i>
-                                <p>{{ __('sidebar.category') }}</p>
+                                <p>Category</p>
                             </a>
                         </li>
                         @endcan
@@ -204,7 +204,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.subcategory.index') }}" class="nav-link ">
                                 <i class="fab fa-linode nav-icon"></i>
-                                <p>{{ __('sidebar.subcategory') }}</p>
+                                <p>Subcategory</p>
                             </a>
                         </li>
                         @endcan
@@ -213,7 +213,7 @@ sidebar-dark-primary elevation-4">
                         <li class="nav-item">
                             <a href="{{ route('admin.area.index') }}" class="nav-link ">
                                 <i class="fas fa-map-marker-alt nav-icon"></i>
-                                <p>{{ __('sidebar.area') }}</p>
+                                <p>Area</p>
                             </a>
                         </li>
                         @endcan
