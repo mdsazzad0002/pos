@@ -84,6 +84,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ProductStyleController;
 
 
 
@@ -770,8 +771,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // Supplier Management
     Route::resource('/supplier', SupplierController::class)->names('supplier');
     Route::group(['as' => 'supplier.', 'prefix' => 'supplier'], function() {
-        Route::get('/delete/{supplier}', [SupplierController::class, 'delete'])->name('delete');
         Route::get('/getSupplier/get', [SupplierController::class, 'getSupplier'])->name('select');
+        Route::get('/delete/{supplier}/delete', [SupplierController::class, 'delete'])->name('delete');
     });
     // End Supplier Management
 
@@ -837,6 +838,15 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // Header Style Manage
     Route::get('header-style', [HeaderStyleController::class, 'index'])->name('header-style.index');
     // end Header Style Management
+
+
+    // Admin
+    // Product Style Manage
+    Route::get('product-style', [ProductStyleController::class, 'index'])->name('product-style.index');
+    // end Header Style Management
+
+
+
 
     // ======================== END CMS ================== END CMS ================ END CMS ================================================================
     // ======================== END CMS ================== END CMS ================ END CMS ================================================================

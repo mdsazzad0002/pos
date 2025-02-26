@@ -12,7 +12,7 @@ class ProductStyleController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.product.product_style');
     }
 
     /**

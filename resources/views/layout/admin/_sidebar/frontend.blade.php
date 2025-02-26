@@ -52,7 +52,7 @@
         @canany(['footerlinkheading read', 'footerlinksubheading read'])
         <li class="nav-item">
             <a href="#" class="nav-link ">
-                <i class="nav-icon fab fa-staylinked"></i>
+                <i class="nav-icon fab ">F</i>
                 <p>
                    Footer
                     <i class="fas fa-angle-left right"></i>
@@ -89,7 +89,7 @@
         @canany(['footerlinkheading read', 'footerlinksubheading read'])
         <li class="nav-item">
             <a href="#" class="nav-link ">
-                <i class="nav-icon fab fa-staylinked"></i>
+                <i class="nav-icon fab ">H</i>
                 <p>
                    Header Management
                     <i class="fas fa-angle-left right"></i>
@@ -117,45 +117,40 @@
         </li>
         @endcanany
 
-        <li class="nav-item">
-            <a href="#" class="nav-link ">
-                <i class="nav-icon fab fa-staylinked"></i>
-                <p>
-                   Part Setting
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('admin.setting.index', ['footer_style', '88']) }}" class="nav-link">
-                        <i class="fas nav-icon">F</i>
-                        <p>{{ __('sidebar.Footer_Style') }}</p>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.setting.index', ['header_style', '80']) }}" class="nav-link">
-                        <i class="fas  nav-icon">H</i>
-                        <p>{{ __('sidebar.Header_Style') }}</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.setting.index', ['variant_part_status', '99']) }}" class="nav-link">
-                        <i class="fas  nav-icon">P</i>
-                        <p>{{ __('sidebar.variant_part_status') }}</p>
-                    </a>
-                </li>
-            </ul>
+        <li class="nav-item">
+            <a href="{{ route('admin.product-style.index') }}" class="nav-link {{ Request::routeIs('admin.product-style.*') ? 'active' :''  }}">
+                <i class="fas  nav-icon">P</i>
+                <p>Product Style</p>
+            </a>
         </li>
 
       
-
         @can('page read')
-             <li class="nav-item">
-            <a href="{{ route('admin.page.index') }}" class="nav-link {{ Request::routeIs('admin.homePageManage.*') ? 'active' :''  }}">
-                <i class="fas fa-book nav-icon"></i>
-                <p>Page Management</p>
+        <li class="nav-item">
+            <a href="#" class="nav-link ">
+         
+                <p>
+                    <i class="fas fa-book nav-icon"></i>
+                    <p>Page Management</p>
+                </p>
             </a>
+            <ul class="nav nav-treeview">
+ 
+
+                <li class="nav-item">
+                    <a  href="{{ route('admin.page.index') }}" class="nav-link {{ Request::routeIs('admin.homePageManage.*') ? 'active' :''  }}" class="nav-link">
+                        <i class="fas fa-book nav-icon"></i>
+                         <p>Page </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.setting.index', ['header_style', '80']) }}" class="nav-link">
+                        <i class="fas  nav-icon">F</i>
+                        <p>Filter Page Option</p>
+                    </a>
+                </li>
+            </ul>
         </li>
         @endcan
        

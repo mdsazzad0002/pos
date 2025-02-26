@@ -29,7 +29,7 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade ajax_modal_dialog_add" id="ajax_modal_dialog_add"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add_modal_lLabel" aria-hidden="true">
+<div class="modal fade ajax_modal_dialog_add" id="ajax_modal_add"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add_modal_lLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -67,51 +67,39 @@ var placeholder_body = `
 
 var modalDialog = '';
 var setElement = '';
-var model = ''
-
 if($(thi).data('setelement')){
     setElement =  $(thi).data('setelement');
 
 }else{
-
-    if($(thi).data('target')){
-        model = document.querySelector($(thi).data('target'));
-    }else{
-        model = document.querySelector('#ajax_modal');
-    }
-
-    console.log($(thi).data('target'))
-
-    modalDialog = model.querySelector('.modal-dialog')
-
-    setElement = model.querySelector('.modal-body');
+    modalDialog = document.querySelector('#ajax_modal .modal-dialog');
+    setElement = modalDialog.querySelector('.modal-body');
 
     if($(thi).data('dialog')){
-        if($(modalDialog).data('dialog')){
+        if($('#ajax_modal .modal-dialog').data('dialog')){
             var data_array = modalDialog.getAttribute('data-dialog').split(" ");
             data_array.forEach(function(element) {
-                $(modalDialog).removeClass(element); // Remove each class from modal-dialog
+                $('#ajax_modal .modal-dialog').removeClass(element); // Remove each class from modal-dialog
             });
         }
 
 
         var dialogValue = thi.getAttribute('data-dialog');
-        $(modalDialog).addClass($(thi).data('dialog'));
+        $('#ajax_modal .modal-dialog').addClass($(thi).data('dialog'));
         // Add the data-dialog attribute value from thi to the .modal-dialog element
         modalDialog.setAttribute('data-dialog', dialogValue);
     }
 
-      {{--  Modal Title  --}}
+    {{--  Modal Title  --}}
         if($(thi).data('title')){
-            $(model).find('#eajax_modalLabel').html($(thi).data('title'));
+            $('#ajax_modal #eajax_modalLabel').html($(thi).data('title'));
         }else{
             if($(thi).title){
-                $(model).find('#eajax_modalLabel').html($(thi).title);
+                $('#ajax_modal #eajax_modalLabel').html($(thi).title);
             }else{
-                $(model).find('#eajax_modalLabel').html('data-title or title');
+                $('#ajax_modal #eajax_modalLabel').html('data-title or title');
             }
         }
-    {{--  end modal Title  --}}
+        {{--  end modal Title  --}}
 
 
     }
@@ -149,18 +137,18 @@ if($(thi).data('setelement')){
 
                     //Error show and refresh button generate
                     var items_refresh = "<div class='text-center btn_refresh_head'>"+thi.outerHTML+"<br/><br/>AJAX Error: "+ status + error+"</div>";
-                    $(model).find('.modal-body').html(items_refresh);
-                     $(model).find('.btn_refresh_head .btn').html('Refresh')
+                    $('#ajax_modal .modal-body').html(items_refresh);
+                    $('.btn_refresh_head .btn').html('Refresh')
                      //Error show and refresh button generate
                 }
             })
         }else{
-             $(model).find('.modal-body').html('data-href');
+            $('#ajax_modal .modal-body').html('data-href');
         }
     {{--  end data set  --}}
 
     if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
-        $(model).modal('show');
+        $('#ajax_modal').modal('show');
     }
 
     }

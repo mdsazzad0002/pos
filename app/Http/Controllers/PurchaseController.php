@@ -44,13 +44,12 @@ class PurchaseController extends Controller
 
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.purchase.report_single',['purchase_id'=> $row->purchase_id]);
-                    return "<a class='btn btn-primary' target='_blank' href='$view_route'>View</a>";
+                    return "<a class='btn btn-primary' onclick='window.open(\"$view_route\", \"_blank\", \"width=800,height=600,scrollbars=yes,resizable=yes\")' href='javascript:void(0)'>View</a>";
+
 
                 })
                 ->addColumn('image', function ($row) {
-                    
                    return  $view_route = "<img style='max-width:100px' src='".dynamic_asset($row->upload_id ?? 0)."'/></br> ";
-
                 })
                 ->addColumn('supplier', function ($row) {
                     $supplier_view_route = route('admin.supplier.show', $row->supplier_id);
