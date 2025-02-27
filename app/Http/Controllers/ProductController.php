@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\product;
+use App\Models\purchase;
 use App\Models\ProductFaq;
 use App\Models\VariantOption;
 use Illuminate\Http\Request;
@@ -484,6 +485,14 @@ class ProductController extends Controller
 
 
 
+    }
+
+
+
+    // 
+    public function purchase_history_by_product($product = null){
+        $product_purchase = purchase::where('productId', $product)->paginate(50);
+        return view('admin/product/purchase/summary', compact('product_purchase'));
     }
 
 }

@@ -1,7 +1,14 @@
 <table class="table talbe-bordered border table-striped table-hover">
     <tr>
         <td>Name</td>
-        <td>{{ $product->name }}</td>
+        <td>{{ $product->name }}   </br>
+            <button class='btn btn-primary btn-sm' 
+            data-target="#ajax_modal_dialog_add"
+            data-dialog='modal-dialog-scrollable modal-xl'  
+            onclick='button_ajax(this)' 
+            data-title='Purchase History of `{{  $product->name }}`'
+            data-href='{{ route('admin.product.purchase_history_by_product', $product->id) }}'>View Purchse Histoy</button>
+        </td>
     </tr>
     <tr>
         <td>Links</td>
@@ -19,17 +26,10 @@
                 {{ url('/product-details/'.$product->slug ?? '') }} <button type="button" class="btn btn-warning btn-sm" onclick="window.copyToClipboard('{{ url('/product-details/'.$product->slug ?? '') }}')">Copy</button>
             </div>
 
-            @if (env('APP_DEBUG'))
-                
-         
-          <button class='btn btn-primary' 
-                data-target="#ajax_modal_dialog_add"
-                data-dialog='modal-dialog-centered modal-lg'  
-                onclick='button_ajax(this)' 
-                data-title='info'
-                data-href='{{ route('admin.product.show', $product->id) }}'>View Purchse Histoy</button>
-            @endif
-
+          
+            
+              
+          
         </td>
     </tr>
     <tr>

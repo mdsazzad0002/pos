@@ -252,6 +252,17 @@ sidebar-dark-primary elevation-4">
                         </li>
                         @endcan
 
+                        {{-- @can('vat read') --}}
+                        <li class="nav-item">
+                            <a href="{{ route('admin.order_status.index') }}" class="nav-link">
+                                <i class="fab  nav-icon"></i>
+                                <p>Order Status</p>
+                            </a>
+                        </li>
+                        {{-- @endcan --}}
+
+
+
 
                     </ul>
                 </li>

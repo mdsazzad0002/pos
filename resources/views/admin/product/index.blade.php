@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('product.product_title'))
+@section('title', 'Product')
 
 {{--  Content Extends  --}}
 @section('content')
@@ -15,7 +15,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        {{ __('product.product_list') }}
+        Product List
         <div>
             @can('user create')
 

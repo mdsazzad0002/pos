@@ -14,7 +14,9 @@
     <div class="card-body">
         <table id="users" class="table table-bordered table-striped table-hover">
             <thead>
-             
+                <th>
+                    Actions
+                 </th>
                 <th>
                     Name
                 </th>
@@ -24,16 +26,33 @@
                 <th>
                     Sotck Alert
                 </th>
+                
 
             </thead>
             <tbody>
                 @foreach($stock_data as $key => $items)
                 <tr>
                     <td>
-                        {{$items->name ?? ''}} <br/>
-                        <a class="btn btn-warning" href="{{route('admin.product.edit', $items->id)}}">Edit Product</a>
-                        <a class="btn btn-warning" href="{{route('admin.supplier.create')}}">Buy Product</a>
-                        <a class="btn btn-warning" href="#">History Unser working</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="productActions" data-toggle="dropdown" aria-expanded="false">
+                                Actions
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="productActions">
+                                <li>
+                                    <a class="dropdown-item text-warning" href="{{route('admin.product.edit', $items->id)}}">Edit Product</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-primary" href="{{route('admin.purchase.create')}}">Buy Product</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="#">History Unser working</a>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </td>
+                    <td>
+                        {{$items->name ?? ''}} 
 
                     </td>
                     <td> <img src="{{$items->image_url}}" alt="" style="max-width:80px"></td>
@@ -68,6 +87,7 @@
                         <span class="badge badge-danger"> Out of Stock </span>
                         @endif
                     </td>
+                   
                 </tr>
                 @endforeach
             </tbody>
@@ -75,7 +95,9 @@
 
 
     </div>
-    {{$stock_data->links()}}
+    <div class="mx-auto my-2">
+        {{$stock_data->links()}}
+    </div>
 </div>
 
 <style>

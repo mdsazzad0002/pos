@@ -97,7 +97,7 @@ use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderCo
 use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 use App\Http\Controllers\FooterStyleController;
 use App\Http\Controllers\HeaderStyleController;
-
+use App\Http\Controllers\OrderStatusController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -427,13 +427,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-
-        // Vat management
-        Route::resource('/vat', vatController::class)->names('vat');
-        Route::get('/vat/delete/{vat}', [vatController::class, 'delete'])->name('vat.delete');
-        Route::get('/vat/getvat/get', [vatController::class, 'getVats'])->name('vat.select');
-
-
         // Discount management
         Route::resource('/discount', discountController::class)->names('discount');
         Route::get('/discount/delete/{vat}', [discountController::class, 'delete'])->name('discount.delete');
@@ -742,8 +735,35 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
         Route::get('/filter_purchase/get', [ProductController::class, 'filterPurchase'])->name('filter_purchase');
 
+        Route::get('/{product}/purchase_history_by_product/', [ProductController::class, 'purchase_history_by_product'])->name('purchase_history_by_product');
+
     });
     // End product Management
+
+
+    // Admin
+    // Vat Management
+    Route::resource('/vat', VatController::class)->names('vat');
+    Route::group(['as' => 'vat.', 'prefix' => 'vat'], function() {
+        Route::get('/delete/{vat}', [VatController::class, 'delete'])->name('delete');
+        Route::get('/getVat/get', [VatController::class, 'getVat'])->name('select');
+    });
+    // End Vat Management
+    
+
+
+    // Admin
+    // order_status Management
+    Route::resource('/order_status', OrderStatusController::class)->names('order_status');
+    Route::group(['as' => 'order_status.', 'prefix' => 'order_status'], function() {
+        Route::get('/delete/{order_status}', [OrderStatusController::class, 'delete'])->name('delete');
+        // Route::get('/getOrderStatus/get', [OrderStatusController::class, 'getOrderStatus'])->name('select');
+    });
+   
+
+    
+
+      
 
 
     // Admin

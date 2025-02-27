@@ -41,9 +41,11 @@
             <a class="items_active" href="{{ url($filter_page->slug) }}?category={{  $product->category_info->slug ?? '' }}">{{ $product->category_info->name ?? '' }}</a>
         @endif
 
-        @foreach ($product->category_info->subcategories_info as $items) ,
-            <a @if($product->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
-        @endforeach
+        @if($product->category_info?->subcategories_info?->count() > 0)
+            @foreach ($product->category_info->subcategories_info as $items) ,
+                <a @if($product->sub_category == $items->id) class="items_active" @endif  href="{{ url('filter') }}?subcategory={{   $items->slug  }}">{{  $items->name }}</a>
+            @endforeach
+        @endif
     </p>
 </div>
 
