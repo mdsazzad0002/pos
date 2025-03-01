@@ -12,7 +12,7 @@ use Yajra\DataTables\DataTables;
 use App\Models\product;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-
+use App\Models\Stock;
 class OrderController extends Controller
 {
     /**
@@ -307,9 +307,9 @@ class OrderController extends Controller
 
     public function update_status(Request $request, order $order){
 
-        $statuses = OrderStatus::get();
+     
 
-        return view('admin.order.update_status', compact('order', 'statuses'));
+        return view('admin.order.update_status', compact('order'));
     }
     public function update_status_post(Request $request, order $order){
         // return $request->all();
@@ -319,6 +319,94 @@ class OrderController extends Controller
 
         ]);
         $validator->validate();
+
+
+
+        $order_current_status = $order->latestEventStatus()?->status_data;
+
+        if($order_current_status->qty_status == 1){
+
+            // 1 for add and 2 for remove
+
+            foreach($request->stock as $key => $value){
+                $stock = Stock::where('id', $key)->first();
+                // dd($stock);
+
+                if($stock){
+                    // add remove items means not sale
+                    if($value == 0 && $order_current_status->qty_add_remove == 1 ){
+                        if($stock->status == $order_current_status->qty_add_remove){
+                            $stock->status = $order_current_status->qty_add_remove;
+                            $stock->save();
+
+                            if($stock->size != 0){
+                                $size = VariantOption::find($stock->size);
+                                $size->quantity += $value;
+                                $size->save();
+                            }else{
+                                $product = product::find($stock->product_id);
+                                $product->quantity += $value;
+                                $product->save();
+                            }
+                        }
+                    }elseif($value == 0 && $order_current_status->qty_add_remove == 2){
+                        if($stock->status == $order_current_status->qty_add_remove){
+                            $stock->status = $order_current_status->qty_add_remove;
+                            $stock->save();
+    
+                            if($stock->size != 0){
+                                $size = VariantOption::find($stock->size);
+                                $size->quantity -= $value;
+                                $size->save();
+                            }else{
+                                $product = product::find($stock->product_id);
+                                $product->quantity -= $value;
+                                $product->save();
+                            }
+                        }
+                        
+                    }elseif($value == 1 && $order_current_status->qty_add_remove == 1){
+
+                        // selling product
+                        if($stock->status != $order_current_status->qty_add_remove){
+                            $stock->status = $order_current_status->qty_add_remove;
+                            $stock->save();
+
+                            if($stock->size != 0){
+                                $size = VariantOption::find($stock->size);
+                                $size->quantity -= $value;
+                                $size->save();
+                            }else{
+                                $product = product::find($stock->product_id);
+                                $product->quantity -= $value;
+                                $product->save();
+                            }
+                        }
+
+                        
+                    }elseif($value == 1 && $order_current_status->qty_add_remove == 2){
+                        // selling product
+                        if($stock->status != $order_current_status->qty_add_remove){
+                            $stock->status = $order_current_status->qty_add_remove;
+                            $stock->save();
+    
+                            if($stock->size != 0){
+                                $size = VariantOption::find($stock->size);
+                                $size->quantity += $value;
+                                $size->save();
+                            }else{
+                                $product = product::find($stock->product_id);
+                                $product->quantity += $value;
+                                $product->save();
+                            }
+                        }
+                    }
+
+                }
+
+            }
+        }
+
 
         $order_event = OrderEvent::where('order_id', $order->id)->latest()->first();
         if($order_event){

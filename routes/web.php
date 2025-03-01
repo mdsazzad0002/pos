@@ -591,7 +591,7 @@ Route::get('/locale/{lang}', [LanguageController::class, 'switchLanguage']);
 
 
 
-Route::middleware(['guest', 'web'])->group(function () {
+Route::middleware(['guest', 'web', 'setlocale'])->group(function () {
 
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
@@ -614,7 +614,7 @@ Route::middleware(['guest', 'web'])->group(function () {
                 ->name('password.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'setlocale')->group(function () {
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

@@ -23,6 +23,19 @@
             <input type="checkbox" class="toggle safe_items_toggler"  placeholder=" Status" name="qty_status" {{ $orderStatus ? ( $orderStatus->qty_status == 1 ? 'checked' : '') : '' }} id="status" value="1">
         </label>
     </div>
+
+    @php
+        $array =  $orderStatus ? (json_decode($orderStatus->under_items) ?? []) : [];
+    @endphp
+    <div>
+        <label for="under_items">Under Items</label> <br/>
+        <select name="under_items[]" id="under_items" multiple class="form-control mb-2 select2" placeholder="Under Items">
+        @foreach ($order_status_all as $order_status )
+            <option value="{{ $order_status->id }}" {{ in_array($order_status->id, $array) ? 'selected' : '' }}>{{ $order_status->name }}</option>
+        @endforeach
+        </select>
+    </div>
+
     <div class="safe_items">
         <div class="form-group mb-2">
             <label for="qty_add_remove">Type</label>
@@ -33,18 +46,7 @@
             </select>
         </div>
 
-        @php
-            $array =  $orderStatus ? (json_decode($orderStatus->under_items) ?? []) : [];
-        @endphp
-        <div>
-            <label for="under_items">Under Items</label> <br/>
-            <select name="under_items[]" id="under_items" multiple class="form-control mb-2 select2" placeholder="Under Items">
-            @foreach ($order_status_all as $order_status )
-                <option value="{{ $order_status->id }}" {{ in_array($order_status->id, $array) ? 'selected' : '' }}>{{ $order_status->name }}</option>
-            @endforeach
-            </select>
-        </div>
-
+      
     </div>
 
     <br/>

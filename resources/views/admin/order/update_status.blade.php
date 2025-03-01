@@ -12,15 +12,45 @@
         @endforeach
     </table>
   
+    @php
+        $latest_status = $order->latestEventStatus()?->status_data ?? [];
+        $child_status = $latest_status->ChildItems() ?? [];
+    @endphp
 
+
+
+   
     <div class="form-group mb-2">
         <label for="status">Status</label>
         <select name="status" class="form-control select2" data-model="true" id="status">
-            @foreach($statuses as $status)
+            @foreach($child_status as $status)
                 <option value="{{ $status->id }}" >{{ $status->name }}</option>
             @endforeach
         </select>
     </div>
+
+        @if ($latest_status)
+            @if ($latest_status->qty_status == 1)
+            
+              @foreach ($order->order_items as $items)
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Variant Name</th>
+                            <th>Product Quantity</th>
+                            <th class="text-center">Stock</th>
+                        </tr>
+                        <tr>
+                            <td>{{ $items->variant_size->name ?? 'No Variant' }}</td>
+                            <td>{{ $items->quantity ?? '' }}</td>
+                            <td>
+                                <input type="checkbox" checked hidden name="stock[{{ $items->id }}]" value="0" id="">
+                                <input type="checkbox" class="form-control cursor-pointer" @if($items->status == 1 && $items->status > 2) checked @endif ({{ $items->stock == 1 ? 'checked' : '' }}) name="stock[{{ $items->id }}]" value="1" id="">
+                            </td>
+                        </tr>
+                    </table>
+              @endforeach
+            @endif
+        @endif
 
     <div class="form-group mb-2">
         <label for="note">Note</label>

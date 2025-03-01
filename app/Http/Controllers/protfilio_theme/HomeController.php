@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
+use App\Models\Stock;
 
 class HomeController extends Controller
 {
@@ -923,6 +924,26 @@ class HomeController extends Controller
             $order_event->updater = auth()->guard('customer')->user()->id;
             $order_event->save();
             // Order Event add end
+
+
+            // Order Data Management
+            // dd($card_information['subtotal']['product_ids']);
+            foreach ($card_information['subtotal']['product_ids'] as $key => $product) {
+              
+                foreach ($product as $product_key => $items) { // Extract inner array
+                    // dd($items['product_id']);
+                    $stock = new Stock();
+                    $stock->order_id = $order->id;
+                    $stock->product_id = $items['product_id'] ?? 0; // Ensure key exists
+                    $stock->variant_id = $items['size'] ?? 0; // Check if variant exists
+                    $stock->quantity = $items['quantaty'] ?? 0; // Fix typo: "quantaty" to "quantity" if necessary
+                    $stock->save();
+                }
+
+                // dd($product);
+            }
+
+            
         }
 
 
@@ -958,7 +979,7 @@ class HomeController extends Controller
 
 
 
-        session()->put('front_product', []);
+        // session()->put('front_product', []);
 
         return json_encode([
             'status' => true,

@@ -11,6 +11,6 @@ class OrderEvent extends Model
 
     public function status_data()
     {
-        return $this->hasOne(OrderStatus::class,  'id','status_id');
+        return $this->belongsTo(OrderStatus::class, 'status_id');
     }
 }

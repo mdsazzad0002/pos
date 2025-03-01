@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
 
             $table->integer('qty')->default(0);
-            $table->integer('qty_status')->default(0);
+            $table->integer('qty_status')->default(0)->comment('0 for nothing, 1 for positive 2 for negative');
             $table->integer('qty_add_remove')->default(0);
 
             $table->text('under_items')->nullable();

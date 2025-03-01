@@ -47,6 +47,15 @@
                                 <li>
                                     <a class="dropdown-item text-danger" href="#">History Unser working</a>
                                 </li>
+                                <li>
+                                    <a class='dropdown-item text-primary' 
+                                         href="javascript:void(0)"
+                                        data-target="#ajax_modal_dialog_add"
+                                        data-dialog='modal-dialog-scrollable modal-xl'  
+                                        onclick='button_ajax(this)' 
+                                        data-title='Purchase History of `{{  $items->name }}`'
+                                        data-href='{{ route('admin.product.purchase_history_by_product', $items->id) }}'>View Purchse Histoy</a>
+                                </li>
                                
                             </ul>
                         </div>

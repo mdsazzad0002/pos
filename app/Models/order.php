@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customer;
+use App\Models\Stock;
 
 class order extends Model
 {
@@ -58,8 +59,20 @@ class order extends Model
     public function getOrderStatusAttribute(){
         return $this->order_status();
     }
+
     public function payment_method_info(){
         return $this->hasOne(PaymentCredential::class, 'id', 'payment_method');
     }
+
+    public function latestEventStatus() {
+        return $this->order_events()->latest()->first();
+    }
+
+    public function order_items() {
+        return $this->hasMany(Stock::class, 'order_id', 'id');
+    }
+
+ 
+
 
 }
