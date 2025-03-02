@@ -363,15 +363,13 @@ class HomeController extends Controller
                     $request['size'] = 0;
                 }
 
-                $product_cart = session()->get( $source_type, []);
+                $product_cart = session()->get($source_type, []);
+                if($product_cart == null){
+                    $product_cart = [];
+                }
 
-
-                // Loop through the cart to check if the product exists
-                foreach ($product_cart as $key =>  &$item) {
-                    if (isset($item[$product_key])) {
-                        $found = true;
-                        break;
-                    }
+                if(isset($product_cart[$product_key])){
+                    $found = true;
                 }
             }
             
@@ -433,9 +431,9 @@ class HomeController extends Controller
 
                 // If the product exists, increase the quantity
                 if($request->has('quantity')) {
-                    $product_cart[ $product_key]['quantaty'] = $request->quantity;
+                    $product_cart[$product_key]['quantaty'] = $request->quantity;
                 }else{
-                    $product_cart[ $product_key]['quantaty'] += 1;
+                    $product_cart[$product_key]['quantaty'] += 1;
 
                 }
                 $found = true;
@@ -473,28 +471,23 @@ class HomeController extends Controller
                 
                 if (!$found) {
                     if($request->has('quantity')) {
-                        $product_cart[] = [
-                             $product_key => [
+                        $product_cart[$product_key] = [
                                 'product_id' => $product_id,
                                 'quantaty' => $request->quantity,
                                 'size' => $size,
-    
-                            ]
                         ];
                     }else{
-                        $product_cart[] = [
-                             $product_key => [
+                        $product_cart[$product_key] = [
                                 'product_id' => $product_id,
                                 'quantaty' => 1,
                                 'size' => $size,
-    
-                            ]
                         ];
     
                     }
                 }
 
                 session()->put( $source_type, $product_cart);
+
 
                 if($this->verify_add_to_cart($request)['found'] == false){
                     if($attempt == 1){
@@ -627,11 +620,15 @@ class HomeController extends Controller
                     'product_ids' =>  $product_cart
                 ]
             ];
+// dd($product_cart);
+            foreach ($product_cart as $key =>  &$itemdata) {
 
-            foreach ($product_cart as $key =>  &$item) {
 
-
-                foreach($item as $key => $itemdata){
+                  // Product Single data
+                    if(!is_array($itemdata) && !is_object($itemdata)){
+                        continue;
+                        
+                    }
                     $product = product::find($itemdata['product_id']);
 
                     if(!$product){
@@ -705,7 +702,7 @@ class HomeController extends Controller
                     $data_array['subtotal']['price'] +=   $cal_total_with_vat * $cal_quantity;
 
 
-                }
+              
 
                 $coupon_id = session()->get('coupon_id',0);
                 $coupon = coupon::find($coupon_id);
@@ -722,6 +719,8 @@ class HomeController extends Controller
 
                 // Final price - Coupoon price =  Final Coupon without price
                 $data_array['subtotal']['coupon_without_price'] =   $data_array['subtotal']['price'] -  $coupon_price;
+
+                // Final Single items
 
 
             }

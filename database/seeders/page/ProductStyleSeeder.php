@@ -19,7 +19,7 @@ class ProductStyleSeeder extends Seeder
                 'key' => '_product_style.product_style1',
                 'title' => 'Product Style Style',
                 'upload_id'=>'preset/_product_style/product_style1.png',
-                'status' => 1,
+                'status' => 0,
                 'background_color' => '#ffffff',
                 'details' => '
                    Product Style 1
@@ -29,10 +29,20 @@ class ProductStyleSeeder extends Seeder
                 'key' => '_product_style.product_style2',
                 'title' => 'Product Style Style',
                 'upload_id'=>'preset/_product_style/product_style2.png',
-                'status' => 1,
+                'status' => 0,
                 'background_color' => '#ffffff',
                 'details' => '
                    Product Style 2
+                ',
+            ],
+            'Product_style3' => [
+                'key' => '_product_style.product_style3',
+                'title' => 'Product Style Style',
+                'upload_id'=>'preset/_product_style/product_style3.png',
+                'status' => 1,
+                'background_color' => '#ffffff',
+                'details' => '
+                   Product Style 3
                 ',
             ],
         ];

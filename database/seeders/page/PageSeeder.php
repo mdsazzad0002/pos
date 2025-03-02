@@ -206,6 +206,28 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'order_success',
             ],
+            [
+                'name' => '404',
+                'slug' => '404',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => '404_error',
+            ],
+            [
+                'name' => '503',
+                'slug' => '503',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => '503_error',
+            ],
+            [
+                'name' => '401',
+                'slug' => '401',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => '401_error',
+            ],
+           
 
 
         ];
