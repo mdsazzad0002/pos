@@ -134,7 +134,7 @@
         var title_style = e.value;
         var data_class = e.dataset.class;
         console.log(data_class);
-        $(data_class).attr('src', "{{ asset('uploads/preset/title/') }}/"+title_style+".png");
+        $(data_class).attr('src', "{{ asset('preset/title/') }}/"+title_style+".png");
     }
 </script>
 

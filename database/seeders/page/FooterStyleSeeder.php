@@ -19,7 +19,7 @@ class FooterStyleSeeder extends Seeder
             'footer_style' => [
                 'key' => 'footer_style.footer_style1',
                 'title' => 'Footer Style Style',
-                'upload_id'=>'uploads/preset/footer_style/footer_style1.png',
+                'upload_id'=>'preset/footer_style/footer_style1.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '
@@ -29,7 +29,7 @@ class FooterStyleSeeder extends Seeder
             'footer_style2' => [
                 'key' => 'footer_style.footer_style2',
                 'title' => 'Footer Style Style 2',
-                'upload_id'=>'uploads/preset/footer_style/footer_style2.png',
+                'upload_id'=>'preset/footer_style/footer_style2.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '

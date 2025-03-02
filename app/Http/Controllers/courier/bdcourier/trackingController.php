@@ -9,6 +9,7 @@ class trackingController extends Controller
 {
     public function tracking(Request $request){
 
+      $phone = $request->phone ?? null;
 
         if(settings('bd_courier_tracking_status', 27) == 1){
 
@@ -37,15 +38,23 @@ class trackingController extends Controller
         if($response === false) {
              echo 'cURL Error: ' . curl_error($curl);
         } else {
-              return ($response);  // Show the response
+              //$response;  // Show the response
         }
 
         curl_close($curl);
 
 
-        return $request;
-    }else{
-        return 'Please Enabled courier settings';
+        // return $request;
+        return view('admin.courier.bdcourier.index', compact('response','phone'));
+      }else{
+        return view('admin.courier.bdcourier.index', [
+            'response' => [
+                'message' => 'Please Enabled courier settings',
+                'status' => 'error'
+            ],
+            'phone' => $phone
+        ]);
+       
     }
     }
 }

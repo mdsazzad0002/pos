@@ -88,6 +88,11 @@ class OrderStatusController extends Controller
      */
     public function destroy(OrderStatus $orderStatus)
     {
-        //
+        $orderStatus->delete();
+        return json_encode([
+            'title'=> 'Order Status Deleted Successfully',
+            'type'=> 'success',
+            'refresh'=>'false',
+        ]);
     }
 }

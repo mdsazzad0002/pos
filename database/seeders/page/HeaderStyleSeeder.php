@@ -17,7 +17,7 @@ class HeaderStyleSeeder extends Seeder
             'header_style' => [
                 'key' => 'header_style.header_style1',
                 'title' => 'Header Style',
-                'upload_id'=>'uploads/preset/header_variant/header_style1.png',
+                'upload_id'=>'preset/header_variant/header_style1.png',
                 'status' => 0,
                 'background_color' => '#ffffff',
                 'details' => '
@@ -41,7 +41,7 @@ class HeaderStyleSeeder extends Seeder
             'header_style2' => [
                 'key' => 'header_style.header_style2',
                 'title' => 'Header Style',
-                'upload_id'=>'uploads/preset/header_variant/header_style2.png',
+                'upload_id'=>'preset/header_variant/header_style2.png',
                 'status' => 0,
                 'background_color' => '#ffffff',
                 'details' => '
@@ -65,7 +65,7 @@ class HeaderStyleSeeder extends Seeder
             'header_style3' => [
                 'key' => 'header_style.header_style3',
                 'title' => 'Header Style',
-                'upload_id'=>'uploads/preset/header_variant/header_style3.png',
+                'upload_id'=>'preset/header_variant/header_style3.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '
@@ -89,7 +89,7 @@ class HeaderStyleSeeder extends Seeder
             'header_style4' => [
                 'key' => 'header_style.header_style4',
                 'title' => 'Header Style 4',
-                'upload_id'=>'uploads/preset/header_variant/header_style4.png',
+                'upload_id'=>'preset/header_variant/header_style4.png',
                 'status' => 0,
                 'background_color' => '#ffffff',
                 'details' => '

@@ -131,6 +131,9 @@ class rolepermissionsedder extends Seeder
                 // custom order
                 'custom_order type read', 'custom_order bulk read', 'custom_order custom read',
 
+                // custom order_status
+                'order_status read', 'order_status delete', 'order_status edit', 'order_status create',
+
                 // offerbanner
                 'offerbanner read',
                 'offerbanner create',

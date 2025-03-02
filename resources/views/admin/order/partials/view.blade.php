@@ -86,6 +86,8 @@ Product Info
 
 
 
+@include('admin.courier.bdcourier.bdcourier_report', ['phone' => $order->customer->phone])
+
 
 <div>
     <br>

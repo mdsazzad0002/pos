@@ -10,12 +10,12 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Order Status
         <div>
-            @if(config('app.env') == 'local')
-                {{-- @can('user create') --}}
+          
+                @can('order_status create')
 
                 <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-dialog="modal-lg modal-dialog-centered" data-title="Add New Order Status"  data-href="{{ route('admin.order_status.create') }}">+ Add New Order Status</button>
-                {{-- @endcan --}}
-            @endif
+                @endcan
+          
         </div>
     </div>
     <div class="card-body">
@@ -61,7 +61,9 @@
                                                         {{ $item->name }}
                                                     </td>
                                                     <td>
-                                                        <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-title="Edit Order Status" data-dialog="modal-lg modal-dialog-centered" data-href="{{ route('admin.order_status.edit', $item->id) }}">Edit</button>
+                                                        @can('order_status edit')
+                                                             <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-title="Edit Order Status" data-dialog="modal-lg modal-dialog-centered" data-href="{{ route('admin.order_status.edit', $item->id) }}">Edit</button>
+                                                        @endcan
                                                      </td>
 
                                                 </tr>
@@ -75,7 +77,12 @@
 
                         </td>
                         <td>
-                           <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-title="Edit Order Status" data-dialog="modal-lg modal-dialog-centered" data-href="{{ route('admin.order_status.edit', $order_status->id) }}">Edit</button>
+                            @can('order_status edit')
+                                 <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-title="Edit Order Status" data-dialog="modal-lg modal-dialog-centered" data-href="{{ route('admin.order_status.edit', $order_status->id) }}">Edit</button>
+                            @endcan
+                            @can('order_status delete')
+                                 <button class="btn btn-primary btn-sm" onclick="button_ajax(this)" data-title="Delete Order Status" data-href="{{ route('admin.order_status.delete', $order_status->id) }}">Delete</button>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

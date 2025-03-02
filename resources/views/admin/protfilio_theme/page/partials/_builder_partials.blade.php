@@ -90,7 +90,7 @@
                         </select>
                     </div>
                     <div class="col-6">
-                        <img class="title_style_img{{ $item->id }}" src="{{ asset('uploads/preset/title/'.$item->title_style.'.png') }}" alt="">
+                        <img class="title_style_img{{ $item->id }}" src="{{ asset('preset/title/'.$item->title_style.'.png') }}" alt="">
                     </div>
                 </div>
                 @endif

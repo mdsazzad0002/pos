@@ -17,7 +17,7 @@ class CompareStyleSeeder extends Seeder
             'compare_style' => [
                 'key' => '_compare_style.compare_style1',
                 'title' => 'Header Style',
-                'upload_id'=>'uploads/preset/compare_variant/compare_style1.png',
+                'upload_id'=>'preset/compare_variant/compare_style1.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '

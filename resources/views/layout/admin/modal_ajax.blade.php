@@ -4,9 +4,9 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade ajax_modal_dialog" id="ajax_modal"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="ajax_modalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+<div class="modal fade ajax_modal_dialog" id="ajax_modal"   tabindex="-1" role="dialog" aria-labelledby="ajax_modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content scrolla">
             <div class="modal-header">
                 <h5 class="modal-title" id="eajax_modalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -29,8 +29,8 @@
 </button>
 
 <!-- Modal -->
-<div class="modal fade ajax_modal_dialog_add" id="ajax_modal_dialog_add"  data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add_modal_lLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade ajax_modal_dialog_add" id="ajax_modal_dialog_add"   tabindex="-1" role="dialog" aria-labelledby="add_modal_lLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="eajax_modalLabel">Modal title</h5>

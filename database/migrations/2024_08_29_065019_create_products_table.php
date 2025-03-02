@@ -58,6 +58,7 @@ return new class extends Migration
             $table->string('variant_on')->default(0);
             $table->string('variant_option')->nullable();
             $table->string('status')->default(0);
+            
 
 
             $table->string('landing_page_bg')->nullable();
