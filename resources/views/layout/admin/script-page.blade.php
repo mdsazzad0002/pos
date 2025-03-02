@@ -14,16 +14,12 @@
 <!-- Sparkline -->
 <script src="{{ asset('vendor/sparklines/sparkline.js')}}"></script>
 <!-- JQVMap -->
-<script src="{{ asset('vendor/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{ asset('vendor/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
-<!-- jQuery Knob Chart -->
-<script src="{{ asset('vendor/jquery-knob/jquery.knob.min.js')}}"></script>
+
 <!-- daterangepicker -->
 <script src="{{ asset('vendor/moment/moment.min.js')}}"></script>
 <script src="{{ asset('vendor/daterangepicker/daterangepicker.js')}}"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-{{--  <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>  --}}
-<!-- Summernote -->
+<script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.js')}}"></script>
+
 <script src="{{ asset('vendor/summernote/summernote.js')}}"></script>
 
 
@@ -37,8 +33,8 @@
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script src="{{ asset('vendor/jszip/jszip.js') }}"></script>
-<script src="{{ asset('vendor/datatables-buttons/js/buttons.flash.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables-buttons/js/buttons.flash.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 
@@ -53,21 +49,27 @@
 
 
 <script>
-    function ActiveMenuCenter() {
+function ActiveMenuCenter() {
+    var container = document.querySelector('.sidebar .os-viewport');
 
-            var container = document.querySelectorAll('.sidebar .os-viewport')[0];
-            var activeItem = container.querySelectorAll('a.active');
-            if(activeItem.length > 0){
-                var activeItem = activeItem[activeItem.length - 1];
+    // Check if the container exists before proceeding
+    if (container) {
+        var activeItems = container.querySelectorAll('a.active');
 
-            }
-            if (activeItem) {
-                var containerRect = container.getBoundingClientRect();
-                var activeItemRect = activeItem.getBoundingClientRect();
-                var scrollTop = activeItem.offsetTop - (containerRect.height / 2) + (activeItemRect.height / 2);
-                container.scrollTop = scrollTop;
-            }
+        // Proceed only if activeItems is not empty
+        if (activeItems.length > 0) {
+            var activeItem = activeItems[activeItems.length - 1];
+
+            var containerRect = container.getBoundingClientRect();
+            var activeItemRect = activeItem.getBoundingClientRect();
+            var scrollTop = activeItem.offsetTop - (containerRect.height / 2) + (activeItemRect.height / 2);
+            container.scrollTop = scrollTop;
+        }
+    } else {
+       // console.error('Container element not found');
     }
+}
+
 
     // Scroll to the active item on load
 

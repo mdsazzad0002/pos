@@ -90,7 +90,7 @@
                     success:function(data){
                         if(data.type == 'error'){
                             flasher.error(data.title);
-                        } 
+                        }
                         if(data.type == 'info'){
                             flasher.info(data.title);
                         }
@@ -449,6 +449,9 @@
             }
 
         }
+
+
+        
 
 
 

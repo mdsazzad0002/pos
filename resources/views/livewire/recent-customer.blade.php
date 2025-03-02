@@ -1,6 +1,8 @@
 <div>
 
 
+
+
     <!-- USERS LIST -->
     <div class="card latest_customer">
         <div class="card-header">
@@ -23,9 +25,11 @@
 
                 @foreach ($customer as $key => $items)
                 <li>
-                    <img src="{{ dynamic_asset($items->upload_id) }}" alt="User Image">
-                    <a data-dialog=" modal-dialog-centered"  onclick="button_ajax(this)" data-title="{{ $items->name }} info" data-href="{{ url('admin/customer') }}/{{ $items->id }}" class="users-list-name" href="#">{{ $items->name }}</a>
-                    <span class="users-list-date">{{ $items->created_at->diffForHumans() }}</span>
+                    <a data-dialog=" modal-dialog-centered"  onclick="button_ajax(this)" data-title="{{ $items->name }} info" data-href="{{ url('admin/customer') }}/{{ $items->id }}" class="users-list-name" href="#">
+                        <img src="{{ dynamic_asset($items->upload_id) }}" alt="User Image"> <br/>
+                        {{ $items->name }} <br/>
+                        <span class="users-list-date">{{ $items->created_at->diffForHumans() }}</span>
+                    </a>
                 </li>
                 @endforeach
 
@@ -36,7 +40,7 @@
                     <br>
                     <h3>Please Wait ...</h3>
                 </div>
-                <div wire:poll.4000ms.once="loadCustomer"></div>
+                <div wire:poll.400ms.once="loadCustomer"></div>
             @endif
 
 

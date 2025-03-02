@@ -85,6 +85,7 @@ use App\Http\Controllers\TrackingOrderController;
 use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductStyleController;
+use App\Http\Controllers\CalendarEventController;
 
 
 
@@ -415,7 +416,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::resource('/category', CategoryController::class)->names('category');
         Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
         Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
-        
+
         Route::get('/category/category_/for_order', [CategoryController::class, 'category_for_order'])->name('category.category_for_order');
         Route::post('/category/category_/for_order', [CategoryController::class, 'category_for_order_post']);
 
@@ -500,9 +501,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/mail', [MailSettingController::class, 'index'])->name('mail.index');
         Route::post('/mail', [MailSettingController::class, 'store'])->name('mail.store');
         Route::post('/mail/test', [MailSettingController::class, 'testMail'])->name('mail.test');
-        
+
         Route::put('/mail/template/{mailTemplate}', [MailTemplateController::class, 'update'])->name('mail.update');
-        
+
         // Route::get('/imap',
         // function () {
         //     /** @var \Webklex\PHPIMAP\Client $client */
@@ -513,12 +514,15 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         // }
         // )->name('imap.index');
 
-        
+
         Route::get('/imap', [MailSettingController::class, 'imap_index'])->name('imap.index');
 
-        
-        
-     
+
+        Route::get('calenderevent', [CalendarEventController::class, 'index'])->name('calenderevent.index');
+        Route::post('calenderevent', [CalendarEventController::class, 'store'])->name('calenderevent.store');
+        Route::delete('calenderevent/{calenderevent}', [CalendarEventController::class, 'destroy']);
+
+
 
 
 
@@ -749,7 +753,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/getVat/get', [VatController::class, 'getVat'])->name('select');
     });
     // End Vat Management
-    
+
 
 
     // Admin
@@ -759,11 +763,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/delete/{order_status}', [OrderStatusController::class, 'delete'])->name('delete');
         // Route::get('/getOrderStatus/get', [OrderStatusController::class, 'getOrderStatus'])->name('select');
     });
-   
 
-    
 
-      
+
+
+
 
 
     // Admin

@@ -345,3 +345,26 @@ function settings_data(array $data){
 
 }
 
+
+function getLocation($ip) {
+    try {
+        $response = file_get_contents("http://ip-api.com/json/{$ip}");
+
+        if ($response === false) {
+            return (object) [
+                "status" => "fail",
+                "message" => "Failed to get location"
+            ];
+        }
+
+        return json_decode($response);
+    } catch (\Exception $e) {
+        return (object) [
+            "status" => "fail",
+            "message" => "Invalid IP Address"
+        ];
+    }
+
+    // dd($data);
+
+}

@@ -42,7 +42,7 @@
                     <br>
                     <h3>Please Wait ...</h3>
                 </div>
-                <div wire:poll.6000ms.once="loadProducts"></div>
+                <div wire:poll.400ms.once="loadProducts"></div>
 
             @endif
         </div>

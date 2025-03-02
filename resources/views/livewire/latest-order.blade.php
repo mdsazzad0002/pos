@@ -59,7 +59,7 @@
                 <br>
                 <h3>Please Wait ...</h3>
             </div>
-            <div wire:poll.2000ms.once="loadData"></div>
+            <div wire:poll.400ms.once="loadData"></div>
             @endif
         </div>
         <!-- /.table-responsive -->

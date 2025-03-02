@@ -20,7 +20,8 @@ class VerifyCsrfToken extends Middleware
         'paypal/*',
         'checkout',
         'admin/homePageManage',
-        'admin/product/*'
+        'admin/product/*',
+        'admin/calenderevent',
 
     ];
 }

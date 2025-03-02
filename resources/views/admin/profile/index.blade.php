@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title  --}}
-@section('title', settings('Prof_ile', 10))
+@section('title', 'Profile of '.auth()->user()->name)
 
 {{-- Content Extends  --}}
 @section('content')
