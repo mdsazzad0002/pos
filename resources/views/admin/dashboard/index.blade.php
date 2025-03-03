@@ -70,7 +70,7 @@
             <div class="row connectedSortable ">
 
                 {{-- small box --}}
-                <div class=" col-xl-4 col-6 mb-2">
+                <div class=" col-lg-4 col-6 col-xl-3 mb-2">
                     <div class="card small-box  bg-secondary " onclick="copyToClipboard('{{ url('/') }}')"
                         title="Click to Copy">
                         <div class="card-header card_count_loaded p-0">
@@ -88,7 +88,7 @@
                 </div>
 
                 {{-- small box --}}
-                <div class=" col-xl-4 col-6 mb-2">
+                <div class=" col-lg-4 col-6 col-xl-3 mb-2">
                     <div class="card small-box  bg-secondary ">
                         <div class="card-header card_count_loaded p-0"
                             style="    cursor: move;
@@ -118,7 +118,7 @@
 
                 {{--  Order Card  --}}
                 @can('order read')
-                    <x-dashboard.link_card column="col-xl-4 col-6 mb-2" bg="bg-primary" items="orders" title="All Order"
+                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="orders" title="All Order"
                         icon="fas fa-luggage-cart" link="{{ route('admin.order.index') }}" sort="sort_1" />
                 @endcan
 
@@ -126,7 +126,7 @@
 
                 {{--  Purchause  --}}
                 @can('purchase read')
-                    <x-dashboard.link_card column="col-xl-4 col-6 mb-2" bg="bg-primary" items="purchases" title="All Purchase"
+                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="purchases" title="All Purchase"
                         icon="fas fa-store-alt" link="{{ route('admin.purchase.index') }}" sort="sort_2" />
                 @endcan
                 {{--  End Purchase  --}}
@@ -135,7 +135,7 @@
 
                 {{--  Customer  --}}
                 @can('customer read')
-                    <x-dashboard.link_card column="col-xl-4 col-6 mb-2" bg="bg-primary" items="customers" title="Customer"
+                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="customers" title="Customer"
                         icon="far fa-comments" link="{{ route('admin.customer.index') }}" sort="sort_4" />
                 @endcan
                 {{--  End Customer  --}}
@@ -145,7 +145,7 @@
 
                 {{--  Category  --}}
                 @can('category read')
-                    <x-dashboard.link_card column="col-xl-4 col-6 mb-2" bg="bg-success" items="categories" title="All category"
+                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-success" items="categories" title="All category"
                         icon="far fa-comments" link="{{ route('admin.category.index') }}" sort="sort_4" />
                 @endcan
                 {{--  End Category  --}}

@@ -1,21 +1,18 @@
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=SUSE:wght@100..800&display=swap');
-
-
-    .phone {
-        height: 350px;
+    .product_style_3 .phone {
+        aspect-ratio:10/11;
         width: auto;
     }
 
-    .card {
+    .product_style_3 .card {
         position: relative;
-        height: 520px;
-        background: #191919;
+     
+        background: var(--primary-color);
         border-radius: 20px;
         overflow: hidden;
     }
 
-    .card::before {
+    .product_style_3 .card::before {
         content: "";
         position: absolute;
         top: -50%;
@@ -26,22 +23,23 @@
         transition: 0.5s;
     }
 
-    .card:hover::before {
+    .product_style_3 .card:hover::before {
         top: -70%;
         transform: skewY(390deg);
     }
 
-    .card::after {
-        content: "Samsung Galaxy S23 Ultra";
+    .product_style_3 .card::after {
+        content: "{{ settings('app_name_short',9) }}";
         position: absolute;
-        bottom: 0;
-        left: 0;
+        bottom: 25px;
+        left: 25px;
         font-weight: 600;
-        font-size: 4em;
-        color: rgba(0, 0, 0, 0.1);
+        font-size:4rem;
+        line-height:2.5rem;
+        color: rgb(255 255 255 / 15%);
     }
 
-    .card .img-container {
+    .product_style_3 .card .img-container {
         position: relative;
         width: 100%;
         display: flex;
@@ -51,7 +49,7 @@
         z-inder: 1;
     }
 
-    .card .container {
+    .product_style_3 .card .content-container {
         position: relative;
         padding: 20px;
         display: flex;
@@ -61,7 +59,7 @@
         z-index: 2;
     }
 
-    .card .container h1 {
+    .card .content-container h1 {
         font-size: 18px;
 
         font-family: 'Montserrat';
@@ -71,14 +69,14 @@
         letter-spacing: 2px;
     }
 
-    .card .container .price {
+    .product_style_3 .card .content-container .price {
         font-size: 24px;
         color: white;
         font-weight: 700;
         letter-spacing: 1px;
     }
 
-    .card .container .buy {
+    .product_style_3 .card .content-container .buy {
         position: relative;
         top: 100px;
         opacity: 0;
@@ -93,7 +91,7 @@
         transition: 0.5s;
     }
 
-    .card:hover .container .buy {
+    .product_style_3 .card:hover .content-container .buy {
         top: 0;
         opacity: 1;
     }
@@ -103,46 +101,30 @@
 
 
 
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_2">
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_3">
 
-    <a class="card" href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">
-        <div class="img-container">
+    <div class="card" href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">
+        <a class="img-container">
             <img class="phone" src="{{ $product->image_url }}" alt="{{ $product->name ?? '' }}">
-        </div>
+        </a>
 
-        <div class="container">
+        <div class="content-container">
             <h1>{{ Str::title($product->name ?? '') }}</h1>
 
 
             @if ($product->variant_on == 0)
-                @if ($product->old_price > $product->selling_price)
-                    <span style="text-decoration: line-through;color: red;font-size: 1rem;">
-                        {{ settings('currency_symbol', 9) . ' ' . $product->old_price }}
-                    </span>
-                @endif
-
-
-                {{ settings('currency_symbol', 9) . ' ' . $product->selling_price }}
-
-
-                @if ($product->old_price > $product->selling_price)
-                    <div style="display:block" class="discounted_amount">
-                        <span>Save Tk.
-                            {{ settings('currency_symbol', 9) . ' ' . $product->old_price - $product->selling_price }}</span>
-                    </div>
-                @endif
+                <h3 class="price">{{ $product->selling_price ?? '' }}{{ settings('currency_symbol', 9) }}</h3>
             @else
-                Variant Available
+              
+                <h3 class="price"> Variant Available</h3>
             @endif
 
 
-            <h3 class="price">{{ $product->price ?? '' }}<small>00</small>&euro;</h3>
+            <a data-title="{{ Str::title($product->name ?? '') }}" onclick="" data-id="{{ $product->id }}" data-bs-toggle="modal"
+                data-bs-target="#productQuickView" class="buy cursor-pointer products-cart-button productQuickViewbtn"><i class="fa fa-cart-plus"></i> Buy Now </a>
 
-            <a href="#" class="buy">Buy Now</a>
-
-            <a data-title="{{ Str::title($product->name ?? '') }}" data-id="{{ $product->id }}" data-bs-toggle="modal"
-                data-bs-target="#productQuickView" class="buy"><i class="fa fa-cart-plus"></i> Buy Now </a>
+              
         </div>
 
-    </a>
+    </div>
 </div>

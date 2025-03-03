@@ -25,7 +25,7 @@
 
                 @foreach ($customer as $key => $items)
                 <li>
-                    <a data-dialog=" modal-dialog-centered"  onclick="button_ajax(this)" data-title="{{ $items->name }} info" data-href="{{ url('admin/customer') }}/{{ $items->id }}" class="users-list-name" href="#">
+                    <a data-dialog=" modal-dialog-centered"  onclick="button_ajax(this)" data-title="{{ $items->name }} info" data-href="{{ url('admin/customer') }}/{{ $items->id }}" class="users-list-name" href="javascript:void(0);">
                         <img src="{{ dynamic_asset($items->upload_id) }}" alt="User Image"> <br/>
                         {{ $items->name }} <br/>
                         <span class="users-list-date">{{ $items->created_at->diffForHumans() }}</span>
