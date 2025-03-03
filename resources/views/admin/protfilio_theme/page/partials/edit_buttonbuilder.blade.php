@@ -8,7 +8,7 @@
     $url = $url[0];
     $separator = strpos($url, '?') !== false ? '&' : '?';
     $finalUrl = $url . $separator . 'preview_page=' . $id;
-   
+
 @endphp
 
 
@@ -32,9 +32,43 @@
         <button onclick="refresh_iframe()">Refresh</button>
         <div>
             @can('page create')
-                {{-- <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  page" data-href="{{ route('admin.homePageManage.create', 'page_id='.$id) }}">+ Add New page</button> --}}
 
-                <button class="btn btn-primary" onclick="document.querySelector('.add_new_item_box').classList.toggle('hide_content')">New Page Element</button>
+            <div class="btn-group">
+                <button class="btn btn-info" onclick="document.querySelector('.add_new_item_box').classList.toggle('hide_content')"><i class="fas fa-cog"></i></button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                New Component
+                </button>
+            </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New Component</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="add_new_data_render">
+
+                                <label for="">Select Layout </label>
+                                <input type="search" placeholder="Enter Layout Name ... .. ." name="Varinatfilter"  oninput="filter_variant(this)" class="filter form-control mb-2" id="Varinatfilter">
+
+                                <div class="add_to_layout_container">
+                                        {{-- load by ajax --}}
+                                </div>
+
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-primary    mt-2" data-toggle="modal" data-target="#exampleModal">New Component</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
             @endcan
         </div>
 
@@ -47,18 +81,21 @@
 
 
         <div class="add_new_item_box hide_content">
-
-
-
-            <div class="add_new_data_render">
-
-                    <label for="">Select Layout </label>
-                    <input type="search" placeholder="Enter Layout Name ... .. ." name="Varinatfilter"  oninput="filter_variant(this)" class="filter form-control mb-2" id="Varinatfilter">
-
-                    <div class="add_to_layout_container">
-                            {{-- load by ajax --}}
+            <ul id="sortable" class="accordion">
+                @foreach ($page_content->home_page as $items)
+                <li id="{{ $items->id }}" class="menu_of_settings_page_container">
+                    <div class="row">
+                        <div class="col-md-12 menu_of_settings_page">
+                            @include('admin.protfilio_theme.page.partials._builder_partials',['item'=>$items])
+                        </div>
                     </div>
-            </div>
+                </li>
+                @endforeach
+            </ul>
+
+
+
+
         </div>
     </div>
 
@@ -84,11 +121,34 @@
 
 <script>
 
+
+window.addEventListener("message", function(event) {
+    // Ensure the message comes from a trusted origin
+    if (typeof event.data === "object" && event.data.id_selected) {
+
+        console.log(event.data.id_selected);
+        let container_element = document.querySelector('.add_new_item_box'); // The scrollable parent
+        container_element.classList.remove('hide_content');
+
+
+        let targetElement = document.querySelector('.' + event.data.id_selected);
+        if (targetElement) {
+            window.location.hash = targetElement.getAttribute('id');
+            targetElement.click();
+
+
+
+        } else {
+            console.warn("Element with class '" + event.data.id_selected + "' not found.");
+        }
+    }
+});
+
     function filter_variant(thi){
-    
+
         const filterValue = thi.value.toLowerCase(); // Get the input value and convert to lowercase
         const cards = document.querySelectorAll('.add_to_layout_container  .single_item_layout'); // Get all cards
-       
+
         cards.forEach(card => {
             const cardTitle = card.querySelector('.title_layout.main').innerHTML.toLowerCase(); // Get the card's title
             const cardTitleKey = card.querySelector('.title_layout.sm').innerHTML.toLowerCase(); // Get the card's title
@@ -112,10 +172,10 @@
     function format_layout(data){
         var html_output = '';
         // console.log(data)
-        
+
 
         Object.keys(data).forEach((key, element) => {
-            // console.log(key)  
+            // console.log(key)
                 element = data[key];
                 html_output +=  `
                    <div class="single_item_layout mb-3" onclick="add_to_items(${element.id}, {{ $id }})" style="    border: 1px solid #3e444a;cursor: pointer;">
@@ -181,6 +241,98 @@
 
 
 
+    function change_title_style(e) {
+        var title_style = e.value;
+        var data_class = e.dataset.class;
+        console.log(data_class);
+        $(data_class).attr('src', "{{ asset('preset/title/') }}/"+title_style+".png");
+    }
+    function submit_ajax_builder(){
+        $('.form_ajax_submit').on('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var form = $(this);
+            var actionUrl = form.attr('action'); // Get the action URL
+
+            $.ajax({
+                url: actionUrl,
+                type: 'POST',
+                data: form.serialize(), // Serialize form data
+                success: function(response) {
+                    // $('#responseMessage').append('<p>' + response.message + '</p>');
+                    if(response.type == 'success'){
+                        window.location.href= '';
+                    }else{
+                        alert('Something went wrong. please try again');
+                    }
+                },
+                error: function(xhr) {
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    for (let key in errors) {
+                        errorMessages += '<p>' + errors[key][0] + '</p>'; // Display the first error message
+                    }
+                    $('#responseMessage').append('<div class="error">' + errorMessages + '</div>');
+                }
+            });
+        });
+
+    }
+
+    submit_ajax_builder();
+
+
+    function sorting(){
+        $("#sortable").sortable({
+        update: function(event, ui) {
+            var sortedIDs = $(this).sortable("toArray");
+            $.ajax({
+            url: '{{ route('admin.page.edit_builder_update') }}', // Your server endpoint
+            method: 'POST',
+            data: {
+                order: sortedIDs,
+                'id' : {{ $id }},
+                '_token' : '{{  csrf_token() }}'
+            },
+            success: function(response) {
+                console.log("Order updated successfully:", response);
+                refresh_iframe();
+            },
+            error: function(xhr, status, error) {
+                console.error("Error updating order:", error);
+            }
+            });
+        }
+        });
+        $("#sortable").disableSelection();
+
+    }
+    sorting()
+
+
+
+    function delete_function_element(){
+        $('.delete_items').on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type:this.method,
+                url: this.action,
+                data: $(this).serialize(),
+                success:function(data){
+                    if(data.type= 'success'){
+                        window.location.href = ''
+                        // console.log(data)
+                    }else{
+                        alert('Something is wrong');
+                    }
+                }
+            })
+        })
+    }
+
+    delete_function_element()
+
+
 </script>
 @endpush
 
@@ -214,6 +366,39 @@
         opacity: 0;
         padding: 0;
         overflow: hidden;
+    }
+
+
+
+
+
+    ul#sortable {
+        list-style: none;
+        padding-left: 0;
+
+    }
+
+    ul#sortable li {
+        cursor: move;
+        position: relative;
+        -webkit-user-drag: element;
+        app-region: drag;
+
+    }
+
+    .ui-sortable-helper{
+        border:2px solid #ff0000;
+        filter:grayscale(1);
+
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    ul#sortable li .btn.btn-danger{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 9;
     }
 
 </style>
