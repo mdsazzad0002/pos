@@ -8,7 +8,7 @@
 @section('content')
     @foreach ($homepagemanage as $items)
     <div class="page_container page_container{{ $items->id }}" >
-        <button class="btn btn-info menu_of_settings_" id="menu_of_settings_page_container{{ $items->id }}" onclick=" update_settings(this);
+        <button class="btn btn-info btn-sm menu_of_settings_" id="menu_of_settings_page_container{{ $items->id }}" onclick=" update_settings(this);
             "><i class="fa fa-cog"></i></button>
             @include('frontend.protfilio_theme.'.$items->key, ['variant_info'=> $items])
     </div>
@@ -49,7 +49,7 @@ function update_settings(thi) {
 
 button.menu_of_settings_{
     position: absolute;
-    top: 50%;
+    top: 0;
     right: 0;
     left:unset;
     z-index: 9999;
