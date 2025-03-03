@@ -62,7 +62,7 @@
 
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary    mt-2" data-toggle="modal" data-target="#exampleModal">New Component</button>
+                                <button type="button" class="btn btn-primary    mt-2" data-toggle="modal" data-target="#exampleModal">Close Component</button>
                             </div>
                         </div>
 
@@ -93,6 +93,10 @@
                 @endforeach
             </ul>
 
+
+            <div class="text-center">
+                <button type="button" class="btn btn-primary    mt-2" data-toggle="modal" data-target="#exampleModal">New Component</button>
+            </div>
 
 
 
