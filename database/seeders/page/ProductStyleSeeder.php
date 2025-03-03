@@ -39,6 +39,16 @@ class ProductStyleSeeder extends Seeder
                 'key' => '_product_style.product_style3',
                 'title' => 'Product Style Style',
                 'upload_id'=>'preset/_product_style/product_style3.png',
+                'status' => 0,
+                'background_color' => '#ffffff',
+                'details' => '
+                   Product Style 3
+                ',
+            ],
+            'Product_style4' => [
+                'key' => '_product_style.product_style4',
+                'title' => 'Product Style Style',
+                'upload_id'=>'preset/_product_style/product_style4.png',
                 'status' => 1,
                 'background_color' => '#ffffff',
                 'details' => '
