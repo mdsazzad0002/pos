@@ -58,18 +58,18 @@
                                         </div>
                                     @endforeach
                                     @endif
-                                <div class="col-md-6" 
+                                <div class="col-md-12" 
                                     @if(count( $address_array) == 0)
-                                    hidden
+                                          hidden
                                     @endif
                                     >
                                         <div class="input-block mb-16 address_data">
                                             <input type="radio" checked name="address_id" id="address_idcustome" value="" class="form-control" placeholder="First Name">
-    
                                             <label for="address_idcustome">
                                                 Use Another Location
                                             </label>
                                         </div>
+
                                     </div>
 
                             </div>
@@ -257,7 +257,7 @@
                                  @endforeach
                              @endif
 
-                             <div class="col-md-6"
+                             <div class="col-md-12"
                              @if(count( $address_array) == 0)
                              hidden
                              @endif
@@ -562,7 +562,7 @@
 
         });
 
-        form_data['shipping_charge'] = $('input[name="shipping_charge"]').val();
+        form_data['shipping_charge'] = $('input[name="shipping_charge"]:checked').val();
 
 
 
@@ -579,7 +579,7 @@
                 if (data.status === true) {
                     flasher.success(data.message);
                     setTimeout(function() {
-                        var shipping_methods = document.querySelector('.payment_method input[name="plan"]');
+                        var shipping_methods = document.querySelector('.payment_method input[name="plan"]:checked');
                         if(data.payment_method  != 1){
                             window.location.href = '{{ url('checkout/payment') }}?payment_method='+data.payment_method+'&order_id='+data.order_id;
                         }else{
@@ -593,6 +593,8 @@
 
                         //window.location.href= '{{url('/')}}'
                     },1500)
+                }else if(data.status === false){
+                    flasher.error(data.message)
                 }
             },
             error: function(xhr) {

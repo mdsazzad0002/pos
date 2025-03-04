@@ -9,7 +9,7 @@ use App\Http\Controllers\payment\amarpay\amarpayController;
 use App\Http\Controllers\payment\Paypal\PaymentController;
 use App\Http\Controllers\payment\sslcommerz\SslCommerzPaymentController;
 use App\Http\Controllers\payment\stripe\stripePaymentController;
-
+use App\Models\order;
 class PaymentCredentialController extends Controller
 {
     public function index(){
@@ -37,17 +37,52 @@ class PaymentCredentialController extends Controller
     }
 
 
-    public function show(Request $request, PaymentCredential $payment_configuration){
-        $data = [
+    public function show(Request $request,  $payment_configuration = null){
 
-        ];
+        $data =[];
+        if($request->has('payment_method') && $request->has('order_id')){
+
+    
+            $request->validate(
+                [
+                    'payment_method'=>'required',
+                    'order_id'=>'required',
+                    ]
+                );
+                $payment_configuration = PaymentCredential::find($request->payment_method);
+                $order = order::find($request->order_id);
+                if($payment_configuration && $order){
+
+                    $data = [
+                        'amount' => $order->current_cash_collection(),
+                        'email' => $order->customer?->email,
+                        'description' => $order->note,
+                        'phone' => $order->customer?->phone,
+                        'customer' => $order->customer?->name,
+                        'address' => $order->customer?->address,
+                        'currency' =>'BDT',
+                        'location_id' => $order->address,
+                        'order_id' => $order->id,
+                    ];
+
+                }else{
+                    dd('Someting went wrong');
+                }
+
+        }elseif($payment_configuration != null){
+            $payment_configuration = PaymentCredential::find($payment_configuration);
+        }
+
+        // dd($data);
+        // http://pos.localhost/checkout/payment?payment_method=3&order_id=21
+    
         if ($payment_configuration->provider == 'AmarPay') {
             $amarpay = new amarpayController($data);
             return $amarpay->payment();
 
         }elseif($payment_configuration->provider == 'SSLCommerz'){
-            $sslcommerz = new SslCommerzPaymentController();
-            return $sslcommerz->index($data);
+            $sslcommerz = new SslCommerzPaymentController($data);
+            return $sslcommerz->index();
         }elseif($payment_configuration->provider == 'paypal'){
             $paypal = new PaymentController($data);
             return $paypal->createPayment();

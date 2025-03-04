@@ -13,7 +13,7 @@
                  @foreach ( $shipping_charges as $key =>  $methods)
                     <div class="col-md-6 plans mb-16">
                         <label class="plan basic-plan" for="basic{{ $methods->id }}">
-                            <input  type="radio" name="shipping_charge" id="basic{{ $methods->id }}" @if($key == 0) checked @endif  value="{{ $methods->id }}">
+                            <input  type="radio" name="shipping_charge" id="basic{{ $methods->id }}" @if($key == 0) checked @endif  value="{{$methods->id}}">
                             <span class="plan-content">
                                 <img src="{{ $methods->upload_id ?? 0 }}" alt="">
                                 <span class="plan-details">

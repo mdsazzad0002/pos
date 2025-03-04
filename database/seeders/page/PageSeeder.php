@@ -227,6 +227,13 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => '401_error',
             ],
+            [
+                'name' => 'payment',
+                'slug' => 'checkout/payment_method',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'payment_method',
+            ],
            
 
 

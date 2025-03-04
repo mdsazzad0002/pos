@@ -42,7 +42,7 @@ class SslCommerzPaymentController extends Controller
      */
     public function __construct($data = null)
     { // Corrected method name
-        $payment_credentials = PaymentCredential::where('provider', 'AmarPay')->first();
+        $payment_credentials = PaymentCredential::where('provider', 'SSLCommerz')->first();
 
         if ($payment_credentials) { // Check if credentials exist
             $this->store_id = $payment_credentials->store_id;
@@ -50,17 +50,23 @@ class SslCommerzPaymentController extends Controller
             $this->sandbox_status = $payment_credentials->sandbox_status;
             $this->status = $payment_credentials->status;
         }
+        // dd($data);
 
         $this->transection_id = uniqid();
-        $this->success_url = route('amarpay.success');
-        $this->fail_url = route('amarpay.fail');
-        $this->cancel_url = route('amarpay.cancel');
+        $this->success_url = (route('sslcommerz.success'));
+        $this->fail_url = (route('sslcommerz.fail'));
+        $this->cancel_url = (route('sslcommerz.cancel'));
 
        $this->customer = $data['customer'] ?? $this->customer;
        $this->phone = $data['phone'] ?? $this->phone;
        $this->description = $data['description'] ?? $this->description;
        $this->email = $data['email'] ?? $this->email;
        $this->amount =  $data['amount'] ?? $this->amount;
+       $this->address =  $data['address'] ?? $this->address;
+       $this->currency =  $data['currency'] ?? $this->currency;
+       $this->location_id =  $data['location_id'] ?? $this->location_id;
+       $this->order_id =  $data['order_id'] ?? $this->order_id;
+       $this->user_id =  $data['user_id'] ?? $this->user_id;
        $this->amount +=($this->amount * $payment_credentials->charge);
 
         // Set the base URL based on the sandbox status
@@ -264,23 +270,36 @@ class SslCommerzPaymentController extends Controller
                         $order_details->status = 'success';
                         $order_details->all_response = $request->all();
                         $order_details->save();
+
+
+// dd($order_details);
+                        auth()->guard('customer')->login($order_details->customer_info());
+                        $order_success_page = \App\Models\Page::where('status', 1)->where('page_type', 'order_success')->first();
+                        return redirect($order_success_page->slug.'?order_id='.$order_details->order_id);
                     }
 
+                  
+                    
 
-                return redirect('/')->with('message', [
-                    'status' => 'success',
-                    'message' => 'Transaction is successfully Completed'
-                ]);
+                // return redirect('/')->with('message', [
+                //     'status' => 'success',
+                //     'message' => 'Transaction is successfully Completed'
+                // ]);
             }
         } else if ($order_details->status == 'Processing' || $order_details->status == 'success') {
             /*
              That means through IPN Order status already updated. Now you can just show the customer that transaction is completed. No need to udate database.
              */
+            $order_success_page = \App\Models\Page::where('status', 1)->where('page_type', 'order_success')->first();
+            
+// dd($order_details->customer_info());
+            auth()->guard('customer')->login($order_details->customer_info());
+            return redirect($order_success_page->slug.'?order_id='.$order_details->order_id);
 
-            return redirect('/')->with('message', [
-                'status' => 'success',
-                'message' => 'Transaction is successfully Completed'
-            ]);
+            // return redirect('/')->with('message', [
+            //     'status' => 'success',
+            //     'message' => 'Transaction is successfully Completed'
+            // ]);
         } else {
             #That means something wrong happened. You can redirect customer to your product page.
 

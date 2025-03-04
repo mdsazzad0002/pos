@@ -32,6 +32,7 @@ $customer = auth()->guard('customer')->user();
                         <td>Status</td>
                         <td>Payment method</td>
                         <td>Cash Collection</td>
+                        <td>Due</td>
                         <td>Track Now</td>
                     </tr>
                     @forelse ( $customer->order as $key => $order)
@@ -42,6 +43,10 @@ $customer = auth()->guard('customer')->user();
                         <td>{{ $order->payment_method_info?->provider ?? 'Cash On Delivery'}}</td>
                         <td>{{ $order->order_status() }}</td>
                         <td>{{ settings('currency_symbol', 9) .' '. $order->cash_collection}}</td>
+                         @php $due =  $order->current_cash_collection(); @endphp
+                        <td>
+                            @if($due > 0) 
+                            <a  class="btn btn-primary" href="{{ url('checkout/payment_method?order_id='.$order->id) }}"> {{ settings('currency_symbol', 9) .' '. $due }} Pay Now </a> @else Paid @endif</td>
                         <td>
                              <a href="{{ url($tracking_page->slug) }}?id={{ $order->order_id }}&email={{ auth()->guard('customer')->user()->email }}" class="btn btn-primary">Track Now</a>
                              <a href="{{ route('order_invoice') }}?order_id={{ $order->order_id }}" class="btn btn-primary" target="_blank"><i class="fas fa-download"></i></a>

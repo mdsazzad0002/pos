@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customer;
 use App\Models\Stock;
+use App\Models\payment\TransectionInformation;
 
 class order extends Model
 {
@@ -72,6 +73,13 @@ class order extends Model
         return $this->hasMany(Stock::class, 'order_id', 'id');
     }
 
+
+    public function transection(){
+        return $this->hasMany(TransectionInformation::class, 'order_id', 'id');
+    }
+    public function current_cash_collection(){
+            return $this->cash_collection -  $this->transection()->where('status', 'success')->sum('amount');
+    }
  
 
 

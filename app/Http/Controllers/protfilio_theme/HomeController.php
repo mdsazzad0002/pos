@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Mail;
 use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
 use App\Models\Stock;
+use  App\Models\ShippingCharge;
 
 class HomeController extends Controller
 {
@@ -736,11 +737,9 @@ class HomeController extends Controller
 
     public function checkout(Request $request){
 
-        $request->validate([
+       
 
-        ]);
-
-        // return $request->all();
+        // if addredd_id 0 or empty mearge by 0 or has
         if ($request->has('address_id') && $request->address_id == '') {
             $request->merge(['address_id' => 0]);
         }
@@ -753,28 +752,28 @@ class HomeController extends Controller
         // return auth()->guard('customer')->user();
 
         if(!auth()->guard('customer')->user()){
-
             $user = customer::where('email', $request->email)->first();
             if($user){
-                return json_encode([
-                    'status' => false,
-                    'status_code'=> 301,
-                    'message'=> 'User Already Exists please login first',
-                ]);
+
+                // return json_encode([
+                //     'status' => false,
+                //     'status_code'=> 301,
+                //     'message'=> 'User Already Exists please login first',
+                // ]);
+            }else{
+                $user = new customer();
+                $user->name = $request->name ?? '';
+                $user->email = $request->email  ?? '';
+                $user->phone = $request->phone  ?? '';
+                $user->password = Hash::make($request->email);
+                $user->phone = $request->phone  ?? '';
+                $user->prev_due = 0;
+                $user->credit_limit = 20000;
+    
+               $user->save();
+
             }
 
-
-
-            $user = new customer();
-            $user->name = $request->name ?? '';
-            $user->email = $request->email  ?? '';
-            $user->phone = $request->phone  ?? '';
-            $user->password = Hash::make($request->email);
-            $user->phone = $request->phone  ?? '';
-            $user->prev_due = 0;
-            $user->credit_limit = 20000;
-
-           $user->save();
 
             auth()->guard('customer')->login($user);
         }else{
@@ -805,19 +804,6 @@ class HomeController extends Controller
                     $query->where('phone', $request->phone);
 
                 }
-                if($request->has('post_code')){
-                    $query->where('post_code', $request->post_code);
-
-                }
-                if($request->has('country')){
-                    $query->where('country', $request->country);
-
-                }
-                if($request->has('state')){
-                    $query->where('state', $request->state);
-
-                }
-
             })
             ->first();
 
@@ -825,6 +811,15 @@ class HomeController extends Controller
             if($address_find){
                 $address_id = $address_find->id;
             }else{
+
+                $request->validate([
+                    'address' => 'required|min:5',
+                    'name' => 'required|string',
+                    'phone' => 'required',
+                    'email' => 'required|email',
+                ]);
+                
+
                 $address = new address();
                 $address->name = $request->name ?? ''. ' ' . $request->lname  ?? '';
                 $address->email = $request->email ?? '';
@@ -848,32 +843,64 @@ class HomeController extends Controller
         }
 
 
+        // check diffrent address
+        if($request->has('shipAddress')){
+            if(!$request->has('billingaddress_id') || $request->billingaddress_id == 0){
+                $address_find = address::where('addressable_type', customer::class)
+                ->where('addressable_id', auth()->guard('customer')->user()->id)
+                ->where(function($query) use ($request){
+                    if($request->has('address')){
+                        $query->where('address', $request->address);
+    
+                    }
+                    if($request->has('email')){
+                        $query->where('email', $request->email);
+    
+                    }
+                    if($request->has('phone')){
+                        $query->where('phone', $request->phone);
+    
+                    }
+                })
+                ->first();
+    
+    
+                if($address_find){
+                    $billingaddress_id = $address_find->id;
+                } else{
+                    $request->validate([
+                        'address2' => 'required|min:5',
+                        'name1' => 'required|string',
+                        'phone2' => 'required',
+                        'email2' => 'required|email',
+                    ]);
+                    $address = new address();
+                    $address->name = $request->name1  ?? ''. ' ' . $request->lname2  ?? '';
+                    $address->email = $request->email2  ?? '';
+                    $address->phone = $request->phone2 ?? '';
+                    $address->address = $request->address2 ?? '';
+                    $address->address_optional = $request->apartment2 ?? '';
+                    $address->district = $request->town2 ?? '';
+                    $address->country = $request->country2  ?? '';
+                    $address->state = $request->state2 ?? '';
+                    $address->postal = $request->postal2 ?? '';
+    
+                    $address->addressable_type = customer::class;
+                    $address->addressable_id = $user->id;
+                    $address->save();
+                }  
 
-        if(!$request->has('billingaddress_id') || $request->billingaddress_id == 0){
-            $address = new address();
-            $address->name = $request->name1  ?? ''. ' ' . $request->lname2  ?? '';
-            $address->email = $request->email2  ?? '';
-            $address->phone = $request->phone2 ?? '';
-            $address->address = $request->address2 ?? '';
-            $address->address_optional = $request->apartment2 ?? '';
-            $address->district = $request->town2 ?? '';
-            $address->country = $request->country2  ?? '';
-            $address->state = $request->state2 ?? '';
-            $address->postal = $request->postal2 ?? '';
+                $billingaddress_id = $address->id;
+            }elseif($request->has('billingaddress_id')){
+                $billingaddress_id = $request->billingaddress_id;
 
-            $address->addressable_type = customer::class;
-            $address->addressable_id = $user->id;
-            $address->save();
-
-            $billingaddress_id = $address->id;
-        }elseif($request->has('billingaddress_id')){
-            $billingaddress_id = $request->billingaddress_id;
-
+            }else{
+                $billingaddress_id = $address_id;
+            }
         }else{
             $billingaddress_id = $address_id;
-
         }
-        // End Address
+        // End Diffrent Address
 
 
 
@@ -889,12 +916,37 @@ class HomeController extends Controller
             // dd($card_information['subtotal']['product_ids']);
 
             // Order add
+            $exists = Order::where([
+                'customer_id' => $user->id,
+                'payment_method' => $request->plan,
+                'price' => $card_information['subtotal']['price']
+            ])
+            ->where('created_at', '>=', Carbon::now()->subMinutes(1))
+            ->exists();
+            if($exists){
+                return json_encode([
+                        'status' => false,
+                        'status_code'=> 301,
+                        'message'=> 'You are trying Dublicate Order',
+                    ]);
+            }
+
+            $shipping_charege = 0;
+            $shipping_price = 0;
+            $shipping_charege_find  =  ShippingCharge::findOrFail($request->shipping_charge);
+            if( $shipping_charege_find){
+                $shipping_price =  $shipping_charege_find->amount;
+            }
+         
+
             $order =  new order();
             $order->customer_id = $user->id;
             $order->order_id = time();
 
+
             $order->address = $address_id;
             $order->billing_address = $billingaddress_id;
+
 
             $order->product_ids = json_encode($card_information['subtotal']['product_ids']);
             $order->product_json = json_encode($card_information);
@@ -903,14 +955,14 @@ class HomeController extends Controller
             $order->quantitys = json_encode($card_information['subtotal']['quantitys']);
             $order->discount_id = $card_information['subtotal']['discount'];
             $order->price = $card_information['subtotal']['price'];
-            $order->cash_collection = $card_information['subtotal']['price'];
+            $order->cash_collection = $card_information['subtotal']['price'] + $shipping_price;
             $order->vat = $card_information['subtotal']['vat'];
             $order->status = 1;
             $order->note = $request->textarea ?? '';
             $order->payment_method =  $request->plan ?? '0';
 
             $order->shipping_charge_id = $request->shipping_charge ?? 0;
-
+            
             $order->save();
             // Order add end
 
@@ -972,13 +1024,18 @@ class HomeController extends Controller
                                             "
                 ];
 
-                Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                try{
+                    Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                }catch(\Exception $e){
+
+                }
             }
         }
 
 
 
-        // session()->put('front_product', []);
+        // Session empty
+        session()->put('front_product', []);
 
         return json_encode([
             'status' => true,

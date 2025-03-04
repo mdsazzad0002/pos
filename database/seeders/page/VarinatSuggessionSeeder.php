@@ -1556,6 +1556,35 @@ class VarinatSuggessionSeeder extends Seeder
                 'background_manage_status'=> 1,
 
             ],
+            '_order_checkout_style1' => [
+                'key' =>'_profile._checkout_payment.variant_1',
+                'title' => 'profile location style  1',
+                'title_manage_status' => 1,
+
+                'title_status' => 0,
+                'sub_title' => 'Register Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'items_per_row' => 15,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'preset/page_variant/_order_success_success_style1.png',
+                'background_manage_status'=> 1,
+
+            ],
 
 
 
@@ -1759,6 +1788,14 @@ class VarinatSuggessionSeeder extends Seeder
 
          $about_us_id = Page::where('page_type', 'order_success')->first();
          $ecom_home = ['_success_style1'];
+
+         foreach($ecom_home as $items){
+             seed_items($data[$items],$about_us_id->id);
+         }
+
+         
+         $about_us_id = Page::where('page_type', 'payment_method')->first();
+         $ecom_home = ['_order_checkout_style1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);

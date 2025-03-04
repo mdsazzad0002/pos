@@ -23,7 +23,22 @@ class SslCommerzNotification extends AbstractSslCommerz
      */
     public function __construct()
     {
-        $this->config = config('sslcommerz');
+        $this->config = [
+            'apiUrl' => [
+                'make_payment' => "/gwprocess/v4/api.php",
+                'transaction_status' => "/validator/api/merchantTransIDvalidationAPI.php",
+                'order_validate' => "/validator/api/validationserverAPI.php",
+                'refund_payment' => "/validator/api/merchantTransIDvalidationAPI.php",
+                'refund_status' => "/validator/api/merchantTransIDvalidationAPI.php",
+            ],
+
+            'success_url' => url(route('sslcommerz.success')),
+            'failed_url' => url(route('sslcommerz.fail')),
+            'cancel_url' => url(route('sslcommerz.cancel')),
+            'ipn_url' => url(route('sslcommerz.ipn')),
+        ];
+
+
         $payment_credentials = PaymentCredential::where('provider', 'SSLCommerz')->first();
 
         if($payment_credentials){
@@ -235,7 +250,7 @@ class SslCommerzNotification extends AbstractSslCommerz
 
     protected function setSuccessUrl()
     {
-        $this->successUrl = rtrim(env('APP_URL'), '/') . $this->config['success_url'];
+        $this->successUrl = $this->config['success_url'];
     }
 
     protected function getSuccessUrl()
@@ -245,7 +260,7 @@ class SslCommerzNotification extends AbstractSslCommerz
 
     protected function setFailedUrl()
     {
-        $this->failedUrl = rtrim(env('APP_URL'), '/') . $this->config['failed_url'];
+        $this->failedUrl = $this->config['failed_url'];
     }
 
     protected function getFailedUrl()
@@ -255,7 +270,7 @@ class SslCommerzNotification extends AbstractSslCommerz
 
     protected function setCancelUrl()
     {
-        $this->cancelUrl = rtrim(env('APP_URL'), '/') . $this->config['cancel_url'];
+        $this->cancelUrl = $this->config['cancel_url'];
     }
 
     protected function getCancelUrl()
@@ -265,7 +280,7 @@ class SslCommerzNotification extends AbstractSslCommerz
 
     protected function setIPNUrl()
     {
-        $this->ipnUrl = rtrim(env('APP_URL'), '/') . $this->config['ipn_url'];
+        $this->ipnUrl = $this->config['ipn_url'];
     }
 
     protected function getIPNUrl()

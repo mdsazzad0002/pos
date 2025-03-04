@@ -31,6 +31,7 @@ if(!isset($tracking_page)){
                 <div class="text-center">
                     Order Id #{{ $order_history->order_id }} </br>
                     Order Amount : {{ settings('currency_symbol'). ' '. $order_history->price }} </br>
+                    Cash Collection  Amount : {{ settings('currency_symbol'). ' '. $order_history->cash_collection }} (Includes Shipping Charge) </br>
                     {{ __('order.success_text') }}
                 </div>
                 <br>
