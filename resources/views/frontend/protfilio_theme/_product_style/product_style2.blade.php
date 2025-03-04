@@ -5,7 +5,7 @@
                 style="background: url('/img/product-loader.svg') no-repeat center, linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);">
 
                 <img class="gallerythumb gallerythumbLoaded"
-                    style="background-color:#ffffff; min-height: 13vw;" src="{{ $product->image_url}}"
+                    style="background-color:{{ $product_style->background_color ?? '#fff' }}; min-height: 13vw;" src="{{ $product->image_url}}"
                     width="100%" alt="Card image" />
 
                 <h6 style="text-align: center; color: #000; padding: 0px 15px;  height: 40px;"

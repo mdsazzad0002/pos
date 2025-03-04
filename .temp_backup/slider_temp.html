@@ -1,0 +1,354 @@
+<div class="site-outer">
+
+    <div class="site-inner">
+        <section class="container-fluid">
+            <!-- ACCORDION ROW -->
+            <div class="row">
+                <ul class="accordion-group" id="accordion">
+                    <li
+                        style="background-image: url('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');">
+                        <div class="accordion-overlay"></div>
+                        <h3>Rustic</h3>
+                        <section class="hidden-xs">
+                            <article>
+                                <p>Rual and rustic</p>
+                            </article>
+                        </section>
+                    </li>
+                    <li class="out"
+                        style="background-image: url('https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80');">
+                        <div class="accordion-overlay"></div>
+                        <h3>Clean</h3>
+                        <section class="hidden-xs">
+                            <article>
+                                <p>For the single or couple
+                                </p>
+                            </article>
+                        </section>
+                    </li>
+                    <li
+                        style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80');">
+                        <div class="accordion-overlay"></div>
+                        <h3>Stylish</h3>
+                        <section class="hidden-xs">
+                            <article>
+                                <p>When people want it cosy but stylish</p>
+                            </article>
+                        </section>
+                    </li>
+                    <li
+                        style="background-image: url('https://images.unsplash.com/photo-1495433324511-bf8e92934d90?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');">
+                        <div class="accordion-overlay"></div>
+                        <h3>Family</h3>
+                        <section class="hidden-xs">
+                            <article>
+                                <p>For the family dinner</p>
+                            </article>
+                        </section>
+                    </li>
+                </ul>
+            </div>
+            <!-- BEGIN NEW ROW AFTER ACCORDION -->
+
+        </section>
+    </div>
+
+</div>
+
+
+
+<style>
+
+
+    .accordion-group li:nth-child(4) .accordion-overlay {
+        background-color: #333;
+        opacity: 0.8;
+    }
+
+    .accordion-group li:nth-child(4).out .accordion-overlay {
+        background-color: #333;
+        opacity: 0;
+    }
+
+    .accordion-group li:nth-child(3) .accordion-overlay {
+        background-color: #9d9d9d;
+        opacity: 0.8;
+    }
+
+    .accordion-group li:nth-child(3).out .accordion-overlay {
+        background-color: #9d9d9d;
+        opacity: 0;
+    }
+
+    .accordion-group li:nth-child(2) .accordion-overlay {
+        background-color: #ca9964;
+        opacity: 0.8;
+    }
+
+    .accordion-group li:nth-child(2).out .accordion-overlay {
+        background-color: #ca9964;
+        opacity: 0;
+    }
+
+    .accordion-group li:nth-child(1) .accordion-overlay {
+        background-color: #a87339;
+        opacity: 0.8;
+    }
+
+    .accordion-group li:nth-child(1).out .accordion-overlay {
+        background-color: #a87339;
+        opacity: 0;
+    }
+
+    .red {
+        color: #ca9964;
+    }
+
+    .orange {
+        color: #e06014;
+    }
+
+    .blue {
+        color: #5aaed6;
+    }
+
+    .beige {
+        color: #d6ccad;
+    }
+
+    .site-outer {
+        overflow: hidden;
+    }
+
+    .accordion-group {
+        overflow: hidden;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        width: 100%;
+        height: 700px;
+        display: flex;
+        align-items: center;
+        -webkit-transition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        transition: all 300ms ease;
+    }
+
+    .accordion-group li {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        overflow: hidden;
+        margin: 0;
+        padding: 1.6em;
+        list-style: none;
+        width: 16.66666667%;
+        height: inherit;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        -webkit-transition: all 250ms ease-in-out;
+        -moz-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+    }
+
+    .accordion-group li h3 {
+        position: relative;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 0.15rem;
+        padding: 0;
+        font-weight: 300;
+        margin: 6.5rem 0 0;
+    }
+
+    .accordion-group li .accordion-overlay {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        -webkit-transition: all 250ms ease-in-out;
+        -moz-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+    }
+
+    .accordion-group li section {
+        display: flex;
+        align-items: center;
+        width: 75%;
+        height: 100%;
+    }
+
+    .accordion-group li section.big-section {
+        width: 100%;
+    }
+
+    .accordion-group li section article {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 4rem;
+        position: relative;
+        right: -200%;
+        -webkit-transition: all 250ms ease-in-out;
+        -moz-transition: all 250ms ease-in-out;
+        transition: all 250ms ease-in-out;
+    }
+
+    .accordion-group li section article p {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 1.6rem;
+        color: #333;
+        font-size: 1.6rem;
+        letter-spacing: 0.15rem;
+    }
+
+    .accordion-group li section article p:before,
+    .accordion-group li section article p:after {
+        content: "";
+        display: block;
+        height: 1px;
+    }
+
+    .accordion-group li.out {
+        width: 50%;
+    }
+
+    .accordion-group li.out section article {
+        right: 0;
+    }
+
+    .input-group-addon {
+        color: #333;
+        border-color: #333;
+        background-color: #fff;
+        border-radius: 0;
+    }
+
+    .select-hidden {
+        display: none;
+        visibility: hidden;
+        padding-right: 1rem;
+    }
+
+    .select {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        font-size: 16px;
+        color: #333;
+        width: 100%;
+        height: 50px;
+    }
+
+    @media (max-width: 767px) {
+        .accordion-group {
+            height: 360px;
+        }
+
+        .accordion-group li {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accordion-group li.out h3 {
+            opacity: 0;
+        }
+
+        .accordion-group li h3 {
+            opacity: 1;
+            -webkit-transition: all 300ms ease-in-out;
+            -moz-transition: all 300ms ease-in-out;
+            transition: all 300ms ease-in-out;
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            transform: rotate(90deg);
+            width: 2.5rem;
+            padding: 0;
+            margin: 10rem 0;
+        }
+    }
+
+    @-webkit-keyframes rotate {
+        from {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @-moz-keyframes rotate {
+        from {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        from {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script>
+    (function () {
+
+        $(function () {
+            var $accordion, $wideScreen;
+            $accordion = $('#accordion').children('li');
+            $wideScreen = $(window).width() > 767;
+            if ($wideScreen) {
+                $accordion.on('mouseenter click', function (e) {
+                    var $this;
+                    e.stopPropagation();
+                    $this = $(this);
+                    if ($this.hasClass('out')) {
+                        $this.addClass('out');
+                    } else {
+                        $this.addClass('out');
+                        $this.siblings().removeClass('out');
+                    }
+                });
+            } else {
+                $accordion.on('touchstart touchend', function (e) {
+                    var $this;
+                    e.stopPropagation();
+                    $this = $(this);
+                    if ($this.hasClass('out')) {
+                        $this.addClass('out');
+                    } else {
+                        $this.addClass('out');
+                        $this.siblings().removeClass('out');
+                    }
+                });
+            }
+        });
+
+    }.call(this));
+
+
+</script>

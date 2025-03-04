@@ -62,8 +62,10 @@
 
 <script>
     function reset_alert(){
-            setTimeout(() => {
+        flasher.success(@this.get('message', ''));;
+        setTimeout(() => {
                 @this.set('message', '');
+
             },2500)
         }
 </script>

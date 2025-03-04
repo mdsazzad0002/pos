@@ -1,5 +1,5 @@
 <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-6">
-    <div class="featured-product-card bg-white br-10">
+    <div class="featured-product-card  br-10" style="background-color:{{ $product_style->background_color ??  '#ffffff' }}">
         <div class="image-box mb-16">
 
             @if($product->variant == 0 && $product->selling_price < $product->old_price)
@@ -38,7 +38,7 @@
             <div class="text mb-16">
                 <p class="light-gray line-clamp-2">{{ $product->short_description }}</p>
             </div>
-            <div class="rating-star mb-16 bg-white">
+            <div class="rating-star mb-16">
                 <div class="mb-24">
                     @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->rat_count, 'rating_star' => $product->avg_rat])
                 </div>

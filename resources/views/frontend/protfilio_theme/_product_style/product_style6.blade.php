@@ -1,0 +1,20 @@
+
+<style>
+    .product_style_6 .card{
+        background: {{ $product_style->background_color ?? '#fff' }};
+    }
+</style>
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_6">
+    <div class="card mb-3">
+        <img class="card-img-top" src="{{ $product->image_url }}"
+          style="width: 100%;" alt="Card image cap">
+        <div class="product-detail">
+            <h5 class="card-title heading text-center">{{ Str::title($product->name ?? '') }}</h5>
+            <span class="subheading">{{ $product->category_info?->name ?? 'Unknown' }}</span>
+            <blockquote>
+                <p>'{{ $product->short_description }}'</p>
+            </blockquote>
+            <a type="button" href="{{ url($view_page->slug) }}?slug={{ $product->slug }}" class="btn btn-outline-dark">BUY NOW</a>
+        </div>
+    </div>
+</div>
