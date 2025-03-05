@@ -999,6 +999,9 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
+                'upload_id'=>'preset/page_variant/tracking_style1.png',
+                'background_manage_status'=> 1,
+                
 
 
             ],
@@ -1400,6 +1403,9 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
+                'upload_id'=>'preset/page_variant/_checkout_variant_1.png',
+                'background_manage_status'=> 1,
+                
 
 
             ],
@@ -1581,7 +1587,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'background' => 0,
                 'background_color' => '#eeeeee',
                 'background_type' => 0,
-                'upload_id'=>'preset/page_variant/_order_success_success_style1.png',
+                'upload_id'=>'preset/page_variant/checkout_style1.png',
                 'background_manage_status'=> 1,
 
             ],

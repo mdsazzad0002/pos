@@ -79,9 +79,36 @@ Product Info
             <tr>
                 <td>Final Amount : </td><td>{{ settings('currency_symbol', 9) }} {{ ($product_data->subtotal->coupon_without_price ?? 0) + ($order->shipping_charge->amount ?? 0) }} </td>
             </tr>
+            <tr style="background: green">
+                <td>Payable Amount : </td><td>{{ settings('currency_symbol', 9) }} {{ ($order->current_cash_collection())}} </td>
+            </tr>
 
 
    </tbody>
+</table>
+
+<table class="table talbe-bordered border table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Transection Id</th>
+            <th>Payment Method</th>
+            <th>Payment Card</th>
+            <th>Payment Amount</th>
+            <th>Date</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach ($order->transection as $transection)
+            <tr>
+                <td>{{ $transection->mer_txnid ?? '' }}</td>
+                <td>{{ $transection->payment_method ?? '' }}</td>
+                <td>{{ $transection->by_method ?? '' }}</td>
+                <td>{{ settings('currency_symbol', 9) }} {{ $transection->amount ?? '' }}</td>
+                <td>{{ $transection->created_at->format('d-m-Y') ?? '' }}</td>
+            </tr>
+        @endforeach
+    </tbody>
 </table>
 
 
@@ -123,27 +150,27 @@ Product Info
 <table class="table talbe-bordered border table-striped table-hover">
     <tr>
         <td>Address</td>
-        <td>{{ $order->billing_info->address }}</td>
+        <td>{{ $order->billing_info->address ?? ''}}</td>
     </tr>
     <tr>
         <td>district</td>
-        <td>{{ $order->billing_info->district }}</td>
+        <td>{{ $order->billing_info->district  ?? ''}}</td>
     </tr>
     <tr>
         <td>country</td>
-        <td>{{ $order->billing_info->country }}</td>
+        <td>{{ $order->billing_info->country  ?? ''}}</td>
     </tr>
     <tr>
         <td>Apartment / Flat</td>
-        <td>{{ $order->billing_info->address_optional }}</td>
+        <td>{{ $order->billing_info->address_optional ?? '' }}</td>
     </tr>
     <tr>
         <td>postal</td>
-        <td>{{ $order->billing_info->postal }}</td>
+        <td>{{ $order->billing_info->postal  ?? ''}}</td>
     </tr>
     <tr>
         <td>state</td>
-        <td>{{ $order->billing_info->state }}</td>
+        <td>{{ $order->billing_info->state  ?? ''}}</td>
     </tr>
 
 </table>

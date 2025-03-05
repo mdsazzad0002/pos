@@ -10,7 +10,9 @@ class OrderStatus extends Model
     use HasFactory;
 
     public function ChildItems() {
-        return OrderStatus::whereIn('id', json_decode($this->under_items))->get();
+        $items_data = json_decode($this->under_items) ?? [];
+       
+        return OrderStatus::whereIn('id',  $items_data)->get();
     }
 
 }

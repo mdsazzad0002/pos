@@ -86,6 +86,7 @@ use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductStyleController;
 use App\Http\Controllers\CalendarEventController;
+use Illuminate\Http\Request;
 
 
 
@@ -112,68 +113,39 @@ use App\Http\Controllers\OrderStatusController;
 
 
 
-// Route::get('latest_order', [AdminDashboardController::class, 'latest_order'])->name('latest_order');
-// Route::get('latest_customer', [AdminDashboardController::class, 'latest_customer'])->name('latest_customer');
-// Route::get('recent_product', [AdminDashboardController::class, 'recent_product'])->name('recent_product');
-
-
-
-
-
-
-Route::get('bdcouriertracking', [trackingController::class, 'tracking'])->name('tracking');
-Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
-Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCredentialController::class, 'update'])->name('admin.settings.courier-configration.update');
-
-
-
-
-
-
-
 
 
 // Web Route
-Route::get('test_login', function(){
-    $userTEst = User::first();
-    Auth::guard('web')->login($userTEst);
-   return redirect('admin/dashboard');
+
+// Authentic login by api token
+Route::get('test_login', function(Request $request){
+    if($request->has('token') && $request->token != ''){
+        $userTEst = User::where('api_token', $request->token)->first();
+        Auth::guard('web')->login($userTEst);
+        $userTEst->api_token = '';
+        $userTEst->save();
+        return redirect('admin/dashboard');
+    }
+    return redirect('/');
 });
 
 
-
-Route::get('/migrate', function(){
-    Artisan::call('migrate');
-    // toastr()->success('Successfully migrated', 'Congrats');
-    return back();
+Route::middleware('csrfVerify')->get('login_token_generate', function(Request $request){
+     $requestHost = parse_url($request->headers->get('origin'),  PHP_URL_HOST) ?? 'localhost'; 
+     if($requestHost == 'monitoring.dengrweb.com'){
+        $userTEst = User::first();
+        $userTEst->api_token = Str::random(60);
+        $userTEst->save();
+        return response()->json(['token' => $userTEst->api_token]);
+     }else{
+        return response()->json(['token' => '']);
+     }
 });
-Route::get('/migrate/seed', function(){
-    $db_seeder = new DatabaseSeeder;
-    $db_seeder->run();
-    // toastr()->success('Successfully seed', 'Congrats');
-    return back();
-});
+// End Authentic login by api token
 
 
 
-Route::get('clear', function () {
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
-    Artisan::call('route:clear');
-    // toastr()->success('Successfully cleared', 'Congrats');
-    return back();
-});
 
-// Route::get('fresh', function () {
-//     Artisan::call('migrate:fresh --seed');
-//     return back();
-// });
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Route::get('/dashboard', function () {
     return redirect('admin/');
@@ -182,121 +154,59 @@ Route::get('/dashboard', function () {
 
 Route::post('/uploads/post', [UploadController::class, 'store']);
 Route::get('/uploads/get', [UploadController::class, 'index']);
-
 Route::get('notification', [dashboardController::class, 'noti']);
-
-
-Route::post('user/customer-profile_pic/{customer}',[App\Http\Controllers\CustomerController::class, 'customer_profile_pic'])->name('customer_profile_pic.update');
-Route::post('user/customer-register',[App\Http\Controllers\CustomerController::class, 'customerStore'])->name('customer_register');
-Route::post('user/customer-login', [App\Http\Controllers\CustomerController::class, 'customerLogin'])->name('customer_login');
-Route::get('user/customer-logout', [App\Http\Controllers\CustomerController::class, 'customer_logout'])->name('customer_logout');
-
-Route::put('user/customer-customerUpdate/{customer}',[App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customerUpdate');
-
-
-Route::get('user/google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
-Route::get('user/google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
-
-Route::get('user/facebook/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToFacebook'])->name('facebook.redirect');
-Route::get('user/facebook/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleFacebookCallback'])->name('facebook.callback');
-
-
-// Route::get('auth/google', [CustomerController::class, 'redirectToGoogle']);
-// Route::get('auth/google/callback', [CustomerController::class, 'handleGoogleCallback']);
 
 
 
 Route::get('device_access_check', [LoginCheckController::class, 'index']);
-
-
-
-
-
 Route::any('setting-store-update', [SettingController::class, 'store'])->name('setting.store.update');
 
 
 
 
-Route::get('/checkout/payment', [PaymentCredentialController::class, 'payment'])->name('payment');
 
-Route::group(['as' => 'amarpay.', 'prefix' => 'amarpay'], function () {
-    Route::post('success', [amarpayController::class, 'success'])->name('success');
-    Route::post('fail', [amarpayController::class, 'fail'])->name('fail');
-    Route::get('cancel', [amarpayController::class, 'cancel'])->name('cancel');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/migrate', function(){
+        if(auth()->can('migrate')){
+            Artisan::call('migrate');
+            return back();
+        }
+        return abort(403);
+    });
+
+    Route::get('/migrate/seed', function(){
+        if(auth()->can('migrate seed')){
+            $db_seeder = new DatabaseSeeder;
+            $db_seeder->run();
+            return back();
+        }
+        return abort(403);
+    });
+    
+    
+    
+    Route::get('clear', function () {
+        // if(auth()->user()->can('catche clear')){
+            Artisan::call('config:clear');
+            Artisan::call('config:cache');
+            Artisan::call('view:clear');
+            Artisan::call('route:clear');
+            return back();
+        // }
+        // return abort(403);
+    });
+    
+    
+    Route::get('fresh', function () {
+        if(auth()->can('migrate fresh')){
+            Artisan::call('migrate:fresh --seed');
+            return back();
+        }
+        return abort(403);
+    });
+    
 });
-
-
-Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
-    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
-    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
-
-    Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('pay');
-    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax'])->name('pay-via-ajax');
-
-    Route::post('/success', [SslCommerzPaymentController::class, 'success'])->name('success');
-    Route::post('/fail', [SslCommerzPaymentController::class, 'fail'])->name('fail');
-    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel'])->name('cancel');
-
-    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn'])->name('ipn');
-    //SSLCOMMERZ END
-
-});
-
-
-
-Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
-    Route::post('/purchase', [PaymentController::class, 'createPayment'])->name('payment.purchase');
-    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
-    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
-
-
-});
-
-
-
-Route::group(['as' => 'stripe.', 'prefix' => 'stripe'], function () {
-    Route::get('/checkout', [stripePaymentController::class, 'create'])->name('checkout.create');
-    Route::get('/checkout/success', [stripePaymentController::class, 'success'])->name('checkout.success');
-    Route::get('/checkout/cancel', [stripePaymentController::class, 'cancel'])->name('checkout.cancel');
-
-
-});
-
-
-
-Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
-    Route::get('/generate-client-token', [BraintreeController::class, 'generateClientToken']);
-    Route::get('/process-transaction', [BraintreeController::class, 'processTransaction']);
-
-});
-
-
-
-
-// end Web route
-
-
-
-
-
-
-//custom order
-
-Route::post('bluk-order/store',[WholeSaleOrderController::class, 'blukOderStore'])->name('bluk.order.store');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -589,11 +499,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 });
 
 
-Route::get('/locale/{lang}', [LanguageController::class, 'switchLanguage']);
-
-
-
-
 
 Route::middleware(['guest', 'web', 'setlocale'])->group(function () {
 
@@ -643,74 +548,9 @@ Route::middleware('auth', 'setlocale')->group(function () {
 
 
 
-
-
-
-
-
-// protflio_web_theme
-
-
-Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');
-
-Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-Route::get('/client/{slug}/', [ClientController::class, 'show'])->name('client.view');
-
-
-
-// Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-
-Route::get('/team', [TeamController::class, 'index'])->name('team.index');
-Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
-
-
-
-Route::get('tracking_order', [TrackingOrderController::class, 'index'])->name('tracking_order.index');
-
-
-Route::get('/about', [HomeController::class, 'about']);
-Route::get('filter/data-get', [HomeController::class, 'filter_get']);
-
-
-
-
-
-
-Route::get('add_to_cart', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
-Route::get('cart_details', [HomeController::class, 'cart_details'])->name('cart_details');
-Route::post('checkout', [HomeController::class, 'checkout'])->name('checkout');
-
-Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->name('cart_and_wishlist');
-Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
-
-Route::get('add_to_compareList', [HomeController::class, 'add_to_compareList'])->name('add_to_compareList');
-Route::get('compare_list', [HomeController::class, 'compare_list'])->name('compare_list');
-
-
-
-Route::post('/pos/salse/partner', [HomeController::class, 'sales_partner_store'])->name('sales_partner_store');
-
-
-
-Route::resource('review', ReviewProductController::class)->names('review');
-
-
-
-
-
-// Product management
-Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
-    // frontend
-    Route::get('/feature_view', [HomeController::class, 'feature_view'])->name('feature_view');
-    Route::get('/popular_view', [HomeController::class, 'popular_view'])->name('popular_view');
-    Route::get('/recommend_view', [HomeController::class, 'recommend_view'])->name('recommend_view');
-    Route::get('/recent_view', [HomeController::class, 'recent_view'])->name('recent_view');
-    Route::get('/quickview', [HomeController::class, 'quickview'])->name('quickview');
-    Route::get('/product_category_wise', [HomeController::class, 'product_category_wise'])->name('category_wise');
-    Route::get('/random_wise_product_category_wise', [HomeController::class, 'random_wise_product_category_wise'])->name('random_wise_product_category_wise');
-});
+Route::get('bdcouriertracking', [trackingController::class, 'tracking'])->name('tracking');
+Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
+Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCredentialController::class, 'update'])->name('admin.settings.courier-configration.update');
 
 
 
@@ -893,33 +733,189 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
+// ==================================  Frontend Management =====================================  Frontend Management =================
+
+Route::get('/locale/{lang}', [LanguageController::class, 'switchLanguage']);
+// Payment Process
+Route::get('/checkout/payment', [PaymentCredentialController::class, 'payment'])->name('payment');
+
+Route::group(['as' => 'amarpay.', 'prefix' => 'amarpay'], function () {
+    Route::post('success', [amarpayController::class, 'success'])->name('success');
+    Route::post('fail', [amarpayController::class, 'fail'])->name('fail');
+    Route::get('cancel', [amarpayController::class, 'cancel'])->name('cancel');
+});
+
+
+Route::group(['as' => 'sslcommerz.', 'prefix' => 'sslcommerz'], function () {
+    Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+    Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+    Route::post('/pay', [SslCommerzPaymentController::class, 'index'])->name('pay');
+    Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax'])->name('pay-via-ajax');
+
+    Route::post('/success', [SslCommerzPaymentController::class, 'success'])->name('success');
+    Route::post('/fail', [SslCommerzPaymentController::class, 'fail'])->name('fail');
+    Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel'])->name('cancel');
+
+    Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn'])->name('ipn');
+    //SSLCOMMERZ END
+
+});
+
+
+
+Route::group(['as' => 'paypal.', 'prefix' => 'paypal'], function () {
+    Route::post('/purchase', [PaymentController::class, 'createPayment'])->name('payment.purchase');
+    Route::get('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+    Route::get('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+
+
+});
+
+
+
+Route::group(['as' => 'stripe.', 'prefix' => 'stripe'], function () {
+    Route::get('/checkout', [stripePaymentController::class, 'create'])->name('checkout.create');
+    Route::get('/checkout/success', [stripePaymentController::class, 'success'])->name('checkout.success');
+    Route::get('/checkout/cancel', [stripePaymentController::class, 'cancel'])->name('checkout.cancel');
+
+
+});
+
+
+
+Route::group(['as' => 'baintree.', 'prefix' => 'baintree'], function () {
+    Route::get('/generate-client-token', [BraintreeController::class, 'generateClientToken']);
+    Route::get('/process-transaction', [BraintreeController::class, 'processTransaction']);
+
+});
+// End Payment Process
 
 
 
 
 
-Route::get('/invoice', [HomeController::class, 'order_invoice'])->name('order_invoice');
-Route::put('/address/{address}', [AddressController::class, 'update'])->name('address.update');
-Route::delete('/address/{address}', [AddressController::class, 'destroy'])->name('address.delete');
+
+
+// Profile route for manage data
+Route::group(['prefix' => 'user'],function () {
+    Route::post('customer-profile_pic/{customer}',[App\Http\Controllers\CustomerController::class, 'customer_profile_pic'])->name('customer_profile_pic.update');
+    Route::post('customer-register',[App\Http\Controllers\CustomerController::class, 'customerStore'])->name('customer_register');
+    Route::post('customer-login', [App\Http\Controllers\CustomerController::class, 'customerLogin'])->name('customer_login');
+    Route::get('customer-logout', [App\Http\Controllers\CustomerController::class, 'customer_logout'])->name('customer_logout');
+    
+    Route::put('customer-customerUpdate/{customer}',[App\Http\Controllers\CustomerController::class, 'customerUpdate'])->name('customerUpdate');
+    
+    
+    Route::get('google/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToGoogle'])->name('google.redirect');
+    Route::get('google/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleGoogleCallback'])->name('google.callback');
+    
+    Route::get('facebook/redirect', [App\Http\Controllers\GoogleLoginController::class, 'redirectToFacebook'])->name('facebook.redirect');
+    Route::get('facebook/callback', [App\Http\Controllers\GoogleLoginController::class, 'handleFacebookCallback'])->name('facebook.callback');
+});
+
+
+//custom order
+Route::post('bluk-order/store',[WholeSaleOrderController::class, 'blukOderStore'])->name('bluk.order.store');
 
 
 
-Route::get('customer/verify_mail_send', [App\Http\Controllers\CustomerController::class, 'verify_mail_send'])->name('customer.verify_mail_send');
-Route::get('customer/verify_mail_verify', [App\Http\Controllers\CustomerController::class, 'verify_mail_verify'])->name('customer.verify');
+
+
+
+// Product management
+Route::group(['as' => 'product.', 'prefix' => 'product'], function(){
+    // frontend
+    Route::get('/feature_view', [HomeController::class, 'feature_view'])->name('feature_view');
+    Route::get('/popular_view', [HomeController::class, 'popular_view'])->name('popular_view');
+    Route::get('/recommend_view', [HomeController::class, 'recommend_view'])->name('recommend_view');
+    Route::get('/recent_view', [HomeController::class, 'recent_view'])->name('recent_view');
+    Route::get('/quickview', [HomeController::class, 'quickview'])->name('quickview');
+    Route::get('/product_category_wise', [HomeController::class, 'product_category_wise'])->name('category_wise');
+    Route::get('/random_wise_product_category_wise', [HomeController::class, 'random_wise_product_category_wise'])->name('random_wise_product_category_wise');
+});
 
 
 
 
-// Duplicate route helped for seo
-Route::get('/product-details/{slug}', [HomeController::class,'product_view_by_slug'])->name('product_view_by_slug');
+// Fornt View data
+Route::middleware(['setlocale'])->group(function () {
+
+    // protflio_web_theme
 
 
-// User Defined Route Web So Check Route not exists
-Route::get('{view}', [HomeController::class, 'index'])->middleware('TrackUniqueVisitor')->name('home')-> where('view', '^(?!admin).*');
-// end protflio_web_theme
+    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
+    Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');
+
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/client/{slug}/', [ClientController::class, 'show'])->name('client.view');
 
 
 
+    // Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    Route::get('/team', [TeamController::class, 'index'])->name('team.index');
+    Route::get('/team/{slug}/', [TeamController::class, 'show'])->name('team.view');
+
+
+
+    Route::get('tracking_order', [TrackingOrderController::class, 'index'])->name('tracking_order.index');
+
+
+    Route::get('/about', [HomeController::class, 'about']);
+    Route::get('filter/data-get', [HomeController::class, 'filter_get']);
+
+
+
+
+
+
+    Route::get('add_to_cart', [HomeController::class, 'add_to_cart'])->name('add_to_cart');
+    Route::get('cart_details', [HomeController::class, 'cart_details'])->name('cart_details');
+    Route::post('checkout', [HomeController::class, 'checkout'])->name('checkout');
+
+    Route::get('cart_and_wishlist', [HomeController::class, 'cart_and_wishlist'])->name('cart_and_wishlist');
+    Route::get('side_cart_info', [HomeController::class, 'side_cart_info'])->name('side_cart_info');
+
+    Route::get('add_to_compareList', [HomeController::class, 'add_to_compareList'])->name('add_to_compareList');
+    Route::get('compare_list', [HomeController::class, 'compare_list'])->name('compare_list');
+
+
+
+    Route::post('/pos/salse/partner', [HomeController::class, 'sales_partner_store'])->name('sales_partner_store');
+
+
+
+    Route::resource('review', ReviewProductController::class)->names('review');
+
+
+
+
+
+    
+    Route::get('/invoice', [HomeController::class, 'order_invoice'])->name('order_invoice');
+    Route::put('/address/{address}', [AddressController::class, 'update'])->name('address.update');
+    Route::delete('/address/{address}', [AddressController::class, 'destroy'])->name('address.delete');
+
+
+
+    Route::get('customer/verify_mail_send', [App\Http\Controllers\CustomerController::class, 'verify_mail_send'])->name('customer.verify_mail_send');
+    Route::get('customer/verify_mail_verify', [App\Http\Controllers\CustomerController::class, 'verify_mail_verify'])->name('customer.verify');
+
+
+
+
+    // Duplicate route helped for seo
+    Route::get('/product-details/{slug}', [HomeController::class,'product_view_by_slug'])->name('product_view_by_slug');
+
+
+    // User Defined Route Web So Check Route not exists
+    Route::get('{view}', [HomeController::class, 'index'])->middleware('TrackUniqueVisitor')->name('home')-> where('view', '^(?!admin).*');
+    // end protflio_web_theme
+
+});
+// ================================== End Frontend Management ===================================== End Frontend Management =================
 
 
 

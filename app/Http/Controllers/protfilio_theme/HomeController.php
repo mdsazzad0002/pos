@@ -68,7 +68,7 @@ class HomeController extends Controller
             if(env('APP_DEBUG') == true){
                 abort('404', 'Not Set Home Page');
             }else{
-                return redirect('404');
+                 abort('404');
             }
         }
 

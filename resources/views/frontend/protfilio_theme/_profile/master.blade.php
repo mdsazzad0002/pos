@@ -198,6 +198,7 @@ label.update_profile_pic:hover i.fas.fa-camera.top-right-0{
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 999;
 }
 
 #staticBackdrop .modal-content{

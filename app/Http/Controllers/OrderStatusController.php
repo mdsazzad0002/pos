@@ -72,7 +72,7 @@ class OrderStatusController extends Controller
             $orderStatus->name = $request->name;
             $orderStatus->qty_status = $request->qty_status;
             $orderStatus->qty_add_remove = $request->qty_add_remove;
-            $orderStatus->under_items = is_array($request->under_items) ? json_encode($request->under_items) : [];
+            $orderStatus->under_items = is_array($request->under_items) ? json_encode($request->under_items) : json_encode([]);
             $orderStatus->save();
         }
 
@@ -94,5 +94,9 @@ class OrderStatusController extends Controller
             'type'=> 'success',
             'refresh'=>'false',
         ]);
+    }
+
+    public function delete(OrderStatus $orderStatus){
+        return view('layout.admin.modal_content_delete');
     }
 }

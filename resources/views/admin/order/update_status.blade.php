@@ -4,8 +4,8 @@
         @foreach ($order->order_events as $event )
         <tr>
             <th>#ID{{ $order->order_id }}</th>
-            <td>{{ $event->status_data->name }}</td>
-            <td>{{ $event->status_data->note }}</td>
+            <td>{{ $event->status_data->name ?? '' }}</td>
+            <td>{{ $event->status_data->note ?? '' }}</td>
             <td>{{ $event->created_at->format('d-F-Y h:i:s A') }}</td>
         </tr>
             
@@ -13,8 +13,14 @@
     </table>
   
     @php
-        $latest_status = $order->latestEventStatus()?->status_data ?? [];
-        $child_status = $latest_status->ChildItems() ?? [];
+        $latest_status = $order?->latestEventStatus()?->status_data ?? [];
+        // dd($latest_status);
+        if(count($latest_status) > 0){
+            $child_status = $latest_status?->ChildItems() ?? [];
+            
+        }else{
+            $child_status = [];
+        }
     @endphp
 
 

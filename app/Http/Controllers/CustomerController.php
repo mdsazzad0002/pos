@@ -287,7 +287,11 @@ class CustomerController extends Controller
                 $user->v_code =  $mailInfo['code'];
                 $user->save();
 
-                Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                try{
+                    Mail::to($mailInfo['email'], $mailInfo['title'])->send(new MailerDynamic($mailInfo));
+                }catch(\Exception $e){
+                   
+                }
             }
         }
         return back();

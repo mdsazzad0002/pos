@@ -18,7 +18,11 @@ $customer = auth()->guard('customer')->user();
 
 @section('profile')
 
+@if (\request('order_id'))
+    
+
 @php
+
     $order_find = \App\Models\order::findOrFail(\request('order_id'));
 @endphp
 <div class="col-12">
@@ -54,6 +58,11 @@ $customer = auth()->guard('customer')->user();
 
     </div>
 </div>
+@else
+    <div class="p-3 bg-warning">
+        Someting went Wrong contact with Athor. Order Id Not Found
+    </div>
+@endif
 
 
 @endsection

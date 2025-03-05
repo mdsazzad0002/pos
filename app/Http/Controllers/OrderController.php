@@ -31,7 +31,7 @@ class OrderController extends Controller
                 ->addColumn('order_status', function ($row) {
                   $order_event = OrderEvent::where('order_id', $row->id)->latest()->first();
                   if($order_event){
-                    return $order_event->status_data->name;
+                    return $order_event?->status_data?->name ?? 'Unknown';
                   }else{
                     return 'Unread';
                   }
@@ -330,8 +330,12 @@ class OrderController extends Controller
 
             foreach($request->stock as $key => $value){
                 $stock = Stock::where('id', $key)->first();
-                // dd($stock);
+                $product = product::find($stock->product_id);
+                $size = VariantOption::find($stock->size);
 
+
+                // dd($stock);
+              
                 if($stock){
                     // add remove items means not sale
                     if($value == 0 && $order_current_status->qty_add_remove == 1 ){
@@ -339,6 +343,9 @@ class OrderController extends Controller
                             $stock->status = $order_current_status->qty_add_remove;
                             $stock->save();
 
+                            if($product->service == 1){
+                                continue;
+                            }
                             if($stock->size != 0){
                                 $size = VariantOption::find($stock->size);
                                 $size->quantity += $value;
@@ -348,12 +355,16 @@ class OrderController extends Controller
                                 $product->quantity += $value;
                                 $product->save();
                             }
+
+
                         }
                     }elseif($value == 0 && $order_current_status->qty_add_remove == 2){
                         if($stock->status == $order_current_status->qty_add_remove){
                             $stock->status = $order_current_status->qty_add_remove;
                             $stock->save();
-    
+                            if($product->service == 1){
+                                continue;
+                            }
                             if($stock->size != 0){
                                 $size = VariantOption::find($stock->size);
                                 $size->quantity -= $value;
@@ -371,7 +382,9 @@ class OrderController extends Controller
                         if($stock->status != $order_current_status->qty_add_remove){
                             $stock->status = $order_current_status->qty_add_remove;
                             $stock->save();
-
+                            if($product->service == 1){
+                                continue;
+                            }
                             if($stock->size != 0){
                                 $size = VariantOption::find($stock->size);
                                 $size->quantity -= $value;
@@ -389,7 +402,11 @@ class OrderController extends Controller
                         if($stock->status != $order_current_status->qty_add_remove){
                             $stock->status = $order_current_status->qty_add_remove;
                             $stock->save();
-    
+
+                            if($product->service == 1){
+                                continue;
+                            }
+
                             if($stock->size != 0){
                                 $size = VariantOption::find($stock->size);
                                 $size->quantity += $value;

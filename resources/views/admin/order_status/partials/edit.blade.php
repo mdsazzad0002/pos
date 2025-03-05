@@ -39,10 +39,15 @@
     <div class="safe_items">
         <div class="form-group mb-2">
             <label for="qty_add_remove">Type</label>
+            <div>
+                Remove From Stock = Stock Remove form stock. <br/>
+                Add Stock = Stock Add to stock
+                None = No Change
+            </div>
             <select name="qty_add_remove" id="qty_add_remove" name="qty_add_remove" class="form-control mb-2">
                 <option value="0" {{ $orderStatus && $orderStatus->qty_add_remove == '0' ? 'selected' : '' }}>None</option>
-                <option value="1" {{ $orderStatus && $orderStatus->qty_add_remove == '1' ? 'selected' : '' }}>Adding Stock</option>
-                <option value="2" {{ $orderStatus && $orderStatus->qty_add_remove == '2' ? 'selected' : '' }}>Removing Stock</option>
+                <option value="1" {{ $orderStatus && $orderStatus->qty_add_remove == '1' ? 'selected' : '' }}>Remove From Stock</option>
+                <option value="2" {{ $orderStatus && $orderStatus->qty_add_remove == '2' ? 'selected' : '' }}>Add  Stock</option>
             </select>
         </div>
 

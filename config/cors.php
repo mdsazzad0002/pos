@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login_token_generate'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [''],
 
     'allowed_origins_patterns' => [],
 
@@ -30,5 +30,13 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => false,
+    'paths' => ['api/*', 'login_token_generate'], // Add the route explicitly
+        'allowed_methods' => ['*'],
+        'allowed_origins' => ['https://dengrweb.com'], // Use ['https://dengrweb.com'] to allow specific domains
+        'allowed_origins_patterns' => [],
+        'allowed_headers' => ['*'],
+        'exposed_headers' => [],
+        'max_age' => 0,
+        'supports_credentials' => false,
+    ];
 
-];
