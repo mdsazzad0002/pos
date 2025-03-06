@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(125);
         view()->share('asset_version', '1.0.0.1');
 
-
+        // \Artisan::call('optimize:clear');
         Paginator::useBootstrapFour();
 
         if(Schema::hasTable('mail_settings') ){
