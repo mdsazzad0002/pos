@@ -80,7 +80,7 @@ if($(thi).data('setelement')){
         model = document.querySelector('#ajax_modal');
     }
 
-    console.log($(thi).data('target'))
+    // console.log($(thi).data('target'))
 
     modalDialog = model.querySelector('.modal-dialog')
 
@@ -119,49 +119,56 @@ if($(thi).data('setelement')){
 
 
 
+console.log(model)
 
 
 
 
+        {{--  data set  --}}
+            if($(thi).data('href')){
 
-    {{--  data set  --}}
-        if($(thi).data('href')){
-            $.ajax({
-                'type':'get',
-                'url': $(thi).data('href'),
-                success: function (data){
-                    $(setElement).html(data);
+                $.ajax({
+                    'type':'get',
+                    'url': thi.getAttribute('data-href'),
+                    success: function (data){
+                        $(setElement).html(data);
 
 
-                    //Select2 fillelement
-                    select2_caller();
+                        //Select2 fillelement
+                        select2_caller();
 
-                    //call all summernote render into class optional
-                    summernote_render();
+                        //call all summernote render into class optional
+                        summernote_render();
 
-                    //call all form submit in dialog
-                    //if($(thi).)
-                    form_submit('.ajax_modal_dialog form');
-                    tooltip_active()
+                        //call all form submit in dialog
+                        //if($(thi).)
+                       
+                            
+                         form_submit('#' + model.getAttribute('id') + ' form');
+                       
 
-                },
-                error: function (xhr, status, error) {
+                        tooltip_active()
 
-                    //Error show and refresh button generate
-                    var items_refresh = "<div class='text-center btn_refresh_head'>"+thi.outerHTML+"<br/><br/>AJAX Error: "+ status + error+"</div>";
-                    $(model).find('.modal-body').html(items_refresh);
-                     $(model).find('.btn_refresh_head .btn').html('Refresh')
-                     //Error show and refresh button generate
-                }
-            })
-        }else{
-             $(model).find('.modal-body').html('data-href');
-        }
-    {{--  end data set  --}}
+                    },
+                    error: function (xhr, status, error) {
 
-    if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
-        $(model).modal('show');
-    }
+                        //Error show and refresh button generate
+                        var items_refresh = "<div class='text-center btn_refresh_head'>"+thi.outerHTML+"<br/><br/>AJAX Error: "+ status + error+"</div>";
+                        $(model).find('.modal-body').html(items_refresh);
+                        $(model).find('.btn_refresh_head .btn').html('Refresh')
+                        //Error show and refresh button generate
+                    }
+                })
+            }else{
+                $(model).find('.modal-body').html('data-href');
+            }
+
+
+            {{--  end data set  --}}
+
+            if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
+                $(model).modal('show');
+            }
 
     }
 
@@ -224,6 +231,7 @@ if($(thi).data('setelement')){
              {{--  forem_reset = true;  --}}
         }
         document.querySelectorAll(class_element).forEach(function(element){
+            console.log(element);
 
         $(element).on('submit', function (e) {
             e.preventDefault(); // Prevent the default form submission
@@ -236,7 +244,9 @@ if($(thi).data('setelement')){
                 processData: false,              // Required for FormData
                 contentType: false,              // Required for FormData
                 success: function (data) {
+
                     data = JSON.parse(data);
+                   
                     //console.log(data);          // Handle success
                     if(data.type == 'success'){
                         flasher.success(data.title);

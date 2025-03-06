@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\payment\transection_information;
-use Illuminate\Http\Request;
+use App\Models\payment\TransectionInformation;
+use Illuminate\Http\Request;use Yajra\DataTables\DataTables;use App\Models\OrderEvent;
 
 class TransectionInformationController extends Controller
 {
@@ -12,7 +12,72 @@ class TransectionInformationController extends Controller
      */
     public function index()
     {
-        //
+     
+               // $roles = role::latest()->get();
+               if (request()->ajax()) {
+                $order = TransectionInformation::select('transection_information.*');
+                return DataTables::make($order)
+                        ->addColumn('order_status', function ($row) {
+                            if($row->order_id == 0){
+                                return 'Unknown';
+                            }
+                            $order_event = OrderEvent::where('order_id', $row->order_id)->latest()->first();
+                            if($order_event){
+                            return $order_event?->status_data?->name ?? 'Unknown';
+                            }else{
+                            return 'Pending';
+                            }
+        
+                        })
+            
+                   
+                    ->addColumn('order_id_data', function ($row) {
+                      if($row->order_id == 0){
+                          return 'Unknown';
+                      }
+                      return $row->order_info?->order_id ?? 'Unknown';
+    
+                    })
+                 
+    
+                    ->addColumn('action', function ($row) {
+                        if($row->order_id == 0){
+                            return 'No Action Avialable';
+                        }
+                        $view_route = route('admin.order.show', $row->order_id);
+                        $view_button = " <button class='btn btn-primary '
+                        data-dialog='modal-lg modal-dialog-centered'
+                        onclick='button_ajax(this)'
+                        data-title='Info #ID".$row->order_info->order_id."'
+                        data-href='$view_route'>View</button>";
+    
+    
+                        $update_status_route = route('admin.order.update_status', $row->order_id);
+                        $update_status_button = " <button class='btn btn-primary '
+                        data-dialog='modal-lg modal-dialog-centered'
+                        onclick='button_ajax(this)'
+                        data-title='info #ID".$row->order_info->order_id."'
+                        data-href='$update_status_route'>Update Status </button>";
+    
+    
+                        $return_data = '';
+                  
+                        if(auth()->user()->can('order read') == true){
+                                $return_data .= $view_button;
+                        }
+    
+    
+    
+    
+                        return $return_data;
+    
+    
+                    })
+                    ->rawColumns(['action' ,'order_status','cashcollection_price'])
+                    ->make(true);
+            }
+            return view('admin.transaction.index');
+       
     }
 
     /**

@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('language.title'))
+@section('title', "Languages")
 
 {{--  Content Extends  --}}
 @section('content')
@@ -15,7 +15,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        {{ __('settings.language') }}
+        Language List
         <div>
             @can('user create')
 

@@ -40,6 +40,13 @@ Product Info
 
     @endforeach
 
+    <tr>
+        <td colspan="5">
+           <b> Note: </b><br/>
+            {{ $order->note ?? '' }}
+        </td>
+    </tr>
+
 
 
 
@@ -207,3 +214,5 @@ Product Info
     </tr>
 
 </table>
+
+@include('admin.courier.courier_info')

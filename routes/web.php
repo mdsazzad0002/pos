@@ -87,6 +87,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductStyleController;
 use App\Http\Controllers\CalendarEventController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TransectionInformationController;
 
 
 
@@ -374,6 +375,16 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         Route::get('/order/update_status/{order}', [OrderController::class, 'update_status'])->name('order.update_status');
         Route::post('/order/update_status/{order}', [OrderController::class, 'update_status_post'])->name('order.update_status_post');
         // Route::get('/order/getOrder/get', [OrderController::class, 'getOrder'])->name('order.select');
+        Route::get('/order/cashcollection/{order}', [OrderController::class, 'cashcollection'])->name('order.cashcollection_show');
+        Route::post('/order/cashcollection/{order}', [OrderController::class, 'cashcollection_post']);
+
+        
+        Route::any('courier/{order}/test', [OrderController::class, 'courier'])->name('courier.action');
+
+        
+        
+        Route::resource('/transaction', TransectionInformationController::class)->names('transaction');
+
 
         //pos
         Route::resource('/pos', PosController::class)->names('pos');

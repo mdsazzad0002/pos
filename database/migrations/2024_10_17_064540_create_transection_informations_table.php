@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('PayerID')->nullable();
             $table->string('token')->nullable();
             $table->string('client_id')->nullable();
+            $table->string('note')->nullable();
 
 
             $table->string('updater')->default(0);

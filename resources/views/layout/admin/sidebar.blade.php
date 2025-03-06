@@ -96,8 +96,15 @@ sidebar-dark-primary elevation-4">
                                         <p>Create</p>
                                     </a>
                                 </li>
-                            @endcan
-                        @endif
+                                @endcan
+                                @endif
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.transaction.index') }}" class="nav-link ">
+                                <i class="fas fa-money-check-alt nav-icon"></i>
+                                <p>Transaction</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 @endcanany
@@ -139,7 +146,7 @@ sidebar-dark-primary elevation-4">
                                     <p>Custom Order <span class="right badge badge-danger">{{ customOrder() }}</span></p>
                                 </a>
                             </li>
-                            @endif
+                        @endif
                     </ul>
                 </li>
                 @endcanany
@@ -270,7 +277,7 @@ sidebar-dark-primary elevation-4">
 
 
 
-                @if(config('app.env') == 'local')
+              
                 @can('stock read')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -287,16 +294,19 @@ sidebar-dark-primary elevation-4">
                                 <p>Stock</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.stock.stockalert') }}" class="nav-link">
-                                <i class="fab fa-dropbox nav-icon"></i>
-                                <p>Stock Alert</p>
-                            </a>
-                        </li>
+                        @if (config('app.env') == 'local')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.stock.stockalert') }}" class="nav-link">
+                                    <i class="fab fa-dropbox nav-icon"></i>
+                                    <p>Stock Alert</p>
+                                </a>
+                            </li>
+                            
+                        @endif
                     </ul>
                 </li>
                 @endcan
-                @endif
+              
 
 
                 @can('customer read')
@@ -316,7 +326,8 @@ sidebar-dark-primary elevation-4">
                     </li>
                 @endcan
 
-                @if(config('app.env') == 'local')
+               
+                @canany(['supplier read', 'supplier create'])
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-swatchbook nav-icon"></i>
@@ -356,7 +367,7 @@ sidebar-dark-primary elevation-4">
                         @endcan
                     </ul>
                 </li>
-                @endif
+                @endcanany
 
 
 

@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        Stock Management
        
     </div>
     <div class="card-body">

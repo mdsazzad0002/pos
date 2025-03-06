@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <h5>
-                    <label for="{{ $setting->name }}">{{ __(Str::title(Str::replace('_', ' ', $setting->name))) }}</label>
+                    <label for="{{ $setting->name }}">{{ Str::title(Str::replace('_', ' ', $setting->name)) }}</label>
                 </h5>
             </div>
 

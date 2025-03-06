@@ -3,9 +3,9 @@
 
 {{-- Define Site Title --}}
 @if($product)
-    @section('title', __('product.update'))
+    @section('title', 'Product Update')
 @else
-    @section('title', __('product.create'))
+    @section('title', 'Product Create')
 @endif
 {{-- Content Extends --}}
 @section('content')
@@ -31,7 +31,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            {{ __('product.information') }}
+                           Product Information
                         </div>
                         <div class="card-body">
 
@@ -226,7 +226,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            {{ __('product.image_and_slider') }}
+                           Image & Slider
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -267,7 +267,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            {{ __('product.status_and_feature') }}
+                           Status Feature
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -315,7 +315,7 @@
                     {{-- Storeing information --}}
                     <div class="card">
                         <div class="card-header">
-                            {{ __('product.store_information') }}
+                          Storeing Information
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -337,7 +337,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            {{ __('product.landing_page_info') }}
+                          Landing Page Information
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -418,7 +418,7 @@
             <div class="variant_option my-4">
                 <div class="card">
                     <div class="card-header">
-                        {{ __('product.variant_option') }}
+                        Variant Option
                         <div class="float-right">
 
                             <input type="checkbox" checked class="" hidden name="variant_on" value="0">

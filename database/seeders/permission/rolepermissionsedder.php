@@ -51,6 +51,8 @@ class rolepermissionsedder extends Seeder
                 // Stock
                 'stock read',
 
+               
+
 
                 // Supplier
                 'supplier read', 'supplier create',  'supplier edit', 'supplier delete',
@@ -118,6 +120,10 @@ class rolepermissionsedder extends Seeder
                       'settings tracking_report', 'settings site_pwa',  'settings messagesdk',  'settings cookie',
                       'settings email_setting',
                       'imap management',
+
+
+                       // courier
+                        'settings courier_configration',
 
 
                 //]]]

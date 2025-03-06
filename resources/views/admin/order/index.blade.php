@@ -49,6 +49,7 @@
             {data:'order_status',  title:'Status', searchable:false, orderable:false},
             {data:'quantity', name:'quantity', title:'Quantity', searchable:false, orderable:false},
             {data:'price', name:'price', searchable:false, title:'Price', orderable:false},
+            {data:'cashcollection_price', name:'cashcollection_price', searchable:false, title:'CashCollection Price', orderable:false},
             {data:'created_at', name:'created_at',  title:'Date', render(data, type, row, meta) {
                 return moment(data).format('DD-MM-YYYY hh:mm:ss A');
             }},

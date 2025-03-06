@@ -14,15 +14,15 @@ class productSeeder extends Seeder
      */
     public function run(): void
     {
-        $product = new product();
-        $product->name = 'Test Product';
-        $product->slug = Str::slug('Test Product', '-');
-        $product->category = 1;
-        $product->brand = 1;
-        $product->for_selling = 0;
-        $product->alert_quantity = 0;
-        $product->upload_id = 0;
-        $product->creator = 0;
-        $product->save();
+        // $product = new product();
+        // $product->name = 'Test Product';
+        // $product->slug = Str::slug('Test Product', '-');
+        // $product->category = 1;
+        // $product->brand = 1;
+        // $product->for_selling = 0;
+        // $product->alert_quantity = 0;
+        // $product->upload_id = 0;
+        // $product->creator = 0;
+        // $product->save();
     }
 }

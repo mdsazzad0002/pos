@@ -16,19 +16,29 @@ class CourierCredentialController extends Controller
         return view('admin.settings.courier', compact('payment_credentials'));
     }
 
-    public function update(Request $request, CourierCredential $courier_configuration ){
-        $request = $request->except(['_token', '_method']);
-        foreach($request as $key => $value){
-             $courier_configuration[$key] = $value;
+    public function update(Request $request,  $courier_configuration ){
+        $courier_configuration = CourierCredential::findOrFail($courier_configuration);
 
-        }
-        $courier_configuration->save();
+        if($courier_configuration){
 
-
+            $validatedData = $request->only([
+                'provider', 'Secret_Key', 'Api_Key', 'client_id', 'client_secret',
+                'secret_token', 'key', 'sandbox_status', 'status'
+            ]);
+            $courier_configuration->update($validatedData);
+            
             return json_encode([
                 'title' => 'Successfully   updated',
                 'type' => 'success',
                 'refresh' => 'true',
+            ]);
+        }
+
+
+            return json_encode([
+                'title' => 'Failed to updated',
+                'type' => 'error',
+                'refresh' => 'false',
             ]);
 
     }

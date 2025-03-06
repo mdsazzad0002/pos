@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('settings.authenticted_history'))
+@section('title', 'Device Log')
 
 {{--  Content Extends  --}}
 @section('content')
@@ -17,7 +17,7 @@
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         <h5>
-            {{ __('settings.authenticated_list') }}
+            Device Log
         </h5>
 
     </div>

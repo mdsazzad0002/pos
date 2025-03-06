@@ -1,7 +1,7 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title  --}}
-@section('title', __('setting.payment-settings'))
+@section('title', 'Courier Settings')
 @section('content')
 
 
@@ -20,7 +20,7 @@
     <div class="col-md-6 col-lg-">
         <div class="card">
             <div class="card-header">
-                {{ __('settings.'.$items->provider) }}
+                {{ $items->provider }}
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.settings.courier-configration.update', $items->id) }}" method="POST" class="form_ajax_submit">
@@ -35,7 +35,7 @@
                         @endif
 
                         <div class="form-group mb-2">
-                            <label for="{{ $key.$items->id }}"> {{ __('settings.'.$key) }}</label>
+                            <label for="{{ $key.$items->id }}"> {{ Str::replace('_', ' ', Str::title($key)) }}</label>
                             @include('admin.settings.partials.main-setting-helper', ['key' => $key.$items->id, 'items_key'=> $key, 'items_value' => $value])
                         </div>
                     @endforeach

@@ -13,6 +13,8 @@ use App\Models\product;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Stock;
+use App\Models\payment\TransectionInformation;
+use App\Http\Controllers\courier\courierController;
 class OrderController extends Controller
 {
     /**
@@ -33,7 +35,7 @@ class OrderController extends Controller
                   if($order_event){
                     return $order_event?->status_data?->name ?? 'Unknown';
                   }else{
-                    return 'Unread';
+                    return 'Pending';
                   }
 
                 })
@@ -44,6 +46,19 @@ class OrderController extends Controller
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
+
+                })
+                ->addColumn('cashcollection_price', function ($row) {
+                    $view_route = route('admin.order.cashcollection_show', $row->id);
+
+                    if($row->current_cash_collection() == 0){
+                        return  'Paid';
+                    }
+                    return "<button class='btn btn-primary '
+                    data-dialog='modal-lg modal-dialog-centered'
+                    onclick='button_ajax(this)'
+                    data-title='  Cash Collection of #`$row->order_id`'
+                    data-href='".$view_route."'>".settings('currency_symbol',9) . ' '. $row->current_cash_collection()."</button>";
 
                 })
 
@@ -97,7 +112,7 @@ class OrderController extends Controller
 
 
                 })
-                ->rawColumns(['action' ,'order_status'])
+                ->rawColumns(['action' ,'order_status','cashcollection_price'])
                 ->make(true);
         }
         return view('admin.order.index');
@@ -495,4 +510,92 @@ class OrderController extends Controller
         ]);
     }
 
+
+
+    public function cashcollection(Request $request, $order){ 
+
+        $order = order::find($order);
+        if($order){
+            return view('admin.order.cashcollection', compact('order'));
+        }else{
+            return abort(404);
+        }
+    }
+    public function cashcollection_post(Request $request, $order){ 
+        $request->validate([
+            'note' => 'required',
+            // 'date' => 'required',
+            'amount' => 'required',
+            'payment_method' => 'required',
+        ]);
+
+        $order = order::find($order);
+        if($order->current_cash_collection() < $request->amount){
+            return json_encode([
+                'title'=>'Cash Collection is not enough',
+                'type'=>'error',
+                'refresh'=>'false',
+            ]);
+        }
+
+        if($order){
+            $transection = new TransectionInformation();
+            $transection->order_id = $order->id;
+            $transection->payment_method_id = 0;
+            $transection->by_method = $request->payment_method;
+            $transection->amount = $request->amount;
+            $transection->note = $request->note;
+            // $transection->date = $request->date;
+            $transection->status = 'success';
+            $transection->creator = auth()->user()->id;
+            $transection->updater = auth()->user()->id;
+            $transection->save();
+        }
+
+        return json_encode([
+            'title'=>'Successfully Added Cash Collection',
+            'type'=>'success',
+            'refresh'=>'true',
+        ]);
+    }
+
+
+
+    public function courier(Request $request, $order){
+        $new = new courierController();
+        return $new->decition_courier($request,$order);
+    }
+  
+
 }
+
+
+// id Primary	bigint		UNSIGNED	No	None		AUTO_INCREMENT	Change Change	Drop Drop	
+// 2	payment_method_id	int			No	None			Change Change	Drop Drop	
+// 3	user_id	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 4	location_id	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 5	order_id	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 6	name	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 7	email	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 8	phone	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 9	address	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 10	status	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 11	mer_txnid	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 12	currency	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 13	ip_address	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 14	by_method	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 15	description	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 16	tnx_id_by_user	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 17	amount	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 18	store_amount	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 19	service_charge	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 20	payment_charge	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 21	all_response	text	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 22	secret	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 23	PayerID	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 24	token	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 25	client_id	varchar(125)	utf8mb4_unicode_ci		Yes	NULL			Change Change	Drop Drop	
+// 26	updater	varchar(125)	utf8mb4_unicode_ci		No	0			Change Change	Drop Drop	
+// 27	creator	varchar(125)	utf8mb4_unicode_ci		No	0			Change Change	Drop Drop	
+// 28	created_at	timestamp			Yes	NULL			Change Change	Drop Drop	
+// 29	updated_at	timestamp

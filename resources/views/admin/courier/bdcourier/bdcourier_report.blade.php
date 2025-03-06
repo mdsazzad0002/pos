@@ -10,20 +10,20 @@
             Please Wait ...
           </div>
     </div>
-    </div>
+</div>
     
-    <script>
-        // documquent.addEventListener('DOMContentLoaded', function() {
-            var url = "{{ url('bdcouriertracking?phone='.$phone) }}";
-            var place_element = document.querySelector('.tracking_data');
-            // ajax set
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    place_element.innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        // });
-    </script>
+<script>
+    // documquent.addEventListener('DOMContentLoaded', function() {
+        var url = "{{ url('bdcouriertracking?phone='.$phone) }}";
+        var place_element = document.querySelector('.tracking_data');
+        // ajax set
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                place_element.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    // });
+</script>

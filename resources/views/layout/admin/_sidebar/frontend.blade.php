@@ -130,9 +130,9 @@
         <li class="nav-item">
             <a href="#" class="nav-link ">
          
+                <i class="fas fa-book nav-icon"></i>
                 <p>
-                    <i class="fas fa-book nav-icon"></i>
-                    <p>Page Management</p>
+                    <p>Page Management  <i class="fas fa-angle-left right"></i></p>
                 </p>
             </a>
             <ul class="nav nav-treeview">
