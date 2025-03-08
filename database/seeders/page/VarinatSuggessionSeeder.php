@@ -534,10 +534,11 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_manage_status' => 0,
 
                 'view_all' => 'View All',
-                'view_all_manage_status' => 1,
-
+                'view_all_manage_status' => 0,
                 'view_all_status' => 0,
                 'items_per_row' => 6,
+                'items_manage_status'=> 1,
+                'is_details_page_manage_status'=> 1,
 
                 'background' => 0,
                 'background_color' => '#eeeeee',
@@ -547,6 +548,8 @@ class VarinatSuggessionSeeder extends Seeder
                 'background_manage_status'=> 1,
                 'category_manage_status' => 1,
 
+
+             
             ],
              'product6' => [
                 'key' =>'_product_variant._randomize_product_category_wise',

@@ -23,50 +23,19 @@
         </div>
     </div>
     <div class="card-body" style="max-height: 800px;overflow: auto;">
-        <form class="row">
+        <form class="row mb-3" id="search_search" >
             <div class="col-md-6">
-                <input type="search" class="form-control" placeholder="Enter your Keywords">
+                <input type="search" name="q" class="form-control" placeholder="Enter your Keywords">
             </div>
             <div class="col-md-3 col-6">
-                <button class="btn btn-submit"><i class="fa fa-search" aria-hidden="true"></i>
+                <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i>
                     Search</button>
             </div>
         </form>
 
     
     <div class="order_container" id="sortable_items_data">
-        @foreach($category as $key => $item)
-        <div class="order_items" dragging="true" id="{{$item->id}}">
-            <img class="w-100" src="{{dynamic_asset($item->upload_id)}}" />
-            <hr class="mt-0 mb-1" />
-            <div class="px-2">
-                <div>{{$item->name ?? ''}}</div>
-                <div class="action-button btn-group w-100 mt-1">
-                    @can('category edit')
-                    <button class='btn btn-warning ' data-dialog='modal-dialog-centered' data-title='{{ $item->name }}'
-                        onclick='button_ajax(this)' data-href='{{ route('admin.category.edit', $item->id)
-                        }}'><i class="fas fa-edit"></i></button>
-                    @endcan
-
-                    @can('category read')
-                    <button class='btn btn-primary ' data-dialog=' modal-dialog-centered' onclick='button_ajax(this)'
-                        data-title='{{ $item->name }}  info' data-href='{{ route('admin.category.show', $item->id)
-                        }}'><i class="fa fa-eye" aria-hidden="true"></i>
-                    </button>
-                    @endcan
-
-                    @can('category delete')
-                    <button class='btn btn-danger ' data-title='{{ $item->name }}' onclick='button_ajax(this)'
-                        data-href='{{ route('admin.category.delete', $item->id) }}'><i class="fa fa-trash"
-                            aria-hidden="true"></i>
-                    </button>
-                    @endcan
-
-                </div>
-            </div>
-
-        </div>
-        @endforeach
+        @include('admin.category.reorder.format_data')
     </div>
     <br>
 
@@ -136,6 +105,21 @@
     setTimeout(function(){
         sorting();
     },1500)
+
+
+document.querySelector('#search_search').addEventListener('submit', function(e){
+    e.preventDefault();
+    let order_container = document.getElementById('sortable_items_data');
+    $.ajax({
+        url: '',
+        method:'get',
+        data:$(search_search).serialize(),
+        success:function(response){
+            order_container.innerHTML = response;
+            sorting();
+        }
+    })
+});
 
 </script>
 @endsection

@@ -227,6 +227,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         // homepagemanage it's allover pagecontrol
         Route::resource('homePageManage', HomePageManageController::class)->names('homePageManage');
         Route::get('/homePageManage/homePageManage/get', [HomePageManageController::class, 'homePageManage'])->name('homePageManage.select');
+        Route::get('/homePageManage/homePageManage/homePageManage', [HomePageManageController::class, 'homePageManage'])->name('homePageManage.homePageManage');
 
 
         Route::get('/VarinatSuggession/VarinatSuggession/get', [VarinatSuggessionController::class, 'VarinatSuggession'])->name('VarinatSuggession.select');

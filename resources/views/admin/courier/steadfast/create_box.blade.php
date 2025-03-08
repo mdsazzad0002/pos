@@ -13,6 +13,10 @@
             <input class="form-control" type="text" value="{{ $request->courier_id }}" hidden name="courier_id" value="true">
         </div>
         <div class="col-lg-6">
+            <label for="order_id">Payable Amount</label><br/>
+            <input class="form-control" type="number" step="0.01"   name="amount" value="{{ $order->current_cash_collection() }}">
+        </div>
+        <div class="col-lg-6">
             <label for="order_id">Receiver Name</label><br/>
             <input class="form-control" type="text"   name="name" value="{{ $order->billing_info->name ?? $order->address_info->name ?? $order->customer->name ?? '' }}">
         </div>
@@ -29,8 +33,8 @@
             <input class="form-control" type="text"   name="note" value="{{ $order->note ?? $order->note ?? $order->note ?? '' }}">
         </div>
 
-        <div class="col-12">
-            <button style="submit">Process To Submit</button>
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary btn-block" style="submit">Process To Submit</button>
         </div>
     </div>
 

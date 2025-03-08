@@ -20,13 +20,16 @@ class PaymentCredentialController extends Controller
     }
 
     public function update(Request $request, PaymentCredential $payment_configuration ){
-        $request = $request->except(['_token', '_method']);
-        foreach($request as $key => $value){
-             $payment_configuration[$key] = $value;
-
+        if(!$payment_configuration){
+            return response()->json(['message' => 'Payment Credential not found'], 404);
         }
-        $payment_configuration->save();
-
+        
+        $validatedData = $request->only([
+            'provider', 'store_id', 'store_password', 'merchant_id', 'api_key', 'signature_key', 'app_key', 'app_secret', 'username', 'password', 'merchant_number', 'public_key', 'private_key', 'client_id', 'secret', 'publishable', 'sandbox_status', 'status', 'charge', 'banach', 'country'
+        ]);
+        $payment_configuration->update($validatedData);
+        
+    
 
             return json_encode([
                 'title' => 'Successfully   updated',

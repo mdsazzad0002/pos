@@ -50,12 +50,10 @@
 
 
 <script>
-    function button_ajax(thi) {
-
-
-
-
-var placeholder_body = `
+    var modalDialog = '';
+    var setElement = '';
+    var model = '';
+    var placeholder_body = `
         <div class="w-100 p-2 glow_text"></div>
         <div class="w-100 p-2 glow_text"></div>
         <div class="w-100 p-2 glow_text"></div>
@@ -65,9 +63,14 @@ var placeholder_body = `
         <div class="w-100 p-2 glow_text"></div>
 `;
 
-var modalDialog = '';
-var setElement = '';
-var model = ''
+
+function button_ajax(thi) {
+
+
+
+
+
+
 
 if($(thi).data('setelement')){
     setElement =  $(thi).data('setelement');
@@ -119,8 +122,15 @@ if($(thi).data('setelement')){
 
 
 
-console.log(model)
+// console.log(model)
 
+     
+            let model_dialog = $(model);
+            if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
+                model_dialog.modal('show');
+            }
+            
+       
 
 
 
@@ -131,7 +141,23 @@ console.log(model)
                     'type':'get',
                     'url': thi.getAttribute('data-href'),
                     success: function (data){
-                        $(setElement).html(data);
+                        if(isValidJSONObject(data)){
+                            data = JSON.parse(data);
+                            if(data.success == false){
+                                flasher.error(data.message);
+                            }else if(data.success == true){
+                                flasher.success(data.message);
+                            }
+
+                            setTimeout(() => {
+                                model_dialog.modal('hide');
+                                console.log(data);
+                                
+                            }, 1500);
+                          
+                        }else{
+                            $(setElement).html(data);
+                        }
 
 
                         //Select2 fillelement
@@ -164,14 +190,20 @@ console.log(model)
             }
 
 
-            {{--  end data set  --}}
+         
 
-            if ($(thi).data('dialogstatus') === true || $(thi).data('dialogstatus') === undefined) {
-                $(model).modal('show');
-            }
+         
 
     }
 
+    function isValidJSONObject(obj) {
+    try {
+        JSON.parse(obj);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
 
     //Summernote render
     function summernote_render(class_element = null){
@@ -243,14 +275,17 @@ console.log(model)
                 accecpt:'json',       // Correct constructor for FormData
                 processData: false,              // Required for FormData
                 contentType: false,              // Required for FormData
-                success: function (data) {
-
+                success: function (data, status, xhr) {
                     data = JSON.parse(data);
-                   
-                    //console.log(data);          // Handle success
+                    console.log(data.status);          // Handle success
                     if(data.type == 'success'){
                         flasher.success(data.title);
-                        $('#ajax_modal').modal('hide');
+                       
+                        $(model).modal('hide');
+                    }else if(data.status == 400){
+
+                      // its for steedfast specily
+                        error_show(xhr, data.status, 'Bad Request');
                     }else{
                         flasher.error(data.title);
                     }
@@ -274,6 +309,8 @@ console.log(model)
                             console.log('not changed');
                         }
                     }
+
+
 
 
 

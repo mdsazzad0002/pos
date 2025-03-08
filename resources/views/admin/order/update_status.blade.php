@@ -13,9 +13,9 @@
     </table>
   
     @php
-        $latest_status = $order?->latestEventStatus()?->status_data ?? [];
+        $latest_status = $order?->latestEventStatus()?->status_data ?? null;
         // dd($latest_status);
-        if(count($latest_status) > 0){
+        if($latest_status){
             $child_status = $latest_status?->ChildItems() ?? [];
             
         }else{

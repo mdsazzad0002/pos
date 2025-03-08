@@ -45,6 +45,7 @@ function update_settings(thi) {
 .page_container{
     position:relative;
     border: 4px dotted #0077d9;
+    min-height: 150px;
 }
 
 button.menu_of_settings_{

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\HomePageManage;
 use App\Models\VarinatSuggession;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class HomePageManageController extends Controller
 {
@@ -33,6 +34,7 @@ class HomePageManageController extends Controller
     public function create(Request $request)
     {
         $page_id = $request->page_id;
+      
         return view('admin.protfilio_theme.page.partials._select_layout_modal', compact('page_id'));
     }
 
@@ -62,6 +64,13 @@ class HomePageManageController extends Controller
         ]);
     }
 
+
+    // Homepage manage items
+    public function homePageManage(Request $request)    {
+        $categories_items = Category::all();
+        $page_content = Page::find($request->id);
+        return view('admin.protfilio_theme.page.partials._sorting_partials', compact('page_content', 'categories_items'));
+    }
     /**
      * Display the specified resource.
      */

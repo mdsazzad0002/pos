@@ -9,6 +9,7 @@ class CourierHandler extends Controller
 {
         public $Api_Key; //= "jwqjaywbmswqrwymm0bdvnwvrr6annc4";
         public $Secret_Key; //= "g94vnmgpdvehmsp8vrhgkyrv";
+        public $provider_id; //= "g94vnmgpdvehmsp8vrhgkyrv";
 
         public function __construct()
         {
@@ -16,6 +17,7 @@ class CourierHandler extends Controller
             if($courier_credential){
                 $this->Api_Key = $courier_credential->Api_Key;
                 $this->Secret_Key = $courier_credential->Secret_Key;
+                $this->provider_id = $courier_credential->id;
 
             }
             // dd($this->Api_Key);
@@ -58,8 +60,11 @@ class CourierHandler extends Controller
             }
         
             curl_close($curl);
+          
             return ($response);
         }
+
+     
         
 
 
@@ -174,18 +179,20 @@ class CourierHandler extends Controller
                     'Secret-Key:'. $this->Secret_Key,
                     'Api-Key: '.$this->Api_Key,
                 ),
+                CURLOPT_SSL_VERIFYPEER => false, // Disable SSL verification
+                CURLOPT_SSL_VERIFYHOST => false, // Optional: Ignore host verification
                 ));
 
                 $response = curl_exec($curl);
 
                 curl_close($curl);
-                return json_decode($response);
+                return ($response);
 
         }
 
         public function status_by_trackingcode($trackingCode){
             // need trackingCode 
-
+// dd($trackingCode);
             $curl = curl_init();
 
             curl_setopt_array($curl, array(
@@ -202,12 +209,19 @@ class CourierHandler extends Controller
                 'Content-Type: application/json',
                 'Secret-Key:'. $this->Secret_Key
             ),
+            CURLOPT_SSL_VERIFYPEER => false, // Disable SSL verification
+            CURLOPT_SSL_VERIFYHOST => false, // Optional: Ignore host verification
             ));
 
             $response = curl_exec($curl);
+            if (curl_errno($curl)) {
+                return 'cURL Error: ' . curl_error($curl);
+            }
+
 
             curl_close($curl);
-            return json_decode($response);
+            // dd($response);
+            return $response;
 
         }
 

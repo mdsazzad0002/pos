@@ -81,25 +81,8 @@
 
 
         <div class="add_new_item_box hide_content">
-            <ul id="sortable" class="accordion">
-                @foreach ($page_content->home_page as $items)
-                <li id="{{ $items->id }}" class="menu_of_settings_page_container">
-                    <div class="row">
-                        <div class="col-md-12 menu_of_settings_page">
-                            @include('admin.protfilio_theme.page.partials._builder_partials',['item'=>$items])
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
-
-
-            <div class="text-center">
-                <button type="button" class="btn btn-primary    mt-2" data-toggle="modal" data-target="#exampleModal">New Component</button>
-            </div>
-
-
-
+            {{-- @include('admin.protfilio_theme.page.partials._sorting_partials') --}}
+            load by ajax
         </div>
     </div>
 
@@ -147,6 +130,23 @@ window.addEventListener("message", function(event) {
         }
     }
 });
+
+    function add_new_item_box(){
+        let container_element = document.querySelector('.add_new_item_box'); // The scrollable parent
+        $.ajax({
+            url: '{{ route('admin.homePageManage.homePageManage') }}?id={{ $page_content->id }}',
+            method:'get',
+            success:function(response){
+                container_element.innerHTML = response;
+                sorting();
+                delete_function_element();
+                submit_ajax_builder();
+            }
+        })
+
+    }
+    add_new_item_box();
+
 
     function filter_variant(thi){
 
@@ -235,6 +235,7 @@ window.addEventListener("message", function(event) {
 
                 if(data.type == 'success'){
                     refresh_iframe();
+                    add_new_item_box();
                 }
 
 
@@ -265,7 +266,7 @@ window.addEventListener("message", function(event) {
                 success: function(response) {
                     // $('#responseMessage').append('<p>' + response.message + '</p>');
                     if(response.type == 'success'){
-                        window.location.href= '';
+                        refresh_iframe();
                     }else{
                         alert('Something went wrong. please try again');
                     }
@@ -324,8 +325,10 @@ window.addEventListener("message", function(event) {
                 data: $(this).serialize(),
                 success:function(data){
                     if(data.type= 'success'){
-                        window.location.href = ''
+                        // window.location.href = ''
+                        refresh_iframe();
                         // console.log(data)
+                        add_new_item_box();
                     }else{
                         alert('Something is wrong');
                     }

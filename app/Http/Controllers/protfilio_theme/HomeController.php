@@ -124,25 +124,41 @@ class HomeController extends Controller
             // filter by custom input
             if($request->has('q') && $request->q != ''){
                 $q = explode(' ', $request->q);
-                foreach (['name', 'short_description', 'sku', 'brand', 'tags'] as $column) {
+                foreach (['name'] as $column) {
                     foreach ($q as $value) {
-                        // Use LIKE to find partial matches
-                        $query->orWhere($column, 'LIKE', '%' . trim($value) . '%');
+                      
+                        $query->where($column, 'LIKE', '%' . trim($value) . '%');
                     }
                 }
             }
 
 
            // Filter by rating
-           if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
-                $query->withAvg('reviews_info', 'rating') // eager load the average rating
-                ->havingRaw('COALESCE(review_avg_rating, 0) >= ?', [$request->rating_star]);
+        
 
+            
+        });
+
+        if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
+            $product_list = $product_list->withAvg('reviews_info', 'rating') // eager load the average rating
+            ->havingRaw('COALESCE(reviews_info_avg_rating, 0) >= ?', [$request->rating_star]);
+
+        }
+
+        if($request->has('sort_by') && $request->sort_by != '' && $request->sort_by != ''){
+            if($request->sort_by == 'latest'){
+              $product_list =  $product_list->orderBy('id', 'desc');
+            }elseif($request->sort_by == 'oldest'){
+                $product_list = $product_list->orderBy('id', 'asc');
+            }elseif($request->sort_by == 'price_low_to_high'){
+                $product_list = $product_list->orderBy('selling_price', 'asc');
+            }elseif($request->sort_by == 'price_high_to_low'){
+                $product_list = $product_list->orderBy('selling_price', 'desc');
             }
+        }
 
-        })
-
-        ->paginate($request->paginate_items);
+        $product_list = $product_list->paginate($request->paginate_items);
+       
 
         return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
     }

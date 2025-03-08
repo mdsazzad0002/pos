@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Customer;
 use App\Models\Stock;
+use App\Models\CourierInfo;
 use App\Models\payment\TransectionInformation;
 
 class order extends Model
@@ -79,6 +80,10 @@ class order extends Model
     }
     public function current_cash_collection(){
             return $this->cash_collection -  $this->transection()->where('status', 'success')->sum('amount');
+    }
+
+    public function courier_info() {
+        return $this->hasMany(CourierInfo::class, 'order_id', 'order_id') ?? null;
     }
  
 

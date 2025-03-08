@@ -8,7 +8,7 @@
 
     if(\request('category') ){
         $recommend_category = $recommend_category->where('slug', \request('category'));
-    }elseif($variant_info->category != 0){
+    }elseif($variant_info->category != 0 && $variant_info->category != null && $variant_info->category != ''){
         $recommend_category = $recommend_category->where('id', $variant_info->category);
     }
 
@@ -30,7 +30,8 @@
 
 
                     <div class="col-xl-12">
-                        <div class="items_data_category info_id_pro{{ $category_item->id ?? 0 }}">
+                     
+                        <div class="items_data_category info_id_pro{{ $variant_info->id ?? 0 }}{{ $category_item->id ?? 0 }}">
                             {{-- load by ajax --}}
                         </div>
                     </div>
@@ -44,11 +45,12 @@
     @push('script')
     <script>
         function recommend_product{{ $category_item->id }}(){
-            var recommends_sec =  document.querySelector('.product_wise_cateogry-product-sec .items_data_category.info_id_pro{{ $category_item->id ?? 0 }}');
+            var recommends_sec =  document.querySelector('.product_wise_cateogry-product-sec .items_data_category.info_id_pro{{ $variant_info->id ?? 0 }}{{ $category_item->id ?? 0 }}');
             $.ajax({
                 type:'get',
                 data:{
                     // 'id' :id
+                    'limit' :{{ $variant_info->items_show }},
                     'category_id': '{{ $category_item->id }}',
                         @if ($variant_info->is_details_page)
                           'paginate_data': true,
@@ -59,7 +61,7 @@
                             'p' : '{{ request('p') }}',
                         @endif
                       'details_page_slug' : '{{ $category_wise_details_page->slug }}',
-                      'limit' :{{ $variant_info->items_show }},
+                    
                 },
                 url:'{{ route('product.category_wise') }}',
                 success: function(data) {

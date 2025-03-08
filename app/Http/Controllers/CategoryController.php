@@ -183,8 +183,16 @@ class CategoryController extends Controller
 
 
 
-    public function category_for_order(){
-        $category =  category::orderBy('position_order', 'desc')->get();
+    public function category_for_order(Request $request){
+        $category =  category::where(function($query) use ($request){
+            if($request->has('q') && $request->q != null && $request->q != '' && $request->q != 0){
+                $query->where('name', 'LIKE', "%{$request->q}%");
+            }
+        })->orderBy('position_order', 'asc')->get();
+
+        if($request->ajax()){
+            return view('admin.category.reorder.format_data', compact('category'));
+        }
         return view('admin.category.reorder.index', compact('category'));
     }
 

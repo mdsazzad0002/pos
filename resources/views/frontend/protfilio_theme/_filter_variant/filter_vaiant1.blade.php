@@ -41,7 +41,7 @@
                             <div class="hr-line mb-24"></div>
                                 {{-- Category and Subcategory filter --}}
                                 @php
-                                $categories_items = \App\Models\Category::where('status', 1)->get();
+                                $categories_items = \App\Models\Category::where('status', 1)->orderBy('position_order', 'asc')->get();
                                 @endphp
                                 @if(count($categories_items) > 0)
                                 <div class="category-block box-1 mb-24">
@@ -60,6 +60,9 @@
                                                     class="arrow-block d-flex align-items-center justify-content-between mb-16">
                                                     <div class="check-block">
                                                         <input type="checkbox" value="{{ $category->id  }}"  id="cat{{ $category->id }}"
+
+                                                            @if(\request('category') == $category->slug) checked @endif
+
                                                              class="sub-check-box main_check_category">
                                                         <label for="cat{{ $category->id }}">{{ $category->name
                                                             }}</label>
@@ -243,6 +246,13 @@
                                                     &#9733; &#9733;&#9733; &#9733;
                                                 </label>
                                             </div>
+                                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                                <input type="radio" id="0-stars" name="rating" value="0">
+                                                <label for="0-stars" class="star">
+                                             
+                                                    &#9733; &#9733; &#9733;&#9733; &#9733;
+                                                </label>
+                                            </div>
 
                                         </div>
 
@@ -314,21 +324,16 @@
                             <div class="last-block">
                                 <div class="d-lg-flex d-none align-items-center gap-8">
                                     <p class="dark-gray">Short by:</p>
-                                    <div class="drop-container ">
-                                        <div class="wrapper-dropdown dark-black" id="dropdown12">
-                                            <span class="selected-display" id="destination12">Price:</span>
-                                            <svg id="drp-arrow1" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                class="arrow transition-all ml-auto rotate-180">
-                                                <path d="M7 14.5l5-5 5 5" stroke="currentColor" stroke-width="1.5"
-                                                    stroke-linecap="round" stroke-linejoin="round"></path>
-                                            </svg>
-                                            <ul class="topbar-dropdown bg-light-gray" >
-                                                <li class="item dark-black">Price: low to high</li>
-                                                <li class="item dark-black">high to low</li>
-                                                <li class="item dark-black">Average Rating</li>
-                                            </ul>
-                                        </div>
+                                    <div class="">
+                                        <select class=" form-select p-2" name="sort_by" id="sort_by">
+                                            
+                                            <option value="oldest">Oldest</option>
+                                            <option value="latest">Latest</option>
+                                            <option value="price_low_to_high">Price: low to high</option>
+                                            <option value="price_high_to_low">Price: high to low</option>
+                                          
+                                        </select>
+                                       
                                     </div>
                                 </div>
 
@@ -361,7 +366,8 @@
         var max_price = '{{ $_GET['max_price'] ?? '' }}';
         var brands_items = {!! json_encode($_GET['brands_key'] ?? []) !!};
         var rating_star = {{ $_GET['rating_star'] ?? 0 }};
-        var paginate_items = {{ $items?->items_show ?? 3 }}
+        var paginate_items = {{ $items?->items_show ?? 3 }};
+        var sort_by = '{{ $_GET['sort_by'] ?? '' }}';
 
 
 
@@ -374,6 +380,7 @@
             '&max_price='+max_price+
             '&rating_star='+rating_star+
             '&paginate_items='+paginate_items+
+            '&sort_by='+sort_by+
             '&q='+q;
 
             selectedCategories.forEach(element => {
@@ -431,6 +438,10 @@
             q =  this.value;
             ajaxDataChangeLoad();
         });
+        $('#sort_by').on('change', function(e){
+            sort_by =  this.value;
+            ajaxDataChangeLoad();
+        });
 
 
         $('.category_filter').on('change', function(){
@@ -468,7 +479,7 @@
 
         $('.rating_block').on('change', function(){
 
-            rating_star = $('input:checked').val();
+            rating_star = $(this).find('input:checked').val();
 
             ajaxDataChangeLoad()
         })

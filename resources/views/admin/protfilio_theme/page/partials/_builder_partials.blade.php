@@ -233,6 +233,7 @@
                 <div class="row  py-1" style="background: #ecc3f1">
                     <div class="col-md-6 ">
                       <select class="form-control" name="category">
+                          <option value="">All Category</option>
                           @foreach($categories_items as $category)
                             <option value="{{ $category->id }}" {{ $item->category == $category->id ? 'selected' : '' }} > {{ $category->name }} </option>
                           @endforeach

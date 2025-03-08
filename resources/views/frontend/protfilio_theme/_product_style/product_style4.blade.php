@@ -26,9 +26,10 @@
         </div>
         <div class="tag bg-red">sale</div>
         <div class="title pt-4 pb-1" onclick="window.location.href='{{ url($view_page->slug) }}?slug={{ $product->slug }}">{{ Str::title($product->name ?? '') }}</div>
-        <div class="d-flex align-content-center justify-content-center"> <span class="fas fa-star"></span> <span
-                class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span
-                class="fas fa-star"></span> </div>
+        <div class="d-flex align-content-center justify-content-center">
+              
+                @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->rat_count, 'rating_star' => $product->avg_rat, 'rating_count' => false])
+            </div>
     
             @if ($product->variant_on == 0)
                 <div class="price">{{ $product->selling_price ?? '' }}{{ settings('currency_symbol', 9) }}</div>
