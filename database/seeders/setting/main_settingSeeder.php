@@ -26,7 +26,7 @@ class main_settingSeeder extends Seeder
             ['name' => 'app_tel', 'value' => '01590084779', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_linkedin', 'value' => 'https://linkedin.com/mdsazzad0002', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_facebook', 'value' => 'https://facebook.com/mdsazzad0002', 'creator_id' => '1', 'key' => '9'],
-            ['name' => 'app_whatsapp', 'value' => 'https://wa.me/01590084779', 'creator_id' => '1', 'key' => '9'],
+            ['name' => 'app_whatsapp', 'value' => 'https://api.whatsapp.com/send?phone=01590084779', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_twitter', 'value' => 'https://twitter.com/mdsazzad0002', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_youtube', 'value' => 'https://youtube.com/mdsazzad0002', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_telegram', 'value' => 'https://t.me/mdsazzad0002', 'creator_id' => '1', 'key' => '9'],

@@ -1,18 +1,3 @@
-@php
-    $p_background_color = $product_style->background_color ??  '#ffffff';
-
-    $p_selling_price = $product->selling_price;
-    $p_old_price = $product->old_price;
-    $p_variant_on = $product->variant_on;
-    $p_discount = number_format((($product->old_price - $product->selling_price ) *  100 )/ $product->old_price,2) ?? 0;
-
-    $p_url = url($view_page->slug) . '?slug=' . $product->slug;
-    $p_image = dynamic_asset($product->upload_id);
-    $p_id = $product->id;
-    $p_name = $product->name;
-    $p_short_description = $product->short_description;
-@endphp
-
 <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6 col-6">
     <div class="featured-product-card  br-10" style="background-color:{{ $p_background_color }}">
         <div class="image-box mb-16">
@@ -55,17 +40,25 @@
             </div>
             <div class="rating-star mb-16">
                 <div class="mb-24">
-                    @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $product->rat_count, 'rating_star' => $product->avg_rat])
+                    @include('frontend.protfilio_theme._filter_variant.partials.rating_star', ['rating'=> $p_rat_count, 'rating_star' => $p_avg_rat])
                 </div>
 
-                @include('frontend.protfilio_theme._filter_variant.partials.product_price')
+                @if ($p_variant_on == 1)
+                    <h6 ><span class="text-decoration-line-through light-gray"> In Variant</h6>
+                @else
+                    <h6 >
+                        <span class="text-decoration-line-through light-gray">
+                            {{ settings('currency_symbol', 9) }}{{ $p_old_price }}
+                        </span>&nbsp;&nbsp;{{ settings('currency_symbol', 9) }}{{  $p_selling_price }}
+                    </h6>
+                @endif
 
+    @include('frontend.protfilio_theme._product_style._button.product_buttons', [
+        'root_class'=> 'd-flex gap-16',
+        'btn_class'=> 'cus-btn',
+    ])
             </div>
-            @if ($product->variant_on == 1)
-                <a href="{{ $p_url }}"  data-id="{{ $p_id }}" class="cus-btn-2 w-100">View Details</a>
-            @else
-                <a href="javascript:void(0)" onclick="add_to_cart(this)" data-id="{{ $p_id }}" class="cus-btn-2 w-100">Add to Cart</a>
-            @endif
+
         </div>
     </div>
 </div>

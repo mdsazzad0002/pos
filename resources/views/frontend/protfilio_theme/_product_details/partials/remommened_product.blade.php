@@ -21,8 +21,12 @@ $filter_page = \App\Models\Page::where('status', 1)->where('page_type', 'filter'
         $products->id)->limit(20)->paginate(20);
         @endphp
 
-        @include('frontend.protfilio_theme._product_default.partials.filter_product', ['product_list'=>
+        @include('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=>
         $samilar_product])
+
+
+
+
 
     </div>
 </section>

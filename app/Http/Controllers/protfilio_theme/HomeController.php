@@ -41,12 +41,12 @@ class HomeController extends Controller
 
         if($request->has('preview_page')){
               $homepage = Page::findOrFail($request->preview_page);
-               
-                // $url = $request->url; 
+
+                // $url = $request->url;
                 // $homepage['slug'] = $url;
                 //   #requestUri: "/previdw_page_and_fornt_page?preview_page=4&url=http://pos.localhost/product/details?slug=test-product"
-          
-             
+
+
         }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
@@ -126,7 +126,7 @@ class HomeController extends Controller
                 $q = explode(' ', $request->q);
                 foreach (['name'] as $column) {
                     foreach ($q as $value) {
-                      
+
                         $query->where($column, 'LIKE', '%' . trim($value) . '%');
                     }
                 }
@@ -134,9 +134,9 @@ class HomeController extends Controller
 
 
            // Filter by rating
-        
 
-            
+
+
         });
 
         if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
@@ -158,9 +158,9 @@ class HomeController extends Controller
         }
 
         $product_list = $product_list->paginate($request->paginate_items);
-       
 
-        return view('frontend.protfilio_theme._product_default.partials.filter_product', compact('product_list'));
+
+        return view('frontend.protfilio_theme._filter_variant.partials.product_items', compact('product_list'));
     }
 
 
@@ -185,7 +185,7 @@ class HomeController extends Controller
 
        })->limit(20)->get();
 
-       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+       return view('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=> $features_product]);
 
    }
 
@@ -204,7 +204,7 @@ class HomeController extends Controller
 
        })->limit(20)->orderBy('id' ,'desc')->get();
 
-       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+       return view('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=> $features_product]);
 
    }
    public function recommend_view(Request $request){
@@ -222,7 +222,7 @@ class HomeController extends Controller
 
        })->limit(20)->orderBy('views' ,'asc')->get();
 
-       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+       return view('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=> $features_product]);
 
    }
 
@@ -243,7 +243,7 @@ class HomeController extends Controller
 
        })->limit(20)->orderByRaw('COALESCE(reviews_info_avg_rating, 0) desc')->get();
 
-       return view('frontend.protfilio_theme._filter_variant.partials.product', ['products'=> $features_product]);
+       return view('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=> $features_product]);
 
    }
 
@@ -255,24 +255,7 @@ class HomeController extends Controller
 
 
 
-//    public function filter(Request $request){
-//        // return $request;
-//        $products = product::withCount('review')->withAvg('review', 'rating')->where(function($query) use ($request){
 
-//            // filter by category
-//            if($request->has('category')){
-//                $category = category::where('slug', $request->category)->first();
-//                if($category){
-//                    $query->orWhere('category', $category->id);
-//                }
-//            }
-
-//        })->get();
-
-//        //   $products;
-
-//        return view('frontend.filter.index', compact('request', 'products'));
-//    }
 
 
    public function quickview(Request $request){
@@ -296,7 +279,7 @@ class HomeController extends Controller
         $paginate_data = $request->paginate_data ?? false;
         $details_page_slug = $request->details_page_slug ?? false;
         $category =  $request->category_id;
-        
+
 
         $specific_product_id = $request->p ?? false; // Replace with your desired product ID
 
@@ -306,26 +289,26 @@ class HomeController extends Controller
         if ($category) {
             $products = $products->where('category', $category);
         }
-        
+
         // Filter by product ID
         if ($specific_product_id) {
             $products = $products->orderByRaw('id = ? desc', [$specific_product_id]);
         }
 
-        // order by id desc  
+        // order by id desc
         $products = $products->orderBy('id', 'desc');
-        
-       
+
+
         if ($request->has('paginate_data') && !$paginate_data) {
             $products = $products->paginate($limit_product);
         } else {
             $products = $products->limit($limit_product)->get();
         }
-        
 
 
 
-        return view('frontend.protfilio_theme._filter_variant.partials.product_category_wise', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request' => $request]);
+
+        return view('frontend.protfilio_theme._filter_variant.partials.product_items', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request' => $request]);
 
 
    }
@@ -343,7 +326,13 @@ class HomeController extends Controller
         }
 
 
-        return view('frontend.protfilio_theme._filter_variant.partials.product_category_wise', ['products'=> $products, 'paginate_data'=>$paginate_data, 'details_page_slug'=>$details_page_slug, 'request' => $request]);
+        return view('frontend.protfilio_theme._filter_variant.partials.product_items',
+         [
+            'products'=> $products,
+            'paginate_data'=>$paginate_data,
+            'details_page_slug'=>$details_page_slug,
+            'request' => $request
+        ]);
 
 
    }
@@ -367,7 +356,7 @@ class HomeController extends Controller
             $source_type = 'front_product';
 
             if ($request->has('product_id')) {
-              
+
                 if($request->has('source_type')){
                     $source_type = $request->source_type;
                 }
@@ -389,7 +378,7 @@ class HomeController extends Controller
                     $found = true;
                 }
             }
-            
+
             $return_data = [
                 'found' => $found,
                 'key' => $product_key,
@@ -413,15 +402,15 @@ class HomeController extends Controller
         $product_key = $key = $primary_find_result['key'];
         $source_type = $primary_find_result['source_type'];
         $product_id = $request->product_id;
-        
-    
+
+
 
         // return $product_id;
         if($found == true){
             if($request->has('type') && $request->type == 'remove_cart') {
                 unset($product_cart[$key]);
                 session()->put( $source_type, $product_cart);
-               
+
                 // Check if the product was successfully removed
                 if ($this->verify_add_to_cart($request)['found'] == false) {
                     // Return success response if product was removed
@@ -461,17 +450,17 @@ class HomeController extends Controller
                     'type'  => 'info',
                     'cart'  => $product_cart, // Return the updated cart
                 ]);
-                
-                
+
+
 
             }
         }else{
             if($request->has('type') && $request->type == 'remove_cart') {
                 // run again function if not remove product
                 if($this->verify_add_to_cart($request)['found'] == false){
-                    $product_cart = $this->add_to_cart($request);   
+                    $product_cart = $this->add_to_cart($request);
                 }
-    
+
                 return response()->json([
                     'title' => 'Failed to find items',
                     'type'  => 'error',
@@ -484,8 +473,8 @@ class HomeController extends Controller
                 }else{
                     $size = 0;
                 }
-    
-                
+
+
                 if (!$found) {
                     if($request->has('quantity')) {
                         $product_cart[$product_key] = [
@@ -499,7 +488,7 @@ class HomeController extends Controller
                                 'quantaty' => 1,
                                 'size' => $size,
                         ];
-    
+
                     }
                 }
 
@@ -524,16 +513,16 @@ class HomeController extends Controller
                     'type'=>'success',
                     'product' =>  $product_cart
                 ]);
-                
+
             }
 
         }
-              
+
 
     }
 
 
-    
+
 
 
     public function compare_list(){
@@ -644,7 +633,7 @@ class HomeController extends Controller
                   // Product Single data
                     if(!is_array($itemdata) && !is_object($itemdata)){
                         continue;
-                        
+
                     }
                     $product = product::find($itemdata['product_id']);
 
@@ -719,7 +708,7 @@ class HomeController extends Controller
                     $data_array['subtotal']['price'] +=   $cal_total_with_vat * $cal_quantity;
 
 
-              
+
 
                 $coupon_id = session()->get('coupon_id',0);
                 $coupon = coupon::find($coupon_id);
@@ -753,7 +742,7 @@ class HomeController extends Controller
 
     public function checkout(Request $request){
 
-       
+
 
         // if addredd_id 0 or empty mearge by 0 or has
         if ($request->has('address_id') && $request->address_id == '') {
@@ -785,7 +774,7 @@ class HomeController extends Controller
                 $user->phone = $request->phone  ?? '';
                 $user->prev_due = 0;
                 $user->credit_limit = 20000;
-    
+
                $user->save();
 
             }
@@ -834,7 +823,7 @@ class HomeController extends Controller
                     'phone' => 'required',
                     'email' => 'required|email',
                 ]);
-                
+
 
                 $address = new address();
                 $address->name = $request->name ?? ''. ' ' . $request->lname  ?? '';
@@ -867,20 +856,20 @@ class HomeController extends Controller
                 ->where(function($query) use ($request){
                     if($request->has('address')){
                         $query->where('address', $request->address);
-    
+
                     }
                     if($request->has('email')){
                         $query->where('email', $request->email);
-    
+
                     }
                     if($request->has('phone')){
                         $query->where('phone', $request->phone);
-    
+
                     }
                 })
                 ->first();
-    
-    
+
+
                 if($address_find){
                     $billingaddress_id = $address_find->id;
                 } else{
@@ -900,11 +889,11 @@ class HomeController extends Controller
                     $address->country = $request->country2  ?? '';
                     $address->state = $request->state2 ?? '';
                     $address->postal = $request->postal2 ?? '';
-    
+
                     $address->addressable_type = customer::class;
                     $address->addressable_id = $user->id;
                     $address->save();
-                }  
+                }
 
                 $billingaddress_id = $address->id;
             }elseif($request->has('billingaddress_id')){
@@ -953,7 +942,7 @@ class HomeController extends Controller
             if( $shipping_charege_find){
                 $shipping_price =  $shipping_charege_find->amount;
             }
-         
+
 
             $order =  new order();
             $order->customer_id = $user->id;
@@ -978,7 +967,7 @@ class HomeController extends Controller
             $order->payment_method =  $request->plan ?? '0';
 
             $order->shipping_charge_id = $request->shipping_charge ?? 0;
-            
+
             $order->save();
             // Order add end
 
@@ -996,7 +985,7 @@ class HomeController extends Controller
             // Order Data Management
             // dd($card_information['subtotal']['product_ids']);
             foreach ($card_information['subtotal']['product_ids'] as $key => $product) {
-              
+
                 foreach ($product as $product_key => $items) { // Extract inner array
                     // dd($items['product_id']);
                     $stock = new Stock();
@@ -1010,7 +999,7 @@ class HomeController extends Controller
                 // dd($product);
             }
 
-            
+
         }
 
 
@@ -1100,7 +1089,7 @@ class HomeController extends Controller
 
     public function product_view_by_slug(Request $request, $slug){
         // return $request->all();
-        
+
         $request['slug'] = $slug;
         $details_page = Page::where('status', 1)->where('page_type', 'view')->first();
         return   $this->index($request, $details_page?->slug);

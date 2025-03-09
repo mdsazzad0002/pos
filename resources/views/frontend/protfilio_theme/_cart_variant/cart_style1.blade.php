@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-8">
-                    <div class="d-lg-block d-none">
+                    <div class="">
                         <table class="cart-table mb-16">
                             <thead>
                                 <tr>
@@ -73,7 +73,7 @@
             Object(data['product']).forEach((element, index)=>{
 
                 html_data+=`
-              
+
                             <tr class="table-row  border-top-1">
                                     <td class="pd">
                                         <div class="product-detail-box">
@@ -84,8 +84,8 @@
 
                                             <div class="d-block text-start">
                                                 <h6><a href="{{ $view_page->slug }}?slug=${element.product.slug}">${element.product.name}</a></h6>
-                                                   
-                                    
+
+
                                             </div>
 
                                         </div>
@@ -102,7 +102,7 @@
                                     </td>
                                     <td>
                                         <p class="fw-500">{{ settings('currency_symbol', 9) }} ${element.single_subtotal.toFixed(2)}</p>
-                                        
+
                                     </td>
                                 </tr>
                                   `;
@@ -118,7 +118,7 @@
                                         `;
 
                                         //  console.log(element.product_variant)
-                                      
+
                                         for(var i = 0; i < variant_option.variant_key.length; i++){
                                             // let key = variant_option.variant_key[i];
                                          //   console.log(variant_option.variant_key[0])
@@ -143,10 +143,10 @@
                                         <div class="product-detail-box_heading">
                                             `;
 
-                                       
+
 
                                             // Form key name variant product
-                                            let variant_key = element.product_variant.name.split(','); 
+                                            let variant_key = element.product_variant.name.split(',');
                                                 for(var i = 0; i < variant_key.length; i++){
                                                     html_data+=`
                                                     <div>
@@ -154,7 +154,7 @@
                                                     </div>
                                                     `
                                             }
-                                            // End product name 
+                                            // End product name
 
 
                                             // Form key value variant product
@@ -178,9 +178,9 @@
 
                                     }
 
-                             
-                                
-                              
+
+
+
 
                 // console.log(element)
             })
