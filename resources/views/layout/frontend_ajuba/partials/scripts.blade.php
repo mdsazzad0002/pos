@@ -47,9 +47,9 @@
 
         function add_to_cart(thi){
 
+            var current = thi;
             if ($(thi).data('quantaty')) {
 
-                var current = thi;
 
 
                 var variant;
@@ -101,11 +101,13 @@
                         setTimeout(() => {
                             load_cart_and_wishlist();
                         },500)
+
                         setTimeout(() => {
                             if($(current).data('href')){
                                     window.location.href = $(current).data('href');
                             }
                         },1000)
+                      
                     }
                 })
 
@@ -119,6 +121,12 @@
                     },
                     success:function(data){
                         flasher.success('Successfully added cart');
+                        
+                        setTimeout(() => {
+                            if($(current).data('href')){
+                                    window.location.href = $(current).data('href');
+                            }
+                        },1000)
                         setTimeout(() => {
                             load_cart_and_wishlist();
                         },500)
