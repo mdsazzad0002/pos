@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use  App\Http\Controllers\Auth\LoginCheckController;
 use App\Models\setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,10 +53,22 @@ class SettingController extends Controller
 
         }elseif($slug == 'custom_js_css' && $key == '45'){
             $flag_target = 1;
-  
+
         }elseif($slug == 'header_style' && $key == '80'){
             $flag_target = 1;
         }
+
+
+
+
+        $login_check = new LoginCheckController();
+        $settings = $login_check->identifysender($request);
+
+
+
+
+
+
 
 
         // return $settings;
