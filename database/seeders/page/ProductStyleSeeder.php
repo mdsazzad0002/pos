@@ -25,16 +25,7 @@ class ProductStyleSeeder extends Seeder
                    Product Style 1
                 ',
             ],
-            'Product_style' => [
-                'key' => '_product_style.product_style7',
-                'title' => 'Product Style Style',
-                'upload_id'=>'preset/_product_style/product_style7.png',
-                'status' => 0,
-                'background_color' => '#ffffff',
-                'details' => '
-                   Product Style 1 Alfa. added buy now button
-                ',
-            ],
+          
             'Product_style2' => [
                 'key' => '_product_style.product_style2',
                 'title' => 'Product Style Style',
@@ -83,6 +74,16 @@ class ProductStyleSeeder extends Seeder
                 'background_color' => '#ffffff',
                 'details' => '
                    Product Style 6
+                ',
+            ],
+            'Product_style7' => [
+                'key' => '_product_style.product_style7',
+                'title' => 'Product Style Style',
+                'upload_id'=>'preset/_product_style/product_style7.png',
+                'status' => 0,
+                'background_color' => '#ffffff',
+                'details' => '
+                   Product Style 1 Alfa. added buy now button
                 ',
             ],
         ];

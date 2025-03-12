@@ -160,7 +160,9 @@ class HomeController extends Controller
         $product_list = $product_list->paginate($request->paginate_items);
 
 
-        return view('frontend.protfilio_theme._filter_variant.partials.product_items', compact('product_list'));
+        return view('frontend.protfilio_theme._filter_variant.partials.product_items', [
+            'products' => $product_list
+        ]);
     }
 
 

@@ -1,7 +1,7 @@
 
 
 
-<ul class="{{ $root_class}} w-100">
+<ul class="mt-2 {{ $root_class}} w-100">
     <li class="icon btn productQuickViewbtn" data-bs-toggle="modal" data-bs-target="#productQuickView" data-id="{{ $p_id }}">
         <span class="fas fa-expand-arrows-alt " ></span></li>
     <li class="icon mx-3" onclick="add_to_compareList({{ $p_id }})"><span class="far fa-heart"></span></li>

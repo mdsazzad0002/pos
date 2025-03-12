@@ -1,4 +1,4 @@
-@php
+{{-- @php
 $languages = \App\Models\language\language::where('status', 1)->get();
 @endphp
 
@@ -23,4 +23,4 @@ $languages = \App\Models\language\language::where('status', 1)->get();
     })
 </script>
 
-@endpush
+@endpush --}}

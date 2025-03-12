@@ -52,7 +52,7 @@
                     // 'id' :id
                     'limit' :{{ $variant_info->items_show }},
                     'category_id': '{{ $category_item->id }}',
-                        @if ($variant_info->is_details_page)
+                        @if ($variant_info->is_details_page == 1)
                           'paginate_data': true,
                           'page' : {{ request('page') ?? 1 }},
                           'category' : '{{ request('category') }}',

@@ -1,0 +1,11 @@
+Reporting-MTA: dns; srvbdix2.noc223.com
+
+Action: failed
+Final-Recipient: rfc822;mdsazzad0002@gmail.com
+Status: 5.0.0
+Remote-MTA: dns; gmail-smtp-in.l.google.com
+Diagnostic-Code: smtp; 550-5.7.26 Unauthenticated email from dengrweb.com is not accepted due to
+ 550-5.7.26 domain's DMARC policy. Please contact the administrator of
+ 550-5.7.26 dengrweb.com domain if this was a legitimate mail. To learn about
+ 550-5.7.26 the DMARC initiative, go to
+ 550 5.7.26  https://support.google.com/mail/?p=DmarcRejection 41be03b00d2f7-af51b879ac4si12145582a12.302 - gsmtp

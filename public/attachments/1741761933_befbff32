@@ -1,0 +1,25 @@
+Return-path: <dev@dengrweb.com>
+Received: from [::1] (port=33288 helo=srvbdix2.noc223.com)
+	by srvbdix2.noc223.com with esmtpa (Exim 4.97.1)
+	(envelope-from <dev@dengrweb.com>)
+	id 1tlYKt-00000007Vxa-35To
+	for mdsazzad0002@gmail.com;
+	Sat, 22 Feb 2025 01:05:19 +0600
+MIME-Version: 1.0
+Date: Sat, 22 Feb 2025 01:05:19 +0600
+From: dev@dengrweb.com
+To: Mdsazzad0002 <mdsazzad0002@gmail.com>
+Subject: Re: Mail delivery failed: returning message to sender
+In-Reply-To: <80055e39bb8db0bbaab7cc59c85d540a@dengrweb.com>
+References: <1ebacf743318084eec82ba005ee9138a@dengrweb.com>
+ <E1tlYBx-00000007TyG-0UWx@srvbdix2.noc223.com>
+ <80055e39bb8db0bbaab7cc59c85d540a@dengrweb.com>
+User-Agent: Roundcube Webmail/1.6.8
+Message-ID: <adde419a7d7cfa1e347b822c0cd7fa37@dengrweb.com>
+X-Sender: dev@dengrweb.com
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+
+On 2025-02-22 00:58, dev@dengrweb.com wrote:
+> sda

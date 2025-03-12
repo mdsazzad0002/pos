@@ -42,7 +42,8 @@
 
                                     </span>
                                 </span>
-                                <span class="wrapper-1">
+                                {{-- it worked --}}
+                                {{-- <span class="wrapper-1">
                                     <span class="category-second-list-ul list-unstyled mb-40">
                                         <span class="dark-black fw-500 mb-16">Sub Cateogory</span>
                                         @foreach ($items->subcategories_info as $subcategory_items)
@@ -86,7 +87,7 @@
                                             </a>
                                         </span>
                                     </span>
-                                </span>
+                                </span> --}}
                             </span>
                             @if($product = $items->most_view_by_cat())
                                  <span class="img-product-menu" style="background: url('{{ dynamic_asset($items->upload_id) }}') no-repeat;">

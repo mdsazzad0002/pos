@@ -16,9 +16,10 @@
                 $p_selling_price = $product->selling_price;
                 $p_old_price = $product->old_price;
                 $p_variant_on = $product->variant_on;
-                $p_discount =
-                    number_format((($product->old_price - $product->selling_price) * 100) / $product->old_price, 2) ??
-                    0;
+                $p_discount = ($product->old_price > 0) 
+                    ? number_format((($product->old_price - $product->selling_price) * 100) / $product->old_price, 2) 
+                    : 0;
+
 
                 if(isset($details_page_slug) && $details_page_slug && !$request->has('paginate_data')){
                     $p_url = url($details_page_slug) . '?category=' . $product->category_info?->slug . '&p=' . $product->id;

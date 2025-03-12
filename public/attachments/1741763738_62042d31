@@ -1,0 +1,5 @@
+Reporting-MTA: dns; srvbdix2.noc223.com
+
+Action: failed
+Final-Recipient: rfc822;mdsazzad0002@gmail.com
+Status: 5.0.0

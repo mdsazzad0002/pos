@@ -1,4 +1,4 @@
-<div class="{{ $root_class}} w-100">
+<div class="mt-2 {{ $root_class}} w-100 ">
     @if ($p_next_page_status == true)
         <a href="{{ $p_url }}" data-id="{{ $p_id }}" class="{{$btn_class}} w-100">{{ $v_next_page_name }}</a>
     @else
