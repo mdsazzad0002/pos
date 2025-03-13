@@ -29,9 +29,21 @@
                                 'key' => '77'
                             ],
                             [
+                                'name' => 'detail_button_background_color',
+                                'key' => '77'
+                            ],
+                            [
+                                'name' => 'detail_button_text_color',
+                                'key' => '77'
+                            ],
+                            [
                                 'name' => 'detail_button_status',
                                 'key' => '77'
                             ],
+
+
+
+
                             [
                                 'name' => 'cart_button_name',
                                 'key' => '77'
@@ -41,6 +53,19 @@
                                 'key' => '77'
                             ],
                             [
+                                'name' => 'cart_button_background_color',
+                                'key' => '77'
+                            ],
+                            [
+                                'name' => 'cart_button_text_color',
+                                'key' => '77'
+                            ],
+
+
+
+
+
+                            [
                                 'name' => 'buy_now_button_name',
                                 'key' => '77'
                             ],
@@ -48,6 +73,18 @@
                                 'name' => 'buy_now_button_status',
                                 'key' => '77'
                             ],
+                            [
+                                'name' => 'buy_now_button_background_color',
+                                'key' => '77'
+                            ],
+                            [
+                                'name' => 'buy_now_button_text_color',
+                                'key' => '77'
+                            ],
+
+
+
+
                             [
                                 'name' => 'whatsapp_button_name',
                                 'key' => '77'
@@ -57,9 +94,30 @@
                                 'key' => '77'
                             ],
                             [
+                                'name' => 'whatsapp_button_background_color',
+                                'key' => '77'
+                            ],[
+                                'name' => 'whatsapp_button_text_color',
+                                'key' => '77'
+                            ],
+
+
+
+                            [
                                 'name' => 'next_page_button_name',
                                 'key' => '77'
                             ],
+
+                            [
+                                'name' => 'next_page_button_background_color',
+                                'key' => '77'
+                             ],
+                            [
+                                'name' => 'next_page_button_text_color',
+                                'key' => '77'
+                             ]
+                          
+                           
                         ];
 
 

@@ -54,6 +54,22 @@
 
                 $v_cart_page_slug = \App\Models\Page::where('page_type', 'cart')->first()->slug ?? '';
 
+
+                $btn_next_bg = settings('next_page_button_background_color', 77);
+                $btn_next_color = settings('next_page_button_text_color', 77);
+
+                $btn_buy_now_bg = settings('buy_now_button_background_color', 77);
+                $btn_buy_now_color = settings('buy_now_button_text_color', 77);
+
+                $btn_cart_bg = settings('cart_button_background_color', 77);
+                $btn_cart_color = settings('cart_button_text_color', 77);
+
+                $btn_whatsapp_bg = settings('whatsapp_button_background_color', 77);
+                $btn_whatsapp_color = settings('whatsapp_button_text_color', 77);
+
+                $btn_details_bg = settings('detail_button_background_color', 77);
+                $btn_details_color = settings('detail_button_text_color', 77);
+
             @endphp
 
             @if ($product_style)

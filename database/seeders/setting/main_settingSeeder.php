@@ -41,6 +41,122 @@ class main_settingSeeder extends Seeder
             ['name' => 'app_preloader_image', 'value' => '0', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'app_preloader_status', 'value' => '0', 'creator_id' => '1', 'key' => '9'],
             ['name' => 'theme_color', 'value' => '#000000', 'creator_id' => '1', 'key' => '9'],
+           
+            [
+                'name' => 'detail_button_name',
+                'key' => '77',
+                'value' => 'Details'
+            ],
+            [
+                'name' => 'detail_button_background_color',
+                'key' => '77',
+                'value' => '#000000'
+            ],
+            [
+                'name' => 'detail_button_text_color',
+                'key' => '77',
+                'value' => '#ffffff'
+            ],
+            [
+                'name' => 'detail_button_status',
+                'key' => '77',
+                'value' => '0'
+            ],
+
+
+
+
+            [
+                'name' => 'cart_button_name',
+                'key' => '77',
+                'value' => 'Cart'
+            ],
+            [
+                'name' => 'cart_button_status',
+                'key' => '77',
+                'value' => '0'
+            ],
+            [
+                'name' => 'cart_button_background_color',
+                'key' => '77',
+                'value' => '#000000'
+            ],
+            [
+                'name' => 'cart_button_text_color',
+                'key' => '77',
+                'value' => '#ffffff'
+            ],
+
+
+
+
+
+            [
+                'name' => 'buy_now_button_name',
+                'key' => '77',
+                'value' => 'Buy Now'
+            ],
+            [
+                'name' => 'buy_now_button_status',
+                'key' => '77',
+                'value' => '0'
+            ],
+            [
+                'name' => 'buy_now_button_background_color',
+                'key' => '77',
+                'value' => '#000000'
+
+            ],
+            [
+                'name' => 'buy_now_button_text_color',
+                'key' => '77',
+                'value' => '#ffffff'
+            ],
+
+
+
+
+            [
+                'name' => 'whatsapp_button_name',
+                'key' => '77',
+                'value' => 'WhatsApp'
+
+            ],
+            [
+                'name' => 'whatsapp_button_status',
+                'key' => '77',
+                'value' => '0'
+            ],
+            [
+                'name' => 'whatsapp_button_background_color',
+                'key' => '77',
+                'value' => '#000000'
+            ],[
+                'name' => 'whatsapp_button_text_color',
+                'key' => '77',
+                'value' => '#ffffff'
+            ],
+
+
+
+            [
+                'name' => 'next_page_button_name',
+                'key' => '77',
+                'value' => 'View Details'
+            ],
+
+            [
+                'name' => 'next_page_button_background_color',
+                'key' => '77',
+                'value' => '#000000'
+
+             ],
+            [
+                'name' => 'next_page_button_text_color',
+                'key' => '77',
+                'value' => '#ffffff'
+             ]
+          
         ];
 
 

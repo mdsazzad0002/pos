@@ -19,11 +19,11 @@
         <thead>
 
 
-            <th>
+            {{-- <th>
                 Title
-            </th>
+            </th> --}}
             <th>
-                Image
+                Variant Style
             </th>
             <th>
                 Background
@@ -35,8 +35,19 @@
         <tbody>
             @foreach ($product_styles as $key => $product_style)
             <tr wire:key="post-field-{{ $product_style['id'] }}">
-                <td>{{ $product_style['title'] }}</td>
-                <td><img class="img-fluid" src="{{ asset($product_style['upload_id']) }}" alt=""></td>
+                {{-- <td>{{ $product_style['title'] }}</td> --}}
+                <td>
+                    <div class="mb-2">
+                        {{ $product_style['title'] }}
+                    </div>
+                   
+                    <img class="img-fluid" src="{{ asset($product_style['upload_id']) }}" alt=""> <br/>
+                    <div class="mt-2">
+
+                        {{ $product_style['details'] }}
+                    </div>
+
+                </td>
                 <td>
                     <div>
                         <input type="color" class="form-control" wire:model="product_styles.{{ $key }}.background_color"

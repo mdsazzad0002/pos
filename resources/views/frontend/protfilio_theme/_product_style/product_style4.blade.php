@@ -10,7 +10,7 @@
                 ])
            </div>
         <div class="tag bg-red">sale</div>
-        <div class="title pt-4 pb-1" onclick="window.location.href='{{ url($p_url) }}?slug={{ $product->slug }}">{{ $p_name }}</div>
+        <div class="title pt-4 pb-1" onclick="window.location.href='{{ url($p_url) }}">{{ $p_name }}</div>
         <div class="d-flex align-content-center justify-content-center">
 
 

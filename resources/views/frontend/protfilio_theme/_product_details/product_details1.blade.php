@@ -44,24 +44,24 @@
                                 <div class="product-image-container container-2 bg-white">
                                     <div class="product-slider-asnav asnav-2">
 
-                                        <div class="nav-image">
+                                        <div class="nav-image ">
                                             <img src="{{ dynamic_asset($products->upload_id) }}"
                                                 alt="{{ $products->name }}">
                                         </div>
                                         @foreach (dynamic_assets($products->uploads_id) as $key => $item)
-                                            <div class="nav-image">
+                                            <div class="nav-image ">
                                                 <img src="{{ $item }}" alt="{{ $products->name }}">
                                             </div>
                                         @endforeach
 
                                     </div>
-                                    <div class="product-slider slider-2">
+                                    <div class="product-slider slider-2 hover_image_container">
                                         <div class="detail-image">
                                             <img src="{{ dynamic_asset($products->upload_id) }}"
                                                 alt="{{ $products->name }}">
                                         </div>
                                         @foreach (dynamic_assets($products->uploads_id) as $key => $item)
-                                            <div class="detail-image">
+                                            <div class="detail-image hover_image_container">
                                                 <img class="w-100 " src="{{ $item }}"
                                                     alt="{{ $products->name }}">
                                             </div>
@@ -69,11 +69,20 @@
 
                                     </div>
                                 </div>
+
+                              
+
+                            
+                            
                             </div>
 
 
-                            <div class="col-xl-6">
-
+                            <div class="col-xl-6" >
+                               
+                                    <div class="position-relative">
+                                        <div id="zoomBox"> </div>
+                                    </div>
+                             
 
                                 <div class="product-text-container bg-white br-20">
                                     @include(
@@ -328,6 +337,8 @@
     <style>
         .product-slider-asnav img {
             max-width: 80px;
+            height: 65px;
+            object-fit: scale-down;
         }
     </style>
 
@@ -385,3 +396,52 @@
         </div>
     </div>
 @endif
+
+
+
+
+{{-- zooming image --}}
+   <style>
+                                
+    div#zoomBox {
+
+        width: 100%;
+        min-height: 400px;
+        overflow: hidden;
+        border: 1px solid #000;
+        background-color: #fff;
+        display: none;
+        position: absolute;
+        z-index: 999;
+        top:15px;    
+}
+</style>
+<script>
+// Zoom Image
+let main_image_containers = document.querySelectorAll('.hover_image_container');
+const zoomBox = document.getElementById('zoomBox');
+
+main_image_containers.forEach(function (container) {
+    const img = container.querySelector('img');
+
+    container.addEventListener('mouseover', function () {
+        zoomBox.style.display = 'block';
+        zoomBox.style.backgroundImage = `url(${img.src})`;
+        zoomBox.style.backgroundSize = '200% 200%'; // Zoom level
+    });
+
+    container.addEventListener('mouseleave', function () {
+        zoomBox.style.display = 'none';
+    });
+
+    img.addEventListener('mousemove', function (event) {
+        const { left, top, width, height } = img.getBoundingClientRect();
+        const x = (event.clientX - left) / width;
+        const y = (event.clientY - top) / height;
+
+        zoomBox.style.backgroundPosition = `${x * 100}% ${y * 100}%`;
+    });
+});
+
+</script>
+{{-- end zooming --}}

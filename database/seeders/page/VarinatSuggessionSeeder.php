@@ -21,90 +21,13 @@ class VarinatSuggessionSeeder extends Seeder
     public function run(): void
     {
 
+        $data = [];
 
-        $data = [
-              // Brand =====================================================================
-             'brand1' => [
-                'key' =>'_brand_variant._brand_style1',
-                'title' => 'Brand Style 1',
-                'title_status' => 0,
-                'title_manage_status' => 1,
-
-                'sub_title' => 'Brand Sub Title',
-                'sub_title_status' => 0,
-                'sub_title_manage_status' => 1,
-
-
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'short_read_more_manage_status' => 1,
-
-
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'view_all_manage_status' => 1,
-                'is_details_page_manage_status'=> 1,
-
-
-                'items_per_row' => 0,
-                'items_per_row_status' => 0,
-
-                'items_show' => 20,
-                'items_manage_status' => 1,
-
-
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/brand_style1.png',
-                'background_manage_status'=> 1,
-
-                'upload_manage_id3_status'=> 0,
-                'upload_manage_status'=> 0,
-
-            ],
-             'brand2' => [
-                'key' =>'_brand_variant._brand_style2',
-                'title' => 'Brand Style 2',
-                'title_status' => 0,
-                'title_manage_status' => 1,
-
-                'sub_title' => 'Brand Sub Title',
-                'sub_title_status' => 0,
-                'sub_title_manage_status' => 1,
-
-
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'short_read_more_manage_status' => 1,
-
-
-                'items_per_row' => 0,
-                'items_per_row_status' => 0,
-
-                'items_show' => 20,
-                'items_manage_status' => 1,
-
-
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'view_all_manage_status' => 1,
-                'is_details_page_manage_status'=> 1,
 
 
 
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/brand_style2.png',
-                'background_manage_status'=> 1,
-
-            ],
-            // ===================================================================
-            // ===================================================================
-            // ===================================================================
-
-
+        $data = [
+          
 
 
 
@@ -150,159 +73,7 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
 
-            // Category =====================================================================
-            'category1' => [
-                'key' =>'_category_variant._category_style1',
-                'title' => 'Category Style 1',
-                'title_status' => 0,
-                'title_manage_status' => 1,
-
-
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'sub_title_manage_status' => 1,
-
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'short_read_more_manage_status' => 1,
-
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'view_all_manage_status' => 1,
-                'is_details_page_manage_status'=> 1,
-
-                'items_per_row' => 0,
-                'items_per_row_status' => 0,
-
-                'items_show' => 20,
-                'items_manage_status' => 1,
-
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style1.png',
-                'background_manage_status'=> 1,
-
-            ],
-
-            'category2' => [
-                'key' =>'_category_variant._category_style2',
-                'title' => 'Category Style 2',
-                'title_status' => 0,
-                'title_manage_status' => 1,
-
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'sub_title_manage_status' => 1,
-
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'short_read_more_manage_status' => 1,
-
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'view_all_manage_status' => 1,
-                'is_details_page_manage_status'=> 1,
-
-                'items_per_row' => 0,
-                'items_per_row_status' => 0,
-
-                'items_show' => 20,
-                'items_manage_status' => 1,
-
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style2.png',
-                'background_manage_status'=> 1,
-
-            ],
-            'category3' => [
-                'key' =>'_category_variant._category_style3',
-                'title' => 'Category Style 3',
-                'title_status' => 0,
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'items_per_row' => 12,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style3.png',
-                'background_manage_status'=> 1,
-
-            ],
-            'category4' => [
-                'key' =>'_category_variant._category_style4',
-                'title' => 'Category Style 4',
-                'title_status' => 0,
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'items_per_row' => 12,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style4.png',
-                'background_manage_status'=> 1,
-
-            ],
-            'category5' => [
-                'key' =>'_category_variant._category_style5',
-                'title' => 'Category Style 5',
-                'title_status' => 0,
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'items_per_row' => 12,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style5.png',
-                'background_manage_status'=> 1,
-
-            ],
-            'category6' => [
-                'key' =>'_category_variant._category_style6',
-                'title' => 'Category Style 6',
-                'title_status' => 0,
-                'title_manage_status' => 1,
-
-                'sub_title' => 'Category Sub Title',
-                'sub_title_status' => 0,
-                'sub_title_manage_status' => 1,
-
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 0,
-                'short_read_more_manage_status' => 0,
-
-                'view_all' => 'View All',
-                'view_all_status' => 0,
-                'view_all_manage_status' => 1,
-
-                'items_per_row' => 3,
-                'items_per_row_status' => 0,
-                'items_manage_status' => 1,
-
-
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-                'upload_id'=>'preset/page_variant/category_style6.png',
-                'background_manage_status'=> 1,
-
-
-            ],
-
+           
             // ===================================================================
             // ===================================================================
             // ===================================================================
@@ -1602,6 +1373,303 @@ class VarinatSuggessionSeeder extends Seeder
         ];
 
 
+//  ================================================== Category Variant =====================================================
+         $data['category1'] = [
+            'key' =>'_category_variant._category_style1',
+            
+            'title' => 'Category Style 1',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+      
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+            
+            
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+
+
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style1.png',
+            'background_manage_status'=> 1,
+
+         ];
+
+         $data['category2'] = [
+            'key' =>'_category_variant._category_style2',
+         
+            'title' => 'Category Style 2',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+           
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+            
+            
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style2.png',
+            'background_manage_status'=> 1,
+
+         ];
+
+
+         $data['category3'] = [
+            'key' =>'_category_variant._category_style3',
+           
+            'title' => 'Category Style 3',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+            
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+            
+            
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+
+
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style3.png',
+            'background_manage_status'=> 1,
+
+         ];
+
+        $data['category4'] = [
+            'key' =>'_category_variant._category_style4',
+
+            'title' => 'Category Style 4',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+            
+            
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+            
+            
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style4.png',
+            'background_manage_status'=> 1,
+
+        ];
+
+
+        $data['category5'] = [
+            'key' =>'_category_variant._category_style5',
+
+            'title' => 'Category Style 5',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+            
+            
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style5.png',
+            'background_manage_status'=> 1,
+
+        ];
+
+        $data['category6'] = [
+            'key' =>'_category_variant._category_style6',
+            'title' => 'Category Style 6',
+            'title_status' => 0,
+            'title_manage_status' => 1,
+
+            'sub_title' => 'Category Sub Title',
+            'sub_title_status' => 0,
+            'sub_title_manage_status' => 1,
+
+            'short_read_more' => 'Read More',
+            'short_read_more_status' => 0,
+            'short_read_more_manage_status' => 0,
+
+            'view_all' => 'View All',
+            'view_all_status' => 0,
+            'view_all_manage_status' => 1,
+
+            'items_per_row' => 12,
+            'items_per_row_status' => 0,
+            'items_manage_status' => 1,
+
+
+            'background' => 0,
+            'background_color' => '#eeeeee',
+            'background_type' => 0,
+            'upload_id'=>'preset/page_variant/category_style6.png',
+            'background_manage_status'=> 1,
+
+        ];
+// /========================================== category variant end ===========================//
+
+
+
+//================================== Brand  variant ================================
+
+$data['brand1'] = [
+    'key' =>'_brand_variant._brand_style1',
+    'title' => 'Brand Style 1',
+    'title_status' => 0,
+    'title_manage_status' => 1,
+
+    'sub_title' => 'Brand Sub Title',
+    'sub_title_status' => 0,
+    'sub_title_manage_status' => 1,
+
+
+    'short_read_more' => 'Read More',
+    'short_read_more_status' => 0,
+    'short_read_more_manage_status' => 1,
+
+
+    'view_all' => 'View All',
+    'view_all_status' => 0,
+    'view_all_manage_status' => 1,
+    'is_details_page_manage_status'=> 1,
+
+
+    'items_per_row' => 0,
+    'items_per_row_status' => 0,
+
+    'items_show' => 20,
+    'items_manage_status' => 1,
+
+
+    'background' => 0,
+    'background_color' => '#eeeeee',
+    'background_type' => 0,
+    'upload_id'=>'preset/page_variant/brand_style1.png',
+    'background_manage_status'=> 1,
+
+    'upload_manage_id3_status'=> 0,
+    'upload_manage_status'=> 0,
+];
+
+$data['brand2'] = [
+ 
+        'key' =>'_brand_variant._brand_style2',
+        'title' => 'Brand Style 2',
+        'title_status' => 0,
+        'title_manage_status' => 1,
+
+        'sub_title' => 'Brand Sub Title',
+        'sub_title_status' => 0,
+        'sub_title_manage_status' => 1,
+
+
+        'short_read_more' => 'Read More',
+        'short_read_more_status' => 0,
+        'short_read_more_manage_status' => 1,
+
+
+        'items_per_row' => 0,
+        'items_per_row_status' => 0,
+
+        'items_show' => 20,
+        'items_manage_status' => 1,
+
+
+        'view_all' => 'View All',
+        'view_all_status' => 0,
+        'view_all_manage_status' => 1,
+        'is_details_page_manage_status'=> 1,
+
+
+
+        'background' => 0,
+        'background_color' => '#eeeeee',
+        'background_type' => 0,
+        'upload_id'=>'preset/page_variant/brand_style2.png',
+        'background_manage_status'=> 1,
+];
+// ================================== End Brand variant ================================
+
+
+
+
+
 
         function seed_items($item, $sug = null){
 
@@ -1613,27 +1681,6 @@ class VarinatSuggessionSeeder extends Seeder
                 foreach($item as $key => $value){
                     $homepage->$key = $value;
                 }
-                // $homepage->upload_id = $item['upload_id'] ?? 0;
-
-                // $homepage->upload_id1 = $item['upload_id1'] ?? 0;
-                // $homepage->upload_id2 = $item['upload_id2'] ?? 0;
-
-                // $homepage->items_per_row_status = $item['items_per_row_status'] ?? 0;
-                // $homepage->upload_manage_status = $item['upload_id_status'] ?? 0;
-
-
-                // $homepage->title_manage_status = $item['title_manage_status'] ?? 0;
-                // $homepage->sub_title_manage_status = $item['sub_title_manage_status'] ?? 0;
-                // $homepage->short_read_more_manage_status = $item['short_read_more_manage_status'] ?? 0;
-                // $homepage->view_all_manage_status = $item['view_all_manage_status'] ?? 0;
-                // $homepage->items_manage_status = $item['items_manage_status'] ?? 0;
-                // $homepage->is_details_page_manage_status = $item['is_details_page_manage_status'] ?? 0;
-                // $homepage->background_manage_status = $item['background_manage_status'] ?? 0;
-
-
-                // $homepage->upload_manage_id3_status = $item['upload_manage_id3_status'] ?? 0;
-
-
 
             }else  {
                 $homepage =  HomePageManage::where(['key'=> $item['key'], 'controlby'=> $sug])->first();
@@ -1678,7 +1725,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // about-us page seeder default
          $about_us_id = Page::where('slug', 'about-us')->first();
-         $ecom_home = ['page_title1', 'about1', 'faq_1',];
+         $ecom_home = [ 'about1', 'faq_1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1686,7 +1733,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // filter page seeder default
          $about_us_id = Page::where('slug', 'filter')->first();
-         $ecom_home = [ 'page_title1', 'product_filter1',];
+         $ecom_home = [  'product_filter1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1713,7 +1760,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // checkout page seeder default
          $about_us_id = Page::where('slug', 'checkout')->first();
-         $ecom_home = [ 'page_title1','product_checkout1', ];
+         $ecom_home = [ 'product_checkout1', ];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1721,7 +1768,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // tracking page seeder default
          $about_us_id = Page::where('slug', 'tracking')->first();
-         $ecom_home = [ 'page_title1', 'tracking1',];
+         $ecom_home = [  'tracking1',];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1729,7 +1776,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service page seeder default
          $about_us_id = Page::where('slug', 'service')->first();
-         $ecom_home = [ 'page_title1','service1'];
+         $ecom_home = [ 'service1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1737,7 +1784,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service-details page seeder default
          $about_us_id = Page::where('slug', 'service-details')->first();
-         $ecom_home = ['page_title1', 'service_view1'];
+         $ecom_home = [ 'service_view1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1745,7 +1792,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // service-details page seeder default
          $about_us_id = Page::where('slug', 'register')->first();
-         $ecom_home = [ 'page_title1','register1'];
+         $ecom_home = [ 'register1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1753,7 +1800,7 @@ class VarinatSuggessionSeeder extends Seeder
 
          // Sales-details page seeder default
          $about_us_id = Page::where('page_type', 'sales_partner')->first();
-         $ecom_home = [ 'page_title1','sales_partner_1', ];
+         $ecom_home = [ 'sales_partner_1', ];
          foreach($ecom_home as $items){
             seed_items($data[$items],$about_us_id->id);
         }
@@ -1762,20 +1809,20 @@ class VarinatSuggessionSeeder extends Seeder
 
          // Sales-details page seeder default
          $about_us_id = Page::where('page_type', 'profile_dashboard')->first();
-         $ecom_home = ['page_title1','profile_profile_1'];
+         $ecom_home = ['profile_profile_1'];
          foreach($ecom_home as $items){
             seed_items($data[$items],$about_us_id->id);
         }
 
 
          $about_us_id = Page::where('page_type', 'profile_location')->first();
-         $ecom_home = [ 'page_title1','profile_location_1'];
+         $ecom_home = [ 'profile_location_1'];
          foreach($ecom_home as $items){
             seed_items($data[$items],$about_us_id->id);
         }
 
          $about_us_id = Page::where('page_type', 'profile_cart')->first();
-         $ecom_home = [ 'page_title1','profile_cart_1'];
+         $ecom_home = [ 'profile_cart_1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1784,7 +1831,7 @@ class VarinatSuggessionSeeder extends Seeder
 
 
          $about_us_id = Page::where('page_type', 'checkout_page')->first();
-         $ecom_home = [ 'page_title1','checkout_page1'];
+         $ecom_home = [ 'checkout_page1'];
 
          foreach($ecom_home as $items){
              seed_items($data[$items],$about_us_id->id);
@@ -1792,7 +1839,7 @@ class VarinatSuggessionSeeder extends Seeder
 
 
          $about_us_id = Page::where('page_type', 'payment_page')->first();
-         $ecom_home = [ 'page_title1','payment_page1'];
+         $ecom_home = [ 'payment_page1'];
 
 
          $about_us_id = Page::where('page_type', 'order_success')->first();

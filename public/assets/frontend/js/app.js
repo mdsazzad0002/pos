@@ -292,6 +292,7 @@ var MyScroll = "";
           slidesToShow: 1,
           slidesToScroll: 1,
           arrows: false,
+          // draggable:true,
           fade: true,
           asNavFor: ".product-slider-asnav",
         });
@@ -304,6 +305,7 @@ var MyScroll = "";
           dots: false,
           arrows: false,
           centerMode: false,
+          draggable:true,
           variableWidth: true,
           focusOnSelect: true,
         });

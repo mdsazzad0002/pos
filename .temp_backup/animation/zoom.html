@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,8 @@
 
         .zoom_container img {
             position: absolute;
-            width: 200%; /* Double the size for zoom */
+            width: 200%;
+            /* Double the size for zoom */
             height: auto;
             top: 0;
             left: 0;
@@ -45,13 +47,14 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
         <div class="hover_image_container">
             <img src="http://127.0.0.1:8000/upload/67cd35c35faf9.jpeg" alt="Image" id="mainImage">
         </div>
-    
+
         <div class="zoom_container" id="zoomBox">
             <img src="" alt="Zoomed Image" id="zoomImage">
         </div>
@@ -87,49 +90,50 @@
         });
     </script>
 
-    
-<script>
-    // Zoom Image
-    let main_image_container = document.querySelectorAll('.hover_image_container');
-  const zoomBox = document.getElementById('zoomBox');
-  const zoomImage = document.getElementById('zoomImage');
 
-  main_image_container.forEach(function(container) {
+    <script>
+        // Zoom Image
+        let main_image_container = document.querySelectorAll('.hover_image_container');
+        const zoomBox = document.getElementById('zoomBox');
+        const zoomImage = document.getElementById('zoomImage');
 
-
-      container.addEventListener('mouseover', function() {
-          zoomBox.style.display = 'block';
-          zoomImage.src = container.querySelector('img').src;
-      });
+        main_image_container.forEach(function (container) {
 
 
-      container.addEventListener('mouseleave', function() {
-          zoomBox.style.display = 'none';
-      });
+            container.addEventListener('mouseover', function () {
+                zoomBox.style.display = 'block';
+                zoomImage.src = container.querySelector('img').src;
+            });
 
 
-      container.querySelector('img').addEventListener('mousemove', function(event) {
-
-          const { left, top, width, height } = this.getBoundingClientRect();
-          const x = ((event.clientX - left) / width);
-          const y = ((event.clientY - top) / height);
-         
-          
-      console.log(zoomImage.clientWidth, zoomImage.clientHeight);
-          // Move zoomed image relative to the cursor position
-          const zoomWidth = zoomImage.clientWidth - zoomBox.clientWidth;
-          const zoomHeight = zoomImage.clientHeight - zoomBox.clientHeight;
-
-          const moveX = Math.max(0, Math.min(zoomWidth, x * zoomWidth));
-          const moveY = Math.max(0, Math.min(zoomHeight, y * zoomHeight));
-          console.log(zoomWidth, moveY);
-          zoomImage.style.transform = `translate(-${moveX}px, -${moveY}px)`;
-      })
+            container.addEventListener('mouseleave', function () {
+                zoomBox.style.display = 'none';
+            });
 
 
+            container.querySelector('img').addEventListener('mousemove', function (event) {
 
-  })
-</script>
+                const { left, top, width, height } = this.getBoundingClientRect();
+                const x = ((event.clientX - left) / width);
+                const y = ((event.clientY - top) / height);
+
+
+                console.log(zoomImage.clientWidth, zoomImage.clientHeight);
+                // Move zoomed image relative to the cursor position
+                const zoomWidth = zoomImage.clientWidth - zoomBox.clientWidth;
+                const zoomHeight = zoomImage.clientHeight - zoomBox.clientHeight;
+
+                const moveX = Math.max(0, Math.min(zoomWidth, x * zoomWidth));
+                const moveY = Math.max(0, Math.min(zoomHeight, y * zoomHeight));
+                console.log(zoomWidth, moveY);
+                zoomImage.style.transform = `translate(-${moveX}px, -${moveY}px)`;
+            })
+
+
+
+        })
+    </script>
 
 </body>
+
 </html>

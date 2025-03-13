@@ -1,16 +1,12 @@
-<style>
-    .product_style_5 .product-type-simple{
-        background: {{ $product_style->background_color ?? '#fff' }};
-    }
-</style>
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_5">
+
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_5" style="background: {{ $p_background_color  }}">
     <div
         class="product type-product post-4704 status-publish first instock product_cat-fuji-hd product_cat-passenger-lift has-post-thumbnail sold-individually shipping-taxable purchasable product-type-simple product-item grid hover-fade">
         <div class="product-img-wrap">
             <div class="nasa-sc-pdeal-countdown hidden-tag"></div>
             <div class="nasa-product-grid nasa-group-btns nasa-btns-product-item">
                 <a href="javascript:void(0);"
-                    class="quick-view btn-link quick-view-icon nasa-tip nasa-tip-left productQuickViewbtn" data-bs-toggle="modal" data-bs-target="#productQuickView" data-id="{{ $product->id }}"><svg class="nasa-icon" width="20" height="36" viewBox="0 0 32 32"
+                    class="quick-view btn-link quick-view-icon nasa-tip nasa-tip-left productQuickViewbtn" data-bs-toggle="modal" data-bs-target="#productQuickView" data-id="{{ $p_id }}"><svg class="nasa-icon" width="20" height="36" viewBox="0 0 32 32"
                         fill="currentColor">
 
                         <path
@@ -24,12 +20,12 @@
                         </path>
                     </svg></a></div>
                     <a class="product-img"
-                          href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">
+                          href="{{ url($p_url) }}">
                 <div class="main-img">
                     <img loading="lazy" decoding="async" width="450" height="383"
-                        src="{{ asset($product->image_url) }}"
+                        src="{{ $p_image }}"
                         class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail"
-                        alt="{{ $product->name }}"
+                        alt="{{ $p_name }}"
                         sizes="(max-width: 450px) 100vw, 450px">
                 </div>
              
@@ -37,19 +33,17 @@
         </div>
         <div class="product-info-wrap info">
             <a class="name nasa-bold woocommerce-loop-product__title nasa-show-one-line"
-                href="{{ url($view_page->slug) }}?slug={{ $product->slug }}">
-                {{Str::title($product->name ?? '')}} </a>
+                href="{{ url($p_url) }}">
+                {{ $p_name }} </a>
             <span class="price"><span class="woocommerce-Price-amount amount"><bdi><span
-                            class="woocommerce-Price-currencySymbol">৳&nbsp;</span>2,400,000</bdi></span></span>
+                            class="woocommerce-Price-currencySymbol">{{ settings('currency_symbol', 9) }}&nbsp;</span>{{ $p_selling_price }}</bdi></span></span>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center; width: 100%; flex-wrap: wrap;"><a
-                href="{{ settings('app_whatsapp',9) }}&amp;text={{ url($view_page->slug) }}?slug={{ $product->slug }}"
-                class="whatsapp-button"
-                style="margin: 5px; background-color: #4CAF50; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; flex: 1 1 calc(50% - 20px); box-sizing: border-box;">WhatsApp
-                Now</a><a
-                href="{{ url($view_page->slug) }}?slug={{ $product->slug }}"
-                class="button"
-                style="margin: 5px; background-color: #007BFF; border: none; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 12px; flex: 1 1 calc(50% - 20px); box-sizing: border-box;">Details</a>
-        </div>
+
+        @include('frontend.protfilio_theme._product_style._button.product_buttons', [
+            'root_class'=> 'd-flex gap-16',
+            'btn_class'=> 'buy cursor-pointer color-full-boutton',
+
+        ])
+      
     </div>
 </div>

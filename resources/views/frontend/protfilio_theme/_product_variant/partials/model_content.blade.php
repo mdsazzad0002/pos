@@ -76,6 +76,7 @@
         @if( $product->old_price > $product->selling_price || $product->variant_on == 1)
             <span class="label white price_discount"> <span>{{  number_format((($product->old_price - $product->selling_price ) *  100 ) / $product->old_price ,2) }}</span>%</span>
         @endif
+      
 
 
 
@@ -84,6 +85,7 @@
 
 
 </div>
+<h6>Total Price : {{ settings('currency_symbol', 9) }} <span class="total_price_temp"></span></h6>
 
 
 
@@ -155,4 +157,7 @@
 @endif
 
 </div>
+
+
+
 @endisset

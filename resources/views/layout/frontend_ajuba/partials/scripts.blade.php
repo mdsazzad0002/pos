@@ -400,8 +400,8 @@
 
 
         function price_change(thi){
-            console.log(thi)
-            console.log(456)
+            // console.log(thi)
+            // console.log(456)
             $('.name_price input').val($(thi).data('price'));
             $('.name_price_old input').val($(thi).data('old_price'));
             price_calculation_change_option(thi)
@@ -434,6 +434,7 @@
             $(thi).parents('.product_description_parents').find('.price_discount span').html(calculateDiscount(inp_price_old,inp_price))
 
 
+            temp_total_price()
         }
 
 
@@ -456,7 +457,26 @@
                 }
             }
 
+            temp_total_price()
+
         }
+
+        function temp_total_price(){
+            var total = 0;
+            if($('.total_price_temp').length > 0){
+
+                var quantity = $('.product_description_parents').find('.input_quantity').val();
+                var inp_price = $('.product_description_parents').find('.name_price input').val();
+                    total = quantity * inp_price;
+               
+
+                $('.total_price_temp').html(total);
+                // console.log('not found'+total)
+            }
+            
+        }
+
+        temp_total_price()
 
 
         
