@@ -122,12 +122,39 @@ window.addEventListener("message", function(event) {
         if (targetElement) {
             window.location.hash = targetElement.getAttribute('id');
             targetElement.click();
-
-
-
         } else {
             console.warn("Element with class '" + event.data.id_selected + "' not found.");
         }
+    }else if (typeof event.data === "object" && event.data.id_selected_array) {
+        if(event.data.id_selected_array.length > 0){
+
+
+        document.querySelectorAll('.menu_of_settings_page').forEach(element => {
+            element.querySelector('.card').classList.remove('normal_active');
+
+        });
+
+        event.data.id_selected_array.forEach((element, index) => {
+            // console.log(element);
+            let targetElement = document.querySelector(element);
+
+            if(index == 0){
+
+                window.location.hash =targetElement.getAttribute('id');
+            }
+
+            // console.log(targetElement);
+
+                targetElement.querySelector('.card').classList.add('normal_active');
+
+        });
+    }
+    }else if (typeof event.data === "object" && event.data.danger_active) {
+        document.querySelectorAll('.menu_of_settings_page').forEach(element => {
+            element.querySelector('.card').classList.remove('danger_active');
+        })
+        document.querySelector(event.data.danger_active).querySelector('.card').classList.add('danger_active');
+
     }
 });
 
@@ -406,6 +433,15 @@ window.addEventListener("message", function(event) {
         top: 10px;
         right: 10px;
         z-index: 9;
+    }
+
+
+    .normal_active{
+        background:#16b28a4d;
+    }
+
+    .normal_active.danger_active{
+        background:#fb000024
     }
 
 </style>

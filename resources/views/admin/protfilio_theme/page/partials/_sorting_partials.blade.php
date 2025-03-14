@@ -1,8 +1,8 @@
 <ul id="sortable" class="accordion">
     @foreach ($page_content->home_page as $items)
-    <li id="{{ $items->id }}" class="menu_of_settings_page_container">
+    <li id="{{ $items->id }}" class="menu_of_settings_page_container target{{ $items->id}}">
         <div class="row">
-            <div class="col-md-12 menu_of_settings_page">
+            <div class="col-md-12 menu_of_settings_page ">
                 @include('admin.protfilio_theme.page.partials._builder_partials',['item'=>$items])
             </div>
         </div>
