@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\upload;
 use Illuminate\Http\Request;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Encoders\PngEncoder;
 use Illuminate\Support\Facades\File;
+
 
 class UploadController extends Controller
 {
@@ -37,6 +41,8 @@ class UploadController extends Controller
     {
         //return 4545;
 
+        
+
           // Temporary directory for chunks
           $tempPath = public_path('uploads/temp');
           $finalPath = public_path('uploads');
@@ -66,9 +72,31 @@ class UploadController extends Controller
                   fclose($chunk);
                   unlink($chunkFile); // Remove chunk file
               }
-
               fclose($finalFile);
 
+             // check image unsupport format by img tag
+              $unsupport_format = ['avif', 'svg', 'webp', 'BMP', 'bmp', 'WEBP', 'SVG','AVIF', 'jfif', 'pjpeg', 'pjp', 'JFIF', 'PJPEG', 'PJP'];
+                if(in_array(explode('.',$fileName)[1], $unsupport_format)){
+
+                    $imageManager = new ImageManager(new Driver());
+                    $new_file = str_replace(explode('.',$fileName)[1], 'png', $fileName);
+
+    
+                    $outputPath = public_path('uploads/'.$new_file);
+                    
+
+                    $encoder = new PngEncoder();
+
+                    $image = $imageManager->read($finalFilePath)->encode($encoder);
+                    // $image->save($outputPath);
+                    file_put_contents($outputPath, (string) $image);
+
+                    unlink($finalFilePath);
+                    $fileName = $new_file;
+
+                }
+
+            
               $upload = Upload::create([
                 'name' => $fileName,
                 'extension' => explode('.',$fileName)[1],

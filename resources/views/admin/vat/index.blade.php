@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title',__('settings.area'))
+@section('title','VAT')
 
 {{--  Content Extends  --}}
 @section('content')
@@ -10,7 +10,7 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Vat
         <div>
-            @can('area create')
+            @can('vat create')
 
             <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Vat" data-href="{{ route('admin.vat.create') }}">+ Add New area</button>
             @endcan

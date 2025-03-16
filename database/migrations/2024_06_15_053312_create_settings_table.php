@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('value')->nullable();
-            $table->string('creator_id')->nullable();
             $table->string('key')->nullable();
+            $table->string('creator_id')->default(0);
             $table->timestamps();
         });
     }

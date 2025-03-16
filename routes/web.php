@@ -587,7 +587,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('/vat', VatController::class)->names('vat');
     Route::group(['as' => 'vat.', 'prefix' => 'vat'], function() {
         Route::get('/delete/{vat}', [VatController::class, 'delete'])->name('delete');
-        Route::get('/getVat/get', [VatController::class, 'getVat'])->name('select');
+        Route::get('/getVat/get', [VatController::class, 'getVats'])->name('select');
     });
     // End Vat Management
 

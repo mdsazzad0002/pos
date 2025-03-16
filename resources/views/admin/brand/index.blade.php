@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('brand.title'))
+@section('title', 'Brand')
 
 {{--  Content Extends  --}}
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
+            $table->string('name')->length(800)->nullable();
             $table->string('extension')->nullable();
             $table->string('size')->nullable();
             $table->string('source')->nullable();

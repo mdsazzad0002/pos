@@ -3540,7 +3540,10 @@ footer .footer-wrapper .footer-link-block {
 }
 @media (max-width: 490px) {
   footer .footer-wrapper .footer-link-block {
-    width: 80%;
+    width: 48%;
+  }
+  footer .footer-wrapper .footer-link-block.footer-contact {
+    width: 100%;
   }
 }
 footer .footer-wrapper .footer-link-block .footer-link .img-box {

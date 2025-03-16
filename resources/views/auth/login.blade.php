@@ -42,14 +42,29 @@
                 </a>
             @endif
 
+            
             <x-primary-button class="ms-3">
                 {{ __('log.in') }}
             </x-primary-button>
         </div>
         <br>
-       <span class=" text-gray-200 dark:text-gray-400">{{ __('log.choose_your_language') }}  - </span>
+        <span class=" text-gray-200 dark:text-gray-400">{{ __('log.choose_your_language') }}  - </span>
         @foreach ($language as $items)
         <a class=" text-gray-600 dark:text-gray-400" href="{{ url('locale/'.$items->id) }}">{{ Str::title($items->name) }}</a>
         @endforeach
     </form>
+    @if (settings('is_demo_mode_status', 9) == 1)
+    <br/>
+    <span class=" text-gray-200 dark:text-gray-400 border border-gray-400 p-2 rounded cursor-pointer block"
+        onclick="
+        document.getElementById('email').value = 'admin@gmail.com';
+        document.getElementById('password').value = 'admin@gmail.com';
+        "
+    >
+        Demo Mode Login Credentials <br>
+        <hr>
+        Email : admin@gmail.com <br>
+        Password : admin@gmail.com <br/>
+    </span>
+    @endif
 </x-guest-layout>

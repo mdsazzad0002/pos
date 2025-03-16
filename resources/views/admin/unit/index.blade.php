@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', __('settings.units'))
+@section('title', 'Unit')
 
 {{--  Content Extends  --}}
 @section('content')

@@ -5,7 +5,7 @@
 
     <tr>
         <td>Image</td>
-        <td><img src="{{ dynamic_asset($testimonial->upload_id) }}" alt=""></td>
+        <td><img  class="img-fluid" src="{{ dynamic_asset($testimonial->upload_id) }}" alt=""></td>
     </tr>
     <tr>
         <td>Title</td>

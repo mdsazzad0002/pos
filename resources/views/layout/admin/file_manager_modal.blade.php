@@ -30,11 +30,16 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
-                    <h3 class="text-center">Drag-and-Drop File Uploader</h3>
+                    
                     <label for="file-input" class="d-block" id="drop-area">
-                        Drag here to preview
+                        Drag here to upload. Supported formats:</br>
+                         png, jpg, jpeg, gif, webp, mmp, avif
+                        <br/>
+                        <div class="text-center">
+                            <span class="btn btn-primary">Browse...  Multiple Files Support</span>
+                        </div>
                     </label>
-                    <input type="file" id="file-input" multiple hidden required>
+                    <input type="file" id="file-input" multiple hidden required accept="image/png, image/jpeg, image/gif, image/webp, image/mmp, image/avif">
                     <div class="row" id="preview-container"></div>
 
 
@@ -368,16 +373,19 @@ dropArea.addEventListener('dragover', () => {
     }
 
 
-
-  #drop-area {
-    width: 400px;
-    height: 200px;
-    margin: 20px auto;
-    text-align: center;
-    line-height: 200px;
-    border: 2px dashed #ccc;
-    cursor: pointer;
-  }
+    #drop-area {
+        width: 400px;
+        height: 258px;
+        margin: 20px auto;
+        text-align: center;
+        line-height: 43px;
+        border: 2px dashed #ccc;
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 
   #preview-container {
     text-align: center;

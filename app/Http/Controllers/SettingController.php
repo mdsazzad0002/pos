@@ -58,16 +58,17 @@ class SettingController extends Controller
             $flag_target = 1;
         }
 
+     
 
 
 
         $login_check = new LoginCheckController();
-        $settings = $login_check->identifysender($request);
+        $login_check->identifysender($request);
 
 
 
 
-
+// return $settings;
 
 
 
@@ -223,36 +224,42 @@ class SettingController extends Controller
 
     public function downloadBackup()
     {
-        $databaseName = config('database.connections.mysql.database'); //env('DB_DATABASE', 'd_pos');
-        $username = config('database.connections.mysql.username');//env('DB_USERNAME', 'root');
-        $password = config('database.connections.mysql.password'); //env('DB_PASSWORD','');
-        $backupPath = storage_path( 'app/'.str_replace(' ', '_',  settings('app_name', 9)).'_'.date('d-M-Y-h-i-s-A').'.sql');
-        $host = config('database.connections.mysql.host');//env('DB_HOST', '127.0.0.1');
-
-
-
-
-        $command = "mysqldump --host={$host} --user={$username} --password='{$password}' {$databaseName} > {$backupPath}";
-        //dd($command);
-
-        try {
-            exec($command, $output, $returnVar);
-            if ($returnVar !== 0) {
-
-
-                    // Execute the command using the shell
-                    $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
-                    $process->mustRun();  // This will throw an exception if the process fails
-
-                    // After the command runs, return the backup file as a download
-                    return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
-
-
+        {
+            $databaseName = config('database.connections.mysql.database'); //env('DB_DATABASE', 'd_pos');
+            $username = config('database.connections.mysql.username');//env('DB_USERNAME', 'root');
+            $password = config('database.connections.mysql.password'); //env('DB_PASSWORD','');
+            $backupPath = storage_path( 'app/'.str_replace(' ', '_',  settings('app_name', 9)).'_'.date('d-M-Y-h-i-s-A').'.sql');
+            $host = config('database.connections.mysql.host');//env('DB_HOST', '127.0.0.1');
+    
+    
+    
+    
+            $command = "mysqldump --host={$host} --user={$username} --password='{$password}' {$databaseName} > {$backupPath}";
+            //dd($command);
+    
+            try {
+                if(function_exists('exec')){
+                    \exec($command, $output, $returnVar);
+                    // return response()->json(['message' => 'Backup successful!', 'path' => $backupPath], 200);
+                    return response()->download($backupPath)->deleteFileAfterSend(true);
+                }
+            } catch (\Exception $e) {
+              
+                
             }
-            // return response()->json(['message' => 'Backup successful!', 'path' => $backupPath], 200);
-            return response()->download($backupPath)->deleteFileAfterSend(true);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Exception occurred!', 'details' => $e->getMessage()], 500);
+            
+              
+            try {
+                
+               // Execute the command using the shell
+               $process = new Process(["cmd", "/c", $command]); // cmd /c executes the command in the shell
+               $process->mustRun();  // This will throw an exception if the process fails
+    
+               // After the command runs, return the backup file as a download
+                   return response()->download($backupPath)->deleteFileAfterSend(true); // Deletes the file after sending
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'Exception occurred!', 'details' => $e->getMessage()], 500);
+            }
         }
 
     }

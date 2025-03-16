@@ -162,6 +162,9 @@ class main_settingSeeder extends Seeder
 
         $count = DB::table('settings')->where('key', 9)->count();
         if($count == 0){
+            foreach($data as $key => $value){
+                $data[$key]['creator_id'] = '1';
+            }
             DB::table('settings')->insert($data);
         }
     }

@@ -44,7 +44,7 @@ class SubCategoryController extends Controller
 
                     $edit_route = route('admin.subcategory.edit', $row->id);
                     $edit_button =  "<button class='btn btn-warning '
-                    data-dialog='modal-dialog-centered'
+                    data-dialog='modal-dialog-centered modal-lg'
                     data-title='$row->name'
                     onclick='button_ajax(this)'
                     data-href='$edit_route'>Edit</button>";
@@ -73,7 +73,8 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.subcategory.partials.create');
+        $subcategory = null; 
+        return view('admin.subcategory.partials.edit', compact('subcategory'));
     }
 
     /**
@@ -87,6 +88,8 @@ class SubCategoryController extends Controller
         $category->name = $request->name;;
         $category->category_id = $request->category;
         $category->description = $request->description;
+        $category->primary_description = $request->primary_description;
+        $category->additional_description = $request->additional_description;
         $category->status = $request->status;
 
         $category->creator = auth()->user()->id ?? 0;
@@ -130,6 +133,8 @@ class SubCategoryController extends Controller
         $subcategory->name = $request->name;
         $subcategory->category_id = $request->category;
         $subcategory->description = $request->description;
+        $category->primary_description = $request->primary_description;
+        $category->additional_description = $request->additional_description;
         $subcategory->status = $request->status;
 
 

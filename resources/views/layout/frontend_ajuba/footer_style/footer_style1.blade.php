@@ -70,7 +70,7 @@
             @endforeach
 
 
-            <div class="footer-link-block">
+            <div class="footer-link-block footer-contact">
                 <ul class="list-unstyled mb-16">
                     <li class="mb-12 footer-link">
                         <a href="{{ settings('app_maps', 9) }}" class="d-flex align-items-center gap-2">

@@ -19,7 +19,7 @@
         <div>
             @can('user create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  subcategory" data-href="{{ route('admin.subcategory.create') }}">+ Add New subcategory</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog="modal-dialog-scrollable modal-dialog-centered modal-lg" data-title="Add New  subcategory" data-href="{{ route('admin.subcategory.create') }}">+ Add New subcategory</button>
             @endcan
         </div>
     </div>
