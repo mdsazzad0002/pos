@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('upload_id')->nullable();
             $table->string('status');
             $table->string('creator');
             $table->string('updater');
+            $table->integer('position_order')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

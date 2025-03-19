@@ -61,7 +61,7 @@
 
 
     @if ($info->view_all_status)
-    <div class="text-center my-4">
+    <div class="text-center py-4">
         <a href="{{ url($info->view_all_page_url ?? '') }}" class="btn_primary">{{ $info->short_read_more }}
             <i class="bi bi-arrow-right"></i></a>
     </div>

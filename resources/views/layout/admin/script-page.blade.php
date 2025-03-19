@@ -95,6 +95,22 @@ function ActiveMenuCenter() {
         });
 
 
+        function generateSlugMake(thi, target) {
+            var text = thi.value;
+
+            let output = text
+                .toLowerCase()                  // Convert to lowercase
+                .trim()                          // Trim spaces
+                .replace(/[^a-z0-9\s-]/g, '')    // Remove special characters
+                .replace(/\s+/g, '-')            // Replace spaces with dashes
+                .replace(/-+/g, '-');            // Remove multiple dashes
+
+
+            document.querySelector(target).value = output;
+
+        }
+
+
         function copyToClipboard(text) {
             if (navigator.clipboard) {
                 // Modern approach using Clipboard API

@@ -1,7 +1,7 @@
 @section('content')
 
 @php
-    $service = \App\Models\Service::where('slug', $request->service)->first();
+    $service = \App\Models\Service::where('slug', $request->slug)->first();
 @endphp
 
 

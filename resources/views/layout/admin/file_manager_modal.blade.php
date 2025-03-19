@@ -126,12 +126,12 @@
 
 
 
-      const CHUNK_SIZE = 0.2 * 1024 * 1024; // 1MB
+      const CHUNK_SIZE = 0.05 * 1024 * 1024; // 50KB
       const MAX_RETRIES = 3; // Maximum retries for a chunk
 
 
       async function file_upload(files) {
-        const CHUNK_SIZE = 1 * 1024 * 1024; // 1 MB
+        const CHUNK_SIZE = 0.2 * 1024 * 1024; // 50KB
         const MAX_RETRIES = 3; // Maximum retry attempts
 
         for(let j =0; j <files.length; j++){

@@ -36,8 +36,12 @@ use  App\Models\ShippingCharge;
 
 class HomeController extends Controller
 {
-    public function index(Request $request, $view = null){
+    public function index($view = null, $slug = null){
+        $request = request();
         $edit_url =  $url = $request->url() . '?' . http_build_query(request()->query());
+        // return  dd($view, $slug);
+        
+
 
         if($request->has('preview_page')){
               $homepage = Page::findOrFail($request->preview_page);
@@ -51,6 +55,9 @@ class HomeController extends Controller
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
             $homepage = Page::where('status', 1)->where('slug', $view)->first();
+            if(!$homepage){
+                $homepage = Page::where('status', 1)->where('slug', $view.'/'.$slug)->first();
+            }
         }
 
         if($homepage){

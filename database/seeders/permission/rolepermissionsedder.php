@@ -166,6 +166,24 @@ class rolepermissionsedder extends Seeder
                 'LeadAccount create',
                 'LeadAccount edit',
                 'LeadAccount delete',
+          
+          
+                // Category blog Account
+                'blog category read',
+                'blog category create',
+                'blog category edit',
+                'blog category delete',
+
+
+                //  blog Account
+                'blog read',
+                'blog create',
+                'blog edit',
+                'blog delete',
+
+
+
+
 
                 // Lead Contact
                 'LeadContact read',
@@ -271,6 +289,7 @@ class rolepermissionsedder extends Seeder
 
 
             Permission::truncate();
+           
 
             foreach ($permission_data as $data) {
 

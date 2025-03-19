@@ -507,6 +507,48 @@ sidebar-dark-primary elevation-4">
 
 
 
+                 @canany(['blog category read', 'blog read'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user-cog nav-icon"></i>
+                            <p>
+                                Blog
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('blog category read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.blog.category.index') }}" class="nav-link">
+                                    <i class="fas fa-user-tie nav-icon"></i>
+                                    <p>Category</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                            @can('blog create')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.blog.blog.create') }}" class="nav-link">
+                                    <i class="fas fa-user-tie nav-icon"></i>
+                                    <p>Blog Create</p>
+                                </a>
+                            </li>
+                            @endcan
+                            @can('blog read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.blog.blog.index') }}" class="nav-link {{ Route::is('admin.blog.blog.edit') ? 'active' : '' }}">
+                                    <i class="fas fa-user-tie nav-icon"></i>
+                                    <p>Blog</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                        </ul>
+                    </li>    
+                @endcanany
+
+
+
 
 
                 @include('layout.admin._sidebar.frontend')

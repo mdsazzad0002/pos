@@ -1,3 +1,4 @@
+
 <div class="col-sm-6">
     <a href="{{ route('google.redirect') }}" class="link-btn fw-500"><img src="{{ asset('uploads/icons/google-icon.png') }}" alt=""> Login with Google</a>
 </div>

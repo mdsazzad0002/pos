@@ -1,40 +1,5 @@
 <footer>
     <div class="container-fluid">
-        <div class="benefits">
-            <div class="row justify-content-center  benefits-wrapper">
-                <div class="col-xxl-12 col-xl-12">
-                    <div class="row row-gap-3">
-
-
-                        @php
-                            $services = \App\Models\Service::where('status', 1)->get();
-                            $service__details_page = \App\Models\Page::where('status', 1)->where('page_type', 'service_details')->first();
-                        @endphp
-                        @if($service__details_page && count($services) > 0)
-                            @foreach ($services as $key => $items)
-                                <a class="col-xl-2 col-md-4 col-6" href="{{ url(  $service__details_page->slug) }}?service={{  $items->slug ?? '' }}">
-                                    <div class="benefit-block">
-                                        <div class="image-box mb-12">
-                                            <i class="{{  $items->icon_class ?? '' }}"></i>
-                                        </div>
-                                        <div class="content-box">
-                                            <p class="fw-500 mb-4p">{{  $items->title ?? '' }}</p>
-                                            <p class="light-gray">{{  $items->short_description ?? '' }}</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        @endif
-
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="hr-line"></div>
         <div class="footer-wrapper pt-40 mb-32">
             <div class="store-desc">
                 <a href="{{ url('/') }}"><img style="max-height: 80px;" src="{{ settings('app_footer_image', 9) }}" alt="" class="mb-16"></a>

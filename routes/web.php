@@ -30,7 +30,7 @@ use App\Http\Controllers\protfilio_theme\FaqController as frontend_faq;
 use App\Http\Controllers\protfilio_theme_admin\FaqController;
 
 use App\Http\Controllers\protfilio_theme\HomeController;
-use App\Http\Controllers\protfilio_theme\ServiceController;
+
 use App\Http\Controllers\protfilio_theme_admin\ServiceController as  AdminServiceController;
 use App\Http\Controllers\protfilio_theme\TeamController;
 use App\Http\Controllers\ReviewProductController;
@@ -90,6 +90,8 @@ use App\Http\Controllers\ProductStyleController;
 use App\Http\Controllers\CalendarEventController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TransectionInformationController;
+use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogController;
 
 
 
@@ -159,6 +161,7 @@ Route::middleware(['auth'])->group(function () {
         return abort(403);
     });
 
+    
     Route::get('/migrate/seed', function(){
         if(auth()->can('migrate seed')){
             $db_seeder = new DatabaseSeeder;
@@ -440,6 +443,34 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('Translation', TranslatorController::class)->names('Translation')->middleware('can:Translation read');
     Route::get('Translation/{Translation}/delete/', [TranslatorController::class, 'delete'])->name('Translation.delete');
     Route::get('Translation/getTranslation/get', [TranslatorController::class, 'geTranslation'])->name('Translation.select');
+
+
+
+
+// Blog Management
+
+    // Category management
+    Route::resource('/blog/category', BlogCategoryController::class)->names('blog.category');
+    Route::get('/blog/category/delete/{category}', [BlogCategoryController::class, 'delete'])->name('blog.category.delete');
+    Route::get('/blog/category/getCategory/get', [BlogCategoryController::class, 'getCategory'])->name('blog.category.select');
+    
+    Route::get('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order'])->name('blog.category.category_for_order');
+    Route::post('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order_post']);
+    
+    
+    // Blog management
+    Route::resource('/blog/blog', BlogController::class)->names('blog.blog');
+    Route::get('/blog/blog/delete/{blog}', [BlogController::class, 'delete'])->name('blog.blog.delete');
+    // Route::get('/blog/category/getCategory/get', [BlogController::class, 'getCategory'])->name('blog.category.select');
+
+
+
+
+
+
+
+
+
 
 
 
@@ -841,8 +872,6 @@ Route::middleware(['setlocale'])->group(function () {
     // protflio_web_theme
 
 
-    Route::get('/services', [ServiceController::class, 'index'])->name('service.index');
-    Route::get('/service/{slug}/', [ServiceController::class, 'show'])->name('service.view');
 
     Route::get('/client', [ClientController::class, 'index'])->name('client.index');
     Route::get('/client/{slug}/', [ClientController::class, 'show'])->name('client.view');
@@ -908,7 +937,14 @@ Route::middleware(['setlocale'])->group(function () {
 
 
     // User Defined Route Web So Check Route not exists
-    Route::get('{view}', [HomeController::class, 'index'])->middleware('TrackUniqueVisitor')->name('home')-> where('view', '^(?!admin).*');
+    Route::get('{view?}/{slug?}', [HomeController::class, 'index'])
+    ->middleware('TrackUniqueVisitor')
+    ->name('home')
+    ->where('view', '^(?!admin$)[^/]+')
+    ->where('slug', '.*'); // Ensures view is not "admin"
+    
+    
+
     // end protflio_web_theme
 
 });

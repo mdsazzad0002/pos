@@ -365,61 +365,6 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 
-             // Service =====================================================================
-            'service1' => [
-                'key' =>'_service_variant._service_style1',
-                'title' => 'Service Style 1',
-                'title_status' => 1,
-                'sub_title' => 'Service Sub Title',
-                'sub_title_status' => 1,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 1,
-                'view_all' => 'View All',
-                'view_all_status' => 1,
-                'items_per_row' => 3,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-
-            ],
-            // Service 2
-            'service2' => [
-                'key' =>'_service_variant._service_style2',
-                'title' => 'Service Style 2',
-                'title_status' => 1,
-                'sub_title' => 'Service Sub Title',
-                'sub_title_status' => 1,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 1,
-                'view_all' => 'View All',
-                'view_all_status' => 1,
-                'items_per_row' => 3,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-
-            ],
-            // ===================================================================
-            // ===================================================================
-            // ===================================================================
-
-            // Service View 1
-            'service_view1' => [
-                'key' =>'_service_view_variant._service_view1',
-                'title' => 'Service View 1',
-                'title_status' => 1,
-                'sub_title' => 'Service Sub Title',
-                'sub_title_status' => 1,
-                'short_read_more' => 'Read More',
-                'short_read_more_status' => 1,
-                'view_all' => 'View All',
-                'view_all_status' => 1,
-                'items_per_row' => 3,
-                'background' => 0,
-                'background_color' => '#eeeeee',
-                'background_type' => 0,
-
-            ],
             // ===================================================================
             // ===================================================================
             // ===================================================================
@@ -1206,6 +1151,206 @@ class VarinatSuggessionSeeder extends Seeder
 
 
         ];
+
+        
+          
+            // ===================================================================
+            // ===================================================================
+            // ===================================================================
+
+            // Service View 1
+   // Service =====================================================================
+
+            $data['service1'] = [
+                'key' =>'_service_variant._service_style1',
+                'title' => 'Service Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/service_style1.png',
+            ];
+        
+
+            $data['service2'] = [
+                'key' =>'_service_variant._service_style2',
+                'title' => 'Service Style 2',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 1,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/service_style2.png',
+            ];
+
+            $data['service3'] = [
+                'key' =>'_service_variant._service_style3',
+                'title' => 'Service Style   3',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 1,
+                'sub_title_manage_status' => 1,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 1,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/service_style3.png',
+            ];  
+            
+            $data['service4'] = [
+                'key' =>'_service_variant._service_style4',
+                'title' => 'Service Style 4',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/service_style4.png',
+            ];
+
+            $data['service5'] = [
+                'key' =>'_service_variant._service_style5',
+                'title' => 'Service Style 5',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 1,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/service_style5.png',
+            ];
+
+// Service =====================================================================
+
+// Service View ====================================================================
+            $data['service_view1']=[
+                'key' =>'_service_view_variant._service_view1',
+                'title' => 'Service View 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Service Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 1,
+                'view_all_manage_status' => 0,
+
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+
+                'upload_id'=>'preset/page_variant/service_view1.png',
+                'background_manage_status'=> 1,
+                
+                
+            ];
+// end Service View ====================================================================
 
 //  ================================================== Slider  Variant =====================================================
         $data['hero1'] = [

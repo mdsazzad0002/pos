@@ -3,17 +3,18 @@
 # Services Section
 --------------------------------------------------------------*/
 .services_service_style2 {
-    --background-color: color-mix(in srgb, var(--accent-color), transparent 97%);
+  padding: 60px 0;
   }
 
   .services_service_style2 .service-item {
-    background-color: var(--surface-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+    background-color: #ffffff;
+    border: 1px solid var(--primary-color);
     height: 100%;
     padding: 30px;
     transition: 0.3s;
     border-radius: 10px;
     display: flex;
+    cursor: pointer;
   }
 
   .services_service_style2 .service-item .icon {
@@ -30,7 +31,7 @@
   }
 
   .services_service_style2 .service-item h3 {
-    color: color-mix(in srgb, var(--heading-color), transparent 25%);
+    color: color-mix(in srgb, var(--primary-color), transparent 25%);
     font-weight: 700;
     font-size: 22px;
     transition: 0.3s;
@@ -38,7 +39,7 @@
 
   .services_service_style2 .service-item p {
     margin-bottom: 0;
-    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    color: color-mix(in srgb, var(--primary-color), transparent 40%);
     transition: 0.3s;
   }
 
@@ -53,6 +54,8 @@
   .services_service_style2 .service-item .read-more i {
     margin-left: 10px;
   }
+
+
 
   .services_service_style2 .service-item.item-cyan .icon {
     color: #0dcaf0;

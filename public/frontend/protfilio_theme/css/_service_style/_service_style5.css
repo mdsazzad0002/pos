@@ -1,0 +1,27 @@
+
+/*--------------------------------------------------------------
+# Services Section
+--------------------------------------------------------------*/
+.services_service_style5 {
+  padding: 60px 0;
+}
+.services_service_style5 .benefit-block {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.services_service_style5  .content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.services_service_style5  .content-box  p.light-gray {
+    display: -webkit-box;           /* Creates a flexible box container */
+    -webkit-box-orient: vertical;   /* Defines the box's orientation to be vertical */
+    overflow: hidden;               /* Hides the overflowing text */
+    -webkit-line-clamp: 2;          /* Limits the text to 2 lines */
+    text-overflow: ellipsis;        /* Adds the ellipsis (...) when text overflows */
+}

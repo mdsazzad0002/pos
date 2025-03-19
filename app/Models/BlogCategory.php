@@ -10,8 +10,8 @@ class BlogCategory extends Model
     use HasFactory;
 
     public function blogs()
-{
-    return $this->belongsToMany(Blog::class);
-}
+    {
+        return $this->belongsToMany(Blog::class);
+    }
 
 }
