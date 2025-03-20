@@ -72,15 +72,6 @@ class VarinatSuggessionController extends Controller
                 $query->where('title', 'LIKE', '%' . $request->q . '%');
             }
         })->get()->filter(function ($variant) {
-            // if (empty($variant->permission)) {
-            //     return true;
-            // }
-            
-            // if(auth()->user()->can($variant->permission ?? '') == true){
-            //     return true;
-            // }
-        
-            // Check if the user has the specific permission
            return empty($variant->permission) ? true : Auth::user()->can($variant->permission ?? '');
         });
 

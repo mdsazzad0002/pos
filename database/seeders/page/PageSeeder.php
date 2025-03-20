@@ -3,9 +3,10 @@
 namespace Database\Seeders\page;
 
 use App\Models\Page;
+use App\Models\PageType;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
+use Illuminate\Support\Facades\DB;
 class PageSeeder extends Seeder
 {
     /**
@@ -106,14 +107,16 @@ class PageSeeder extends Seeder
                 'slug' => 'blog',
                 'status' => 1,
                 'homepage' => 0,
-                'page_type' => ''
+                'page_type' => 'blog',
+                'permission' => 'blog read'
             ],
             [
                 'name' => 'Blog Details',
-                'slug' => 'blog/details',
+                'slug' => 'blog-details',
                 'status' => 1,
                 'homepage' => 0,
-                'page_type' => ''
+                'page_type' => 'blog_details',
+                'permission' => 'blog read'
             ],
             [
                 'name' => 'FAQ',
@@ -249,7 +252,18 @@ class PageSeeder extends Seeder
             $page->page_type = $item['page_type'];
             $page->status = $item['status'];
             $page->homepage = $item['homepage'];
+            $page->permission = $item['permission'] ?? null;
             $page->save();
+
+
+            $page_type = PageType::where('name', $item['page_type'])->first();
+            if(!$page_type){
+                $page_type = new PageType();
+            }
+            $page_type->name = $item['page_type'];
+            $page_type->permission = $item['permission'] ?? null;
+            $page_type->save();
+
         }
 
     }

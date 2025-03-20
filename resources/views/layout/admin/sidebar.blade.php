@@ -549,6 +549,41 @@ sidebar-dark-primary elevation-4">
 
 
 
+                 @canany(['service-point read', 'service-request read'])
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user-cog nav-icon"></i>
+                            <p>
+                                Service Request
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @can('service-point read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.service-request.service-request.index') }}" class="nav-link">
+                                    <i class="fas fa-user-tie nav-icon"></i>
+                                    <p>Service Request</p>
+                                </a>
+                            </li>
+                            @endcan
+
+                            @can('service-request read')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.service-request.service-point.create') }}" class="nav-link">
+                                    <i class="fas fa-user-tie nav-icon"></i>
+                                    <p> Service Point</p>
+                                </a>
+                            </li>
+                            @endcan
+                          
+
+                        </ul>
+                    </li>    
+                @endcanany
+
+
+
 
 
                 @include('layout.admin._sidebar.frontend')

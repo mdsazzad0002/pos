@@ -181,6 +181,19 @@ class rolepermissionsedder extends Seeder
                 'blog edit',
                 'blog delete',
 
+                // Service-request blog Account
+                'service-point read',
+                'service-point create',
+                'service-point edit',
+                'service-point delete',
+
+
+                //  blog Account
+                'service-request read',
+                'service-request create',
+                'service-request edit',
+                'service-request delete',
+
 
 
 

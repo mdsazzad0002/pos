@@ -1,0 +1,58 @@
+ 
+/*--------------------------------------------------------------
+# Blog Posts Section
+--------------------------------------------------------------*/
+
+.__blog_style1  {
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .__blog_style1  .post-img {
+    max-height: 240px;
+    margin: -30px -30px 15px -30px;
+    overflow: hidden;
+  }
+  
+  .__blog_style1  .post-category {
+    font-size: 16px;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    margin-bottom: 10px;
+  }
+  
+  .__blog_style1  .title {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+  
+  .__blog_style1  .title a {
+    color: var(--heading-color);
+    transition: 0.3s;
+  }
+  
+  .__blog_style1  .title a:hover {
+    color: var(--accent-color);
+  }
+  
+  .__blog_style1  .post-author-img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .__blog_style1  .post-author {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  .__blog_style1  .post-date {
+    font-size: 14px;
+    color: color-mix(in srgb, var(--default-color), transparent 40%);
+    margin-bottom: 0;
+  }

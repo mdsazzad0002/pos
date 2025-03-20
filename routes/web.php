@@ -105,6 +105,7 @@ use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 use App\Http\Controllers\FooterStyleController;
 use App\Http\Controllers\HeaderStyleController;
 use App\Http\Controllers\OrderStatusController;
+use App\Http\Controllers\ServicePointController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -410,16 +411,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     Route::put('/mail/template/{mailTemplate}', [MailTemplateController::class, 'update'])->name('mail.update');
 
-    // Route::get('/imap',
-    // function () {
-    //     /** @var \Webklex\PHPIMAP\Client $client */
-    //         $client = Webklex\IMAP\Facades\Client::account('mailtrap');
-
-    //         //Connect to the IMAP Server
-    //         $client->connect();
-    // }
-    // )->name('imap.index');
-
+   
 
     Route::get('/imap', [MailSettingController::class, 'imap_index'])->name('imap.index');
 
@@ -447,30 +439,35 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-// Blog Management
+    // Blog Management
 
-    // Category management
-    Route::resource('/blog/category', BlogCategoryController::class)->names('blog.category');
-    Route::get('/blog/category/delete/{category}', [BlogCategoryController::class, 'delete'])->name('blog.category.delete');
-    Route::get('/blog/category/getCategory/get', [BlogCategoryController::class, 'getCategory'])->name('blog.category.select');
+        // Category management
+        Route::resource('/blog/category', BlogCategoryController::class)->names('blog.category');
+        Route::get('/blog/category/delete/{category}', [BlogCategoryController::class, 'delete'])->name('blog.category.delete');
+        Route::get('/blog/category/getCategory/get', [BlogCategoryController::class, 'getCategory'])->name('blog.category.select');
+        
+        Route::get('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order'])->name('blog.category.category_for_order');
+        Route::post('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order_post']);
+        
+        
+        // Blog management
+        Route::resource('/blog/blog', BlogController::class)->names('blog.blog');
+        Route::get('/blog/blog/delete/{blog}', [BlogController::class, 'delete'])->name('blog.blog.delete');
+        // Route::get('/blog/category/getCategory/get', [BlogController::class, 'getCategory'])->name('blog.category.select');
+
+
+// Service Request
     
-    Route::get('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order'])->name('blog.category.category_for_order');
-    Route::post('/blog/category/category_/for_order', [BlogCategoryController::class, 'category_for_order_post']);
-    
-    
-    // Blog management
-    Route::resource('/blog/blog', BlogController::class)->names('blog.blog');
-    Route::get('/blog/blog/delete/{blog}', [BlogController::class, 'delete'])->name('blog.blog.delete');
-    // Route::get('/blog/category/getCategory/get', [BlogController::class, 'getCategory'])->name('blog.category.select');
+    // ServicePoint management
+    Route::resource('/service-request/service-point', ServicePointController::class)->names('service-request.service-point');
+    Route::get('/service-request/service-point/delete/{service_point}', [ServicePointController::class, 'delete'])->name('service-request.service-point.delete');
+    Route::get('/service-request/service-point/getservice_point/get', [ServicePointController::class, 'getServicePoint'])->name('service-request.service-point.select');
 
 
-
-
-
-
-
-
-
+    // ServiceRequest management
+    Route::resource('/service-request/service-request', ServicePointController::class)->names('service-request.service-request');
+    Route::get('/service-request/service-request/delete/{service_request}', [ServicePointController::class, 'delete'])->name('service-request.service-request.delete');
+    Route::get('/service-request/service-request/getservice_request/get', [ServicePointController::class, 'getService'])->name('service-request.service-request.select');
 
 
 

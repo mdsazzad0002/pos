@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('page_type')->nullable()->comment('Like filter, homepage');
             $table->string('creator')->default(0);
             $table->string('updater')->default(0);
+            $table->string('permission')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -280,8 +280,9 @@ div#locationSelectModal .modal-dialog {
 .category_container img.cat-img {
   max-width: 100%;
   object-fit: scale-down;
-  width: 100%;
+  width: 63px;
   position: static;
+  margin: auto;
 
 }
 
@@ -309,16 +310,13 @@ section#hero_hero_style2_service {
 }
 
 .category_container .row_grid {
-  display: grid;
-  grid-auto-flow: column;
-  /* Forces items into a horizontal row */
-  grid-auto-columns: 150px;
-  /* Ensures each item gets a flexible width */
-  overflow-x: auto;
-  /* Enables horizontal scrolling if items exceed container width */
-
-  white-space: normal;
-  /* Not needed for grids, but can be left for safety */
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 170px;
+    overflow-x: auto;
+    white-space: normal;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
 }
 
 button.scroll-left {}
@@ -364,6 +362,7 @@ div#v-pills-tab {
   height: 400px;
   overflow-x: auto;
   flex-wrap: nowrap;
+  
 }
 
 button.category_btn {

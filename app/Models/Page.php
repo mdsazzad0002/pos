@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\header;
 use App\Models\HomePageManage;
 use App\Models\VarinatSuggession;
+use Illuminate\Support\Facades\Auth;
 
 class Page extends Model
 {
@@ -21,9 +22,12 @@ class Page extends Model
         return $this->belongsTo(header::class,'page_id', 'id');
     }
 
+  
+
     public function page_type(){
-        return Page::select('page_type')->distinct()->pluck('page_type');
 
-
+        return PageType::get()->filter(function ($variant) {
+           return empty($variant->permission) ? true : Auth::user()->can($variant->permission ?? '');
+        });
     }
 }

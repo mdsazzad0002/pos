@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use App\Models\HomePageManage;
-
+use Illuminate\Support\Facades\Auth;
 class PageController extends Controller
 {
   /**
@@ -17,11 +17,21 @@ class PageController extends Controller
     {
            // $roles = role::latest()->get();
            if (request()->ajax()) {
+
             $query = Page::query();
+            // $user = auth()->user();
+            // // dd($user->permissions);
+            // $permissions = $user->getAllPermissions()->pluck('name')->toArray();
+            // // dd($permissions);
 
             return DataTables::of($query)
-
-
+        
+            //    ->filterColumn('permission', function ($query) use ($permissions) {
+            //         $query->where(function ($q) use ($permissions) {
+            //             $q->whereNull('permission')
+            //             ->orWhereIn('permission', $permissions);
+            //         });
+            //     })
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.page.show', $row->id);
                     return "<button class='btn btn-primary '
@@ -46,8 +56,6 @@ class PageController extends Controller
                 })
 
                 ->addColumn('action', function ($row) {
-
-
 
                         $delete_route = route('admin.page.delete', $row->id);
                         $delete_button =  "<button class='btn btn-danger '
@@ -92,7 +100,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        return view('admin.protfilio_theme.page.partials.create');
+        $page = null;
+        return view('admin.protfilio_theme.page.partials.edit_create', compact('page'));
     }
 
     /**
@@ -160,7 +169,7 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
-        return view('admin.protfilio_theme.page.partials.edit', compact('page'));
+        return view('admin.protfilio_theme.page.partials.edit_create', compact('page'));
     }
 
     /**

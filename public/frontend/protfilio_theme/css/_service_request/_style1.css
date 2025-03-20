@@ -1,0 +1,18 @@
+._service_request_style1{
+    padding: 50px 0;
+}
+
+._service_request_style1 h4.headding-title {
+    border-bottom:1px solid gray;
+    padding:10px 0;
+    margin-bottom:30px;
+}
+
+._service_request_style1 div#loader {
+    display:none;
+}
+
+
+._service_request_style1 .form-group {
+    margin-bottom:20px;
+}
