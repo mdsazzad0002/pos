@@ -41,7 +41,7 @@ class UploadController extends Controller
     {
         //return 4545;
 
-        
+
 
           // Temporary directory for chunks
           $tempPath = public_path('uploads/temp');
@@ -75,15 +75,17 @@ class UploadController extends Controller
               fclose($finalFile);
 
              // check image unsupport format by img tag
-              $unsupport_format = ['avif', 'svg', 'webp', 'BMP', 'bmp', 'WEBP', 'SVG','AVIF', 'jfif', 'pjpeg', 'pjp', 'JFIF', 'PJPEG', 'PJP'];
-                if(in_array(explode('.',$fileName)[1], $unsupport_format)){
+              $unsupport_format = ['avif', 'svg', 'webp', 'BMP', 'bmp',  'jfif', 'pjpeg', 'tif', 'tiff', 'pjp'];
+               $file_explode = explode('.', $fileName);
+
+                if(in_array(strtolower($file_explode[count($file_explode) - 1]), $unsupport_format)){
 
                     $imageManager = new ImageManager(new Driver());
-                    $new_file = str_replace(explode('.',$fileName)[1], 'png', $fileName);
+                    $new_file = str_replace($file_explode[count($file_explode) - 1], 'png', $fileName);
 
-    
+
                     $outputPath = public_path('uploads/'.$new_file);
-                    
+
 
                     $encoder = new PngEncoder();
 
@@ -96,7 +98,7 @@ class UploadController extends Controller
 
                 }
 
-            
+
               $upload = Upload::create([
                 'name' => $fileName,
                 'extension' => explode('.',$fileName)[1],

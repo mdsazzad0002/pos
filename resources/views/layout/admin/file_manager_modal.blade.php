@@ -6,7 +6,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="upload_ajax_modal" tabindex="-1" role="dialog" aria-labelledby="upload_ajax_modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header pb-0 pl-0 pt-0">
 
@@ -30,7 +30,7 @@
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 
-                    
+
                     <label for="file-input" class="d-block" id="drop-area">
                         Drag here to upload. Supported formats:</br>
                          png, jpg, jpeg, gif, webp, mmp, avif
@@ -126,13 +126,11 @@
 
 
 
-      const CHUNK_SIZE = 0.05 * 1024 * 1024; // 50KB
-      const MAX_RETRIES = 3; // Maximum retries for a chunk
 
 
+    const CHUNK_SIZE = 0.2 * 1024 * 1024; // 200KB
+    const MAX_RETRIES = 3; // Maximum retry attempts
       async function file_upload(files) {
-        const CHUNK_SIZE = 0.2 * 1024 * 1024; // 50KB
-        const MAX_RETRIES = 3; // Maximum retry attempts
 
         for(let j =0; j <files.length; j++){
             let preview_image =  `<div  type="button"  class="border progress_${j}">
