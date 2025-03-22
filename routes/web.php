@@ -23,7 +23,7 @@ use App\Http\Controllers\dashboardController;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\protfilio_theme\ClientController;
+
 use App\Http\Controllers\protfilio_theme\ContactController;
 
 use App\Http\Controllers\protfilio_theme\FaqController as frontend_faq;
@@ -37,6 +37,7 @@ use App\Http\Controllers\ReviewProductController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ClientController;
 
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\BranchController;
@@ -92,6 +93,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\TransectionInformationController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ServiceRequestController;
+use App\Http\Controllers\SubScriberController;
+use App\Http\Controllers\ProjectController;
 
 
 
@@ -155,7 +159,7 @@ Route::any('setting-store-update', [SettingController::class, 'store'])->name('s
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/migrate', function(){
-        if(auth()->can('migrate')){
+        if(auth()->user()->can('migrate')){
             Artisan::call('migrate');
             return back();
         }
@@ -164,30 +168,30 @@ Route::middleware(['auth'])->group(function () {
 
     
     Route::get('/migrate/seed', function(){
-        if(auth()->can('migrate seed')){
+        // if(auth()->user()->can('migrate seed')){
             $db_seeder = new DatabaseSeeder;
             $db_seeder->run();
             return back();
-        }
+        // }
         return abort(403);
     });
 
 
 
     Route::get('clear', function () {
-        // if(auth()->user()->can('catche clear')){
+        if(auth()->user()->can('catche clear')){
             Artisan::call('config:clear');
             Artisan::call('config:cache');
             Artisan::call('view:clear');
             Artisan::call('route:clear');
             return back();
-        // }
-        // return abort(403);
+        }
+        return abort(403);
     });
 
 
     Route::get('fresh', function () {
-        if(auth()->can('migrate fresh')){
+        if(auth()->user()->can('migrate fresh')){
             Artisan::call('migrate:fresh --seed');
             return back();
         }
@@ -220,26 +224,26 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // Slider
     Route::resource('slider', SliderController::class)->names('slider');
     Route::get('/slider/delete/{slider}', [SliderController::class, 'delete'])->name('slider.delete');
-    Route::get('/brand/getSliders/get', [SliderController::class, 'getSlider'])->name('slider.select');
+    Route::get('/slider/getSliders/get', [SliderController::class, 'getSlider'])->name('slider.select');
 
 
     // Service
     Route::resource('service', AdminServiceController::class)->names('service');
     Route::get('/service/delete/{service}', [AdminServiceController::class, 'delete'])->name('service.delete');
-    Route::get('/brand/getservices/get', [AdminServiceController::class, 'getservice'])->name('service.select');
+    Route::get('/service/getservices/get', [AdminServiceController::class, 'getservice'])->name('service.select');
 
 
     // Testimonial
     Route::resource('testimonial', TestimonialController::class)->names('testimonial');
     Route::get('/testimonial/delete/{testimonial}', [TestimonialController::class, 'delete'])->name('testimonial.delete');
-    Route::get('/brand/getTesimonials/get', [TestimonialController::class, 'getTestimonial'])->name('testimonial.select');
+    Route::get('/testimonial/getTesimonials/get', [TestimonialController::class, 'getTestimonial'])->name('testimonial.select');
 
 
 
     // faq
     Route::resource('faq', FaqController::class)->names('faq');
     Route::get('/faq/delete/{faq}', [FaqController::class, 'delete'])->name('faq.delete');
-    Route::get('/brand/getfaq/get', [FaqController::class, 'getFaq'])->name('faq.select');
+    Route::get('/faq/getfaq/get', [FaqController::class, 'getFaq'])->name('faq.select');
 
 
 
@@ -336,6 +340,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('/brand', BrandController::class)->names('brand');
     Route::get('/brand/delete/{brand}', [BrandController::class, 'delete'])->name('brand.delete');
     Route::get('/brand/getBrands/get', [BrandController::class, 'getBrands'])->name('brand.select');
+    
+ // client management
+    Route::resource('/client', ClientController::class)->names('client');
+    Route::get('/client/delete/{client}', [ClientController::class, 'delete'])->name('client.delete');
+    Route::get('/client/getClients/get', [ClientController::class, 'getClients'])->name('client.select');
 
 
     //  management
@@ -456,20 +465,27 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
         // Route::get('/blog/category/getCategory/get', [BlogController::class, 'getCategory'])->name('blog.category.select');
 
 
+        // Project management
+            Route::resource('/project', ProjectController::class)->names('project');
+            Route::get('/project/delete/{project}', [ProjectController::class, 'delete'])->name('project.delete');
+           
 // Service Request
     
     // ServicePoint management
     Route::resource('/service-request/service-point', ServicePointController::class)->names('service-request.service-point');
     Route::get('/service-request/service-point/delete/{service_point}', [ServicePointController::class, 'delete'])->name('service-request.service-point.delete');
-    Route::get('/service-request/service-point/getservice_point/get', [ServicePointController::class, 'getServicePoint'])->name('service-request.service-point.select');
-
+    Route::get('/service-request/service-request/getservice_request/get', [ServicePointController::class, 'getServicePoint'])->name('service-request.service-request.select');
 
     // ServiceRequest management
-    Route::resource('/service-request/service-request', ServicePointController::class)->names('service-request.service-request');
-    Route::get('/service-request/service-request/delete/{service_request}', [ServicePointController::class, 'delete'])->name('service-request.service-request.delete');
-    Route::get('/service-request/service-request/getservice_request/get', [ServicePointController::class, 'getService'])->name('service-request.service-request.select');
+    Route::resource('/service-request/service-request', ServiceRequestController::class)->names('service-request.service-request');
+    Route::get('/service-request/service-request/delete/{service_request}', [ServiceRequestController::class, 'delete'])->name('service-request.service-request.delete');
 
 
+    
+
+    Route::resource('/sub-scribers', SubScriberController::class)->names('sub-scribers');
+    Route::get('/sub-scribers/delete/{subScriber}', [SubScriberController::class, 'delete'])->name('sub-scribers.delete');
+    
 
 
 
@@ -870,10 +886,7 @@ Route::middleware(['setlocale'])->group(function () {
 
 
 
-    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-    Route::get('/client/{slug}/', [ClientController::class, 'show'])->name('client.view');
-
-
+  
 
     // Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -928,6 +941,8 @@ Route::middleware(['setlocale'])->group(function () {
 
 
 
+
+    Route::post('join/newsletter', [HomeController::class, 'join_newsletter'])->name('frontend.newslater.store');
 
     // Duplicate route helped for seo
     Route::get('/product-details/{slug}', [HomeController::class,'product_view_by_slug'])->name('product_view_by_slug');

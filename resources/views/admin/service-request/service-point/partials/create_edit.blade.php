@@ -12,10 +12,14 @@ method="post" enctype="multipart/form-data">
     @endif
 
     <div class="mb-2">
-        <label for="service_point_name"> Service Name </label>
-        <input type="text" name="name" class="form-control mb-2" oninput="generateSlugMake(this, '#service_point_slug')" value="{{ $service_point ? $service_point->name : ''}}" placeholder="Enter your name">
+        <label for="service_point_name"> Service Point Name </label>
+        <input type="text" name="name" class="form-control mb-2"  value="{{ $service_point ? $service_point->name : ''}}" placeholder="Enter your name">
     </div>
-
+    
+    <div class="mb-2">
+        <label for="service_point_name"> Service Point Location </label>
+        <textarea type="text" name="location" class="form-control mb-2" placeholder="Enter Service location">{{ $service_point ? $service_point->location : ''}}</textarea>
+    </div>
 
 
     <label for="status"> Service Status Status <br/>

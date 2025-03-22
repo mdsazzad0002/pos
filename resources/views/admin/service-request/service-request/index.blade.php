@@ -2,25 +2,22 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', 'Blog')
+@section('title', 'Service Request')
 
 {{--  Content Extends  --}}
 @section('content')
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.blog')
+        @include('admin.dashboard._cards.service_request')
     </div>
 </x-summary>
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Blog List
+       Service Request
         <div>
-            @can('user create')
-
-            <a class="btn btn-primary"  href="{{ route('admin.blog.blog.create') }}">+ Add New Blog</a>
-            @endcan
+        
         </div>
     </div>
     <div class="card-body">
@@ -47,15 +44,25 @@
             {data:'action', name:'action', searchable:false, orderable:false, title:'Action'},
             
 
-            {data:'title', name:'title', title:'Title'},
-            {data:'category', name:'category', title:'Category', searchable:false, orderable:false},
+            {data:'name', name:'name', title:'Name'},
+            {data:'mobile', name:'mobile', title:'Mobile'},
+            {data:'alt_mobile', name:'alt_mobile', title:'Alt Mobile'},
+            {data:'address', name:'address', title:'Address'},
+            {data:'service-point', name:'service-point', title:'Service Point', searchable:false, orderable:false},
+            {data:'product', name:'product', title:'Product', searchable:false, orderable:false},
+
             {data:'status', name:'status', title:'Status', render: function (data, type, row, meta){
-                return data == 1 ? 'Active' : 'Inactive';
+                return data == 1 ? 'Read' : 'Unread';
             }},
          
-            {data:'image', name:'image', searchable:false, orderable:false, title:'Image'},
+           
 
         ],
+        createdRow: function (row, data) {
+            if (data.status == 0) { 
+                $(row).css('background-color', 'rgb(113 113 113)'); // Light red for inactive
+            } 
+        },
         buttons: true,
         dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",
         error: function(xhr, error, thrown) {

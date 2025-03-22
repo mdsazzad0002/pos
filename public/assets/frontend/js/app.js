@@ -252,6 +252,7 @@ var MyScroll = "";
           ],
         });
         };
+        
 
       if ($(".blog-slider").length) {
         $(".blog-slider").slick({
@@ -349,9 +350,9 @@ var MyScroll = "";
           autoPlaceholder: "ON",
           dropdownContainer: document.body,
           formatOnDisplay: true,
-          initialCountry: "us",
+          initialCountry: "BD",
           placeholderNumberType: "MOBILE",
-          preferredCountries: ['us', 'gb', 'in'],
+          preferredCountries: ['BD'],
           separateDialCode: true
         });
         $('#btn-submit').on('click', function () {

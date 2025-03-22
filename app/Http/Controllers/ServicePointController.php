@@ -76,6 +76,7 @@ class ServicePointController extends Controller
         $request->validate(['name' => 'required']);
         $service_point = new ServicePoint;
         $service_point->name = $request->name;;
+        $service_point->location = $request->location;;
         $service_point->status = $request->status;
         $service_point->upload_id = $request->image ?? 0;
         $service_point->save();
@@ -113,6 +114,7 @@ class ServicePointController extends Controller
     {
         
         $service_point->name = $request->name;;
+        $service_point->location = $request->location;
         $service_point->status = $request->status;
         $service_point->upload_id = $request->image ?? 0;
         $service_point->save();
@@ -145,9 +147,9 @@ class ServicePointController extends Controller
     }
 
 
-    public function getCategory(Request $request)
+    public function getServicePoint(Request $request)
     {
-        $data_result = category::where(function($query) use ($request) {
+        $data_result = ServicePoint::where(function($query) use ($request) {
             if ($request->has('q')) {
                 $query->where('name', 'LIKE', '%' . $request->q . '%');
             }

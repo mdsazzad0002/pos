@@ -14,11 +14,10 @@
 @if (count($brand_list) > 0)
 <x-frontend_section :items="$brand_list" :info="$variant_info" class="clients_brand_style2 section p-0" css="_brand_style/_brand_style2.css" >
 
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_brand_style/_brand_style2.css') }}">
-    <section id="clients_brand_style2" class="clients_brand_style2 section p-0" style="{{ $variant_info->background_type ? 'background-image:url('.dynamic_asset($variant_info->background).')' : 'background:'.$variant_info->background_color  }}"> --}}
+   
 <div class="container-fluid">
         <div class="brand-sec">
-            @include('frontend.protfilio_theme._variant_manage._title')
+     
 
             <div class="brand-slider init-slick">
                 <script type="application/json" class="slick-config d-none">

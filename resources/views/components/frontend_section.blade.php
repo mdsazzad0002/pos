@@ -11,6 +11,7 @@
     <!-- Section Title -->
         @if(!isset($title))
             @if($info->sub_title_status || $info->title_status)
+
                 @if($info->title_style == 'title_style_5')
 
                     <div class=" section-title" data-aos="fade-up">
@@ -38,6 +39,7 @@
                     </div>
 
                 @endif
+                
             @endif
         @endif
     @endif
@@ -62,7 +64,7 @@
 
     @if ($info->view_all_status)
     <div class="text-center py-4">
-        <a href="{{ url($info->view_all_page_url ?? '') }}" class="btn_primary">{{ $info->short_read_more }}
+        <a href="{{ url($info->view_all_page_url ?? '') }}" class="btn_primary">{{ $info->view_all }}
             <i class="bi bi-arrow-right"></i></a>
     </div>
     @endif

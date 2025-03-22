@@ -50,6 +50,7 @@
             {data:'image', name:'image', title:'Image', searchable:false, orderable:false},
         
             {data:'name', name:'name', title:'Name'},
+            {data:'location', name:'location', title:'Location'},
             {data:'status', name:'status', title:'Status', render: function (data, type, row, meta) {
                 return data == 1 ? 'Active' : 'Inactive';
             }},

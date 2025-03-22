@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->string('product_id')->default(0);
             $table->longText('comment')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

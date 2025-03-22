@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('home_page_manages', function (Blueprint $table) {
             $table->id();
             $table->string('key');
-            $table->string('title')->nullable();
+            $table->text('title')->nullable();
             $table->string('title_status')->default(1);
 
-            $table->string('sub_title')->nullable();
+            $table->text('sub_title')->nullable();
             $table->string('sub_title_status')->default(1);
 
 

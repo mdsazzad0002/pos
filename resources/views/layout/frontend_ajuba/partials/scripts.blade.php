@@ -485,6 +485,93 @@
 
     </script>
 
+    
+
+<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            // load by ajax data href
+            $('.select2').each(function() {
+
+                let thi = this;
+                $(this).select2({
+                    ajax: {
+                        url: $(thi).data('href'), // Replace with your API endpoint
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                q: params.term, // Search term
+                            };
+                        },
+                        processResults: function(data, params) {
+                            // Parse the results into the format expected by Select2
+                            return {
+                                results: data.items, // The array of items
+                            };
+                        },
+                        cache: true
+                    },
+                    minimumInputLength: 0 // Minimum length of input to trigger search
+                });
+
+            });
+        })
+
+
+        document.querySelectorAll('.informationForm').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            let _self = e.target; // Correctly reference the form
+            $(_self).find('.loader').show();
+
+            let formData = new FormData(_self); // Use `_self` correctly
+
+            $.ajax({
+                url: $(_self).data('action'), // Add your endpoint URL
+                method: 'post',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    response = JSON.parse(response);
+                    if (response.type == 'success') {
+                        flasher.success(response.title);
+                    }
+                    _self.reset(); // Reset form
+                    $(_self).find('.loader').hide();
+                },
+                error: function(xhr) {
+                    var response_error = JSON.parse(xhr.responseText);
+
+                    if (response_error.errors) {
+                        Object.keys(response_error.errors).forEach((key, index) => {
+                            if (index === 0) {
+                                $(_self).find('input[name="' + key + '"]').focus();
+                            }
+                            response_error.errors[key].forEach((errorMessage) => {
+                                flasher.error(errorMessage);
+                            });
+                        });
+                    } else if (response_error.message) {
+                        flasher.error(response_error.message);
+                    }
+
+                    $(_self).find('.loader').hide();
+                }
+            });
+        });
+    });
+
+
+
+    });
+</script>
+
+
 
 
 {!! settings('custom_js_footer_code', 45) !!}

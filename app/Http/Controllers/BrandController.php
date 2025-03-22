@@ -70,7 +70,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.partials.create');
+        return view('admin.brand.partials.create_edit');
     }
 
     /**
@@ -110,7 +110,7 @@ class BrandController extends Controller
      */
     public function edit(brand $brand)
     {
-        return view('admin.brand.partials.edit', compact('brand'));
+        return view('admin.brand.partials.craete_edit', compact('brand'));
     }
 
     /**

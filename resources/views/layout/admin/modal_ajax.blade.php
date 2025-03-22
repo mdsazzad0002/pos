@@ -1,12 +1,12 @@
 <!-- Button trigger modal -->
 <button type="button" hidden class="btn btn-primary" data-toggle="modal" data-target="#ajax_modal">
-    Launch demo modal
+    Launch  modal  data-terget="#ajax_modal"
 </button>
 
 <!-- Modal -->
 <div class="modal fade ajax_modal_dialog" id="ajax_modal"   tabindex="-1" role="dialog" aria-labelledby="ajax_modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content scrolla">
+        <div class="modal-content ">
             <div class="modal-header">
                 <h5 class="modal-title" id="eajax_modalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -24,8 +24,32 @@
 
 
 <!-- Button trigger modal -->
+<button type="button" hidden class="btn btn-primary" data-toggle="modal" data-target="#ajax_modal_add_plus">
+    Launch  modal  data-terget="#ajax_modal_add_plus"
+</button>
+
+<!-- Modal -->
+<div class="modal fade ajax_modal_add_plus" id="ajax_modal_add_plus"   tabindex="-1" role="dialog" aria-labelledby="add_modal_lLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eajax_modalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
 <button type="button" hidden class="btn btn-primary" data-toggle="modal" data-target="#ajax_modal_add">
-    Launch demo modal
+    Launch  modal  data-terget="#ajax_modal_add"
 </button>
 
 <!-- Modal -->
@@ -45,6 +69,7 @@
         </div>
     </div>
 </div>
+
 
 
 

@@ -9,7 +9,7 @@ use App\Models\language\language;
 use App\Models\order;
 use App\Models\WholeSaleOrder;
 use Illuminate\Support\Facades\File;
-
+use App\Models\ServiceRequest;
 
 
 
@@ -367,4 +367,9 @@ function getLocation($ip) {
 
     // dd($data);
 
+}
+
+
+function getUnreadServiceRequest(){
+    return ServiceRequest::where('status',0)->count();
 }

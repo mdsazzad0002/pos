@@ -16,3 +16,25 @@
 ._service_request_style1 .form-group {
     margin-bottom:20px;
 }
+
+
+._service_request_style1 .form-control {
+    padding: 10px !important;
+}
+
+._service_request_style1 .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 30px;
+}
+
+._service_request_style1 span.selection {
+    display: block !important;
+}
+
+._service_request_style1 span.select2-selection.select2-selection--single {
+    height: 45px !important;
+}
+
+._service_request_style1 .select2-container {
+    height: 45px !important;
+}

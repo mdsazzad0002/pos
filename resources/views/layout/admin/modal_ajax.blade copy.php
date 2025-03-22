@@ -313,28 +313,28 @@ if($(thi).data('setelement')){
         }
 
       
-                $(thi).select2({
-                    dropdownParent:model,
-                    placeholder: $(thi).placeholder,
-                    ajax: {
-                        url: $(thi).data('url'), // Replace with your API endpoint
-                        dataType: 'json',
-                        delay: 250,
-                        data: function(params) {
-                            return {
-                                q: params.term, // Search term
-                            };
-                        },
-                        processResults: function(data, params) {
-                            // Parse the results into the format expected by Select2
-                            return {
-                                results: data.items, // The array of items
-                            };
-                        },
-                        cache: true
+            $(thi).select2({
+                dropdownParent:model,
+                placeholder: $(thi).placeholder,
+                ajax: {
+                    url: $(thi).data('url'), // Replace with your API endpoint
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            q: params.term, // Search term
+                        };
                     },
-                    minimumInputLength: 0 // Minimum length of input to trigger search
-                });
+                    processResults: function(data, params) {
+                        // Parse the results into the format expected by Select2
+                        return {
+                            results: data.items, // The array of items
+                        };
+                    },
+                    cache: true
+                },
+                minimumInputLength: 0 // Minimum length of input to trigger search
+            });
               
            
         }

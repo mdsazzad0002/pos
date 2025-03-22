@@ -33,6 +33,7 @@ use Mpdf\Mpdf;
 use Illuminate\Support\Facades\View;
 use App\Models\Stock;
 use  App\Models\ShippingCharge;
+use App\Models\SubScriber;
 
 class HomeController extends Controller
 {
@@ -1102,6 +1103,25 @@ class HomeController extends Controller
         $request['slug'] = $slug;
         $details_page = Page::where('status', 1)->where('page_type', 'view')->first();
         return   $this->index($request, $details_page?->slug);
+    }
+
+
+
+    public function join_newsletter(Request $request){
+        $request->validate([
+            'email' => 'required|email | unique:sub_scribers',
+        ]);
+
+        $sub_scribers = new SubScriber();
+        $sub_scribers->email = $request->email;
+        $sub_scribers->name = $request->name ?? '';
+
+        $sub_scribers->save();
+        return json_encode([
+            'title'=>'Successfully  Created SubScriber',
+            'type'=>'success',
+            'refresh'=>'false',
+        ]);
     }
 
 }

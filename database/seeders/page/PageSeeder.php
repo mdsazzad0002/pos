@@ -238,6 +238,22 @@ class PageSeeder extends Seeder
                 'page_type' => 'payment_method',
             ],
            
+            [
+                'name' => 'project',
+                'slug' => 'project',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'project',
+            ],
+           
+            [
+                'name' => 'project-details',
+                'slug' => 'project-details',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'project-details',
+            ],
+           
 
 
         ];

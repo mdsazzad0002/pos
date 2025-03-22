@@ -1,4 +1,4 @@
-@if (auth()->check())
+@if (auth()->check() && isset($homepage))
 <div class="element_page_editor bg-secondary">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between py-1">

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('service_points', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->text('location')->nullable();
             $table->string('status')->default(1);
             $table->string('upload_id')->default(0);
             $table->timestamps();

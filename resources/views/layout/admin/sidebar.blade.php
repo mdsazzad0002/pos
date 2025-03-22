@@ -555,6 +555,8 @@ sidebar-dark-primary elevation-4">
                             <i class="fas fa-user-cog nav-icon"></i>
                             <p>
                                 Service Request
+                               
+                                <span class="right badge badge-danger"> {{ getUnreadServiceRequest() }}</span>
                                 <i class="fas fa-angle-left right"></i>
                             </p>
                         </a>
@@ -563,14 +565,14 @@ sidebar-dark-primary elevation-4">
                             <li class="nav-item">
                                 <a href="{{ route('admin.service-request.service-request.index') }}" class="nav-link">
                                     <i class="fas fa-user-tie nav-icon"></i>
-                                    <p>Service Request</p>
+                                    <p>Service Request      <span class="right badge badge-danger"> {{ getUnreadServiceRequest() }}</span></p>
                                 </a>
                             </li>
                             @endcan
 
                             @can('service-request read')
                             <li class="nav-item">
-                                <a href="{{ route('admin.service-request.service-point.create') }}" class="nav-link">
+                                <a href="{{ route('admin.service-request.service-point.index') }}" class="nav-link">
                                     <i class="fas fa-user-tie nav-icon"></i>
                                     <p> Service Point</p>
                                 </a>
@@ -581,6 +583,35 @@ sidebar-dark-primary elevation-4">
                         </ul>
                     </li>    
                 @endcanany
+
+
+                @can('sub-scribers read')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.sub-scribers.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p> Subscribers</p>
+                        </a>
+                    </li>
+                @endcan
+
+                
+                @can('client read')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.client.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p> Client</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('project read')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.project.index') }}" class="nav-link {{ (Route::is('admin.project.edit') || Route::is('admin.project.create') )? 'active' : '' }}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p> Project</p>
+                        </a>
+                    </li>
+                @endcan
+
 
 
 

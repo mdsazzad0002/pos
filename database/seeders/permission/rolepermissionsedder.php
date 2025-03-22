@@ -8,6 +8,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use DB;
 
 class rolepermissionsedder extends Seeder
 {
@@ -18,8 +19,10 @@ class rolepermissionsedder extends Seeder
     {
         $role_count = Role::count();
         if ($role_count == 0) {
-
             $role = Role::create(['name' => 'superadmin']);
+        }else{
+            $role = Role::where('name', 'superadmin')->first();
+        }
 
             $permission_data = [
 
@@ -68,6 +71,11 @@ class rolepermissionsedder extends Seeder
 
                 // Brand
                 'brand read',  'brand create', 'brand edit',  'brand delete',
+                
+                
+                // Client
+                'client read',  'client create', 'client edit',  'client delete',
+                'project read',  'project create', 'project edit',  'project delete',
 
                 // Brand
                 'vat read',  'vat create', 'vat edit',  'vat delete',
@@ -181,20 +189,25 @@ class rolepermissionsedder extends Seeder
                 'blog edit',
                 'blog delete',
 
-                // Service-request blog Account
+                // Service-point  Account
                 'service-point read',
                 'service-point create',
                 'service-point edit',
                 'service-point delete',
 
 
-                //  blog Account
+                //  Service-request Account
                 'service-request read',
                 'service-request create',
                 'service-request edit',
                 'service-request delete',
 
-
+                // Subscriber
+                'sub-scribers read',
+                'sub-scribers create',
+                'sub-scribers edit',
+                'sub-scribers delete',
+                'sub-scribers mailer',
 
 
 
@@ -298,15 +311,26 @@ class rolepermissionsedder extends Seeder
                    'page create',
                    'page edit',
                    'page delete',
+
+
+                   'migrate seed',
+                   'migrate',
+                   'catche clear',
+                   'migrate fresh'
             ];
 
 
             Permission::truncate();
+            DB::table('role_has_permissions')->truncate();
            
 
             foreach ($permission_data as $data) {
 
-                $permission = Permission::create(['name' => $data]);
+                if (Permission::where('name', $data)->exists()) {
+                    echo $data . ' already exists' . "\n";
+                    continue;
+                }
+                $permission = Permission::updateOrCreate(['name' => $data, 'guard_name' => 'web']);
             }
 
             $role->syncPermissions(permission::all());
@@ -316,6 +340,6 @@ class rolepermissionsedder extends Seeder
 
             $user = User::first();
             $user->assignRole($role);
-        }
+        
     }
 }

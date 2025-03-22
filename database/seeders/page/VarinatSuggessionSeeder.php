@@ -1140,6 +1140,45 @@ class VarinatSuggessionSeeder extends Seeder
             // ===================================================================
             // ===================================================================
             // ===================================================================
+
+// Subscriber ====================================================================
+
+            $data['newslater_1'] = [
+                'key' =>'_newslater.newslater_1',
+                'title' => 'Newslater 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Newslater Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/newslater_1.png',
+
+                'permission'=>'',
+
+            ];
+// Subscriber ====================================================================
+
+
+
 // Blog ====================================================================
 
             $data['blog_1'] = [
@@ -1213,6 +1252,81 @@ class VarinatSuggessionSeeder extends Seeder
             ];
 
 // Blog View  ===================================================================
+
+
+// Project ====================================================================
+
+            $data['project_1'] = [
+                'key' =>'_project_variant._project_style1',
+                'title' => 'project Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'project Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 3,
+                'items_per_row_status' => 1,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/project_style1.png',
+
+                'permission'=>'project read',
+
+            ];
+// project ====================================================================
+
+
+// project View  ===================================================================
+
+            $data['project_details1'] = [
+                'key' =>'_project_details_variant._project_details_style1',
+                'title' => 'project Details Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'project Details Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+                
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+
+                'items_per_row' => 1,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'background_manage_status'=> 1,
+                'upload_id'=>'preset/page_variant/project_details_style1.png',
+
+                'permission'=>'project read',
+
+            ];
+
+// project View  ===================================================================
 
 
 
@@ -1607,8 +1721,10 @@ class VarinatSuggessionSeeder extends Seeder
             ];
 //  ================================================== end Banner Variant =====================================================
 
+
+
 //  ================================================== Category-Subcategory Variant =====================================================
-$data['category_subcategory1'] = [
+            $data['category_subcategory1'] = [
     'key' =>'_category_subcategory._style1',
     
     'title' => 'Category - Subcategory Style 1',
@@ -1648,41 +1764,83 @@ $data['category_subcategory1'] = [
 
 
 //  ================================================== Category-Subcategory Variant =====================================================
-$data['service_request_1'] = [
-    'key' =>'_service_request._style1',
-    
-    'title' => 'Service Request Style 1',
-    'title_status' => 0,
-    'title_manage_status' => 1,
+            $data['service_request_1'] = [
+                'key' =>'_service_request._style1',
+                
+                'title' => 'Service Request Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
 
 
-    'short_read_more' => 'Read More',
-    'short_read_more_status' => 0,
-    'short_read_more_manage_status' => 1,
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
 
 
-    'sub_title' => 'Category Sub Title',
-    'sub_title_status' => 0,
-    'sub_title_manage_status' => 0,
+                'sub_title' => 'Category Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 0,
 
-    
-    'view_all' => 'View All',
-    'view_all_status' => 0,
-    'view_all_manage_status' => 0,
-    
-    
-    'items_per_row' => 12,
-    'items_per_row_status' => 0,
-    'items_manage_status' => 0,
+                
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+                
+                
+                'items_per_row' => 12,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'upload_manage_id3_status'=> 1,
+                
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'preset/page_variant/_service_request__style1.png',
+                'background_manage_status'=> 1,
+
+            ];
+
+//  ================================================== end Category-Subcategory Variant =====================================================
 
 
-    'background' => 0,
-    'background_color' => '#eeeeee',
-    'background_type' => 0,
-    'upload_id'=>'preset/page_variant/_service_request__style1.png',
-    'background_manage_status'=> 1,
+//  ================================================== Why Us Variant =====================================================
+            $data['service_request_1'] = [
+                'key' =>'_why_choose_us.why_choose_us_1',
+                
+                'title' => 'Why Choose Us Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
 
-    ];
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 0,
+
+
+                'sub_title' => 'Why Choose Us Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+                
+                
+                'items_per_row' => 12,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 0,
+
+                'upload_manage_id3_status'=> 1,
+                
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'preset/page_variant/_why_choose_us_1.png',
+                'background_manage_status'=> 1,
+
+            ];
 
 //  ================================================== end Category-Subcategory Variant =====================================================
 
@@ -1975,6 +2133,87 @@ $data['service_request_1'] = [
                     'background_color' => '#eeeeee',
                     'background_type' => 0,
                     'upload_id'=>'preset/page_variant/brand_style2.png',
+                    'background_manage_status'=> 1,
+            ];
+// ================================== End Brand variant ================================
+
+
+//================================== Client  variant ================================
+
+            $data['client1'] = [
+                'key' =>'_client._style1',
+                'title' => 'Client Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+                'sub_title' => 'Client Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
+
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 1,
+                'is_details_page_manage_status'=> 1,
+
+
+                'items_per_row' => 0,
+                'items_per_row_status' => 0,
+
+                'items_show' => 20,
+                'items_manage_status' => 1,
+
+
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'preset/page_variant/client_style1.png',
+                'background_manage_status'=> 1,
+
+                'upload_manage_id3_status'=> 0,
+                'upload_manage_status'=> 0,
+            ];
+
+            $data['client2'] = [
+            
+                    'key' =>'_client._style2',
+                    'title' => 'Client Style 2',
+                    'title_status' => 0,
+                    'title_manage_status' => 1,
+
+                    'sub_title' => 'Client Sub Title',
+                    'sub_title_status' => 0,
+                    'sub_title_manage_status' => 1,
+
+
+                    'short_read_more' => 'Read More',
+                    'short_read_more_status' => 0,
+                    'short_read_more_manage_status' => 1,
+
+
+                    'items_per_row' => 0,
+                    'items_per_row_status' => 0,
+
+                    'items_show' => 20,
+                    'items_manage_status' => 1,
+
+
+                    'view_all' => 'View All',
+                    'view_all_status' => 0,
+                    'view_all_manage_status' => 1,
+                    'is_details_page_manage_status'=> 1,
+
+
+
+                    'background' => 0,
+                    'background_color' => '#eeeeee',
+                    'background_type' => 0,
+                    'upload_id'=>'preset/page_variant/client_style2.png',
                     'background_manage_status'=> 1,
             ];
 // ================================== End Brand variant ================================

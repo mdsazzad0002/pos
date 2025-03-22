@@ -3,6 +3,10 @@
         <td>Name</td>
         <td>{{ $service_point->name }}</td>
     </tr>
+    <tr>
+        <td>Location</td>
+        <td>{{ $service_point->location }}</td>
+    </tr>
 
     <tr>
         <td>Status</td>
