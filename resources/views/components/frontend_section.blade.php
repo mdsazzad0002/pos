@@ -12,33 +12,52 @@
         @if(!isset($title))
             @if($info->sub_title_status || $info->title_status)
 
-                @if($info->title_style == 'title_style_5')
-
-                    <div class=" section-title" data-aos="fade-up">
-                        <div class="{{ $info->title_style }}">
-                            @if($info->title_status)
-                            <h2 class="title">{{ __($info->title) }}</h2>
-                            @endif
-                            @if($info->sub_title_status)
-                            <p class="sub_title">{{ __($info->sub_title) }}</p>
-                            @endif
-                        </div>
-                    </div>
-
-                @else
-
-                    <div class="container-fluid section-title pt-3" data-aos="fade-up">
-                        <div class="{{ $info->title_style }}">
-                            @if($info->title_status)
-                            <h2 class="title">{{ __($info->title) }}</h2>
-                            @endif
-                            @if($info->sub_title_status)
-                            <p class="sub_title">{{ __($info->sub_title) }}</p>
-                            @endif
-                        </div>
-                    </div>
-
+            <div class="container-fluid">
+            {{-- button short --}}
+                @if (isset($shortbutton)   && $info->short_read_more_status == 1)
+                    <div class="d-flex align-items-end justify-content-between">
                 @endif
+            {{-- button short --}}
+             
+
+
+                        @if($info->title_style == 'title_style_5')
+
+                            <div class=" section-title" data-aos="fade-up">
+                                <div class="{{ $info->title_style }}">
+                                    @if($info->title_status)
+                                    <h2 class="title">{{ __($info->title) }}</h2>
+                                    @endif
+                                    @if($info->sub_title_status)
+                                    <p class="sub_title">{{ __($info->sub_title) }}</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                        @else
+
+                            <div class=" section-title pt-3" data-aos="fade-up">
+                                <div class="{{ $info->title_style }}">
+                                    @if($info->title_status)
+                                    <h2 class="title">{{ __($info->title) }}</h2>
+                                    @endif
+                                    @if($info->sub_title_status)
+                                    <p class="sub_title">{{ __($info->sub_title) }}</p>
+                                    @endif
+                                </div>
+                            </div>
+
+                        @endif
+
+        {{-- button short --}}
+            @if (isset($shortbutton)   && $info->short_read_more_status == 1)
+                    <div class="short_button_section">
+                        <a href="{{ url($info->short_read_more_page_url) }}" class="btn btn-sm btn-primary btn_primary" style="    white-space: nowrap;">{{ $info->short_read_more }} </a>
+                    </div>
+                </div>
+            @endif
+        {{-- button short --}}
+    </div>
                 
             @endif
         @endif

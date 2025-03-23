@@ -3,7 +3,7 @@
     <article class="__project_style1">
 
         <div class="post-img">
-            <img src="{{ dynamic_asset($project->image) }}" alt="" class="img-fluid">
+            <img src="{{ dynamic_asset($project->image) }}" alt="" class="img-fluid"/>
         </div>
 
         <a href="{{ url($project_details_page->slug . '/' . $project->slug) }}">

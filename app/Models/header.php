@@ -12,4 +12,8 @@ class header extends Model
     public function page(){
         return $this->hasOne(Page::class,"id","page_id");
     }
+
+    public function sub_items(){
+        return $this->hasMany(header::class,"parents");
+    }
 }

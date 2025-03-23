@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('position')->comment(' left ,  center,  right');
             $table->integer('order')->default(0);
-
+            $table->integer('parents')->default(0);
 
 
             $table->string('key_name')->nullable();

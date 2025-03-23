@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
             $table->bigInteger('upload_id')->default(0);
+            $table->bigInteger('bg_upload_id')->default(0);
             $table->string('status')->nullable();
             $table->string('slug')->nullable();
             $table->timestamps();

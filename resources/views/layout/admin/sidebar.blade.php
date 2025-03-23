@@ -588,7 +588,7 @@ sidebar-dark-primary elevation-4">
                 @can('sub-scribers read')
                     <li class="nav-item">
                         <a href="{{ route('admin.sub-scribers.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon far fa-newspaper"></i>
                             <p> Subscribers</p>
                         </a>
                     </li>
@@ -598,7 +598,7 @@ sidebar-dark-primary elevation-4">
                 @can('client read')
                     <li class="nav-item">
                         <a href="{{ route('admin.client.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-handshake"></i>
                             <p> Client</p>
                         </a>
                     </li>
@@ -606,7 +606,7 @@ sidebar-dark-primary elevation-4">
                 @can('project read')
                     <li class="nav-item">
                         <a href="{{ route('admin.project.index') }}" class="nav-link {{ (Route::is('admin.project.edit') || Route::is('admin.project.create') )? 'active' : '' }}">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fab fa-r-project"></i>
                             <p> Project</p>
                         </a>
                     </li>

@@ -6,7 +6,7 @@
 
 @if (count($service_items) > 0)
 
-    <x-frontend_section :items="$service_items" :info="$variant_info" id="services_service_style2"
+    <x-frontend_section :items="$service_items" shortbutton="true" :info="$variant_info" id="services_service_style2"
         class="services_service_style2 section" css="_service_style/_service_style2.css">
 
 

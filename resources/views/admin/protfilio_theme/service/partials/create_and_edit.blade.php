@@ -37,8 +37,14 @@
 
     <label type="button" class="mb-2" onclick="upload_select(this)">
         <label for="service">Service Image</label> <br/>
-        <input type="text" name="image" value="0" id="image" class="form-control mb-2" hidden="">
+        <input type="text" name="image" value="{{ $service ? $service->upload_id : 0 }}" id="image" class="form-control mb-2" hidden="">
         <img style="max-width: 100px" src="{{ dynamic_asset($service ? $service->upload_id : 0) }}" alt="">
+    </label>
+    
+    <label type="button" class="mb-2" onclick="upload_select(this)">
+        <label for="bg_upload_id">Service BG</label> <br/>
+        <input type="text" name="bg_upload_id" value="{{ $service ? $service->bg_upload_id : 0 }}" id="bg_upload_id" class="form-control mb-2" hidden="">
+        <img style="max-width: 100px" src="{{ dynamic_asset($service ? $service->bg_upload_id : 0) }}" alt="">
     </label>
 
 

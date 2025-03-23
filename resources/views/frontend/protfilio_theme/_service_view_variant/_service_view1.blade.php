@@ -26,7 +26,7 @@
       </div>
 
       <div class="col-lg-8 service_container Device_rootservice_container" data-aos="fade-up" data-aos-delay="200">
-        <img src="{{ dynamic_asset($service->upload_id) }}" alt="" class="img-fluid services-img w-100">
+        <img src="{{ dynamic_asset($service->bg_upload_id) }}" alt="" class="img-fluid services-img w-100">
 
         {!! $service->description ?? '' !!}
 

@@ -38,8 +38,12 @@ class HeaderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
+
     public function store(Request $request)
     {
+
         if($request->has('type') && $request->type == 'new'){
             $header = new header;
             $header->name =  $request->name;
@@ -51,14 +55,39 @@ class HeaderController extends Controller
             $header->order =  0;
             $header->save();
 
-        }elseif($request->has('orderid')){
-            foreach($request->orderid as $orderSerial =>  $header_id){
+        }elseif($request->has('order')){
+            
 
-                $header_data = header::find( $header_id );
+            foreach($request->order as $orderSerial => $header_info){
+                $header_data = header::find($header_info['id']);
                 $header_data->order = $orderSerial;
+                $header_data->parents =  0;
                 $header_data->save();
+
+                
+                if(isset($header_info['children'])){
+                    foreach($header_info['children'] as $serial => $child){
+                        $header_data = header::find($child['id']);
+                        $header_data->order = $serial;
+                        $header_data->parents = $header_info['id'];
+                        $header_data->save();
+
+
+                        if(isset($child['children'])){
+                            foreach($child['children'] as $s => $child2){
+                                $header_data = header::find($child2['id']);
+                                $header_data->order = $s;
+                                $header_data->parents = $child['id'];
+                                $header_data->save();
+                            }
+                        }
+                    }
+                }
+
+
             }
-            return $request->orderid;
+            return json_encode(['success' => true]);
+
         }elseif($request->has('status_id')){
             $header_data = header::find( $request->status_id );
             $header_data->status = $request->status_change;
@@ -115,7 +144,7 @@ class HeaderController extends Controller
     }
     public function view()
     {
-        $headers = header::orderBy('order', 'asc')->get();
+        $headers = header::orderBy('order', 'asc')->where('parents', 0)->orWhere('parents', null)->get();
         return view('admin.protfilio_theme.menu_builder.partials.list_header_items', compact('headers'));
     }
 }

@@ -1,5 +1,5 @@
 @php
-    $menu_items = \App\Models\header::where('status', 1)->orderBy('order', 'asc')->get()->groupBy('position');
+    $menu_items = \App\Models\header::where('status', 1)->orderBy('order', 'asc')->where('parents', 0)->orWhere('parents', null)->get()->groupBy('position');
     $filter_page = \App\Models\Page::where('page_type', 'filter')->first();
     $view_page = \App\Models\Page::where('page_type', 'view')->first();
 @endphp

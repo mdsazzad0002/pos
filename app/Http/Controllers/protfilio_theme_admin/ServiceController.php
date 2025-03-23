@@ -21,7 +21,12 @@ class ServiceController extends Controller
 
 
                 ->addColumn('image', function ($row) {
-                   return  "<i  class='".$row->icon_class."></i>";
+                   return  "<img style='max-width:100px;' src='".dynamic_asset($row->upload_id)."'/>";
+
+                })
+
+                ->addColumn('background', function ($row) {
+                   return  "<img style='max-width:100px;' src='".dynamic_asset($row->bg_upload_id)."'/>";
 
                 })
                 ->addColumn('view', function ($row) {
@@ -66,7 +71,7 @@ class ServiceController extends Controller
 
 
                 })
-                ->rawColumns(['image','action', 'view'])
+                ->rawColumns(['image','action', 'view', 'background'])
                 ->make(true);
         }
         return view('admin.protfilio_theme.service.index');
@@ -89,6 +94,7 @@ class ServiceController extends Controller
         $service->title =  $request->title;
         $service->icon_class =  $request->icon_class;
         $service->upload_id =  $request->image;
+        $service->bg_upload_id =  $request->bg_upload_id;
         $service->short_description = $request->short_description;
         $service->description = $request->description;
         $service->status = $request->status;
@@ -130,6 +136,7 @@ class ServiceController extends Controller
         $service->icon_class =  $request->icon_class;
         $service->short_description = $request->short_description;
         $service->upload_id =  $request->image;
+        $service->bg_upload_id =  $request->bg_upload_id;
         $service->description = $request->description;
         $service->status = $request->status;
         $service->slug = Str::slug($request->title);

@@ -10,6 +10,7 @@ use App\Models\order;
 use App\Models\WholeSaleOrder;
 use Illuminate\Support\Facades\File;
 use App\Models\ServiceRequest;
+use App\Models\PageType;
 
 
 
@@ -372,4 +373,11 @@ function getLocation($ip) {
 
 function getUnreadServiceRequest(){
     return ServiceRequest::where('status',0)->count();
+}
+
+function page_type(){
+
+    return PageType::get()->filter(function ($variant) {
+       return empty($variant->permission) ? true : Auth::user()->can($variant->permission ?? '');
+    });
 }

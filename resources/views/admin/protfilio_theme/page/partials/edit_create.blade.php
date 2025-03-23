@@ -22,7 +22,7 @@
     <label for="page_type"> Page Type <br/>
         <select name="page_type" id="page_type" class="form-control">
 
-             @foreach ($page->page_type() as $page_type)
+             @foreach (page_type() as $page_type)
                 <option @if(($page ?  $page->page_type : '') == $page_type->name) selected @endif value="{{ $page_type->name }}">{{ Str::title($page_type->name != '' ? $page_type->name : 'Default') }}</option>
              @endforeach
 

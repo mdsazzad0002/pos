@@ -1,8 +1,8 @@
 @php
     if ($variant_info->is_details_page) {
-        $client_list = \App\Models\client::where('status', 1)->paginate($variant_info->items_show);
+        $client_list = \App\Models\Client::where('status', 1)->paginate($variant_info->items_show);
     } else {
-        $client_list = \App\Models\client::where('status', 1)->limit($variant_info->items_show)->get();
+        $client_list = \App\Models\Client::where('status', 1)->limit($variant_info->items_show)->get();
     }
 
 @endphp
@@ -10,7 +10,7 @@
 
 <!-- Clients Section -->
 @if (count($client_list) > 0)
-    <x-frontend_section :items="$client_list" :info="$variant_info" class="clients_client_style2 section p-0"
+    <x-frontend_section :items="$client_list" :info="$variant_info" shortbutton="true" class="clients_client_style2 section p-0"
         css="_client_style/_client_style2.css">
 
 

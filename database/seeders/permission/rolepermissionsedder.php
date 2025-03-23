@@ -132,6 +132,7 @@ class rolepermissionsedder extends Seeder
 
                        // courier
                         'settings courier_configration',
+                        'settings custom_js_css',
 
 
                 //]]]

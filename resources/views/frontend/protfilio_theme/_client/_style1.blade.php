@@ -10,7 +10,7 @@ if(!isset($filter_page)){
 @endphp
 
 @if(count($clients_list) > 0)
-<x-frontend_section :items="$clients_list" :info="$variant_info" class="clients_clients_style1" css="_client_style/_client_style1.css" >
+<x-frontend_section :items="$clients_list" :info="$variant_info" shortbutton="true" class="clients_clients_style1" css="_client_style/_client_style1.css" >
 
         <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
             <div class=" clients-wrap">

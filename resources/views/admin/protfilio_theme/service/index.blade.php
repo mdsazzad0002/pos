@@ -16,28 +16,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table id="service" class="table table-bordered table-striped table-hover">
-            <thead>
-                <th>
-                    SI
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Title
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    View
-                </th>
-                <th>
-                    Action
-                </th>
-            </thead>
-        </table>
+        <table id="service" class="table table-bordered table-striped table-hover"> </table>
     </div>
 </div>
 
@@ -56,15 +35,17 @@
             { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            {data:'icon_class', name:'icon_class', searchable:false, orderable:false, render: function (data, type, row, meta) {
+            {data:'icon_class', name:'icon_class', searchable:false, title:'Icon', orderable:false, render: function (data, type, row, meta) {
                 return '<i class="'+data+'"></i>';
             }},
-            {data:'title', name:'title'},
-            {data:'status', name:'status', render: function (data, type, row, meta) {
+            {data:'title', name:'title', title:'Title'},
+            {data:'status', name:'status', title:'Status', render: function (data, type, row, meta) {
                 return  data == 1 ? 'Active' : 'Inactive';
             }},
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
+            {data:'image', name:'image', title:'Image', searchable:false, orderable:false},
+            {data:'background', name:'background', title:'Background', searchable:false, orderable:false},
+            {data:'view', name:'view', title:'View', searchable:false, orderable:false},
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false}
         ],
         buttons: true,
         dom:"<'row'<'col-lg-3 text-center text-lg-left mb-2'l><'col-lg-5 text-center mb-2'B><'col-lg-4 text-center text-lg-right mb-2'f>><'row'<'col-sm-12 overflow-auto'tr>><'row'<'col-sm-6'i><'col-sm-6 text-center text-md-right d-md-flex justify-content-md-end'p>>",

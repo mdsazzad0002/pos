@@ -254,6 +254,14 @@ class PageSeeder extends Seeder
                 'page_type' => 'project-details',
             ],
            
+            [
+                'name' => 'Service To Request',
+                'slug' => 'service-request',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'service_request',
+            ],
+           
 
 
         ];

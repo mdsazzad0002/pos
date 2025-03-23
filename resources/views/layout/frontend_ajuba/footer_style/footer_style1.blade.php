@@ -1,4 +1,4 @@
-<footer>
+<footer style="background-color: {{ $footer_style->background_color }}">
     <div class="container-fluid">
         <div class="footer-wrapper pt-40 mb-32">
             <div class="store-desc">
