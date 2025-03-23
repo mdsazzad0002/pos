@@ -159,25 +159,17 @@
 </div>
 
 
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ui.nestedSortable/2.0.0/jquery.ui.nestedSortable.min.js"></script> --}}
 
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> --}}
-    {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> --}}
     @push('js')
      <script src="https://cdnjs.cloudflare.com/ajax/libs/Nestable/2012-10-15/jquery.nestable.min.js" integrity="sha512-a3kqAaSAbp2ymx5/Kt3+GL+lnJ8lFrh2ax/norvlahyx59Ru/1dOwN1s9pbWEz1fRHbOd/gba80hkXxKPNe6fg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script>
-        console.log(typeof $.fn.nestable);
-
-      </script>
+     
     @endpush
-  
+
 
 <script>
     function sorting(){
-     
-     
+
+
         $("#sortable_items_data").nestable({
             group: 1,
             maxDepth: 3 // Adjust as needed
@@ -185,7 +177,7 @@
             updateOrder();
         });
 
-        
+
 
     }
     function updateOrder() {
@@ -340,7 +332,7 @@
         background-color: #b4b4b4;
         cursor: pointer;
         border:1px solid white;
-     
+
     }
 
     ul#sortable_items_data li {
@@ -420,9 +412,9 @@
         line-height: 20px;
     }
 
-   
 
-   
+
+
     .dd-item>button {
 
         position: relative;

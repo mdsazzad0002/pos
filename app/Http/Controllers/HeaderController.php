@@ -56,37 +56,56 @@ class HeaderController extends Controller
             $header->save();
 
         }elseif($request->has('order')){
-            
+            $array_data = [];
 
-            foreach($request->order as $orderSerial => $header_info){
-                $header_data = header::find($header_info['id']);
-                $header_data->order = $orderSerial;
-                $header_data->parents =  0;
-                $header_data->save();
+            foreach ($request->order as $orderSerial => $header_info) {
+                if (!in_array($header_info['id'], $array_data)) {
+                    $array_data[] = $header_info['id'];
+                    $header_data = header::find($header_info['id']);
 
-                
-                if(isset($header_info['children'])){
-                    foreach($header_info['children'] as $serial => $child){
-                        $header_data = header::find($child['id']);
-                        $header_data->order = $serial;
-                        $header_data->parents = $header_info['id'];
+                    // Only update if there's a change
+                    if ($header_data->order != $orderSerial || $header_data->parents != 0) {
+                        $header_data->order = $orderSerial;
+                        $header_data->parents = 0;
                         $header_data->save();
+                    }
+                }
 
+                if (isset($header_info['children'])) {
+                    foreach ($header_info['children'] as $serial => $child) {
+                        if (!in_array($child['id'], $array_data)) {
+                            $array_data[] = $child['id'];
+                            $child_data = header::find($child['id']);
 
-                        if(isset($child['children'])){
-                            foreach($child['children'] as $s => $child2){
-                                $header_data = header::find($child2['id']);
-                                $header_data->order = $s;
-                                $header_data->parents = $child['id'];
-                                $header_data->save();
+                            if ($child_data->order != $serial || $child_data->parents != $header_info['id']) {
+                                $child_data->order = $serial;
+                                $child_data->parents = $header_info['id'];
+                                $child_data->save();
+                            }
+                        }
+
+                        if (isset($child['children'])) {
+                            foreach ($child['children'] as $s => $child2) {
+                                if (!in_array($child2['id'], $array_data)) {
+                                    $array_data[] = $child2['id'];
+                                    $child2_data = header::find($child2['id']);
+
+                                    if ($child2_data->order != $s || $child2_data->parents != $child['id']) {
+                                        $child2_data->order = $s;
+                                        $child2_data->parents = $child['id'];
+                                        $child2_data->save();
+                                    }
+                                }
                             }
                         }
                     }
                 }
-
-
             }
-            return json_encode(['success' => true]);
+
+            return response()->json([
+                'success' => true,
+                'array_data' => $array_data
+            ]);
 
         }elseif($request->has('status_id')){
             $header_data = header::find( $request->status_id );
