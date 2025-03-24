@@ -45,6 +45,12 @@
         </label>
     </div>
 
+    {{-- offerbanner status --}}
+    <label for="status">  Status <br/>
+        <input type="checkbox" checked class="" hidden  name="status"   value="0">
+        <input type="checkbox" class="toggle"  placeholder=" Status" name="status" {{$offerbanner ? ( $offerbanner->status == 1 ? 'checked' : '' ) : ''   }} id="status" value="1">
+    </label>
+
 
 
     <div class="form-group mb-2 items_2_full2" style="display:none">
@@ -87,6 +93,7 @@
             $('.subtitle_variant').css('display', 'block')
             $('.items_2_full2').css('display', 'block')
             $('.items_2_full1').css('display', 'block')
+            $('.link_variant').css('display', 'block')
             return;
         }
 
@@ -96,12 +103,14 @@
             $('.items_2_full').css('display', 'block')
             $('.items_2_full2').css('display', 'block')
             $('.items_2_full1').css('display', 'block')
+            $('.link_variant').css('display', 'block')
             return;
         }
         if(thi.value == 3){
             $('.title_variant').css('display', 'block')
             $('.items_2_full2').css('display', 'block')
             $('.items_2_full1').css('display', 'block')
+            $('.link_variant').css('display', 'block')
             return;
         }
 

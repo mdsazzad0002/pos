@@ -46,7 +46,8 @@
                     <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
                 </a>
 
-
+                
+                @if (settings('location_wise_filter_page_status', 'hero') == 1)
                 {{-- Filter --}}
                 <div class="filter_form">
                     <form action="{{ url($filter_page->slug) }}" method="get" class="d-flex flex-nowrap">
@@ -62,6 +63,7 @@
                     </form>
                 </div>
                 {{-- End Filter --}}
+                @endif
 
 
             </div>
@@ -107,36 +109,37 @@
 
 
 
-@php
-    $area_list = \App\Models\area::where('status', 1)->get();
-@endphp
-<!-- Location Area select Modal -->
-<div class="modal fade" id="locationSelectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Select your Area</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-
-                <div class="row">
-                    @foreach ($area_list as $area)
-                        <div class="col-md-6 col-xl-4 single_area"
-                            onclick="change_area({{ $area->id }}, '{{ $area->name }}')">
-                            {{ $area->name }}
-                        </div>
-                    @endforeach
+@if (settings('location_wise_filter_page_status', 'hero') == 1)
+    @php
+        $area_list = \App\Models\area::where('status', 1)->get();
+    @endphp
+    <!-- Location Area select Modal -->
+    <div class="modal fade" id="locationSelectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select your Area</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <div class="modal-body">
+
+                    <div class="row">
+                        @foreach ($area_list as $area)
+                            <div class="col-md-6 col-xl-4 single_area"
+                                onclick="change_area({{ $area->id }}, '{{ $area->name }}')">
+                                {{ $area->name }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{{-- End Location Area select Modal --}}
-
+    {{-- End Location Area select Modal --}}
+@endif
 
 {{-- Category Sub Category --}}
 <div class="modal fade" id="locationSelectModal_category" tabindex="-1" aria-labelledby="exampleModalLabel"

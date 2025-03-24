@@ -134,6 +134,7 @@ class HomePageManageController extends Controller
     $homePageManage->upload_id3 = $request->upload_id3 ?? 0; // Background color
 
     $homePageManage->title_style = $request->title_style ?? 0; // Background color
+    $homePageManage->details_or_view_all_align = $request->details_or_view_all_align ?? 'center'; // Background color
     // Save the updated homePageManage
     $homePageManage->save();
 

@@ -173,6 +173,20 @@
                 @endif
 
 
+                @if ($item->HasExists('is_details_page_manage_status') || $item->HasExists('view_all_manage_status'))
+                <div class="row" style="background: #f1ebc3">
+                    <div class="col-md-12 ">
+                        <label for="details_or_view_all_align"> Details Or View All Align <br />
+                         <select name="details_or_view_all_align" class="form-control" id="details_or_view_all_align">
+                             <option {{ $item->details_or_view_all_align == 'center' ? 'selected' : '' }} value="center">Center</option>
+                             <option {{ $item->details_or_view_all_align == 'start' ? 'selected' : '' }} value="start">Left</option>
+                             <option {{ $item->details_or_view_all_align == 'end' ? 'selected' : '' }} value="end">Right</option>
+                         </select>
+                        </label>
+                    </div>
+                </div>
+                @endif
+
                 @if($item->HasExists('background_manage_status'))
                 <div class="row  py-1" style="background: #c3c6f1">
                     <div class="col-md-12">

@@ -5,9 +5,17 @@
    $details_page = \App\Models\Page::where('status', 1)->where('page_type', 'view')->first();
 
     if($variant_info->is_details_page){
-        $products = \App\Models\product::where('status', 1)->where('service', 0)->paginate($variant_info->items_show);
+        $products = \App\Models\product::where('status', 1)->where('service', 0)
+        ->when($variant_info->category, function ($query) use ($variant_info) {
+            return $query->where('category', $variant_info->category);
+        })
+        ->paginate($variant_info->items_show);
     }else{
-        $products = \App\Models\product::where('status', 1)->where('service', 0)->limit($variant_info->items_show)->get();
+        $products = \App\Models\product::where('status', 1)->where('service', 0)
+        ->when($variant_info->category, function ($query) use ($variant_info) {
+            return $query->where('category', $variant_info->category);
+        })
+        ->limit($variant_info->items_show)->get();
     }
 
 

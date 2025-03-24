@@ -1418,7 +1418,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
                 'items_per_row' => 3,
-                'items_per_row_status' => 0,
+                'items_per_row_status' => 1,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
 
@@ -1514,7 +1514,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
                 'items_per_row' => 3,
-                'items_per_row_status' => 0,
+                'items_per_row_status' => 1,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
 

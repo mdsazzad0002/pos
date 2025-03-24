@@ -198,9 +198,18 @@
     width: -webkit-fill-available;
 
 }
-.navbar_filter_section .mixin-container form input{
-    padding-left: 8px !important;
+
+
+header .header-section .mixin-container .input-field button {
+    padding: 11px 22px;
+    border-radius: 0px 8px 8px 0;
 }
+header .header-section .mixin-container .input-field input{
+    border-radius: 3px;
+    padding: 9px 16px;
+
+}
+
 .navbar_filter_section #dropdown3{
     min-width: 150px;
 }
@@ -338,6 +347,8 @@ span.items_added {
 
 
     }
+
+  
 </style>
 
 @endif

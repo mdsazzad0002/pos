@@ -40,7 +40,7 @@
                                 <div class="col-lg-12">
                                     <label for="">Name</label>
                                     <input type="text" name="name" class="form-control mb-2"
-                                        placeholder="Enter product name" value="{{ $product->name ?? '' }}" required oninput="generateSlugMake(this)">
+                                        placeholder="Enter product name" value="{{ $product->name ?? '' }}" required oninput="generateSlugMake(this, '#generateSlug')">
                                 </div>
                                 <div class="col-lg-12">
                                     <label for="">Slug</label>

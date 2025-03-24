@@ -18,21 +18,7 @@
     <div class="card-body">
 
             <table id="offerbanner" class="table table-bordered table-striped table-hover">
-                <thead>
-                    <th>
-                        SI
-                    </th>
-                    <th>
-                        Title
-                    </th>
-
-                    <th>
-                        View
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                </thead>
+           
             </table>
 
         </div>
@@ -54,10 +40,12 @@
             { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            { data: 'title', name: 'title', orderable: false, searchable: true },
-
-            {data:'view', name:'view', searchable:false, orderable:false},
-            {data:'action', name:'action', searchable:false, orderable:false}
+            { data: 'title', name: 'title', title: 'Title', orderable: false, searchable: true },
+            { data: 'status', name: 'status', title: 'Status', orderable: false, searchable: true, render: function (data, type, row, meta) {
+                return data == 1 ? 'Active' : 'Inactive';
+            }},
+            {data:'view', name:'view', title:'View', searchable:false, orderable:false},
+            {data:'action', name:'action', title:'Action', searchable:false, orderable:false}
         ],
 
         buttons: true,

@@ -11,7 +11,7 @@
         service
         <div>
             @can('service create')
-                <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered modal-lg" data-title="Add New  service" data-href="{{ route('admin.service.create') }}">+ Add New service</button>
+                <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-centered modal-lg" data-title="Add New  service" data-href="{{ route('admin.service.create') }}">+ Add New service</button>
             @endcan
         </div>
     </div>

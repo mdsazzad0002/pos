@@ -70,7 +70,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('admin.brand.partials.create_edit');
+        $brand = null;
+        return view('admin.brand.partials.create_edit', compact('brand'));
     }
 
     /**
