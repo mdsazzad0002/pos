@@ -42,7 +42,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['site-tag-management', '24']) }}" class="nav-link">
                 <i class="fas fa-tags nav-icon"></i>
-                <p>Site Tag Management</p>
+                <p>Site Tag </p>
             </a>
         </li>
         @endcan
@@ -60,7 +60,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}" class="nav-link">
                 <i class="bi bi-app-indicator nav-icon"></i>
-                <p>Site PWA Management</p>
+                <p>Site PWA </p>
             </a>
         </li>
         @endcan
@@ -78,7 +78,7 @@
         <li class="nav-item">
             <a href="{{ route('admin.setting.index', ['cookie-management', '40']) }}" class="nav-link">
                 <i class="fas fa-cookie-bite nav-icon"></i>
-                <p>Cookie Management</p>
+                <p>Cookie </p>
             </a>
         </li>
         @endcan

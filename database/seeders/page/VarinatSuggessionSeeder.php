@@ -1877,7 +1877,7 @@ class VarinatSuggessionSeeder extends Seeder
 
 
 //  ================================================== Why Us Variant =====================================================
-            $data['service_request_1'] = [
+            $data['why_choose_us_1'] = [
                 'key' =>'_why_choose_us.why_choose_us_1',
                 
                 'title' => 'Why Choose Us Style 1',
@@ -1914,7 +1914,51 @@ class VarinatSuggessionSeeder extends Seeder
 
             ];
 
-//  ================================================== end Category-Subcategory Variant =====================================================
+//  ================================================== end Why Us Variant =====================================================
+
+
+//  ================================================== Service Point Variant =====================================================
+            $data['service_point1'] = [
+                'key' =>'_service_point._style1',
+                
+                'title' => 'Service Point Style 1',
+                'title_status' => 0,
+                'title_manage_status' => 1,
+
+
+                'short_read_more' => 'Read More',
+                'short_read_more_status' => 0,
+                'short_read_more_manage_status' => 1,
+
+
+                'sub_title' => 'Service Point Sub Title',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 1,
+
+                
+                'view_all' => 'View All',
+                'view_all_status' => 0,
+                'view_all_manage_status' => 0,
+                
+                
+                
+                
+                'items_per_row' => 12,
+                'items_per_row_status' => 0,
+                'items_manage_status' => 1,
+                'is_details_page_manage_status' => 1,
+
+                'upload_manage_id3_status'=> 0,
+                
+                'background' => 0,
+                'background_color' => '#eeeeee',
+                'background_type' => 0,
+                'upload_id'=>'preset/page_variant/_service_point__style1.png',
+                'background_manage_status'=> 1,
+
+            ];
+
+//  ================================================== end Service Point Variant =====================================================
 
 
 //  ================================================== Category Variant =====================================================

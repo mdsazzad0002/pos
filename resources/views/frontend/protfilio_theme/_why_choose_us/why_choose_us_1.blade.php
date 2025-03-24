@@ -1,5 +1,5 @@
 <x-frontend_section :info="$variant_info" title='none' class="why_choose_us_1" css="_why_choose_us/_why_choose_us1.css">
-    <div class="container-flud why-us section-bg aos-init aos-animate" data-aos="fade-up">
+    <div class="container-fluid why-us section-bg aos-init aos-animate" data-aos="fade-up">
         <div class="row">
             <div class="col-lg-6 d-flex flex-row-reverse align-items-center why-us-left aos-init aos-animate"
                 data-aos="fade-right" data-aos-delay="100">

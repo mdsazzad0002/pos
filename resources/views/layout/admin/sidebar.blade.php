@@ -74,7 +74,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-luggage-cart"></i>
                         <p>
-                            Order management
+                            Order Manage
                             <i class="fas fa-angle-left right"></i>
 
                         </p>
@@ -159,7 +159,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Product Management
+                            Product Manage
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -283,7 +283,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="fas fa-boxes nav-icon"></i>
                         <p>
-                            Stock Management
+                            Stock Manage
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -332,7 +332,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="fas fa-swatchbook nav-icon"></i>
                         <p>
-                            Supplier Management
+                            Supplier Manage
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -377,7 +377,7 @@ sidebar-dark-primary elevation-4">
                     <a href="#" class="nav-link">
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>
-                            User Management 
+                            User Manage 
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -435,11 +435,13 @@ sidebar-dark-primary elevation-4">
 
            
                 @if(config('app.env') == 'local')
+                @canany(['LeadAccount read', 'LeadContact read', 'LeadDeal read', 'Lead read', 'LeadDealStage read', 'LeadSource read'])
+                    
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fas fa-user-cog nav-icon"></i>
                         <p>
-                            CRM Management
+                            CRM Manage
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -503,49 +505,10 @@ sidebar-dark-primary elevation-4">
 
                     </ul>
                 </li>
+                @endcanany
                 @endif
 
 
-
-                 @canany(['blog category read', 'blog read'])
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fas fa-user-cog nav-icon"></i>
-                            <p>
-                                Blog
-                                <i class="fas fa-angle-left right"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @can('blog category read')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.blog.category.index') }}" class="nav-link">
-                                    <i class="fas fa-user-tie nav-icon"></i>
-                                    <p>Category</p>
-                                </a>
-                            </li>
-                            @endcan
-
-                            @can('blog create')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.blog.blog.create') }}" class="nav-link">
-                                    <i class="fas fa-user-tie nav-icon"></i>
-                                    <p>Blog Create</p>
-                                </a>
-                            </li>
-                            @endcan
-                            @can('blog read')
-                            <li class="nav-item">
-                                <a href="{{ route('admin.blog.blog.index') }}" class="nav-link {{ Route::is('admin.blog.blog.edit') ? 'active' : '' }}">
-                                    <i class="fas fa-user-tie nav-icon"></i>
-                                    <p>Blog</p>
-                                </a>
-                            </li>
-                            @endcan
-
-                        </ul>
-                    </li>    
-                @endcanany
 
 
 
@@ -595,24 +558,7 @@ sidebar-dark-primary elevation-4">
                 @endcan
 
                 
-                @can('client read')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.client.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-handshake"></i>
-                            <p> Client</p>
-                        </a>
-                    </li>
-                @endcan
-                @can('project read')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.project.index') }}" class="nav-link {{ (Route::is('admin.project.edit') || Route::is('admin.project.create') )? 'active' : '' }}">
-                            <i class="nav-icon fab fa-r-project"></i>
-                            <p> Project</p>
-                        </a>
-                    </li>
-                @endcan
-
-
+              
 
 
 

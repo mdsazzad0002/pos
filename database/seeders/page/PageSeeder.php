@@ -261,6 +261,13 @@ class PageSeeder extends Seeder
                 'homepage' => 0,
                 'page_type' => 'service_request',
             ],
+            [
+                'name' => 'Service Point',
+                'slug' => 'service-point',
+                'status' => 1,
+                'homepage' => 0,
+                'page_type' => 'service_point',
+            ],
            
 
 
