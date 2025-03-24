@@ -16,26 +16,19 @@
     </div>
 </div>
 
-
-<script>
-
-
-
-
-    const executeCodesPopup = () => {
-        //if cookie contains codinglab it will be returned and below of this code will not run
-        if (document.cookie.includes("laravel_popup_consent")) return;
-            $('#exampleModal').modal('show');
-            document.querySelector(".cookie_popup_close").addEventListener("click", () => {
-                //set cookies for 1 month. 60 = 1 min, 60 = 1 hours, 24 = 1 day, 30 = 30 days
-                document.cookie = "laravel_popup_consent = {{ url('/') }}; max-age=" + 60 * 60 * 24 * 30;
-            });
-
-
-    };
-
-    //executeCodes function will be called on webpage load
-    window.addEventListener("load", executeCodesPopup);
-
-</script>
+    @php  
+        if(session()->get('laravel_popup_consent')){
+            
+        }else{
+            session()->put('laravel_popup_consent', true);
+            @endphp
+                <script>
+                    setTimeout(() => {
+                        $('#exampleModal').modal('show');
+                    },800)
+                    
+                </script>
+            @php
+        }
+    @endphp
 @endif
