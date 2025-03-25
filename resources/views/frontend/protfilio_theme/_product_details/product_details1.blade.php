@@ -319,6 +319,11 @@
             .comment-box img {
                 width: 60px;
             }
+
+
+            section.product-description table {
+                max-width:100%
+            }
         </style>
     @endpush
 @else
