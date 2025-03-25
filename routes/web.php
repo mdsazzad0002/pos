@@ -96,6 +96,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\SubScriberController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\WhyChooseUsController;
+use App\Http\Controllers\AchivementController;
 
 
 
@@ -479,6 +481,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // ServiceRequest management
     Route::resource('/service-request/service-request', ServiceRequestController::class)->names('service-request.service-request');
     Route::get('/service-request/service-request/delete/{service_request}', [ServiceRequestController::class, 'delete'])->name('service-request.service-request.delete');
+
+    // WhyChooseUs management
+    Route::resource('/whychooseus', WhyChooseUsController::class)->names('whychooseus');
+    Route::get('/whychooseus/delete/{whychooseus}', [WhyChooseUsController::class, 'delete'])->name('whychooseus.delete');
+
+    // achivement management
+    Route::resource('/achivement', AchivementController::class)->names('achivement');
+    Route::get('/achivement/delete/{achivement}', [AchivementController::class, 'delete'])->name('achivement.delete');
 
 
     

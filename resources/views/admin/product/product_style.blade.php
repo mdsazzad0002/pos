@@ -23,123 +23,97 @@
                     </div>
                     <div class="card-body">
                         @php
-                        $data = [
-                            [
-                                'name' => 'detail_button_name',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'detail_button_background_color',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'detail_button_text_color',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'detail_button_status',
-                                'key' => '77'
-                            ],
+                        $data1 = [
+                            // =========================================================================
+                            // Details Button
+                            [ 'name' => 'detail_button_name', 'key' => '77' ],
+                            [ 'name' => 'detail_button_status', 'key' => '77' ],
+                            [ 'name' => 'detail_button_background_color', 'key' => '77' ],
+                            [ 'name' => 'detail_button_text_color',  'key' => '77' ],
+                            [ 'name' => 'v_details_not_service_status',  'key' => '77' ],
+                            [ 'name' => 'v_details_service_status',  'key' => '77' ],
+                        ];
 
+                        $data2 = [
+                            // =========================================================================
+                            // Next Page button
+                            [ 'name' => 'next_page_button_name',  'key' => '77'  ],
+                            [ 'name' => 'next_page_button_background_color', 'key' => '77' ],
+                            [  'name' => 'next_page_button_text_color',  'key' => '77'  ],
+                            [  'name' => 'p_next_page_not_service_status',  'key' => '77'  ],
+                            [  'name' => 'p_next_page_service_status',  'key' => '77'  ],
+                        ];
 
+                        $data3 = [  
+                            // =========================================================================
+                            // CART Button
+                            [  'name' => 'cart_button_name',  'key' => '77'  ],
+                            [  'name' => 'cart_button_status',  'key' => '77'  ],
+                            [  'name' => 'cart_button_background_color',  'key' => '77'  ],
+                            [  'name' => 'cart_button_text_color',  'key' => '77'  ],
+                            [  'name' => 'v_cart_not_service_status',  'key' => '77'  ],
+                            [  'name' => 'v_cart_service_status',  'key' => '77'  ],
+                        ];
+                        $data4 = [
+                            // =========================================================================
+                           // Buy Now
+                            [  'name' => 'buy_now_button_name',  'key' => '77'  ],
+                            [  'name' => 'buy_now_button_status',  'key' => '77'  ],
+                            [  'name' => 'buy_now_button_background_color',  'key' => '77'  ],
+                            [  'name' => 'buy_now_button_text_color',  'key' => '77'  ],
+                            [  'name' => 'v_buy_now_not_service_status',  'key' => '77'  ],
+                            [  'name' => 'v_buynow_service_status',  'key' => '77'  ],
+                        ];
 
+                        $data5 = [
+                            // =========================================================================
+                            // Whatsapp button
+                            [  'name' => 'whatsapp_button_name',  'key' => '77'  ],
+                            [  'name' => 'whatsapp_button_status',  'key' => '77'  ],
+                            [  'name' => 'whatsapp_button_background_color',  'key' => '77'  ],
+                            [  'name' => 'whatsapp_button_text_color',  'key' => '77'  ],
+                            [  'name' => 'v_whatsapp_not_service_status',  'key' => '77'  ],
+                            [  'name' => 'v_whatsapp_service_status',  'key' => '77'  ],
 
-                            [
-                                'name' => 'cart_button_name',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'cart_button_status',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'cart_button_background_color',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'cart_button_text_color',
-                                'key' => '77'
-                            ],
-
-
-
-
-
-                            [
-                                'name' => 'buy_now_button_name',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'buy_now_button_status',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'buy_now_button_background_color',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'buy_now_button_text_color',
-                                'key' => '77'
-                            ],
-
-
-
-
-                            [
-                                'name' => 'whatsapp_button_name',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'whatsapp_button_status',
-                                'key' => '77'
-                            ],
-                            [
-                                'name' => 'whatsapp_button_background_color',
-                                'key' => '77'
-                            ],[
-                                'name' => 'whatsapp_button_text_color',
-                                'key' => '77'
-                            ],
-
-
-
-                            [
-                                'name' => 'next_page_button_name',
-                                'key' => '77'
-                            ],
-
-                            [
-                                'name' => 'next_page_button_background_color',
-                                'key' => '77'
-                             ],
-                            [
-                                'name' => 'next_page_button_text_color',
-                                'key' => '77'
-                             ]
-                          
+                            // =========================================================================
                            
                         ];
 
 
-                // $v_details_name = settings('detail_button_name', 77);
-                // $v_details_status = settings('detail_button_status', 77);
-
-                // $v_cart_name = settings('cart_button_name', 77);
-                // $v_cart_status = settings('cart_button_status', 77);
-
-                // $v_buy_now_name = settings('buy_now_button_name', 77);
-                // $v_buy_now_status = settings('buy_now_button_status', 77);
-
-                // $v_whatsapp_name = settings('whatsapp_button_name', 77);
-                // $v_whatsapp_status = settings('whatsapp_button_status', 77);
-
-                // $v_next_page_name = settings('next_page_button_name', 77);
 
 
                         @endphp
 
-                        <div class="row">
-                            @foreach (settings_data($data) as $setting)
+                        <div class="row border py-2 border-dark">
+                            @foreach (settings_data($data1) as $setting)
+                            <div class="col-6">
+                                @include( 'admin.settings.partials.main-setting', ['key' => 77])
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="row border py-2 border-dark">
+                            @foreach (settings_data($data2) as $setting)
+                            <div class="col-6">
+                                @include( 'admin.settings.partials.main-setting', ['key' => 77])
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="row border py-2 border-dark">
+                            @foreach (settings_data($data3) as $setting)
+                            <div class="col-6">
+                                @include( 'admin.settings.partials.main-setting', ['key' => 77])
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="row border py-2 border-dark">
+                            @foreach (settings_data($data4) as $setting)
+                            <div class="col-6">
+                                @include( 'admin.settings.partials.main-setting', ['key' => 77])
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="row border py-2 border-dark">
+                            @foreach (settings_data($data5) as $setting)
                             <div class="col-6">
                                 @include( 'admin.settings.partials.main-setting', ['key' => 77])
                             </div>

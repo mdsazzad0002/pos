@@ -11,8 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('why_choose_us', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+        
+            $table->string('icon')->nullable();
+            $table->string('creator')->default(0);
+            $table->string('updater')->default(0);
+            $table->boolean('status')->default(1);
+            
             $table->timestamps();
         });
     }
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('why_choose_us');
     }
 };

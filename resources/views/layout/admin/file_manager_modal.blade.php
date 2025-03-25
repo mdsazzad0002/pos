@@ -28,7 +28,23 @@
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
+                    <div class="p-2 converter bg-secondary">
+                        <label for="converter_enabled">Enabled to Resize <input type="checkbox" name="converter_enabled" class="form-check converter_enabled" id="converter_enabled"></label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="resize-width">Resize Width:</label> <br>
+                                <input type="number" id="resize-width" name="resize-width" placeholder="Width" min="1" max="5000" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="resize-height">Resize Height:</label> <br>
+                                <input type="number" id="resize-height" name="resize-height" placeholder="Height" min="1" max="5000" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="quality">Quality (1-100):</label> <br>
+                                <input type="number" id="quality" name="quality" value="100" min="1" max="100">
+                            </div>
+                        </div>
+                    </div>
 
 
                     <label for="file-input" class="d-block" id="drop-area">
@@ -200,12 +216,22 @@
 
 
         async function uploadChunk(chunk, fileName, chunkIndex, totalChunks, size, current_key) {
+            let converter_enabled = $('input[name="converter_enabled"]').is(':checked') ? 'convert_eanabled' : 'no';
+            let quality = $('input[name="quality"]').val();
+            let resize_width = $('input[name="resize-width"]').val();
+            let resize_height = $('input[name="resize-height"]').val();
+
+
             const formData = new FormData();
             formData.append('file', chunk);
             formData.append('fileName', fileName);
             formData.append('chunkIndex', chunkIndex);
             formData.append('totalChunks', totalChunks);
             formData.append('file_size', size);
+            formData.append('converter_enabled', converter_enabled);
+            formData.append('quality', quality);
+            formData.append('resize_width', resize_width);
+            formData.append('resize_height', resize_height);
 
             const response = await fetch('{{ url('uploads/post') }}', {
                 method: 'POST',
@@ -319,9 +345,15 @@ dropArea.addEventListener('dragover', () => {
 
 <script>
     var currnet_element_selected = '';
-    function upload_select(thi){
+    var p_w_image =  '';
+    var p_h_image = '';
+    function upload_select(thi, width = null, height =null){
         $('#upload_ajax_modal').modal('show');
         currnet_element_selected = thi;
+        p_w_image = width ? width : '';
+        p_h_image = height ? height : '';
+        $("#upload_ajax_modal").find('input[name="resize-width"]').val(p_w_image);
+        $("#upload_ajax_modal").find('input[name="resize-height"]').val(p_h_image);
     }
 
     function select_image(thi){
@@ -347,7 +379,7 @@ dropArea.addEventListener('dragover', () => {
     }
     function add_more_filed_image(){
         var items_image = `<div class="image_items_removeable">
-                                 <label type="button" class="multiple" onclick="upload_select(this)">
+                                 <label type="button" class="multiple" onclick="upload_select(this, 1500, 500)">
                                     <input type="text" hidden name="images_multiple[]" id="image" class="form-control mb-2"/>
                                     <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt=""/>
                                 </label>

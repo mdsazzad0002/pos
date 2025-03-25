@@ -53,10 +53,10 @@
                     </h6>
                 @endif
 
-    @include('frontend.protfilio_theme._product_style._button.product_buttons', [
-        'root_class'=> 'd-flex gap-16',
-        'btn_class'=> 'cus-btn',
-    ])
+                    @include('frontend.protfilio_theme._product_style._button.product_buttons', [
+                        'root_class'=> 'd-flex gap-16',
+                        'btn_class'=> 'cus-btn',
+                    ])
             </div>
 
         </div>

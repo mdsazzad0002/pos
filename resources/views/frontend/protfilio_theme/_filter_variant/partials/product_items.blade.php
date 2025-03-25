@@ -29,6 +29,7 @@
                     $p_url = url($view_page->slug) . '?slug=' . $product->slug;
                 }
 
+                $p_service = $product->service;
 
                 $p_image = dynamic_asset($product->upload_id);
                 $p_id = $product->id;
@@ -37,38 +38,68 @@
                 $p_avg_rat = $product->avg_rat;
                 $p_rat_count = $product->rat_count;
 
-
-                $v_details_name = settings('detail_button_name', 77);
-                $v_details_status = settings('detail_button_status', 77);
-
-                $v_cart_name = settings('cart_button_name', 77);
-                $v_cart_status = settings('cart_button_status', 77);
-
-                $v_buy_now_name = settings('buy_now_button_name', 77);
-                $v_buy_now_status = settings('buy_now_button_status', 77);
-
-                $v_whatsapp_name = settings('whatsapp_button_name', 77);
-                $v_whatsapp_status = settings('whatsapp_button_status', 77);
-
-                $v_next_page_name = settings('next_page_button_name', 77);
-
                 $v_cart_page_slug = \App\Models\Page::where('page_type', 'cart')->first()->slug ?? '';
 
+// =========================================================================
+// Next Page button
+                $v_next_page_name = settings('next_page_button_name', 77);
 
                 $btn_next_bg = settings('next_page_button_background_color', 77);
                 $btn_next_color = settings('next_page_button_text_color', 77);
 
-                $btn_buy_now_bg = settings('buy_now_button_background_color', 77);
-                $btn_buy_now_color = settings('buy_now_button_text_color', 77);
+                $p_next_page_not_service = settings('p_next_page_not_service_status', 77);
+                $p_next_page_service = settings('p_next_page_service_status', 77);
+
+// =========================================================================
+// Details Button
+                $v_details_name = settings('detail_button_name', 77);
+                $v_details_status = settings('detail_button_status', 77);
+
+                $btn_details_bg = settings('detail_button_background_color', 77);
+                $btn_details_color = settings('detail_button_text_color', 77);
+
+                $v_details_not_service = settings('v_details_not_service_status', 77);
+                $v_details_service = settings('v_details_service_status', 77);
+
+// =========================================================================
+// CART Button
+                $v_cart_name = settings('cart_button_name', 77);
+                $v_cart_status = settings('cart_button_status', 77);
 
                 $btn_cart_bg = settings('cart_button_background_color', 77);
                 $btn_cart_color = settings('cart_button_text_color', 77);
 
+                $v_cart_not_service = settings('v_cart_not_service_status', 77);
+                $v_cart_service = settings('v_cart_service_status', 77);
+
+// =========================================================================
+// Buy Now
+                $v_buy_now_name = settings('buy_now_button_name', 77);
+                $v_buy_now_status = settings('buy_now_button_status', 77);
+
+                $btn_buy_now_bg = settings('buy_now_button_background_color', 77);
+                $btn_buy_now_color = settings('buy_now_button_text_color', 77);
+
+                $v_buy_now_not_service = settings('v_buy_now_not_service_status', 77);
+                $v_buynow_service = settings('v_buynow_service_status', 77);
+
+// =========================================================================
+// Whatsapp button
+                $v_whatsapp_name = settings('whatsapp_button_name', 77);
+                $v_whatsapp_status = settings('whatsapp_button_status', 77);
+
                 $btn_whatsapp_bg = settings('whatsapp_button_background_color', 77);
                 $btn_whatsapp_color = settings('whatsapp_button_text_color', 77);
 
-                $btn_details_bg = settings('detail_button_background_color', 77);
-                $btn_details_color = settings('detail_button_text_color', 77);
+                $v_whatsapp_not_service = settings('v_whatsapp_not_service_status', 77);
+                $v_whatsapp_service = settings('v_whatsapp_service_status', 77);
+// =========================================================================
+
+
+                
+
+
+             
 
             @endphp
 

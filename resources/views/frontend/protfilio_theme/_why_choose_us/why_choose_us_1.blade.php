@@ -1,3 +1,7 @@
+@php
+    $why_choose_us = \App\Models\WhyChooseUs::where('status', 1)->get();
+    $acheivement = \App\Models\Achivement::where('status', 1)->get();
+@endphp
 <x-frontend_section :info="$variant_info" title='none' class="why_choose_us_1" css="_why_choose_us/_why_choose_us1.css">
     <div class="container-fluid why-us section-bg aos-init aos-animate" data-aos="fade-up">
         <div class="row">
@@ -13,60 +17,27 @@
                             class="fa fa-long-arrow-right"></i></p>
                     <h3>{!! $variant_info->sub_title !!}</h3>
                     <ul>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <div>
-                                <h5>১০ দিনের ওয়ারেন্টি সহ ২৪/৭ সাপোর্ট</h5>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <div>
-                                <h5>বেস্ট প্রাইজ এ প্রফেশনাল সার্ভিস</h5>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <div>
-                                <h5>সঠিক সময় গ্রাহক সেবা</h5>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fas fa-check"></i>
-                            <div>
-                                <h5>দক্ষ ও ভেরিফাইড টেকনিশিয়ান দ্বারা সার্ভিস প্রদান করা</h5>
-                            </div>
-                        </li>
+                        @foreach ($why_choose_us as $why_choose )
+                            <li>
+                                <i class="{{ $why_choose->icon }}"></i>
+                                <div>
+                                    <h5>{{ $why_choose->title }}</h5>
+                                </div>
+                            </li>
+                            
+                        @endforeach
                     </ul>
                     <div class="row wwu">
-                        <div class="col-6 col-md-6 count-box">
-                            <div class="count-head">
-                                <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="0"
-                                    class="purecounter">6</span> Years+
+                        @foreach ($acheivement as $acheivement )
+                            <div class="col-6 col-md-6 count-box">
+                                <div class="count-head">
+                                    <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="0"
+                                        class="purecounter">{{ $acheivement->counter }}</span> {{ $acheivement->title }}
+                                </div>
+                                <p>{{ $acheivement->sub_title }}</p>
                             </div>
-                            <p>কাজ করার সময়কাল</p>
-                        </div>
-                        <div class="col-6 col-md-6 count-box">
-                            <div class="count-head">
-                                <span data-purecounter-start="0" data-purecounter-end="101"
-                                    data-purecounter-duration="0" class="purecounter">101</span>+
-                            </div>
-                            <p>সার্ভিস সমূহ</p>
-                        </div>
-                        <div class="col-6 col-md-6 count-box">
-                            <div class="count-head">
-                                <span data-purecounter-start="0" data-purecounter-end="5061"
-                                    data-purecounter-duration="0" class="purecounter">5061</span>+
-                            </div>
-                            <p>আমাদের সাফল্য</p>
-                        </div>
-                        <div class="col-6 col-md-6 count-box">
-                            <div class="count-head">
-                                <span data-purecounter-start="0" data-purecounter-end="88.669950738916"
-                                    data-purecounter-duration="0" class="purecounter">89</span>%
-                            </div>
-                            <p>সফলতার হার</p>
-                        </div>
+                            
+                        @endforeach
                     </div>
                 </div>
             </div>

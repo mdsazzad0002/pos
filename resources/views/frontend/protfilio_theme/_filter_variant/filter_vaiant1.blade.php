@@ -76,7 +76,11 @@
                                                     @foreach ($category->subcategories_info as $subcategory)
                                                     <li class="d-flex align-items-center gap-2 mb-12">
                                                         <div class="check-block">
-                                                            <input type="checkbox"  value="{{ $subcategory->id  }}" class="sub_check_category" data-type="subcategory" id="sub{{ $subcategory->id }}"
+                                                            <input type="checkbox" 
+                                                            
+                                                            @if(in_array($subcategory->id, request('subcategory_ids', []))) checked @endif
+
+                                                            value="{{ $subcategory->id  }}" class="sub_check_category" data-type="subcategory" id="sub{{ $subcategory->id }}"
                                                                 name="subcategory[]">
                                                             <label for="sub{{ $subcategory->id }}">{{ $subcategory->name
                                                                 }}</label>

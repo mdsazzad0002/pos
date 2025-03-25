@@ -88,7 +88,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('admin.client.partials.view', compact('brand'));
+        return view('admin.client.partials.view', compact('client'));
     }
 
     /**

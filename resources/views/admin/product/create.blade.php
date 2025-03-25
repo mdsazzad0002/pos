@@ -232,20 +232,20 @@
                             <div class="row">
 
                                 <div class="col-lg-6">
-                                    <label type="button" onclick="upload_select(this)"> Image <br>
+                                    <label type="button" onclick="upload_select(this, 1500, 500)"> Image  <span class="text-danger">Size : 1500px x 500px</span><br>
                                         <input type="text" name="image" id="image" class="form-control mb-2" value="{{ $product ? $product->upload_id : 0 }}" hidden>
                                         <img style="max-height: 60px" src="{{ dynamic_asset( $product ? $product->upload_id : 0 ) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
-                                    Image Slides
+                                    Image Slides <span class="text-danger">Size : 1500px x 500px</span>
                                     <div class="items_container_image">
                                         <div class="items_filed_iamge">
                                             {{-- items --}}
                                             @if($product)
                                                 @foreach (dynamic_assets($product->uploads_id) as $key =>  $item)
                                                     <div class="image_items_removeable">
-                                                        <label type="button" class="multiple" onclick="upload_select(this)">
+                                                        <label type="button" class="multiple" onclick="upload_select(this, 1500, 500)"> 
                                                         <input type="text" hidden name="images_multiple[]" value="{{ $key }}" id="image" class="form-control mb-2"/>
                                                         <img style="max-height: 60px" src="{{ $item }}" alt=""/>
                                                     </label>

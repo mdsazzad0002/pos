@@ -32,7 +32,7 @@ class TrackUniqueVisitor
         if (!$visitorExists) {
             Visitor::create([
                 'ip_address' => $ipAddress,
-                'user_agent' => $userAgent ?? '',
+                'user_agent' => '',
                 'browser' => $browser ?? '', // Store the browser name
                 'visit_date' => $visitDate
             ]);

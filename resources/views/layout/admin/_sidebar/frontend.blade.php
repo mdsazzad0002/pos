@@ -192,6 +192,19 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a href="{{ route('admin.whychooseus.index') }}" class="nav-link {{ Request::routeIs('admin.whychooseus.*') ? 'active' :''  }}">
+                <i class="fas  nav-icon">W</i>
+                <p>Why Choose Us</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('admin.achivement.index') }}" class="nav-link {{ Request::routeIs('admin.achivement.*') ? 'active' :''  }}">
+                <i class="fas  nav-icon">A</i>
+                <p>Achivement</p>
+            </a>
+        </li>
+
       
         @can('page read')
         <li class="nav-item">

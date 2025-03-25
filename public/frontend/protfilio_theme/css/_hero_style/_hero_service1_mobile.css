@@ -9,9 +9,9 @@
   width: 100%;
   height: calc((100vw * 4) / 12);
   padding: 0;
-  margin: 0;
+  margin-bottom: 20px;
   position: relative;
-  min-height: 350px;
+
 }
 
 
@@ -21,7 +21,6 @@
   inset: 0;
   display: block;
   width: 100%;
-  height: 100%;
   object-fit: cover;
   z-index: 1;
 }
@@ -259,20 +258,10 @@ div#locationSelectModal .modal-dialog {
 
 
 .category_container {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: 8;
-  bottom: -60px;
-  height: 140px;
-  width: min(80%);
   background: white;
   padding: 20px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  border: 2px solid #dfdfdf;
+  /* border-radius: 10px; */
+  /* border: 2px solid #dfdfdf; */
 }
 
 
@@ -299,10 +288,11 @@ section#hero_hero_style2_service {
   flex-direction: column;
   text-align: center;
   padding: 10px;
-  gap: 10px;
+  gap: 0px;
   font-weight: 700;
   cursor: pointer;
-
+  min-height: 128px;
+  border: 1px solid #e7e7e7;
 }
 
 .category_container a.cat-link:hover {
@@ -311,14 +301,11 @@ section#hero_hero_style2_service {
 
 .category_container .row_grid {
     display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 190px;
-    overflow-x: auto;
-    white-space: normal;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0; /* Optional: Adjust spacing between grid items */
 }
 
+button.scroll-left {}
 
 
 button.scroll-right,
@@ -336,6 +323,7 @@ button.scroll-left {
 
 button.scroll-right {
   right: 5px;
+  display: none;
 }
 
 button.scroll-left {

@@ -78,23 +78,67 @@ class UploadController extends Controller
               $unsupport_format = ['avif', 'svg', 'webp', 'BMP', 'bmp',  'jfif', 'pjpeg', 'tif', 'tiff', 'pjp'];
                $file_explode = explode('.', $fileName);
 
-                if(in_array(strtolower($file_explode[count($file_explode) - 1]), $unsupport_format)){
+                if(in_array(strtolower($file_explode[count($file_explode) - 1]), $unsupport_format) || $request->converter_enabled == 'convert_eanabled'){
 
                     $imageManager = new ImageManager(new Driver());
-                    $new_file = str_replace($file_explode[count($file_explode) - 1], 'png', $fileName);
+
+                    // Read the image
+                    $image = $imageManager->read($finalFilePath);
+                    
+                    // Resize the image if enabled
+                    if ($request->converter_enabled == 'convert_eanabled') {
+                        $width = $request->input('resize_width');
+                        $height = $request->input('resize_height');
+                        
+                        
+                        if ($width && $height) {
+                            $image->resize($width, $height);
+                        } elseif ($width) {
+                            $image->resize($width, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                        } elseif ($height) {
+                            $image->resize(null, $height, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                        }
+                    }
+                    // end resize enabled
+                    
 
 
-                    $outputPath = public_path('uploads/'.$new_file);
+                // File if unsupported convert in png if quality  change quality
+                    // Get the file extension
+                    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                    $quality = $request->quality; // Quality for JPEG, WEBP, etc. (0-100)
+                    
+                    // Check if format is supported
+                    if (!in_array($fileExtension, $unsupport_format) && $request->converter_enabled == 'convert_eanabled') {
+                        // Save the resized image in its original format with quality control
+                        $outputPath = public_path('uploads/' . $fileName);
+                        $image->save($outputPath, $quality);
 
+                    } else {
+                        
+                        $new_file = pathinfo($fileName, PATHINFO_FILENAME) . '.png';
+                        $outputPath = public_path('uploads/' . $new_file);
+                    
+                        $encoder = new PngEncoder();
 
-                    $encoder = new PngEncoder();
+                        if( $request->converter_enabled == 'convert_eanabled'){
+                            $image = $image->encode($encoder, $quality);
+                        }else{
+                            $image = $image->encode($encoder);
+                        }
+                    
+                        file_put_contents($outputPath, (string) $image);
+                        
+                        unlink($finalFilePath);
+                        $fileName = $new_file;
+                    }
+                
+                // End of convert and save
 
-                    $image = $imageManager->read($finalFilePath)->encode($encoder);
-                    // $image->save($outputPath);
-                    file_put_contents($outputPath, (string) $image);
-
-                    unlink($finalFilePath);
-                    $fileName = $new_file;
 
                 }
 

@@ -143,6 +143,18 @@ class rolepermissionsedder extends Seeder
                 'order edit',
                 'order delete',
 
+                // whychooseus
+                'whychooseus read',
+                'whychooseus create',
+                'whychooseus edit',
+                'whychooseus delete',
+
+                // achivement
+                'achivement read',
+                'achivement create',
+                'achivement edit',
+                'achivement delete',
+
                 // custom order
                 'custom_order type read', 'custom_order bulk read', 'custom_order custom read',
 

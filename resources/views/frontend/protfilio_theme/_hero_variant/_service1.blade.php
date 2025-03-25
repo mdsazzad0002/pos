@@ -17,7 +17,12 @@
         }
     </script>
 
-    <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_hero_style/_hero_service1.css') }}">
+
+    @if(isMobile())
+         <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_hero_style/_hero_service1_mobile.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('frontend/protfilio_theme/css/_hero_style/_hero_service1.css') }}">
+    @endif
     <!-- Hero Section -->
     <section id="hero_hero_style2_service" class="hero_hero_style2_service section dark-background">
         <div class="">
@@ -100,10 +105,14 @@
         @else
             <div style="background: {{ $variant_info->background_color }}">
     @endif
+
+    @if (!isMobile())
+        
     <br>
     <br>
     <br>
     <br>
+    @endif
     </div>
 @endif
 

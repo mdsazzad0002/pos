@@ -10,25 +10,35 @@
 
             <div class="modal-body p-0">
                 <button type="button" class="btn-close cookie_popup_close position-absolute  top-0 end-0 bg-secondary rounded-circle text-white p-2" data-bs-dismiss="modal"  aria-label="Close"></button>
-                <img src="{{ dynamic_asset($homepage_offer_banner_popup->image3) }}" alt="Offer Banner">
+                <a href="{{ $homepage_offer_banner_popup->link }}">
+                    <img src="{{ dynamic_asset($homepage_offer_banner_popup->image3) }}" alt="Offer Banner">
+                </a>
             </div>
         </div>
     </div>
 </div>
+@push('js')
+    
+    @php
+        $isHomePage = request()->is('/'); // Check if on the home page
+        if ($isHomePage) {
+            session()->forget('laravel_popup_consent'); // Reset banner on home page
+        }
 
-    @php  
-        if(session()->get('laravel_popup_consent')){
-            
-        }else{
+        if (!session()->has('laravel_popup_consent')) {
             session()->put('laravel_popup_consent', true);
-            @endphp
-                <script>
-                    setTimeout(() => {
-                        $('#exampleModal').modal('show');
-                    },800)
-                    
-                </script>
-            @php
+    @endphp
+
+            <script>
+                setTimeout(() => {
+                    $('#exampleModal').modal('show');
+                }, 1000);
+            </script>
+
+    @php
         }
     @endphp
+@endpush
+
+
 @endif
