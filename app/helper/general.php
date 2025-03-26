@@ -117,8 +117,9 @@ function uploads($file, $id = null)
 
 
 
-function dynamic_asset($id)
+function dynamic_asset($id, $default = null)
 {
+    
     $destinationPath = 'uploads/';
     if ($id != null || $id != '') {
         if ($file1 = Upload::find($id)) {
@@ -132,7 +133,7 @@ function dynamic_asset($id)
                  $file1 = preg_replace('/([^:])\/{2,}/', '$1/',  $file1);
                  return $file1;
             } else {
-                $file = 'preset/fixing.png';
+                $file =  'preset/'. ($default ?? 'fixing.png');
                 $file = asset($file);
                 $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
                 return   $file;
@@ -141,13 +142,13 @@ function dynamic_asset($id)
 
 
         } else {
-            $file = 'preset/fixing.png';
+            $file =  'preset/'. ($default ?? 'fixing.png');
             $file = asset($file);
             $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
             return $file;
         }
     } else {
-        $file = 'preset/fixing.png';
+        $file =  'preset/'. ($default ?? 'fixing.png');
         $file = asset($file);
         $file = preg_replace('/([^:])\/{2,}/', '$1/',  $file);
         return $file;

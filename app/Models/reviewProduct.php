@@ -17,6 +17,6 @@ class reviewProduct extends Model
 
 
         public function getReviewImageAttribute(){
-            return dynamic_asset($this->customer_info->upload_id ?? 0);
+            return dynamic_asset($this->customer_info->upload_id ?? 0, 'profile_avater.png');
         }
 }

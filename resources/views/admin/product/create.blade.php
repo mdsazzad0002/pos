@@ -232,20 +232,20 @@
                             <div class="row">
 
                                 <div class="col-lg-6">
-                                    <label type="button" onclick="upload_select(this, 1500, 500)"> Image  <span class="text-danger">Size : 1500px x 500px</span><br>
+                                    <label type="button" onclick="upload_select(this, 600, 600)"> Image  <span class="text-danger">Size : 600px x 600px</span><br>
                                         <input type="text" name="image" id="image" class="form-control mb-2" value="{{ $product ? $product->upload_id : 0 }}" hidden>
                                         <img style="max-height: 60px" src="{{ dynamic_asset( $product ? $product->upload_id : 0 ) }}" alt="">
                                     </label>
                                 </div>
                                 <div class="col-lg-6">
-                                    Image Slides <span class="text-danger">Size : 1500px x 500px</span>
+                                    Image Slides <span class="text-danger">Size : 600px x 600px</span>
                                     <div class="items_container_image">
                                         <div class="items_filed_iamge">
                                             {{-- items --}}
                                             @if($product)
                                                 @foreach (dynamic_assets($product->uploads_id) as $key =>  $item)
                                                     <div class="image_items_removeable">
-                                                        <label type="button" class="multiple" onclick="upload_select(this, 1500, 500)"> 
+                                                        <label type="button" class="multiple" onclick="upload_select(this, 600, 600)"> 
                                                         <input type="text" hidden name="images_multiple[]" value="{{ $key }}" id="image" class="form-control mb-2"/>
                                                         <img style="max-height: 60px" src="{{ $item }}" alt=""/>
                                                     </label>
@@ -256,7 +256,7 @@
                                             {{-- items --}}
 
                                         </div>
-                                        <button type="button" class="add_image_filed btn btn-primary" onclick="add_more_filed_image()">
+                                        <button type="button" class="add_image_filed btn btn-primary" onclick="add_more_filed_image(600, 600)">
                                             +
                                         </button>
                                     </div>
@@ -271,35 +271,35 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-6 col-xl-4">
                                     <label for="feature"> Feature <br />
                                         <input type="checkbox" checked class="" hidden name="feature" value="0">
                                         <input type="checkbox" {{ $product ? ($product->feature ? 'checked' : '') : '' }} class="toggle" placeholder="Feature" name="feature"
                                             id="feature" value="1">
                                     </label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-6 col-xl-4">
                                     <label for="service"> Service <br />
                                         <input type="checkbox" checked class="" hidden name="service" value="0">
                                         <input type="checkbox" class="service toggle" {{ $product ? ($product->service ? 'checked' : '') : '' }}  placeholder="service" name="service"
                                             id="service" value="1">
                                     </label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-6 col-xl-4">
                                     <label for="service"> Status <br />
                                         <input type="checkbox" checked class="" hidden name="status" value="0">
                                         <input type="checkbox" class="status toggle" {{ $product ? ($product->status ? 'checked' : '') : '' }}  placeholder="status" name="status"
                                             id="service" value="1">
                                     </label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-6 col-xl-4">
                                     <label for="for_selling"> For Selling <br />
                                         <input type="checkbox" checked class="" hidden name="for_selling" value="0">
                                         <input type="checkbox" class="status toggle" {{ $product ? ($product->for_selling ? 'checked' : '') : '' }}  placeholder="status" name="for_selling"
                                             id="service" value="1">
                                     </label>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-6 col-xl-4">
                                     <label for="free_delivery"> Free Delivery <br />
                                         <input type="checkbox" checked class="" hidden name="free_delivery" value="0">
                                         <input type="checkbox" class="status toggle" {{ $product ? ($product->free_delivery ? 'checked' : '') : '' }}  placeholder="status" name="free_delivery"

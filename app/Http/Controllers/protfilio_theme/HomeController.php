@@ -101,6 +101,17 @@ class HomeController extends Controller
 
             }
 
+            // filter by weight
+            if($request->has('weight') && $request->weight != '' && count($request->weight) > 0 ){
+                foreach ($request->weight as $key => $value) {
+                    if($key == 0){
+                        $query->where('weight',  $value);
+                    }else{
+                        $query->orWhere('weight',  $value);
+                    }
+                }
+            }
+
             // filter by category slug
             if($request->has('category') && $request->category != ''){
                 $category = category::where('slug', $request->category)->first();

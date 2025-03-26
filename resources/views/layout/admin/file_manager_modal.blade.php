@@ -28,20 +28,24 @@
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="p-2 converter bg-secondary">
-                        <label for="converter_enabled">Enabled to Resize <input type="checkbox" name="converter_enabled" class="form-check converter_enabled" id="converter_enabled"></label>
+                    <div class="p-2 converter bg-secondary rounded">
+                        <label for="converter_enabled" class="d-flex align-items-center gap-3">
+                            <input type="checkbox" name="converter_enabled" class="form-check converter_enabled " id="converter_enabled">
+                            Enabled to Resize 
+                        </label>
+                     
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-4">
                                 <label for="resize-width">Resize Width:</label> <br>
                                 <input type="number" id="resize-width" name="resize-width" placeholder="Width" min="1" max="5000" class="form-control">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-4">
                                 <label for="resize-height">Resize Height:</label> <br>
                                 <input type="number" id="resize-height" name="resize-height" placeholder="Height" min="1" max="5000" class="form-control">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-4">
                                 <label for="quality">Quality (1-100):</label> <br>
-                                <input type="number" id="quality" name="quality" value="100" min="1" max="100">
+                                <input type="number" class="form-control" id="quality" name="quality" value="100" min="1" max="100">
                             </div>
                         </div>
                     </div>
@@ -377,9 +381,9 @@ dropArea.addEventListener('dragover', () => {
     function remove_element_image(thi){
         $(thi).parents('.image_items_removeable').remove();
     }
-    function add_more_filed_image(){
+    function add_more_filed_image(width = null, height = null){
         var items_image = `<div class="image_items_removeable">
-                                 <label type="button" class="multiple" onclick="upload_select(this, 1500, 500)">
+                                 <label type="button" class="multiple" onclick="upload_select(this, ${width}, ${height})">
                                     <input type="text" hidden name="images_multiple[]" id="image" class="form-control mb-2"/>
                                     <img style="max-height: 60px" src="{{ dynamic_asset(0) }}" alt=""/>
                                 </label>

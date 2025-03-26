@@ -35,7 +35,7 @@ section#newslater_1 .form-group {
 section#newslater_1 .container_of input{
     background:white;
 } 
-.form-control:focus {
+section#newslater_1  .form-control:focus {
    color: #ffffff !important;
 }
 

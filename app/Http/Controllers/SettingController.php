@@ -13,6 +13,24 @@ class SettingController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function view_setting(Request $request, $view)
+    {
+        return view('admin.settings.settings_manual.' . $view);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function index(Request $request, $slug, $key)
     {
 
@@ -54,8 +72,6 @@ class SettingController extends Controller
         }elseif($slug == 'custom_js_css' && $key == '45'){
             $flag_target = 1;
 
-        }elseif($slug == 'header_style' && $key == '80'){
-            $flag_target = 1;
         }
 
      

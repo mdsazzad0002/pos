@@ -182,6 +182,42 @@
                             @endif
 
 
+                            @if(settings('show_filter_weight_product_status', 80) == 1)
+                                {{-- Filter by brand --}}
+                                @php
+                                $weight_items = \App\Models\product::where('status', 1)->distinct()->pluck('weight');
+                                
+                                @endphp
+                                @if(count($weight_items) > 0)
+                                <div class="hr-line mb-24"></div>
+                                <div class="category-block box-3 mb-24 weight_block">
+                                    <div class="title mb-32" data-count="3">
+                                        <h6>{{ __('product.filter_by_weight') }}</h6>
+                                        <span>
+                                            <i class="far fa-horizontal-rule"></i>
+                                        </span>
+                                    </div>
+                                    <div class="content-block">
+                                        <ul class="list-unstyled">
+                                            @foreach ($weight_items as $weight)
+
+                                            <li class="d-flex align-items-center justify-content-between mb-12">
+                                                <div class="check-block">
+                                                    <input type="checkbox" class="weight_input" value="{{ $weight }}" id="weight{{ $weight}}">
+                                                    <label for="weight{{ $weight }}">{{ $weight }}</label>
+                                                </div>
+                                                <p class="light-gray fw-400"></p>
+                                            </li>
+
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                @endif
+                                {{-- end filter by brand --}}
+                            @endif
+
+
 
 
 
@@ -372,6 +408,7 @@
         var rating_star = {{ $_GET['rating_star'] ?? 0 }};
         var paginate_items = {{ $items?->items_show ?? 3 }};
         var sort_by = '{{ $_GET['sort_by'] ?? '' }}';
+        var weight = [];
 
 
 
@@ -385,6 +422,7 @@
             '&rating_star='+rating_star+
             '&paginate_items='+paginate_items+
             '&sort_by='+sort_by+
+          
             '&q='+q;
 
             selectedCategories.forEach(element => {
@@ -396,6 +434,9 @@
             brands_items.forEach(element => {
                 url_data+='&brand[]='+element;
             });
+            weight.forEach(element => {
+                url_data+='&weight[]='+element;
+            })
 
             // window.history.pushState(window.history.state, '', url_data);
             var newUrl = "{{ url('filter/data-get') }}"+url_data;
@@ -444,6 +485,15 @@
         });
         $('#sort_by').on('change', function(e){
             sort_by =  this.value;
+            ajaxDataChangeLoad();
+        });
+        $('.weight_block').on('change', function(e){
+
+            weight = [];
+
+            $('.weight_input:checked').each(function() {
+                weight.push($(this).val());
+            })
             ajaxDataChangeLoad();
         });
 

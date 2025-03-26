@@ -224,12 +224,16 @@
                          <p>Page </p>
                     </a>
                 </li>
+
+                
                 <li class="nav-item">
-                    <a href="{{ route('admin.setting.index', ['header_style', '80']) }}" class="nav-link">
+                    <a href="{{ route('admin.setting.view', 'filter_page_option') }}" class="nav-link">
                         <i class="fas  nav-icon">F</i>
                         <p>Filter Page Option</p>
                     </a>
                 </li>
+
+             
             </ul>
         </li>
         @endcan

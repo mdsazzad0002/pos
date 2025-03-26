@@ -9,7 +9,7 @@
                     <i class="fas fa-3x fa-sync-alt fa-spin"></i>
                 </div>
                 @endisset
-                <h3><span>0</span></h3>
+                <h3><span>{{ isset($count) ? $count : '0' }}</span></h3>
                 <p>{{ Str::title($title ?? '') }}</p>
             </div>
             <div class="icon">

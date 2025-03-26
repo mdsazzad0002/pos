@@ -33,10 +33,12 @@
                             ]
                         ];
 
+                        $data_object =json_decode(json_encode($data));
+
                         @endphp
 
                             <div class="row">
-                                @foreach (settings_data($data) as $setting)
+                                @foreach ($data_object as $setting)
                                     <div class="col-6">
                                         @include( 'admin.settings.partials.main-setting', ['slug' => 80])
                                     </div>

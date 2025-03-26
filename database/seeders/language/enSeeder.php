@@ -214,6 +214,7 @@ class enSeeder extends Seeder
             'tracking_report.bd_courier_tracking_status'=>'Courier Tracking  Status',
             'frontend.order_success'=>'Success',
             'order.success_text'=>'Successfully Received your Order. Keep With Us.',
+            'product.filter_by_weight'=>'Filter By Weight',
 
 
 

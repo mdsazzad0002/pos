@@ -302,6 +302,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     // Setting
     Route::get('/settings/{slug}/{key}', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/settings/{view}/show/update', [SettingController::class, 'view_setting'])->name('setting.view');
     Route::get('/settings/{slug}/{key}/group', [SettingController::class, 'index_group'])->name('setting.index_group');
 
 

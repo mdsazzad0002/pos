@@ -284,6 +284,7 @@
 
             .shop-detail .detail-wrapper .product-image-container .product-slider .detail-image img {
                 width: 100%;
+                cursor: crosshair;
 
             }
 
