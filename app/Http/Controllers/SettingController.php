@@ -131,11 +131,23 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        // return $_REQUEST;
+        
 
         $creator_id = auth()->user()->id ?? 0;
-
-        if($request->has('group')){
+        if($request->has('multiple_settings')){
+            $key_code = $request->key_code;
+            foreach($request->multiple_settings as $key =>  $items){
+                $setting_find = setting::where(['name'=> $key , 'key' =>   $key_code])->first();
+                $setting_find->value = $items;
+                $setting_find->save();
+            }
+            return json_encode([
+                'title' => 'Successfully   updated',
+                'type' => 'success',
+                'refresh' => 'false',
+            ]);
+        }
+       if($request->has('group')){
              $request = $request->except('group');
 
             foreach ($request as $key => $items) {

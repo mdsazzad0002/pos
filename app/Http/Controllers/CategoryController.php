@@ -78,7 +78,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.partials.create');
+        $category = null;
+        return view('admin.category.partials.create_edit', compact('category'));
     }
 
     /**
@@ -87,25 +88,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate(['name' => 'required']);
-        $category = new Category;
-        $category->name = $request->name;;
-        $category->status = $request->status;
-        $category->description = $request->description;;
-        $category->creator = auth()->user()->id ?? 0;
-
-        $category->upload_id = $request->image ?? 0;
-        $category->upload_bg = $request->background ?? 0;
-        $category->slug = create_slug($request->name, 'category', 'slug');
-        $category->save();
-
-
-        return json_encode([
-            'title'=>'Successfully  Created Category',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
-
-
+        $request['create'] = 'Successfully Created';
+        return $this->update($request);
     }
 
     /**
@@ -121,24 +105,38 @@ class CategoryController extends Controller
      */
     public function edit(category $category)
     {
-        return view('admin.category.partials.edit', compact('category'));
+        
+        return view('admin.category.partials.create_edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request,  $category = null)
     {
-        $category->name = $request->name;
-        $category->status = $request->status;
-        $category->description = $request->description;;
-        $category->upload_bg = $request->background ?? 0;
-        $category->upload_id = $request->image ?? 0;
-        $category->save();
+      
+        if($category){
+            $category = category::find($category);
+        }else{
+            $category = new Category;
+            $category->creator = auth()->user()->id ?? 0;
+        }
+
+        if($category){
+            $category->name = $request->name;
+            $category->status = $request->status;
+            $category->description = $request->description;;
+            $category->upload_bg = $request->background ?? 0;
+            $category->upload_id = $request->image ?? 0;
+            $category->slug= $request->slug ?? '';
+            $category->service_status = $request->service_status ?? 0;
+            $category->save();
+            
+        }
 
 
         return json_encode([
-            'title'=>'Successfully  Updated Category',
+            'title'=> isset($request->create) ? $request->create : 'Successfully  Updated Category',
             'type'=>'success',
             'refresh'=>'true',
         ]);

@@ -20,28 +20,40 @@
 
     <div class="mb-2">
         <label for="subcategory_name">Sub CategoryName</label>
-        <input type="text" name="name" class="form-control mb-2" value="{{ $subcategory ? $subcategory->name : ''}}" placeholder="Enter your name">
+        <input type="text" name="name" class="form-control mb-2" value="{{ $subcategory ? $subcategory->name : ''}}" placeholder="Enter your name" oninput="generateSlugMake(this, '#slug')">
 
     </div>
-
-
     <div class="mb-2">
-        <label for="description">Short Description</label>
-        <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About subcategory">{{$subcategory ?  $subcategory->description : ''}}</textarea>
+        <label for="slug">Slug</label>
+        <input type="text" name="slug" id="slug" class="form-control mb-2" value="{{ $subcategory ? $subcategory->slug : ''}}" placeholder="Enter your slug">
+
     </div>
 
-    <div class="col-lg-12">
-        <label for="">Description</label>
-        <textarea type="text" name="primary_description" class="form-control mb-2 summernote"
-            placeholder="Description">{{$subcategory ? $subcategory->primary_description : '' }}</textarea>
+
+{{-- Additional information --}}
+    <div class="mb-2">
+        <label for="need_additional_check" class="cursor-pointer additional-infomation-toggler">Do you need additional Information?</label>
+        <input type="checkbox" name="need_additional" id="need_additional_check" class=" mb-2" value="1" {{ $subcategory ? ($subcategory->need_additional == 1 ? 'checked' : '') : '' }} onchange="document.getElementById('additional_info').style.display = this.checked ? 'block' : 'none'">
     </div>
 
-    <div class="col-lg-12 pt-3">
-        <label for="">Additional Description</label>
-        <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
-            placeholder="Additional Description">{{ $subcategory ? $subcategory->additional_description : '' }}</textarea>
-    </div>
+    <div class="mb-2" id="additional_info" style="display: {{ $subcategory ? ($subcategory->need_additional == 1 ? 'block' : 'none') : 'none' }}">
+        <div class="mb-2">
+            <label for="description">Short Description</label>
+            <textarea type="text" name="description" class="form-control mb-2" placeholder="Enter About subcategory">{{$subcategory ?  $subcategory->description : ''}}</textarea>
+        </div>
 
+        <div class="col-lg-12">
+            <label for="">Description</label>
+            <textarea type="text" name="primary_description" class="form-control mb-2 summernote"
+                placeholder="Description">{{$subcategory ? $subcategory->primary_description : '' }}</textarea>
+        </div>
+
+        <div class="col-lg-12 pt-3">
+            <label for="">Additional Description</label>
+            <textarea type="text" name="additional_description" class="form-control mb-2 summernote"
+                placeholder="Additional Description">{{ $subcategory ? $subcategory->additional_description : '' }}</textarea>
+        </div>
+    </div>
 
     <label for="status"> Subcategory Status <br/>
         <input type="checkbox" checked class="" hidden  name="status"   value="0">
@@ -62,3 +74,25 @@
     </div>
 
 </form>
+
+
+<style>
+    div#additional_info {
+        border: 1px solid gray;
+        padding: 10px;
+        border-radius: 5px;
+        margin: -27px 0 0 0;
+    }
+    .additional-infomation-toggler{
+        display: inline-block;
+        background: white;
+        margin-left: 10px;
+        padding: 0 14px 0 0;
+    }
+    div#additional_info {
+        border: 1px solid gray;
+        padding: 10px;
+        border-radius: 5px;
+        margin: -27px 0 0 0;
+    }
+</style>

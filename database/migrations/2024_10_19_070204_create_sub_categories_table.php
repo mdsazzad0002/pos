@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('primary_description')->nullable();
             $table->longText('additional_description')->nullable();
             $table->string('category_id');
+            $table->string('need_additional')->default(1);
             $table->string('status')->default(1);
             $table->string('feature')->default(0);
             $table->string('upload_id')->nullable();

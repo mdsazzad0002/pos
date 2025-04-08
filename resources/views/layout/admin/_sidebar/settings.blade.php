@@ -118,6 +118,14 @@
             </a>
         </li>
         @endcan
+        @can('settings courier_configration')
+        <li class="nav-item">
+            <a href="{{ route('admin.settings.sms-configration.index') }}" class="nav-link ">
+                <i class="fas fa-truck-loading nav-icon"></i>
+                <p> SMS Configuration</p>
+            </a>
+        </li>
+        @endcan
 
 
         @canany(['language read','Translation read'])

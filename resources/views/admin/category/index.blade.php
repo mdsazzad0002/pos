@@ -15,7 +15,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        {{ __('category.list') }}
+      Category 
         <div>
             @can('user create')
                 <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  Category" data-href="{{ route('admin.category.create') }}">+ Add New Category</button>

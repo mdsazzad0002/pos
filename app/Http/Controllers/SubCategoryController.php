@@ -27,7 +27,7 @@ class SubCategoryController extends Controller
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.subcategory.show', $row->id);
                     return "<button class='btn btn-primary '
-                    data-dialog=' modal-dialog-centered'
+                    data-dialog=' '
                     onclick='button_ajax(this)'
                     data-title='$row->name  info'
                     data-href='$view_route'>View</button>";
@@ -44,7 +44,7 @@ class SubCategoryController extends Controller
 
                     $edit_route = route('admin.subcategory.edit', $row->id);
                     $edit_button =  "<button class='btn btn-warning '
-                    data-dialog='modal-dialog-centered modal-lg'
+                    data-dialog=' modal-lg'
                     data-title='$row->name'
                     onclick='button_ajax(this)'
                     data-href='$edit_route'>Edit</button>";
@@ -82,30 +82,8 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required', 'category'=>'required|integer']);
-
-        $category = new SubCategory;
-        $category->name = $request->name;;
-        $category->category_id = $request->category;
-        $category->description = $request->description;
-        $category->primary_description = $request->primary_description;
-        $category->additional_description = $request->additional_description;
-        $category->status = $request->status;
-
-        $category->creator = auth()->user()->id ?? 0;
-
-        $category->upload_id = $request->image ?? 0;
-        $category->slug = create_slug($request->name, 'SubCategory', 'slug');
-        $category->save();
-
-
-        return json_encode([
-            'title'=>'Successfully  Created Category',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
-
-
+        $request['create']='Successfully Created';
+        return $this->update($request);
     }
 
     /**
@@ -127,23 +105,37 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SubCategory $subcategory)
+    public function update(Request $request, $subcategory = null)
     {
+
+        
         $request->validate(['name' => 'required', 'category'=>'required|integer']);
-        $subcategory->name = $request->name;
-        $subcategory->category_id = $request->category;
-        $subcategory->description = $request->description;
-        $category->primary_description = $request->primary_description;
-        $category->additional_description = $request->additional_description;
-        $subcategory->status = $request->status;
+
+        if($subcategory){
+            $subcategory = SubCategory::find($subcategory);
+        }else{
+            $subcategory = new SubCategory;
+            $category->creator = auth()->user()->id ?? 0;
+        }
 
 
-        $subcategory->upload_id = $request->image ?? 0;
-        $subcategory->save();
+        if($subcategory){
+            $subcategory->name = $request->name ?? '';
+            $subcategory->category_id = $request->category ?? 0;
+            $subcategory->description = $request->description ?? '';
+            $subcategory->primary_description = $request->primary_description ?? '';
+            $subcategory->additional_description = $request->additional_description ?? '';
+            $subcategory->need_additional = $request->need_additional ?? 0;
+            
+            $subcategory->status = $request->status;
+            $subcategory->upload_id = $request->image ?? 0;
+            $subcategory->slug = $request->slug ?? '';
+            $subcategory->save();
 
+        }
 
         return json_encode([
-            'title'=>'Successfully  Updated subcategory',
+            'title'=> isset($request['create']) ? $request['create'] : 'Successfully  Updated subcategory',
             'type'=>'success',
             'refresh'=>'true',
         ]);

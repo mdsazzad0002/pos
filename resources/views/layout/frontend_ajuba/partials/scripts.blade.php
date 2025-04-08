@@ -48,7 +48,41 @@
         function add_to_cart(thi){
 
             var current = thi;
-            if ($(thi).data('quantaty')) {
+            if($(current).data('variant_cart_simple')){
+                $.ajax({
+                    type: 'get',
+                    url:'{{ route('add_to_cart') }}',
+                    data:{
+                        'product_id': $(current).data('id'),
+                        'quantity' : 1,
+                        'size' : $(current).data('size'),
+                        'update':'sdfasd'
+
+                    },
+                    success:function(data){
+                        if(data.type == 'error'){
+                            flasher.error(data.title);
+                        }
+                        if(data.type == 'info'){
+                            flasher.info(data.title);
+                        }
+                        if(data.type == 'success'){
+                            flasher.success(data.title);
+                        }
+
+                        setTimeout(() => {
+                            load_cart_and_wishlist();
+                        },500)
+
+                        setTimeout(() => {
+                            if($(current).data('href')){
+                                    window.location.href = $(current).data('href');
+                            }
+                        },1000)
+                      
+                    }
+                })
+            }else if ($(thi).data('quantaty')) {
 
 
 

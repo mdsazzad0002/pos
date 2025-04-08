@@ -15,7 +15,7 @@
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        Users
+        Sub Category
         <div>
             @can('user create')
 

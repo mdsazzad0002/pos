@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('status')->default(1);
             $table->string('upload_id')->nullable();
             $table->string('upload_bg')->nullable();
+            $table->boolean('service_status')->default(0);
+            
             $table->softDeletes();
             $table->timestamps();
         });

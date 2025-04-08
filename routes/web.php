@@ -98,6 +98,7 @@ use App\Http\Controllers\SubScriberController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WhyChooseUsController;
 use App\Http\Controllers\AchivementController;
+use App\Http\Controllers\SmsController;
 
 
 
@@ -258,6 +259,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
     Route::resource('settings/payment-configuration', PaymentCredentialController::class)->names('settings.payment-configration');
+    
 
     Route::post('fcm_notification/test', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
     Route::post('fcm_notification/subscribe/', [PushNotificationController::class, 'subscribe'])->name('fcm_notification.subscribe');
@@ -301,6 +303,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
     // Setting
+    
     Route::get('/settings/{slug}/{key}', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/settings/{view}/show/update', [SettingController::class, 'view_setting'])->name('setting.view');
     Route::get('/settings/{slug}/{key}/group', [SettingController::class, 'index_group'])->name('setting.index_group');
@@ -606,6 +609,8 @@ Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCred
 
 
 
+
+
 // ============================== Admin Management ===================================== Admin Management =================
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function() {
 
@@ -613,6 +618,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 // ============================= Management AND Function ======================= Management AND Function =========================
 // ============================= Management AND Function ======================= Management AND Function =========================
 
+
+    Route::get('settings/sms', [SmsController::class, 'index'])->name('settings.sms-configration.index');
+    Route::post('settings/sms/send', [SmsController::class, 'send'])->name('settings.sms-configration.send');
     // Admin
     // product Management
     Route::resource('/product', ProductController::class)->names('product'); // Use an empty string here
