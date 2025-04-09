@@ -85,11 +85,11 @@
 
 <div class="card">
     <div class="card-body">
-        {{ __('smtp.send_a_test_mail') }}
+        Send a Test Mail
         <br>
         <form action="{{ route('admin.mail.test') }}" class="input-group form_ajax_submit" method="post">
             @csrf
-            <input type="email" name="mail" class="form-control" placeholder="{{ __('mailconfigration.test.email') }}">
+            <input type="email" name="mail" class="form-control" placeholder="Enter email address">
             <button class="btn btn-primary submit">Send</button>
         </form>
     </div>

@@ -13,7 +13,7 @@
     <ul class="nav nav-treeview">
         @can('settings main')
             <li class="nav-item">
-                <a href="{{ route('admin.setting.index', ['main-setting', '9']) }}" class="nav-link">
+                <a href="{{ route('admin.setting.index', ['page'=>'main']) }}" class="nav-link">
                     <i class="fas fa-cogs nav-icon"></i>
                     <p>Main Setting</p>
                 </a>
@@ -22,7 +22,7 @@
 
         @can('settings notification')
             <li class="nav-item">
-                <a href="{{ route('admin.fcm_notification.index') }}" class="nav-link">
+                <a href="{{ route('admin.setting.index', ['page'=>'fcm']) }}" class="nav-link">
                     <i class="fas fa-bell nav-icon"></i>
                     <p>Notification</p>
                 </a>
@@ -31,7 +31,7 @@
 
         @can('settings site_verification')
             <li class="nav-item">
-                <a href="{{ route('admin.setting.index', ['site-verification-setting', '25']) }}" class="nav-link">
+                <a href="{{ route('admin.setting.index', ['page'=> 'site-verify']) }}" class="nav-link">
                     <i class="fas fa-certificate nav-icon"></i>
                     <p>Site Verification</p>
                 </a>
@@ -40,7 +40,7 @@
 
         @can('settings site_tag')
         <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['site-tag-management', '24']) }}" class="nav-link">
+            <a href="{{ route('admin.setting.index', ['page'=>'site-tag']) }}" class="nav-link">
                 <i class="fas fa-tags nav-icon"></i>
                 <p>Site Tag </p>
             </a>
@@ -49,7 +49,7 @@
 
         @can('settings tracking_report')
         <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['tracking_report', '27']) }}" class="nav-link">
+            <a href="{{ route('admin.setting.index', ['page'=> 'tracking-report']) }}" class="nav-link">
                 <i class="fas fa-route nav-icon"></i>
                 <p>Tracking Report</p>
             </a>
@@ -58,21 +58,13 @@
 
         @can('settings site_pwa')
         <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['site-pwa-management', '20']) }}" class="nav-link">
+            <a href="{{ route('admin.setting.index', ['page'=>'pwa']) }}" class="nav-link">
                 <i class="bi bi-app-indicator nav-icon"></i>
                 <p>Site PWA </p>
             </a>
         </li>
         @endcan
 
-        @can('settings messagesdk')
-        <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['takto-messageing-management', '31']) }}" class="nav-link">
-                <i class="bi bi-chat-left-dots-fill nav-icon"></i>
-                <p>Message SDK</p>
-            </a>
-        </li>
-        @endcan
 
         @can('settings cookie')
         <li class="nav-item">
@@ -85,7 +77,7 @@
 
         @can('settings custom_js_css')
         <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['custom_js_css', '45']) }}" class="nav-link">
+            <a href="{{ route('admin.setting.index', ['page'=> 'custom-script']) }}" class="nav-link">
                 <i class="fas fa-code nav-icon"></i>
                 <p>Custom JS/CSS</p>
             </a>
@@ -112,16 +104,25 @@
 
         @can('settings courier_configration')
         <li class="nav-item">
-            <a href="{{ route('admin.settings.courier-configration.index') }}" class="nav-link ">
+            <a href="{{ route('admin.setting.index', ['page'=>'courier']) }}" class="nav-link ">
                 <i class="fas fa-truck-loading nav-icon"></i>
                 <p> Courier Configuration</p>
             </a>
         </li>
         @endcan
-        @can('settings courier_configration')
+        
+        @can('settings messagesdk')
+        <li class="nav-item">
+            <a href="{{ route('admin.setting.index', ['page'=>'message-sdk']) }}" class="nav-link">
+                <i class="bi bi-chat-left-dots-fill nav-icon"></i>
+                <p>Message SDK</p>
+            </a>
+        </li>
+        @endcan
+        @can('settings sms_configration')
         <li class="nav-item">
             <a href="{{ route('admin.settings.sms-configration.index') }}" class="nav-link ">
-                <i class="fas fa-truck-loading nav-icon"></i>
+                <i class="fas fa-sms nav-icon"></i>
                 <p> SMS Configuration</p>
             </a>
         </li>

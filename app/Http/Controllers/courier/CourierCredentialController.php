@@ -9,37 +9,25 @@ use App\Models\courier\CourierCredential;
 
 class CourierCredentialController extends Controller
 {
-    public function index(){
+//     public function index(){
 
-        $payment_credentials = CourierCredential::get();
+//         $payment_credentials = CourierCredential::get();
 
-        return view('admin.settings.courier', compact('payment_credentials'));
-    }
+//         return view('admin.settings.courier', compact('payment_credentials'));
+//     }
 
-    public function update(Request $request,  $courier_configuration ){
-        $courier_configuration = CourierCredential::findOrFail($courier_configuration);
+    public function update(Request $request, CourierCredential $courier_configuration ){
+      
 
-        if($courier_configuration){
-
-            $validatedData = $request->only([
-                'provider', 'Secret_Key', 'Api_Key', 'client_id', 'client_secret',
-                'secret_token', 'key', 'sandbox_status', 'status'
-            ]);
-            $courier_configuration->update($validatedData);
+      
+            $courier_configuration->update($request->multiple_settings);
             
             return json_encode([
                 'title' => 'Successfully   updated',
                 'type' => 'success',
                 'refresh' => 'true',
             ]);
-        }
-
-
-            return json_encode([
-                'title' => 'Failed to updated',
-                'type' => 'error',
-                'refresh' => 'false',
-            ]);
+     
 
     }
 

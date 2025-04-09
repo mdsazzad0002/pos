@@ -147,7 +147,7 @@ Route::get('/dashboard', function () {
 
 Route::post('/uploads/post', [UploadController::class, 'store']);
 Route::get('/uploads/get', [UploadController::class, 'index']);
-Route::get('notification', [dashboardController::class, 'noti']);
+// Route::get('notification', [dashboardController::class, 'noti']);
 
 
 
@@ -264,7 +264,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::post('fcm_notification/test', [PushNotificationController::class, 'sendNotification'])->name('sendNotification');
     Route::post('fcm_notification/subscribe/', [PushNotificationController::class, 'subscribe'])->name('fcm_notification.subscribe');
 
-    Route::get('fcm_notification', [PushNotificationController::class, 'index'])->name('fcm_notification.index');
+    // Route::get('fcm_notification', [PushNotificationController::class, 'index'])->name('fcm_notification.index');
     Route::post('fcm_notification', [PushNotificationController::class, 'store'])->name('fcm_notification.store');
 
 
@@ -304,7 +304,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     // Setting
     
-    Route::get('/settings/{slug}/{key}', [SettingController::class, 'index'])->name('setting.index');
+    Route::get('/settings/{page}', [SettingController::class, 'index'])->name('setting.index');
+    // Route::get('/settings/{slug}/{key}', [SettingController::class, 'index'])->name('setting.index');
+
     Route::get('/settings/{view}/show/update', [SettingController::class, 'view_setting'])->name('setting.view');
     Route::get('/settings/{slug}/{key}/group', [SettingController::class, 'index_group'])->name('setting.index_group');
 
@@ -604,7 +606,7 @@ Route::middleware('auth', 'setlocale')->group(function () {
 
 
 Route::get('bdcouriertracking', [trackingController::class, 'tracking'])->name('tracking');
-Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
+// Route::get('admin/settings/courier', [CourierCredentialController::class, 'index'])->name('admin.settings.courier-configration.index');
 Route::put('admin/settings/courier/{courier_configuration}/update', [CourierCredentialController::class, 'update'])->name('admin.settings.courier-configration.update');
 
 

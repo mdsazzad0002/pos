@@ -6,7 +6,8 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.fcm')
+        <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary"  items="fcm" where="" title="Total items" icon="far fa-payment" link="#" sort="sort_3" />
+        <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary"  items="fcm" where="status" title="Status" icon="far fa-payment" link="#" sort="sort_3" />
     </div>
 </x-summary>
 
@@ -17,7 +18,10 @@
             </h3>
         </div>
         <div class="card-body">
-            <form action="" method="POST" class="form_ajax_submit">
+            @php
+                $fcm = \App\Models\fcm::first();
+            @endphp
+            <form action="{{ route('admin.fcm_notification.store') }}" method="POST" class="form_ajax_submit">
                 @csrf
                 <div class="row">
                     <div class="col-md-12 col-lg-6">

@@ -2,7 +2,7 @@
 @extends('layout.admin.master')
 
 {{-- Define Site Title  --}}
-@section('title',__('settings.smtp_setting'))
+@section('title', 'Mail Configuration')
 
 {{-- Content Extends  --}}
 @section('content')
@@ -10,9 +10,18 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.smtp')
+            @can('smtp read')
+                <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary"  items="mail_template" where="" title="Mail Template" icon="far fa-payment" link="#" sort="sort_3" />
+            @endcan
+
+            @can('imap management')
+                <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-success" count="Mail Box"  title="Mail Box Imap" icon="far fa-payment" link="{{  route('admin.imap.index') }}" sort="sort_3" />
+            @endcan
     </div>
+
 </x-summary>
+
+
 
 
 <div class="row">

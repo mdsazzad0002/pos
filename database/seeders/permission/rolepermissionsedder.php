@@ -133,6 +133,7 @@ class rolepermissionsedder extends Seeder
                        // courier
                         'settings courier_configration',
                         'settings custom_js_css',
+                        'sms_configration',
 
 
                 //]]]
@@ -172,6 +173,7 @@ class rolepermissionsedder extends Seeder
                 'profile create',
                 'profile edit',
                 'profile delete',
+
 
 
                 // Settings

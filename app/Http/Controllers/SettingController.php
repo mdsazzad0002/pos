@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\View;
 
 class SettingController extends Controller
 {
@@ -31,61 +32,20 @@ class SettingController extends Controller
 
 
 
-    public function index(Request $request, $slug, $key)
+    public function index(Request $request, $page)
     {
 
-        $perpage = 30;
-        if($request->has('perpage')){
-            if($request->perpage != ''){
-                $perpage = $request->perpage;
+        if($page != null ){
+            $directive_create = 'admin.settings.' . $page;
+            if(View::exists($directive_create)){
+                return view($directive_create);
+
             }
         }
-
-
-        $settings = setting::where('key', $key)->where(function ($query) use ($request) {
-            if($request->has('s')){
-                $search_keyword = $request->s;
-                $query->where('name', 'LIKE', "%$search_keyword%");
-            }
-        })->paginate($perpage);
-
-
-        if ($request->ajax()) {
-            return view('admin.settings.partials.helper.' . $slug.'-helper', compact('settings'));
-        }
-        $flag_target = 0;
-        if($slug == 'main-setting' && $key == '9'){
-            $flag_target = 1;
-        }elseif($slug == 'site-verification-setting' && $key == '25'){
-            $flag_target = 1;
-        }elseif($slug == 'site-tag-management' && $key == '24'){
-            $flag_target = 1;
-        }elseif($slug == 'site-pwa-management' && $key == '20'){
-            $flag_target = 1;
-        }elseif($slug == 'takto-messageing-management' && $key == '31'){
-            $flag_target = 1;
-        }elseif($slug == 'cookie-management' && $key == '40'){
-            $flag_target = 1;
-        }elseif($slug == 'tracking_report' && $key == '27'){
-            $flag_target = 1;
-
-        }elseif($slug == 'custom_js_css' && $key == '45'){
-            $flag_target = 1;
-
-        }
-
-     
-
-
-
+        
+  
         $login_check = new LoginCheckController();
         $login_check->identifysender($request);
-
-
-
-
-// return $settings;
-
 
 
         // return $settings;
@@ -256,7 +216,7 @@ class SettingController extends Controller
             $databaseName = config('database.connections.mysql.database'); //env('DB_DATABASE', 'd_pos');
             $username = config('database.connections.mysql.username');//env('DB_USERNAME', 'root');
             $password = config('database.connections.mysql.password'); //env('DB_PASSWORD','');
-            $backupPath = storage_path( 'app/'.str_replace(' ', '_',  settings('app_name', 9)).'_'.date('d-M-Y-h-i-s-A').'.sql');
+            $backupPath = storage_path( 'app/'.str_replace(' ', '_',  settings('app_name_short', 9)).'_'.date('d-M-Y-h-i-s-A').'.sql');
             $host = config('database.connections.mysql.host');//env('DB_HOST', '127.0.0.1');
     
     

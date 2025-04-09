@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\payment\PaymentCredential;
 use App\Models\setting;
 use App\Models\SubCategory;
+use App\Models\MailBox;
 use App\Notifications\NotificationDynamic;
 use Illuminate\Support\Facades\Notification;
 
@@ -112,15 +113,10 @@ class dashboardController extends Controller
                 $query = area::query(); // Start the query for the User model
             }elseif($items_req === 'fcm'){
                 $query = fcm::query(); // Start the query for the User model
+            }elseif($items_req === 'mail_box'){
+                $query = MailBox::query(); // Start the query for the User model
 
-            }elseif(
-                $items_req === 'cookie' ||
-                $items_req === 'takto'||
-                $items_req === 'pwa' ||
-                $items_req === 'site_verification' ||
-                $items_req === 'main_settings' ||
-                $items_req === 'tag'
-            ){
+            }else{
                 $query = setting::query(); // Start the query for the User model
 
             }

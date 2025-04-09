@@ -16,13 +16,17 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            Mram <a href="https://sms.mram.com.bd/" target="_blank">Referance</a>
+                            Mram <a href="https://sms.mram.com.bd/" target="_blank">Reference</a>
                         </div>
                         <div class="card-body">
                             @php
-                                $data = [
+                                $sms_settings = [
                                     [
                                         'name' => 'maram_api_key',
+                                        'key' => '87',
+                                    ],
+                                    [
+                                        'name' => 'mariam_api_serder_id',
                                         'key' => '87',
                                     ],
                                     [
@@ -31,35 +35,47 @@
                                     ],
                                 ];
 
-                                $data_object = json_decode(json_encode($data));
+                                $sms_settings = json_decode(json_encode($sms_settings));
 
                             @endphp
 
-                          
-                                    <form class=" form_ajax_submit" action="{{ route('setting.store.update') }}"
-                                        enctype="multipart/form-data" method="POST">
-                                        @csrf
-                                        <input type="text" name="key_code" value="87">
-                                        @foreach ($data_object as $setting)
-                                      
-                                          <label for="{{ $setting->name. $setting->key }}">
-                                            {{ Str::title(Str::replace('_', ' ',$setting->name)) }}
-                                        </label>
-                                          <input type="text" name="multiple_settings[{{ $setting->name }}]" id="{{ $setting->name . $setting->key }}" class="form-control" value="{{ settings($setting->name, $setting->key) }}" id="">
-                                        @endforeach
-                                        <div class="pt-2 d-flex justify-content-end">
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </form>
 
-                                    <br/>
-                                    <form action="{{ route('admin.settings.sms-configration.send') }}"  class="input-group form_ajax_submit" method="post">
-                                       @csrf
-                                        <input type="tel" name="phone" class="form-control"
-                                            placeholder="Enter your phone number with country code">
+                            {{-- update Sms Settings --}}
+                            <form class=" form_ajax_submit" action="{{ route('setting.store.update') }}"
+                                enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <input hidden type="text" name="key_code" value="87">
+
+                                @foreach ($sms_settings as $setting)
+                                    @include('admin.settings.partials.main-setting-helper', [
+                                        'items_name' => $setting->name,
+                                        'key' => $setting->key,
+                                    ])
+                                    <br>
+                                @endforeach
+
+                                <div class="pt-2 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                            {{-- update Sms Settings --}}
+                            <br />
+
+                            {{-- test sms settings --}}
+                            <form action="{{ route('admin.settings.sms-configration.send') }}"
+                                class="input-group form_ajax_submit" method="post">
+                                @csrf
+                              
+                                    <input type="tel" name="phone" class="rounded-left form-control"
+                                    placeholder="Enter your phone number with country code">
+
+                             
+                                    <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">Submit</button>
-                                    </form>
-                               
+                                    </div>
+                            </form>
+                            {{-- test sms settings --}}
+
                         </div>
                     </div>
                 </div>

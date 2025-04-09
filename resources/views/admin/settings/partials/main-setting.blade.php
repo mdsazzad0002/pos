@@ -26,7 +26,7 @@
                 @endphp
 
        
-                @include('admin.settings.partials.main-setting-helper', ['key' => $setting->name, 'items_key'=> 'value', 'items_value' => $items_value])
+                @include('admin.settings.partials.main-setting-helper_part', ['key' => $setting->name, 'items_key'=> 'value', 'items_value' => $items_value])
 
 
 

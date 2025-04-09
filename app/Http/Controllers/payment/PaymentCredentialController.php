@@ -23,19 +23,14 @@ class PaymentCredentialController extends Controller
         if(!$payment_configuration){
             return response()->json(['message' => 'Payment Credential not found'], 404);
         }
-        
-        $validatedData = $request->only([
-            'provider', 'store_id', 'store_password', 'merchant_id', 'api_key', 'signature_key', 'app_key', 'app_secret', 'username', 'password', 'merchant_number', 'public_key', 'private_key', 'client_id', 'secret', 'publishable', 'sandbox_status', 'status', 'charge', 'banach', 'country'
-        ]);
-        $payment_configuration->update($validatedData);
-        
-    
 
-            return json_encode([
-                'title' => 'Successfully   updated',
-                'type' => 'success',
-                'refresh' => 'true',
-            ]);
+        $payment_configuration->update($request->multiple_settings);
+
+        return json_encode([
+            'title' => 'Successfully   updated',
+            'type' => 'success',
+            'refresh' => 'true',
+        ]);
 
     }
 

@@ -13,7 +13,10 @@
 
 
 <div class="row">
+@php
+      $payment_credentials = \App\Models\courier\CourierCredential::get();
 
+@endphp
 
     @foreach ($payment_credentials as $items)
 
@@ -36,7 +39,11 @@
 
                         <div class="form-group mb-2">
                             <label for="{{ $key.$items->id }}"> {{ Str::replace('_', ' ', Str::title($key)) }}</label>
-                            @include('admin.settings.partials.main-setting-helper', ['key' => $key.$items->id, 'items_key'=> $key, 'items_value' => $value])
+                            @include('admin.settings.partials.main-setting-helper', [
+                                'items_name' => $key,
+                                'key' => 'settings_value' . $key,
+                                'settings_value' => $value,
+                            ])
                         </div>
                     @endforeach
 

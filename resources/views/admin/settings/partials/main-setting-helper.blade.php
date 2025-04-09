@@ -1,46 +1,57 @@
 @php
-    $key = $key ?? '';
-    $items_value = $items_value ?? '';
-    $items_key = $items_key ?? 'value';
+    /**
+     * @param string $items_name
+     * @param string $settings_value
+     * @param string $items_name optional
+     */
+
+    if (!isset($settings_value)) {
+        $settings_value = settings($items_name, $key);
+    }
+
 @endphp
 
-@if (collect(['image', 'logo', 'icon'])->contains(fn($word) => str_contains($key, $word)))
-
-<div class="">
-    <label type="button" onclick="upload_select(this)">
-        <input type="text" name="{{$items_key}}" id="image" class="form-control mb-2" hidden>
-        <img style="max-height: 60px" src="{{  $items_value }}" alt="">
-    </label>
-</div>
-
-@elseif(str_contains($key, 'color'))
-
-<input type="color" class="form-control" placeholder="Enter App Name" name="{{$items_key}}" id="{{ $key }}" value="{{  $items_value}}">
+<label for="{{ $items_name }}">{{ Str::title(Str::replace('_', ' ', $items_name)) }}
+    @if(isset($reference))
+        <a href="{{ $reference }}" target="_blank">reference</a>
+    @endif
+</label>
+<br />
 
 
-@elseif(str_contains($key, 'text'))
-<textarea class="form-control summernote" name="{{$items_key}}" id="{{ $key }}">{{ $items_value }}</textarea>
+@if (collect(['image', 'logo', 'icon'])->contains(fn($word) => str_contains($items_name, $word)))
+    <div class="">
+        <label type="button" onclick="upload_select(this)">
+            <input type="text" name="{{ $items_name }}" id="image" class="form-control mb-2" hidden>
+            <img style="max-height: 60px" src="{{ $settings_value }}" alt="">
+        </label>
+    </div>
+@elseif(str_contains($items_name, 'color'))
+    <input type="color" class="form-control" placeholder="Enter App Name"
+        name="multiple_settings[{{ $items_name }}]" id="{{ $items_name }}" value="{{ $settings_value }}">
+@elseif(str_contains($items_name, 'text'))
+    <textarea class="form-control summernote" name="multiple_settings[{{ $items_name }}]" id="{{ $items_name }}">{{ $settings_value }}</textarea>
+@elseif(str_contains($items_name, 'code'))
+    <textarea class="form-control" name="multiple_settings[{{ $items_name }}]" id="{{ $items_name }}">{{ $settings_value }}</textarea>
 
-@elseif(str_contains($key, 'code'))
-<textarea class="form-control" name="{{$items_key}}" id="{{ $key }}">{{ $items_value }}</textarea>
+    <script>
+        CodeMirror.fromTextArea(document.getElementById("{{ $items_name }}"), {
+            mode: "javascript",
+            theme: "default",
+            lineNumbers: true,
+        });
+    </script>
+@elseif(str_contains($items_name, 'status'))
+    <div>
 
-<script>
-    CodeMirror.fromTextArea(document.getElementById("{{ $key }}"), {
-        mode: "javascript",
-        theme: "default",
-        lineNumbers: true,
-    });
-</script>
+        <input type="checkbox" checked="" class="" hidden=""
+            name="multiple_settings[{{ $items_name }}]" value="0">
+        <input type="checkbox" class="toggle" @if ($settings_value == 1) checked @endif
+            placeholder="Enter App Name" name="multiple_settings[{{ $items_name }}]" id="{{ $items_name }}"
+            value="1">
 
-@elseif(str_contains($key, 'status'))
-<div>
-
-    <input type="checkbox" checked="" class="" hidden="" name="{{$items_key}}" value="0">
-    <input type="checkbox" class="toggle" @if($items_value == 1) checked   @endif placeholder="Enter App Name" name="{{$items_key}}" id="{{ $key }}" value="1">
-
-</div>
+    </div>
 @else
-
-<input type="text" class="form-control" placeholder="Enter App Name" name="{{$items_key}}" id="{{ $key }}" value="{{  $items_value}}">
-
+    <input type="text" class="form-control" placeholder="Enter App Name"
+        name="multiple_settings[{{ $items_name }}]" id="{{ $items_name }}" value="{{ $settings_value }}">
 @endif

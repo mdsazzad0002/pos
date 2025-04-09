@@ -8,7 +8,7 @@
         $cart_page = \App\Models\Page::where('status', 1)->where('page_type', 'cart')->first();
     }
 
-    $service_category =  \App\Models\Category::where('status',1)->where('service_status',1)->get() ?? [];
+    $service_category = \App\Models\Category::where('status', 1)->where('service_status', 1)->get() ?? [];
 @endphp
 
 @if (count($slider_list) > 0)
@@ -296,9 +296,9 @@
                                         </div>
                                     @endif
                                 @empty
-                                <div class="text-center p-5">
-                                    Not Found any Items
-                                </div>
+                                    <div class="text-center p-5">
+                                        Not Found any Items
+                                    </div>
                                 @endforelse
 
                             </div>
@@ -403,3 +403,94 @@
         justify-content: space-around;
     }
 </style>
+
+
+
+
+
+
+
+{{-- Additional slider --}}
+<br>
+<br>
+<div class="container-fluid">
+    <div class=" mb-16">
+        <div class="text-center"> Your Favorite Popular Service. </div>
+        <h2 class="text-center font-weight-bold">Popular Service</h2>
+    </div>
+    <div class="hero-slider-service" data-parent="hero-slider-service">
+
+
+        @foreach ($service_category as $category)
+            <div class="col-lg-4 items">
+
+                <a class="cat-link"
+                    onclick="modal_category_open('#v-pills-{{ $category->slug }}-tab', '#locationSelectModal_category')">
+                    <img class="cat-img img-fluid" src="{{ dynamic_asset($category->upload_id) }}" />
+                    <div class="service_category">
+                        {{ $category->name }}
+                    </div>
+                    <div class="hero-name btn btn-primary">
+                        View Details
+                    </div>
+
+                </a>
+
+            </div>
+        @endforeach
+
+    </div>
+</div>
+
+
+<style>
+    .hero-slider-service .items {
+        padding: 15px;
+    }
+
+    .hero-slider-service a.cat-link {
+        padding: 15px;
+        text-align: center;
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        background: #eee;
+        border-radius: 15px;
+
+    }
+
+    .hero-slider-service a.cat-link .btn {
+        width: auto;
+        display: inline-block;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .hero-slider-service a.cat-link .service_category {
+        font-size: 22px;
+    }
+
+    .hero-slider-service .slick-dots li button:before {
+        border: 1px solid var(--primary-color);
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+        background: var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 50%;
+    }
+
+    .hero-slider-service .slick-dots li.slick-active button:before {
+        color: var(--primary-color);
+        background: var(--primary-color);
+    }
+    .hero-slider-service .slick-dots{
+        bottom: -33px;
+    }
+</style>
+<br>
+<br>
+<br>
+
+
+{{-- Additional slider --}}
