@@ -20,7 +20,7 @@
       </div>
 
       <div class="form-group">
-          <textarea id="compose-textarea" class="form-control" wire:model="body" style="height: 300px">
+          <textarea id="compose-textarea summernote" class="form-control" wire:model="body" style="height: 300px">
 
           </textarea>
           @error('body')

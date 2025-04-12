@@ -7,10 +7,9 @@
     <div class="form-group mb-2">
         <label class="form-label" for="bannar_type">Style Valiant</label>
         <select class="form-control" name="type" id="type_select_variant">
-            <option @if($offerbanner ? ($offerbanner->type == 1) : false) selected  @endif value="1">Feature Card</option>
-            <option @if($offerbanner ? ($offerbanner->type == 2) : false) selected  @endif value="2">Full Banner</option>
-            <option @if($offerbanner ? ($offerbanner->type == 3) : false) selected  @endif value="3">Countdown</option>
-            <option @if($offerbanner ? ($offerbanner->type == 4) : false) selected  @endif value="4">Frontend Popup</option>
+            @foreach (offerbanner_type() as $key => $items)
+                  <option @if($offerbanner ? ($offerbanner->type == $key) : false) selected  @endif value="{{ $key }}">{{ $items }}</option>
+            @endforeach
         </select>
     </div>
 
@@ -54,7 +53,7 @@
 
 
     <div class="form-group mb-2 items_2_full2" style="display:none">
-        <label  type="button" onclick="upload_select(this)"> {{ __('banner.imagebg') }} <br>
+        <label  type="button" onclick="upload_select(this)"> Banner Background<br>
             <input type="text" name="image3" value="{{ $offerbanner ? $offerbanner->image3 : 0 }}" id="image" class="form-control mb-2" hidden >
             <img style="max-height: 60px" src="{{ dynamic_asset($offerbanner ? $offerbanner->image3 : 0) }}" alt="">
         </label>

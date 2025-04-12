@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class OfferBanner extends Model
 {
     use HasFactory;
+
+   
 }

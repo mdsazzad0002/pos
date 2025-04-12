@@ -1,4 +1,5 @@
 
+
 @if ($request->has('slug'))
 
     @php
@@ -26,10 +27,12 @@
 
     @endphp
 
+
     @section('title_p', $products->name)
     @if ($products->short_description != null)
         @section('description_p', $products->short_description)
     @endif
+
     @section('canonical', route('product_view_by_slug', ['slug' => $products->slug]))
 
     <main class="main-wrapper bg-lightest-gray">
@@ -79,8 +82,8 @@
 
                             <div class="col-xl-6" >
                                
-                                    <div class="position-relative">
-                                        <div id="zoomBox"> </div>
+                                    <div class="position-sticky top-0 " style="z-index: 999">
+                                        <div id="zoomBox" style="border-radius: 12px;"> </div>
                                     </div>
                              
 

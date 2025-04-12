@@ -2,10 +2,19 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('faqs', 10))
+@section('title', 'Faq Frequently Asked Questions')
 
 {{--  Content Extends  --}}
 @section('content')
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @can('testimonial read')
+             <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Testimonial"   title="Faq" icon="far fa-payment" link="{{ route('admin.testimonial.index') }}" sort="sort_3" />
+        @endcan
+
+    </div>
+</x-summary>
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
         faq

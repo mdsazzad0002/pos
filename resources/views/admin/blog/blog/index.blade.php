@@ -9,7 +9,9 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.blog')
+       @can('project read')
+           <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Project"   title="project" icon="far fa-payment" link="{{ route('admin.project.index') }}" sort="sort_3" />
+       @endcan
     </div>
 </x-summary>
 

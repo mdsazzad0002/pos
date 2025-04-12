@@ -9,9 +9,12 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        {{-- @include('admin.dashboard._cards.category') --}}
+        @can('faq read')
+             <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Faq"   title="Faq" icon="far fa-payment" link="{{ route('admin.faq.index') }}" sort="sort_3" />
+        @endcan
     </div>
 </x-summary>
+
 
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">

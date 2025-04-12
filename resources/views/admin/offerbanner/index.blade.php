@@ -2,13 +2,26 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('offerbanner', 10))
+@section('title', 'Offer & Banner')
 
 {{--  Content Extends  --}}
 @section('content')
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        {{-- <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-primary" items="site_verification" where=""
+            title="Total items" icon="far fa-payment" link="#" sort="sort_3" />
+
+        <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-success" count="Site Tag"
+            title="Site Tag Management" icon="far fa-info" link="{{ route('admin.setting.index', ['page' => 'site-tag']) }}" sort="sort_3" /> --}}
+    </div>
+</x-summary>
+
+
+
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        offerbanner
+        Offer & Banner
         <div>
             {{-- @can('offerbanner create') --}}
                 <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  offerbanner" data-href="{{ route('admin.offerbanner.create') }}">+ Add New offerbanner</button>
@@ -37,11 +50,12 @@
         responsive:true,
         ajax:'',
         columns:[
-            { data: null, name: null, orderable: false, searchable: false, render: function (data, type, row, meta) {
+            { data: null, name: null, orderable: false, title: 'SL', searchable: false, render: function (data, type, row, meta) {
                 return meta.row + meta.settings._iDisplayStart + 1;
             }},
-            { data: 'title', name: 'title', title: 'Title', orderable: false, searchable: true },
-            { data: 'status', name: 'status', title: 'Status', orderable: false, searchable: true, render: function (data, type, row, meta) {
+            { data: 'type_of_offer', name: 'type_of_offer', title: 'Type', orderable: false, searchable: true },
+            { data: 'title', name: 'title', title: 'Title', orderable: true, searchable: true },
+            { data: 'status', name: 'status', title: 'Status', orderable: true, searchable: false, render: function (data, type, row, meta) {
                 return data == 1 ? 'Active' : 'Inactive';
             }},
             {data:'view', name:'view', title:'View', searchable:false, orderable:false},

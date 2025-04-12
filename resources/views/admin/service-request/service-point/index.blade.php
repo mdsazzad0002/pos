@@ -9,7 +9,7 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.service_request')
+       <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Service"   title="Service Request" icon="far fa-payment" link="{{ route('admin.service-request.service-request.index') }}" sort="sort_3" />
     </div>
 </x-summary>
 

@@ -9,7 +9,9 @@
 
 <x-summary>
     <div class="row connectedSortable mb-2">
-        @include('admin.dashboard._cards.blog')
+       @can('blog read')
+           <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Blog"   title="blog" icon="far fa-payment" link="{{ route('admin.blog.blog.index') }}" sort="sort_3" />
+       @endcan
     </div>
 </x-summary>
 
@@ -17,9 +19,8 @@
     <div class="card-header d-flex align-items-center justify-content-between">
         Project List
         <div>
-            @can('user create')
-
-            <a class="btn btn-primary"  href="{{ route('admin.project.create') }}">+ Add New Project</a>
+            @can('project create')
+                <a class="btn btn-primary"  href="{{ route('admin.project.create') }}">+ Add New Project</a>
             @endcan
         </div>
     </div>

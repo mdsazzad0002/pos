@@ -40,6 +40,8 @@ class SettingController extends Controller
             if(View::exists($directive_create)){
                 return view($directive_create);
 
+            }else{
+                return abort('404');
             }
         }
         

@@ -9,11 +9,15 @@
     <x-summary>
         <div class="row connectedSortable mb-2">
             <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-primary" items="pwa" where="" title="Total items"
-                icon="far fa-payment" link="{{ route('admin.setting.index', ['site-pwa-management', '40']) }}"
+                icon="far fa-payment" link="#"
                 sort="sort_3" />
 
             <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-success" items="pwa" where="status" title="Status"
-                icon="far fa-payment" link="{{ route('admin.setting.index', ['site-pwa-management', '40']) }}"
+                icon="far fa-payment" link="#"
+                sort="sort_3" />
+
+            <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-success" count="Cookie" title="Cookie Settings"
+                icon="far fa-payment" link="{{ route('admin.setting.index', ['page'=>'cookie'])}}"
                 sort="sort_3" />
 
         </div>

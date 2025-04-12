@@ -2,13 +2,21 @@
 @extends('layout.admin.master')
 
 {{--  Define Site Title  --}}
-@section('title', settings('testimonials', 10))
+@section('title', 'Testimonail')
 
 {{--  Content Extends  --}}
 @section('content')
+<x-summary>
+    <div class="row connectedSortable mb-2">
+        @can('faq read')
+             <x-dashboard.link_card column="col-lg-3 col-6"  bg="bg-primary" count="Faq"   title="Faq" icon="far fa-payment" link="{{ route('admin.faq.index') }}" sort="sort_3" />
+        @endcan
+    </div>
+</x-summary>
+
 <div class="card">
     <div class="card-header d-flex align-items-center justify-content-between">
-        testimonial
+        Testimonail
         <div>
             @can('testimonial create')
                 <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered" data-title="Add New  testimonial" data-href="{{ route('admin.testimonial.create') }}">+ Add New testimonial</button>

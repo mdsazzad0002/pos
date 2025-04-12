@@ -387,3 +387,12 @@ function page_type(){
 function isMobile() {
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
+
+ function offerbanner_type(){
+    return [
+        1 => 'Feature Card',
+        2 => 'Full Banner',
+        3 => 'Countdown',
+        4 => 'Frontend Popup',
+    ];
+}

@@ -113,6 +113,10 @@ use App\Http\Controllers\FooterStyleController;
 use App\Http\Controllers\HeaderStyleController;
 use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\ServicePointController;
+use App\Http\Controllers\WaController;
+use App\Http\Controllers\WaHookController;
+use App\Http\Controllers\ShippingChargeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -204,6 +208,9 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+Route::match(['GET', 'POST'], '/webhook/whatsapp', [WaHookController::class, 'handle']);
+
+
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function(){
 
     // page
@@ -228,6 +235,11 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::resource('slider', SliderController::class)->names('slider');
     Route::get('/slider/delete/{slider}', [SliderController::class, 'delete'])->name('slider.delete');
     Route::get('/slider/getSliders/get', [SliderController::class, 'getSlider'])->name('slider.select');
+
+    // Slider
+    Route::resource('deliverycharge', ShippingChargeController::class)->names('deliverycharge');
+    Route::get('/deliverycharge/delete/{deliverycharge}', [ShippingChargeController::class, 'delete'])->name('deliverycharge.delete');
+    // Route::get('/slider/getSliders/get', [ShippingChargeController::class, 'getSlider'])->name('slider.select');
 
 
     // Service
@@ -439,7 +451,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-
+    Route::resource('wa', WaController::class)->names('wa');
+    Route::post('wa/sendMessage', [WaController::class, 'sendMessage'])->name('wa.sendMessage');
+    Route::get('wa/token-generate/get', [WaController::class, 'tokenGenerate'])->name('wa.tokenGenerate');
+    
 
     // Language
     Route::resource('language', LanguageController::class)->names('language')->middleware('can:language read');

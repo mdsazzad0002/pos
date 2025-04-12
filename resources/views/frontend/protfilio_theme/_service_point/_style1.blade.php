@@ -13,6 +13,9 @@
             @foreach ($service_list as $service)
                 <div class="col-md-6 col-lg-4 col-xl-3 mb-3">
                     <div class="card">
+                        <div class="card-header p-0">
+                            <img src="{{ dynamic_asset($service->upload_id) }}" alt="" class="img-fluid">
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"> {{ $service->name }} </h5>
                             <p class="card-text"> {{ $service->location }} </p>

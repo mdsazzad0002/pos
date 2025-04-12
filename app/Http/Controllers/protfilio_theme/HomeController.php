@@ -40,7 +40,8 @@ class HomeController extends Controller
     public function index($view = null, $slug = null){
         $request = request();
         $edit_url =  $url = $request->url() . '?' . http_build_query(request()->query());
-        // return  dd($view, $slug);
+       
+       
         
 
 
@@ -49,8 +50,8 @@ class HomeController extends Controller
 
                 // $url = $request->url;
                 // $homepage['slug'] = $url;
-                //   #requestUri: "/previdw_page_and_fornt_page?preview_page=4&url=http://pos.localhost/product/details?slug=test-product"
-
+                // #requestUri: "/previdw_page_and_fornt_page?preview_page=4&url=http://pos.localhost/product/details?slug=test-product"
+                  
 
         }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
@@ -58,21 +59,29 @@ class HomeController extends Controller
             $homepage = Page::where('status', 1)->where('slug', $view)->first();
             if(!$homepage){
                 $homepage = Page::where('status', 1)->where('slug', $view.'/'.$slug)->first();
+             
+            }else{
+                if($homepage->slug != $view.'/'.$slug){
+                    $request['slug'] = $slug;
+                }
             }
         }
 
+        // dd( $slug);
+     
         if($homepage){
 
             $homepagemanage = HomePageManage::where('status', 1)->where('controlby', $homepage->id)->orderBy('order', 'asc')->get();
 
-
+           
             if($request->has('preview_page')){
                 return view('frontend.protfilio_theme.home.preview', compact('homepagemanage', 'homepage', 'request', 'edit_url'));
             }
             return view('frontend.protfilio_theme.home.index', compact(   'homepagemanage', 'homepage', 'request', 'edit_url'));
 
-
+        
         }else{
+            return  dd($view, $slug);
             if(env('APP_DEBUG') == true){
                 abort('404', 'Not Set Home Page');
             }else{
@@ -1109,11 +1118,9 @@ class HomeController extends Controller
 
 
     public function product_view_by_slug(Request $request, $slug){
-        // return $request->all();
 
-        $request['slug'] = $slug;
-        $details_page = Page::where('status', 1)->where('page_type', 'view')->first();
-        return   $this->index($request, $details_page?->slug);
+         $details_page = Page::where('status', 1)->where('page_type', 'view')->first();
+        return   $this->index($details_page->slug,  $request['slug'] ?? "");
     }
 
 

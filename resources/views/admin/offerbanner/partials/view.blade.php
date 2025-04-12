@@ -3,6 +3,11 @@
     {{--  Action info  --}}
 
     <tr>
+        <td>Type : </td>
+        <td>{{ offerbanner_type()[$offerbanner->type] }}</td>
+    </tr>
+
+    <tr>
         <td>Image Items : </td>
         <td> <img src="{{ dynamic_asset($offerbanner->image1 ?? 0) }}"  style="width: 250px"/> </td>
     </tr>

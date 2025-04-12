@@ -95,10 +95,12 @@
                     </a>
                 @endforeach
 
-                {{-- <a class="cat-link" href="{{ url($filter_page->slug) }}">
-                    <i class="fas fa-th-large" style="    font-size: 44px;"></i>
-                    <div class="hero-name"> All Services <i class="fas fa-arrow-right"></i></div>
-                </a> --}}
+                @if ($filter_page)
+                    <a class="cat-link" href="{{ url($filter_page->slug) }}">
+                        <i class="fas fa-th-large" style="    font-size: 44px;"></i>
+                        <div class="hero-name"> {{ $filter_page->name }} <i class="fas fa-arrow-right"></i></div>
+                    </a>
+                @endif
 
             </div>
             <button class="scroll-right">&gt;</button>

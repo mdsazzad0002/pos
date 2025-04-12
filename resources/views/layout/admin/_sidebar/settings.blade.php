@@ -68,7 +68,7 @@
 
         @can('settings cookie')
         <li class="nav-item">
-            <a href="{{ route('admin.setting.index', ['cookie-management', '40']) }}" class="nav-link">
+            <a href="{{ route('admin.setting.index', ['page' => 'cookie']) }}" class="nav-link">
                 <i class="fas fa-cookie-bite nav-icon"></i>
                 <p>Cookie </p>
             </a>
@@ -107,6 +107,15 @@
             <a href="{{ route('admin.setting.index', ['page'=>'courier']) }}" class="nav-link ">
                 <i class="fas fa-truck-loading nav-icon"></i>
                 <p> Courier Configuration</p>
+            </a>
+        </li>
+        @endcan
+        
+        @can('settings courier_configration')
+        <li class="nav-item">
+            <a href="{{ route('admin.deliverycharge.index') }}" class="nav-link ">
+                <i class="fas fa-truck-loading nav-icon"></i>
+                <p>  Delivery Charge</p>
             </a>
         </li>
         @endcan

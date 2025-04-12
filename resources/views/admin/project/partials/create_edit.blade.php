@@ -12,7 +12,10 @@
 
     <x-summary>
         <div class="row connectedSortable mb-2">
-            {{-- @include('admin.dashboard._cards.project') --}}
+            @can('blog read')
+                <x-dashboard.link_card column="col-lg-3 col-6" bg="bg-primary" count="Blog" title="blog" icon="far fa-payment"
+                    link="{{ route('admin.blog.blog.index') }}" sort="sort_3" />
+            @endcan
         </div>
     </x-summary>
 
@@ -46,13 +49,14 @@
                                     <div class="col-lg-12">
                                         <label for="">Slug</label>
                                         <input type="text" name="slug" class="form-control mb-2"
-                                            placeholder="Enter slug name" id="generateSlug" value="{{ $project->slug ?? '' }}">
+                                            placeholder="Enter slug name" id="generateSlug"
+                                            value="{{ $project->slug ?? '' }}">
                                     </div>
                                 </div>
 
 
                                 <div class="row">
-                    
+
 
 
                                     <div class="col-lg-6">
@@ -60,7 +64,8 @@
                                             <input type="text" name="image" id="image" class="form-control mb-2"
                                                 value="{{ $project ? $project->upload_id : 0 }}" hidden>
                                             <img style="max-height: 60px"
-                                                src="{{ dynamic_asset($project ? $project->upload_id : 0) }}" alt="">
+                                                src="{{ dynamic_asset($project ? $project->upload_id : 0) }}"
+                                                alt="">
                                         </label>
                                     </div>
 
@@ -71,8 +76,8 @@
                                             <input type="checkbox" checked class="" hidden name="status"
                                                 value="0">
                                             <input type="checkbox" class="status toggle"
-                                                {{ $project ? ($project->status ? 'checked' : '') : '' }} placeholder="status"
-                                                name="status" id="service" value="1">
+                                                {{ $project ? ($project->status ? 'checked' : '') : '' }}
+                                                placeholder="status" name="status" id="service" value="1">
                                         </label>
                                     </div>
 
@@ -94,7 +99,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <br>
-                                        
+
                                         <div class="d-flex justify-content-end">
                                             <button class="btn btn-warning mr-1" type="button"
                                                 onclick="document.querySelector('.form_ajax_submit').reset()">Reset</button>

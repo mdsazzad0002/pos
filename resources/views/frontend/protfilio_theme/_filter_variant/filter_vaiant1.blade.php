@@ -61,7 +61,7 @@
                                                     <div class="check-block">
                                                         <input type="checkbox" value="{{ $category->id  }}"  id="cat{{ $category->id }}"
 
-                                                            @if(\request('category') == $category->slug) checked @endif
+                                                            @if(\request('category') == $category->slug && request('category') != '') checked @endif
 
                                                              class="sub-check-box main_check_category">
                                                         <label for="cat{{ $category->id }}">{{ $category->name

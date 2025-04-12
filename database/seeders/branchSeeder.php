@@ -13,13 +13,16 @@ class branchSeeder extends Seeder
      */
     public function run(): void
     {
-        branch::create(
-            [
-                'name' => 'Head Branch',
-                'location' => 'Mirpur 10',
-                'creator' => '1',
-                'status' => 1
-            ]
-        );
+        if(branch::count() < 1){
+            branch::create(
+                [
+                    'name' => 'Head Branch',
+                    'location' => 'Unknown',
+                    'creator' => '1',
+                    'status' => 1
+                ]
+            );
+
+        }
     }
 }

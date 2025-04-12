@@ -17,6 +17,10 @@ class OfferbannerController extends Controller
            if (request()->ajax()) {
             return DataTables::make(offerbanner::query())
 
+                ->addColumn('type_of_offer', function ($row) {
+                    return offerbanner_type()[$row->type];
+                })
+
                 ->addColumn('view', function ($row) {
                     $view_route = route('admin.offerbanner.show', $row->id);
                     return "<button class='btn btn-primary '
@@ -55,7 +59,7 @@ class OfferbannerController extends Controller
 
 
                 })
-                ->rawColumns(['action', 'view'])
+                ->rawColumns(['action', 'view', 'type_of_offer'])
                 ->make(true);
         }
         return view('admin.offerbanner.index');
