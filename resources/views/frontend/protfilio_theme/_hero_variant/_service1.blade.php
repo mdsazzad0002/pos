@@ -17,7 +17,7 @@
         function modal_category_open(category_id, modal_id) {
             $(modal_id).modal('show');
             document.querySelector(category_id).click();
-            // console.log(category_id);
+            console.log(category_id);
 
         }
     </script>
@@ -88,7 +88,7 @@
             <div class="row_grid">
                 @foreach ($service_category as $category)
                     <a class="cat-link"
-                        onclick="modal_category_open('#v-pills-{{ $category->slug }}-tab', '#locationSelectModal_category')">
+                        onclick="modal_category_open('#v-pills-{{ $category->id }}-tab', '#locationSelectModal_category')">
                         <img class="cat-img img-fluid" src="{{ dynamic_asset($category->upload_id) }}" />
                         <div class="hero-name"> {{ $category->name }}</div>
 
@@ -162,7 +162,7 @@
 {{-- Category Sub Category --}}
 <div class="modal fade" id="locationSelectModal_category" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content rounded-0">
             <div class="modal-header">
                 <h5 class="modal-title text-center">Service</h5>
@@ -172,7 +172,7 @@
 
 
 
-                <div class="d-flex align-items-start">
+                <div class="d-flex align-items-start {{ settings('additional_full_width_service1_hero_variant', 10) ? 'full_width' : '' }}">
                     <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist"
                         aria-orientation="vertical">
                         @foreach ($service_category as $key => $category)
@@ -303,6 +303,19 @@
                                     </div>
                                 @endforelse
 
+                                <div class="additional_info ">
+                                    <div class="discription">
+                                        {!! $category->description !!}
+                                    </div>
+                                    <div class="discription primary_description">
+                                        {!! $category->primary_description !!}
+                                    </div>
+                                    <div class="discription additional_description">
+                                        {!! $category->additional_description !!}
+                                    </div>
+                                    
+                                </div>
+
                             </div>
                         @endforeach
 
@@ -377,13 +390,19 @@
 
     #locationSelectModal_category .modal-header {
         display: block;
-        background: #72aaf1;
+        background: var(--primary-color);
+        color: white;
+    }
+    #locationSelectModal_category .modal-header *{
+        color: white;
+
     }
 
     #locationSelectModal_category .single_product {
-        background: #72aaf1;
+        background: var(--primary-color);
         padding: 13px 5px;
         margin-bottom: 10px;
+        color: white;
     }
 
     div#v-pills-tabContent {
@@ -427,7 +446,7 @@
             <div class="col-lg-4 items">
 
                 <a class="cat-link"
-                    onclick="modal_category_open('#v-pills-{{ $category->slug }}-tab', '#locationSelectModal_category')">
+                    onclick="modal_category_open('#v-pills-{{ $category->id }}-tab', '#locationSelectModal_category')">
                     <img class="cat-img img-fluid" src="{{ dynamic_asset($category->upload_id) }}" />
                     <div class="service_category">
                         {{ $category->name }}

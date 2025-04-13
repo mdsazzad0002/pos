@@ -16,11 +16,13 @@ return new class extends Migration
             $table->bigInteger('creator');
             $table->string('name');
             $table->string('slug');
+            
             $table->text('description')->nullable();
             $table->longText('primary_description')->nullable();
             $table->longText('additional_description')->nullable();
-            $table->string('category_id');
             $table->string('need_additional')->default(1);
+
+            $table->string('category_id');
             $table->string('status')->default(1);
             $table->string('feature')->default(0);
             $table->string('upload_id')->nullable();

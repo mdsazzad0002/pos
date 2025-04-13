@@ -26,9 +26,9 @@ class settingCaller extends Seeder
             main_settingSeeder::class,
             fcmSettingSeeder::class,
             SiteVerificationSeeder::class,
-            tag_managementSeeder::class,
+            
             PwaSeeder::class,
-            takto_messageSeeder::class,
+          
             CookieSeeder::class,
             CourierReportSeeder::class,
             CustomCssJsSeeder::class

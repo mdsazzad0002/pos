@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\category;
 
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
 
 class SubCategoryController extends Controller
 {
@@ -65,7 +66,7 @@ class SubCategoryController extends Controller
                 ->rawColumns(['action', 'view', 'image'])
                 ->make(true);
         }
-        return view('admin.subcategory.index');
+        return view('admin.category.subcategory.index');
     }
 
     /**
@@ -74,7 +75,7 @@ class SubCategoryController extends Controller
     public function create()
     {
         $subcategory = null; 
-        return view('admin.subcategory.partials.edit', compact('subcategory'));
+        return view('admin.category.subcategory.partials.edit', compact('subcategory'));
     }
 
     /**
@@ -91,7 +92,7 @@ class SubCategoryController extends Controller
      */
     public function show(SubCategory $subcategory)
     {
-        return view('admin.subcategory.partials.view', compact('subcategory'));
+        return view('admin.category.subcategory.partials.view', compact('subcategory'));
     }
 
     /**
@@ -99,7 +100,7 @@ class SubCategoryController extends Controller
      */
     public function edit(SubCategory $subcategory)
     {
-        return view('admin.subcategory.partials.edit', compact('subcategory'));
+        return view('admin.category.subcategory.partials.edit', compact('subcategory'));
     }
 
     /**
@@ -122,6 +123,7 @@ class SubCategoryController extends Controller
         if($subcategory){
             $subcategory->name = $request->name ?? '';
             $subcategory->category_id = $request->category ?? 0;
+            
             $subcategory->description = $request->description ?? '';
             $subcategory->primary_description = $request->primary_description ?? '';
             $subcategory->additional_description = $request->additional_description ?? '';

@@ -1,3 +1,4 @@
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -358,9 +359,10 @@ div#locationSelectModal_category .modal-content {
 
 div#v-pills-tab {
   width: 40%;
-  height: 400px;
   overflow-x: auto;
   flex-wrap: nowrap;
+  height: 800px;
+  max-height: 81vh;
   
 }
 
@@ -385,9 +387,9 @@ button.category_btn.active {
 
 div#v-pills-tabContent {
   width: 60%;
-  height: 400px;
+  height: 800px;
   overflow-x: auto;
-
+  max-height: 81vh;
 }
 
 div#v-pills-tabContent .tab-pane.active {
@@ -455,3 +457,36 @@ button.category_btn img {
 }
 
 
+/** #locationSelectModal_category .additional_info ul{
+  list-style:none !important;
+ padding-left: 0;
+}
+
+#locationSelectModal_category .additional_info ul li:before{
+content: "★ "; /* Unicode star */
+/* color: var(--primary-color)
+}  */
+
+
+
+#locationSelectModal_category .full_width div#v-pills-tab {
+  width:0;
+  opacity:0;
+  height: 0;
+}
+
+#locationSelectModal_category .full_width div#v-pills-tabContent {
+  width:100%;
+}
+
+
+#locationSelectModal_category .additional_info {
+  padding: 14px;
+}
+#locationSelectModal_category .discription.additional_description {
+  text-align:center;
+  background:#dfdfdf;
+  border-radius:20px;
+  
+  padding:15px;
+}

@@ -17,7 +17,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->bigInteger('position_order')->default(0);
+
             $table->text('description')->nullable();
+            $table->longText('primary_description')->nullable();
+            $table->longText('additional_description')->nullable();
+            $table->string('need_additional')->default(1);
+            
             $table->string('status')->default(1);
             $table->string('upload_id')->nullable();
             $table->string('upload_bg')->nullable();

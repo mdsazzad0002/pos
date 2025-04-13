@@ -44,12 +44,14 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CategoryController;
+
+use App\Http\Controllers\admin\category\CategoryController;
+use App\Http\Controllers\admin\category\SubCategoryController;
+
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\CashCounterController;
-use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\CommisionAgentController;
 use App\Http\Controllers\DiscountController as discountController;
 use App\Http\Controllers\StockManagementController;

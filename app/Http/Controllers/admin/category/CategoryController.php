@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\category;
 
 use App\Models\Category as category;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
@@ -36,7 +37,7 @@ class CategoryController extends Controller
                     if(auth()->user()->can('category edit')==true){
                         $edit_route = route('admin.category.edit', $row->id);
                         $edit_button =  "<button class='btn btn-warning '
-                        data-dialog='modal-dialog-centered'
+                        data-dialog='modal-xl'
                         data-title='$row->name'
                         onclick='button_ajax(this)'
                         data-href='$edit_route'>Edit</button>";
@@ -70,7 +71,7 @@ class CategoryController extends Controller
                 ->rawColumns(['action', 'image', 'background'])
                 ->make(true);
         }
-        return view('admin.category.index');
+        return view('admin.category.category.index');
     }
 
     /**
@@ -79,7 +80,7 @@ class CategoryController extends Controller
     public function create()
     {
         $category = null;
-        return view('admin.category.partials.create_edit', compact('category'));
+        return view('admin.category.category.partials.create_edit', compact('category'));
     }
 
     /**
@@ -97,7 +98,7 @@ class CategoryController extends Controller
      */
     public function show(category $category)
     {
-        return view('admin.category.partials.view', compact('category'));
+        return view('admin.category.category.partials.view', compact('category'));
     }
 
     /**
@@ -106,7 +107,7 @@ class CategoryController extends Controller
     public function edit(category $category)
     {
         
-        return view('admin.category.partials.create_edit', compact('category'));
+        return view('admin.category.category.partials.create_edit', compact('category'));
     }
 
     /**
@@ -125,7 +126,12 @@ class CategoryController extends Controller
         if($category){
             $category->name = $request->name;
             $category->status = $request->status;
-            $category->description = $request->description;;
+
+            $category->description = $request->description ?? '';
+            $category->primary_description = $request->primary_description ?? '';
+            $category->additional_description = $request->additional_description ?? '';
+            $category->need_additional = $request->need_additional ?? 0;
+
             $category->upload_bg = $request->background ?? 0;
             $category->upload_id = $request->image ?? 0;
             $category->slug= $request->slug ?? '';
@@ -189,9 +195,9 @@ class CategoryController extends Controller
         })->orderBy('position_order', 'asc')->get();
 
         if($request->ajax()){
-            return view('admin.category.reorder.format_data', compact('category'));
+            return view('admin.category.category.reorder.format_data', compact('category'));
         }
-        return view('admin.category.reorder.index', compact('category'));
+        return view('admin.category.category.reorder.index', compact('category'));
     }
 
     public function category_for_order_post(Request $request){

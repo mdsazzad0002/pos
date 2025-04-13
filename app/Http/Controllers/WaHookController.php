@@ -11,7 +11,7 @@ class WaHookController extends Controller
     {
         // Handle verification from Meta (GET request)
         if ($request->isMethod('get')) {
-            $verify_token = 'your_custom_token'; // set this same token in Meta Webhook config
+            $verify_token = 'whatsapp-webhook'; // set this same token in Meta Webhook config
             $mode = $request->hub_mode;
             $token = $request->hub_verify_token;
             $challenge = $request->hub_challenge;
