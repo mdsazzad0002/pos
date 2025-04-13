@@ -78,7 +78,8 @@ class PushNotificationController extends Controller
         $webPush = new WebPush($auth);
         if ($request->has('user_id')) {
             $daws_filter = \Carbon\Carbon::now()->subDays(7);
-            $subscriptions = device::where('creator', $request->user_id)->where('updated_at', '>', $daws_filter)->where('notification_data', '!=', null)->where('logout', 0)->pluck('notification_data')->toArray();
+            $subscriptions = device::where('creator', $request->user_id)->where('updated_at', '>', $daws_filter)->whereNot('notification_data', null)->where('logout', 0)->whereNot('notification_data', "")->pluck('notification_data')->toArray();
+          
             foreach($subscriptions as $subscription){
                 $subscription = Subscription::create(json_decode($subscription, true));
                 $report = $webPush->sendOneNotification(

@@ -81,7 +81,7 @@ class HomeController extends Controller
 
         
         }else{
-            return  dd($view, $slug);
+            // return  dd($view, $slug);
             if(env('APP_DEBUG') == true){
                 abort('404', 'Not Set Home Page');
             }else{

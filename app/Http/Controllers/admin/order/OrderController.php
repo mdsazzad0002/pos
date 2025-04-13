@@ -307,28 +307,12 @@ class OrderController extends Controller
     }
 
 
-    // public function getOrder(Request $request)
-    // {
-    //     $data_result = order::where(function($query) use ($request) {
-    //         if ($request->has('q')) {
-    //             $query->where('name', 'LIKE', '%' . $request->q . '%');
-    //         }
-    //     })->select('id', 'name as text')->get();
-
-    //     $result_make = [];
-    //     $result_make['items']=$data_result;
-
-    //     return json_encode($result_make);
-
-    // }
-
 
     public function update_status(Request $request, order $order){
-
-     
-
         return view('admin.order.order.update_status', compact('order'));
     }
+
+
     public function update_status_post(Request $request, order $order){
         // return $request->all();
         $validator = Validator::make($request->all(), [
@@ -503,6 +487,15 @@ class OrderController extends Controller
 
             }
         }
+
+        // SMS Send when order status change
+        $SmsController = \App\Http\Controllers\SmsController::class;
+        $SmsController = new $SmsController();
+        $request = new \Illuminate\Http\Request();
+        $request['phone'] = $order->customer->phone;
+        $request['message'] = 'Order #'.$order->order_id.' Status Changed to '.$order_event->status_data->name .'Track Now '.url($tracking_page->slug).'?id='. $order->order_id .'&email='. $order->customer->email.''.$order_event->note;
+        $SmsController->send($request);
+
 
 
 

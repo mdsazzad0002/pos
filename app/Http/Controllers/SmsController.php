@@ -14,14 +14,15 @@ class SmsController extends Controller
 
 
 
+    /**
+     * $request = ['phone', 'message']
+     */
     public function send(Request $request){
         $request->validate([
-            // 'message' => 'required',
             'phone' => 'required'
         ]);
 
         $data = [
-            
             'message' =>  $request->message ?? 'test message form '. settings('app_name_short', 9),
             'phone' => $request->phone
         ];

@@ -155,7 +155,14 @@ use App\Http\Controllers\SubScriberController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WhyChooseUsController;
 use App\Http\Controllers\AchivementController;
+
+// ======================= SMS ==============================
 use App\Http\Controllers\SmsController;
+
+Route::group(['as'=>'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function() {
+    Route::get('settings/sms', [SmsController::class, 'index'])->name('settings.sms-configration.index');
+    Route::post('settings/sms/send', [SmsController::class, 'send'])->name('settings.sms-configration.send');
+});
 
 
 
@@ -644,8 +651,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 // ============================= Management AND Function ======================= Management AND Function =========================
 
 
-    Route::get('settings/sms', [SmsController::class, 'index'])->name('settings.sms-configration.index');
-    Route::post('settings/sms/send', [SmsController::class, 'send'])->name('settings.sms-configration.send');
+ 
     // Admin
     // product Management
     Route::resource('/product', ProductController::class)->names('product'); // Use an empty string here

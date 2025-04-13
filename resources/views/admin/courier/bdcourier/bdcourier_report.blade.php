@@ -1,4 +1,7 @@
 
+@if (settings('bd_courier_tracking_status', 27) == 1)
+    
+
 <div class="tracking_data">
     {{-- ajax load --}}
     <div class="border text-center p-3">
@@ -27,3 +30,5 @@
         xhr.send();
     // });
 </script>
+
+@endif
