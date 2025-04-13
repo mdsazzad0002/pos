@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\language;
-
-
+namespace App\Http\Controllers\admin\language;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -61,7 +59,7 @@ class TranslatorController extends Controller
                 ->make(true);
         }
         $languages = language::get();
-        return view('admin.translation.index', compact('languages'));
+        return view('admin.language.translation.index', compact('languages'));
     }
 
     /**
@@ -70,7 +68,7 @@ class TranslatorController extends Controller
     public function create()
     {
         $language_all = language::all();
-        return view('admin.translation.partials.create', compact('language_all'));
+        return view('admin.language.translation.partials.create', compact('language_all'));
     }
 
     /**
@@ -120,7 +118,7 @@ class TranslatorController extends Controller
      */
     public function show(Translation $Translation)
     {
-        return view('admin.translation.partials.view', compact('Translation'));
+        return view('admin.language.translation.partials.view', compact('Translation'));
     }
 
     /**

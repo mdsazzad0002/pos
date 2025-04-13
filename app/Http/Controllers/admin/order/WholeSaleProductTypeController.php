@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\order;
 
 use App\Http\Controllers\Controller;
 use App\Models\WholeSaleProductType;
@@ -42,7 +42,7 @@ class WholeSaleProductTypeController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.wholeSeleProduct.index');
+        return view('admin.order.order_request.order_type');
     }
 
     /**
@@ -50,7 +50,8 @@ class WholeSaleProductTypeController extends Controller
      */
     public function create()
     {
-        return view('admin.wholeSeleProduct.partials.create');
+        $wholeSaleProductType = null;
+        return view('admin.order.order_request.partials.create_edit', compact('wholeSaleProductType'));
     }
 
     /**
@@ -87,7 +88,7 @@ class WholeSaleProductTypeController extends Controller
      */
     public function edit(WholeSaleProductType $wholeSaleProductType)
     {
-        return view('admin.wholeSeleProduct.partials.edit', compact('wholeSaleProductType'));
+        return view('admin.order.custom_order.type.partials.edit', compact('wholeSaleProductType'));
     }
 
     /**

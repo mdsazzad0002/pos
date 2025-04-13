@@ -1,8 +1,26 @@
 <?php
-
-use Database\Seeders\DatabaseSeeder;
+// Common Route
 use Illuminate\Support\Facades\Route;
+use Database\Seeders\DatabaseSeeder;
+
+// ================ Artisan Command ================
 use Illuminate\Support\Facades\Artisan;
+Route::middleware(['auth'])->group(function () {
+    Route::get('clear', function () {
+        if(auth()->user()->can('catche clear')){
+            Artisan::call('config:clear');
+            Artisan::call('config:cache');
+            Artisan::call('view:clear');
+            Artisan::call('route:clear');
+            return back();
+        }
+        return abort(403);
+    });
+});
+
+
+
+
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\admin\CustomerController;
@@ -17,7 +35,7 @@ use App\Http\Controllers\VatController as vatController;
 use App\Http\Controllers\frontend\HomeController as home;
 use App\Http\Controllers\OfferbannerController;
 use App\Http\Controllers\PosController;
-use App\Http\Controllers\OrderController;
+
 use App\Http\Controllers\dashboardController;
 
 
@@ -45,8 +63,46 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
+// ==================================== Category ======================================
 use App\Http\Controllers\admin\category\CategoryController;
 use App\Http\Controllers\admin\category\SubCategoryController;
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']],function () {
+    // Category management
+    Route::resource('category', CategoryController::class)->names('category');
+    Route::get('category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
+    Route::get('category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
+    Route::get('category/category_/for_order', [CategoryController::class, 'category_for_order'])->name('category.category_for_order');
+    Route::post('category/category_/for_order', [CategoryController::class, 'category_for_order_post']);
+
+    // subcategory management
+    Route::resource('/subcategory', SubCategoryController::class)->names('subcategory');
+    Route::get('subcategory/delete/{subcategory}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
+    Route::get('subcategory/subcategory/get', [SubCategoryController::class, 'getsubcategory'])->name('subcategory.select');
+});
+
+
+
+//  ======================== Language ==============================
+use App\Http\Controllers\admin\language\LanguageController;
+use App\Http\Controllers\admin\language\TranslatorController;
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']],function () {
+    // Language
+    Route::resource('language', LanguageController::class)->names('language')->middleware('can:language read');
+    Route::get('language/{language}/delete/', [LanguageController::class, 'delete'])->name('language.delete');
+    Route::get('language/getLeadSource/get', [LanguageController::class, 'getlanguage'])->name('language.select');
+    
+    // Translate
+    Route::resource('Translation', TranslatorController::class)->names('Translation')->middleware('can:Translation read');
+    Route::get('Translation/{Translation}/delete/', [TranslatorController::class, 'delete'])->name('Translation.delete');
+    Route::get('Translation/getTranslation/get', [TranslatorController::class, 'geTranslation'])->name('Translation.select');
+});
+
+
+
+
+
 
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
@@ -58,8 +114,7 @@ use App\Http\Controllers\StockManagementController;
 use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\payment\PaymentCredentialController;
 use App\Http\Controllers\HeaderController;
-use App\Http\Controllers\language\LanguageController;
-use App\Http\Controllers\language\TranslatorController;
+
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkHeadingController;
 use App\Http\Controllers\protfilio_theme_admin\FooterLinkSubHeadingController;
 use App\Http\Controllers\protfilio_theme_admin\HomePageManageController;
@@ -95,7 +150,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\TransectionInformationController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\ServiceRequestController;
+
 use App\Http\Controllers\SubScriberController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\WhyChooseUsController;
@@ -104,17 +159,61 @@ use App\Http\Controllers\SmsController;
 
 
 
-use App\Http\Controllers\admin\WholeSaleProductTypeController;
 use App\Http\Controllers\WholeSaleOrderController;
-use App\Http\Controllers\admin\WholeSaleOrderController as AdminWholeSaleOrderController;
 
 
 
 use App\Http\Controllers\admin\dashboardController as AdminDashboardController;
 use App\Http\Controllers\FooterStyleController;
 use App\Http\Controllers\HeaderStyleController;
-use App\Http\Controllers\OrderStatusController;
-use App\Http\Controllers\ServicePointController;
+
+// ================= Order =================
+use App\Http\Controllers\admin\order\OrderController;
+use App\Http\Controllers\admin\order\OrderStatusController;
+use App\Http\Controllers\admin\order\WholeSaleOrderController as AdminWholeSaleOrderController;
+use App\Http\Controllers\admin\order\WholeSaleProductTypeController;
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function() {
+    // order
+    Route::resource('/order', OrderController::class)->names('order');
+    Route::get('/order/delete/{order}', [OrderController::class, 'delete'])->name('order.delete');
+    Route::get('/order/update_status/{order}', [OrderController::class, 'update_status'])->name('order.update_status');
+    Route::post('/order/update_status/{order}', [OrderController::class, 'update_status_post'])->name('order.update_status_post');
+    Route::get('/order/cashcollection/{order}', [OrderController::class, 'cashcollection'])->name('order.cashcollection_show');
+    Route::post('/order/cashcollection/{order}', [OrderController::class, 'cashcollection_post']);
+
+    Route::any('courier/{order}/test', [OrderController::class, 'courier'])->name('courier.action');
+
+    // order status
+    Route::resource('/order_status', OrderStatusController::class)->names('order_status');
+    Route::get('/delete/{order_status}', [OrderStatusController::class, 'delete'])->name('order_status.delete');
+
+    //custom order request
+    Route::get('/custom/order', [AdminWholeSaleOrderController::class, 'customOrder'])->name('custom.order');
+
+    //whole sele product type
+    Route::resource('custom/order/type',WholeSaleProductTypeController::class)->names('whole.sele');
+    Route::get('custom/order/type/{wholeSaleProductType}/delete/', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
+    
+});
+
+
+
+// ================= Service =================
+use App\Http\Controllers\admin\service\ServicePointController;
+use App\Http\Controllers\admin\service\ServiceRequestController;
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], function() {
+        // ServicePoint management
+        Route::resource('/service-request/service-point', ServicePointController::class)->names('service-request.service-point');
+        Route::get('/service-request/service-point/delete/{service_point}', [ServicePointController::class, 'delete'])->name('service-request.service-point.delete');
+        Route::get('/service-request/service-request/getservice_request/get', [ServicePointController::class, 'getServicePoint'])->name('service-request.service-request.select');
+    
+        // ServiceRequest management
+        Route::resource('/service-request/service-request', ServiceRequestController::class)->names('service-request.service-request');
+        Route::get('/service-request/service-request/delete/{service_request}', [ServiceRequestController::class, 'delete'])->name('service-request.service-request.delete');
+});    
+
+
+
 use App\Http\Controllers\WaController;
 use App\Http\Controllers\WaHookController;
 use App\Http\Controllers\ShippingChargeController;
@@ -166,48 +265,7 @@ Route::any('setting-store-update', [SettingController::class, 'store'])->name('s
 
 
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/migrate', function(){
-        if(auth()->user()->can('migrate')){
-            Artisan::call('migrate');
-            return back();
-        }
-        return abort(403);
-    });
 
-    
-    Route::get('/migrate/seed', function(){
-        // if(auth()->user()->can('migrate seed')){
-            $db_seeder = new DatabaseSeeder;
-            $db_seeder->run();
-            return back();
-        // }
-        return abort(403);
-    });
-
-
-
-    Route::get('clear', function () {
-        if(auth()->user()->can('catche clear')){
-            Artisan::call('config:clear');
-            Artisan::call('config:cache');
-            Artisan::call('view:clear');
-            Artisan::call('route:clear');
-            return back();
-        }
-        return abort(403);
-    });
-
-
-    Route::get('fresh', function () {
-        if(auth()->user()->can('migrate fresh')){
-            Artisan::call('migrate:fresh --seed');
-            return back();
-        }
-        return abort(403);
-    });
-
-});
 
 
 Route::match(['GET', 'POST'], '/webhook/whatsapp', [WaHookController::class, 'handle']);
@@ -335,20 +393,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     // Commision Agent Route
     Route::get('/CommisionAgent', [CommisionAgentController::class, 'index'])->name('CommisionAgent.index');
 
-    // Category management
-    Route::resource('/category', CategoryController::class)->names('category');
-    Route::get('/category/delete/{category}', [CategoryController::class, 'delete'])->name('category.delete');
-    Route::get('/category/getCategory/get', [CategoryController::class, 'getCategory'])->name('category.select');
-
-    Route::get('/category/category_/for_order', [CategoryController::class, 'category_for_order'])->name('category.category_for_order');
-    Route::post('/category/category_/for_order', [CategoryController::class, 'category_for_order_post']);
-
-
-    // subcategory management
-    Route::resource('/subcategory', SubCategoryController::class)->names('subcategory');
-    Route::get('/subcategory/delete/{subcategory}', [SubCategoryController::class, 'delete'])->name('subcategory.delete');
-    Route::get('/subcategory/subcategory/get', [SubCategoryController::class, 'getsubcategory'])->name('subcategory.select');
-
 
 
     // Discount management
@@ -386,19 +430,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-    //  Order
-    Route::resource('/order', OrderController::class)->names('order');
-    Route::get('/order/delete/{order}', [OrderController::class, 'delete'])->name('order.delete');
-    Route::get('/order/update_status/{order}', [OrderController::class, 'update_status'])->name('order.update_status');
-    Route::post('/order/update_status/{order}', [OrderController::class, 'update_status_post'])->name('order.update_status_post');
-    // Route::get('/order/getOrder/get', [OrderController::class, 'getOrder'])->name('order.select');
-    Route::get('/order/cashcollection/{order}', [OrderController::class, 'cashcollection'])->name('order.cashcollection_show');
-    Route::post('/order/cashcollection/{order}', [OrderController::class, 'cashcollection_post']);
-
-
-    Route::any('courier/{order}/test', [OrderController::class, 'courier'])->name('courier.action');
-
-
 
     Route::resource('/transaction', TransectionInformationController::class)->names('transaction');
 
@@ -411,8 +442,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('/bluk/order', [AdminWholeSaleOrderController::class, 'blukOrder'])->name('bluk.order');
     Route::delete('/bluk/order/{order}', [AdminWholeSaleOrderController::class, 'destroy']);
     Route::get('/bluk/order/{order}/delete', [AdminWholeSaleOrderController::class, 'delete'])->name('bluk.order.delete');
-    //custom order
-    Route::get('/custom/order', [AdminWholeSaleOrderController::class, 'customOrder'])->name('custom.order');
+    
 
     // unit purchase
     Route::get('/stock', [StockManagementController::class, 'index'])->name('stock.index');
@@ -426,9 +456,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    //whole sele product type
-    Route::resource('whole/sale/wholeSaleProductType',WholeSaleProductTypeController::class)->names('whole.sele');
-    Route::get('whole/sale/wholeSaleProductType/{wholeSaleProductType}/delete/', [WholeSaleProductTypeController::class, 'delete'])->name('whole.sele.delete');
 
 
 
@@ -458,19 +485,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::get('wa/token-generate/get', [WaController::class, 'tokenGenerate'])->name('wa.tokenGenerate');
     
 
-    // Language
-    Route::resource('language', LanguageController::class)->names('language')->middleware('can:language read');
-    Route::get('language/{language}/delete/', [LanguageController::class, 'delete'])->name('language.delete');
-    Route::get('language/getLeadSource/get', [LanguageController::class, 'getlanguage'])->name('language.select');
-
-
-
-    // Translate
-    Route::resource('Translation', TranslatorController::class)->names('Translation')->middleware('can:Translation read');
-    Route::get('Translation/{Translation}/delete/', [TranslatorController::class, 'delete'])->name('Translation.delete');
-    Route::get('Translation/getTranslation/get', [TranslatorController::class, 'geTranslation'])->name('Translation.select');
-
-
 
 
     // Blog Management
@@ -496,14 +510,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
            
 // Service Request
     
-    // ServicePoint management
-    Route::resource('/service-request/service-point', ServicePointController::class)->names('service-request.service-point');
-    Route::get('/service-request/service-point/delete/{service_point}', [ServicePointController::class, 'delete'])->name('service-request.service-point.delete');
-    Route::get('/service-request/service-request/getservice_request/get', [ServicePointController::class, 'getServicePoint'])->name('service-request.service-request.select');
-
-    // ServiceRequest management
-    Route::resource('/service-request/service-request', ServiceRequestController::class)->names('service-request.service-request');
-    Route::get('/service-request/service-request/delete/{service_request}', [ServiceRequestController::class, 'delete'])->name('service-request.service-request.delete');
 
     // WhyChooseUs management
     Route::resource('/whychooseus', WhyChooseUsController::class)->names('whychooseus');
@@ -676,12 +682,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
     // Admin
-    // order_status Management
-    Route::resource('/order_status', OrderStatusController::class)->names('order_status');
-    Route::group(['as' => 'order_status.', 'prefix' => 'order_status'], function() {
-        Route::get('/delete/{order_status}', [OrderStatusController::class, 'delete'])->name('delete');
-        // Route::get('/getOrderStatus/get', [OrderStatusController::class, 'getOrderStatus'])->name('select');
-    });
 
 
 

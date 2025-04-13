@@ -141,7 +141,7 @@
         @canany(['language read','Translation read'])
         <li class="nav-item">
             <a href="#" class="nav-link">
-                <i class="fas fa-user-cog nav-icon"></i>
+                <i class="fa fa-language nav-icon"></i>
                 <p>
                     Language
                     <i class="fas fa-angle-left right"></i>
@@ -151,7 +151,7 @@
                 @can('language read')
                     <li class="nav-item">
                         <a href="{{ route('admin.language.index') }}" class="nav-link">
-                            <i class="fas fa-user-tie nav-icon"></i>
+                            <i class="fa fa-language nav-icon"></i>
                             <p>Language</p>
                         </a>
                     </li>
@@ -160,7 +160,7 @@
                 @can('Translation read')
                     <li class="nav-item">
                         <a href="{{ route('admin.Translation.index') }}" class="nav-link">
-                            <i class="fas fa-user-tie nav-icon"></i>
+                            <i class="fa fa-language nav-icon"></i>
                             <p>Translation</p>
                         </a>
                     </li>

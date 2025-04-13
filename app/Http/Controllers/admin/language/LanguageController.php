@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\language;
+namespace App\Http\Controllers\admin\language;
 
 
 
@@ -62,7 +62,7 @@ class LanguageController extends Controller
                 ->rawColumns(['action', 'view'])
                 ->make(true);
         }
-        return view('admin.language.index');
+        return view('admin.language.language.index');
     }
 
     /**
@@ -70,7 +70,7 @@ class LanguageController extends Controller
      */
     public function create()
     {
-        return view('admin.language.partials.create');
+        return view('admin.language.language.partials.create');
     }
 
     /**
@@ -123,7 +123,7 @@ class LanguageController extends Controller
      */
     public function show(language $language)
     {
-        return view('admin.language.partials.view', compact('language'));
+        return view('admin.language.language.partials.view', compact('language'));
     }
 
     /**
@@ -131,7 +131,7 @@ class LanguageController extends Controller
      */
     public function edit(language $language)
     {
-        return view('admin.language.partials.edit', compact('language'));
+        return view('admin.language.language.partials.edit', compact('language'));
     }
 
     /**

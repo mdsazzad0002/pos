@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\order;
 
 use App\Mail\MailerDynamic;
 use App\Models\mail\MailSetting;
@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Stock;
 use App\Models\payment\TransectionInformation;
 use App\Http\Controllers\courier\courierController;
+use App\Http\Controllers\Controller;
+
+
 class OrderController extends Controller
 {
     /**
@@ -115,7 +118,7 @@ class OrderController extends Controller
                 ->rawColumns(['action' ,'order_status','cashcollection_price'])
                 ->make(true);
         }
-        return view('admin.order.index');
+        return view('admin.order.order.index');
     }
 
     /**
@@ -123,7 +126,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('admin.order.order_create.index');
+        return view('admin.order.order.order_create.index');
     }
 
     /**
@@ -199,7 +202,7 @@ class OrderController extends Controller
      */
     public function show(order $order)
     {
-        return view('admin.order.partials.view', compact('order'));
+        return view('admin.order.order.partials.view', compact('order'));
     }
 
     /**
@@ -207,7 +210,7 @@ class OrderController extends Controller
      */
     public function edit(order $order)
     {
-        return view('admin.order.order_edit.index', compact('order'));
+        return view('admin.order.order.order_edit.index', compact('order'));
     }
 
     /**
@@ -324,7 +327,7 @@ class OrderController extends Controller
 
      
 
-        return view('admin.order.update_status', compact('order'));
+        return view('admin.order.order.update_status', compact('order'));
     }
     public function update_status_post(Request $request, order $order){
         // return $request->all();
@@ -516,7 +519,7 @@ class OrderController extends Controller
 
         $order = order::find($order);
         if($order){
-            return view('admin.order.cashcollection', compact('order'));
+            return view('admin.order.order.cashcollection', compact('order'));
         }else{
             return abort(404);
         }

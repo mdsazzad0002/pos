@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\service;
 
 use App\Models\ServicePoint;
 use Illuminate\Http\Request;
 use DataTables;
+use App\Http\Controllers\Controller;
 
 class ServicePointController extends Controller
 {
@@ -56,7 +57,7 @@ class ServicePointController extends Controller
                 ->rawColumns(['action', 'image', 'background'])
                 ->make(true);
         }
-        return view('admin.service-request.service-point.index');
+        return view('admin.service.service-point.index');
     }
 
     /**
@@ -65,7 +66,7 @@ class ServicePointController extends Controller
     public function create()
     {
         $service_point = null;
-        return view('admin.service-request.service-point.partials.create_edit', compact('service_point'));
+        return view('admin.service.service-point.partials.create_edit', compact('service_point'));
     }
 
     /**
@@ -96,7 +97,7 @@ class ServicePointController extends Controller
      */
     public function show(ServicePoint $service_point)
     {
-        return view('admin.service-request.service-point.partials.view', compact('service_point'));
+        return view('admin.service.service-point.partials.view', compact('service_point'));
     }
 
     /**
@@ -104,7 +105,7 @@ class ServicePointController extends Controller
      */
     public function edit(ServicePoint $service_point)
     {
-        return view('admin.service-request.service-point.partials.create_edit', compact('service_point'));
+        return view('admin.service.service-point.partials.create_edit', compact('service_point'));
     }
 
     /**

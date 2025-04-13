@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\admin\order;
 
 use App\Http\Controllers\Controller;
 use App\Models\WholeSaleOrder;
@@ -30,7 +30,7 @@ class WholeSaleOrderController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.wholeSeleProduct.bluk_order');
+        return view('admin.order.order_request.bluk_order');
     }
     public function customOrder(Request $request)
     {
@@ -55,7 +55,7 @@ class WholeSaleOrderController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.wholeSeleProduct.custom_order');
+        return view('admin.order.order_request.custom_order');
     }
 
     public function delete(WholeSaleOrder $order){
@@ -71,7 +71,7 @@ class WholeSaleOrderController extends Controller
         $order->delete();
 
         return json_encode([
-            'title'=>'Successfully  Deleted wholeSeleProduct',
+            'title'=>'Successfully  Deleted order',
             'type'=>'success',
             'refresh'=>'true',
         ]);

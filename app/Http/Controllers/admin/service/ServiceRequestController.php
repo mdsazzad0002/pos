@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\service;
 
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Controllers\Controller;
 
 class ServiceRequestController extends Controller
 {
@@ -53,7 +54,7 @@ class ServiceRequestController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.service-request.service-request.index');
+        return view('admin.service.service-request.index');
     }
 
     /**
@@ -106,7 +107,7 @@ class ServiceRequestController extends Controller
             $serviceRequest->status = 1;
             $serviceRequest->save();
         }
-        return view('admin.service-request.service-request.partials.view', compact('serviceRequest'));
+        return view('admin.service.service-request.partials.view', compact('serviceRequest'));
     }
 
     public function delete(ServiceRequest $serviceRequest){

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin\order;
 
 use App\Models\OrderStatus;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class OrderStatusController extends Controller
 {
@@ -14,7 +15,7 @@ class OrderStatusController extends Controller
     {
       
         $order_status = OrderStatus::all();
-        return view('admin.order_status.index', compact('order_status'));
+        return view('admin.order.order_status.index', compact('order_status'));
     }
 
     /**
@@ -23,7 +24,7 @@ class OrderStatusController extends Controller
     public function create()
     {  $orderStatus = null;
         $order_status_all = OrderStatus::all();
-        return view('admin.order_status.partials.edit', compact('order_status_all','orderStatus'));
+        return view('admin.order.order_status.partials.edit', compact('order_status_all','orderStatus'));
     }
 
     /**
@@ -49,7 +50,7 @@ class OrderStatusController extends Controller
     public function edit(OrderStatus $orderStatus)
     {
         $order_status_all = OrderStatus::all();
-        return view('admin.order_status.partials.edit', compact('order_status_all', 'orderStatus'));
+        return view('admin.order.order_status.partials.edit', compact('order_status_all', 'orderStatus'));
     }
 
     /**

@@ -64,8 +64,7 @@
                         </th>
                     </thead>
                     <tbody id="data_insert_list">
-
-                        @include('admin.order.order_edit.partials.previousOrder')
+                        @include('admin.order.order.order_edit.partials.previousOrder')
 
                     </tbody>
                     <tfoot class="foma_output_footer">
