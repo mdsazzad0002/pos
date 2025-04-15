@@ -165,11 +165,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content rounded-0">
             <div class="modal-header">
-                <h5 class="modal-title text-center">Service</h5>
+                <h5 class="modal-title text-center">Our Service</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
-
 
 
                 <div class="d-flex align-items-start {{ settings('additional_full_width_service1_hero_variant', 10) ? 'full_width' : '' }}">
@@ -280,16 +279,16 @@
                                                     style="display: flex;
                                                             align-items: center;
                                                             gap: 5px;
-                                                            color: white;">
+                                                          ">
                                                     <div>
                                                         {{ settings('currency_symbol', 9) }}
                                                         {{ $product->selling_price }} &nbsp;
                                                     </div>
-                                                    <button class="btn btn-primary buy_now buy-now-btn"
+                                                    <button class="btn  buy_now buy-now-btn"
                                                         title="Order Now" data-href="{{ url($cart_page->slug) }}"
                                                         onclick="add_to_cart(this)"
                                                         data-id="{{ $product->id }}">Order Now</button>
-                                                    <button class="btn btn-primary" title="Add to Cart"
+                                                    <button class="btn " title="Add to Cart"
                                                         onclick="add_to_cart(this)" data-id="{{ $product->id }}"><i
                                                             class="fa fa-cart-plus"></i></button>
 
@@ -399,10 +398,23 @@
     }
 
     #locationSelectModal_category .single_product {
-        background: var(--primary-color);
-        padding: 13px 5px;
+        background: #eee;
+        padding: 13px 12px;
         margin-bottom: 10px;
-        color: white;
+        color: #000;
+    }
+    #locationSelectModal_category .single_product:hover  {
+        background: var(--primary-color);
+        
+        color: #eee;
+    }
+    #locationSelectModal_category .single_product .btn{
+        background: var(--primary-color);
+        color: #eee;
+    }
+    #locationSelectModal_category .single_product:hover .btn{
+        background: #ffffff;
+        color: var(--primary-color);
     }
 
     div#v-pills-tabContent {
@@ -451,7 +463,7 @@
                     <div class="service_category">
                         {{ $category->name }}
                     </div>
-                    <div class="hero-name btn btn-primary">
+                    <div class="hero-name btn " style="background: var(--primary-color); color: white;">
                         View Details
                     </div>
 
