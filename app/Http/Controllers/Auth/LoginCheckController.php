@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Yajra\DataTables\Facades\DataTables;
-
+use App\Models\setting;
 class LoginCheckController extends Controller
 {
 
@@ -111,7 +111,7 @@ class LoginCheckController extends Controller
     }
 
     public function index(Request $request){
-
+             ob_start();
             $device_logout = 0;
             $device_id = 0;
             $cookieName = 'user' . base64_encode(auth()->user()->id * 4);
@@ -207,7 +207,7 @@ class LoginCheckController extends Controller
 
             ob_flush();
             flush();
-            sleep(5);
+            sleep(25);
 
         // dd($device);
     }
@@ -298,15 +298,15 @@ public function verify_host(Request $request){
 
 
     public function identifysender(Request $request){
-        try{
+        // try{
             $base_url = env('MAINTAIN_BASE', null);
             if($base_url == null){
                 return abort(404);
             }else{
                 // send post request to server per data distance 1minuites
-                $time =  setting::where('key', 999)->where('name', 'request_time')->first();
+                    $time =  setting::where('key', 999)->where('name', 'request_time')->first();
                     if($time){
-                        $time = $time->value;
+                       
                     }else{
                         $time = \Carbon\Carbon::now();
                         $time = new setting();
@@ -317,31 +317,32 @@ public function verify_host(Request $request){
                     }
 
 
-                    if($time < \Carbon\Carbon::now()->addMinutes(1)){
-
+                    if($time->value < \Carbon\Carbon::now()->addMinutes(1)){
                         $client =  new \GuzzleHttp\Client();
-                    $response = $client->request('POST', $base_url.'api/subscription', [
-                            'headers' => [
-                                'Accept' => 'application/json',
-                                'Content-Type' => 'application/json',
-                            ],
-                            'json' => [
-                                'key' => settings('license_key','999'),
-                                'slug' => url('/'),
-                            ],
-                        ]);
-                    }
-                $response    = $response->getBody()->getContents();
-                $response    = json_decode($response);
-                //    dd($response);
-                if($response->status == 'success'){
-                        $time->value = \Carbon\Carbon::now();
-                        $time->save();
+                        $response = $client->request('POST', $base_url.'api/subscription', [
+                                'headers' => [
+                                    'Accept' => 'application/json',
+                                    'Content-Type' => 'application/json',
+                                 
+                                ],
+                                'verify' => false,
+                                'json' => [
+                                    'key' => settings('license_key','999'),
+                                    'slug' => url('/'),
+                                ],
+                            ]);
+                        }
+                        $response    = $response->getBody()->getContents();
+                        $response    = json_decode($response);
+                        //    dd($time);
+                        if($response->status == 'success'){
+                            $time->value = \Carbon\Carbon::now();
+                            $time->save();
+                        }
                 }
-                }
-            }catch(\Exception $e){
+            // }catch(\Exception $e){
 
-            }
+            // }
     }
 
     public function login_token_generate(Request $request){

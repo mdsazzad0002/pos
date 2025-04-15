@@ -82,7 +82,7 @@ class WaController extends Controller
        
       if(isset($response['error'])){
         return json_encode([
-                'message'=>$response->message,
+                'title'=>$response['error']['message'],
                 'type'=>'error',
                 'refresh'=>'false',
             ]);

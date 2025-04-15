@@ -21,8 +21,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 use App\Http\Controllers\WaHookController;
-Route::post('/webhook/whatsapp', [WaHookController::class, 'handle']);
-Route::get('/webhook/whatsapp', [WaHookController::class, 'handleConnect']);
+Route::post('/webhook/whatsapp/', [WaHookController::class, 'handleStore']);
+Route::get('/webhook/whatsapp/', [WaHookController::class, 'handleConnect']);
 
 
 
@@ -240,6 +240,7 @@ use App\Http\Controllers\ShippingChargeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('latest_order', [AdminDashboardController::class, 'latest_order'])->name('latest_order');
 
 
 

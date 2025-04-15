@@ -1,15 +1,15 @@
-{{--  Master Include  --}}
+{{-- Master Include --}}
 @extends('layout.admin.master')
 
-{{--  Define Site Title  --}}
+{{-- Define Site Title --}}
 @section('title', 'Dashboard')
-{{--  Content Extends  --}}
+{{-- Content Extends --}}
 @section('content')
 
 
 
 
-    <div class="row">
+<div class="row">
 
 
 
@@ -64,34 +64,33 @@
 
 
 
-        <div class="col-12 mb-3">
-            <livewire:calender-event />
+    <div class="col-12 mb-3">
+        <livewire:calender-event />
 
-            <div class="row connectedSortable ">
+        <div class="row connectedSortable ">
 
-                {{-- small box --}}
-                <div class=" col-lg-4 col-6 col-xl-3 mb-2">
-                    <div class="card small-box  bg-secondary " onclick="copyToClipboard('{{ url('/') }}')"
-                        title="Click to Copy">
-                        <div class="card-header card_count_loaded p-0">
+            {{-- small box --}}
+            <div class=" col-lg-4 col-6 col-xl-3 mb-2">
+                <div class="card small-box  bg-secondary " onclick="copyToClipboard('{{ url('/') }}')"
+                    title="Click to Copy">
+                    <div class="card-header card_count_loaded p-0">
 
-                            <div class="icon">
-                                <i class="fab fa-firefox-browser"></i>
-                            </div>
-                            <div class="inner" style="zoom: 88%">
-                                {!! $data !!}
-                            </div>
+                        <div class="icon">
+                            <i class="fab fa-firefox-browser"></i>
                         </div>
-                        <a href="{{ url('/') }}" target="_blank" class="small-box-footer">Visit Website <i
-                                class="fas fa-arrow-circle-right"></i></a>
+                        <div class="inner" style="zoom: 88%">
+                            {!! $data !!}
+                        </div>
                     </div>
+                    <a href="{{ url('/') }}" target="_blank" class="small-box-footer">Visit Website <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
+            </div>
 
-                {{-- small box --}}
-                <div class=" col-lg-4 col-6 col-xl-3 mb-2">
-                    <div class="card small-box  bg-secondary ">
-                        <div class="card-header card_count_loaded p-0"
-                            style="    cursor: move;
+            {{-- small box --}}
+            <div class=" col-lg-4 col-6 col-xl-3 mb-2">
+                <div class="card small-box  bg-secondary ">
+                    <div class="card-header card_count_loaded p-0" style="    cursor: move;
                             display: flex
                         ;
                             flex-direction: row-reverse;
@@ -100,192 +99,192 @@
                             padding: 9px 16px !important;">
 
 
-                            <div class="inner" style="zoom: 88%">
-                                <img src="{{ auth()->user()->image }}"style="width: 100px;max-height: 115px" alt="">
-                            </div>
-                            <div>
-                                <h3>Welcome</h3>
-                                <p>{{ auth()->user()->name }}</p>
-
-                            </div>
+                        <div class="inner" style="zoom: 88%">
+                            <img src="{{ auth()->user()->image }}" style="width: 100px;max-height: 115px" alt="">
                         </div>
-                        <a href="{{ url('admin/profile') }}" class="small-box-footer">Visit Profile <i
-                                class="fas fa-arrow-circle-right"></i></a>
+                        <div>
+                            <h3>Welcome</h3>
+                            <p>{{ auth()->user()->name }}</p>
+
+                        </div>
                     </div>
+                    <a href="{{ url('admin/profile') }}" class="small-box-footer">Visit Profile <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <!-- small box -->
+            </div>
+            <!-- small box -->
 
 
-                {{--  Order Card  --}}
-                @can('order read')
-                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="orders" title="All Order"
-                        icon="fas fa-luggage-cart" link="{{ route('admin.order.index') }}" sort="sort_1" />
-                @endcan
+            {{-- Order Card --}}
+            @can('order read')
+            <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="orders"
+                title="All Order" icon="fas fa-luggage-cart" link="{{ route('admin.order.index') }}" sort="sort_1" />
+            @endcan
 
-                {{--  End Order  --}}
+            {{-- End Order --}}
 
-                {{--  Purchause  --}}
-                @can('purchase read')
-                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="purchases" title="All Purchase"
-                        icon="fas fa-store-alt" link="{{ route('admin.purchase.index') }}" sort="sort_2" />
-                @endcan
-                {{--  End Purchase  --}}
-
-
-
-                {{--  Customer  --}}
-                @can('customer read')
-                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="customers" title="Customer"
-                        icon="far fa-comments" link="{{ route('admin.customer.index') }}" sort="sort_4" />
-                @endcan
-                {{--  End Customer  --}}
+            {{-- Purchause --}}
+            @can('purchase read')
+            <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="purchases"
+                title="All Purchase" icon="fas fa-store-alt" link="{{ route('admin.purchase.index') }}" sort="sort_2" />
+            @endcan
+            {{-- End Purchase --}}
 
 
 
+            {{-- Customer --}}
+            @can('customer read')
+            <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-primary" items="customers"
+                title="Customer" icon="far fa-comments" link="{{ route('admin.customer.index') }}" sort="sort_4" />
+            @endcan
+            {{-- End Customer --}}
 
-                {{--  Category  --}}
-                @can('category read')
-                    <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-success" items="categories" title="All category"
-                        icon="far fa-comments" link="{{ route('admin.category.index') }}" sort="sort_4" />
-                @endcan
-                {{--  End Category  --}}
 
 
+
+            {{-- Category --}}
+            @can('category read')
+            <x-dashboard.link_card column="col-lg-4 col-6 col-xl-3 mb-2" bg="bg-success" items="categories"
+                title="All category" icon="far fa-comments" link="{{ route('admin.category.index') }}" sort="sort_4" />
+            @endcan
+            {{-- End Category --}}
+
+
+        </div>
+
+
+        <div class="row connectedSortable">
+            <div class="col-lg-12 col-12">
+                <livewire:sales-report-month />
+
+            </div>
+            <div class="col-lg-8 col-12">
+                <livewire:latest-order />
             </div>
 
 
-            <div class="row connectedSortable">
-                <div class="col-lg-12 col-12">
-                    <livewire:sales-report-month />
+            <div class="col-lg-4 col-12">
+                <livewire:recent-customer />
+                {{-- @include('admin.dashboard.dashboard_report.recent_customer') --}}
+            </div>
+            <div class="col-lg-8 col-12">
+                <livewire:recent-product />
+                {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
+            </div>
+            <div class="col-lg-4 col-12">
+                <livewire:browser-history />
+                {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
+            </div>
 
-                </div>
-                <div class="col-lg-8 col-12">
-                    <livewire:latest-order />
-                </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Calendar & Events</h3>
 
-
-                <div class="col-lg-4 col-12">
-                    <livewire:recent-customer />
-                    {{-- @include('admin.dashboard.dashboard_report.recent_customer') --}}
-                </div>
-                <div class="col-lg-8 col-12">
-                    <livewire:recent-product />
-                    {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
-                </div>
-                <div class="col-lg-4 col-12">
-                    <livewire:browser-history />
-                    {{-- @include('admin.dashboard.dashboard_report.recent_product') --}}
-                </div>
-
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Calendar & Events</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            {{-- <button type="button" class="btn btn-tool" data-card-widget="remove">
                                 <i class="fas fa-times"></i>
-                              </button> --}}
-                            </div>
+                            </button> --}}
                         </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <div id="calendar"></div>
-                        </div>
-
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div id="calendar"></div>
+                    </div>
+
                 </div>
-
-
-
-
-
+                <!-- /.card-body -->
             </div>
 
 
 
 
-            <style>
-                /* Preloader Style */
-                .card-body {
-                    position: relative;
-                    min-height: 200px;
+
+        </div>
+
+
+
+
+        <style>
+            /* Preloader Style */
+            .card-body {
+                position: relative;
+                min-height: 200px;
+            }
+
+            .preloader_body {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                background: rgb(223, 221, 221);
+                flex-direction: column;
+
+
+                animation: opcity 4s linear infinite;
+            }
+
+            .preloader_body .spinner {
+                width: 40px;
+                height: 40px;
+                border: 5px solid #dee2e6;
+                border-top: 5px solid #000000;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            }
+
+            /* Spinner Animation */
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
                 }
 
-                .preloader_body {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: 100%;
-                    background: rgb(223, 221, 221);
-                    flex-direction: column;
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
 
-
-                    animation: opcity 4s linear infinite;
+            @keyframes opcity {
+                0% {
+                    opacity: 0.7;
                 }
 
-                .preloader_body .spinner {
-                    width: 40px;
-                    height: 40px;
-                    border: 5px solid #dee2e6;
-                    border-top: 5px solid #000000;
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
+                25% {
+                    opacity: 1;
                 }
 
-                /* Spinner Animation */
-                @keyframes spin {
-                    0% {
-                        transform: rotate(0deg);
-                    }
-
-                    100% {
-                        transform: rotate(360deg);
-                    }
+                50% {
+                    opacity: 0.7;
                 }
 
-                @keyframes opcity {
-                    0% {
-                        opacity: 0.7;
-                    }
-
-                    25% {
-                        opacity: 1;
-                    }
-
-                    50% {
-                        opacity: 0.7;
-                    }
-
-                    75% {
-                        opacity: 1;
-                    }
-
-                    100% {
-                        opacity: 0.7;
-                        ;
-                    }
+                75% {
+                    opacity: 1;
                 }
-            </style>
 
-            @livewireScripts
+                100% {
+                    opacity: 0.7;
+                    ;
+                }
+            }
+        </style>
+
+        @livewireScripts
 
         @endsection
 
         @push('js')
         <script src="{{ asset('vendor/calendar/index.global.js') }}"></script>
 
-            <script>
-                // The Calender
+        <script>
+            // The Calender
                 document.addEventListener('livewire:load', function() {});
 
 
@@ -431,5 +430,5 @@
 
                 });
 
-            </script>
+        </script>
         @endpush

@@ -17,6 +17,7 @@ class order extends Model
     use HasFactory,SoftDeletes;
 
     protected $appends =['order_status'];
+    
 
     public function user(){
         return $this->hasOne(User::class,'id', 'creator');
@@ -33,7 +34,6 @@ class order extends Model
     public function getTotalPriceAttribute(){
         return (int) $this->quantity * (int) $this->price;
     }
-
 
     public function order_events(){
         return $this->hasMany(OrderEvent::class, 'order_id', 'id');

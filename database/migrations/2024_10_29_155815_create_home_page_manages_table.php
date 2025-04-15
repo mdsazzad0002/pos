@@ -34,7 +34,7 @@ return new class extends Migration
             $table->integer('items_show')->default(4);
 
             $table->integer('is_details_page')->default(0);
-            $table->integer('details_or_view_all_align')->default('center');
+            $table->string('details_or_view_all_align')->default('center');
 
 
 

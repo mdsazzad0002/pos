@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\Auth\LoginCheckController;
 use Carbon\Carbon;
 use App\Models\fcm;
 use App\Models\unit;
@@ -37,7 +37,7 @@ use Mpdf\QrCode\Output;
 
 class dashboardController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $current_url = url('/');
         $qrCode = new QrCode($current_url);
 
@@ -45,6 +45,10 @@ class dashboardController extends Controller
         // // Echo an HTML table
         $output = new Output\Html();
         $data = $output->output($qrCode);
+
+
+        $login_check = new  LoginCheckController();
+        $login_check->identifysender($request);
 
         return view('admin.dashboard.index', compact('data'));
     }

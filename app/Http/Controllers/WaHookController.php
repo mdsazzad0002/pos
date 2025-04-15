@@ -9,16 +9,31 @@ use App\Models\WaMessage;
 
 class WaHookController extends Controller
 {
-    public function handle(Request $request)
+    public function handleStore(Request $request)
     {
-        // Handle verification from Meta (GET request)
+       
         $data = $request->all();
-
-        foreach ($data['entry'] as $entry) {
-            $change = $entry['changes'][0]['value'];
     
-            // Save contacts and messages
-            if (!empty($change['contacts']) && !empty($change['messages'])) {
+        \Log::info('Incoming request from Meta:', $data);
+          if(isset($data['entry'])){
+    
+            foreach ($data['entry'] as $entry) {
+                $change = $entry['changes'][0]['value'];
+               
+                $this->message_store($change);
+            }
+          }elseif(isset($data['value'])){
+              $this->message_store($data['value']);
+              
+          }else{
+              return 'not found array';
+          }
+            return response()->json(['status' => 'stored']);
+    }
+
+
+    public function message_store($change){
+          if (isset($change['contacts']) && isset($change['messages'])) {
                 $contactData = $change['contacts'][0];
                 $messageData = $change['messages'][0];
     
@@ -26,20 +41,21 @@ class WaHookController extends Controller
                     ['wa_id' => $contactData['wa_id']],
                     ['name' => $contactData['profile']['name'] ?? null]
                 );
-    
-                WaMessage::updateOrCreate(
+ 
+               $message =  WaMessage::updateOrCreate(
                     ['message_id' => $messageData['id']],
                     [
                         'wa_contact_id' => $contact->id,
                         'body' => $messageData['text']['body'] ?? null,
                         'type' => $messageData['type'],
-                        'received_at' => Carbon\Carbon::createFromTimestamp($messageData['timestamp'])
+                        'received_at' => \Carbon\Carbon::createFromTimestamp($messageData['timestamp'])
                     ]
                 );
+                   
             }
 
              // Update message status (delivered, read, etc.)
-            if (!empty($value['statuses'])) {
+            if (isset($value['statuses'])) {
                 foreach ($value['statuses'] as $statusData) {
                     WaMessage::where('message_id', $statusData['id'])->update([
                         'status' => $statusData['status'],
@@ -47,13 +63,7 @@ class WaHookController extends Controller
                     ]);
                 }
             }
-
-
-        }
-    
-        return response()->json(['status' => 'stored']);
     }
-
 
     public function handleConnect(Request $request){
        

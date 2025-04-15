@@ -29,9 +29,6 @@ class SettingController extends Controller
 
 
 
-
-
-
     public function index(Request $request, $page)
     {
 
@@ -46,8 +43,7 @@ class SettingController extends Controller
         }
         
   
-        $login_check = new LoginCheckController();
-        $login_check->identifysender($request);
+        
 
 
         // return $settings;
