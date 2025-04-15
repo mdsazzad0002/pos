@@ -33,13 +33,7 @@
                 <a href="{{ url($blog_page->slug) }}" class="top-bar-links d-flex  align-items-center gap-2">{{ $blog_page->name  }}</a> 
             @endif
 
-            @if($service_request)
-            <a href="{{ url($service_request->slug) }}" class="top-bar-links d-flex  align-items-center gap-2">
-                <div>
-                    <p class="fw-500 white">{{ $service_request->name }}</p>
-                </div>
-            </a>
-            @endif
+
 
             @if($service_point_page)
             <a href="{{ url($service_point_page->slug) }}" class="top-bar-links d-flex  align-items-center gap-2">

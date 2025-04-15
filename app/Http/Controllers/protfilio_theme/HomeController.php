@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\View;
 use App\Models\Stock;
 use  App\Models\ShippingCharge;
 use App\Models\SubScriber;
+use Mpdf\QrCode\QrCode;
+use Mpdf\QrCode\Output;
 
 class HomeController extends Controller
 {
@@ -44,7 +46,7 @@ class HomeController extends Controller
        
         
 
-
+        $homepage = null;
         if($request->has('preview_page')){
               $homepage = Page::findOrFail($request->preview_page);
 
@@ -56,15 +58,19 @@ class HomeController extends Controller
         }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
-            $homepage = Page::where('status', 1)->where('slug', $view)->first();
-            if(!$homepage){
+            if($slug != null && $view != null){
                 $homepage = Page::where('status', 1)->where('slug', $view.'/'.$slug)->first();
-             
-            }else{
-                if($homepage->slug != $view.'/'.$slug){
-                    $request['slug'] = $slug;
-                }
             }
+
+            if($slug == null && $view != null && $homepage == null){
+                $homepage = Page::where('status', 1)->where('slug', $view)->first();
+            }
+
+            if($homepage->slug != $view.'/'.$slug){
+                $request['slug'] = $slug;
+            }
+
+          
         }
 
         // dd( $slug);
@@ -82,6 +88,7 @@ class HomeController extends Controller
         
         }else{
             // return  dd($view, $slug);
+          
             if(env('APP_DEBUG') == true){
                 abort('404', 'Not Set Home Page');
             }else{
@@ -1084,6 +1091,13 @@ class HomeController extends Controller
 
 
     public function order_invoice(Request $request){
+        $current_url = url('/invoice?order_id='.$request->order_id);
+        $qrCode = new QrCode($current_url);
+
+
+        // // Echo an HTML table
+        $output = new Output\Html();
+        $qrcode_data = $output->output($qrCode);
         if($request->has('order_id')){
             $order = order::where('order_id', $request->order_id)->first();
             if($order){
@@ -1091,8 +1105,9 @@ class HomeController extends Controller
                 $final = 4000;
                 if($final = 400){
                     // Load the Blade view and render it into HTML
-                    $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'))->render();
-
+                    // $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'))->render();
+                    $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer1', compact('order', 'qrcode_data'))->render();
+// return $html;
                     // Initialize mPDF
                     $mpdf = new Mpdf();
                       // $mpdf->showImageErrors = true;
@@ -1110,7 +1125,7 @@ class HomeController extends Controller
 
 
 
-                return view('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'));
+               
             }
         }
         return back();

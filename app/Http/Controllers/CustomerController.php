@@ -55,9 +55,12 @@ class CustomerController extends Controller
                     onclick='button_ajax(this)'
                     data-href='$edit_route'>Edit</button>";
 
+                    $login_button = "<a href='".route('customer.login', $row->id)."' class='btn btn-info '>Login</a>";
+
                     $return_data = '';
+                    $return_data .= $login_button.' &nbsp;';
                     if(auth()->user()->can('customer edit')==true){
-                        $return_data = $edit_button. '&nbsp;';
+                        $return_data .= $edit_button. '&nbsp;';
                     }
 
                     if(auth()->user()->can('customer delete') == true){
@@ -345,4 +348,5 @@ class CustomerController extends Controller
     }
 
 
+   
 }

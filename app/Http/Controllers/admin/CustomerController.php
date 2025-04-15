@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer as customer;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Auth;
 
 class CustomerController extends Controller
 {
@@ -40,6 +41,9 @@ class CustomerController extends Controller
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 
+                    
+                    $login_button = "<a href='".route('admin.customer.login', $row->id)."' class='btn btn-info '>Login</a>";
+
                     $edit_route = route('admin.customer.edit', $row->id);
                     $edit_button =  "<button class='btn btn-warning '
                     data-dialog='modal-dialog-centered'
@@ -48,8 +52,9 @@ class CustomerController extends Controller
                     data-href='$edit_route'>Edit</button>";
 
                     $return_data = '';
+                    $return_data .= $login_button.'&nbsp;';
                     if(auth()->user()->can('customer edit')==true){
-                        $return_data = $edit_button. '&nbsp;';
+                        $return_data .= $edit_button. '&nbsp;';
                     }
 
                     if(auth()->user()->can('customer delete') == true){
@@ -188,4 +193,22 @@ class CustomerController extends Controller
         return json_encode($result_make);
 
     }
+
+    public function login(Request $request,  $customer){
+     
+        if($customer){
+
+        $customer = customer::find($customer);
+        if(!$customer){
+            return back();
+        }
+
+         Auth::guard('customer')->login($customer);
+          $profile_page =  \App\Models\Page::where('status', 1)->where('page_type', 'profile_dashboard')->first();
+        //   dd($profile_page);
+          return redirect($profile_page->slug);
+        }
+        return back();
+      }
+  
 }

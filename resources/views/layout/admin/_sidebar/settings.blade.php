@@ -136,6 +136,15 @@
             </a>
         </li>
         @endcan
+        
+        @can('settings sms_configration')
+        <li class="nav-item">
+            <a href="{{ route('admin.setting.index', ['page'=>'wa']) }}" class="nav-link ">
+                <i class="fas fa-sms nav-icon"></i>
+                <p> WA Configuration</p>
+            </a>
+        </li>
+        @endcan
 
 
         @canany(['language read','Translation read'])

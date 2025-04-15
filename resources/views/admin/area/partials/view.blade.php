@@ -8,6 +8,10 @@
         <td>{{ $area->slug }}</td>
     </tr>
     <tr>
+        <td>Image</td>
+        <td>{{ dynamic_asset($area->upload_id) }}</td>
+    </tr>
+    <tr>
         <td>Status</td>
         <td>{{ $area->status ? 'Active' : 'Inactive' }}</td>
     </tr>

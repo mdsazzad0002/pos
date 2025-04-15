@@ -22,6 +22,7 @@ class VerifyCsrfToken extends Middleware
         'admin/homePageManage',
         'admin/product/*',
         'admin/calenderevent',
+        '/webhook/whatsapp'
 
     ];
 }

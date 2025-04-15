@@ -109,7 +109,7 @@ Product Info
         @foreach ($order->transection as $transection)
             <tr>
                 <td>{{ $transection->mer_txnid ?? '' }}</td>
-                <td>{{ $transection->payment_method ?? '' }}</td>
+                <td>{{ $transection->payment_method->provider ?? '' }}</td>
                 <td>{{ $transection->by_method ?? '' }}</td>
                 <td>{{ settings('currency_symbol', 9) }} {{ $transection->amount ?? '' }}</td>
                 <td>{{ $transection->created_at->format('d-m-Y') ?? '' }}</td>

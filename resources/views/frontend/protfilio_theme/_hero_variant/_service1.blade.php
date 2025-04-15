@@ -238,7 +238,7 @@
                                                                         style="display: flex;
                                                             align-items: center;
                                                             gap: 5px;
-                                                            color: white;">
+                                                           ">
                                                                         <div>
                                                                             {{ settings('currency_symbol', 9) }}
                                                                             {{ $variant_info->selling_price }} &nbsp;

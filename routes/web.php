@@ -2,6 +2,7 @@
 // Common Route
 use Illuminate\Support\Facades\Route;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Http\Request;
 
 // ================ Artisan Command ================
 use Illuminate\Support\Facades\Artisan;
@@ -18,6 +19,10 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
+use App\Http\Controllers\WaHookController;
+Route::post('/webhook/whatsapp', [WaHookController::class, 'handle']);
+Route::get('/webhook/whatsapp', [WaHookController::class, 'handleConnect']);
 
 
 
@@ -146,7 +151,7 @@ use App\Http\Controllers\MaintainController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductStyleController;
 use App\Http\Controllers\CalendarEventController;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\TransectionInformationController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogController;
@@ -222,7 +227,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth']], 
 
 
 use App\Http\Controllers\WaController;
-use App\Http\Controllers\WaHookController;
+
 use App\Http\Controllers\ShippingChargeController;
 
 /*
@@ -275,7 +280,6 @@ Route::any('setting-store-update', [SettingController::class, 'store'])->name('s
 
 
 
-Route::match(['GET', 'POST'], '/webhook/whatsapp', [WaHookController::class, 'handle']);
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function(){
@@ -487,7 +491,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-    Route::resource('wa', WaController::class)->names('wa');
+    Route::get('wa',[ WaController::class, 'index'])->name('wa.index');
     Route::post('wa/sendMessage', [WaController::class, 'sendMessage'])->name('wa.sendMessage');
     Route::get('wa/token-generate/get', [WaController::class, 'tokenGenerate'])->name('wa.tokenGenerate');
     
@@ -732,6 +736,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
     Route::group(['as' => 'customer.', 'prefix' => 'customer'], function() {
         Route::get('/delete/{customer}', [CustomerController::class, 'delete'])->name('delete');
         Route::get('/getCustomer/get', [CustomerController::class, 'getCustomer'])->name('select');
+        Route::get('/{id}/login', [CustomerController::class, 'login'])->name('login');
     });
     // End Customer Management
 

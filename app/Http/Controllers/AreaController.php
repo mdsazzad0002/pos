@@ -70,7 +70,8 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('admin.area.partials.create');
+        $area = null;
+        return view('admin.area.partials.create_edit', compact('area'));
     }
 
     /**
@@ -78,23 +79,8 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
-        $area = new area;
-        $area->name = $request->name;
-        $area->status = $request->status;
-
-        $area->upload_id = $request->image;
-        $area->slug = create_slug($request->name, 'area', 'slug');
-
-        $area->creator = auth()->user()->id ?? 0;
-        $area->save();
-
-
-        return json_encode([
-            'title'=>'Successfully  Created area',
-            'type'=>'success',
-            'refresh'=>'true',
-        ]);
+      $request['create'] = 'Successfully Created';
+      return $this->update($request);
 
 
     }
@@ -112,24 +98,33 @@ class AreaController extends Controller
      */
     public function edit(area $area)
     {
-        return view('admin.area.partials.edit', compact('area'));
+        return view('admin.area.partials.create_edit', compact('area'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, area $area)
+    public function update(Request $request,  $area = null)
     {
-        $area->name = $request->name;
-        $area->status = $request->status;
-        $area->upload_id = $request->image;
-        $area->slug = create_slug($request->name, 'area', 'slug');
-        $area->creator = auth()->user()->id ?? 0;
-        $area->save();
+        
+        
+        if($area == null){
+            $area = new area();
+            $area->creator = auth()->user()->id ?? 0;
+        }else{
+            $area = area::find($area);
+        }
+        
+            $area->updater = auth()->user()->id ?? 0;
+            $area->name = $request->name;
+            $area->status = $request->status;
+            $area->upload_id = $request->image;
+            $area->slug = create_slug($request->name, 'area', 'slug');
+            $area->save();
 
 
         return json_encode([
-            'title'=>'Successfully  Updated area',
+            'title'=> isset($request->create) ? $request->create : 'Successfully  Updated area',
             'type'=>'success',
             'refresh'=>'true',
         ]);
