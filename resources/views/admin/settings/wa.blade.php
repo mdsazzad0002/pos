@@ -31,6 +31,7 @@
                 <a href="https://developers.facebook.com/tools/debug/accesstoken/" target="_blank">Long Live Token
                     Generate</a>
             </div>
+            <div> Your Webhook URL: {{ url('webhook') }} <i class="fa fa-copy" onclick="copyToClipboard('{{ url('webhook') }}')"></i></div>
             @php
                 $sms_settings = [
                     [

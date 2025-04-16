@@ -68,7 +68,7 @@ class OrderController extends Controller
                 ->addColumn('action', function ($row) {
                     $delete_route = route('admin.order.delete', $row->id);
                     $delete_button =  "<button class='btn btn-danger '
-                    data-title='$row->name'
+                    data-title='Delete #$row->order_id'
                     onclick='button_ajax(this)'
                     data-href='$delete_route'>Delete</button>";
 

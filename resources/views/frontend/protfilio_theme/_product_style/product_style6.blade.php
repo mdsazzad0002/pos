@@ -4,7 +4,7 @@
         background: {{ $product_style->background_color ?? '#fff' }};
     }
 </style>
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_6">
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-xxl-{{ 12/$v_per_row }} product_style_6">
     <div class="card mb-3">
         <img class="card-img-top" src="{{ $p_image }}"
           style="width: 100%;" alt="Card image cap">

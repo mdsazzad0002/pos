@@ -9,7 +9,7 @@
 
 
 
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_3">
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-xxl-{{ 12/$v_per_row }} product_style_3">
 
     <div class="card">
         <a class="img-container" href="{{$p_url }}">

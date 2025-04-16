@@ -150,8 +150,8 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 0,
-                'items_per_row_status' => 0,
+                'items_per_row' => 4,
+                'items_per_row_status' => 1,
                 'items_manage_status' => 1,
 
                 'background' => 0,
@@ -576,7 +576,8 @@ class VarinatSuggessionSeeder extends Seeder
                 'upload_id_status' => 1,
 
                 'background_color' => '#eeeeee',
-                'upload_id'=>'preset/page_variant/page_title1.png'
+                'upload_id'=>'preset/page_variant/page_title1.png',
+                'background_manage_status'=> 1,
 
 
             ],
@@ -610,7 +611,43 @@ class VarinatSuggessionSeeder extends Seeder
                 'upload_id_status' => 0,
 
                 'background_color' => '#eeeeee',
-                 'upload_id'=>'preset/page_variant/page_title2.png'
+                 'upload_id'=>'preset/page_variant/page_title2.png',
+                 'background_manage_status'=> 1,
+
+
+            ],
+            'page_title3' => [
+                'key' =>'_variant_manage.page_title2',
+                'title' => 'Page Title style  3',
+                'title_status' => 1,
+
+                'sub_title' => 'Page Title subtitle 2',
+                'sub_title_status' => 0,
+                'sub_title_manage_status' => 0,
+
+                'short_read_more' => 'Read More',
+                'short_read_more_manage_status'=> 0,
+
+
+
+                'short_read_more_status' => 0,
+                'view_all' => 'View All',
+                'view_all_manage_status' => 0,
+
+                'view_all_status' => 0,
+                'items_per_row' => 0,
+                'items_manage_status' => 0,
+
+                'background' => 0,
+                'background_type' => 0,
+
+                'upload_id1' => 0,
+                'upload_id2' => 0,
+                'upload_id_status' => 0,
+
+                'background_color' => '#eeeeee',
+                 'upload_id'=>'preset/page_variant/page_title3.png',
+                 'background_manage_status'=> 1,
 
 
             ],

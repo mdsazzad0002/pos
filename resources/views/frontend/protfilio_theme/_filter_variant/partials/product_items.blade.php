@@ -40,6 +40,8 @@
 
                 $v_cart_page_slug = \App\Models\Page::where('page_type', 'cart')->first()->slug ?? '';
 
+                $v_per_row = $request->has('per_row') ? $request->per_row : 4;
+
 // =========================================================================
 // Next Page button
                 $v_next_page_name = settings('next_page_button_name', 77);

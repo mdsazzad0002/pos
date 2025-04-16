@@ -12,65 +12,64 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
-/**
- * @method static Builder|self between(array $participants)
- * @method static Builder|self betweenOnly(array $participants)
- * @method static Builder|self forUser(mixed $userId)
- * @method static Builder|self forUserWithNewMessages(mixed $userId)
- */
 class Thread extends Eloquent
 {
     use SoftDeletes;
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    // protected $table = 'threads';
-
-    /**
-     * The attributes that can be set with Mass Assignment.
-     *
-     * @var array
-     */
+ 
     protected $fillable = ['subject'];
+    protected $appends = ['image', 'name', 'latest_message'];
 
 
 
-    /**
-     * Messages relationship.
-     *
-     * @return HasMany
-     *
-     * @codeCoverageIgnore
-     */
-    public function messages()
+
+    public function getImageAttribute()
+    {
+        $items = $this->oppositeParticipant();
+        $user = $items->user;
+        if($user){
+            return dynamic_asset($user->upload_id ?? 0);
+        }
+        return dynamic_asset(0);
+        
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->oppositeParticipant()->user->name ?? '';
+    }
+
+    public function getLatestMessageAttribute()
+    {
+         $mssaage = $this->messages()->latest()->first();
+         if($mssaage){
+             return $mssaage->body;
+         }
+         return '';
+    }
+
+
+    public function oppositeParticipant()
+    {
+        return  $this->participants()->whereNot('user_id', auth()->id())->first();
+        
+    }
+
+
+
+     public function messages()
     {
         return $this->hasMany(Message::class, 'thread_id', 'id');
     }
 
-    /**
-     * Returns the latest message from a thread.
-     *
-     * @return ?Message
-     */
-    public function getLatestMessageAttribute()
-    {
-        return $this->messages()->latest()->first();
-    }
 
-    /**
-     * Participants relationship.
-     *
-     * @return HasMany
-     *
-     * @codeCoverageIgnore
-     */
+
+
     public function participants()
     {
         return $this->hasMany(Participant::class, 'thread_id', 'id');
     }
+
 
     /**
      * User's relationship.

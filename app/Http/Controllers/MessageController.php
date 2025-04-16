@@ -107,7 +107,7 @@ class MessageController extends Controller
 
 
     public function thread_user_filter(Request $request){
-        $users = User::where('name', 'LIKE', '%' . $request->inpute . '%')->get();
+        $users = User::where('name', 'LIKE', '%' . $request->inpute . '%')->whereNot('id', auth()->user()->id)->get();
         $return_data = [
             'users' => $users
         ];
@@ -116,6 +116,17 @@ class MessageController extends Controller
 
 
     public function thread_create(Request $request){
+
+        
+        $user_type = $request->key == 'users' ? 1 : 2;
+        $participant =  Participant::where('user_id', '==', auth()->user()->id)->where('user_id', $request->items)->where('user_type', $user_type)->first();
+        if($participant){
+           $thread = Thread::find($participant->thread_id);
+           return ($thread);
+        }
+
+
+        // Otherwise Create new thread & participant
         $thread_create = new Thread();
         $thread_create->subject = $request->subject ?? '';
         $thread_create->type = $request->type ?? 1;
@@ -135,6 +146,6 @@ class MessageController extends Controller
         $participant->save();
 
 
-        return json_encode($thread_create);
+        return ($thread_create);
     }
 }

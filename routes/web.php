@@ -284,6 +284,11 @@ Route::any('setting-store-update', [SettingController::class, 'store'])->name('s
 
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], function(){
+    
+    Route::get('/', [dashboardController::class, 'index'])->name('index');
+    Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
+    Route::get('/home', [dashboardController::class, 'index'])->name('home');
+
 
     // page
     Route::resource('page', PageController::class)->names('page');
@@ -362,10 +367,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
     Route::get('message/get_message/data', [MessageController::class, 'get_message'])->name('message.get_message');
 
-
-    Route::get('/', [dashboardController::class, 'index'])->name('index');
-    Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
-    Route::get('/home', [dashboardController::class, 'index'])->name('home');
 
 
     Route::get('/items_load_card', [dashboardController::class, 'items_load_card'])->name('items_load_card');
@@ -492,7 +493,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => 'auth'], fu
 
 
 
-    Route::get('wa',[ WaController::class, 'index'])->name('wa.index');
+    
     Route::post('wa/sendMessage', [WaController::class, 'sendMessage'])->name('wa.sendMessage');
     Route::get('wa/token-generate/get', [WaController::class, 'tokenGenerate'])->name('wa.tokenGenerate');
     

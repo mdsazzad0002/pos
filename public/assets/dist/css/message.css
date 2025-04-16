@@ -100,7 +100,7 @@
     font-size: 14px;
 }
 .message_chart .message-sent {
-    background-color: #000000;
+    background-color: #ffffff;
     align-self: flex-end;
 }
 .message_chart .message-received {

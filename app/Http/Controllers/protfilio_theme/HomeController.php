@@ -66,7 +66,7 @@ class HomeController extends Controller
                 $homepage = Page::where('status', 1)->where('slug', $view)->first();
             }
 
-            if($homepage->slug != $view.'/'.$slug){
+            if($homepage?->slug != $view.'/'.$slug){
                 $request['slug'] = $slug;
             }
 
@@ -196,7 +196,8 @@ class HomeController extends Controller
 
 
         return view('frontend.protfilio_theme._filter_variant.partials.product_items', [
-            'products' => $product_list
+            'products' => $product_list,
+            'request' => $request
         ]);
     }
 

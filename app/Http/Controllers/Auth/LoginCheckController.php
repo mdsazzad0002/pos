@@ -298,7 +298,7 @@ public function verify_host(Request $request){
 
 
     public function identifysender(Request $request){
-        // try{
+        try{
             $base_url = env('MAINTAIN_BASE', null);
             if($base_url == null){
                 return abort(404);
@@ -340,9 +340,9 @@ public function verify_host(Request $request){
                             $time->save();
                         }
                 }
-            // }catch(\Exception $e){
+            }catch(\Exception $e){
 
-            // }
+            }
     }
 
     public function login_token_generate(Request $request){

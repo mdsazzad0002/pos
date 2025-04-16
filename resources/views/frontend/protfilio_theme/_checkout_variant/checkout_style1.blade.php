@@ -25,7 +25,7 @@
 
 
     <!-- Billing Details Start -->
-    <section class="billing-detail pb-40">
+    <section class="billing-detail pb-40 pt-40">
         <div class="container-fluid">
             <div class="row row-gap-4">
                 <div class="col-xl-8">

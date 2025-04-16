@@ -1,4 +1,4 @@
-<x-page_title title="About Us" />
+
 
 <!-- About Section Start -->
 <section class="about-section py-40">

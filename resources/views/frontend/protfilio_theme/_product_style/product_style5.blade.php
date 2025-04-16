@@ -1,5 +1,5 @@
 
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-lg-3 product_style_5" >
+<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-xxl-{{ 12/$v_per_row }} product_style_5" >
     <div
         class="product type-product post-4704 status-publish first instock product_cat-fuji-hd product_cat-passenger-lift has-post-thumbnail sold-individually shipping-taxable purchasable product-type-simple product-item grid hover-fade p-2 rounded" style="background-color: {{ $p_background_color  }}">
         <div class="product-img-wrap">

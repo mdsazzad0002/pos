@@ -24,10 +24,7 @@ class WaController extends Controller
 
     }
 
-    public function index(){
-        return view('admin.wa.index');
-
-    }
+    
 
     public function sendMessage(Request $request){
         $request->validate([

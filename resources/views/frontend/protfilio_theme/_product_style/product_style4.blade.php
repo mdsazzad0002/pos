@@ -1,5 +1,5 @@
 
-<div class="col-lg-3 col-sm-6 d-flex product-item my-3 product_style_4" style="background-color:{{ $p_background_color }}">
+<div class="col-xxl-{{ 12/$v_per_row }} col-sm-6 d-flex product-item my-3 product_style_4" style="background-color:{{ $p_background_color }}">
 
     <div class=" d-flex flex-column align-items-center justify-content-center product-item my-3" style="background-color:{{ $p_background_color }}">
         <div href="{{$p_url }}" class="product" >

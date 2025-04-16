@@ -406,7 +406,9 @@
         var max_price = '{{ $_GET['max_price'] ?? '' }}';
         var brands_items = {!! json_encode($_GET['brands_key'] ?? []) !!};
         var rating_star = {{ $_GET['rating_star'] ?? 0 }};
+        var items_per_row = {{ $items?->items_per_row ?? 3 }};
         var paginate_items = {{ $items?->items_show ?? 3 }};
+       
         var sort_by = '{{ $_GET['sort_by'] ?? '' }}';
         var weight = [];
 
@@ -421,8 +423,8 @@
             '&max_price='+max_price+
             '&rating_star='+rating_star+
             '&paginate_items='+paginate_items+
+            '&per_row='+items_per_row+
             '&sort_by='+sort_by+
-          
             '&q='+q;
 
             selectedCategories.forEach(element => {
