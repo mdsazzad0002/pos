@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class message extends Model
 {
     use HasFactory;
+
+    protected $cast = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 }

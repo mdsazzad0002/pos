@@ -16,8 +16,8 @@
         <div class="chat-window">
             <!-- Header -->
             <div class="header">
-                <img src="https://via.placeholder.com/40" alt="Avatar" class="header-avatar">
-                <span class="header-name">John Doe</span>
+                <img src="{{ settings('app_image', 9) }}" alt="Avatar" class="header-avatar">
+                <span class="header-name">{{ settings('app_name', 9) }}</span>
             </div>
 
             <!-- Chat Box -->
@@ -70,7 +70,7 @@
                                 <span class="message_sidebar-name">${element.name}</span>
                                 <span class="status-indicator ${ element.last_active }"></span>
                             </div>
-                            <div style="color:#c5c5c5">
+                            <div style="color:#c5c5c5" class="latest_message">
                                 ${ element.latest_message }
                             </div>
                         </div>
@@ -86,19 +86,24 @@
                 type: 'get',
                 url: '{{ route('admin.thread.index') }}',
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
                     data = JSON.parse(data)
 
                     Object.entries(data).forEach(([key, element]) => {
                         sidebarThreadPrint(key, element);
-                        console.log(element);
+                        // console.log(element);
                     })
-
+                    setTimeout(() => {
+                        let items_select = $('.message_sidebar-item')[0];
+                        show_tabs(items_select.dataset.type, items_select);
+                        headerinfo(items_select);
+                    }, 1500);
 
                 }
             })
         }
         theradLoad();
+        
         {{--  end thread  --}}
 
         // Scroll to bottom
@@ -113,15 +118,13 @@
             var items_data_ret = '';
             message_selected_id = id;
             $('.items_body_per').css('display', 'none')
-            $('.message_sidebar-item').removeClass('active')
+            $('.message_sidebar-item').removeClass('active');
+            $('.sidebar' + message_selected_id).addClass('active');
+
             if ($('.items_body_per.thread_items' + id).length > 0) {
-
                 $('.items_body_per.thread_items' + id).css('display', 'flex');
-                $('.sidebar' + message_selected_id).addClass('active')
-
                 headerinfo(thi);
                 scrollbottom();
-
             }
         }
         // End Tab Switch
@@ -236,7 +239,7 @@
 
 
 
-
+        // send message
         $('.message_sender_form').on('submit', function(e) {
             e.preventDefault();
 
@@ -271,45 +274,5 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('assets/dist/css/message.css') }}">
-    <style>
-        .sidebar-mini-xs.sidebar-collapse .main-header {
-            display: none;
-            margin-top: 0px;
-        }
-
-        .container-fluid.pt-4 {
-            padding-top: 0px !important;
-        }
-
-        .layout-navbar-fixed .wrapper .main-header.border-bottom-0~.content-wrapper {
-            margin-top: 0px;
-            padding: 0px;
-        }
-
-        .layout-navbar-fixed .wrapper .main-header,
-        .main-footer {
-            display: none;
-        }
-
-        .content,
-        .container-fluid {
-            padding: 0px;
-        }
-
-        #contactList {
-            position: relative;
-            height: 100%;
-        }
-
-
-        .items_body_per {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-        }
-
-        .message_sidebar-item.active {
-            background: #001246;
-        }
-    </style>
+   
 @endpush

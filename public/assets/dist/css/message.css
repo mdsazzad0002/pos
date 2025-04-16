@@ -33,9 +33,7 @@
     cursor: pointer;
     border-bottom: 1px solid #ddd;
 }
-.message_chart .message_sidebar-item:hover {
-    background-color: #128c7e;
-}
+
 .message_chart .message_sidebar-avatar {
     width: 40px;
     height: 40px;
@@ -146,6 +144,44 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.message_chart .filter-buttons button:hover {
-    background-color: #128c7e;
+
+.sidebar-mini-xs.sidebar-collapse .main-header {
+    display: none;
+    margin-top: 0px;
+}
+
+.container-fluid.pt-4 {
+    padding-top: 0px !important;
+}
+
+.layout-navbar-fixed .wrapper .main-header.border-bottom-0~.content-wrapper {
+    margin-top: 0px;
+    padding: 0px;
+}
+
+.layout-navbar-fixed .wrapper .main-header,
+.main-footer {
+    display: none;
+}
+
+.content,
+.container-fluid {
+    padding: 0px;
+}
+
+#contactList {
+    position: relative;
+    height: 100%;
+}
+
+
+.items_body_per {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.message_sidebar-item:hover,
+.message_sidebar-item.active {
+    background: #001246;
 }

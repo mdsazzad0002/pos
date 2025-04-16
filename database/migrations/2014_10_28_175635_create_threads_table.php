@@ -18,7 +18,8 @@ class CreateThreadsTable extends Migration
             $table->increments('id');
             $table->string('subject');
             $table->integer('type')->default(1)->comment('1 single, 2 group');
-            $table->integer('status');
+            $table->integer('status')->default(1)->comment('1 open, 2 close');
+            $table->bigInteger('last_read_message_id')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
