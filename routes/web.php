@@ -21,8 +21,8 @@ Route::middleware(['auth'])->group(function () {
 
 
 use App\Http\Controllers\WaHookController;
-Route::post('/webhook/whatsapp/', [WaHookController::class, 'handleStore']);
-Route::get('/webhook/whatsapp/', [WaHookController::class, 'handleConnect']);
+Route::post('/webhook', [WaHookController::class, 'handleStore']);
+Route::get('/webhook', [WaHookController::class, 'handleConnect']);
 
 
 

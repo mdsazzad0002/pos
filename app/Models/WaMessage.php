@@ -9,7 +9,7 @@ class WaMessage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['wa_contact_id', 'message_id', 'body', 'type', 'received_at'];
+    protected $fillable = ['wa_contact_id', 'message_id', 'body', 'type', 'received_at','status'];
 
     public function contact()
     {
