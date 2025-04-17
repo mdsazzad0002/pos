@@ -66,9 +66,12 @@ class HomeController extends Controller
                 $homepage = Page::where('status', 1)->where('slug', $view)->first();
             }
 
-            if($homepage?->slug != $view.'/'.$slug){
-                $request['slug'] = $slug;
+            if($homepage){
+                if($homepage->slug != $view.'/'.$slug){
+                    $request['slug'] = $slug;
+                }
             }
+
 
           
         }
@@ -173,6 +176,17 @@ class HomeController extends Controller
 
 
         });
+
+        if(settings('service_show_status',80) == 1 && settings('product_show_status',80) == 1){
+            // do nothing
+        }elseif(settings('service_show_status',80) == 1 || settings('product_show_status',80) == 0){
+            $product_list = $product_list->where('service', 1);
+        }elseif(settings('product_show_status',80) == 1 || settings('service_show_status',80) == 0){
+            $product_list = $product_list->where('service', 0);
+        }else{
+            $product_list = $product_list->whereNot('service', 0);
+            $product_list = $product_list->whereNot('service', 1);
+        }
 
         if ($request->has('rating_star') && $request->rating_star != '' && $request->rating_star != 0) {
             $product_list = $product_list->withAvg('reviews_info', 'rating') // eager load the average rating
@@ -1055,9 +1069,9 @@ class HomeController extends Controller
                     'title' => settings('app_title', 9).' From Order Invoice Generated', //must
                     'subject' => settings('app_title', 9).'From Order Invoice Generated', //must
                     // 'user' => $user?->email,
-                    'email' => $user?->email,
+                    'email' => $user ? $user->email : 'Dummy@gmail.com',
                     'template' => 'order_create', //must
-                    'name' => $user?->name,
+                    'name' => $user ? $user->name : 'DummyName',
                     'additional_text' => " <iframe src='".route('order_invoice')."?order_id=". $order->order_id ."'></iframe>
                                             <div>
                                                     <a  href='".url('/')."'> Visit Our Shop Now </a>
@@ -1108,9 +1122,27 @@ class HomeController extends Controller
                     // Load the Blade view and render it into HTML
                     // $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer', compact('order'))->render();
                     $html = View::make('frontend.protfilio_theme._profile._checkout.invoice_customer1', compact('order', 'qrcode_data'))->render();
-// return $html;
-                    // Initialize mPDF
-                    $mpdf = new Mpdf();
+                    // return $html;
+                    
+
+                    $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+                    $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+                    
+                    $fontDirs = $defaultConfig['fontDir'];
+                    $fontData = $defaultFontConfig['fontdata'];
+
+
+               $mpdf = new \Mpdf\Mpdf([
+                    'fontDir' => array_merge($fontDirs, [__DIR__ . '/vendor/mpdf/mpdf/ttfonts']),
+                    'fontdata' => $fontData + [
+                        'nikosh' => [
+                            // 'R' => 'NotoSans.ttf',
+                            'R' => 'Nikosh.ttf',
+                        ]
+                    ],
+                    'default_font' => 'nikosh'
+                ]);
+
                       // $mpdf->showImageErrors = true;
                     $mpdf->WriteHTML($html);
                     // $pdfOutput = $mpdf->Output('', 'S'); // 'S' returns the PDF as a string

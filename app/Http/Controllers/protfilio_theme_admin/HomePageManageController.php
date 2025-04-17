@@ -112,7 +112,15 @@ class HomePageManageController extends Controller
     $homePageManage->short_read_more = $request->short_read_more ?? '';
     $homePageManage->view_all = $request->view_all ?? '';
 
-    $homePageManage->items_per_row = $request->items_per_row ?? 0;
+    // $homePageManage->items_per_row = $request->items_per_row ?? 0;
+    
+    $homePageManage->items_per_row_xxl = $request->items_per_row_xxl ?? 0;
+    $homePageManage->items_per_row_xl = $request->items_per_row_xl ?? 0;
+    $homePageManage->items_per_row_lg = $request->items_per_row_lg ?? 0;
+    $homePageManage->items_per_row_md = $request->items_per_row_md ?? 0;
+    $homePageManage->items_per_row_sm = $request->items_per_row_sm ?? 0;
+
+
     $homePageManage->items_show = $request->items_show ?? 0;
     $homePageManage->view_all_page_url = $request->view_all_page_url ?? '';
     $homePageManage->short_read_more_page_url = $request->short_read_more_page_url ?? '';

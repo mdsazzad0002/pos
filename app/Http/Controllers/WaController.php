@@ -47,33 +47,48 @@ class WaController extends Controller
     public function sendTextMessage($to, $message)
     {
 
-        $response = Http::withoutVerifying()->withHeaders([
-            'Authorization' => 'Bearer '.$this->token,
+        // $response = Http::withoutVerifying()->withHeaders([
+        //     'Authorization' => 'Bearer '.$this->token,
 
-        ])->post('https://graph.facebook.com/v22.0/'.$this->phoneNumberId.'/messages', [
+        // ])->post('https://graph.facebook.com/v22.0/'.$this->phoneNumberId.'/messages', [
+        //     'messaging_product' => 'whatsapp',
+        //     'to' => ''.$to.'',
+        //     'type' => 'template',
+        //     'template' => [
+        //         'name' => 'plain_text',
+        //         'language' => [
+        //             'code' => 'en_US',
+        //         ],
+        //         'components' => [
+        //             [
+        //                 'type' => 'body',
+        //                 'parameters' => [
+        //                     [
+        //                         'type' => 'text',
+        //                         'text' => $message,
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        // ]);
+
+
+        $response = Http::withoutVerifying()->withHeaders([
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->post('https://graph.facebook.com/v22.0/' . $this->phoneNumberId . '/messages', [
             'messaging_product' => 'whatsapp',
-            'to' => ''.$to.'',
-            'type' => 'template',
-            'template' => [
-                'name' => 'plain_text',
-                'language' => [
-                    'code' => 'en_US',
-                ],
-                'components' => [
-                    [
-                        'type' => 'body',
-                        'parameters' => [
-                            [
-                                'type' => 'text',
-                                'text' => $message,
-                            ],
-                        ],
-                    ],
-                ],
+            "recipient_type"=> "individual",
+            'to' => $to,
+            'type' => 'image',
+            'image' => [
+                'link' => 'http://pos.localhost/public/preset/fixing.png',
+                'caption' => 'Here is your image!',
             ],
         ]);
+        
 
-        $response = $response->json();
+       return $response = $response->json();
       
 
        

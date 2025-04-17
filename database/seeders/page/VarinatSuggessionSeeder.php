@@ -55,7 +55,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'is_details_page_manage_status'=> 0,
 
 
-                'items_per_row' => 0,
+               
                 'items_per_row_status' => 0,
 
                 'items_show' => 20,
@@ -96,7 +96,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -119,7 +119,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -150,7 +150,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 4,
+                
                 'items_per_row_status' => 1,
                 'items_manage_status' => 1,
 
@@ -186,7 +186,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 0,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -212,7 +212,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -236,7 +236,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -262,7 +262,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -290,7 +290,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -315,7 +315,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -345,7 +345,7 @@ class VarinatSuggessionSeeder extends Seeder
             //     'view_all_status' => 0,
             //     'view_all_manage_status' => 0,
 
-            //     'items_per_row' => 15,
+           
             //     'items_per_row_status' => 0,
             //     'items_manage_status' => 0,
 
@@ -373,7 +373,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+             
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -401,7 +401,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -430,7 +430,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -452,7 +452,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -476,7 +476,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -499,7 +499,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -520,7 +520,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -544,7 +544,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -565,7 +565,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all' => 'View All',
 
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'items_manage_status' => 0,
 
                 'background' => 1,
@@ -600,7 +600,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'items_manage_status' => 0,
 
                 'background' => 0,
@@ -635,7 +635,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'items_manage_status' => 0,
 
                 'background' => 0,
@@ -665,7 +665,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -686,7 +686,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 1,
                 'background_type' => 0,
                 'background_color' => '#eeeeee',
@@ -718,7 +718,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+             
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -750,7 +750,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+              
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -780,7 +780,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -809,7 +809,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -838,7 +838,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+             
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -867,7 +867,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'short_read_more_manage_status' => 0,
 
-                'items_per_row' => 15,
+
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -904,7 +904,7 @@ class VarinatSuggessionSeeder extends Seeder
             'short_read_more_status' => 0,
             'view_all' => 'View All',
             'view_all_status' => 0,
-            'items_per_row' => 4,
+            
             'background' => 0,
             'background_color' => '#eeeeee',
             'background_type' => 0,
@@ -923,7 +923,7 @@ class VarinatSuggessionSeeder extends Seeder
             'short_read_more_status' => 0,
             'view_all' => 'View All',
             'view_all_status' => 0,
-            'items_per_row' => 6,
+          
             'background' => 0,
             'background_color' => '#eeeeee',
             'background_type' => 0,
@@ -942,7 +942,7 @@ class VarinatSuggessionSeeder extends Seeder
             'short_read_more_status' => 0,
             'view_all' => 'View All',
             'view_all_status' => 0,
-            'items_per_row' => 6,
+           
             'background' => 0,
             'background_color' => '#eeeeee',
             'background_type' => 0,
@@ -960,7 +960,7 @@ class VarinatSuggessionSeeder extends Seeder
             'short_read_more_status' => 0,
             'view_all' => 'View All',
             'view_all_status' => 0,
-            'items_per_row' => 6,
+           
             'background' => 0,
             'background_color' => '#eeeeee',
             'background_type' => 0,
@@ -989,7 +989,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all' => 'View All',
             'view_all_manage_status' => 0,
             'view_all_status' => 0,
-            'items_per_row' => 6,
+            
             'items_manage_status'=> 1,
             'is_details_page_manage_status'=> 1,
 
@@ -1022,7 +1022,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 1,
 
-            'items_per_row' => 6,
+         
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1055,7 +1055,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 0,
 
-            'items_per_row' => 6,
+           
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1090,7 +1090,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_manage_status' => 0,
 
 
-            'items_per_row' => 6,
+           
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1123,7 +1123,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 0,
 
-            'items_per_row' => 6,
+           
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1156,7 +1156,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 1,
 
-            'items_per_row' => 6,
+           
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1191,7 +1191,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 1,
 
-            'items_per_row' => 6,
+            
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1224,7 +1224,7 @@ class VarinatSuggessionSeeder extends Seeder
             'view_all_status' => 0,
             'view_all_manage_status' => 1,
 
-            'items_per_row' => 6,
+            
             'items_per_row_status' => 0,
             'items_manage_status' => 1,
 
@@ -1264,7 +1264,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+              
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1302,7 +1302,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 1,
                 'items_manage_status' => 1,
 
@@ -1339,7 +1339,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 1,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1377,7 +1377,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1415,7 +1415,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 1,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1454,7 +1454,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 1,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1487,7 +1487,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 1,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1519,7 +1519,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 1,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1550,7 +1550,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 1,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1581,7 +1581,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status'=> 1,
@@ -1616,7 +1616,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1653,7 +1653,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
 
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1689,7 +1689,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 1,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 3,
+                
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1720,7 +1720,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 15,
+              
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -1750,7 +1750,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 0,
+              
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -1781,7 +1781,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 0,
 
-                'items_per_row' => 0,
+            
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -1806,7 +1806,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -1823,7 +1823,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'short_read_more_status' => 0,
                 'view_all' => 'View All',
                 'view_all_status' => 0,
-                'items_per_row' => 0,
+               
                 'background' => 0,
                 'background_type' => 1,
                 'background_color' => '#eeeeee',
@@ -1855,8 +1855,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 1,
                 
-                
-                'items_per_row' => 12,
+          
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -1896,7 +1895,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
                 
                 
-                'items_per_row' => 12,
+    
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1937,7 +1936,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 0,
                 
                 
-                'items_per_row' => 12,
+             
                 'items_per_row_status' => 0,
                 'items_manage_status' => 0,
 
@@ -1980,7 +1979,7 @@ class VarinatSuggessionSeeder extends Seeder
                 
                 
                 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 'is_details_page_manage_status' => 1,
@@ -2022,7 +2021,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 1,
                 
                 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -2058,7 +2057,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 1,
                 
                 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -2093,7 +2092,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 1,
                 
                 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -2129,7 +2128,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_manage_status' => 1,
                 
                 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 
@@ -2163,7 +2162,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 1,
 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
                 
@@ -2194,7 +2193,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'view_all_status' => 0,
                 'view_all_manage_status' => 1,
 
-                'items_per_row' => 12,
+               
                 'items_per_row_status' => 0,
                 'items_manage_status' => 1,
 
@@ -2234,7 +2233,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'is_details_page_manage_status'=> 1,
 
 
-                'items_per_row' => 0,
+               
                 'items_per_row_status' => 0,
 
                 'items_show' => 20,
@@ -2268,7 +2267,7 @@ class VarinatSuggessionSeeder extends Seeder
                     'short_read_more_manage_status' => 1,
 
 
-                    'items_per_row' => 0,
+                   
                     'items_per_row_status' => 0,
 
                     'items_show' => 20,
@@ -2315,7 +2314,7 @@ class VarinatSuggessionSeeder extends Seeder
                 'is_details_page_manage_status'=> 1,
 
 
-                'items_per_row' => 0,
+               
                 'items_per_row_status' => 0,
 
                 'items_show' => 20,
@@ -2349,7 +2348,7 @@ class VarinatSuggessionSeeder extends Seeder
                     'short_read_more_manage_status' => 1,
 
 
-                    'items_per_row' => 0,
+                   
                     'items_per_row_status' => 0,
 
                     'items_show' => 20,
@@ -2404,7 +2403,7 @@ class VarinatSuggessionSeeder extends Seeder
                 $homepage->short_read_more = $item['short_read_more'];
                 $homepage->sub_title = $item['sub_title'];
                 $homepage->sub_title_status = $item['sub_title_status'];
-                $homepage->items_per_row = $item['items_per_row'];
+           
                 $homepage->background = $item['background'];
                 $homepage->background_color = $item['background_color'];
                 $homepage->view_all_status = $item['view_all_status'];

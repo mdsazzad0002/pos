@@ -40,7 +40,12 @@
 
                 $v_cart_page_slug = \App\Models\Page::where('page_type', 'cart')->first()->slug ?? '';
 
-                $v_per_row = $request->has('per_row') ? $request->per_row : 4;
+                $v_per_row = 'col-xxl-' . (12/($request->has('items_per_row_xxl') ? $request->items_per_row_xxl : 4) );
+                $v_per_row .= ' col-xl-' . (12/($request->has('items_per_row_xl') ? $request->items_per_row_xl : 4) );
+                $v_per_row .= ' col-lg-' . (12/($request->has('items_per_row_lg') ? $request->items_per_row_lg : 3) );
+                $v_per_row .= ' col-md-' . (12/($request->has('items_per_row_md') ? $request->items_per_row_md : 2) );
+                $v_per_row .= ' col-sm-' . (12/($request->has('items_per_row_sm') ? $request->items_per_row_sm : 2) );
+                $v_per_row .= ' col-' . (12/($request->has('items_per_row') ? $request->items_per_row : 1) );
 
 // =========================================================================
 // Next Page button

@@ -406,7 +406,7 @@
         var max_price = '{{ $_GET['max_price'] ?? '' }}';
         var brands_items = {!! json_encode($_GET['brands_key'] ?? []) !!};
         var rating_star = {{ $_GET['rating_star'] ?? 0 }};
-        var items_per_row = {{ $items?->items_per_row ?? 3 }};
+       
         var paginate_items = {{ $items?->items_show ?? 3 }};
        
         var sort_by = '{{ $_GET['sort_by'] ?? '' }}';
@@ -423,7 +423,12 @@
             '&max_price='+max_price+
             '&rating_star='+rating_star+
             '&paginate_items='+paginate_items+
-            '&per_row='+items_per_row+
+            '&items_per_row_xxl={{ $items?->items_per_row_xxl ?? 4 }}'+
+            '&items_per_row_xl={{ $items?->items_per_row_xl ?? 3 }}'+
+            '&items_per_row_lg={{ $items?->items_per_row_lg ?? 3 }}'+
+            '&items_per_row_md={{ $items?->items_per_row_md ?? 2 }}'+
+            '&items_per_row_sm={{ $items?->items_per_row_sm ?? 2 }}'+
+            '&items_per_row={{ $items?->items_per_row?? 1 }}'+
             '&sort_by='+sort_by+
             '&q='+q;
 

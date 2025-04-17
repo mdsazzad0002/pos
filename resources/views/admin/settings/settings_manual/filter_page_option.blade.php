@@ -33,6 +33,9 @@
                     ['name' => 'show_filter_feature_product_status', 'key' => '80', 'image' => 'filter_page_option/feature_wise.png'],
                     ['name' => 'show_filter_offer_product_status', 'key' => '80', 'image' => 'filter_page_option/offer_product_side_bar.png'],
                     ['name' => 'show_filter_weight_product_status', 'key' => '80', 'image' => 'filter_page_option/weight_wise.png'],
+                    ['name' => 'service_show_status', 'key' => '80'],
+                    ['name' => 'product_show_status', 'key' => '80'],
+
 
                     // =========================================================================
                 ];

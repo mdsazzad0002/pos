@@ -1,4 +1,4 @@
-<div class="col-xxl-{{ 12/$v_per_row }} col-xl-4 col-lg-4 col-md-6 col-6">
+<div class=" {{ $v_per_row }} product_style_7">
     <div class="featured-product-card  br-10" style="background-color:{{ $p_background_color }}">
         <div class="image-box mb-16">
 

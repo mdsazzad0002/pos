@@ -8,14 +8,18 @@
     <title>Invoice</title>
 
     <style>
+       
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            
+
         }
 
         body {
             font-family: Arial, sans-serif;
+           
         }
 
         h2 {
@@ -205,7 +209,7 @@
                 @foreach ($product_info->product as $key => $items)
                     <tr>
                         <td>{{ $key + 1 }}</td>
-                        <td style="">
+                        <td style="font-family: nikosh, sans-serif;">
                             {{ $items->product->name }}
                         </td>
                         <td style="">

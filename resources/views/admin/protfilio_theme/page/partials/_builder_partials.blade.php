@@ -149,14 +149,44 @@
                     @if($item->HasExists('items_per_row_status'))
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="items_per_row">Items Per Row</label>
+                                <label for="items_per_row_xxl">Items Per Row XXL</label>
+                                <input type="number" class="form-control" id="items_per_row_xxl" name="items_per_row_xxl" value="{{ $item->items_per_row_xxl }}" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="items_per_row_xl">Items Per Row XL</label>
+                                <input type="number" class="form-control" id="items_per_row_xl" name="items_per_row_xl" value="{{ $item->items_per_row_xl }}" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="items_per_row_lg">Items Per Row LG</label>
+                                <input type="number" class="form-control" id="items_per_row_lg" name="items_per_row_lg" value="{{ $item->items_per_row_lg }}" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="items_per_row_md">Items Per Row MD</label>
+                                <input type="number" class="form-control" id="items_per_row_md" name="items_per_row_md" value="{{ $item->items_per_row_md }}" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="items_per_row_sm">Items Per Row SM</label>
+                                <input type="number" class="form-control" id="items_per_row_sm" name="items_per_row_sm" value="{{ $item->items_per_row_sm }}" >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="items_per_row">Items Per Row Default</label>
                                 <input type="number" class="form-control" id="items_per_row" name="items_per_row" value="{{ $item->items_per_row }}" >
                             </div>
                         </div>
                     @endif
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label for="items_show">Items Show</label>
+                            <label for="items_show">Total Items Show</label>
                             <input type="number" class="form-control" id="items_show" name="items_show" value="{{ $item->items_show }}" >
                         </div>
                     </div>

@@ -54,6 +54,7 @@
                     ['key' => '9', 'name' => 'app_footer_image'],
                     ['key' => '9', 'name' => 'login_admin_image'],
                     ['key' => '9', 'name' => 'app_preloader_status'],
+                    ['key' => '9', 'name' => 'service_popup_title'],
                     ['key' => '9', 'name' => 'header_sticky_status'],
                 ];
 

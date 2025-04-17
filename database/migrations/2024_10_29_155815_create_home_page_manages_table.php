@@ -30,7 +30,14 @@ return new class extends Migration
             $table->string('view_all_page_url')->nullable();
 
 
-            $table->integer('items_per_row')->default(3);
+            
+            $table->integer('items_per_row_xxl')->default(4);
+            $table->integer('items_per_row_xl')->default(3);
+            $table->integer('items_per_row_lg')->default(3);
+            $table->integer('items_per_row_md')->default(2);
+            $table->integer('items_per_row_sm')->default(1);
+            $table->integer('items_per_row')->default(1); 
+
             $table->integer('items_show')->default(4);
 
             $table->integer('is_details_page')->default(0);

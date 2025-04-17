@@ -165,7 +165,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content rounded-0">
             <div class="modal-header">
-                <h5 class="modal-title text-center">Our Service</h5>
+                <h5 class="modal-title text-center">{{ settings('service_popup_title', 9) }} </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-0">
@@ -249,7 +249,7 @@
                                                                             data-href="{{ url($cart_page->slug) }}"
                                                                             onclick="add_to_cart(this)"
                                                                             data-id="{{ $product->id }}"
-                                                                            data-size="{{ $variant_info->id }}">Order
+                                                                            data-size="{{ $variant_info->id }}">Book
                                                                             Now</button>
                                                                         <button class="btn btn-primary"
                                                                             title="Add to Cart"
@@ -285,9 +285,9 @@
                                                         {{ $product->selling_price }} &nbsp;
                                                     </div>
                                                     <button class="btn  buy_now buy-now-btn"
-                                                        title="Order Now" data-href="{{ url($cart_page->slug) }}"
+                                                        title="Book Now" data-href="{{ url($cart_page->slug) }}"
                                                         onclick="add_to_cart(this)"
-                                                        data-id="{{ $product->id }}">Order Now</button>
+                                                        data-id="{{ $product->id }}">Book Now</button>
                                                     <button class="btn " title="Add to Cart"
                                                         onclick="add_to_cart(this)" data-id="{{ $product->id }}"><i
                                                             class="fa fa-cart-plus"></i></button>
@@ -394,8 +394,13 @@
     }
     #locationSelectModal_category .modal-header *{
         color: white;
-
     }
+
+    #locationSelectModal_category .modal-header .btn-close {
+        filter: invert(1);
+        opacity: 1;
+    }
+
 
     #locationSelectModal_category .single_product {
         background: #eee;

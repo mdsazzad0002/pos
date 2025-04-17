@@ -1,4 +1,4 @@
-<div style="position:relative" class="product-grid-single col-12 col-sm-6 col-md-4 col-xxl-{{ 12/$v_per_row }} product_style_2">
+<div style="position:relative" class="product-grid-single  {{ $v_per_row }}  product_style_2">
     <div class="card product-card" style="background-color:{{ $p_background_color }}">
         <a class="no-style-link" href="{{ $p_url }}">
             <div class="gallerythumbWrapper gallerythumbWrapperLoaded"
