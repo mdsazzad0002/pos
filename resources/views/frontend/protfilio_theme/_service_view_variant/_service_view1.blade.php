@@ -2,6 +2,7 @@
 
 @php
     $service = \App\Models\Service::where('slug', $request->slug)->first();
+  
 @endphp
 
 

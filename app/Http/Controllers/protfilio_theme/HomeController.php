@@ -58,25 +58,29 @@ class HomeController extends Controller
         }elseif( $view == null){
             $homepage = Page::where('status', 1)->where('homepage', 1)->first();
         }else{
-            if($slug != null && $view != null){
+            if(($slug != null && $view != null) && $homepage == null){
                 $homepage = Page::where('status', 1)->where('slug', $view.'/'.$slug)->first();
-            }
-
-            if($slug == null && $view != null && $homepage == null){
-                $homepage = Page::where('status', 1)->where('slug', $view)->first();
-            }
-
-            if($homepage){
-                if($homepage->slug != $view.'/'.$slug){
-                    $request['slug'] = $slug;
+                if($homepage == null){
+                    $homepage = Page::where('status', 1)->where('slug', $view)->first();
+                    
+                    // When slug is not null is request slug
+                    if($homepage){
+                        if($homepage->slug != $view.'/'.$slug){
+                            $request['slug'] = $slug;
+                        }
+                    }
+                    // end When slug is not null is request slug
                 }
             }
-
-
+            
+          
+            if(($slug == null && $view != null) && ($homepage == null || $homepage == '')){
+                $homepage = Page::where('status', 1)->where('slug', $view)->first();
+            }
           
         }
 
-        // dd( $slug);
+      
      
         if($homepage){
 
@@ -95,7 +99,7 @@ class HomeController extends Controller
             if(env('APP_DEBUG') == true){
                 abort('404', 'Not Set Home Page');
             }else{
-                 abort('404');
+                abort('404');
             }
         }
 

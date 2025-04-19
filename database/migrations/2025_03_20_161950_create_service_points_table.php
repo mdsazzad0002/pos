@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->text('location')->nullable();
+            $table->text('url')->nullable();
             $table->string('status')->default(1);
             $table->string('upload_id')->default(0);
             $table->timestamps();

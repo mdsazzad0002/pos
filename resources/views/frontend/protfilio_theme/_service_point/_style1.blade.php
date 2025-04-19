@@ -18,7 +18,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"> {{ $service->name }} </h5>
-                            <p class="card-text"> {{ $service->location }} </p>
+                            <p class="card-text">  <a href="{{ $service->url }}" target="_blank"> {{ $service->location }}  &nbsp; <i class="fas fa-external-link-alt"></i></a></p>
                         </div>
                     </div>
                 </div>

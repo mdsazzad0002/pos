@@ -57,8 +57,7 @@ return new class extends Migration
 
             $table->string('api_token')->nullable();
 
-            // for push notification
-            $table->string('fcm_token')->nullable();
+            
 
             $table->rememberToken();
             $table->timestamps();

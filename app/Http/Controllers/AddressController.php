@@ -27,42 +27,11 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, User $user = null)
+    public function store(Request $request, $class = null, $class_id = null)
     {
-        $address = '';
-        // dd($request);
-
-        foreach ($request->village as $key => $items) {
-            if(isset($items->address_id[$key])){
-                $address =  address::find($items->address_id[$key]);
-                if(!$address){
-                    $address = new address();
-                }
-            }else{
-                $address =  new address();
-            }
-
-            $address->address_type = $request->address_type[$key];
-            $address->village = $request->village[$key];
-            $address->post = $request->post[$key];
-            $address->district = $request->district[$key];
-            $address->stay_time = $request->staying[$key];
-            $address->addressable_type = User::class;
-            $address->addressable_id = $user->id;
-            $address->creator = $user->id;
-            $address->updater = $user->id;
-            $address->country =  $request->country[$key];
-            $address->save();
-
-        }
-
-
-        return json_encode([
-            'title' => 'Success',
-            'type' => 'success',
-            'refresh' => 'true',
-        ]);
-
+       
+    
+        return $this->update($request, null, $class, $class_id);
 
     }
 
@@ -82,21 +51,53 @@ class AddressController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, address $address)
+   /**
+    * Update the specified resource in storage.
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Models\Address  $address
+    * @param  string|null  $class
+    * @param  int|null  $class_id
+    * @return \Illuminate\Http\Response
+    * @throws \Illuminate\Validation\ValidationException
+    */
+    public function update(Request $request,  $address = null, $class = null, $class_id = null)
     {
-      $request =  $request->except(['_token', '_method']);
-        // return $request;
-
+       
+     
         if($address){
-            foreach($request as  $key => $value){
-                $address->$key = $value ?? '';
+            $address = address::find($address);
+            if(!$address){
+                $address = new address();
             }
-            $address->save();
+        }else{
+            $address = new address();
         }
-        return back();
+       
+        if($class){
+            $address->addressable_type = $class;
+        }
+
+        if($class_id){
+            $address->addressable_id = $class_id;
+        }
+     
+        foreach($request->address as $key => $items){
+                $address->$key = $items;
+        }
+              
+        $address->save();
+
+        if($request->ajax()){
+            return response()->json([
+                'title' => 'Success',
+                'type' => 'success',
+                'refresh' => 'true',
+            ]);
+        }else{
+            return back();
+        }
+
+        
     }
 
     /**

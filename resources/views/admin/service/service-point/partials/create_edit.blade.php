@@ -13,12 +13,16 @@ method="post" enctype="multipart/form-data">
 
     <div class="mb-2">
         <label for="service_point_name"> Service Point Name </label>
-        <input type="text" name="name" class="form-control mb-2"  value="{{ $service_point ? $service_point->name : ''}}" placeholder="Enter your name">
+        <input type="text" name="name" class="form-control mb-2"  id="service_point_name" value="{{ $service_point ? $service_point->name : ''}}" placeholder="Enter your name">
     </div>
     
     <div class="mb-2">
-        <label for="service_point_name"> Service Point Location </label>
-        <textarea type="text" name="location" class="form-control mb-2" placeholder="Enter Service location">{{ $service_point ? $service_point->location : ''}}</textarea>
+        <label for="service_point_location"> Service Point Location </label>
+        <textarea type="text" name="location" class="form-control mb-2" id="service_point_location" placeholder="Enter Service location">{{ $service_point ? $service_point->location : ''}}</textarea>
+    </div>
+    <div class="mb-2">
+        <label for="service_point_location_url"> Service Point Location Url </label>
+        <textarea type="text" name="location_url" class="form-control mb-2" id="service_point_location_url" placeholder="Enter Service location url">{{ $service_point ? $service_point->url : ''}}</textarea>
     </div>
 
 

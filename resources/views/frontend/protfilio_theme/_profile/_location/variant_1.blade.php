@@ -44,42 +44,42 @@
                                     {{-- {{ $customers }} --}}
                                     <tr>
                                         <td>Name :</td>
-                                        <td> <input type="text" value="{{ $address->name }}" name="name" class="w-100" disabled ></td>
+                                        <td> <input type="text" value="{{ $address->name }}" name="address[name]" class="w-100" disabled ></td>
                                     </tr>
                                     <tr>
                                         <td>Email :</td>
-                                        <td> <input type="email" name="email" class="w-100" disabled  value="{{ $address->email }}"/></td>
+                                        <td> <input type="email" name="address[email]" class="w-100" disabled  value="{{ $address->email }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Phone :</td>
-                                        <td>  <input type="tel" name="phone" class="w-100" disabled  value="{{ $address->phone }}"/></td>
+                                        <td>  <input type="tel" name="address[phone]" class="w-100" disabled  value="{{ $address->phone }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Address :</td>
-                                        <td>  <input type="text" name="address" class="w-100" disabled  value="{{ $address->address }}"/></td>
+                                        <td>  <input type="text" name="address[address]" class="w-100" disabled  value="{{ $address->address }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Apartment :</td>
-                                        <td>  <input type="text" name="address_optional" class="w-100" disabled  value="{{ $address->address_optional }}"/></td>
+                                        <td>  <input type="text" name="address[address_optional]" class="w-100" disabled  value="{{ $address->address_optional }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>District :</td>
-                                        <td> <input type="text" name="district" class="w-100" disabled  value="{{ $address->district }}"/></td>
+                                        <td> <input type="text" name="address[district]" class="w-100" disabled  value="{{ $address->district }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Post Code :</td>
-                                        <td>  <input type="number" name="postal" class="w-100" disabled  value="{{ $address->postal }}"/></td>
+                                        <td>  <input type="number" name="address[postal]" class="w-100" disabled  value="{{ $address->postal }}"/></td>
                                     </tr>
 
                                     <tr>
                                         <td>Country :</td>
-                                        <td> <input type="text" name="country" class="w-100" disabled  value="{{ $address->country }}"/> </td>
+                                        <td> <input type="text" name="address[country]" class="w-100" disabled  value="{{ $address->country }}"/> </td>
                                     </tr>
                                     <tr>
                                         <td>State :</td>
-                                        <td>  <input type="text" name="state" class="w-100" disabled  value="{{ $address->state }}"/></td>
+                                        <td>  <input type="text" name="address[state]" class="w-100" disabled  value="{{ $address->state }}"/></td>
                                     </tr>
                                     <tr>
                                         <td>Updated By :</td>

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ContactController;
 
 class userController extends Controller
 {
@@ -106,32 +108,18 @@ class userController extends Controller
         $request->validate([
             'email'=>'required|unique:users,email',
             'password'=>'required',
-            'c_password'=>'required',
+            'c_password'=>'required|same:password',
             'name'=>'required',
         ]);
 
 
-        $user_create = new User;
-        $user_create->name = $request->name;
-        $user_create->email  = $request->email;
-
-        if($request->password != $request->c_password){
-
-            return json_encode([
-                'title'=>'Confirm Password  Not Match',
-                'type'=>'error',
-                'refresh'=>'false',
-            ]);
-        }
-        $user_create->password  = Hash::make($request->password);
-
-        $user_create->save();
+       
 
         if(!$request->has('type_of_user')){
             $request['type_of_user'] = 'user_create';
         }
 
-       $user_update = $this->update($request, $user_create);
+       $user_update = $this->update($request);
        return $user_update;
 
 
@@ -159,13 +147,22 @@ class userController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $User)
+    public function update(Request $request,  $User = null)
     {
+        
         $request->validate([
             'name'=>'required',
             'email'=>'required',
         ]);
 
+
+        if($User == null){
+            $User = new User();
+        }else{
+            $User = User::find($User);
+        }
+
+       
 
         if($request->has('name')){
             $User->name = $request->name;
@@ -255,28 +252,36 @@ class userController extends Controller
         $User->save();
 
         if($request->has('role_id')){
-            $this->assingRole($request->role_id, $User);
+            $this->assingRole($request, $User);
         }
 
 
+        $address = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->mobile_number,
+            'address' => $request->address,
+            'address_optional' => $request->address_optional,
+            'district' => $request->district,
+            'stay_time' => $request->stay_time,
+            'country' => $request->country,
+            'state' => $request->state,
+            'postal' => $request->postal,
+        ];
+        $request['address'] = $address;
+        
         $address_data = new AddressController();
-        $address_data =  $address_data->store($request, $User);
+        $address_data =  $address_data->store($request, User::class, $User->id);
 
 
-        $contact_data = new ContactController();
-        $contact_data =  $contact_data->store($request, $User);
+        // $contact_data = new ContactController();
+        // $contact_data =  $contact_data->store($request, $User);
 
 
-        $payment_data = new PaymentMethodController();
-        $payment_data =  $payment_data->store($request, $User);
+        // $payment_data = new PaymentMethodController();
+        // $payment_data =  $payment_data->store($request, $User);
 
 
-
-
-
-        if($address_data){
-            dd($request);
-        }
 
 
         return json_encode([
@@ -314,7 +319,7 @@ class userController extends Controller
 
     }
 
-    public function assingRole(Request $request,User $user){
+    public function assingRole(Request $request, User $user){
 
         if($request->role_id == null){
             $requested_role = [];
@@ -330,6 +335,7 @@ class userController extends Controller
             'refresh'=>'true',
         ]);
     }
+
     public function userroleedit(Request $request,  User $user){
         $roles = Role::get();
 

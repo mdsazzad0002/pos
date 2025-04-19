@@ -12,7 +12,7 @@
         <div>
             @can('user create')
 
-            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered modal-lg" data-title="Add New  Commision Agent" data-href="{{ route('admin.user.create') }}">+ Add New Commision Agent</button>
+            <button class="btn btn-primary" onclick="button_ajax(this)" data-dialog=" modal-dialog-scrollable modal-dialog-centered modal-lg" data-title="Add New  User" data-href="{{ route('admin.user.create') }}">+ Add New User</button>
             @endcan
         </div>
     </div>
